@@ -1,0 +1,1 @@
+table.prettytable{border:1px solid black;margin:1em;border-collapse:collapse;empty-cells:show}table.prettytable td{border:1px solid black;padding:5px}table.prettytable th{border:1px solid black;background:#D0D8FF;text-align:center}

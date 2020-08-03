@@ -1,0 +1,9 @@
+Reading from device using PIO is very simple
+
+1.	Select the drive
+2.	Set the Sector Count and Starting Sector parameters
+3. 	Send command (ATA_CMD_READ)
+4.	Wait for the drive return the BUSY bit clear and the DRQ bit set
+5. 	Check to make sure the ATA_ALT_STATUS register does not show an error
+6. 	Read in a count of 16-bit words from the ATA_DATA port
+7. 	Read the ATA_STATUS register to receive the status of the transfer and clear any pending interrupts

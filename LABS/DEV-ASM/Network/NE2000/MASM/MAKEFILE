@@ -1,0 +1,9 @@
+.asm.obj:
+ 	MASM $*;
+
+NE2000.com: head.obj NE2000.obj tail.obj
+	LINK /TINY head.OBJ NE2000.OBJ tail.OBJ,NE2000.COM,,DEBUG.LIB,,
+
+zip:
+	del *.obj
+	del *.map

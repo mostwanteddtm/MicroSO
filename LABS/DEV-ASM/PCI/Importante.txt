@@ -1,0 +1,19 @@
+################# 25-12-18 ######################
+
+O objetivo dos exercícios quando comecei a estudar o PCI LOCAL BUS, 
+era ouvir as interrupções e devolver o controle ao DOS.
+Apenas como exercicio, pois o meu Kernel32 já está versão 2.01
+
+################# 26-12-18 ######################
+
+Suspendi o entendimento dos exercícios, pois preciso entender melhor,
+o funcionamento do IDT.
+Desta forma os exercícios, não atingiram o resultado esperado.
+
+################# 27-12-18 ######################
+
+Consegui atingir o objetivo com o EX05.
+Alcancei o objetivo, com muita tentativa e erro, sem copiar
+código de fonte nenhuma. Eu mesmo encontrei a solução.
+O mais importante a ressaltar, é: a importância da presença
+do código que informa o fim da interrupção.

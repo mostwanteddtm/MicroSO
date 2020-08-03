@@ -1,0 +1,43 @@
+First let's clear how the characters are stored in the BIOS RAM.
+
+The BIOS font has either the width 8 or 9 and the height 8, 14, or 16. In the usual text mode, mode 3, this height is 16.
+
+For each line in a single character, the matrix is therefore stored in one byte for the charsets with a width of 8 pixels. For example, the character Z of the font with a height of 16 pixel is stored as:
+
+
+                    binary value            displayed matrix
+
+                      11111110b                  ллллллл
+                      11000110b                  лл   лл
+                      00001100b                      лл
+                      00011000b        ==>          лл
+                      00110010b                    лл  л
+                      01100110b                   лл  лл
+                      11111110b                  ллллллл
+                      00000000b
+
+Concerning the charsets with a width of 9 pixels, only the first 8 pixels per line are stored. The 9th pixel corresponds with the lowest (rightmost) bit. Therefore we don't have to care whether we are working with an 8xXX or 9xXX font because it's the same.
+
+In the BIOS font RAM, all ASCII characters are stored after another, i.e first ASCII 0, then ASCII 1,... till ASCII 255.
+
+So, how do we manipulate the font? It's simple! First we have to store our customized font or the customized characters somewhere in the memory like the characters in the BIOS font are stored. Then we only have to call Interrupt 10h function 11h sub-function 0. Parameters:
+
+         AX = 1100h (function 11h, sub-function 0)
+         BH = height of the font (e.g. 16)
+         BL = memory block in the BIOS font RAM (active font = 0)
+         ES = segment that contains your own characters/font
+         BP = offset of your own characters/font
+         DX = first character that should be manipulated (whole font: 0)
+         CX = number of characters that should be manipulated (whole font: 256)
+So, if the variable fntheight contains the height of your font and the modified font starts at the label fntram, you could activate your font in the following way:
+
+
+         mov bh,fntheight
+         xor bl,bl
+         mov ax,seg fntram
+         mov es,ax
+         mov bp,offset fntram
+         mov cx,256
+         xor dx,dx
+         mov ax,1100h
+         int 10h

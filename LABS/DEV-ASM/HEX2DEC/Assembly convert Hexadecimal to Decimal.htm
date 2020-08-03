@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+    <!-- html -->
+    <html lang="en-US">
+
+    <!-- head -->
+	<head>
+        
+	<!-- title -->
+	<meta charset="UTF-8" />
+    <title>An Assembly program to convert Hexadecimal to Decimal form | Computer Science Simplified - A Website for IGNOU MCA &amp; BCA Students for Solved Assignments, Notes, C Programming, Algorithms - CSSimplified.com</title>
+
+    <!-- meta -->
+
+    <meta name ="viewport" content="width = 1020" />
+    <meta name="generator" content="www.cssimplified.com" />
+            <meta name="robots" content="index,all" />
+    <meta name="googlebot" content="index,all" />
+    
+	<link rel="profile" href="http://gmpg.org/xfn/11" />
+	
+	<link rel="pingback" href="http://cssimplified.com/xmlrpc.php" />
+    
+    <link rel="stylesheet" type="text/css" media="all" href="http://cssimplified.com/wp-content/themes/alltuts_wp/style.css" />
+    
+    <link rel="alternate" type="application/rss+xml" title="Computer Science Simplified - A Website for IGNOU MCA &amp; BCA Students for Solved Assignments, Notes, C Programming, Algorithms - CSSimplified.com &raquo; Feed" href="http://cssimplified.com/feed" />
+<link rel="alternate" type="application/rss+xml" title="Computer Science Simplified - A Website for IGNOU MCA &amp; BCA Students for Solved Assignments, Notes, C Programming, Algorithms - CSSimplified.com &raquo; Comments Feed" href="http://cssimplified.com/comments/feed" />
+<link rel="alternate" type="application/rss+xml" title="Computer Science Simplified - A Website for IGNOU MCA &amp; BCA Students for Solved Assignments, Notes, C Programming, Algorithms - CSSimplified.com &raquo; An Assembly program in which a procedure converts Hexadecimal value to print its Decimal form on Screen Comments Feed" href="http://cssimplified.com/computer-organisation-and-assembly-language-programming/an-assembly-program-in-which-a-procedure-converts-hexadecimal-value-to-print-its-decimal-form-on-screen/feed" />
+<link rel='stylesheet' id='prettyphoto-style-css'  href='http://cssimplified.com/wp-content/themes/alltuts_wp/js/prettyphoto/css/prettyPhoto.css?ver=3.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='ddsmoothmenu-css'  href='http://cssimplified.com/wp-content/themes/alltuts_wp/css/ddsmoothmenu.css?ver=3.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='normalize-css'  href='http://cssimplified.com/wp-content/themes/alltuts_wp/css/normalize.css?ver=3.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='boxes-css'  href='http://cssimplified.com/wp-content/themes/alltuts_wp/lib/shortcodes/css/boxes.css?ver=3.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='lists-css'  href='http://cssimplified.com/wp-content/themes/alltuts_wp/lib/shortcodes/css/lists.css?ver=3.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='social-css'  href='http://cssimplified.com/wp-content/themes/alltuts_wp/lib/shortcodes/css/social.css?ver=3.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='dropcaps-css'  href='http://cssimplified.com/wp-content/themes/alltuts_wp/lib/shortcodes/css/dropcaps.css?ver=3.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='viewers-css'  href='http://cssimplified.com/wp-content/themes/alltuts_wp/lib/shortcodes/css/viewers.css?ver=3.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='tabs-css'  href='http://cssimplified.com/wp-content/themes/alltuts_wp/lib/shortcodes/css/tabs.css?ver=3.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='toggles-css'  href='http://cssimplified.com/wp-content/themes/alltuts_wp/lib/shortcodes/css/toggles.css?ver=3.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='site5_buttons-css'  href='http://cssimplified.com/wp-content/themes/alltuts_wp/lib/shortcodes/css/buttons.css?ver=3.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='columns-css'  href='http://cssimplified.com/wp-content/themes/alltuts_wp/lib/shortcodes/css/columns.css?ver=3.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='geshi-asm-css'  href='http://cssimplified.com/wp-content/plugins/wp-synhighlight/themes/default/geshi/asm.css?ver=3.8.1' type='text/css' media='all' />
+<script type='text/javascript' src='http://cssimplified.com/wp-includes/js/jquery/jquery.js?ver=1.10.2'></script>
+<script type='text/javascript' src='http://cssimplified.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript' src='http://cssimplified.com/wp-content/themes/alltuts_wp/js/twittercb.js?ver=3.8.1'></script>
+<script type='text/javascript' src='http://cssimplified.com/wp-content/themes/alltuts_wp/js/modernizr-all-css3.js?ver=3.8.1'></script>
+<script type='text/javascript' src='http://cssimplified.com/wp-content/themes/alltuts_wp/js/prettyphoto/jquery.prettyPhoto.js?ver=3.8.1'></script>
+<script type='text/javascript' src='http://cssimplified.com/wp-content/themes/alltuts_wp/js/ddsmoothmenu.js?ver=3.8.1'></script>
+<script type='text/javascript' src='http://cssimplified.com/wp-content/themes/alltuts_wp/lib/shortcodes/js/buttons.js?ver=3.8.1'></script>
+<script type='text/javascript' src='http://cssimplified.com/wp-content/themes/alltuts_wp/lib/shortcodes/js/jquery.quovolver.js?ver=3.8.1'></script>
+<script type='text/javascript' src='http://cssimplified.com/wp-content/themes/alltuts_wp/lib/shortcodes/js/jquery.cycle.all.min.js?ver=3.8.1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://cssimplified.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://cssimplified.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='An Assembly program to calculate the average of three given numbers stored in memory' href='http://cssimplified.com/computer-organisation-and-assembly-language-programming/an-assembly-program-to-calculate-the-average-of-three-given-numbers-stored-in-memory' />
+<link rel='next' title='An Assembly program to Evaluate sphere volume if radius is given print result on Screen' href='http://cssimplified.com/computer-organisation-and-assembly-language-programming/an-assembly-program-to-evaluate-sphere-volume-if-radius-is-given-print-result-on-screen' />
+<meta name="generator" content="WordPress 3.8.1" />
+<link rel='shortlink' href='http://cssimplified.com/?p=665' />
+
+<link rel="stylesheet" href="http://cssimplified.com/wp-content/plugins/wp-synhighlight/themes/default/wp-synhighlighter.css" type="text/css" media="screen" />
+
+<script type="text/javascript" src="http://cssimplified.com/wp-content/plugins/wp-synhighlight/themes/default/wp-synhighlighter.js"></script>
+<link rel="shortcut icon" href="http://cssimplified.com/wp-content/uploads/2013/08/favicon.ico" type="image/ico" />
+<link rel="icon" href="http://cssimplified.com/wp-content/uploads/2013/08/favicon.ico" type="image/ico" />
+<link rel="apple-touch-icon" href="http://cssimplified.com/wp-content/themes/alltuts_wp/images/ico/apple_icon.png" type="image/png" />
+	<link rel="apple-touch-icon-precomposed" href="http://cssimplified.com/wp-content/themes/alltuts_wp/images/ico/apple_icon.png" type="image/png" />
+	<link rel="icon" href="http://cssimplified.com/wp-content/themes/alltuts_wp/images/ico/apple_icon.png" type="image/png" />
+	
+<!-- All in One SEO Pack 2.1.4 by Michael Torbert of Semper Fi Web Design[149,423] -->
+<link rel="author" href="https://plus.google.com/u/0/101977230065368376370/" />
+<meta name="description" content="An Assembly program in which a procedure converts Hexadecimal value to print its Decimal form on Screen" />
+
+<meta name="keywords" content="assembly, program, procedure, convert, hexadecimal, value, decimal, form, print, onscreen,convert,decimal,form,hexadecimal,onscreen,print,procedure,program,value" />
+
+<link rel="canonical" href="http://cssimplified.com/computer-organisation-and-assembly-language-programming/an-assembly-program-in-which-a-procedure-converts-hexadecimal-value-to-print-its-decimal-form-on-screen" />
+<!-- /all in one seo pack -->
+    
+        
+    <meta name="msvalidate.01" content="7452D4412E61B96BCC9ED771B944223D" />
+</head>
+
+<body>
+
+<!-- ========= Begin GA Code =========== -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43765798-1', 'cssimplified.com');
+  ga('send', 'pageview');
+
+</script>
+<!-- ========= END GA Code =========== -->
+
+<!-- Begin #wrapper -->
+<div id="wrapper">
+	<!-- Begin #header -->
+	<header>
+		<div id="logo"><a href="http://cssimplified.com/" title="Computer Science Simplified &#8211; A Website for IGNOU MCA &amp; BCA Students for Solved Assignments, Notes, C Programming, Algorithms &#8211; CSSimplified.com" rel="home">
+                					<img src="http://cssimplified.com/wp-content/uploads/2013/08/css_logo.jpg" alt="Computer Science Simplified &#8211; A Website for IGNOU MCA &amp; BCA Students for Solved Assignments, Notes, C Programming, Algorithms &#8211; CSSimplified.com" />
+				<span>Computer Science Simplified &#8211; A Website for IGNOU MCA &amp; BCA Students for Solved Assignments, Notes, C Programming, Algorithms &#8211; CSSimplified.com</span>                
+</a>
+            
+        </div>
+		<!-- Begin #topMenu -->
+		<div id="topMenu" class="ddsmoothmenu"><ul id="menu-home" class="menu"><li id="menu-item-753" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-753"><a href="http://cssimplified.com/">Home</a></li>
+<li id="menu-item-740" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-740"><a href="http://cssimplified.com/category/computer-organisation-and-assembly-language-programming">Comp. Org. &#038; Assembly Lang. Prog.</a>
+<ul class="sub-menu">
+	<li id="menu-item-747" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-747"><a href="http://cssimplified.com/category/computer-organisation-and-assembly-language-programming/computer-organisation-theory">Computer Organisation Theory</a></li>
+	<li id="menu-item-748" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-748"><a href="http://cssimplified.com/category/computer-organisation-and-assembly-language-programming/assembly-language-programs">Assembly Language Programs</a></li>
+</ul>
+</li>
+<li id="menu-item-749" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-749"><a href="http://cssimplified.com/category/c-programming">C Programming</a>
+<ul class="sub-menu">
+	<li id="menu-item-750" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-750"><a href="http://cssimplified.com/category/c-programming/c-programs">C Programs</a></li>
+	<li id="menu-item-751" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-751"><a href="http://cssimplified.com/category/c-programming/c-theory">C Theory</a></li>
+</ul>
+</li>
+<li id="menu-item-752" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-752"><a href="http://cssimplified.com/category/assignments">Assignments</a></li>
+<li id="menu-item-754" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-754"><a href="http://cssimplified.com/about-us">About Us</a></li>
+</ul></div>			
+		<!-- End #topMenu -->
+		<!-- Begin #topMenuRight -->
+			<div id="topMenuRight">
+						<ul>
+				<li class="page_item page-item-2"><a href="http://cssimplified.com/about-us">About Us</a></li>
+			</ul>
+
+			</div>
+		<!-- End #topMenuRight -->
+		<!-- Begin #socialLinks -->
+	</header>
+	<!-- End #header -->
+	<!-- Begin #content -->
+	<div id="content" class="clearfix">
+
+<!-- Begin section -->
+		<section>
+				<!-- Begin .postBox -->
+		<article>
+            <header>
+				<div class="date">Mar<br /><span class="day">5</span><br />2014</div>
+				<div class="category"><a href="http://cssimplified.com/category/computer-organisation-and-assembly-language-programming/assembly-language-programs" title="View all posts in Assembly Language Programs" rel="category tag">Assembly Language Programs</a> // <a href="http://cssimplified.com/category/computer-organisation-and-assembly-language-programming" title="View all posts in Computer Organisation and Assembly Language Programming" rel="category tag">Computer Organisation and Assembly Language Programming</a></div>
+				<h1>An Assembly program in which a procedure converts Hexadecimal value to print its Decimal form on Screen</h1>
+            </header>
+				<div class="postMetaSingle">
+					<img src="http://cssimplified.com/wp-content/themes/alltuts_wp/images/ico_author.png" alt="Author"/> An article by  Gangadhar Kopella&nbsp;&nbsp;&nbsp;
+					<img src="http://cssimplified.com/wp-content/themes/alltuts_wp/images/ico_comments.png" alt="Comments"/> <a href="http://cssimplified.com/computer-organisation-and-assembly-language-programming/an-assembly-program-in-which-a-procedure-converts-hexadecimal-value-to-print-its-decimal-form-on-screen#respond" title="Comment on An Assembly program in which a procedure converts Hexadecimal value to print its Decimal form on Screen">No Comments</a>				</div>
+<!-- ==================GOOGLE AD==================-->
+<center>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 336x280 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-3811412487639935"
+     data-ad-slot="2948167606"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</center>	
+<!-- ==================GOOGLE AD==================-->
+					<p>Now we will write another Assembly program in which a procedure converts Hexadecimal value to print its Decimal form on Screen</p>
+<p>Let’s identify variables needed for this program.<br />
+First variables will be the one which will hold the value present in the variable NUM converts Hexadecimal value to print its Decimal form on Console (Screen) and Other variable RES will be holding the Resultant Decimal equivalent printable form to be printed for the User on Screen, So in all  Two variables.<br />
+The identified variables are <b>NUM</b><b> </b>and<b> RES</b>.</p>
+<p><b>First Line – DATA SEGMENT</b></p>
+<p>DATA SEGMENT is the starting point of the Data Segment in a Program and DATA is the name given to this segment and SEGMENT is the keyword for defining Segments, Where we can declare our variables.</p>
+<p><b>Next Line – NUM DW 1234H<br />
+     RES  DB 10 DUP (&#8216;$&#8217;)</b></p>
+<p><em><strong>NUM DW 1234H</strong></em> We are initializing NUM to 1234H  (H stands for <b>Hexadecimal value</b>). The number which we are using is of 4 digits and DB is capable of holding only 2 digits, Hence we use DW as it can hold 4 digits.</p>
+<p><b> <em>RES  DB 10 DUP (&#8216;$&#8217;) </em></b>this line is a declaration of Array initialized with &#8217;$&#8217; which works as New Line Character. $ is used as (\n) NULL character in C program. (A Number Character is of a BYTE size Hence we have to used only DB Define Byte ) as we don&#8217;t know the lenght of the digits in the Resultant Decimal equivalent printable form, Therefore we take it approx size ten. Here 10 DUP (&#8216;$&#8217;) stands for N i.e. Size of Array or Array Size. DUP stands for Duplicate i.e. it will duplicate the value in All the Array with the value present in Bracket (i.e. $).</p>
+<p><b>Next Line – DATA ENDS</b></p>
+<p>DATA ENDS is the End point of the Data Segment in a Program. We can write just ENDS But to differentiate the end of which segment it is of which we have to write the same name given to the Data Segment.</p>
+<p>Now, Selection of data type is <b>DW </b>data type As the number which we are converting in the Register can be Max of size 2 bytes so DW is selected.</p>
+<div id="wpshdo_1" class="wp-synhighlighter-outer"><div id="wpshdt_1" class="wp-synhighlighter-expanded"><table border="0" width="100%"><tr><td align="left" width="80%"><a name="#codesyntax_1"></a><a id="wpshat_1" class="wp-synhighlighter-title" href="#codesyntax_1"  onClick="javascript:wpsh_toggleBlock(1)" title="Click to show/hide code block">Source code</a></td><td align="right"><a href="#codesyntax_1" onClick="javascript:wpsh_code(1)" title="Show code only"><img border="0" style="border: 0 none" src="http://cssimplified.com/wp-content/plugins/wp-synhighlight/themes/default/images/code.png" /></a>&nbsp;<a href="#codesyntax_1" onClick="javascript:wpsh_print(1)" title="Print code"><img border="0" style="border: 0 none" src="http://cssimplified.com/wp-content/plugins/wp-synhighlight/themes/default/images/printer.png" /></a>&nbsp;<a href="http://cssimplified.com/wp-content/plugins/wp-synhighlight/About.html" target="_blank" title="Show plugin information"><img border="0" style="border: 0 none" src="http://cssimplified.com/wp-content/plugins/wp-synhighlight/themes/default/images/info.gif" /></a>&nbsp;</td></tr></table></div><div id="wpshdi_1" class="wp-synhighlighter-inner" style="display: block;max-height: 500px"><pre class="asm" style="font-family:monospace;"> <span class="kw4">DATA</span> <span class="kw4">SEGMENT</span>
+     NUM <span class="kw4">DW</span> 1234H
+     RES  <span class="kw4">DB</span> 10 <span class="kw4">DUP</span> <span class="br0">&#40;</span><span class="st0">'$'</span><span class="br0">&#41;</span>
+<span class="kw4">DATA</span> <span class="kw4">ENDS</span></pre></div></div>
+<p> In Assembly programming, the variable are all defined by bytes only.</p>
+<p><b>DB &#8211; </b>Define Byte  (Size &#8211; 1 Byte)</p>
+<p><b>DW &#8211; </b>Define Word  (Size &#8211; 2 Byte)</p>
+<p><b>DD &#8211; </b>Define Double word  (Size -  4 Bytes)</p>
+<p><b>DQ &#8211; </b>Define Quad word  (Size &#8211; 8 Bytes)</p>
+<p><b>DT &#8211; </b>Define Ten Bytes  (Size &#8211; 10 Bytes)</p>
+<p>NUMBER SYSTEM in Assembly Programming is Decimal, Octal, Hexadecimal, Binary.</p>
+<p>In the Program, We are entering the values for the variables and Do arithmetical Operations like Addition, Subtraction, Multiplication and Division So the Computer should understand which kind of Number is entered. Hence there is a different letters for different Number Systems. <b>O</b> or <b>o</b> stands for <b>Octal, H</b> or <b>h</b> stands for <b>Hexadecimal, B</b> or <b>b</b> stands for <b>Binary, D or d </b>stands for<b> Decimal. By </b>default type of numbering system is Decimal. If you do not specify any letter then the number is understood to be Decimal (By default).</p>
+<div id="wpshdo_2" class="wp-synhighlighter-outer"><div id="wpshdt_2" class="wp-synhighlighter-expanded"><table border="0" width="100%"><tr><td align="left" width="80%"><a name="#codesyntax_2"></a><a id="wpshat_2" class="wp-synhighlighter-title" href="#codesyntax_2"  onClick="javascript:wpsh_toggleBlock(2)" title="Click to show/hide code block">Source code</a></td><td align="right"><a href="#codesyntax_2" onClick="javascript:wpsh_code(2)" title="Show code only"><img border="0" style="border: 0 none" src="http://cssimplified.com/wp-content/plugins/wp-synhighlight/themes/default/images/code.png" /></a>&nbsp;<a href="#codesyntax_2" onClick="javascript:wpsh_print(2)" title="Print code"><img border="0" style="border: 0 none" src="http://cssimplified.com/wp-content/plugins/wp-synhighlight/themes/default/images/printer.png" /></a>&nbsp;<a href="http://cssimplified.com/wp-content/plugins/wp-synhighlight/About.html" target="_blank" title="Show plugin information"><img border="0" style="border: 0 none" src="http://cssimplified.com/wp-content/plugins/wp-synhighlight/themes/default/images/info.gif" /></a>&nbsp;</td></tr></table></div><div id="wpshdi_2" class="wp-synhighlighter-inner" style="display: block;max-height: 500px"><pre class="asm" style="font-family:monospace;"><span class="kw4">DATA</span> <span class="kw4">SEGMENT</span>
+     NUM <span class="kw4">DW</span> 1234H
+     RES  <span class="kw4">DB</span> 10 <span class="kw4">DUP</span> <span class="br0">&#40;</span><span class="st0">'$'</span><span class="br0">&#41;</span>
+<span class="kw4">DATA</span> <span class="kw4">ENDS</span>
+<span class="kw4">CODE</span> <span class="kw4">SEGMENT</span>
+        <span class="kw4">ASSUME</span> <span class="kw3">DS</span><span class="sy0">:</span><span class="kw4">DATA</span><span class="sy0">,</span><span class="kw3">CS</span><span class="sy0">:</span><span class="kw4">CODE</span>
+START<span class="sy0">:</span>       
+    <span class="kw1">MOV</span> <span class="kw3">AX</span><span class="sy0">,</span><span class="kw4">DATA</span>
+    <span class="kw1">MOV</span> <span class="kw3">DS</span><span class="sy0">,</span><span class="kw3">AX</span>
+   
+    <span class="kw1">MOV</span> <span class="kw3">AX</span><span class="sy0">,</span>NUM
+      
+    <span class="kw1">LEA</span> <span class="kw3">SI</span><span class="sy0">,</span>RES
+    <span class="kw1">CALL</span> HEX2DEC
+   
+    <span class="kw1">LEA</span> <span class="kw3">DX</span><span class="sy0">,</span>RES
+    <span class="kw1">MOV</span> <span class="kw3">AH</span><span class="sy0">,</span>9
+    <span class="kw1">INT</span> 21H 
+            
+    <span class="kw1">MOV</span> <span class="kw3">AH</span><span class="sy0">,</span>4CH
+    <span class="kw1">INT</span> 21H        
+<span class="kw4">CODE</span> <span class="kw4">ENDS</span>
+HEX2DEC <span class="kw4">PROC</span> <span class="kw5">NEAR</span>
+    <span class="kw1">MOV</span> <span class="kw3">CX</span><span class="sy0">,</span>0
+    <span class="kw1">MOV</span> <span class="kw3">BX</span><span class="sy0">,</span>10
+   
+LOOP1<span class="sy0">:</span> <span class="kw1">MOV</span> <span class="kw3">DX</span><span class="sy0">,</span>0
+       <span class="kw1">DIV</span> <span class="kw3">BX</span>
+       <span class="kw1">ADD</span> <span class="kw3">DL</span><span class="sy0">,</span>30H
+       <span class="kw1">PUSH</span> <span class="kw3">DX</span>
+       <span class="kw1">INC</span> <span class="kw3">CX</span>
+       <span class="kw1">CMP</span> <span class="kw3">AX</span><span class="sy0">,</span>9
+       <span class="kw1">JG</span> LOOP1
+     
+       <span class="kw1">ADD</span> <span class="kw3">AL</span><span class="sy0">,</span>30H
+       <span class="kw1">MOV</span> <span class="br0">&#91;</span><span class="kw3">SI</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="kw3">AL</span>
+     
+LOOP2<span class="sy0">:</span> <span class="kw1">POP</span> <span class="kw3">AX</span>
+       <span class="kw1">INC</span> <span class="kw3">SI</span>
+       <span class="kw1">MOV</span> <span class="br0">&#91;</span><span class="kw3">SI</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="kw3">AL</span>
+       <span class="kw1">LOOP</span> LOOP2
+       <span class="kw1">RET</span>
+HEX2DEC <span class="kw4">ENDP</span>           
+   
+<span class="kw4">END</span> START</pre></div></div>
+<p><b>Explanation</b><b> : </b></p>
+<p>In this Assembly Language Programming, A single program is divided into four Segments which are 1. Data Segment, 2. Code Segment, 3. Stack Segment, and 4. Extra  Segment. Now, from these one is compulsory i.e. Code Segment if at all you don’t need variable(s) for your program.if you need variable(s) for your program you will need two Segments i.e. Code Segment and Data Segment.</p>
+<p><b>Next Line –CODE SEGMENT</b></p>
+<p><strong><em>CODE SEGMENT</em> </strong>is the starting point of the Code Segment in a Program and CODE is the name given to this segment and SEGMENT is the keyword for defining Segments, Where we can write the coding of the program.</p>
+<p><b>Next Line –     ASSUME DS:DATA CS:CODE</b></p>
+<p>In this Assembly Language Programming, their are Different Registers present for Different Purpose So we have to assume DATA is the name given to Data Segment register and CODE is the name given to Code Segment register (SS,ES are used in the same way as CS,DS )</p>
+<p><b>Next Line – START:</b></p>
+<p><strong><em>START</em> </strong>is the label used to show the starting point of the code which is written in the Code Segment. : is used to define a label as in C programming.</p>
+<p><b>Next Line – MOV AX,DATA</b><b><br />
+</b><b>MOV DS,AX</b></p>
+<p>After Assuming DATA and CODE Segment, Still it is compulsory to initialize Data Segment to DS register.  MOV is a keyword to move the second element into the first element. But we cannot move DATA Directly to DS due to MOV commands restriction, Hence we move DATA to AX and then from AX to DS. AX is the first and most important register in the ALU unit. This part is also called INITIALIZATION OF DATA SEGMENT and It is important so that the Data elements or variables in the DATA Segment are made accessable. Other Segments are not needed to be initialized, Only assuming is enhalf.</p>
+<p><b>Next Line – MOV AX,NUM</b></p>
+<p>The above line code is used to Move  NUM variable value to AX Register.</p>
+<p><b>Next Line – LEA SI,RES<br />
+    CALL HEX2DEC</b></p>
+<p>The above Two line code is used to initialize RES to SI register and Call Procedure HEX2DEC</p>
+<p><em><strong>LEA SI,RES</strong> </em>is used to Load Effective Address of RES variable to SI Register. </p>
+<p><em><strong>CALL HEX2DEC </strong></em>is used to Call a Procedure named HEX2DEC</p>
+<p><b>Next Line – LEA DX,RES<br />
+    MOV AH,9<br />
+    INT 21H</b></p>
+<p>The above three line code is used to print String or Message present in the character Array till $  symbol which tells the compiler to stop. As we have initialized all the values in an Array to $ you will think what will be printed. The procedure is going to change the Array to its Resultant Decimal equivalent printable form i.e. ASCII form of a digit number.</p>
+<p>Now, lets understand line by line</p>
+<p><em><strong>LEA DX,RES</strong> </em>in this LEA stands for LOAD EFFECTIVE ADDRESS and it loads the effective address of second element into the first element.  This same code can be interchangably written as <em><strong>MOV DX, OFFSET RES</strong> </em>where OFFSET  means effective address and MOV means move  second element into the first element.</p>
+<p><b>MOV AH,9</b><br />
+<b>INT 21H</b></p>
+<p>The above two line code is used to PRINT the String or Message of the address present in DX register.</p>
+<p>Standard Input and Standard Output related Interupts are found in INT 21H which is also called as DOS interrupt. It works with the value of AH register, If the Value is 9 or 9h, That means PRINT the String or Message of the address present in DX register.</p>
+<p><b>Next Line – EXIT: MOV AH,4CH<br />
+      INT 21H</b></p>
+<p>The above two line code is used to exit to dos or exit to operating system. Standard Input and Standard Output related Interupts are found in INT 21H which is also called as DOS interrupt. It works with the value of AH register, If the Value is 4ch, That means Return to Operating System or DOS which is the End of the program.</p>
+<p><b>Next Line – CODE ENDS</b></p>
+<p><em><strong>CODE ENDS</strong> </em>is the End point of the Code Segment in a Program. We can write just ENDS But to differentiate the end of which segment it is of which we have to write the same name given to the Code Segment.</p>
+<p><strong>PROCEDURE Code starts here: </strong></p>
+<p>Procedure is a part of code that can be called from a program in order to perform specific task.</p>
+<p><strong>Next <strong>Line – HEX2DEC PROC NEAR</strong></strong></p>
+<p>This line of code is used to start a procedure code and we can make out the procedure by the keyword PROC which tells us the procedure is started. In assembly language we have two types of Procedures one is NEAR and other is FAR. NEAR is used to call the Procedure within the program whereas FAR is used to call the procedure outside the program. HEX2DEC is only the Name given to the Procedure Code. </p>
+<p><strong>Next Line –  MOV CX,0<br />
+    MOV BX,10</strong></p>
+<p><strong><em>MOV CX,0</em></strong> is used to move or assign value 0 (decimal value) to  CX. The program which we are wishing to write is to covert HexaDecimal value to Decimal value, In which we will divide the number till the Quotient is going to be Zero. CX register ( CX is also Called COUNTER). CX register will count the number digit generated by dividing the Hexadecimal number by Base value of Decimal i.e.Ten. <em><strong>MOV BX,10 </strong></em>in this Base value 10 is moved to BX register, So that it is used to divide hexa number by 10.</p>
+<p><strong>Next Line – LOOP1: MOV DX,0</strong></p>
+<p>LOOP1: is a LABEL and all the words ending in colon (:) are Labels. MOV DX,0 is used to clear the unwanted value (garbage value) in DX register is removed by assigning ZERO to it. <em>First Loop starts here.</em></p>
+<p><strong>Next Line – DIV BX<br />
+       ADD DL,30H</strong></p>
+<p>DIV instruction only works with REG or MEMORY hence we cannot use DIV 10 where 10 is immediate, So we have to move 10 to BX register (we can take any register) this we have already done above and Then <em><strong>DIV BX</strong> </em> Now DIV BX will Divide AX register with 10 which is passed to BX register and Result of division is present in AX register contains Quotientand DX register contains Remainder. Here we will not touch Quotient AX as it will be used for furture Division, But DX Remainder will be Decimal Digit and will always be less than Ten so the value will be in DL register only and to make it printable on Console (Screen) we have to add  30H So that it will become a ASCII character and will be saved in Charater Array and will be printed as String later So <em><strong>ADD DL,30H</strong></em>.</p>
+<p><strong>Next Line – PUSH DX<br />
+       INC CX</strong></p>
+<p>PUSH is a stack function. Stack is an area of memory for keeping temporary data. PUSH and POP are two stack operations which stores or gets 16 bits of data. <em><strong>PUSH DX</strong> </em>stores 16 bit data inside DX register into Stack Area. INC is a instruction for Increment the present in Register or Memory. <em><strong>INC CX </strong></em>will increment the value present in CX register by One. Here we are using CX register as a counter and counting the numbers of digits in their ASCII form which are pushed into Stack. So that the same count will help to POP the values out of Stack.</p>
+<p><strong>Next Line – MOV CX,10</strong></p>
+<p><em><strong>MOV CX,10</strong> </em>is used to move or assign value 10 (decimal value) to  CX. The program which we are wishing to write is to input ten characters from console which will be entered by the user, Hence to do so we need a loop construct. In assembly programming language we have a LOOP instruction. This works with two other helpers which are Label and Counter. The Loop start with LABEL and ends with LOOP instruction with the same LABEL name with it. the execution of the Loop depends on the value in CX register ( CX is also Called COUNTER).</p>
+<p><strong><strong>Next Line – CMP AX,9<br />
+       JG LOOP1</strong></strong></p>
+<p><em><strong>CMP AX,9</strong></em>  is used to compare AX register with 9 and jump if AX is greater to the respective LABEL LOOP1. The result of Comparision is not stored anywhere, but flags are set according to result. <em><strong> </strong></em>is Short Jump if first operand is Greater then second operand (as set by CMP instruction). Signed. SECOND is the label where the compiler will JUMP. <em>First Loop ends here. Note :- this loop is without LOOP keyword and depends upon the number to be converted.</em></p>
+<p><strong>Next Line – ADD AL,30H<br />
+       MOV [SI],AL</strong></p>
+<p><em><strong>ADD AL,30H</strong> </em>The Last Remainder will be Decimal Digit in AX register only as the number cannot be divided future and will always be less than Ten so the value will be in AL register only and to make it printable on Console (Screen) we have to add  30H So that it will become a ASCII character and will be saved in Charater Array and will be printed as String later. <em><strong>MOV [SI],AL</strong> </em>Saving the Characters in Character Array (i.e. String) is done by Moving AL register to Address of SI register which is represented in Square Brackets i.e. [SI]. SI is assigned with the Character Array i.e. RES.</p>
+<p> <strong>Next Line – LOOP2: POP AX<br />
+       INC SI</strong></p>
+<p><em><strong>LOOP2</strong></em>: is a LABEL and all the words ending in colon (:) are Labels. POP is a stack function. Stack is an area of memory for keeping temporary data. PUSH and POP are two stack operations which stores or gets 16 bits of data. <em><strong>POP AX</strong> get</em>s 16 bit data to AX register from Top of Stack. <em><strong>INC CX </strong></em>will increment the value present in CX register by One. Here we are using CX register as a counter and counting the numbers of digits in their ASCII form which are pushed into Stack. So that the same count will help to POP the values out of Stack and save it in AX register. <em>Second Loop starts here.</em></p>
+<p><strong>Next Line – MOV [SI],AL</strong></p>
+<p>The values out of Stack saved in AX register saved in string in this Loop.<strong> </strong><em><strong>MOV [SI],AL</strong> </em>Saving the Characters in Character Array (i.e. String) is done by Moving AL register to Address of SI register which is represented in Square Brackets i.e. [SI]. SI is assigned with the Character Array i.e. RES.</p>
+<p><strong><strong>Next Line – </strong>LOOP LOOP2</strong></p>
+<p>This end of loop. In assembly programming language we have a LOOP instruction. This works with two other helpers which are Label and Counter. The Loop start with LABEL and ends with LOOP instruction with the same LABEL name with it. the execution of the Loop depends on the value in CX register ( CX is also Called COUNTER).</p>
+<p><strong><strong>Next Line – RET</strong></strong></p>
+<p><em><strong>RET</strong></em><strong> </strong>is a return instruction. This instruction is used only if  the control is been passed to the code outside Main like to Procedure. this return the control to the place where the Procudure was called.</p>
+<p><strong><strong>Next Line – HEX2DEC ENDP </strong></strong></p>
+<p><em><strong>HEX2DEC ENDP</strong> </em>is the End point of the <strong>Procedure </strong>in a Program.</p>
+<p>This line of code is used to end the procedure code and we can make out the procedure by the keyword ENDP which tells us the procedure is ended. In assembly language we have two types of Procedures one is NEAR and other is FAR. NEAR is used to call the Procedure within the program whereas FAR is used to call the procedure outside the program. HEX2DEC is only the Name given to the Procedure Code. </p>
+<p><b>Last Line – END START</b></p>
+<p>END START is the end of the label used to show the ending point of the code which is written in the Code Segment.</p>
+<p>Note :- In this Assembly Language Programming, We have Com format and EXE format. We are Learning in EXE format only which simple then COM format to understand and Write. We can write the program in lower or upper case, But i prepare Upper Case.</p>
+<p><b>Screen Shots :-</b></p>
+<p> <a href="http://cssimplified.com/wp-content/uploads/2014/03/Asm_program_HexaDecimal_2_Decimal.jpg"><img class="alignnone size-full wp-image-663" alt="Asm_program_HexaDecimal_2_Decimal" src="http://cssimplified.com/wp-content/uploads/2014/03/Asm_program_HexaDecimal_2_Decimal.jpg" width="544" height="708" /></a></p>
+<p><b>Output After Execution :-</b></p>
+<p> <a href="http://cssimplified.com/wp-content/uploads/2014/03/Asm_program_HexaDecimal_2_Decimal_Output.jpg"><img class="alignnone size-full wp-image-664" alt="Asm_program_HexaDecimal_2_Decimal_Output" src="http://cssimplified.com/wp-content/uploads/2014/03/Asm_program_HexaDecimal_2_Decimal_Output.jpg" width="503" height="259" /></a></p>
+<p>Note :- To see the variable and its value you have to click <b>vars </b>button in the emulator.</p>
+                    <div class="postTags">Tags: <a href="http://cssimplified.com/tag/assembly" rel="tag">Assembly</a>, <a href="http://cssimplified.com/tag/convert" rel="tag">convert</a>, <a href="http://cssimplified.com/tag/decimal" rel="tag">decimal</a>, <a href="http://cssimplified.com/tag/form" rel="tag">form</a>, <a href="http://cssimplified.com/tag/hexadecimal" rel="tag">Hexadecimal</a>, <a href="http://cssimplified.com/tag/onscreen" rel="tag">onscreen</a>, <a href="http://cssimplified.com/tag/print" rel="tag">print</a>, <a href="http://cssimplified.com/tag/procedure" rel="tag">procedure</a>, <a href="http://cssimplified.com/tag/program" rel="tag">program</a>, <a href="http://cssimplified.com/tag/value" rel="tag">value</a></div>
+
+
+<!-- Google Ad - Start -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 336x280 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-3811412487639935"
+     data-ad-slot="2948167606"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- Google Ad - End -->
+
+<!-- Google Ad - Start -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 336x280 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-3811412487639935"
+     data-ad-slot="2948167606"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- Google Ad - End -->
+
+					<div class="postCredentials">
+							
+													
+							<!-- Related Posts-->
+							<h2>Related Posts</h2><ul class="relatedPosts">										<li><img width="40" height="27" src="http://cssimplified.com/wp-content/uploads/2013/09/assignment.jpeg" class="attachment-40x40 wp-post-image" alt="MCS-011Q1" /><a href="http://cssimplified.com/assignments/write-an-interactive-c-program-which-prompts-the-user-with-the-following-options-on-the-opening-menu-at-any-post-office" rel="bookmark" title="Permanent Link to A C program to prompt user with option on menu at Post Office &#8211; IGNOU MCA Assignment 2014 &#8211; 15">A C program to prompt user with option on menu at Post Office &#8211; IGNOU MCA Assignment 2014 &#8211; 15</a></li>
+																			<li><img width="40" height="27" src="http://cssimplified.com/wp-content/uploads/2013/09/assignment.jpeg" class="attachment-40x40 wp-post-image" alt="MCS-011Q1" /><a href="http://cssimplified.com/assignments/write-and-run-an-assembly-language-program-that-accepts-a-two-digit-input-from-the-keyboard-and-convert-this-two-digit-ascii-to-equivalent-binary-value-the-output-should-be-stored-in-the-al-register" rel="bookmark" title="Permanent Link to An Assembly language program convert 2 digit ASCII to binary &#8211; IGNOU MCA Assignment 2014 &#8211; 15">An Assembly language program convert 2 digit ASCII to binary &#8211; IGNOU MCA Assignment 2014 &#8211; 15</a></li>
+																			<li><img width="40" height="27" src="http://cssimplified.com/wp-content/uploads/2013/09/assignment.jpeg" class="attachment-40x40 wp-post-image" alt="MCS-011Q1" /><a href="http://cssimplified.com/assignments/write-a-near-procedure-in-assembly-language-that-converts-two-unpacked-bcd-digits-to-a-packed-bcd-digit-both-are-passed-as-parameters-on-the-stack" rel="bookmark" title="Permanent Link to A procedure in Assembly Language to convert two unpacked BCD to packed BCD &#8211; IGNOU MCA Assignment 2014-15">A procedure in Assembly Language to convert two unpacked BCD to packed BCD &#8211; IGNOU MCA Assignment 2014-15</a></li>
+																			<li><img width="40" height="27" src="http://cssimplified.com/wp-content/uploads/2013/09/assignment.jpeg" class="attachment-40x40 wp-post-image" alt="MCS-011Q1" /><a href="http://cssimplified.com/assignments/write-and-run-an-assembly-language-program-that-finds-the-occurrence-of-a-given-substring" rel="bookmark" title="Permanent Link to An Assembly language program to find substring in given string &#8211; IGNOU MCA Assignment 2014-15">An Assembly language program to find substring in given string &#8211; IGNOU MCA Assignment 2014-15</a></li>
+									</ul>							<!-- end Related Posts-->
+					
+		</div>
+        
+		<div class="postBoxMidInner">
+		
+		
+		
+        
+<!-- You can start editing here. -->
+
+
+			<!-- If comments are open, but there are no comments. -->
+
+	 
+
+
+<div id="respond">
+
+<h2 id="commentsForm">Leave a comment</h2>
+
+<div class="cancel-comment-reply">
+	<small><a rel="nofollow" id="cancel-comment-reply-link" href="/computer-organisation-and-assembly-language-programming/an-assembly-program-in-which-a-procedure-converts-hexadecimal-value-to-print-its-decimal-form-on-screen#respond" style="display:none;">Click here to cancel reply.</a></small>
+</div>
+
+<p>You must be  <a href="http://cssimplified.com/wp-login.php?redirect_to=http%3A%2F%2Fcssimplified.com%2Fcomputer-organisation-and-assembly-language-programming%2Fan-assembly-program-in-which-a-procedure-converts-hexadecimal-value-to-print-its-decimal-form-on-screen">logged in</a>to post a comment.</p>
+</div>
+
+			</div>
+		</article>
+				
+			</section>
+		<!-- End section -->
+
+
+<!-- Begin aside -->
+		<aside>
+		<form id="searchform" action="http://cssimplified.com/" method="get">
+			<div class="rightBox rightBoxMidSearch">
+					<input type="text" id="s" name="s" value="type your search here" onfocus="this.value=''" onblur="this.value='type your search here'"/>
+					<input type="submit" value="" class="submit" id="searchsubmit"/>	
+			</div>
+		</form>
+				
+				
+								<div class="rightBox">
+						<div class="textwidget"><iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fpages%2FCSSimplifiedcom%2F313220668840623&amp;width=250&amp;height=290&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:250px; height:290px;" allowTransparency="true"></iframe></div>
+			
+			
+		</div><div class="rightBox">
+						<div class="textwidget"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 300x600 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-3811412487639935"
+     data-ad-slot="4145699203"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+			
+			
+		</div>		<div class="rightBox">
+					<h2>Recent Posts</h2>		<ul>
+					<li>
+				<a href="http://cssimplified.com/assignments/answer-the-following-queries-in-sql-ignou-mca-assignment-2014-15">Answer the following queries in SQL &#8211; IGNOU MCA Assignment 2014 &#8211; 15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/construct-an-er-diagram-for-a-banking-system-clearly-indicate-the-entities-relationships-cardinality-and-the-key-constraints-also-derive-the-un-normalized-relational-database-tables-with-the-help">Entity Relationship ER diagram for a Banking System &#8211; IGNOU MCA Assignment 2014-15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/create-a-web-site-for-a-school-in-html-and-vbscript">Create a Website for a School in HTML and VBScript &#8211; IGNOU MCA Assignment 2014-15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/implement-multiple-stacks-in-a-single-dimensional-array-write-algorithms-for-various-stack-operations-for-them">Write and Implement multiple stacks in a single dimensional array &#8211; IGNOU MCA Assignment 2014-15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/write-an-algorithm-for-the-implementation-of-circular-doubly-linked-lists">A C program and algorithm to implement Circular Doubly Linked List  &#8211; IGNOU MCA Assignment 2014 &#8211; 15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/implement-stack-in-a-single-dimensional-array-write-algorithms-for-various-stack-operations-for-them">A C program and algorithm to implement stack in a single dimensional array  &#8211; IGNOU MCA Assignment 2014 &#8211; 15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/write-an-algorithm-for-the-implementation-of-circular-linked-lists">A C program and algorithm to implement Circular Linked Lists  &#8211; IGNOU MCA Assignment 2014 &#8211; 15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/draw-erd-for-online-examination-system">Draw ERD for Online Examination System &#8211; IGNOU MCA Assignment 2014 &#8211; 15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/draw-the-dfds-upto-2nd-level-for-online-examination-system">Draw DFD (Data Flow Diagram) to 2nd level for Online Examination System &#8211; IGNOU MCA Assignment 2014-15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/develop-srs-for-online-examination-system-srs-should-be-as-per-ieee-standard-srs-template">Develop SRS for Online Examination System. SRS as per IEEE standard &#8211; IGNOU MCA Assignment 2014-15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/write-an-interactive-c-program-which-prompts-the-user-with-the-following-options-on-the-opening-menu-at-any-post-office">A C program to prompt user with option on menu at Post Office &#8211; IGNOU MCA Assignment 2014 &#8211; 15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/write-and-run-an-assembly-language-program-that-accepts-a-two-digit-input-from-the-keyboard-and-convert-this-two-digit-ascii-to-equivalent-binary-value-the-output-should-be-stored-in-the-al-register">An Assembly language program convert 2 digit ASCII to binary &#8211; IGNOU MCA Assignment 2014 &#8211; 15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/write-a-near-procedure-in-assembly-language-that-converts-two-unpacked-bcd-digits-to-a-packed-bcd-digit-both-are-passed-as-parameters-on-the-stack">A procedure in Assembly Language to convert two unpacked BCD to packed BCD &#8211; IGNOU MCA Assignment 2014-15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/write-and-run-an-assembly-language-program-that-finds-the-occurrence-of-a-given-substring">An Assembly language program to find substring in given string &#8211; IGNOU MCA Assignment 2014-15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/write-a-program-in-assembly-language-to-print-an-infinite-sequence-of-pseudo-random-numbers">An Assembly Language program to print sequence of random numbers &#8211; IGNOU MCA Assignment 2014-15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/write-a-program-in-assembly-language-to-print-out-the-length-of-string">A program in assembly language to print out the length of string &#8211; IGNOU MCA Assignment 2014 &#8211; 15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/an-assembly-language-program-to-read-an-array-of-numbers-and-find-the-minimal-and-maximal-elements">An Assembly Language program to find minimal and maximal elements &#8211; IGNOU MCA Assignment 2014 &#8211; 15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/write-a-program-in-assembly-language-for-converting-lower-case-to-upper-case-in-a-given-string-of-characters">An Assembly program to convert lower case to upper case &#8211; IGNOU MCA Assignment 2014 &#8211; 15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/write-a-simple-near-procedure-in-8086-assembly-language-that-receives-one-16-bit-number-as-parameter-value-on-the-stack-from-the-main-module-it-returns-0-if-the-upper-byte-of-the-number-is-0-else-re">A procedure in Assembly Language program to that receives parameter on stack It returns 0 &#8211; IGNOU MCA Assignment 2014-15</a>
+						</li>
+					<li>
+				<a href="http://cssimplified.com/assignments/write-a-program-in-8086-assembly-language-to-convert-a-four-digit-packed-bcd-number-stored-in-memory-into-equivalent-ascii-digits-and-print-the-four-ascii-digits">An Assembly Language program to convert a packed BCD into ASCII digits &#8211; IGNOU MCA Assignment 2014 &#8211; 15</a>
+						</li>
+				</ul>
+			
+			
+		</div><div class="rightBox">
+			<h2>Categories</h2>		<ul>
+	<li class="cat-item cat-item-48"><a href="http://cssimplified.com/category/computer-organisation-and-assembly-language-programming/assembly-language-programs" title="All Assembly Language programs placed here!">Assembly Language Programs</a>
+</li>
+	<li class="cat-item cat-item-240"><a href="http://cssimplified.com/category/assignments" title="All Subjects important assignments placed here!">Assignments</a>
+</li>
+	<li class="cat-item cat-item-2"><a href="http://cssimplified.com/category/c-programming" title="View all posts filed under C Programming">C Programming</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://cssimplified.com/category/c-programming/c-programs" title="All programs placed here!">C Programs</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://cssimplified.com/category/c-programming/c-theory" title="All important theory content placed here!">C Theory</a>
+</li>
+	<li class="cat-item cat-item-47"><a href="http://cssimplified.com/category/computer-organisation-and-assembly-language-programming" title="View all posts filed under Computer Organisation and Assembly Language Programming">Computer Organisation and Assembly Language Programming</a>
+</li>
+		</ul>
+	
+			
+		</div>                		
+		</aside>
+		<!-- End aside -->
+		<script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
+		<script type="text/javascript" src="http://api.twitter.com/1/statuses/user_timeline.json?screen_name=&amp;include_rts=1&amp;callback=twitterCallback2&amp;count=3"></script>
+	
+
+
+
+</div>
+		<!-- end content -->
+	
+	</div>
+	<!-- end wrapper -->
+	<!-- begin footer -->
+	<footer>
+		<div id="footerInner">
+		
+				
+		</div>
+	</footer>
+	<div id="copyright">
+		<div id="copyrightInner">
+					<div id="site5bottom">Copyright &copy; <a href="http://cssimplified.com/" title="Computer Science Simplified">Computer Science Simplified</a> </div>
+		</div>
+	</div>
+	<!-- end footer -->
+	    <link rel='stylesheet' id='geshi-c-css'  href='http://cssimplified.com/wp-content/plugins/wp-synhighlight/themes/default/geshi/c.css?ver=3.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='geshi-html4strict-css'  href='http://cssimplified.com/wp-content/plugins/wp-synhighlight/themes/default/geshi/html4strict.css?ver=3.8.1' type='text/css' media='all' />
+<script type='text/javascript' src='http://cssimplified.com/wp-content/themes/alltuts_wp/js/custom.js?ver=3.8.1'></script>
+
+</body>
+</html>
+<!-- Dynamic page generated in 0.474 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2014-09-21 17:33:48 -->
+
+<!-- Compression = gzip -->

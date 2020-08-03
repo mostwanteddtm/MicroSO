@@ -1,0 +1,4702 @@
+From: "Salvo pelo Windows Internet Explorer 8"
+Subject: FAT - ForensicsWiki
+Date: Wed, 2 Aug 2017 17:58:43 -0300
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0015_01D30BB8.FB254C90"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.1.7601.17514
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0015_01D30BB8.FB254C90
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.forensicswiki.org/wiki/FAT
+
+=EF=BB=BF<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML dir=3Dltr lang=3Den class=3Dclient-nojs><HEAD><META =
+content=3D"IE=3D8.0000"=20
+http-equiv=3D"X-UA-Compatible">
+<TITLE>FAT - ForensicsWiki</TITLE>
+<META charset=3DUTF-8>
+<META name=3DGENERATOR content=3D"MSHTML 8.00.7601.17514"><LINK =
+rel=3D"shortcut icon"=20
+href=3D"/favicon.ico"><LINK title=3D"ForensicsWiki (en)" rel=3Dsearch=20
+type=3Dapplication/opensearchdescription+xml =
+href=3D"/opensearch_desc.php"><LINK=20
+rel=3DEditURI type=3Dapplication/rsd+xml=20
+href=3D"http://forensicswiki.org/api.php?action=3Drsd"><LINK =
+rel=3Dalternate=20
+href=3D"/wiki/FAT" hreflang=3Dx-default><LINK title=3D"ForensicsWiki =
+Atom feed"=20
+rel=3Dalternate type=3Dapplication/atom+xml=20
+href=3D"/index.php?title=3DSpecial:RecentChanges&amp;feed=3Datom"><LINK =
+rel=3Dstylesheet=20
+href=3D"http://forensicswiki.org/load.php?debug=3Dfalse&amp;lang=3Den&amp=
+;modules=3Dmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAncho=
+r%7Cmediawiki.skinning.interface%7Cmediawiki.ui.button%7Cskins.vector.sty=
+les&amp;only=3Dstyles&amp;skin=3Dvector&amp;*">
+<META name=3DResourceLoaderDynamicStyles content=3D""><LINK =
+rel=3Dstylesheet=20
+href=3D"http://forensicswiki.org/load.php?debug=3Dfalse&amp;lang=3Den&amp=
+;modules=3Dsite&amp;only=3Dstyles&amp;skin=3Dvector&amp;*">
+<STYLE>Alang(ar) {
+	TEXT-DECORATION: none
+}
+Alang(kk-arab) {
+	TEXT-DECORATION: none
+}
+Alang(mzn) {
+	TEXT-DECORATION: none
+}
+Alang(ps) {
+	TEXT-DECORATION: none
+}
+Alang(ur) {
+	TEXT-DECORATION: none
+}
+</STYLE>
+
+<SCRIPT=20
+src=3D"http://forensicswiki.org/load.php?debug=3Dfalse&amp;lang=3Den&amp;=
+modules=3Dstartup&amp;only=3Dscripts&amp;skin=3Dvector&amp;*"></SCRIPT>
+
+<SCRIPT>if(window.mw){=0A=
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":fal=
+se,"wgNamespaceNumber":0,"wgPageName":"FAT","wgTitle":"FAT","wgCurRevisio=
+nId":14254,"wgRevisionId":14254,"wgArticleId":53,"wgIsArticle":true,"wgIs=
+Redirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],=
+"wgCategories":["File =
+Systems"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageConte=
+ntModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransform=
+Table":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","=
+February","March","April","May","June","July","August","September","Octob=
+er","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr=
+","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"=
+FAT","wgRelevantArticleId":53,"wgIsProbablyEditable":false,"wgRestriction=
+Edit":[],"wgRestrictionMove":[]});=0A=
+}</SCRIPT>
+
+<SCRIPT>if(window.mw){=0A=
+mw.loader.implement("user.options",function($,jQuery){mw.user.options.set=
+({"variant":"en"});});mw.loader.implement("user.tokens",function($,jQuery=
+){mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":=
+"+\\"});});=0A=
+/* cache key: =
+forensic_live:resourceloader:filter:minify-js:7:a5c52c063dc436c1ca7c9f456=
+936a5e9 */=0A=
+}</SCRIPT>
+
+<SCRIPT>if(window.mw){=0A=
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","med=
+iawiki.legacy.ajax","skins.vector.js"]);=0A=
+}</SCRIPT>
+<!--[if lt IE 7]><style =
+type=3D"text/css">body{behavior:url("/skins/Vector/csshover.min.htc")}</s=
+tyle><![endif]--></HEAD>
+<BODY=20
+class=3D"mediawiki ltr sitedir-ltr ns-0 ns-subject page-FAT skin-vector =
+action-view vector-animateLayout">
+<DIV id=3Dmw-page-base class=3Dnoprint></DIV>
+<DIV id=3Dmw-head-base class=3Dnoprint></DIV>
+<DIV id=3Dcontent class=3Dmw-body role=3Dmain><A id=3Dtop></A>
+<H1 id=3DfirstHeading lang=3Den class=3DfirstHeading><SPAN =
+dir=3Dauto>FAT</SPAN></H1>
+<DIV id=3DbodyContent class=3Dmw-body-content>
+<DIV id=3DsiteSub>From ForensicsWiki</DIV>
+<DIV id=3DcontentSub></DIV>
+<DIV id=3Djump-to-nav class=3Dmw-jump>Jump to: <A=20
+href=3D"http://www.forensicswiki.org/wiki/FAT#mw-navigation">navigation</=
+A>, <A=20
+href=3D"http://www.forensicswiki.org/wiki/FAT#p-search">search</A> =
+</DIV>
+<DIV dir=3Dltr id=3Dmw-content-text lang=3Den class=3Dmw-content-ltr>
+<P><B>FAT</B>, or File Allocation Table, is a <A title=3D"File Systems"=20
+href=3D"http://www.forensicswiki.org/wiki/File_Systems">file system</A> =
+that is=20
+designed to keep track of allocation status of clusters on a <A=20
+class=3Dmw-redirect title=3D"Hard drive"=20
+href=3D"http://www.forensicswiki.org/wiki/Hard_drive">hard drive</A>. =
+Developed in=20
+1977 by <A title=3DMicrosoft=20
+href=3D"http://www.forensicswiki.org/wiki/Microsoft">Microsoft</A> =
+Corporation,=20
+FAT was originally intended to be a <A title=3D"File Systems"=20
+href=3D"http://www.forensicswiki.org/wiki/File_Systems">file system</A> =
+for the=20
+Microsoft Disk BASIC interpreter. FAT was quickly incorporated into an =
+early=20
+version of Tim Patterson's QDOS, which was a moniker for "Quick and =
+Dirty=20
+Operating System". <A title=3DMicrosoft=20
+href=3D"http://www.forensicswiki.org/wiki/Microsoft">Microsoft</A> later =
+purchased=20
+the rights to QDOS and released it under Microsoft branding as PC-DOS =
+and later,=20
+MS-DOS. </P>
+<DIV id=3Dtoc class=3Dtoc>
+<DIV id=3Dtoctitle>
+<H2>Contents</H2></DIV>
+<UL>
+  <LI class=3D"toclevel-1 tocsection-1"><A=20
+  href=3D"http://www.forensicswiki.org/wiki/FAT#Specification"><SPAN=20
+  class=3Dtocnumber>1</SPAN> <SPAN =
+class=3Dtoctext>Specification</SPAN></A></LI>
+  <LI class=3D"toclevel-1 tocsection-2"><A=20
+  href=3D"http://www.forensicswiki.org/wiki/FAT#Structure"><SPAN=20
+  class=3Dtocnumber>2</SPAN> <SPAN class=3Dtoctext>Structure</SPAN></A>=20
+  <UL>
+    <LI class=3D"toclevel-2 tocsection-3"><A=20
+    href=3D"http://www.forensicswiki.org/wiki/FAT#Boot_Record"><SPAN=20
+    class=3Dtocnumber>2.1</SPAN> <SPAN class=3Dtoctext>Boot =
+Record</SPAN></A></LI>
+    <LI class=3D"toclevel-2 tocsection-4"><A=20
+    href=3D"http://www.forensicswiki.org/wiki/FAT#FATs"><SPAN=20
+    class=3Dtocnumber>2.2</SPAN> <SPAN =
+class=3Dtoctext>FATs</SPAN></A></LI>
+    <LI class=3D"toclevel-2 tocsection-5"><A=20
+    href=3D"http://www.forensicswiki.org/wiki/FAT#Root_Directory"><SPAN=20
+    class=3Dtocnumber>2.3</SPAN> <SPAN class=3Dtoctext>Root=20
+Directory</SPAN></A></LI>
+    <LI class=3D"toclevel-2 tocsection-6"><A=20
+    href=3D"http://www.forensicswiki.org/wiki/FAT#Data_Area"><SPAN=20
+    class=3Dtocnumber>2.4</SPAN> <SPAN class=3Dtoctext>Data =
+Area</SPAN></A></LI>
+    <LI class=3D"toclevel-2 tocsection-7"><A=20
+    href=3D"http://www.forensicswiki.org/wiki/FAT#Clusters"><SPAN=20
+    class=3Dtocnumber>2.5</SPAN> <SPAN =
+class=3Dtoctext>Clusters</SPAN></A></LI>
+    <LI class=3D"toclevel-2 tocsection-8"><A=20
+    href=3D"http://www.forensicswiki.org/wiki/FAT#Wasted_Sectors"><SPAN=20
+    class=3Dtocnumber>2.6</SPAN> <SPAN class=3Dtoctext>Wasted=20
+Sectors</SPAN></A></LI>
+    <LI class=3D"toclevel-2 tocsection-9"><A=20
+    =
+href=3D"http://www.forensicswiki.org/wiki/FAT#FAT_Entry_Values"><SPAN=20
+    class=3Dtocnumber>2.7</SPAN> <SPAN class=3Dtoctext>FAT Entry=20
+    Values</SPAN></A></LI></UL></LI>
+  <LI class=3D"toclevel-1 tocsection-10"><A=20
+  href=3D"http://www.forensicswiki.org/wiki/FAT#Versions"><SPAN=20
+  class=3Dtocnumber>3</SPAN> <SPAN class=3Dtoctext>Versions</SPAN></A>=20
+  <UL>
+    <LI class=3D"toclevel-2 tocsection-11"><A=20
+    href=3D"http://www.forensicswiki.org/wiki/FAT#FAT12"><SPAN=20
+    class=3Dtocnumber>3.1</SPAN> <SPAN =
+class=3Dtoctext>FAT12</SPAN></A></LI>
+    <LI class=3D"toclevel-2 tocsection-12"><A=20
+    href=3D"http://www.forensicswiki.org/wiki/FAT#FAT16"><SPAN=20
+    class=3Dtocnumber>3.2</SPAN> <SPAN =
+class=3Dtoctext>FAT16</SPAN></A></LI>
+    <LI class=3D"toclevel-2 tocsection-13"><A=20
+    href=3D"http://www.forensicswiki.org/wiki/FAT#FAT32"><SPAN=20
+    class=3Dtocnumber>3.3</SPAN> <SPAN class=3Dtoctext>FAT32</SPAN></A>=20
+    <UL>
+      <LI class=3D"toclevel-3 tocsection-14"><A=20
+      =
+href=3D"http://www.forensicswiki.org/wiki/FAT#Limitations_with_Windows_20=
+00_.26_Windows_XP"><SPAN=20
+      class=3Dtocnumber>3.3.1</SPAN> <SPAN class=3Dtoctext>Limitations =
+with Windows=20
+      2000 &amp; Windows XP</SPAN></A></LI></UL></LI>
+    <LI class=3D"toclevel-2 tocsection-15"><A=20
+    =
+href=3D"http://www.forensicswiki.org/wiki/FAT#exFAT_.28sometimes_incorrec=
+tly_called_FAT64.29"><SPAN=20
+    class=3Dtocnumber>3.4</SPAN> <SPAN class=3Dtoctext>exFAT (sometimes =
+incorrectly=20
+    called FAT64)</SPAN></A></LI>
+    <LI class=3D"toclevel-2 tocsection-16"><A=20
+    =
+href=3D"http://www.forensicswiki.org/wiki/FAT#Comparison_of_FAT_Versions"=
+><SPAN=20
+    class=3Dtocnumber>3.5</SPAN> <SPAN class=3Dtoctext>Comparison of FAT =
+
+    Versions</SPAN></A></LI></UL></LI>
+  <LI class=3D"toclevel-1 tocsection-17"><A=20
+  href=3D"http://www.forensicswiki.org/wiki/FAT#Uses"><SPAN=20
+  class=3Dtocnumber>4</SPAN> <SPAN class=3Dtoctext>Uses</SPAN></A></LI>
+  <LI class=3D"toclevel-1 tocsection-18"><A=20
+  href=3D"http://www.forensicswiki.org/wiki/FAT#Data_Recovery"><SPAN=20
+  class=3Dtocnumber>5</SPAN> <SPAN class=3Dtoctext>Data =
+Recovery</SPAN></A></LI>
+  <LI class=3D"toclevel-1 tocsection-19"><A=20
+  href=3D"http://www.forensicswiki.org/wiki/FAT#File_Slack"><SPAN=20
+  class=3Dtocnumber>6</SPAN> <SPAN class=3Dtoctext>File =
+Slack</SPAN></A></LI>
+  <LI class=3D"toclevel-1 tocsection-20"><A=20
+  href=3D"http://www.forensicswiki.org/wiki/FAT#FAT_Advantages"><SPAN=20
+  class=3Dtocnumber>7</SPAN> <SPAN class=3Dtoctext>FAT =
+Advantages</SPAN></A></LI>
+  <LI class=3D"toclevel-1 tocsection-21"><A=20
+  href=3D"http://www.forensicswiki.org/wiki/FAT#FAT_Disadvantages"><SPAN =
+
+  class=3Dtocnumber>8</SPAN> <SPAN class=3Dtoctext>FAT =
+Disadvantages</SPAN></A></LI>
+  <LI class=3D"toclevel-1 tocsection-22"><A=20
+  =
+href=3D"http://www.forensicswiki.org/wiki/FAT#FAT_date_and_time_values"><=
+SPAN=20
+  class=3Dtocnumber>9</SPAN> <SPAN class=3Dtoctext>FAT date and time=20
+  values</SPAN></A></LI>
+  <LI class=3D"toclevel-1 tocsection-23"><A=20
+  href=3D"http://www.forensicswiki.org/wiki/FAT#External_links"><SPAN=20
+  class=3Dtocnumber>10</SPAN> <SPAN class=3Dtoctext>External =
+links</SPAN></A>=20
+  <UL>
+    <LI class=3D"toclevel-2 tocsection-24"><A=20
+    href=3D"http://www.forensicswiki.org/wiki/FAT#ExFAT"><SPAN=20
+    class=3Dtocnumber>10.1</SPAN> <SPAN =
+class=3Dtoctext>ExFAT</SPAN></A></LI>
+    <LI class=3D"toclevel-2 tocsection-25"><A=20
+    href=3D"http://www.forensicswiki.org/wiki/FAT#textFAT"><SPAN=20
+    class=3Dtocnumber>10.2</SPAN> <SPAN=20
+  class=3Dtoctext>textFAT</SPAN></A></LI></UL></LI>
+  <LI class=3D"toclevel-1 tocsection-26"><A=20
+  href=3D"http://www.forensicswiki.org/wiki/FAT#Tools"><SPAN=20
+  class=3Dtocnumber>11</SPAN> <SPAN class=3Dtoctext>Tools</SPAN></A>=20
+  <UL>
+    <LI class=3D"toclevel-2 tocsection-27"><A=20
+    href=3D"http://www.forensicswiki.org/wiki/FAT#exFAT_2"><SPAN=20
+    class=3Dtocnumber>11.1</SPAN> <SPAN=20
+class=3Dtoctext>exFAT</SPAN></A></LI></UL></LI></UL></DIV>
+<H2><SPAN id=3DSpecification =
+class=3Dmw-headline>Specification</SPAN></H2>
+<P>FAT is described by Microsoft in <A class=3Dnew title=3DFatgen103.doc =
+
+href=3D"http://www.forensicswiki.org/index.php?title=3DSpecial:Upload&amp=
+;wpDestFile=3DFatgen103.doc">Microsoft's=20
+FAT32 specification</A>. Despite the name, the document includes =
+descriptions of=20
+FAT12 and FAT16. </P>
+<P>Closely related standards are: ECMA 107 and ISO/EIC 9293, which only =
+cover=20
+FAT12 and FAT16, and also are somewhat more restricted than the file =
+system=20
+described by Microsoft's document. </P>
+<H2><SPAN id=3DStructure class=3Dmw-headline>Structure</SPAN></H2>
+<TABLE style=3D"TEXT-ALIGN: center" border=3D1 cellPadding=3D3>
+  <TBODY>
+  <TR>
+    <TD>Boot sector </TD>
+    <TD>More reserved<BR>sectors (optional) </TD>
+    <TD>FAT #1 </TD>
+    <TD>FAT #2 </TD>
+    <TD>Root directory<BR>(FAT12/16 only) </TD>
+    <TD>Data region<BR>(rest of disk) </TD></TR></TBODY></TABLE>
+<H3><SPAN id=3DBoot_Record class=3Dmw-headline>Boot Record</SPAN></H3>
+<P>When a computer is powered on, a POST (power-on self test) is =
+performed, and=20
+control is then transferred to the <A title=3D"Master boot record"=20
+href=3D"http://www.forensicswiki.org/wiki/Master_boot_record">Master =
+boot=20
+record</A> (<A class=3Dmw-redirect title=3DMBR=20
+href=3D"http://www.forensicswiki.org/wiki/MBR">MBR</A>). The <A =
+class=3Dmw-redirect=20
+title=3DMBR href=3D"http://www.forensicswiki.org/wiki/MBR">MBR</A> is =
+present no=20
+matter what file system is in use, and contains information about how =
+the=20
+storage device is logically partitioned. When using a FAT file system, =
+the <A=20
+class=3Dmw-redirect title=3DMBR =
+href=3D"http://www.forensicswiki.org/wiki/MBR">MBR</A>=20
+hands off control of the computer to the Boot Record, which is the first =
+sector=20
+on the partition. The Boot Record, which occupies a reserved area on the =
+
+partition, contains executable code, in addition to information such as =
+an OEM=20
+identifier, number of FATs, media descriptor (type of storage device), =
+and=20
+information about the operating system to be booted. Once the Boot =
+Record code=20
+executes, control is handed off to the operating system installed on =
+that=20
+partition. </P>
+<H3><SPAN id=3DFATs class=3Dmw-headline>FATs</SPAN></H3>
+<P>The primary task of the File Alocation Tables are to keep track of =
+the=20
+allocation status of clusters, or logical groupings of sectors, on the =
+disk=20
+drive. There are four different possible FAT entries: allocated (along =
+with the=20
+address of the next cluster associated with the file), unallocated, end =
+of file,=20
+and bad sector. </P>
+<P>In order to provide redundancy in case of data corruption, two FATs, =
+FAT1 and=20
+FAT2, are stored in the file system. FAT2 is a typically a duplicate of =
+FAT1.=20
+However, FAT mirroring can be disabled on a FAT32 drive, thus enabling =
+any of=20
+the FATs to become the Primary FAT. This possibly leaves FAT1 empty, =
+which can=20
+be deceiving. </P>
+<H3><SPAN id=3DRoot_Directory class=3Dmw-headline>Root =
+Directory</SPAN></H3>
+<P>The Root Directory, sometimes referred to as the Root Folder, =
+contains an=20
+entry for each file and directory stored in the file system. This =
+information=20
+includes the file name, starting cluster number, and file size. This =
+information=20
+is changed whenever a file is created or subsequently modified. Root =
+directory=20
+has a fixed size of 512 entries on a hard disk and the size on a floppy =
+disk=20
+depends. With FAT32 it can be stored anywhere within the partition, =
+although in=20
+previous versions it is always located immediately following the FAT =
+region.=20
+</P>
+<H3><SPAN id=3DData_Area class=3Dmw-headline>Data Area</SPAN></H3>
+<P>The Boot Record, FATs, and Root Directory are collectively referred =
+to as the=20
+System Area. The remaining space on the logical drive is called the Data =
+Area,=20
+which is where files are actually stored. It should be noted that when a =
+file is=20
+deleted by the operating system, the data stored in the Data Area =
+remains intact=20
+until it is overwritten. </P>
+<H3><SPAN id=3DClusters class=3Dmw-headline>Clusters</SPAN></H3>
+<P>In order for FAT to manage files with satisfactory efficiency, it =
+groups=20
+sectors into larger blocks referred to as clusters. A cluster is the =
+smallest=20
+unit of disk space that can be allocated to a file, which is why =
+clusters are=20
+often called allocation units. Each cluster can be used by one and only =
+one=20
+resident file. Only the "data area" is divided into clusters, the rest =
+of the=20
+partition is simply sectors. Cluster size is determined by the size of =
+the disk=20
+volume and every file must be allocated an even number of clusters. =
+Cluster=20
+sizing has a significant impact on performance and disk utilization. =
+Larger=20
+cluster sizes result in more wasted space because files are less likely =
+to fill=20
+up an even number of clusters. </P>
+<P>The size of one cluster is specified in the Boot Record and can range =
+from a=20
+single sector (512 bytes) to 128 sectors (65536 bytes). The sectors in a =
+cluster=20
+are continuous, therefore each cluster is a continuous block of space on =
+the=20
+disk. Note that only one file can be allocated to a cluster. Therefore =
+if a 1KB=20
+file is placed within a 32KB cluster there are 31KB of wasted space. The =
+formula=20
+for determining clusters in a partition is (# of Sectors in Partition) - =
+(# of=20
+Sectors per Fat * 2) - (# of Reserved Sectors) ) / (# of Sectors per =
+Cluster).=20
+</P>
+<H3><SPAN id=3DWasted_Sectors class=3Dmw-headline>Wasted =
+Sectors</SPAN></H3>
+<P><B>Wasted Sectors</B> (a.k.a. <B>partition <A title=3DSlack=20
+href=3D"http://www.forensicswiki.org/wiki/Slack">slack</A></B>) are a =
+result of=20
+the number of data sectors not being evenly distributed by the cluster =
+size.=20
+It's made up of unused bytes left at the end of a file. Also, if the =
+partition=20
+as declared in the partition table is larger than what is claimed in the =
+Boot=20
+Record the volume can be said to have wasted sectors. Small files on a =
+hard=20
+drive are the reason for wasted space and the bigger the hard drive the =
+more=20
+wasted space there is. </P>
+<H3><SPAN id=3DFAT_Entry_Values class=3Dmw-headline>FAT Entry =
+Values</SPAN></H3>
+<P><BR>FAT12<BR><BR>0x000 (Free Cluster)<BR>0x001 (Reserved =
+Cluster)<BR>0x002 -=20
+0xFEF (Used cluster; value points to next cluster)<BR>0xFF0 - 0xFF6 =
+(Reserved=20
+values)<BR>0xFF7 (Bad cluster)<BR>0xFF8 - 0xFFF (Last cluster in=20
+file)<BR><BR>FAT16<BR><BR>0x0000 (Free Cluster)<BR>0x0001 (Reserved=20
+Cluster)<BR>0x0002 - 0xFFEF (Used cluster; value points to next=20
+cluster)<BR>0xFFF0 - 0xFFF6 (Reserved values)<BR>0xFFF7 (Bad =
+cluster)<BR>0xFFF8=20
+- 0xFFFF (Last cluster in file)<BR><BR>FAT32<BR><BR>0x?0000000 (Free=20
+Cluster)<BR>0x?0000001 (Reserved Cluster)<BR>0x?0000002 - 0x?FFFFFEF =
+(Used=20
+cluster; value points to next cluster)<BR>0x?FFFFFF0 - 0x?FFFFFF6 =
+(Reserved=20
+values)<BR>0x?FFFFFF7 (Bad cluster)<BR>0x?FFFFFF8 - 0x?FFFFFFF (Last =
+cluster in=20
+file) </P>
+<P>Note: FAT32 uses only 28 of 32 possible bits, the upper 4 bits should =
+be left=20
+alone. Typically these bits are zero, and are represented above by a =
+question=20
+mark (?). </P>
+<H2><SPAN id=3DVersions class=3Dmw-headline>Versions</SPAN></H2>
+<P>There are three variants of FAT in existence: FAT12, FAT16, and =
+FAT32. </P>
+<H3><SPAN id=3DFAT12 class=3Dmw-headline>FAT12</SPAN></H3>
+<UL>
+  <LI>FAT12 is the oldest type of FAT that uses a 12 bit file allocation =
+table=20
+  entry. </LI>
+  <LI>FAT12 can hold a max of 4,084 clusters (which is 2<SUP>12</SUP> =
+clusters=20
+  minus a few values that are reserved for values used in the FAT). =
+</LI>
+  <LI>It is used for floppy disks and hard drive partitions that are =
+smaller=20
+  than 16 MB. </LI>
+  <LI>All 1.44 MB 3.5" floppy disks are formatted using FAT12.</LI>
+  <LI>Cluster size that is used is between 0.5 KB to 4 KB.</LI></UL>
+<H3><SPAN id=3DFAT16 class=3Dmw-headline>FAT16</SPAN></H3>
+<UL>
+  <LI>It is called FAT16 because all entries are 16 bit.</LI>
+  <LI>FAT16 can hold a max of 65,524 addressable units</LI>
+  <LI>It is used for small and moderate sized hard disk =
+volumes.</LI></UL>
+<H3><SPAN id=3DFAT32 class=3Dmw-headline>FAT32</SPAN></H3>
+<P>FAT32 is the enhanced version of the FAT system implemented beginning =
+with=20
+Windows 95 OSR2, Windows 98, and Windows Me. Features include: </P>
+<UL>
+  <LI>Drives of up to 2 terabytes are supported (<A title=3DWindows=20
+  href=3D"http://www.forensicswiki.org/wiki/Windows">Windows</A> 2000 =
+only=20
+  supports up to 32 gigabytes)</LI>
+  <LI>Since FAT32 uses smaller clusters (of 4 kilobytes each), it uses =
+hard=20
+  drive space more efficiently. This is a 10 to 15 percent improvement =
+over FAT=20
+  or FAT16.</LI>
+  <LI>The limitations of FAT or FAT 16 on the number of root folder =
+entries have=20
+  been eliminated. In FAT32, the root folder is an ordinary cluster =
+chain, and=20
+  can be located anywhere on the drive.</LI>
+  <LI>File allocation mirroring can be disabled in FAT32. This allows a=20
+  different copy of the file allocation table then the default to be=20
+active.</LI></UL>
+<H4><SPAN id=3DLimitations_with_Windows_2000_.26_Windows_XP=20
+class=3Dmw-headline>Limitations with <A title=3DWindows=20
+href=3D"http://www.forensicswiki.org/wiki/Windows">Windows</A> 2000 =
+&amp; <A=20
+title=3DWindows =
+href=3D"http://www.forensicswiki.org/wiki/Windows">Windows</A>=20
+XP</SPAN></H4>
+<UL>
+  <LI>Clusters cannot be 64KB or larger.</LI>
+  <LI>Cannot decrease cluster size that will result in the the FAT being =
+larger=20
+  than 16 MB minus 64KB in size. </LI>
+  <LI>Cannot contain fewer than 65,527 clusters.</LI>
+  <LI>Maximum of 32KB per cluster.</LI>
+  <LI><I><A title=3DWindows=20
+  href=3D"http://www.forensicswiki.org/wiki/Windows">Windows</A> XP</I>: =
+The=20
+  Windows XP installation program will not allow a user to format a =
+drive of=20
+  more than 32GB using the FAT32 file system. Using the installation =
+program,=20
+  the only way to format a disk greater than 32GB in size is to use =
+NTFS. A disk=20
+  larger than 32GB in size <I>can</I> be formatted with FAT32 for use =
+with=20
+  Windows XP if the system is booted from a Windows 98 or Windows ME =
+startup=20
+  disk, and formatted using the tool that will be on the disk.</LI></UL>
+<H3><SPAN id=3DexFAT_.28sometimes_incorrectly_called_FAT64.29=20
+class=3Dmw-headline>exFAT (sometimes incorrectly called =
+FAT64)</SPAN></H3>
+<P>exFAT (also know as Extended File Allocation Table or exFAT) is =
+Microsoft's=20
+latest version of FAT and works with Windows Embedded CE 6.0, Windows =
+XP/Server=20
+2003 (with a KB patch, Vista/Server 2008 SP 1 &amp; Later, and Windows =
+7.=20
+Features include: </P>
+<UL>
+  <LI>Largest file size is 2<SUP>64</SUP> bytes (16 exabytes) vs. =
+FAT32's=20
+  maximum file size of 4GB.</LI>
+  <LI>Has transaction support using Transaction-Safe Extended FAT File =
+System=20
+  (TexFAT). (Not released yet in Desktop/Server OS)</LI>
+  <LI>Speeds up storage allocation processes by using free space =
+bitmaps.</LI>
+  <LI>Support UTC timestamps (Vista/Server 2008 SP1 does not support =
+UTC, UTC=20
+  support came out with SP2)</LI>
+  <LI>Maximum Cluster size of 32MB (Fat32 is 32KB)</LI>
+  <LI>Sector sizes from 512 bytes to 4096 bytes in size</LI>
+  <LI>Maximum FAT supportable volume size of 128PB</LI>
+  <LI>Maximum Subdirectory size of 256MB which can support up to over 2 =
+million=20
+  files in a singlr subdirectory</LI>
+  <LI>Uses a Bitmap for cluster allocation</LI>
+  <LI>Supports File Permissions (Not released yet in Desktop/Server =
+OS)</LI>
+  <LI>Has been selected as the exclusive file system of the SDXC memory =
+card by=20
+  the SD Association</LI></UL>
+<P>Although Microsoft has published some information on exFAT, there are =
+more=20
+technical specifications available from third parties. For example, here =
+is a <A=20
+class=3D"external text"=20
+href=3D"http://paradigmsolutions.files.wordpress.com/2009/12/exfat-excerp=
+t-1-4.pdf"=20
+rel=3Dnofollow>detailed presentation on exFAT</A>. </P>
+<P>Another published technical paper that goes in the internals in great =
+detail=20
+is in the SANS Reading Room at: <A class=3D"external text"=20
+href=3D"http://www.sans.org/reading_room/whitepapers/forensics/rss/revers=
+e_engineering_the_microsoft_exfat_file_system_33274"=20
+rel=3Dnofollow>Reverse Engineering the Microsoft exFAT File System</A> =
+</P>
+<H3><SPAN id=3DComparison_of_FAT_Versions class=3Dmw-headline>Comparison =
+of FAT=20
+Versions</SPAN></H3>
+<P>See the table at <A class=3D"external free"=20
+href=3D"http://en.wikipedia.org/wiki/File_Allocation_Table"=20
+rel=3Dnofollow>http://en.wikipedia.org/wiki/File_Allocation_Table</A> =
+for more=20
+detailed information about the various versions of FAT. </P>
+<H2><SPAN id=3DUses class=3Dmw-headline>Uses</SPAN></H2>
+<P>Due to its low cost, mobility, and non-volatile nature, flash memory =
+has=20
+quickly become the choice medium for storing and transferring data in =
+consumer=20
+electronic devices. The majority of flash memory storage is formatted =
+using the=20
+FAT file system. In addition, FAT is also frequently used in electronic =
+devices=20
+with miniature hard drives. </P>
+<P>Examples of devices in which FAT is utilized include: </P>
+<UL>
+  <LI><A title=3DUSB =
+href=3D"http://www.forensicswiki.org/wiki/USB">USB</A> thumb=20
+  drives</LI>
+  <LI><A class=3Dnew title=3D"Digital camera (page does not exist)"=20
+  =
+href=3D"http://www.forensicswiki.org/index.php?title=3DDigital_camera&amp=
+;action=3Dedit&amp;redlink=3D1">Digital=20
+  cameras</A></LI>
+  <LI>Digital camcorders</LI>
+  <LI>Portable audio and video players</LI>
+  <LI>Multifunction <A title=3DPrinters=20
+  href=3D"http://www.forensicswiki.org/wiki/Printers">printers</A></LI>
+  <LI>Electronic photo frames</LI>
+  <LI>Electronic musical instruments</LI>
+  <LI>Standard televisions</LI>
+  <LI><A title=3DPDAs=20
+href=3D"http://www.forensicswiki.org/wiki/PDAs">PDAs</A></LI></UL>
+<H2><SPAN id=3DData_Recovery class=3Dmw-headline>Data =
+Recovery</SPAN></H2>
+<P>Recovering directory entries from FAT filesystems as part of <A=20
+title=3D"Recovering deleted data"=20
+href=3D"http://www.forensicswiki.org/wiki/Recovering_deleted_data">recove=
+ring=20
+deleted data</A> can be accomplished by looking for entries that begin =
+with a=20
+sigma 0xe5. When a file or directory is deleted under a FAT filesystem, =
+the=20
+first character of its name is changed to sigma. The remainder of the =
+directory=20
+entry information remains intact. </P>
+<P>The pointers are also changed to zero for each cluster used by the =
+file.=20
+Recovery tools look at the FAT to find the entry for the file. The =
+location of=20
+the starting cluster will still be in the directory file. It is not =
+deleted or=20
+modified. The tool will go straight to that cluster and try to recover =
+the file=20
+using the file size to determine the number of clusters to recover. Some =
+tools=20
+will go to the starting cluster and recover the next "X" number of =
+clusters=20
+needed for the specific file size. However, this tool is not ideal. An =
+ideal=20
+tool will locate "X" number of available clusters. Since files are most =
+often=20
+fragmented, this will be a more precise way to recover the file. </P>
+<P>An issue arises when two files in the same row of clusters are =
+deleted. If=20
+the clusters are not in sequential order, the tool will automatically =
+receive=20
+"X" number of clusters. However, because the file was fragmented, it's =
+most=20
+likely that all the clusters obtained will not all contain data for that =
+file.=20
+If these two deleted files are in the same row of clusters, it is highly =
+
+unlikely the file can be recovered. </P>
+<H2><SPAN id=3DFile_Slack class=3Dmw-headline>File <A title=3DSlack=20
+href=3D"http://www.forensicswiki.org/wiki/Slack">Slack</A></SPAN></H2>
+<P>File <A title=3DSlack =
+href=3D"http://www.forensicswiki.org/wiki/Slack">slack</A>=20
+is data that starts from the end of the file written and continues to =
+the end of=20
+the sectors designated to the file. There are two types of file <A =
+title=3DSlack=20
+href=3D"http://www.forensicswiki.org/wiki/Slack">slack</A>, RAM slack =
+and Residual=20
+<A title=3DSlack =
+href=3D"http://www.forensicswiki.org/wiki/Slack">slack</A>. RAM=20
+slack starts from the end of the file and goes to the end of that =
+sector.=20
+Residual slack then starts at the next sector and goes to the end of the =
+cluster=20
+allocated for the file. File slack is a helpful tool when analyzing a =
+hard drive=20
+because the old data that is not overwritten by the new file is still in =
+tact.=20
+Go to <A class=3D"external free"=20
+href=3D"http://www.pcguide.com/ref/hdd/file/partSizes-c.html"=20
+rel=3Dnofollow>http://www.pcguide.com/ref/hdd/file/partSizes-c.html</A> =
+for=20
+examples. </P>
+<P><BR></P>
+<TABLE border=3D1 cellSpacing=3D2 cellPadding=3D4 width=3D468>
+  <TBODY>
+  <TR>
+    <TD bgColor=3D#808080 width=3D101><FONT size=3D2><B>
+      <CENTER>Cluster</CENTER></B></FONT></TD>
+    <TD bgColor=3D#808080 width=3D177><FONT size=3D2><B>
+      <CENTER>Sample Slack Space, 50% Cluster Slack Per=20
+    File</CENTER></B></FONT></TD>
+    <TD bgColor=3D#808080 width=3D178><FONT size=3D2><B>
+      <CENTER>Sample Slack Space, 67% Cluster Slack Per=20
+    File</CENTER></B></FONT></TD></TR>
+  <TR>
+    <TD bgColor=3D#c0c0c0 width=3D101><FONT size=3D2><B>
+      <CENTER>2 kiB</CENTER></B></FONT></TD>
+    <TD width=3D177><FONT size=3D2>
+      <CENTER>17 MB</CENTER></FONT></TD>
+    <TD width=3D178><FONT size=3D2>
+      <CENTER>22 MB</CENTER></FONT></TD></TR>
+  <TR>
+    <TD bgColor=3D#c0c0c0 width=3D101><FONT size=3D2><B>
+      <CENTER>4 kiB</CENTER></B></FONT></TD>
+    <TD width=3D177><FONT size=3D2>
+      <CENTER>33 MB</CENTER></FONT></TD>
+    <TD width=3D178><FONT size=3D2>
+      <CENTER>44 MB</CENTER></FONT></TD></TR>
+  <TR>
+    <TD bgColor=3D#c0c0c0 width=3D101><FONT size=3D2><B>
+      <CENTER>8 kiB</CENTER></B></FONT></TD>
+    <TD width=3D177><FONT size=3D2>
+      <CENTER>66 MB</CENTER></FONT></TD>
+    <TD width=3D178><FONT size=3D2>
+      <CENTER>89 MB</CENTER></FONT></TD></TR>
+  <TR>
+    <TD bgColor=3D#c0c0c0 width=3D101><FONT size=3D2><B>
+      <CENTER>16 kiB</CENTER></B></FONT></TD>
+    <TD width=3D177><FONT size=3D2>
+      <CENTER>133 MB</CENTER></FONT></TD>
+    <TD width=3D178><FONT size=3D2>
+      <CENTER>177 MB</CENTER></FONT></TD></TR>
+  <TR>
+    <TD bgColor=3D#c0c0c0 width=3D101><FONT size=3D2><B>
+      <CENTER>32 kiB</CENTER></B></FONT></TD>
+    <TD width=3D177><FONT size=3D2>
+      <CENTER>265 MB</CENTER></FONT></TD>
+    <TD width=3D178><FONT size=3D2>
+      <CENTER>354 MB</CENTER></FONT></TD></TR></TBODY></TABLE>
+<P>The diagram above demonstrates the larger the cluster size used, the =
+more=20
+disk space is wasted due to slack. This suggests it is better to use =
+smaller=20
+cluster sizes whenever possible. </P>
+<H2><SPAN id=3DFAT_Advantages class=3Dmw-headline>FAT =
+Advantages</SPAN></H2>
+<UL>
+  <LI>Files available to multiple operating systems on the same =
+computer</LI>
+  <LI>Easier to switch from FAT to <A class=3Dmw-redirect title=3DNTFS=20
+  href=3D"http://www.forensicswiki.org/wiki/NTFS">NTFS</A> than vice =
+versa</LI>
+  <LI>Performs faster on smaller volumes (&lt; 10GB)</LI>
+  <LI>Does not index files, which causes slightly higher =
+performance</LI>
+  <LI>Performs better with small cache sizes (&lt; 96MB)</LI>
+  <LI>More space-efficient on small volumes (&lt; 4GB)</LI>
+  <LI>Performs better with slow disks (&lt; 5400RPM)</LI></UL>
+<H2><SPAN id=3DFAT_Disadvantages class=3Dmw-headline>FAT =
+Disadvantages</SPAN></H2>
+<UL>
+  <LI>FAT has a fixed maximum number of clusters per partition, which =
+means as=20
+  the hard disk gets bigger the size of each cluster must increase, =
+creating=20
+  more slack space</LI>
+  <LI>Doesn't natively support many abilities of <A class=3Dmw-redirect =
+title=3DNTFS=20
+  href=3D"http://www.forensicswiki.org/wiki/NTFS">NTFS</A> such as =
+on-the-fly=20
+  compression, <A title=3DEncryption=20
+  href=3D"http://www.forensicswiki.org/wiki/Encryption">encryption</A>, =
+or=20
+  advanced security using access control lists</LI>
+  <LI><A class=3Dmw-redirect title=3DNTFS=20
+  href=3D"http://www.forensicswiki.org/wiki/NTFS">NTFS</A> recommended =
+by <A=20
+  title=3DMicrosoft=20
+  href=3D"http://www.forensicswiki.org/wiki/Microsoft">Microsoft</A> for =
+volumes=20
+  larger than 32GB</LI>
+  <LI>FAT slows down as the number of files on the disk increases</LI>
+  <LI>FAT usually fragments files more</LI>
+  <LI>FAT does not allow for indexing of files for faster searching</LI>
+  <LI>FAT does not support user quotas</LI>
+  <LI>FAT has minimal security features including no access control list =
+(ACL)=20
+  capability.</LI></UL>
+<H2><SPAN id=3DFAT_date_and_time_values class=3Dmw-headline>FAT date and =
+time=20
+values</SPAN></H2>
+<P>Python code to convert a FAT date and time value into a Python =
+datetime=20
+object. </P><PRE>import datetime
+
+def FromFatDateTime(fat_date_time):
+  """Converts a FAT date and time into a Python datetime object.
+
+  FAT date time is mainly used in DOS/Windows file formats and FAT.
+
+  The FAT date and time is a 32-bit value containing two 16-bit values:
+    * The date (lower 16-bit).
+      * bits 0 - 4:  day of month, where 1 represents the first day
+      * bits 5 - 8:  month of year, where 1 represent January
+      * bits 9 - 15: year since 1980
+    * The time of day (upper 16-bit).
+      * bits 0 - 4: seconds (in 2 second intervals)
+      * bits 5 - 10: minutes
+      * bits 11 - 15: hours
+
+  Args:
+    fat_date_time: The 32-bit FAT date time.
+
+  Returns:
+    A datetime object containing the date and time or None.
+  """
+  day_of_month =3D (fat_date_time &amp; 0x1f)
+  month =3D ((fat_date_time &gt;&gt; 5) &amp; 0x0f)
+  year =3D (fat_date_time &gt;&gt; 9) &amp; 0x7f
+
+  if day_of_month &lt; 0 or day_of_month &gt; 30 or month &lt; 0 or =
+month &gt; 11:
+    return None
+
+  fat_date_time &gt;&gt;=3D 16
+
+  seconds =3D (fat_date_time &amp; 0x1f) * 2
+  minutes =3D (fat_date_time &gt;&gt; 5) &amp; 0x3f
+  hours =3D (fat_date_time &gt;&gt; 11) &amp; 0x1f
+
+  if hours &gt; 23 or minutes &gt; 59 or seconds &gt; 59:
+    return None
+
+  return datetime.datetime(
+      1980 + year, month, day_of_month, hours, minutes, seconds)
+</PRE>
+<H2><SPAN id=3DExternal_links class=3Dmw-headline>External =
+links</SPAN></H2>
+<UL>
+  <LI><A class=3D"external free"=20
+  href=3D"http://en.wikipedia.org/wiki/File_Allocation_Table"=20
+  =
+rel=3Dnofollow>http://en.wikipedia.org/wiki/File_Allocation_Table</A></LI=
+>
+  <LI><A class=3D"external free" href=3D"http://www.microsoft.com/"=20
+  rel=3Dnofollow>http://www.microsoft.com/</A></LI>
+  <LI><A class=3D"external free" href=3D"http://www.ntfs.com/"=20
+  rel=3Dnofollow>http://www.ntfs.com/</A></LI>
+  <LI><A class=3D"external free" =
+href=3D"http://www.ntfs.com/ntfs_vs_fat.htm"=20
+  rel=3Dnofollow>http://www.ntfs.com/ntfs_vs_fat.htm</A></LI>
+  <LI><A class=3D"external free"=20
+  =
+href=3D"http://support.microsoft.com/kb/q154997/#XSLTH3126121123120121120=
+120"=20
+  =
+rel=3Dnofollow>http://support.microsoft.com/kb/q154997/#XSLTH312612112312=
+0121120120</A></LI>
+  <LI><A class=3D"external free"=20
+  href=3D"http://www.dewassoc.com/kbase/hard_drives/boot_sector.htm"=20
+  =
+rel=3Dnofollow>http://www.dewassoc.com/kbase/hard_drives/boot_sector.htm<=
+/A></LI>
+  <LI><A class=3D"external free" =
+href=3D"http://home.teleport.com/~brainy/fat32.htm"=20
+  rel=3Dnofollow>http://home.teleport.com/~brainy/fat32.htm</A></LI>
+  <LI><A class=3D"external free"=20
+  href=3D"http://www2.tech.purdue.edu/cpt/courses/cpt499s/"=20
+  =
+rel=3Dnofollow>http://www2.tech.purdue.edu/cpt/courses/cpt499s/</A></LI>
+  <LI><A class=3D"external free" =
+href=3D"http://home.no.net/tkos/info/fat.html"=20
+  rel=3Dnofollow>http://home.no.net/tkos/info/fat.html</A></LI>
+  <LI><A class=3D"external free" =
+href=3D"http://web.ukonline.co.uk/cook/fat32.htm"=20
+  rel=3Dnofollow>http://web.ukonline.co.uk/cook/fat32.htm</A></LI>
+  <LI><A class=3D"external free" =
+href=3D"http://www.ntfs.com/fat-systems.htm"=20
+  rel=3Dnofollow>http://www.ntfs.com/fat-systems.htm</A></LI>
+  <LI><A class=3D"external free"=20
+  =
+href=3D"http://www.microsoft.com/whdc/system/platform/firmware/fatgen.msp=
+x"=20
+  =
+rel=3Dnofollow>http://www.microsoft.com/whdc/system/platform/firmware/fat=
+gen.mspx</A></LI>
+  <LI><A class=3D"external free" =
+href=3D"http://support.microsoft.com/kb/q140418"=20
+  rel=3Dnofollow>http://support.microsoft.com/kb/q140418</A></LI></UL>
+<H3><SPAN id=3DExFAT class=3Dmw-headline>ExFAT</SPAN></H3>
+<UL>
+  <LI><A class=3D"external text" =
+href=3D"http://en.wikipedia.org/wiki/ExFAT"=20
+  rel=3Dnofollow>Wikipedia: ExFAT</A></LI>
+  <LI><A class=3D"external text"=20
+  href=3D"http://www.active-undelete.com/xfat_volume.htm" =
+rel=3Dnofollow>exFAT File=20
+  System</A></LI>
+  <LI><A class=3D"external text"=20
+  =
+href=3D"http://www.sans.org/reading-room/whitepapers/forensics/reverse-en=
+gineering-microsoft-exfat-file-system-33274"=20
+  rel=3Dnofollow>Reverse Engineering the Microsoft exFAT File =
+System</A>, by <A=20
+  class=3Dnew title=3D"Robert Shullich (page does not exist)"=20
+  =
+href=3D"http://www.forensicswiki.org/index.php?title=3DRobert_Shullich&am=
+p;action=3Dedit&amp;redlink=3D1">Robert=20
+  Shullich</A>, December 1, 2009</LI>
+  <LI><A class=3D"external text"=20
+  =
+href=3D"http://paradigmsolutions.files.wordpress.com/2009/12/exfat-excerp=
+t-1-4.pdf"=20
+  rel=3Dnofollow>Extended FAT file system</A>, by <A class=3Dnew=20
+  title=3D"Jeff Hamm (page does not exist)"=20
+  =
+href=3D"http://www.forensicswiki.org/index.php?title=3DJeff_Hamm&amp;acti=
+on=3Dedit&amp;redlink=3D1">Jeff=20
+  Hamm</A>, December 2009</LI>
+  <LI><A class=3D"external text"=20
+  =
+href=3D"http://www.slideshare.net/overcertified/demystifying-the-microsof=
+t-extended-fat-file-system-exfat"=20
+  rel=3Dnofollow>Demystifying the Microsoft Extended FAT File System =
+(exFAT)</A>,=20
+  by <A class=3Dnew title=3D"Robert Shullich (page does not exist)"=20
+  =
+href=3D"http://www.forensicswiki.org/index.php?title=3DRobert_Shullich&am=
+p;action=3Dedit&amp;redlink=3D1">Robert=20
+  Shullich</A>, September 20, 2010</LI>
+  <LI><A class=3D"external text"=20
+  =
+href=3D"http://aut.researchgateway.ac.nz/bitstream/handle/10292/4123/LeY.=
+pdf"=20
+  rel=3Dnofollow>Windows Phone 7&nbsp;: Implications For Digital =
+Forensic=20
+  Investigators</A>, by <A class=3Dnew title=3D"Yung Anh Le (page does =
+not exist)"=20
+  =
+href=3D"http://www.forensicswiki.org/index.php?title=3DYung_Anh_Le&amp;ac=
+tion=3Dedit&amp;redlink=3D1">Yung=20
+  Anh Le</A>, 2012</LI></UL>
+<H3><SPAN id=3DtextFAT class=3Dmw-headline>textFAT</SPAN></H3>
+<UL>
+  <LI><A class=3D"external text"=20
+  =
+href=3D"http://msdn.microsoft.com/en-us/library/ee490643(v=3Dwinembedded.=
+60).aspx"=20
+  rel=3Dnofollow>TexFAT Overview (Windows Embedded CE 6.0)</A>, by <A=20
+  title=3DMicrosoft=20
+  =
+href=3D"http://www.forensicswiki.org/wiki/Microsoft">Microsoft</A></LI>
+  <LI><A class=3D"external text"=20
+  href=3D"http://www.ntfs.com/exfat-textFAT-padding.htm" =
+rel=3Dnofollow>TexFAT=20
+  Padding Directory Entry</A></LI></UL>
+<H2><SPAN id=3DTools class=3Dmw-headline>Tools</SPAN></H2>
+<H3><SPAN id=3DexFAT_2 class=3Dmw-headline>exFAT</SPAN></H3>
+<UL>
+  <LI><A class=3D"external text" =
+href=3D"http://code.google.com/p/exfat/"=20
+  rel=3Dnofollow>Open Source exFAT file system =
+implementation</A></LI></UL><!-- =0A=
+NewPP limit report=0A=
+CPU time usage: 0.102 seconds=0A=
+Real time usage: 0.105 seconds=0A=
+Preprocessor visited node count: 155/1000000=0A=
+Preprocessor generated node count: 210/1000000=0A=
+Post=E2=80=90expand include size: 0/2097152 bytes=0A=
+Template argument size: 0/2097152 bytes=0A=
+Highest expansion depth: 2/40=0A=
+Expensive parser function count: 0/100=0A=
+--><!-- =0A=
+Transclusion expansion time report (%,ms,calls,template)=0A=
+100.00%    0.000      1 - -total=0A=
+--><!-- Saved in parser cache with key =
+forensic_live:pcache:idhash:53-0!*!0!!en!*!* and timestamp =
+20170802192622 and revision id 14254=0A=
+ --></DIV>
+<DIV class=3Dprintfooter>Retrieved from "<A dir=3Dltr=20
+href=3D"http://forensicswiki.org/index.php?title=3DFAT&amp;oldid=3D14254"=
+>http://forensicswiki.org/index.php?title=3DFAT&amp;oldid=3D14254</A>"=20
+</DIV>
+<DIV id=3Dcatlinks class=3Dcatlinks>
+<DIV id=3Dmw-normal-catlinks class=3Dmw-normal-catlinks><A =
+title=3DSpecial:Categories=20
+href=3D"http://www.forensicswiki.org/wiki/Special:Categories">Category</A=
+>:=20
+<UL>
+  <LI><A class=3Dnew title=3D"Category:File Systems (page does not =
+exist)"=20
+  =
+href=3D"http://www.forensicswiki.org/index.php?title=3DCategory:File_Syst=
+ems&amp;action=3Dedit&amp;redlink=3D1">File=20
+  Systems</A></LI></UL></DIV></DIV>
+<DIV class=3DvisualClear></DIV></DIV></DIV>
+<DIV id=3Dmw-navigation>
+<H2>Navigation menu</H2>
+<DIV id=3Dmw-head>
+<DIV id=3Dp-personal role=3Dnavigation =
+aria-labelledby=3Dp-personal-label>
+<H3 id=3Dp-personal-label>Personal tools</H3>
+<UL>
+  <LI id=3Dpt-login><A accessKey=3Do=20
+  title=3D"You are encouraged to log in; however, it is not mandatory =
+[o]"=20
+  =
+href=3D"http://www.forensicswiki.org/index.php?title=3DSpecial:UserLogin&=
+amp;returnto=3DFAT">Log=20
+  in</A></LI>
+  <LI id=3Dpt-createaccount><A=20
+  title=3D"You are encouraged to create an account and log in; however, =
+it is not mandatory"=20
+  =
+href=3D"http://www.forensicswiki.org/wiki/Special:RequestAccount">Request=
+=20
+  account</A></LI></UL></DIV>
+<DIV id=3Dleft-navigation>
+<DIV id=3Dp-namespaces class=3DvectorTabs role=3Dnavigation=20
+aria-labelledby=3Dp-namespaces-label>
+<H3 id=3Dp-namespaces-label>Namespaces</H3>
+<UL>
+  <LI id=3Dca-nstab-main class=3Dselected><SPAN><A accessKey=3Dc=20
+  title=3D"View the content page [c]"=20
+  href=3D"http://www.forensicswiki.org/wiki/FAT">Page</A></SPAN></LI>
+  <LI id=3Dca-talk class=3Dnew><SPAN><A accessKey=3Dt=20
+  title=3D"Discussion about the content page [t]"=20
+  =
+href=3D"http://www.forensicswiki.org/index.php?title=3DTalk:FAT&amp;actio=
+n=3Dedit&amp;redlink=3D1">Discussion</A></SPAN></LI></UL></DIV>
+<DIV id=3Dp-variants class=3D"vectorMenu emptyPortlet" role=3Dnavigation =
+
+aria-labelledby=3Dp-variants-label>
+<H3 id=3Dp-variants-label><SPAN>Variants</SPAN><A=20
+href=3D"http://www.forensicswiki.org/wiki/FAT#"></A></H3>
+<DIV class=3Dmenu>
+<UL></UL></DIV></DIV></DIV>
+<DIV id=3Dright-navigation>
+<DIV id=3Dp-views class=3DvectorTabs role=3Dnavigation =
+aria-labelledby=3Dp-views-label>
+<H3 id=3Dp-views-label>Views</H3>
+<UL>
+  <LI id=3Dca-view class=3Dselected><SPAN><A=20
+  href=3D"http://www.forensicswiki.org/wiki/FAT">Read</A></SPAN></LI>
+  <LI id=3Dca-viewsource><SPAN><A accessKey=3De=20
+  title=3D"This page is protected.&#10;You can view its source [e]"=20
+  =
+href=3D"http://www.forensicswiki.org/index.php?title=3DFAT&amp;action=3De=
+dit">View=20
+  source</A></SPAN></LI>
+  <LI id=3Dca-history class=3Dcollapsible><SPAN><A accessKey=3Dh=20
+  title=3D"Past revisions of this page [h]"=20
+  =
+href=3D"http://www.forensicswiki.org/index.php?title=3DFAT&amp;action=3Dh=
+istory">View=20
+  history</A></SPAN></LI></UL></DIV>
+<DIV id=3Dp-cactions class=3D"vectorMenu emptyPortlet" role=3Dnavigation =
+
+aria-labelledby=3Dp-cactions-label>
+<H3 id=3Dp-cactions-label><SPAN>More</SPAN><A=20
+href=3D"http://www.forensicswiki.org/wiki/FAT#"></A></H3>
+<DIV class=3Dmenu>
+<UL></UL></DIV></DIV>
+<DIV id=3Dp-search role=3Dsearch>
+<H3><LABEL for=3DsearchInput>Search</LABEL> </H3>
+<FORM id=3Dsearchform action=3D/index.php>
+<DIV id=3DsimpleSearch><INPUT accessKey=3Df id=3DsearchInput=20
+title=3D"Search ForensicsWiki [f]" type=3Dsearch name=3Dsearch=20
+placeholder=3D"Search"><INPUT value=3DSpecial:Search type=3Dhidden =
+name=3Dtitle><INPUT id=3Dmw-searchButton class=3D"searchButton =
+mw-fallbackSearchButton" title=3D"Search the pages for this text" =
+value=3DSearch type=3Dsubmit name=3Dfulltext><INPUT id=3DsearchButton =
+class=3DsearchButton title=3D"Go to a page with this exact name if =
+exists" value=3DGo type=3Dsubmit name=3Dgo>=20
+</DIV></FORM></DIV></DIV></DIV>
+<DIV id=3Dmw-panel>
+<DIV id=3Dp-logo role=3Dbanner><A style=3D"BACKGROUND-IMAGE: =
+url(/images/wiki.png)"=20
+title=3D"Visit the main page"=20
+href=3D"http://www.forensicswiki.org/wiki/Main_Page"></A></DIV>
+<DIV id=3Dp-Navigation: class=3Dportal role=3Dnavigation=20
+aria-labelledby=3Dp-Navigation:-label>
+<H3 id=3Dp-Navigation:-label>Navigation:</H3>
+<DIV class=3Dbody>
+<UL>
+  <LI id=3Dn-mainpage><A accessKey=3Dz title=3D"Visit the main page [z]" =
+
+  href=3D"http://www.forensicswiki.org/wiki/Main_Page">Main =
+Page</A></LI>
+  <LI id=3Dn-Categories><A=20
+  =
+href=3D"http://www.forensicswiki.org/wiki/Category:Top-Level">Categories<=
+/A></LI></UL></DIV></DIV>
+<DIV id=3Dp-About_forensicswiki.org: class=3Dportal role=3Dnavigation=20
+aria-labelledby=3Dp-About_forensicswiki.org:-label>
+<H3 id=3Dp-About_forensicswiki.org:-label>About forensicswiki.org:</H3>
+<DIV class=3Dbody>
+<UL>
+  <LI id=3Dn-recentchanges><A accessKey=3Dr=20
+  title=3D"A list of recent changes in the wiki [r]"=20
+  =
+href=3D"http://www.forensicswiki.org/wiki/Special:RecentChanges">Recent=20
+  changes</A></LI>
+  <LI id=3Dn-randompage><A accessKey=3Dx title=3D"Load a random page =
+[x]"=20
+  href=3D"http://www.forensicswiki.org/wiki/Special:Random">Random=20
+page</A></LI></UL></DIV></DIV>
+<DIV id=3Dp-tb class=3Dportal role=3Dnavigation =
+aria-labelledby=3Dp-tb-label>
+<H3 id=3Dp-tb-label>Tools</H3>
+<DIV class=3Dbody>
+<UL>
+  <LI id=3Dt-whatlinkshere><A accessKey=3Dj=20
+  title=3D"A list of all wiki pages that link here [j]"=20
+  =
+href=3D"http://www.forensicswiki.org/wiki/Special:WhatLinksHere/FAT">What=
+ links=20
+  here</A></LI>
+  <LI id=3Dt-recentchangeslinked><A accessKey=3Dk=20
+  title=3D"Recent changes in pages linked from this page [k]"=20
+  =
+href=3D"http://www.forensicswiki.org/wiki/Special:RecentChangesLinked/FAT=
+">Related=20
+  changes</A></LI>
+  <LI id=3Dt-specialpages><A accessKey=3Dq title=3D"A list of all =
+special pages [q]"=20
+  =
+href=3D"http://www.forensicswiki.org/wiki/Special:SpecialPages">Special=20
+  pages</A></LI>
+  <LI id=3Dt-print><A accessKey=3Dp title=3D"Printable version of this =
+page [p]"=20
+  =
+href=3D"http://www.forensicswiki.org/index.php?title=3DFAT&amp;printable=3D=
+yes"=20
+  rel=3Dalternate>Printable version</A></LI>
+  <LI id=3Dt-permalink><A title=3D"Permanent link to this revision of =
+the page"=20
+  =
+href=3D"http://www.forensicswiki.org/index.php?title=3DFAT&amp;oldid=3D14=
+254">Permanent=20
+  link</A></LI>
+  <LI id=3Dt-info><A title=3D"More information about this page"=20
+  =
+href=3D"http://www.forensicswiki.org/index.php?title=3DFAT&amp;action=3Di=
+nfo">Page=20
+  information</A></LI></UL></DIV></DIV></DIV></DIV>
+<DIV id=3Dfooter role=3Dcontentinfo>
+<UL id=3Dfooter-info>
+  <LI id=3Dfooter-info-lastmod>This page was last modified on 1 August =
+2014, at=20
+  04:47.</LI>
+  <LI id=3Dfooter-info-viewcount>This page has been accessed 190,743=20
+times.</LI></UL>
+<UL id=3Dfooter-places>
+  <LI id=3Dfooter-places-privacy><A title=3D"ForensicsWiki:Privacy =
+policy"=20
+  =
+href=3D"http://www.forensicswiki.org/wiki/ForensicsWiki:Privacy_policy">P=
+rivacy=20
+  policy</A></LI>
+  <LI id=3Dfooter-places-about><A title=3DForensicsWiki:About=20
+  href=3D"http://www.forensicswiki.org/wiki/ForensicsWiki:About">About=20
+  ForensicsWiki</A></LI>
+  <LI id=3Dfooter-places-disclaimer><A title=3D"ForensicsWiki:General =
+disclaimer"=20
+  =
+href=3D"http://www.forensicswiki.org/wiki/ForensicsWiki:General_disclaime=
+r">Disclaimers</A></LI></UL>
+<UL id=3Dfooter-icons class=3Dnoprint>
+  <LI id=3Dfooter-poweredbyico><A =
+href=3D"http://www.mediawiki.org/"><IMG=20
+  alt=3D"Powered by MediaWiki"=20
+  =
+src=3D"http://www.forensicswiki.org/resources/assets/poweredby_mediawiki_=
+88x31.png"=20
+  width=3D88 height=3D31=20
+  srcset=3D"/resources/assets/poweredby_mediawiki_132x47.png 1.5x, =
+/resources/assets/poweredby_mediawiki_176x62.png 2x"></A>=20
+  </LI></UL>
+<DIV style=3D"CLEAR: both"></DIV></DIV>
+<SCRIPT>if(window.jQuery)jQuery.ready();</SCRIPT>
+
+<SCRIPT>if(window.mw){=0A=
+mw.loader.state({"site":"loading","user":"ready","user.groups":"ready"});=0A=
+}</SCRIPT>
+
+<SCRIPT>if(window.mw){=0A=
+mw.loader.load(["mediawiki.toc","mediawiki.action.view.postEdit","mediawi=
+ki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSugges=
+t"],null,true);=0A=
+}</SCRIPT>
+
+<SCRIPT>if(window.mw){=0A=
+document.write("\u003Cscript =
+src=3D\"http://forensicswiki.org/load.php?debug=3Dfalse\u0026amp;lang=3De=
+n\u0026amp;modules=3Dsite\u0026amp;only=3Dscripts\u0026amp;skin=3Dvector\=
+u0026amp;*\"\u003E\u003C/script\u003E");=0A=
+}</SCRIPT>
+
+<SCRIPT>=0A=
+  =
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=3Dr;i[r]=3Di[r]||func=
+tion(){=0A=
+  (i[r].q=3Di[r].q||[]).push(arguments)},i[r].l=3D1*new =
+Date();a=3Ds.createElement(o),=0A=
+  =
+m=3Ds.getElementsByTagName(o)[0];a.async=3D1;a.src=3Dg;m.parentNode.inser=
+tBefore(a,m)=0A=
+  =
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga=
+');=0A=
+=0A=
+  ga('create', 'UA-62554549-1', 'auto');=0A=
+  ga('send', 'pageview');=0A=
+=0A=
+</SCRIPT>
+
+<SCRIPT>if(window.mw){=0A=
+mw.config.set({"wgBackendResponseTime":224});=0A=
+}</SCRIPT>
+</BODY></HTML>
+
+------=_NextPart_000_0015_01D30BB8.FB254C90
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: http://www.forensicswiki.org/resources/assets/poweredby_mediawiki_88x31.png
+
+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
+
+------=_NextPart_000_0015_01D30BB8.FB254C90
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://forensicswiki.org/load.php?debug=false&lang=en&modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cmediawiki.ui.button%7Cskins.vector.styles&only=styles&skin=vector&*
+
+
+@media Print   =20
+{
+.noprint {
+	DISPLAY: none
+}
+DIV#jump-to-nav {
+	DISPLAY: none
+}
+.mw-jump {
+	DISPLAY: none
+}
+DIV.top {
+	DISPLAY: none
+}
+DIV#column-one {
+	DISPLAY: none
+}
+#colophon {
+	DISPLAY: none
+}
+.mw-editsection {
+	DISPLAY: none
+}
+.mw-editsection-like {
+	DISPLAY: none
+}
+.toctoggle {
+	DISPLAY: none
+}
+.tochidden#toc {
+	DISPLAY: none
+}
+DIV#f-poweredbyico {
+	DISPLAY: none
+}
+DIV#f-copyrightico {
+	DISPLAY: none
+}
+LI#about {
+	DISPLAY: none
+}
+LI#disclaimer {
+	DISPLAY: none
+}
+LI#mobileview {
+	DISPLAY: none
+}
+LI#privacy {
+	DISPLAY: none
+}
+#footer-places {
+	DISPLAY: none
+}
+.mw-hidden-catlinks {
+	DISPLAY: none
+}
+TR.mw-metadata-show-hide-extended {
+	DISPLAY: none
+}
+SPAN.mw-filepage-other-resolutions {
+	DISPLAY: none
+}
+#filetoc {
+	DISPLAY: none
+}
+.usermessage {
+	DISPLAY: none
+}
+.patrollink {
+	DISPLAY: none
+}
+.ns-0 .mw-redirectedfrom {
+	DISPLAY: none
+}
+#mw-navigation {
+	DISPLAY: none
+}
+#siteNotice {
+	DISPLAY: none
+}
+.wikitable {
+	PAGE-BREAK-INSIDE: avoid
+}
+.thumb {
+	PAGE-BREAK-INSIDE: avoid
+}
+IMG {
+	PAGE-BREAK-INSIDE: avoid
+}
+H2 {
+	PAGE-BREAK-AFTER: avoid
+}
+H3 {
+	PAGE-BREAK-AFTER: avoid
+}
+H4 {
+	PAGE-BREAK-AFTER: avoid
+}
+H5 {
+	PAGE-BREAK-AFTER: avoid
+}
+H6 {
+	PAGE-BREAK-AFTER: avoid
+}
+P {
+	WIDOWS: 3; ORPHANS: 3
+}
+BODY {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: =
+0px; BACKGROUND: white; COLOR: black; PADDING-TOP: 0px
+}
+UL {
+	LIST-STYLE-TYPE: square
+}
+H1 {
+	FONT-WEIGHT: bold
+}
+H2 {
+	FONT-WEIGHT: bold
+}
+H3 {
+	FONT-WEIGHT: bold
+}
+H4 {
+	FONT-WEIGHT: bold
+}
+H5 {
+	FONT-WEIGHT: bold
+}
+H6 {
+	FONT-WEIGHT: bold
+}
+DT {
+	FONT-WEIGHT: bold
+}
+P {
+	LINE-HEIGHT: 1.2em; MARGIN: 1em 0px
+}
+PRE {
+	BORDER-BOTTOM: black 1pt dashed; BORDER-LEFT: black 1pt dashed; =
+PADDING-BOTTOM: 1em; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; WHITE-SPACE: =
+pre; BACKGROUND: white; COLOR: black; FONT-SIZE: 8pt; OVERFLOW: auto; =
+BORDER-TOP: black 1pt dashed; BORDER-RIGHT: black 1pt dashed; =
+PADDING-TOP: 1em
+}
+.mw-code {
+	BORDER-BOTTOM: black 1pt dashed; BORDER-LEFT: black 1pt dashed; =
+PADDING-BOTTOM: 1em; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; WHITE-SPACE: =
+pre; BACKGROUND: white; COLOR: black; FONT-SIZE: 8pt; OVERFLOW: auto; =
+BORDER-TOP: black 1pt dashed; BORDER-RIGHT: black 1pt dashed; =
+PADDING-TOP: 1em
+}
+#globalWrapper {
+	MIN-WIDTH: 0px !important; WIDTH: 100% !important
+}
+.mw-body {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: =
+0px !important; MARGIN: 0px; PADDING-LEFT: 0px !important; =
+PADDING-RIGHT: 0px !important; DIRECTION: ltr; BACKGROUND: white; COLOR: =
+black; BORDER-TOP: medium none; BORDER-RIGHT: medium none; PADDING-TOP: =
+0px !important
+}
+#column-content {
+	MARGIN: 0px
+}
+#column-content .mw-body {
+	PADDING-BOTTOM: 1em; MARGIN: 0px; PADDING-LEFT: 1em; PADDING-RIGHT: =
+1em; PADDING-TOP: 1em
+}
+#toc {
+	BORDER-BOTTOM: #aaaaaa 1px solid; BORDER-LEFT: #aaaaaa 1px solid; =
+PADDING-BOTTOM: 5px; BACKGROUND-COLOR: #f9f9f9; PADDING-LEFT: 5px; =
+PADDING-RIGHT: 5px; ZOOM: 1; DISPLAY: table; BORDER-TOP: #aaaaaa 1px =
+solid; BORDER-RIGHT: #aaaaaa 1px solid; PADDING-TOP: 5px
+}
+#footer {
+	MARGIN-TOP: 1em; DIRECTION: ltr; BACKGROUND: white; COLOR: black; =
+BORDER-TOP: #aaa 1px solid
+}
+IMG {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; VERTICAL-ALIGN: =
+middle; BORDER-TOP: medium none; BORDER-RIGHT: medium none
+}
+SPAN.texhtml {
+	FONT-FAMILY: serif
+}
+A.stub {
+	COLOR: #ba0000; TEXT-DECORATION: none
+}
+A.new {
+	COLOR: #ba0000; TEXT-DECORATION: none
+}
+A {
+	PADDING-BOTTOM: 0px !important; PADDING-LEFT: 0px !important; =
+PADDING-RIGHT: 0px !important; BACKGROUND: none transparent scroll =
+repeat 0% 0%; COLOR: black !important; PADDING-TOP: 0px !important
+}
+A:link {
+	BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: #520; =
+TEXT-DECORATION: underline
+}
+A:visited {
+	BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: #520; =
+TEXT-DECORATION: underline
+}
+.mw-body A.text.external:after {
+	CONTENT: " (" attr(href) ")"
+}
+.mw-body A.autonumber.external:after {
+	CONTENT: " (" attr(href) ")"
+}
+.mw-body A[href^=3D'//'].text.external:after {
+	CONTENT: " (https:" attr(href) ")"
+}
+.mw-body A[href^=3D'//'].autonumber.external:after {
+	CONTENT: " (https:" attr(href) ")"
+}
+A {
+	COLOR: black !important; TEXT-DECORATION: none !important
+}
+A.external {
+	COLOR: black !important; TEXT-DECORATION: none !important
+}
+A.new {
+	COLOR: black !important; TEXT-DECORATION: none !important
+}
+A.stub {
+	COLOR: black !important; TEXT-DECORATION: none !important
+}
+A {
+	COLOR: inherit !important; TEXT-DECORATION: inherit !important
+}
+A.external {
+	COLOR: inherit !important; TEXT-DECORATION: inherit !important
+}
+A.new {
+	COLOR: inherit !important; TEXT-DECORATION: inherit !important
+}
+A.stub {
+	COLOR: inherit !important; TEXT-DECORATION: inherit !important
+}
+DIV.floatright {
+	POSITION: relative; MARGIN: 0.5em 0px 0.8em 1.4em; FLOAT: right; CLEAR: =
+right
+}
+DIV.floatright P {
+	FONT-STYLE: italic
+}
+DIV.floatleft {
+	POSITION: relative; MARGIN: 0.5em 1.4em 0.8em 0px; FLOAT: left; CLEAR: =
+left
+}
+DIV.floatleft P {
+	FONT-STYLE: italic
+}
+DIV.center {
+	TEXT-ALIGN: center
+}
+DIV.thumb {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; BACKGROUND-COLOR: =
+transparent; MARGIN-TOP: 0.5em; WIDTH: auto; MARGIN-BOTTOM: 0.8em; =
+BORDER-TOP: medium none; BORDER-RIGHT: medium none
+}
+DIV.thumbinner {
+	BORDER-BOTTOM: #cccccc 1px solid; TEXT-ALIGN: center; BORDER-LEFT: =
+#cccccc 1px solid; PADDING-BOTTOM: 3px !important; BACKGROUND-COLOR: =
+white; PADDING-LEFT: 3px !important; PADDING-RIGHT: 3px !important; =
+FONT-SIZE: 94%; OVERFLOW: hidden; BORDER-TOP: #cccccc 1px solid; =
+BORDER-RIGHT: #cccccc 1px solid; PADDING-TOP: 3px !important
+}
+HTML .thumbimage {
+	BORDER-BOTTOM: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; =
+BORDER-TOP: #cccccc 1px solid; BORDER-RIGHT: #cccccc 1px solid
+}
+HTML .thumbcaption {
+	BORDER-BOTTOM: medium none; TEXT-ALIGN: left; BORDER-LEFT: medium none; =
+PADDING-BOTTOM: 3px !important; LINE-HEIGHT: 1.4em; PADDING-LEFT: 3px =
+!important; PADDING-RIGHT: 3px !important; FONT-SIZE: 94%; BORDER-TOP: =
+medium none; BORDER-RIGHT: medium none; PADDING-TOP: 3px !important
+}
+DIV.magnify {
+	DISPLAY: none
+}
+DIV.tright {
+	MARGIN: 0.5em 0px 0.8em 1.4em; FLOAT: right; CLEAR: right
+}
+DIV.tleft {
+	MARGIN: 0.5em 1.4em 0.8em 0px; FLOAT: left; CLEAR: left
+}
+IMG.thumbborder {
+	BORDER-BOTTOM: #dddddd 1px solid; BORDER-LEFT: #dddddd 1px solid; =
+BORDER-TOP: #dddddd 1px solid; BORDER-RIGHT: #dddddd 1px solid
+}
+LI.gallerybox {
+	DISPLAY: inline-block; VERTICAL-ALIGN: top
+}
+UL.gallery {
+	ZOOM: 1
+}
+LI.gallerybox {
+	ZOOM: 1
+}
+UL.gallery {
+	PADDING-BOTTOM: 2px; MARGIN: 2px; PADDING-LEFT: 2px; PADDING-RIGHT: =
+2px; DISPLAY: block; PADDING-TOP: 2px
+}
+LI.gallerycaption {
+	TEXT-ALIGN: center; DISPLAY: block; WORD-WRAP: break-word; FONT-WEIGHT: =
+bold
+}
+LI.gallerybox DIV.thumb {
+	BORDER-BOTTOM: #ccc 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #ccc =
+1px solid; MARGIN: 2px; BORDER-TOP: #ccc 1px solid; BORDER-RIGHT: #ccc =
+1px solid
+}
+DIV.gallerytext {
+	PADDING-BOTTOM: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; WORD-WRAP: =
+break-word; FONT-SIZE: 94%; OVERFLOW: hidden; PADDING-TOP: 2px
+}
+TABLE.wikitable {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; MARGIN: 1em =
+0px; BORDER-COLLAPSE: collapse; BACKGROUND: white; BORDER-TOP: #aaa 1px =
+solid; BORDER-RIGHT: #aaa 1px solid
+}
+TABLE.mw_metadata {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; MARGIN: 1em =
+0px; BORDER-COLLAPSE: collapse; BACKGROUND: white; BORDER-TOP: #aaa 1px =
+solid; BORDER-RIGHT: #aaa 1px solid
+}
+TABLE.wikitable > TR > TH {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; =
+PADDING-BOTTOM: 0.2em; PADDING-LEFT: 0.2em; PADDING-RIGHT: 0.2em; =
+BORDER-TOP: #aaa 1px solid; BORDER-RIGHT: #aaa 1px solid; PADDING-TOP: =
+0.2em
+}
+TABLE.wikitable > TR > TD {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; =
+PADDING-BOTTOM: 0.2em; PADDING-LEFT: 0.2em; PADDING-RIGHT: 0.2em; =
+BORDER-TOP: #aaa 1px solid; BORDER-RIGHT: #aaa 1px solid; PADDING-TOP: =
+0.2em
+}
+TABLE.wikitable > * > TR > TH {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; =
+PADDING-BOTTOM: 0.2em; PADDING-LEFT: 0.2em; PADDING-RIGHT: 0.2em; =
+BORDER-TOP: #aaa 1px solid; BORDER-RIGHT: #aaa 1px solid; PADDING-TOP: =
+0.2em
+}
+TABLE.wikitable > * > TR > TD {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; =
+PADDING-BOTTOM: 0.2em; PADDING-LEFT: 0.2em; PADDING-RIGHT: 0.2em; =
+BORDER-TOP: #aaa 1px solid; BORDER-RIGHT: #aaa 1px solid; PADDING-TOP: =
+0.2em
+}
+.mw_metadata TH {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; =
+PADDING-BOTTOM: 0.2em; PADDING-LEFT: 0.2em; PADDING-RIGHT: 0.2em; =
+BORDER-TOP: #aaa 1px solid; BORDER-RIGHT: #aaa 1px solid; PADDING-TOP: =
+0.2em
+}
+.mw_metadata TD {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; =
+PADDING-BOTTOM: 0.2em; PADDING-LEFT: 0.2em; PADDING-RIGHT: 0.2em; =
+BORDER-TOP: #aaa 1px solid; BORDER-RIGHT: #aaa 1px solid; PADDING-TOP: =
+0.2em
+}
+TABLE.wikitable > TR > TH {
+	TEXT-ALIGN: center; BACKGROUND: white; FONT-WEIGHT: bold
+}
+TABLE.wikitable > * > TR > TH {
+	TEXT-ALIGN: center; BACKGROUND: white; FONT-WEIGHT: bold
+}
+.mw_metadata TH {
+	TEXT-ALIGN: center; BACKGROUND: white; FONT-WEIGHT: bold
+}
+TABLE.wikitable > CAPTION {
+	FONT-WEIGHT: bold
+}
+.mw_metadata CAPTION {
+	FONT-WEIGHT: bold
+}
+TABLE.listing {
+	BORDER-BOTTOM: black 1pt solid; BORDER-LEFT: black 1pt solid; =
+BORDER-COLLAPSE: collapse; BORDER-TOP: black 1pt solid; BORDER-RIGHT: =
+black 1pt solid
+}
+TABLE.listing TD {
+	BORDER-BOTTOM: black 1pt solid; BORDER-LEFT: black 1pt solid; =
+BORDER-COLLAPSE: collapse; BORDER-TOP: black 1pt solid; BORDER-RIGHT: =
+black 1pt solid
+}
+A.sortheader {
+	MARGIN: 0px 0.3em
+}
+.catlinks UL {
+	PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; PADDING-LEFT: =
+0px; PADDING-RIGHT: 0px; DISPLAY: inline; LIST-STYLE-IMAGE: none; =
+PADDING-TOP: 0px
+}
+.catlinks LI {
+	BORDER-LEFT: #aaa 1px solid; PADDING-BOTTOM: 0px; LINE-HEIGHT: 1.15em; =
+MARGIN: 0.1em 0px; PADDING-LEFT: 0.4em; PADDING-RIGHT: 0.4em; ZOOM: 1; =
+DISPLAY: inline-block; PADDING-TOP: 0px
+}
+.catlinks LI:first-child {
+	BORDER-LEFT: medium none; PADDING-LEFT: 0.2em
+}
+.printfooter {
+	PADDING-BOTTOM: 1em; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; =
+PADDING-TOP: 1em
+}
+
+}
+
+@media Screen   =20
+{
+.mw-content-ltr {
+	DIRECTION: ltr
+}
+.mw-content-rtl {
+	DIRECTION: rtl
+}
+.sitedir-ltr TEXTAREA {
+	DIRECTION: ltr
+}
+.sitedir-ltr INPUT {
+	DIRECTION: ltr
+}
+.sitedir-rtl TEXTAREA {
+	DIRECTION: rtl
+}
+.sitedir-rtl INPUT {
+	DIRECTION: rtl
+}
+.mw-userlink {
+	unicode-bidi: embed
+}
+mark {
+	BACKGROUND-COLOR: yellow; COLOR: black
+}
+WBR {
+	DISPLAY: inline-block
+}
+INPUT[type=3D'submit'] {
+	DIRECTION: ltr
+}
+INPUT[type=3D'button'] {
+	DIRECTION: ltr
+}
+INPUT[type=3D'reset'] {
+	DIRECTION: ltr
+}
+INPUT[type=3D'file'] {
+	DIRECTION: ltr
+}
+TEXTAREA[dir=3D'ltr'] {
+	DIRECTION: ltr
+}
+INPUT[dir=3D'ltr'] {
+	DIRECTION: ltr
+}
+TEXTAREA[dir=3D'rtl'] {
+	DIRECTION: rtl
+}
+INPUT[dir=3D'rtl'] {
+	DIRECTION: rtl
+}
+ABBR[title] {
+	BORDER-BOTTOM: 1px dotted; CURSOR: help
+}
+[title].explain {
+	BORDER-BOTTOM: 1px dotted; CURSOR: help
+}
+.mw-plusminus-pos {
+	COLOR: #006400
+}
+.mw-plusminus-neg {
+	COLOR: #8b0000
+}
+.mw-plusminus-null {
+	COLOR: #aaa
+}
+.mw-plusminus-pos {
+=09
+}
+.mw-plusminus-neg {
+=09
+}
+.mw-plusminus-null {
+=09
+}
+.allpagesredirect {
+	FONT-STYLE: italic
+}
+.redirect-in-category {
+	FONT-STYLE: italic
+}
+.watchlistredir {
+	FONT-STYLE: italic
+}
+SPAN.comment {
+	FONT-STYLE: italic
+}
+SPAN.changedby {
+	FONT-SIZE: 95%
+}
+.texvc {
+	unicode-bidi: embed; DIRECTION: ltr
+}
+IMG.tex {
+	VERTICAL-ALIGN: middle
+}
+SPAN.texhtml {
+	FONT-FAMILY: serif
+}
+.ontop#wikiPreview {
+	MARGIN-BOTTOM: 1em
+}
+#editform {
+	CLEAR: both
+}
+#toolbar {
+	CLEAR: both
+}
+#wpTextbox1 {
+	CLEAR: both
+}
+DIV.mw-filepage-resolutioninfo {
+	FONT-SIZE: smaller
+}
+H2#filehistory {
+	CLEAR: both
+}
+TABLE.filehistory TH {
+	VERTICAL-ALIGN: top
+}
+TABLE.filehistory TD {
+	VERTICAL-ALIGN: top
+}
+TABLE.filehistory TH {
+	TEXT-ALIGN: left
+}
+TABLE.filehistory TD.mw-imagepage-filesize {
+	WHITE-SPACE: nowrap
+}
+TABLE.filehistory TH.mw-imagepage-filesize {
+	WHITE-SPACE: nowrap
+}
+TABLE.filehistory TD.filehistory-selected {
+	FONT-WEIGHT: bold
+}
+.filehistory A IMG {
+	BACKGROUND: =
+url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAA=
+AGElEQVQYV2N4DwX/oYBhgARgDJjEAAkAAEC99wFuu0VFAAAAAElFTkSuQmCC) white
+}
+#file IMG:hover {
+	BACKGROUND: =
+url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAA=
+AGElEQVQYV2N4DwX/oYBhgARgDJjEAAkAAEC99wFuu0VFAAAAAElFTkSuQmCC) white
+}
+LI SPAN.deleted {
+	FONT-STYLE: italic; COLOR: #888; TEXT-DECORATION: line-through
+}
+SPAN.history-deleted {
+	FONT-STYLE: italic; COLOR: #888; TEXT-DECORATION: line-through
+}
+.not-patrolled {
+	BACKGROUND-COLOR: #ffa
+}
+.unpatrolled {
+	COLOR: red; FONT-WEIGHT: bold
+}
+DIV.patrollink {
+	TEXT-ALIGN: right; FONT-SIZE: 75%
+}
+TD.mw-label {
+	TEXT-ALIGN: right
+}
+TD.mw-input {
+	TEXT-ALIGN: left
+}
+TD.mw-submit {
+	TEXT-ALIGN: left
+}
+TD.mw-label {
+	VERTICAL-ALIGN: top
+}
+.prefsection TD.mw-label {
+	WIDTH: 20%
+}
+.prefsection TABLE {
+	WIDTH: 100%
+}
+.prefsection TABLE.mw-htmlform-matrix {
+	WIDTH: auto
+}
+.mw-icon-question {
+	BACKGROUND-IMAGE: =
+url(/resources/src/mediawiki.legacy/images/question.png?2015-08-10T21:21:=
+40Z); WIDTH: 13px; DISPLAY: inline-block; BACKGROUND-REPEAT: no-repeat; =
+HEIGHT: 13px; MARGIN-LEFT: 4px; background-size: 13px 13px
+}
+lang(ar).mw-icon-question {
+	-webkit-transform: scaleX(-1); -ms-transform: scaleX(-1); transform: =
+scaleX(-1)
+}
+lang(fa).mw-icon-question {
+	-webkit-transform: scaleX(-1); -ms-transform: scaleX(-1); transform: =
+scaleX(-1)
+}
+lang(ur).mw-icon-question {
+	-webkit-transform: scaleX(-1); -ms-transform: scaleX(-1); transform: =
+scaleX(-1)
+}
+TD.mw-submit {
+	WHITE-SPACE: nowrap
+}
+TABLE.mw-htmlform-nolabel TD.mw-label {
+	WIDTH: 1px
+}
+TR.mw-htmlform-vertical-label TD.mw-label {
+	TEXT-ALIGN: left !important
+}
+.mw-htmlform-invalid-input TD.mw-input INPUT {
+	BORDER-BOTTOM-COLOR: red; BORDER-TOP-COLOR: red; BORDER-RIGHT-COLOR: =
+red; BORDER-LEFT-COLOR: red
+}
+.mw-htmlform-flatlist DIV.mw-htmlform-flatlist-item {
+	DISPLAY: inline; WHITE-SPACE: nowrap; MARGIN-RIGHT: 1em
+}
+.mw-htmlform-matrix TD {
+	PADDING-LEFT: 0.5em; PADDING-RIGHT: 0.5em
+}
+INPUT#wpSummary {
+	WIDTH: 80%; MARGIN-BOTTOM: 1em
+}
+.mw-content-ltr .thumbcaption {
+	TEXT-ALIGN: left
+}
+.mw-content-ltr .magnify {
+	FLOAT: right
+}
+.mw-content-rtl .thumbcaption {
+	TEXT-ALIGN: right
+}
+.mw-content-rtl .magnify {
+	FLOAT: left
+}
+#catlinks {
+	TEXT-ALIGN: left
+}
+.catlinks UL {
+	PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; PADDING-LEFT: =
+0px; PADDING-RIGHT: 0px; DISPLAY: inline; LIST-STYLE-IMAGE: none; =
+PADDING-TOP: 0px
+}
+.catlinks LI {
+	BORDER-LEFT: #aaa 1px solid; PADDING-BOTTOM: 0px; LINE-HEIGHT: 1.25em; =
+MARGIN: 0.12em 0px; PADDING-LEFT: 0.5em; PADDING-RIGHT: 0.5em; ZOOM: 1; =
+DISPLAY: inline-block; PADDING-TOP: 0px
+}
+.catlinks LI:first-child {
+	BORDER-LEFT: medium none; PADDING-LEFT: 0.25em
+}
+.catlinks LI A.mw-redirect {
+	FONT-STYLE: italic
+}
+.mw-hidden-cats-hidden {
+	DISPLAY: none
+}
+.catlinks-allhidden {
+	DISPLAY: none
+}
+P.mw-ipb-conveniencelinks {
+	TEXT-ALIGN: right; FONT-SIZE: 90%
+}
+P.mw-protect-editreasons {
+	TEXT-ALIGN: right; FONT-SIZE: 90%
+}
+P.mw-filedelete-editreasons {
+	TEXT-ALIGN: right; FONT-SIZE: 90%
+}
+P.mw-delete-editreasons {
+	TEXT-ALIGN: right; FONT-SIZE: 90%
+}
+P.mw-revdel-editreasons {
+	TEXT-ALIGN: right; FONT-SIZE: 90%
+}
+P.mw-upload-editlicenses {
+	TEXT-ALIGN: right; FONT-SIZE: 90%
+}
+.autocomment {
+	COLOR: gray
+}
+#pagehistory .history-user {
+	MARGIN-LEFT: 0.4em; MARGIN-RIGHT: 0.2em
+}
+#pagehistory SPAN.minor {
+	FONT-WEIGHT: bold
+}
+#pagehistory LI {
+	BORDER-BOTTOM: white 1px solid; BORDER-LEFT: white 1px solid; =
+BORDER-TOP: white 1px solid; BORDER-RIGHT: white 1px solid
+}
+#pagehistory LI.selected {
+	BORDER-BOTTOM: #aaa 1px dashed; BORDER-LEFT: #aaa 1px dashed; =
+BACKGROUND-COLOR: #f9f9f9; BORDER-TOP: #aaa 1px dashed; BORDER-RIGHT: =
+#aaa 1px dashed
+}
+.mw-history-revisionactions {
+	FLOAT: right
+}
+#mw-fileduplicatesearch-icon {
+	FLOAT: right
+}
+.newpage {
+	FONT-WEIGHT: bold
+}
+.minoredit {
+	FONT-WEIGHT: bold
+}
+.botedit {
+	FONT-WEIGHT: bold
+}
+#shared-image-dup {
+	FONT-STYLE: italic
+}
+#shared-image-conflict {
+	FONT-STYLE: italic
+}
+DIV.mw-warning-with-logexcerpt {
+	BORDER-BOTTOM: #2f6fab 2px solid; BORDER-LEFT: #2f6fab 2px solid; =
+PADDING-BOTTOM: 3px; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; =
+MARGIN-BOTTOM: 3px; CLEAR: both; BORDER-TOP: #2f6fab 2px solid; =
+BORDER-RIGHT: #2f6fab 2px solid; PADDING-TOP: 3px
+}
+DIV.mw-warning-with-logexcerpt UL LI {
+	FONT-SIZE: 90%
+}
+SPAN.mw-revdelundel-link {
+	FONT-SIZE: 90%
+}
+STRONG.mw-revdelundel-link {
+	FONT-SIZE: 90%
+}
+SPAN.mw-revdelundel-hidden {
+	VISIBILITY: hidden
+}
+INPUT.mw-revdelundel-hidden {
+	VISIBILITY: hidden
+}
+TD.mw-revdel-checkbox {
+	TEXT-ALIGN: center; PADDING-RIGHT: 10px
+}
+TH.mw-revdel-checkbox {
+	TEXT-ALIGN: center; PADDING-RIGHT: 10px
+}
+A.new {
+	COLOR: #ba0000
+}
+A.feedlink {
+	BACKGROUND-IMAGE: =
+url(/resources/src/mediawiki.legacy/images/feed-icon.png?2015-08-10T21:21=
+:40Z); PADDING-LEFT: 16px; BACKGROUND-REPEAT: no-repeat; =
+BACKGROUND-POSITION: left center; background-size: 12px 12px
+}
+.plainlinks A.external {
+	PADDING-BOTTOM: 0px !important; PADDING-LEFT: 0px !important; =
+PADDING-RIGHT: 0px !important; BACKGROUND: none transparent scroll =
+repeat 0% 0%; PADDING-TOP: 0px !important
+}
+.rtl A.free.external {
+	unicode-bidi: embed; DIRECTION: ltr
+}
+.rtl A.autonumber.external {
+	unicode-bidi: embed; DIRECTION: ltr
+}
+TABLE.wikitable {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; =
+BACKGROUND-COLOR: #f9f9f9; MARGIN: 1em 0px; BORDER-COLLAPSE: collapse; =
+COLOR: black; BORDER-TOP: #aaa 1px solid; BORDER-RIGHT: #aaa 1px solid
+}
+TABLE.wikitable > TR > TH {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; =
+PADDING-BOTTOM: 0.2em; PADDING-LEFT: 0.4em; PADDING-RIGHT: 0.4em; =
+BORDER-TOP: #aaa 1px solid; BORDER-RIGHT: #aaa 1px solid; PADDING-TOP: =
+0.2em
+}
+TABLE.wikitable > TR > TD {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; =
+PADDING-BOTTOM: 0.2em; PADDING-LEFT: 0.4em; PADDING-RIGHT: 0.4em; =
+BORDER-TOP: #aaa 1px solid; BORDER-RIGHT: #aaa 1px solid; PADDING-TOP: =
+0.2em
+}
+TABLE.wikitable > * > TR > TH {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; =
+PADDING-BOTTOM: 0.2em; PADDING-LEFT: 0.4em; PADDING-RIGHT: 0.4em; =
+BORDER-TOP: #aaa 1px solid; BORDER-RIGHT: #aaa 1px solid; PADDING-TOP: =
+0.2em
+}
+TABLE.wikitable > * > TR > TD {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; =
+PADDING-BOTTOM: 0.2em; PADDING-LEFT: 0.4em; PADDING-RIGHT: 0.4em; =
+BORDER-TOP: #aaa 1px solid; BORDER-RIGHT: #aaa 1px solid; PADDING-TOP: =
+0.2em
+}
+TABLE.wikitable > TR > TH {
+	TEXT-ALIGN: center; BACKGROUND-COLOR: #f2f2f2
+}
+TABLE.wikitable > * > TR > TH {
+	TEXT-ALIGN: center; BACKGROUND-COLOR: #f2f2f2
+}
+TABLE.wikitable > CAPTION {
+	FONT-WEIGHT: bold
+}
+.error {
+	FONT-SIZE: larger
+}
+.warning {
+	FONT-SIZE: larger
+}
+.success {
+	FONT-SIZE: larger
+}
+.error {
+	COLOR: #cc0000
+}
+.warning {
+	COLOR: #705000
+}
+.success {
+	COLOR: #009000
+}
+.errorbox {
+	BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: =
+0.5em; PADDING-LEFT: 1em; PADDING-RIGHT: 1em; ZOOM: 1; DISPLAY: =
+inline-block; MARGIN-BOTTOM: 1em; BORDER-TOP: 1px solid; BORDER-RIGHT: =
+1px solid; PADDING-TOP: 0.5em
+}
+.warningbox {
+	BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: =
+0.5em; PADDING-LEFT: 1em; PADDING-RIGHT: 1em; ZOOM: 1; DISPLAY: =
+inline-block; MARGIN-BOTTOM: 1em; BORDER-TOP: 1px solid; BORDER-RIGHT: =
+1px solid; PADDING-TOP: 0.5em
+}
+.successbox {
+	BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: =
+0.5em; PADDING-LEFT: 1em; PADDING-RIGHT: 1em; ZOOM: 1; DISPLAY: =
+inline-block; MARGIN-BOTTOM: 1em; BORDER-TOP: 1px solid; BORDER-RIGHT: =
+1px solid; PADDING-TOP: 0.5em
+}
+.errorbox H2 {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; MARGIN: 0px 0.5em =
+0px 0px; DISPLAY: inline; COLOR: inherit; FONT-SIZE: 1em; BORDER-TOP: =
+medium none; FONT-WEIGHT: bold; BORDER-RIGHT: medium none
+}
+.warningbox H2 {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; MARGIN: 0px 0.5em =
+0px 0px; DISPLAY: inline; COLOR: inherit; FONT-SIZE: 1em; BORDER-TOP: =
+medium none; FONT-WEIGHT: bold; BORDER-RIGHT: medium none
+}
+.successbox H2 {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; MARGIN: 0px 0.5em =
+0px 0px; DISPLAY: inline; COLOR: inherit; FONT-SIZE: 1em; BORDER-TOP: =
+medium none; FONT-WEIGHT: bold; BORDER-RIGHT: medium none
+}
+.errorbox {
+	BORDER-BOTTOM-COLOR: #fac5c5; BACKGROUND-COLOR: #fae3e3; =
+BORDER-TOP-COLOR: #fac5c5; COLOR: #cc0000; BORDER-RIGHT-COLOR: #fac5c5; =
+BORDER-LEFT-COLOR: #fac5c5
+}
+.warningbox {
+	BORDER-BOTTOM-COLOR: #fde29b; BACKGROUND-COLOR: #fdf1d1; =
+BORDER-TOP-COLOR: #fde29b; COLOR: #705000; BORDER-RIGHT-COLOR: #fde29b; =
+BORDER-LEFT-COLOR: #fde29b
+}
+.successbox {
+	BORDER-BOTTOM-COLOR: #b7fdb5; BACKGROUND-COLOR: #e1fddf; =
+BORDER-TOP-COLOR: #b7fdb5; COLOR: #008000; BORDER-RIGHT-COLOR: #b7fdb5; =
+BORDER-LEFT-COLOR: #b7fdb5
+}
+.mw-infobox {
+	BORDER-BOTTOM: #ff7f00 2px solid; BORDER-LEFT: #ff7f00 2px solid; =
+MARGIN: 0.5em; CLEAR: left; OVERFLOW: hidden; BORDER-TOP: #ff7f00 2px =
+solid; BORDER-RIGHT: #ff7f00 2px solid
+}
+.mw-infobox-left {
+	MARGIN: 7px; WIDTH: 35px; FLOAT: left
+}
+.mw-infobox-right {
+	MARGIN: 0.5em 0.5em 0.5em 49px
+}
+.previewnote {
+	MARGIN-BOTTOM: 1em; COLOR: #c00
+}
+.previewnote P {
+	TEXT-INDENT: 3em; MARGIN: 0.8em 0px
+}
+.visualClear {
+	CLEAR: both
+}
+.mw-datatable {
+	BORDER-COLLAPSE: collapse
+}
+.mw-datatable {
+	BORDER-BOTTOM: #aaaaaa 1px solid; BORDER-LEFT: #aaaaaa 1px solid; =
+PADDING-BOTTOM: 0px; PADDING-LEFT: 0.15em; PADDING-RIGHT: 0.15em; =
+BORDER-TOP: #aaaaaa 1px solid; BORDER-RIGHT: #aaaaaa 1px solid; =
+PADDING-TOP: 0px
+}
+.mw-datatable TD {
+	BORDER-BOTTOM: #aaaaaa 1px solid; BORDER-LEFT: #aaaaaa 1px solid; =
+PADDING-BOTTOM: 0px; PADDING-LEFT: 0.15em; PADDING-RIGHT: 0.15em; =
+BORDER-TOP: #aaaaaa 1px solid; BORDER-RIGHT: #aaaaaa 1px solid; =
+PADDING-TOP: 0px
+}
+.mw-datatable TH {
+	BORDER-BOTTOM: #aaaaaa 1px solid; BORDER-LEFT: #aaaaaa 1px solid; =
+PADDING-BOTTOM: 0px; PADDING-LEFT: 0.15em; PADDING-RIGHT: 0.15em; =
+BORDER-TOP: #aaaaaa 1px solid; BORDER-RIGHT: #aaaaaa 1px solid; =
+PADDING-TOP: 0px
+}
+.mw-datatable TH {
+	BACKGROUND-COLOR: #ddddff
+}
+.mw-datatable TD {
+	BACKGROUND-COLOR: #ffffff
+}
+.mw-datatable TR:hover TD {
+	BACKGROUND-COLOR: #eeeeff
+}
+UL#filetoc {
+	BORDER-BOTTOM: #aaaaaa 1px solid; TEXT-ALIGN: center; BORDER-LEFT: =
+#aaaaaa 1px solid; PADDING-BOTTOM: 5px; BACKGROUND-COLOR: #f9f9f9; =
+PADDING-LEFT: 5px; PADDING-RIGHT: 5px; MARGIN-BOTTOM: 0.5em; =
+MARGIN-LEFT: 0px; FONT-SIZE: 95%; BORDER-TOP: #aaaaaa 1px solid; =
+MARGIN-RIGHT: 0px; BORDER-RIGHT: #aaaaaa 1px solid; PADDING-TOP: 5px
+}
+#filetoc LI {
+	LIST-STYLE-TYPE: none; PADDING-RIGHT: 2em; DISPLAY: inline
+}
+TABLE.mw_metadata {
+	WIDTH: 400px; MARGIN-BOTTOM: 0.5em; MARGIN-LEFT: 0.5em; FONT-SIZE: =
+0.8em
+}
+TABLE.mw_metadata CAPTION {
+	FONT-WEIGHT: bold
+}
+TABLE.mw_metadata TH {
+	FONT-WEIGHT: normal
+}
+TABLE.mw_metadata TD {
+	PADDING-BOTTOM: 0.1em; PADDING-LEFT: 0.1em; PADDING-RIGHT: 0.1em; =
+PADDING-TOP: 0.1em
+}
+TABLE.mw_metadata {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; BORDER-COLLAPSE: =
+collapse; BORDER-TOP: medium none; BORDER-RIGHT: medium none
+}
+TABLE.mw_metadata TD {
+	BORDER-BOTTOM: #aaaaaa 1px solid; TEXT-ALIGN: center; BORDER-LEFT: =
+#aaaaaa 1px solid; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; BORDER-TOP: =
+#aaaaaa 1px solid; BORDER-RIGHT: #aaaaaa 1px solid
+}
+TABLE.mw_metadata TH {
+	BORDER-BOTTOM: #aaaaaa 1px solid; TEXT-ALIGN: center; BORDER-LEFT: =
+#aaaaaa 1px solid; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; BORDER-TOP: =
+#aaaaaa 1px solid; BORDER-RIGHT: #aaaaaa 1px solid
+}
+TABLE.mw_metadata TH {
+	BACKGROUND-COLOR: #f9f9f9
+}
+TABLE.mw_metadata TD {
+	BACKGROUND-COLOR: #fcfcfc
+}
+TABLE.mw_metadata UL.metadata-langlist {
+	LIST-STYLE-TYPE: none; MARGIN: 0px; PADDING-LEFT: 5px; PADDING-RIGHT: =
+5px; LIST-STYLE-IMAGE: none
+}
+.mw-content-ltr UL {
+	PADDING-BOTTOM: 0px; MARGIN: 0.3em 0px 0px 1.6em; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.mw-content-rtl .mw-content-ltr UL {
+	PADDING-BOTTOM: 0px; MARGIN: 0.3em 0px 0px 1.6em; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.mw-content-rtl UL {
+	PADDING-BOTTOM: 0px; MARGIN: 0.3em 1.6em 0px 0px; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.mw-content-ltr .mw-content-rtl UL {
+	PADDING-BOTTOM: 0px; MARGIN: 0.3em 1.6em 0px 0px; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.mw-content-ltr OL {
+	PADDING-BOTTOM: 0px; MARGIN: 0.3em 0px 0px 3.2em; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.mw-content-rtl .mw-content-ltr OL {
+	PADDING-BOTTOM: 0px; MARGIN: 0.3em 0px 0px 3.2em; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.mw-content-rtl OL {
+	PADDING-BOTTOM: 0px; MARGIN: 0.3em 3.2em 0px 0px; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.mw-content-ltr .mw-content-rtl OL {
+	PADDING-BOTTOM: 0px; MARGIN: 0.3em 3.2em 0px 0px; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.mw-content-ltr DD {
+	MARGIN-LEFT: 1.6em; MARGIN-RIGHT: 0px
+}
+.mw-content-rtl .mw-content-ltr DD {
+	MARGIN-LEFT: 1.6em; MARGIN-RIGHT: 0px
+}
+.mw-content-rtl DD {
+	MARGIN-LEFT: 0px; MARGIN-RIGHT: 1.6em
+}
+.mw-content-ltr .mw-content-rtl DD {
+	MARGIN-LEFT: 0px; MARGIN-RIGHT: 1.6em
+}
+LI.gallerybox {
+	DISPLAY: inline-block; VERTICAL-ALIGN: top
+}
+UL.gallery {
+	ZOOM: 1
+}
+LI.gallerybox {
+	ZOOM: 1
+}
+UL.gallery {
+	PADDING-BOTTOM: 2px; MARGIN: 2px; PADDING-LEFT: 2px; PADDING-RIGHT: =
+2px; DISPLAY: block; PADDING-TOP: 2px
+}
+LI.gallerycaption {
+	TEXT-ALIGN: center; DISPLAY: block; WORD-WRAP: break-word; FONT-WEIGHT: =
+bold
+}
+LI.gallerybox DIV.thumb {
+	BORDER-BOTTOM: #ccc 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #ccc =
+1px solid; BACKGROUND-COLOR: #f9f9f9; MARGIN: 2px; BORDER-TOP: #ccc 1px =
+solid; BORDER-RIGHT: #ccc 1px solid
+}
+LI.gallerybox DIV.thumb IMG {
+	MARGIN: 0px auto; DISPLAY: block
+}
+DIV.gallerytext {
+	PADDING-BOTTOM: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; WORD-WRAP: =
+break-word; FONT-SIZE: 94%; OVERFLOW: hidden; PADDING-TOP: 2px
+}
+UL.mw-gallery-nolines LI.gallerybox DIV.thumb {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; BACKGROUND-COLOR: =
+transparent; BORDER-TOP: medium none; BORDER-RIGHT: medium none
+}
+UL.mw-gallery-nolines LI.gallerybox DIV.gallerytext {
+	TEXT-ALIGN: center
+}
+UL.mw-gallery-packed LI.gallerybox DIV.thumb {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; BACKGROUND-COLOR: =
+transparent; BORDER-TOP: medium none; BORDER-RIGHT: medium none
+}
+UL.mw-gallery-packed-overlay LI.gallerybox DIV.thumb {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; BACKGROUND-COLOR: =
+transparent; BORDER-TOP: medium none; BORDER-RIGHT: medium none
+}
+UL.mw-gallery-packed-hover LI.gallerybox DIV.thumb {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; BACKGROUND-COLOR: =
+transparent; BORDER-TOP: medium none; BORDER-RIGHT: medium none
+}
+UL.mw-gallery-packed LI.gallerybox DIV.thumb IMG {
+	MARGIN: 0px auto
+}
+UL.mw-gallery-packed-overlay LI.gallerybox DIV.thumb IMG {
+	MARGIN: 0px auto
+}
+UL.mw-gallery-packed-hover LI.gallerybox DIV.thumb IMG {
+	MARGIN: 0px auto
+}
+UL.mw-gallery-packed-hover LI.gallerybox {
+	POSITION: relative
+}
+UL.mw-gallery-packed-overlay LI.gallerybox {
+	POSITION: relative
+}
+UL.mw-gallery-packed-hover DIV.gallerytextwrapper {
+	HEIGHT: 0px; OVERFLOW: hidden
+}
+UL.mw-gallery-packed-hover LI.gallerybox:hover DIV.gallerytextwrapper {
+	POSITION: absolute; PADDING-BOTTOM: 5px; MARGIN: 2px; PADDING-LEFT: =
+10px; BOTTOM: 0px; PADDING-RIGHT: 10px; BACKGROUND: white; HEIGHT: auto; =
+FONT-WEIGHT: bold; PADDING-TOP: 5px; LEFT: 0px
+}
+UL.mw-gallery-packed-overlay LI.gallerybox DIV.gallerytextwrapper {
+	POSITION: absolute; PADDING-BOTTOM: 5px; MARGIN: 2px; PADDING-LEFT: =
+10px; BOTTOM: 0px; PADDING-RIGHT: 10px; BACKGROUND: white; HEIGHT: auto; =
+FONT-WEIGHT: bold; PADDING-TOP: 5px; LEFT: 0px
+}
+UL.mw-gallery-packed-hover LI.mw-gallery-focused.gallerybox =
+DIV.gallerytextwrapper {
+	POSITION: absolute; PADDING-BOTTOM: 5px; MARGIN: 2px; PADDING-LEFT: =
+10px; BOTTOM: 0px; PADDING-RIGHT: 10px; BACKGROUND: white; HEIGHT: auto; =
+FONT-WEIGHT: bold; PADDING-TOP: 5px; LEFT: 0px
+}
+UL.mw-gallery-packed-hover {
+	TEXT-ALIGN: center
+}
+UL.mw-gallery-packed-overlay {
+	TEXT-ALIGN: center
+}
+UL.mw-gallery-packed {
+	TEXT-ALIGN: center
+}
+.mw-ajax-loader {
+	BACKGROUND-IMAGE: =
+url(data:image/gif;base64,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
+7); POSITION: relative; PADDING-BOTTOM: 16px; PADDING-LEFT: 16px; =
+PADDING-RIGHT: 16px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: =
+center center; TOP: -16px; PADDING-TOP: 16px
+}
+.mw-small-spinner {
+	BACKGROUND-IMAGE: =
+url(data:image/gif;base64,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3D=3D); PADDING-BOTTOM: 10px =
+!important; PADDING-LEFT: 10px !important; PADDING-RIGHT: 10px =
+!important; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: center =
+center; MARGIN-RIGHT: 0.6em; PADDING-TOP: 10px !important
+}
+H1lang(anp) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(as) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(bh) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(bho) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(bn) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(gu) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(hi) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(kn) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(ks) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(ml) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(mr) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(my) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(mai) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(ne) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(new) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(or) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(pa) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(pi) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(sa) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(ta) {
+	LINE-HEIGHT: 1.6em !important
+}
+H1lang(te) {
+	LINE-HEIGHT: 1.6em !important
+}
+H2lang(anp) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(anp) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(anp) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(anp) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(anp) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(as) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(as) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(as) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(as) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(as) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(bho) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(bho) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(bho) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(bho) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(bho) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(bh) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(bh) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(bh) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(bh) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(bh) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(bn) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(bn) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(bn) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(bn) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(bn) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(gu) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(gu) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(gu) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(gu) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(gu) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(hi) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(hi) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(hi) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(hi) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(hi) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(kn) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(kn) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(kn) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(kn) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(kn) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(ks) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(ks) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(ks) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(ks) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(ks) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(ml) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(ml) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(ml) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(ml) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(ml) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(mr) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(mr) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(mr) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(mr) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(mr) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(my) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(my) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(my) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(my) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(my) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(mai) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(mai) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(mai) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(mai) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(mai) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(ne) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(ne) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(ne) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(ne) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(ne) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(new) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(new) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(new) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(new) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(new) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(or) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(or) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(or) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(or) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(or) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(pa) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(pa) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(pa) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(pa) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(pa) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(pi) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(pi) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(pi) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(pi) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(pi) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(sa) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(sa) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(sa) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(sa) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(sa) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(ta) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(ta) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(ta) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(ta) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(ta) {
+	LINE-HEIGHT: 1.2em
+}
+H2lang(te) {
+	LINE-HEIGHT: 1.2em
+}
+H3lang(te) {
+	LINE-HEIGHT: 1.2em
+}
+H4lang(te) {
+	LINE-HEIGHT: 1.2em
+}
+H5lang(te) {
+	LINE-HEIGHT: 1.2em
+}
+H6lang(te) {
+	LINE-HEIGHT: 1.2em
+}
+OLlang(bcc) LI {
+=09
+}
+OLlang(bgn) LI {
+=09
+}
+OLlang(bqi) LI {
+=09
+}
+OLlang(fa) LI {
+=09
+}
+OLlang(glk) LI {
+=09
+}
+OLlang(kk-arab) LI {
+=09
+}
+OLlang(lrc) LI {
+=09
+}
+OLlang(mzn) LI {
+=09
+}
+OLlang(sdh) LI {
+=09
+}
+OLlang(ckb) LI {
+=09
+}
+OLlang(hi) LI {
+=09
+}
+OLlang(mr) LI {
+=09
+}
+OLlang(as) LI {
+=09
+}
+OLlang(bn) LI {
+=09
+}
+OLlang(or) LI {
+=09
+}
+#toc UL {
+	MARGIN: 0.3em 0px
+}
+.toc UL {
+	MARGIN: 0.3em 0px
+}
+.mw-content-ltr .toc UL {
+	TEXT-ALIGN: left
+}
+.mw-content-ltr #toc UL {
+	TEXT-ALIGN: left
+}
+.mw-content-rtl .mw-content-ltr .toc UL {
+	TEXT-ALIGN: left
+}
+.mw-content-rtl .mw-content-ltr #toc UL {
+	TEXT-ALIGN: left
+}
+.mw-content-rtl .toc UL {
+	TEXT-ALIGN: right
+}
+.mw-content-rtl #toc UL {
+	TEXT-ALIGN: right
+}
+.mw-content-ltr .mw-content-rtl .toc UL {
+	TEXT-ALIGN: right
+}
+.mw-content-ltr .mw-content-rtl #toc UL {
+	TEXT-ALIGN: right
+}
+.mw-content-ltr .toc UL UL {
+	MARGIN: 0px 0px 0px 2em
+}
+.mw-content-ltr #toc UL UL {
+	MARGIN: 0px 0px 0px 2em
+}
+.mw-content-rtl .mw-content-ltr .toc UL UL {
+	MARGIN: 0px 0px 0px 2em
+}
+.mw-content-rtl .mw-content-ltr #toc UL UL {
+	MARGIN: 0px 0px 0px 2em
+}
+.mw-content-rtl .toc UL UL {
+	MARGIN: 0px 2em 0px 0px
+}
+.mw-content-rtl #toc UL UL {
+	MARGIN: 0px 2em 0px 0px
+}
+.mw-content-ltr .mw-content-rtl .toc UL UL {
+	MARGIN: 0px 2em 0px 0px
+}
+.mw-content-ltr .mw-content-rtl #toc UL UL {
+	MARGIN: 0px 2em 0px 0px
+}
+#toc #toctitle {
+	DIRECTION: ltr
+}
+.toc #toctitle {
+	DIRECTION: ltr
+}
+#toc .toctitle {
+	DIRECTION: ltr
+}
+.toc .toctitle {
+	DIRECTION: ltr
+}
+.mw-help-field-hint {
+	BACKGROUND-IMAGE: =
+url(data:image/gif;base64,R0lGODlhCwALALMAAP///01NTZOTk1lZWefn57i4uJSUlPP=
+z82VlZdDQ0HFxcaysrNvb28TExAAAAAAAACH5BAAAAAAALAAAAAALAAsAAAQrUIRJqQQ455nN=
+NBgHJANBDAwgZsVwqIG2IEQYYwXy2lq/Kg3NqqeSVCqCCAA7); PADDING-BOTTOM: 0px; =
+PADDING-LEFT: 15px; PADDING-RIGHT: 0px; DISPLAY: none; =
+BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: left center; =
+MARGIN-BOTTOM: -8px; COLOR: #0645ad; MARGIN-LEFT: 2px; FONT-SIZE: 0.8em; =
+CURSOR: pointer; TEXT-DECORATION: underline; PADDING-TOP: 0px
+}
+.mw-help-field-hint:hover {
+	BACKGROUND-IMAGE: =
+url(data:image/gif;base64,R0lGODlhCwALALMAAAtop+7z+GCWwpW51oStz8rb6yZzraf=
+F3bnR5Nzn8QBcoD91oABQmf///wAAAAAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2lu=
+PSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuc=
+zp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNj=
+EuMTM0Nzc3LCAyMDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczp=
+yZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRm=
+OkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlL=
+mNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLz=
+EuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS9=
+4YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjAyODAxMTc0MDcy=
+MDY4MTE5NkQ0QUQzRjI0NzRCNUQwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjJBN0FFQ=
+TQwQjlGQzExREY5RDlBQTRBODQyMkJCMkFDIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOj=
+JBN0FFQTNGQjlGQzExREY5RDlBQTRBODQyMkJCMkFDIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2J=
+lIFBob3Rvc2hvcCBDUzUgTWFjaW50b3NoIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmlu=
+c3RhbmNlSUQ9InhtcC5paWQ6RkM3RjExNzQwNzIwNjgxMTk1RkVBQ0ZBOEQxNTU5MkUiIHN0U=
+mVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDI4MDExNzQwNzIwNjgxMTk2RDRBRDNGMjQ3NEI1RD=
+AiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2t=
+ldCBlbmQ9InIiPz4B//79/Pv6+fj39vX08/Lx8O/u7ezr6uno5+bl5OPi4eDf3t3c29rZ2NfW=
+1dTT0tHQz87NzMvKycjHxsXEw8LBwL++vby7urm4t7a1tLOysbCvrq2sq6qpqKempaSjoqGgn=
+56dnJuamZiXlpWUk5KRkI+OjYyLiomIh4aFhIOCgYB/fn18e3p5eHd2dXRzcnFwb25tbGtqaW=
+hnZmVkY2JhYF9eXVxbWllYV1ZVVFNSUVBPTk1MS0pJSEdGRURDQkFAPz49PDs6OTg3NjU0MzI=
+xMC8uLSwrKikoJyYlJCMiISAfHh0cGxoZGBcWFRQTEhEQDw4NDAsKCQgHBgUEAwIBAAAh+QQA=
+AAAAACwAAAAACwALAAAEK3CxSalsOOeZxRQY1yBKkihFI2aDEqiMRgBJGGMD8NpavxoHzaqnk=
+lQqiwgAOw=3D=3D)
+}
+.mw-help-field-data {
+	BORDER-BOTTOM: #5dc9f4 1px solid; BORDER-LEFT: #5dc9f4 1px solid; =
+PADDING-BOTTOM: 4px; BACKGROUND-COLOR: #d6f3ff; PADDING-LEFT: 8px; =
+PADDING-RIGHT: 8px; DISPLAY: block; MARGIN-LEFT: 20px; BORDER-TOP: =
+#5dc9f4 1px solid; BORDER-RIGHT: #5dc9f4 1px solid; PADDING-TOP: 5px
+}
+#mw-clearyourcache {
+	unicode-bidi: embed; DIRECTION: ltr
+}
+#mw-sitecsspreview {
+	unicode-bidi: embed; DIRECTION: ltr
+}
+#mw-sitejspreview {
+	unicode-bidi: embed; DIRECTION: ltr
+}
+#mw-usercsspreview {
+	unicode-bidi: embed; DIRECTION: ltr
+}
+#mw-userjspreview {
+	unicode-bidi: embed; DIRECTION: ltr
+}
+.diff-currentversion-title {
+	unicode-bidi: embed; DIRECTION: ltr
+}
+.diff {
+	unicode-bidi: embed; DIRECTION: ltr
+}
+.diff-contentalign-right TD {
+	unicode-bidi: embed; DIRECTION: rtl
+}
+.diff-contentalign-left TD {
+	unicode-bidi: embed; DIRECTION: ltr
+}
+.diff-multi {
+	unicode-bidi: embed; DIRECTION: ltr !important
+}
+.diff-otitle {
+	unicode-bidi: embed; DIRECTION: ltr !important
+}
+.diff-ntitle {
+	unicode-bidi: embed; DIRECTION: ltr !important
+}
+.diff-lineno {
+	unicode-bidi: embed; DIRECTION: ltr !important
+}
+#mw-revision-info {
+	DISPLAY: inline; DIRECTION: ltr
+}
+#mw-revision-info-current {
+	DISPLAY: inline; DIRECTION: ltr
+}
+#mw-revision-nav {
+	DISPLAY: inline; DIRECTION: ltr
+}
+DIV.tright {
+	FLOAT: right; CLEAR: right
+}
+DIV.floatright {
+	FLOAT: right; CLEAR: right
+}
+TABLE.floatright {
+	FLOAT: right; CLEAR: right
+}
+DIV.tleft {
+	FLOAT: left; CLEAR: left
+}
+DIV.floatleft {
+	FLOAT: left; CLEAR: left
+}
+TABLE.floatleft {
+	FLOAT: left; CLEAR: left
+}
+DIV.floatright {
+	POSITION: relative
+}
+TABLE.floatright {
+	POSITION: relative
+}
+DIV.floatleft {
+	POSITION: relative
+}
+TABLE.floatleft {
+	POSITION: relative
+}
+#mw-credits A {
+	unicode-bidi: embed
+}
+.mw-jump {
+	ZOOM: 1; HEIGHT: 0px; OVERFLOW: hidden
+}
+#jump-to-nav {
+	ZOOM: 1; HEIGHT: 0px; OVERFLOW: hidden
+}
+.printfooter {
+	DISPLAY: none
+}
+.xdebug-error {
+	Z-INDEX: 99; POSITION: absolute
+}
+.mw-editsection {
+	-moz-user-select: none; -webkit-user-select: none; -ms-user-select: =
+none; user-select: none
+}
+.toctoggle {
+	-moz-user-select: none; -webkit-user-select: none; -ms-user-select: =
+none; user-select: none
+}
+.tochidden {
+	-moz-user-select: none; -webkit-user-select: none; -ms-user-select: =
+none; user-select: none
+}
+#jump-to-nav {
+	-moz-user-select: none; -webkit-user-select: none; -ms-user-select: =
+none; user-select: none
+}
+.mw-editsection {
+	LINE-HEIGHT: 1em; DISPLAY: inline-block; MARGIN-LEFT: 1em; FONT-SIZE: =
+small; VERTICAL-ALIGN: baseline; FONT-WEIGHT: normal
+}
+.mw-editsection-like {
+	LINE-HEIGHT: 1em; DISPLAY: inline-block; MARGIN-LEFT: 1em; FONT-SIZE: =
+small; VERTICAL-ALIGN: baseline; FONT-WEIGHT: normal
+}
+.mw-content-ltr .mw-editsection {
+	MARGIN-LEFT: 1em
+}
+.mw-content-rtl .mw-content-ltr .mw-editsection {
+	MARGIN-LEFT: 1em
+}
+.mw-content-rtl .mw-editsection {
+	MARGIN-RIGHT: 1em
+}
+.mw-content-ltr .mw-content-rtl .mw-editsection {
+	MARGIN-RIGHT: 1em
+}
+SUP {
+	LINE-HEIGHT: 1
+}
+SUB {
+	LINE-HEIGHT: 1
+}
+    }
+.mw-headline-anchor {
+	DISPLAY: none
+}
+
+@media Screen   =20
+{
+A {
+	BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: #0645ad; =
+TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #0b0080
+}
+A:active {
+	COLOR: #faa700
+}
+A:hover {
+	TEXT-DECORATION: underline
+}
+A:focus {
+	TEXT-DECORATION: underline
+}
+A.stub {
+	COLOR: #772233
+}
+A.new {
+	COLOR: #ba0000
+}
+#p-personal A.new {
+	COLOR: #ba0000
+}
+A.new:visited {
+	COLOR: #a55858
+}
+#p-personal A.new:visited {
+	COLOR: #a55858
+}
+.mw-body A.extiw {
+	COLOR: #36b
+}
+.mw-body A.extiw:active {
+	COLOR: #36b
+}
+.mw-body A.extiw:visited {
+	COLOR: #636
+}
+.mw-body A.extiw:active {
+	COLOR: #b63
+}
+.mw-body A.external {
+	COLOR: #36b
+}
+.mw-body A.external:visited {
+	COLOR: #636
+}
+.mw-body A.external:active {
+	COLOR: #b63
+}
+IMG {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; VERTICAL-ALIGN: =
+middle; BORDER-TOP: medium none; BORDER-RIGHT: medium none
+}
+HR {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BACKGROUND-COLOR: #aaa; MARGIN: =
+0.2em 0px; HEIGHT: 1px; COLOR: #aaa; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+H1 {
+	BORDER-BOTTOM: #aaa 1px solid; PADDING-BOTTOM: 0.17em; MARGIN: 0px; =
+BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: black; =
+OVERFLOW: hidden; FONT-WEIGHT: normal; PADDING-TOP: 0.5em
+}
+H2 {
+	BORDER-BOTTOM: #aaa 1px solid; PADDING-BOTTOM: 0.17em; MARGIN: 0px; =
+BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: black; =
+OVERFLOW: hidden; FONT-WEIGHT: normal; PADDING-TOP: 0.5em
+}
+H3 {
+	BORDER-BOTTOM: #aaa 1px solid; PADDING-BOTTOM: 0.17em; MARGIN: 0px; =
+BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: black; =
+OVERFLOW: hidden; FONT-WEIGHT: normal; PADDING-TOP: 0.5em
+}
+H4 {
+	BORDER-BOTTOM: #aaa 1px solid; PADDING-BOTTOM: 0.17em; MARGIN: 0px; =
+BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: black; =
+OVERFLOW: hidden; FONT-WEIGHT: normal; PADDING-TOP: 0.5em
+}
+H5 {
+	BORDER-BOTTOM: #aaa 1px solid; PADDING-BOTTOM: 0.17em; MARGIN: 0px; =
+BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: black; =
+OVERFLOW: hidden; FONT-WEIGHT: normal; PADDING-TOP: 0.5em
+}
+H6 {
+	BORDER-BOTTOM: #aaa 1px solid; PADDING-BOTTOM: 0.17em; MARGIN: 0px; =
+BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: black; =
+OVERFLOW: hidden; FONT-WEIGHT: normal; PADDING-TOP: 0.5em
+}
+H1 {
+	FONT-SIZE: 188%
+}
+H2 {
+	FONT-SIZE: 150%
+}
+H3 {
+	BORDER-BOTTOM: medium none; FONT-WEIGHT: bold
+}
+H4 {
+	BORDER-BOTTOM: medium none; FONT-WEIGHT: bold
+}
+H5 {
+	BORDER-BOTTOM: medium none; FONT-WEIGHT: bold
+}
+H6 {
+	BORDER-BOTTOM: medium none; FONT-WEIGHT: bold
+}
+H3 {
+	FONT-SIZE: 128%
+}
+H4 {
+	FONT-SIZE: 116%
+}
+H5 {
+	FONT-SIZE: 108%
+}
+H6 {
+	FONT-SIZE: 100%
+}
+H1 {
+	MARGIN-BOTTOM: 0.6em
+}
+H2 {
+	MARGIN-BOTTOM: 0.6em
+}
+H3 {
+	MARGIN-BOTTOM: 0.3em
+}
+H4 {
+	MARGIN-BOTTOM: 0.3em
+}
+H5 {
+	MARGIN-BOTTOM: 0.3em
+}
+P {
+	MARGIN: 0.4em 0px 0.5em
+}
+P IMG {
+	MARGIN: 0px
+}
+UL {
+	PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: square; MARGIN: 0.3em 0px 0px =
+1.6em; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+OL {
+	PADDING-BOTTOM: 0px; MARGIN: 0.3em 0px 0px 3.2em; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; LIST-STYLE-IMAGE: none; PADDING-TOP: 0px
+}
+LI {
+	MARGIN-BOTTOM: 0.1em
+}
+DT {
+	MARGIN-BOTTOM: 0.1em; FONT-WEIGHT: bold
+}
+DL {
+	MARGIN-TOP: 0.2em; MARGIN-BOTTOM: 0.5em
+}
+DD {
+	MARGIN-BOTTOM: 0.1em; MARGIN-LEFT: 1.6em
+}
+PRE {
+	FONT-FAMILY: monospace, Courier
+}
+CODE {
+	FONT-FAMILY: monospace, Courier
+}
+TT {
+	FONT-FAMILY: monospace, Courier
+}
+KBD {
+	FONT-FAMILY: monospace, Courier
+}
+SAMP {
+	FONT-FAMILY: monospace, Courier
+}
+.mw-code {
+	FONT-FAMILY: monospace, Courier
+}
+CODE {
+	BORDER-BOTTOM: #ddd 1px solid; BORDER-LEFT: #ddd 1px solid; =
+PADDING-BOTTOM: 1px; BACKGROUND-COLOR: #f9f9f9; PADDING-LEFT: 4px; =
+PADDING-RIGHT: 4px; COLOR: black; BORDER-TOP: #ddd 1px solid; =
+BORDER-RIGHT: #ddd 1px solid; PADDING-TOP: 1px; border-radius: 2px
+}
+PRE {
+	BORDER-BOTTOM: #ddd 1px solid; BORDER-LEFT: #ddd 1px solid; =
+PADDING-BOTTOM: 1em; BACKGROUND-COLOR: #f9f9f9; PADDING-LEFT: 1em; =
+PADDING-RIGHT: 1em; COLOR: black; BORDER-TOP: #ddd 1px solid; =
+BORDER-RIGHT: #ddd 1px solid; PADDING-TOP: 1em
+}
+.mw-code {
+	BORDER-BOTTOM: #ddd 1px solid; BORDER-LEFT: #ddd 1px solid; =
+PADDING-BOTTOM: 1em; BACKGROUND-COLOR: #f9f9f9; PADDING-LEFT: 1em; =
+PADDING-RIGHT: 1em; COLOR: black; BORDER-TOP: #ddd 1px solid; =
+BORDER-RIGHT: #ddd 1px solid; PADDING-TOP: 1em
+}
+TABLE {
+	FONT-SIZE: 100%
+}
+FIELDSET {
+	BORDER-BOTTOM: #2f6fab 1px solid; BORDER-LEFT: #2f6fab 1px solid; =
+PADDING-BOTTOM: 1em; MARGIN: 1em 0px; PADDING-LEFT: 1em; PADDING-RIGHT: =
+1em; BORDER-TOP: #2f6fab 1px solid; BORDER-RIGHT: #2f6fab 1px solid; =
+PADDING-TOP: 0px
+}
+FIELDSET.nested {
+	PADDING-BOTTOM: 0.5em; MARGIN: 0px 0px 0.5em; PADDING-LEFT: 0.5em; =
+PADDING-RIGHT: 0.5em; PADDING-TOP: 0px
+}
+LEGEND {
+	PADDING-BOTTOM: 0.5em; PADDING-LEFT: 0.5em; PADDING-RIGHT: 0.5em; =
+FONT-SIZE: 95%; PADDING-TOP: 0.5em
+}
+FORM {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; MARGIN: 0px; =
+BORDER-TOP: medium none; BORDER-RIGHT: medium none
+}
+TEXTAREA {
+	BOX-SIZING: border-box; PADDING-BOTTOM: 0.1em; PADDING-LEFT: 0.1em; =
+WIDTH: 100%; PADDING-RIGHT: 0.1em; DISPLAY: block; PADDING-TOP: 0.1em; =
+-moz-box-sizing: border-box; -webkit-box-sizing: border-box
+}
+SELECT {
+	VERTICAL-ALIGN: top
+}
+.center {
+	TEXT-ALIGN: center; WIDTH: 100%
+}
+*.center * {
+	MARGIN-LEFT: auto; MARGIN-RIGHT: auto
+}
+.small {
+	FONT-SIZE: 94%
+}
+TABLE.small {
+	FONT-SIZE: 100%
+}
+#toc {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; =
+PADDING-BOTTOM: 5px; BACKGROUND-COLOR: #f9f9f9; PADDING-LEFT: 5px; =
+PADDING-RIGHT: 5px; FONT-SIZE: 95%; BORDER-TOP: #aaa 1px solid; =
+BORDER-RIGHT: #aaa 1px solid; PADDING-TOP: 5px
+}
+.toc {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; =
+PADDING-BOTTOM: 5px; BACKGROUND-COLOR: #f9f9f9; PADDING-LEFT: 5px; =
+PADDING-RIGHT: 5px; FONT-SIZE: 95%; BORDER-TOP: #aaa 1px solid; =
+BORDER-RIGHT: #aaa 1px solid; PADDING-TOP: 5px
+}
+.mw-warning {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; =
+PADDING-BOTTOM: 5px; BACKGROUND-COLOR: #f9f9f9; PADDING-LEFT: 5px; =
+PADDING-RIGHT: 5px; FONT-SIZE: 95%; BORDER-TOP: #aaa 1px solid; =
+BORDER-RIGHT: #aaa 1px solid; PADDING-TOP: 5px
+}
+.toccolours {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; =
+PADDING-BOTTOM: 5px; BACKGROUND-COLOR: #f9f9f9; PADDING-LEFT: 5px; =
+PADDING-RIGHT: 5px; FONT-SIZE: 95%; BORDER-TOP: #aaa 1px solid; =
+BORDER-RIGHT: #aaa 1px solid; PADDING-TOP: 5px
+}
+#toc {
+	PADDING-BOTTOM: 7px; PADDING-LEFT: 7px; PADDING-RIGHT: 7px; ZOOM: 1; =
+DISPLAY: table; PADDING-TOP: 7px
+}
+.toc {
+	PADDING-BOTTOM: 7px; PADDING-LEFT: 7px; PADDING-RIGHT: 7px; ZOOM: 1; =
+DISPLAY: table; PADDING-TOP: 7px
+}
+TABLE#toc {
+	BORDER-COLLAPSE: collapse
+}
+TABLE.toc {
+	BORDER-COLLAPSE: collapse
+}
+TABLE#toc TD {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; =
+PADDING-TOP: 0px
+}
+TABLE.toc TD {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; =
+PADDING-TOP: 0px
+}
+#toc H2 {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: =
+0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; DISPLAY: inline; FONT-SIZE: =
+100%; BORDER-TOP: medium none; FONT-WEIGHT: bold; BORDER-RIGHT: medium =
+none; PADDING-TOP: 0px
+}
+.toc H2 {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: =
+0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; DISPLAY: inline; FONT-SIZE: =
+100%; BORDER-TOP: medium none; FONT-WEIGHT: bold; BORDER-RIGHT: medium =
+none; PADDING-TOP: 0px
+}
+#toc #toctitle {
+	TEXT-ALIGN: center
+}
+.toc #toctitle {
+	TEXT-ALIGN: center
+}
+#toc .toctitle {
+	TEXT-ALIGN: center
+}
+.toc .toctitle {
+	TEXT-ALIGN: center
+}
+#toc UL {
+	TEXT-ALIGN: left; PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; MARGIN-LEFT: 0px; =
+LIST-STYLE-IMAGE: none; PADDING-TOP: 0px
+}
+.toc UL {
+	TEXT-ALIGN: left; PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; MARGIN-LEFT: 0px; =
+LIST-STYLE-IMAGE: none; PADDING-TOP: 0px
+}
+#toc UL UL {
+	MARGIN: 0px 0px 0px 2em
+}
+.toc UL UL {
+	MARGIN: 0px 0px 0px 2em
+}
+#toc .toctoggle {
+	FONT-SIZE: 94%
+}
+.toc .toctoggle {
+	FONT-SIZE: 94%
+}
+.mw-warning {
+	TEXT-ALIGN: center; MARGIN-LEFT: 50px; MARGIN-RIGHT: 50px
+}
+DIV.floatright {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; MARGIN: 0px 0px 0.5em 0.5em; =
+BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+TABLE.floatright {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; MARGIN: 0px 0px 0.5em 0.5em; =
+BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+DIV.floatright P {
+	FONT-STYLE: italic
+}
+DIV.floatleft {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; MARGIN: 0px 0.5em 0.5em 0px; =
+BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+TABLE.floatleft {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; MARGIN: 0px 0.5em 0.5em 0px; =
+BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+DIV.floatleft P {
+	FONT-STYLE: italic
+}
+DIV.thumb {
+	BACKGROUND-COLOR: transparent; WIDTH: auto; MARGIN-BOTTOM: 0.5em
+}
+DIV.thumbinner {
+	BORDER-BOTTOM: #ccc 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #ccc =
+1px solid; PADDING-BOTTOM: 3px; BACKGROUND-COLOR: #f9f9f9; PADDING-LEFT: =
+3px; PADDING-RIGHT: 3px; FONT-SIZE: 94%; OVERFLOW: hidden; BORDER-TOP: =
+#ccc 1px solid; BORDER-RIGHT: #ccc 1px solid; PADDING-TOP: 3px
+}
+HTML .thumbimage {
+	BORDER-BOTTOM: #ccc 1px solid; BORDER-LEFT: #ccc 1px solid; BORDER-TOP: =
+#ccc 1px solid; BORDER-RIGHT: #ccc 1px solid
+}
+HTML .thumbcaption {
+	BORDER-BOTTOM: medium none; TEXT-ALIGN: left; BORDER-LEFT: medium none; =
+PADDING-BOTTOM: 3px; LINE-HEIGHT: 1.4em; PADDING-LEFT: 3px; =
+PADDING-RIGHT: 3px; FONT-SIZE: 94%; BORDER-TOP: medium none; =
+BORDER-RIGHT: medium none; PADDING-TOP: 3px
+}
+DIV.magnify {
+	FLOAT: right; MARGIN-LEFT: 3px
+}
+DIV.magnify A {
+	BACKGROUND-IMAGE: =
+url(/resources/src/mediawiki.skinning/images/magnify-clip-ltr.png?2015-08=
+-10T21:21:40Z); TEXT-INDENT: 15px; WIDTH: 15px; DISPLAY: block; =
+WHITE-SPACE: nowrap; HEIGHT: 11px; OVERFLOW: hidden; -moz-user-select: =
+none; -webkit-user-select: none; -ms-user-select: none; user-select: =
+none
+}
+IMG.thumbborder {
+	BORDER-BOTTOM: #dddddd 1px solid; BORDER-LEFT: #dddddd 1px solid; =
+BORDER-TOP: #dddddd 1px solid; BORDER-RIGHT: #dddddd 1px solid
+}
+.mw-content-ltr .thumbcaption {
+	TEXT-ALIGN: left
+}
+.mw-content-ltr .magnify {
+	FLOAT: right; MARGIN-LEFT: 3px; MARGIN-RIGHT: 0px
+}
+.mw-content-ltr DIV.magnify A {
+	BACKGROUND-IMAGE: =
+url(/resources/src/mediawiki.skinning/images/magnify-clip-ltr.png?2015-08=
+-10T21:21:40Z)
+}
+.mw-content-rtl .thumbcaption {
+	TEXT-ALIGN: right
+}
+.mw-content-rtl .magnify {
+	FLOAT: left; MARGIN-LEFT: 0px; MARGIN-RIGHT: 3px
+}
+.mw-content-rtl DIV.magnify A {
+	BACKGROUND-IMAGE: =
+url(/resources/src/mediawiki.skinning/images/magnify-clip-rtl.png?2015-08=
+-10T21:21:40Z)
+}
+DIV.tright {
+	MARGIN: 0.5em 0px 1.3em 1.4em
+}
+DIV.tleft {
+	MARGIN: 0.5em 1.4em 1.3em 0px
+}
+.catlinks {
+	BORDER-BOTTOM: #aaa 1px solid; BORDER-LEFT: #aaa 1px solid; =
+PADDING-BOTTOM: 5px; BACKGROUND-COLOR: #f9f9f9; MARGIN-TOP: 1em; =
+PADDING-LEFT: 5px; PADDING-RIGHT: 5px; CLEAR: both; BORDER-TOP: #aaa 1px =
+solid; BORDER-RIGHT: #aaa 1px solid; PADDING-TOP: 5px
+}
+.editOptions {
+	BORDER-BOTTOM: silver 1px solid; BORDER-LEFT: silver 1px solid; =
+PADDING-BOTTOM: 1.5em; BACKGROUND-COLOR: #f0f0f0; PADDING-LEFT: 1em; =
+PADDING-RIGHT: 1em; MARGIN-BOTTOM: 2em; BORDER-TOP: medium none; =
+BORDER-RIGHT: silver 1px solid; PADDING-TOP: 1em
+}
+.usermessage {
+	BORDER-BOTTOM: #ffa500 1px solid; BORDER-LEFT: #ffa500 1px solid; =
+PADDING-BOTTOM: 0.5em; BACKGROUND-COLOR: #ffce7b; MARGIN: 2em 0px 1em; =
+PADDING-LEFT: 1em; PADDING-RIGHT: 1em; COLOR: black; VERTICAL-ALIGN: =
+middle; BORDER-TOP: #ffa500 1px solid; FONT-WEIGHT: bold; BORDER-RIGHT: =
+#ffa500 1px solid; PADDING-TOP: 0.5em
+}
+#siteNotice {
+	POSITION: relative; TEXT-ALIGN: center; MARGIN: 0px
+}
+#localNotice {
+	MARGIN-BOTTOM: 0.9em
+}
+.firstHeading {
+	PADDING-BOTTOM: 0px; LINE-HEIGHT: 1.2em; MARGIN-BOTTOM: 0.1em
+}
+#siteSub {
+	DISPLAY: none
+}
+#jump-to-nav {
+	MARGIN-TOP: -1.4em; MARGIN-BOTTOM: 1.4em
+}
+#contentSub {
+	LINE-HEIGHT: 1.2em; MARGIN: 0px 0px 1.4em 1em; WIDTH: auto; COLOR: =
+#545454; FONT-SIZE: 84%
+}
+#contentSub2 {
+	LINE-HEIGHT: 1.2em; MARGIN: 0px 0px 1.4em 1em; WIDTH: auto; COLOR: =
+#545454; FONT-SIZE: 84%
+}
+SPAN.subpages {
+	DISPLAY: block
+}
+    }
+.mw-wiki-logo {
+	BACKGROUND-IMAGE: url(/images/wiki.png)
+}
+.column-break-inside-avoid {
+	PAGE-BREAK-INSIDE: avoid; -webkit-column-break-inside: avoid; =
+break-inside: avoid-column
+}
+.mw-ui-button {
+	BOX-SIZING: border-box; BORDER-BOTTOM: #ccc 1px solid; MIN-WIDTH: 4em; =
+TEXT-ALIGN: center; BORDER-LEFT: #ccc 1px solid; PADDING-BOTTOM: 0.5em; =
+MARGIN: 0px; PADDING-LEFT: 1em; PADDING-RIGHT: 1em; ZOOM: 1; DISPLAY: =
+inline-block; FONT-FAMILY: inherit; BACKGROUND: #fff; COLOR: #555; =
+FONT-SIZE: 1em; VERTICAL-ALIGN: middle; BORDER-TOP: #ccc 1px solid; =
+CURSOR: pointer; FONT-WEIGHT: bold; BORDER-RIGHT: #ccc 1px solid; =
+PADDING-TOP: 0.5em; border-radius: 2px; -moz-box-sizing: border-box; =
+-webkit-box-sizing: border-box; -webkit-appearance: none; =
+-webkit-transition: background .1s ease-in-out, color .1s ease-in-out, =
+box-shadow .1s ease-in-out; -moz-transition: background .1s ease-in-out, =
+color .1s ease-in-out, box-shadow .1s ease-in-out; -o-transition: =
+background .1s ease-in-out, color .1s ease-in-out, box-shadow .1s =
+ease-in-out; transition: background .1s ease-in-out, color .1s =
+ease-in-out, box-shadow .1s ease-in-out
+}
+.mw-ui-button:hover {
+	BORDER-BOTTOM-COLOR: #cccccc; box-shadow: 0 1px rgba(0, 0, 0, 0.1), =
+inset 0 -3px rgba(0, 0, 0, 0.2)
+}
+.mw-ui-button:focus {
+	OUTLINE-STYLE: none; OUTLINE-COLOR: invert; OUTLINE-WIDTH: medium; =
+box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2)
+}
+.mw-ui-button:active {
+	BACKGROUND: #cccccc; box-shadow: none
+}
+.mw-ui-checked.mw-ui-button {
+	BACKGROUND: #cccccc; box-shadow: none
+}
+.mw-ui-button:hover {
+	COLOR: #555
+}
+.mw-ui-button:active {
+	COLOR: #555
+}
+.mw-ui-button:visited {
+	COLOR: #555
+}
+.mw-ui-big.mw-ui-button {
+	FONT-SIZE: 1.3em
+}
+.mw-ui-block.mw-ui-button {
+	WIDTH: 100%; DISPLAY: block
+}
+.mw-ui-progressive.mw-ui-button {
+	BORDER-BOTTOM: #347bff 1px solid; BORDER-LEFT: #347bff 1px solid; =
+BACKGROUND: #347bff; COLOR: #fff; BORDER-TOP: #347bff 1px solid; =
+BORDER-RIGHT: #347bff 1px solid; text-shadow: 0 1px rgba(0, 0, 0, 0.1)
+}
+.mw-ui-primary.mw-ui-button {
+	BORDER-BOTTOM: #347bff 1px solid; BORDER-LEFT: #347bff 1px solid; =
+BACKGROUND: #347bff; COLOR: #fff; BORDER-TOP: #347bff 1px solid; =
+BORDER-RIGHT: #347bff 1px solid; text-shadow: 0 1px rgba(0, 0, 0, 0.1)
+}
+.mw-ui-progressive.mw-ui-button:hover {
+	BORDER-BOTTOM-COLOR: #2a62cc; box-shadow: 0 1px rgba(0, 0, 0, 0.1), =
+inset 0 -3px rgba(0, 0, 0, 0.2)
+}
+.mw-ui-primary.mw-ui-button:hover {
+	BORDER-BOTTOM-COLOR: #2a62cc; box-shadow: 0 1px rgba(0, 0, 0, 0.1), =
+inset 0 -3px rgba(0, 0, 0, 0.2)
+}
+.mw-ui-progressive.mw-ui-button:focus {
+	OUTLINE-STYLE: none; OUTLINE-COLOR: invert; OUTLINE-WIDTH: medium; =
+box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2)
+}
+.mw-ui-primary.mw-ui-button:focus {
+	OUTLINE-STYLE: none; OUTLINE-COLOR: invert; OUTLINE-WIDTH: medium; =
+box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2)
+}
+.mw-ui-progressive.mw-ui-button:active {
+	BACKGROUND: #2a62cc; box-shadow: none
+}
+.mw-ui-checked.mw-ui-progressive.mw-ui-button {
+	BACKGROUND: #2a62cc; box-shadow: none
+}
+.mw-ui-primary.mw-ui-button:active {
+	BACKGROUND: #2a62cc; box-shadow: none
+}
+.mw-ui-checked.mw-ui-primary.mw-ui-button {
+	BACKGROUND: #2a62cc; box-shadow: none
+}
+.mw-ui-quiet.mw-ui-progressive.mw-ui-button {
+	COLOR: #555
+}
+.mw-ui-quiet.mw-ui-primary.mw-ui-button {
+	COLOR: #555
+}
+.mw-ui-quiet.mw-ui-progressive.mw-ui-button:hover {
+	COLOR: #347bff
+}
+.mw-ui-quiet.mw-ui-progressive.mw-ui-button:focus {
+	COLOR: #347bff
+}
+.mw-ui-quiet.mw-ui-primary.mw-ui-button:hover {
+	COLOR: #347bff
+}
+.mw-ui-quiet.mw-ui-primary.mw-ui-button:focus {
+	COLOR: #347bff
+}
+.mw-ui-quiet.mw-ui-progressive.mw-ui-button:active {
+	COLOR: #2a62cc
+}
+.mw-ui-checked.mw-ui-quiet.mw-ui-progressive.mw-ui-button {
+	COLOR: #2a62cc
+}
+.mw-ui-quiet.mw-ui-primary.mw-ui-button:active {
+	COLOR: #2a62cc
+}
+.mw-ui-checked.mw-ui-quiet.mw-ui-primary.mw-ui-button {
+	COLOR: #2a62cc
+}
+.mw-ui-constructive.mw-ui-button {
+	BORDER-BOTTOM: #00af89 1px solid; BORDER-LEFT: #00af89 1px solid; =
+BACKGROUND: #00af89; COLOR: #fff; BORDER-TOP: #00af89 1px solid; =
+BORDER-RIGHT: #00af89 1px solid; text-shadow: 0 1px rgba(0, 0, 0, 0.1)
+}
+.mw-ui-constructive.mw-ui-button:hover {
+	BORDER-BOTTOM-COLOR: #008c6e; box-shadow: 0 1px rgba(0, 0, 0, 0.1), =
+inset 0 -3px rgba(0, 0, 0, 0.2)
+}
+.mw-ui-constructive.mw-ui-button:focus {
+	OUTLINE-STYLE: none; OUTLINE-COLOR: invert; OUTLINE-WIDTH: medium; =
+box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2)
+}
+.mw-ui-constructive.mw-ui-button:active {
+	BACKGROUND: #008c6e; box-shadow: none
+}
+.mw-ui-checked.mw-ui-constructive.mw-ui-button {
+	BACKGROUND: #008c6e; box-shadow: none
+}
+.mw-ui-quiet.mw-ui-constructive.mw-ui-button {
+	COLOR: #555
+}
+.mw-ui-quiet.mw-ui-constructive.mw-ui-button:hover {
+	COLOR: #00af89
+}
+.mw-ui-quiet.mw-ui-constructive.mw-ui-button:focus {
+	COLOR: #00af89
+}
+.mw-ui-quiet.mw-ui-constructive.mw-ui-button:active {
+	COLOR: #008c6e
+}
+.mw-ui-checked.mw-ui-quiet.mw-ui-constructive.mw-ui-button {
+	COLOR: #008c6e
+}
+.mw-ui-destructive.mw-ui-button {
+	BORDER-BOTTOM: #d11d13 1px solid; BORDER-LEFT: #d11d13 1px solid; =
+BACKGROUND: #d11d13; COLOR: #fff; BORDER-TOP: #d11d13 1px solid; =
+BORDER-RIGHT: #d11d13 1px solid; text-shadow: 0 1px rgba(0, 0, 0, 0.1)
+}
+.mw-ui-destructive.mw-ui-button:hover {
+	BORDER-BOTTOM-COLOR: #a7170f; box-shadow: 0 1px rgba(0, 0, 0, 0.1), =
+inset 0 -3px rgba(0, 0, 0, 0.2)
+}
+.mw-ui-destructive.mw-ui-button:focus {
+	OUTLINE-STYLE: none; OUTLINE-COLOR: invert; OUTLINE-WIDTH: medium; =
+box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2)
+}
+.mw-ui-destructive.mw-ui-button:active {
+	BACKGROUND: #a7170f; box-shadow: none
+}
+.mw-ui-checked.mw-ui-destructive.mw-ui-button {
+	BACKGROUND: #a7170f; box-shadow: none
+}
+.mw-ui-quiet.mw-ui-destructive.mw-ui-button {
+	COLOR: #555
+}
+.mw-ui-quiet.mw-ui-destructive.mw-ui-button:hover {
+	COLOR: #d11d13
+}
+.mw-ui-quiet.mw-ui-destructive.mw-ui-button:focus {
+	COLOR: #d11d13
+}
+.mw-ui-quiet.mw-ui-destructive.mw-ui-button:active {
+	COLOR: #a7170f
+}
+.mw-ui-checked.mw-ui-quiet.mw-ui-destructive.mw-ui-button {
+	COLOR: #a7170f
+}
+.mw-ui-quiet.mw-ui-button {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; BACKGROUND: none =
+transparent scroll repeat 0% 0%; COLOR: #555; BORDER-TOP: medium none; =
+BORDER-RIGHT: medium none; text-shadow: none
+}
+.mw-ui-quiet.mw-ui-button:hover {
+	COLOR: #555
+}
+.mw-ui-quiet.mw-ui-button:focus {
+	COLOR: #555
+}
+.mw-ui-quiet.mw-ui-button:active {
+	COLOR: #444444
+}
+.mw-ui-checked.mw-ui-quiet.mw-ui-button {
+	COLOR: #444444
+}
+.mw-ui-quiet.mw-ui-button:hover {
+	box-shadow: none
+}
+.mw-ui-quiet.mw-ui-button:focus {
+	box-shadow: none
+}
+A.mw-ui-button {
+	TEXT-DECORATION: none
+}
+A.mw-ui-button:hover {
+	TEXT-DECORATION: none
+}
+A.mw-ui-button:focus {
+	TEXT-DECORATION: none
+}
+.mw-ui-button-group > * {
+	MIN-WIDTH: 48px; FLOAT: left; border-radius: 0
+}
+.mw-ui-button-group > *:first-child {
+	border-top-left-radius: 2px; border-bottom-left-radius: 2px
+}
+
+@media Screen   =20
+{
+.column-break-inside-avoid {
+	PAGE-BREAK-INSIDE: avoid; -webkit-column-break-inside: avoid; =
+break-inside: avoid-column
+}
+HTML {
+	FONT-SIZE: 100%
+}
+HTML {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: =
+0px; FONT-FAMILY: sans-serif; HEIGHT: 100%; PADDING-TOP: 0px
+}
+BODY {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: =
+0px; FONT-FAMILY: sans-serif; HEIGHT: 100%; PADDING-TOP: 0px
+}
+BODY {
+	BACKGROUND-COLOR: #f6f6f6
+}
+.mw-body {
+	BORDER-BOTTOM: #a7d7f9 1px solid; BORDER-LEFT: #a7d7f9 1px solid; =
+PADDING-BOTTOM: 1em; BACKGROUND-COLOR: #fff; MARGIN-TOP: -1px; =
+PADDING-LEFT: 1em; PADDING-RIGHT: 1em; DIRECTION: ltr; COLOR: #252525; =
+MARGIN-LEFT: 10em; BORDER-TOP: #a7d7f9 1px solid; BORDER-RIGHT: #a7d7f9 =
+0px solid; PADDING-TOP: 1em
+}
+.mw-body .mw-editsection {
+	FONT-FAMILY: sans-serif
+}
+.mw-body .mw-editsection-like {
+	FONT-FAMILY: sans-serif
+}
+.mw-body P {
+	LINE-HEIGHT: inherit; MARGIN: 0.5em 0px
+}
+.mw-body H1 {
+	PADDING-BOTTOM: 0px; LINE-HEIGHT: 1.3; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; FONT-FAMILY: "Linux Libertine", Georgia, Times, =
+serif; MARGIN-BOTTOM: 0.25em; PADDING-TOP: 0px
+}
+.mw-body H2 {
+	PADDING-BOTTOM: 0px; LINE-HEIGHT: 1.3; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; FONT-FAMILY: "Linux Libertine", Georgia, Times, =
+serif; MARGIN-BOTTOM: 0.25em; PADDING-TOP: 0px
+}
+.mw-body #firstHeading {
+	PADDING-BOTTOM: 0px; LINE-HEIGHT: 1.3; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; FONT-FAMILY: "Linux Libertine", Georgia, Times, =
+serif; MARGIN-BOTTOM: 0.25em; PADDING-TOP: 0px
+}
+.mw-body H1 {
+	FONT-SIZE: 1.8em
+}
+.mw-body #firstHeading {
+	FONT-SIZE: 1.8em
+}
+.mw-body H2 {
+	MARGIN-TOP: 1em; FONT-SIZE: 1.5em
+}
+.mw-body H3 {
+	PADDING-BOTTOM: 0px; LINE-HEIGHT: 1.6; MARGIN-TOP: 0.3em; =
+MARGIN-BOTTOM: 0px
+}
+.mw-body H4 {
+	PADDING-BOTTOM: 0px; LINE-HEIGHT: 1.6; MARGIN-TOP: 0.3em; =
+MARGIN-BOTTOM: 0px
+}
+.mw-body H5 {
+	PADDING-BOTTOM: 0px; LINE-HEIGHT: 1.6; MARGIN-TOP: 0.3em; =
+MARGIN-BOTTOM: 0px
+}
+.mw-body H6 {
+	PADDING-BOTTOM: 0px; LINE-HEIGHT: 1.6; MARGIN-TOP: 0.3em; =
+MARGIN-BOTTOM: 0px
+}
+.mw-body H3 {
+	FONT-SIZE: 1.17em
+}
+.mw-body H3 {
+	FONT-WEIGHT: bold
+}
+.mw-body H4 {
+	FONT-WEIGHT: bold
+}
+.mw-body H4 {
+	FONT-SIZE: 100%
+}
+.mw-body H5 {
+	FONT-SIZE: 100%
+}
+.mw-body H6 {
+	FONT-SIZE: 100%
+}
+.mw-body #toc H2 {
+	FONT-FAMILY: sans-serif; FONT-SIZE: 100%
+}
+.mw-body .toc H2 {
+	FONT-FAMILY: sans-serif; FONT-SIZE: 100%
+}
+DIV.emptyPortlet {
+	DISPLAY: none
+}
+UL {
+	LIST-STYLE-TYPE: disc; LIST-STYLE-IMAGE: =
+url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAANAQMAAABb8jbLAAA=
+ABlBMVEX///8AUow5QSOjAAAAAXRSTlMAQObYZgAAABNJREFUCB1jYEABBQw/wLCAgQEAGpID=
+yT0IVcsAAAAASUVORK5CYII=3D)
+}
+PRE {
+	LINE-HEIGHT: 1.3em
+}
+.mw-code {
+	LINE-HEIGHT: 1.3em
+}
+#siteNotice {
+	FONT-SIZE: 0.8em
+}
+.redirectText {
+	FONT-SIZE: 140%
+}
+.redirectMsg IMG {
+	VERTICAL-ALIGN: text-bottom
+}
+.mw-body-content {
+	POSITION: relative; LINE-HEIGHT: 1.6; FONT-SIZE: 0.87em
+}
+BODY.vector-animateLayout .mw-body {
+	-webkit-transition: margin-left 250ms, padding 250ms; -moz-transition: =
+margin-left 250ms, padding 250ms; -o-transition: margin-left 250ms, =
+padding 250ms; transition: margin-left 250ms, padding 250ms
+}
+BODY.vector-animateLayout DIV#footer {
+	-webkit-transition: margin-left 250ms, padding 250ms; -moz-transition: =
+margin-left 250ms, padding 250ms; -o-transition: margin-left 250ms, =
+padding 250ms; transition: margin-left 250ms, padding 250ms
+}
+BODY.vector-animateLayout #left-navigation {
+	-webkit-transition: margin-left 250ms, padding 250ms; -moz-transition: =
+margin-left 250ms, padding 250ms; -o-transition: margin-left 250ms, =
+padding 250ms; transition: margin-left 250ms, padding 250ms
+}
+BODY.vector-animateLayout #p-logo {
+	-webkit-transition: left 250ms; -moz-transition: left 250ms; =
+-o-transition: left 250ms; transition: left 250ms
+}
+BODY.vector-animateLayout #mw-panel {
+	-webkit-transition: padding-right 250ms; -moz-transition: padding-right =
+250ms; -o-transition: padding-right 250ms; transition: padding-right =
+250ms
+}
+BODY.vector-animateLayout #p-search {
+	-webkit-transition: margin-right 250ms; -moz-transition: margin-right =
+250ms; -o-transition: margin-right 250ms; transition: margin-right 250ms
+}
+BODY.vector-animateLayout #p-personal {
+	-webkit-transition: right 250ms; -moz-transition: right 250ms; =
+-o-transition: right 250ms; transition: right 250ms
+}
+BODY.vector-animateLayout #mw-head-base {
+	-webkit-transition: margin-left 250ms; -moz-transition: margin-left =
+250ms; -o-transition: margin-left 250ms; transition: margin-left 250ms
+}
+#p-personal {
+	Z-INDEX: 100; POSITION: absolute; TOP: 0.33em; RIGHT: 0.75em
+}
+#p-personal H3 {
+	DISPLAY: none
+}
+#p-personal UL {
+	LIST-STYLE-TYPE: none; MARGIN: 0px; PADDING-LEFT: 10em; =
+LIST-STYLE-IMAGE: none
+}
+#p-personal LI {
+	LINE-HEIGHT: 1.12em; MARGIN-TOP: 0.5em; WHITE-SPACE: nowrap; FLOAT: =
+left; MARGIN-LEFT: 0.75em; FONT-SIZE: 0.75em
+}
+#pt-userpage {
+	BACKGROUND-IMAGE: =
+url(http://forensicswiki.org/skins/Vector/images/user-icon.png?2015-04-09=
+T12:50:00Z); PADDING-LEFT: 15px !important; BACKGROUND-REPEAT: =
+no-repeat; BACKGROUND-POSITION: left top
+}
+#pt-anonuserpage {
+	BACKGROUND-IMAGE: =
+url(http://forensicswiki.org/skins/Vector/images/user-icon.png?2015-04-09=
+T12:50:00Z); PADDING-LEFT: 15px !important; BACKGROUND-REPEAT: =
+no-repeat; BACKGROUND-POSITION: left top
+}
+#p-search {
+	FLOAT: left; MARGIN-LEFT: 0.5em; MARGIN-RIGHT: 0.5em
+}
+#p-search H3 {
+	DISPLAY: none
+}
+#p-search FORM {
+	MARGIN: 0.4em 0px 0px
+}
+#p-search INPUT {
+	MARGIN: 0.4em 0px 0px
+}
+DIV#simpleSearch {
+	BACKGROUND-IMAGE: =
+url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAQCAIAAABY/YLgAAA=
+AJUlEQVQIHQXBsQEAAAjDoND/73UWdnerhmHVsDQZJrNWVg3Dqge6bgMe6bejNAAAAABJRU5E=
+rkJggg=3D=3D); BORDER-BOTTOM: #aaa 1px solid; POSITION: relative; =
+BORDER-LEFT: #aaa 1px solid; BACKGROUND-COLOR: white; MARGIN-TOP: =
+0.65em; MIN-HEIGHT: 1px; WIDTH: 12.6em; PADDING-RIGHT: 1.4em; DISPLAY: =
+block; BACKGROUND-REPEAT: repeat-x; BACKGROUND-POSITION: left top; =
+HEIGHT: 1.4em; COLOR: black; BORDER-TOP: #aaa 1px solid; BORDER-RIGHT: =
+#aaa 1px solid
+}
+DIV#simpleSearch INPUT {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 0px; =
+BACKGROUND-COLOR: transparent; MARGIN: 0px; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; COLOR: black; BORDER-TOP: 0px; BORDER-RIGHT: 0px; =
+PADDING-TOP: 0px
+}
+DIV#simpleSearch #searchInput {
+	PADDING-BOTTOM: 0.2em; PADDING-LEFT: 0.2em; WIDTH: 100%; PADDING-RIGHT: =
+0px; DIRECTION: ltr; FONT-SIZE: 13px; PADDING-TOP: 0.2em; =
+-webkit-appearance: textfield
+}
+DIV#simpleSearch #searchInput:focus {
+	OUTLINE-STYLE: none; OUTLINE-COLOR: invert; OUTLINE-WIDTH: medium
+}
+DIV#simpleSearch .placeholder#searchInput {
+	COLOR: #999
+}
+DIV#simpleSearch #searchButton {
+	BACKGROUND-IMAGE: =
+url(http://forensicswiki.org/skins/Vector/images/search-ltr.png?2015-04-0=
+9T12:50:00Z); POSITION: absolute; LINE-HEIGHT: 1; TEXT-INDENT: -99999px; =
+WIDTH: 1.65em; BACKGROUND-REPEAT: no-repeat; DIRECTION: ltr; =
+WHITE-SPACE: nowrap; BACKGROUND-POSITION: center center; HEIGHT: 100%; =
+OVERFLOW: hidden; TOP: 0px; CURSOR: pointer; RIGHT: 0px
+}
+DIV#simpleSearch #mw-searchButton {
+	BACKGROUND-IMAGE: =
+url(http://forensicswiki.org/skins/Vector/images/search-ltr.png?2015-04-0=
+9T12:50:00Z); POSITION: absolute; LINE-HEIGHT: 1; TEXT-INDENT: -99999px; =
+WIDTH: 1.65em; BACKGROUND-REPEAT: no-repeat; DIRECTION: ltr; =
+WHITE-SPACE: nowrap; BACKGROUND-POSITION: center center; HEIGHT: 100%; =
+OVERFLOW: hidden; TOP: 0px; CURSOR: pointer; RIGHT: 0px
+}
+DIV#simpleSearch #mw-searchButton {
+	Z-INDEX: 1
+}
+DIV.vectorTabs H3 {
+	DISPLAY: none
+}
+DIV.vectorTabs {
+	BACKGROUND-IMAGE: =
+url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAuCAIAAABmjeQ9AAA=
+ARElEQVR42mVO2wrAUAhy/f8fz+niVMTYQ3hLKkgGgN/IPvgIhUYYV/qogdP75J01V+JwrKZr=
+/5YPcnzN3e6t7l+2K+EFX91B1daOi7sAAAAASUVORK5CYII=3D); PADDING-LEFT: 1px; =
+BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: left bottom; FLOAT: =
+left; HEIGHT: 2.5em
+}
+DIV.vectorTabs UL {
+	BACKGROUND-IMAGE: =
+url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAuCAIAAABmjeQ9AAA=
+ARElEQVR42mVO2wrAUAhy/f8fz+niVMTYQ3hLKkgGgN/IPvgIhUYYV/qogdP75J01V+JwrKZr=
+/5YPcnzN3e6t7l+2K+EFX91B1daOi7sAAAAASUVORK5CYII=3D); PADDING-BOTTOM: =
+0px; LIST-STYLE-TYPE: none; MARGIN: 0px; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: =
+right bottom; FLOAT: left; HEIGHT: 100%; LIST-STYLE-IMAGE: none; =
+PADDING-TOP: 0px
+}
+DIV.vectorTabs UL LI {
+	BACKGROUND-IMAGE: =
+url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABkCAIAAADITs03AAA=
+APElEQVR4XuWK2xEAIAzCsPvv5DSu0ahX3yv4wQVyGGCSvg2dnJvduT8sz/IwKOIfjCi2z/76=
+FhHeJcslVZQFLUC06LZ/AAAAAElFTkSuQmCC); PADDING-BOTTOM: 0px; LINE-HEIGHT: =
+1.12em; BACKGROUND-COLOR: #f3f3f3; MARGIN: 0px; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; DISPLAY: inline-block; BACKGROUND-REPEAT: repeat-x; =
+WHITE-SPACE: nowrap; BACKGROUND-POSITION: left bottom; FLOAT: left; =
+HEIGHT: 100%; PADDING-TOP: 0px
+}
+DIV.vectorTabs UL > LI {
+	DISPLAY: block
+}
+DIV.vectorTabs LI {
+=09
+}
+DIV.vectorTabs LI.new A {
+	COLOR: #a55858
+}
+DIV.vectorTabs LI.new A:visited {
+	COLOR: #a55858
+}
+DIV.vectorTabs LI.selected {
+	BACKGROUND-IMAGE: =
+url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABkAQAAAABvV2fNAAA=
+ADUlEQVQIHWNoYBgWEACJ5TIB0K9KcAAAAABJRU5ErkJggg=3D=3D)
+}
+DIV.vectorTabs LI.selected A {
+	COLOR: #333; TEXT-DECORATION: none
+}
+DIV.vectorTabs LI.selected A:visited {
+	COLOR: #333; TEXT-DECORATION: none
+}
+DIV.vectorTabs LI.icon A {
+	BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: right bottom
+}
+DIV.vectorTabs LI A {
+	PADDING-LEFT: 0.5em; PADDING-RIGHT: 0.5em; DISPLAY: inline-block; =
+HEIGHT: 1.9em; COLOR: #0645ad; FONT-SIZE: 0.8em; CURSOR: pointer
+}
+DIV.vectorTabs LI > A {
+	DISPLAY: block
+}
+DIV.vectorTabs SPAN {
+	BACKGROUND-IMAGE: =
+url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAuCAIAAABmjeQ9AAA=
+ARElEQVR42mVO2wrAUAhy/f8fz+niVMTYQ3hLKkgGgN/IPvgIhUYYV/qogdP75J01V+JwrKZr=
+/5YPcnzN3e6t7l+2K+EFX91B1daOi7sAAAAASUVORK5CYII=3D); DISPLAY: =
+inline-block; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: right =
+bottom
+}
+DIV.vectorTabs SPAN A {
+	DISPLAY: inline-block; PADDING-TOP: 1.25em
+}
+DIV.vectorTabs SPAN > A {
+	DISPLAY: block; FLOAT: left
+}
+DIV.vectorMenu {
+	POSITION: relative; DIRECTION: ltr; FLOAT: left; CURSOR: pointer
+}
+BODY.rtl DIV.vectorMenu {
+	DIRECTION: rtl
+}
+DIV#mw-head DIV.vectorMenu H3 {
+	BACKGROUND-IMAGE: =
+url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAuCAIAAABmjeQ9AAA=
+ARElEQVR42mVO2wrAUAhy/f8fz+niVMTYQ3hLKkgGgN/IPvgIhUYYV/qogdP75J01V+JwrKZr=
+/5YPcnzN3e6t7l+2K+EFX91B1daOi7sAAAAASUVORK5CYII=3D); PADDING-RIGHT: 1px; =
+BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: right bottom; FLOAT: =
+left; HEIGHT: 2.5em; MARGIN-LEFT: -1px; FONT-SIZE: 1em; MARGIN-RIGHT: =
+-1px
+}
+DIV.vectorMenu H3 SPAN {
+	PADDING-LEFT: 0.7em; DISPLAY: block; COLOR: #4d4d4d; FONT-SIZE: 0.8em; =
+FONT-WEIGHT: normal; MARGIN-RIGHT: 20px; PADDING-TOP: 1.37em
+}
+DIV.vectorMenu H3 A {
+	BACKGROUND-IMAGE: =
+url(http://forensicswiki.org/skins/Vector/images/arrow-down-icon.png?2015=
+-04-09T12:50:00Z); POSITION: absolute; WIDTH: 20px; BACKGROUND-REPEAT: =
+no-repeat; BACKGROUND-POSITION: 100% 70%; HEIGHT: 2.5em; TOP: 0px; =
+RIGHT: 0px; -webkit-transition: background-position 250ms; =
+-moz-transition: background-position 250ms; -o-transition: =
+background-position 250ms; transition: background-position 250ms
+}
+DIV.menuForceShow.vectorMenu H3 A {
+	BACKGROUND-POSITION: 100% 100%
+}
+DIV.vectorMenuFocus H3 A {
+	BACKGROUND-IMAGE: =
+url(http://forensicswiki.org/skins/Vector/images/arrow-down-focus-icon.pn=
+g?2015-04-09T12:50:00Z)
+}
+DIV.vectorMenu DIV.menu {
+	BORDER-BOTTOM: silver 1px solid; POSITION: absolute; MIN-WIDTH: 100%; =
+TEXT-ALIGN: left; BORDER-LEFT: silver 1px solid; BACKGROUND-COLOR: =
+white; DISPLAY: none; CLEAR: both; BORDER-TOP: silver 0px solid; TOP: =
+2.5em; BORDER-RIGHT: silver 1px solid; LEFT: -1px
+}
+DIV.vectorMenu:hover DIV.menu {
+	DISPLAY: block
+}
+DIV.menuForceShow.vectorMenu DIV.menu {
+	DISPLAY: block
+}
+DIV.vectorMenu UL {
+	TEXT-ALIGN: left; PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: =
+0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; LIST-STYLE-IMAGE: none; =
+PADDING-TOP: 0px
+}
+DIV.vectorMenu LI {
+	TEXT-ALIGN: left; PADDING-BOTTOM: 0px; LINE-HEIGHT: 1em; MARGIN: 0px; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+DIV.vectorMenu LI A {
+	PADDING-BOTTOM: 0.5em; PADDING-LEFT: 0.5em; PADDING-RIGHT: 0.5em; =
+DISPLAY: inline-block; WHITE-SPACE: nowrap; COLOR: #0645ad; FONT-SIZE: =
+0.8em; CURSOR: pointer; PADDING-TOP: 0.5em
+}
+DIV.vectorMenu LI > A {
+	DISPLAY: block
+}
+DIV.vectorMenu LI.selected A {
+	COLOR: #333; TEXT-DECORATION: none
+}
+DIV.vectorMenu LI.selected A:visited {
+	COLOR: #333; TEXT-DECORATION: none
+}
+.icon#ca-unwatch A {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; WIDTH: 26px; =
+PADDING-RIGHT: 0px; DISPLAY: block; BACKGROUND-POSITION: 5px 60%; =
+HEIGHT: 0px; OVERFLOW: hidden; PADDING-TOP: 3.1em
+}
+.icon#ca-watch A {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; WIDTH: 26px; =
+PADDING-RIGHT: 0px; DISPLAY: block; BACKGROUND-POSITION: 5px 60%; =
+HEIGHT: 0px; OVERFLOW: hidden; PADDING-TOP: 3.1em
+}
+.icon#ca-unwatch A {
+	BACKGROUND-IMAGE: =
+url(http://forensicswiki.org/skins/Vector/images/unwatch-icon.png?2015-04=
+-09T12:50:00Z)
+}
+.icon#ca-watch A {
+	BACKGROUND-IMAGE: =
+url(http://forensicswiki.org/skins/Vector/images/watch-icon.png?2015-04-0=
+9T12:50:00Z)
+}
+.icon#ca-unwatch A:hover {
+	BACKGROUND-IMAGE: =
+url(http://forensicswiki.org/skins/Vector/images/unwatch-icon-hl.png?2015=
+-04-09T12:50:00Z)
+}
+.icon#ca-unwatch A:focus {
+	BACKGROUND-IMAGE: =
+url(http://forensicswiki.org/skins/Vector/images/unwatch-icon-hl.png?2015=
+-04-09T12:50:00Z)
+}
+.icon#ca-watch A:hover {
+	BACKGROUND-IMAGE: =
+url(http://forensicswiki.org/skins/Vector/images/watch-icon-hl.png?2015-0=
+4-09T12:50:00Z)
+}
+.icon#ca-watch A:focus {
+	BACKGROUND-IMAGE: =
+url(http://forensicswiki.org/skins/Vector/images/watch-icon-hl.png?2015-0=
+4-09T12:50:00Z)
+}
+.icon#ca-unwatch A.loading {
+	BACKGROUND-IMAGE: =
+url(http://forensicswiki.org/skins/Vector/images/watch-icon-loading.png?2=
+015-04-09T12:50:00Z); OUTLINE-STYLE: none; OUTLINE-COLOR: invert; =
+OUTLINE-WIDTH: medium; BACKGROUND-POSITION: 50% 60%; CURSOR: default; =
+-webkit-animation: rotate 700ms infinite linear; -moz-animation: rotate =
+700ms infinite linear; -o-animation: rotate 700ms infinite linear; =
+animation: rotate 700ms infinite linear; pointer-events: none; =
+-webkit-transform-origin: 50% 57%; transform-origin: 50% 57%
+}
+.icon#ca-watch A.loading {
+	BACKGROUND-IMAGE: =
+url(http://forensicswiki.org/skins/Vector/images/watch-icon-loading.png?2=
+015-04-09T12:50:00Z); OUTLINE-STYLE: none; OUTLINE-COLOR: invert; =
+OUTLINE-WIDTH: medium; BACKGROUND-POSITION: 50% 60%; CURSOR: default; =
+-webkit-animation: rotate 700ms infinite linear; -moz-animation: rotate =
+700ms infinite linear; -o-animation: rotate 700ms infinite linear; =
+animation: rotate 700ms infinite linear; pointer-events: none; =
+-webkit-transform-origin: 50% 57%; transform-origin: 50% 57%
+}
+.icon#ca-unwatch A SPAN {
+	DISPLAY: none
+}
+.icon#ca-watch A SPAN {
+	DISPLAY: none
+}
+#mw-navigation H2 {
+	POSITION: absolute; TOP: -9999px
+}
+#mw-page-base {
+	BACKGROUND-IMAGE: =
+url(http://forensicswiki.org/skins/Vector/images/page-fade.png?2015-04-09=
+T12:50:00Z); BACKGROUND-COLOR: #fff; BACKGROUND-REPEAT: repeat-x; =
+BACKGROUND-POSITION: left bottom; HEIGHT: 5em
+}
+#mw-head-base {
+	MARGIN-TOP: -5em; HEIGHT: 5em; MARGIN-LEFT: 10em
+}
+DIV#mw-head {
+	POSITION: absolute; WIDTH: 100%; TOP: 0px; RIGHT: 0px
+}
+DIV#mw-head H3 {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: =
+0px; PADDING-TOP: 0px
+}
+#left-navigation {
+	MARGIN-TOP: 2.5em; DISPLAY: inline; MARGIN-BOTTOM: -2.5em; FLOAT: left; =
+MARGIN-LEFT: 10em
+}
+#right-navigation {
+	MARGIN-TOP: 2.5em; FLOAT: right
+}
+#p-logo {
+	POSITION: absolute; WIDTH: 10em; HEIGHT: 160px; TOP: -160px; LEFT: 0px
+}
+#p-logo A {
+	WIDTH: 10em; DISPLAY: block; BACKGROUND-REPEAT: no-repeat; =
+BACKGROUND-POSITION: center center; HEIGHT: 160px; TEXT-DECORATION: none
+}
+DIV#mw-panel {
+	POSITION: absolute; WIDTH: 10em; FONT-SIZE: inherit; TOP: 160px; =
+PADDING-TOP: 1em; LEFT: 0px
+}
+DIV#mw-panel DIV.portal {
+	BACKGROUND-IMAGE: =
+url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIwAAAABCAAAAAAphRnkAAA=
+AJ0lEQVQIW7XFsQEAIAyAMPD/b7uLWz8wS5youFW1UREfiIpH1Q2VBz7fGPS1dOGeAAAAAElF=
+TkSuQmCC); PADDING-BOTTOM: 0.25em; MARGIN: 0px 0.6em 0px 0.7em; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-REPEAT: no-repeat; =
+DIRECTION: ltr; BACKGROUND-POSITION: left top; PADDING-TOP: 0.25em
+}
+DIV#mw-panel DIV.portal H3 {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: =
+0.25em; MARGIN: 0px; PADDING-LEFT: 0.25em; PADDING-RIGHT: 0px; COLOR: =
+#4d4d4d; FONT-SIZE: 0.75em; BORDER-TOP: medium none; CURSOR: default; =
+FONT-WEIGHT: normal; BORDER-RIGHT: medium none; PADDING-TOP: 0.25em
+}
+DIV#mw-panel DIV.portal DIV.body {
+	MARGIN: 0px 0px 0px 1.25em; PADDING-TOP: 0px
+}
+DIV#mw-panel DIV.portal DIV.body UL {
+	PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; PADDING-LEFT: =
+0px; PADDING-RIGHT: 0px; LIST-STYLE-IMAGE: none; PADDING-TOP: 0px
+}
+DIV#mw-panel DIV.portal DIV.body UL LI {
+	PADDING-BOTTOM: 0.25em; LINE-HEIGHT: 1.12em; MARGIN: 0px; PADDING-LEFT: =
+0px; PADDING-RIGHT: 0px; WORD-WRAP: break-word; FONT-SIZE: 0.75em; =
+PADDING-TOP: 0.25em
+}
+DIV#mw-panel DIV.portal DIV.body UL LI A {
+	COLOR: #0645ad
+}
+DIV#mw-panel DIV.portal DIV.body UL LI A:visited {
+	COLOR: #0b0080
+}
+DIV#mw-panel DIV.first.portal {
+	BACKGROUND-IMAGE: none; MARGIN-TOP: 0px
+}
+DIV#mw-panel DIV.first.portal H3 {
+	DISPLAY: none
+}
+DIV#mw-panel DIV.first.portal DIV.body {
+	MARGIN-LEFT: 0.5em
+}
+DIV#footer {
+	PADDING-BOTTOM: 0.75em; MARGIN-TOP: 0px; PADDING-LEFT: 0.75em; =
+PADDING-RIGHT: 0.75em; DIRECTION: ltr; MARGIN-LEFT: 10em; PADDING-TOP: =
+0.75em
+}
+DIV#footer UL {
+	PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; PADDING-LEFT: =
+0px; PADDING-RIGHT: 0px; LIST-STYLE-IMAGE: none; PADDING-TOP: 0px
+}
+DIV#footer UL LI {
+	PADDING-BOTTOM: 0.5em; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: =
+0px; COLOR: #333; FONT-SIZE: 0.7em; PADDING-TOP: 0.5em
+}
+DIV#footer #footer-icons {
+	FLOAT: right
+}
+DIV#footer #footer-icons LI {
+	TEXT-ALIGN: right; LINE-HEIGHT: 2em; FLOAT: left; MARGIN-LEFT: 0.5em
+}
+DIV#footer #footer-info LI {
+	LINE-HEIGHT: 1.4em
+}
+DIV#footer #footer-places LI {
+	LINE-HEIGHT: 2em; FLOAT: left; MARGIN-RIGHT: 1em
+}
+BODY.ltr DIV#footer #footer-places {
+	FLOAT: left
+}
+.mw-body .external {
+	BACKGROUND-IMAGE: =
+url(http://forensicswiki.org/skins/Vector/images/external-link-ltr-icon.p=
+ng?2015-04-09T12:50:00Z); PADDING-RIGHT: 13px; BACKGROUND-REPEAT: =
+no-repeat; BACKGROUND-POSITION: right center
+}
+
+}
+
+------=_NextPart_000_0015_01D30BB8.FB254C90
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://forensicswiki.org/load.php?debug=false&lang=en&modules=site&only=styles&skin=vector&*
+
+.infobox {
+	BORDER-BOTTOM: #aaaaaa 1px solid; BORDER-LEFT: #aaaaaa 1px solid; =
+PADDING-BOTTOM: 0.2em; BACKGROUND-COLOR: #f9f9f9; PADDING-LEFT: 0.2em; =
+PADDING-RIGHT: 0.2em; MARGIN-BOTTOM: 0.5em; FLOAT: right; COLOR: black; =
+MARGIN-LEFT: 1em; CLEAR: right; BORDER-TOP: #aaaaaa 1px solid; =
+BORDER-RIGHT: #aaaaaa 1px solid; PADDING-TOP: 0.2em
+}
+.infobox TD {
+	VERTICAL-ALIGN: top
+}
+.infobox TH {
+	VERTICAL-ALIGN: top
+}
+.infobox CAPTION {
+	MARGIN-LEFT: inherit; FONT-SIZE: larger
+}
+.bordered.infobox {
+	BORDER-COLLAPSE: collapse
+}
+.bordered.infobox TD {
+	BORDER-BOTTOM: #aaaaaa 1px solid; BORDER-LEFT: #aaaaaa 1px solid; =
+BORDER-TOP: #aaaaaa 1px solid; BORDER-RIGHT: #aaaaaa 1px solid
+}
+.bordered.infobox TH {
+	BORDER-BOTTOM: #aaaaaa 1px solid; BORDER-LEFT: #aaaaaa 1px solid; =
+BORDER-TOP: #aaaaaa 1px solid; BORDER-RIGHT: #aaaaaa 1px solid
+}
+.bordered.infobox .borderless TD {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+0px
+}
+.bordered.infobox .borderless TH {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+0px
+}
+.sisterproject.infobox {
+	WIDTH: 20em; FONT-SIZE: 90%
+}
+.bordered.infobox .mergedtoprow TD {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: #aaaaaa 1px solid; =
+BORDER-RIGHT: #aaaaaa 1px solid
+}
+.bordered.infobox .mergedtoprow TH {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: #aaaaaa 1px solid; =
+BORDER-RIGHT: #aaaaaa 1px solid
+}
+.bordered.infobox .mergedrow TD {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+#aaaaaa 1px solid
+}
+.bordered.infobox .mergedrow TH {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+#aaaaaa 1px solid
+}
+.geography.infobox {
+	BORDER-BOTTOM: #ccd2d9 1px solid; TEXT-ALIGN: left; BORDER-LEFT: =
+#ccd2d9 1px solid; LINE-HEIGHT: 1.2em; BORDER-COLLAPSE: collapse; =
+FONT-SIZE: 90%; BORDER-TOP: #ccd2d9 1px solid; BORDER-RIGHT: #ccd2d9 1px =
+solid
+}
+.geography.infobox TD {
+	PADDING-BOTTOM: 0.4em; PADDING-LEFT: 0.8em; PADDING-RIGHT: 0.2em; =
+BORDER-TOP: #ccd2d9 1px solid; PADDING-TOP: 0.4em
+}
+.geography.infobox TH {
+	PADDING-BOTTOM: 0.4em; PADDING-LEFT: 0.8em; PADDING-RIGHT: 0.2em; =
+BORDER-TOP: #ccd2d9 1px solid; PADDING-TOP: 0.4em
+}
+.geography.infobox .mergedtoprow TD {
+	PADDING-BOTTOM: 0.2em; PADDING-LEFT: 0.8em; PADDING-RIGHT: 0.2em; =
+BORDER-TOP: #ccd2d9 1px solid; PADDING-TOP: 0.4em
+}
+.geography.infobox .mergedtoprow TH {
+	PADDING-BOTTOM: 0.2em; PADDING-LEFT: 0.8em; PADDING-RIGHT: 0.2em; =
+BORDER-TOP: #ccd2d9 1px solid; PADDING-TOP: 0.4em
+}
+.geography.infobox .mergedrow TD {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 0.2em; =
+PADDING-LEFT: 0.8em; PADDING-RIGHT: 0.2em; BORDER-TOP: 0px; =
+BORDER-RIGHT: 0px; PADDING-TOP: 0px
+}
+.geography.infobox .mergedrow TH {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 0.2em; =
+PADDING-LEFT: 0.8em; PADDING-RIGHT: 0.2em; BORDER-TOP: 0px; =
+BORDER-RIGHT: 0px; PADDING-TOP: 0px
+}
+.geography.infobox .mergedbottomrow TD {
+	BORDER-BOTTOM: #ccd2d9 1px solid; PADDING-BOTTOM: 0.4em; PADDING-LEFT: =
+0.8em; PADDING-RIGHT: 0.2em; BORDER-TOP: 0px; PADDING-TOP: 0px
+}
+.geography.infobox .mergedbottomrow TH {
+	BORDER-BOTTOM: #ccd2d9 1px solid; PADDING-BOTTOM: 0.4em; PADDING-LEFT: =
+0.8em; PADDING-RIGHT: 0.2em; BORDER-TOP: 0px; PADDING-TOP: 0px
+}
+.geography.infobox .maptable TD {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 0px; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+0px; PADDING-TOP: 0px
+}
+.geography.infobox .maptable TH {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 0px; =
+PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: =
+0px; PADDING-TOP: 0px
+}
+
+------=_NextPart_000_0015_01D30BB8.FB254C90
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://forensicswiki.org/load.php?debug=false&lang=en&modules=startup&only=scripts&skin=vector&*
+
+var mediaWikiLoadStart=3D(new Date()).getTime();function =
+isCompatible(ua){if(ua=3D=3D=3Dundefined){ua=3Dnavigator.userAgent;}retur=
+n!((ua.indexOf('MSIE')!=3D=3D-1&&parseFloat(ua.split('MSIE')[1])<8)||(ua.=
+indexOf('Firefox/')!=3D=3D-1&&parseFloat(ua.split('Firefox/')[1])<3)||(ua=
+.indexOf('Opera/')!=3D=3D-1&&(ua.indexOf('Version/')=3D=3D=3D-1?parseFloa=
+t(ua.split('Opera/')[1])<10:parseFloat(ua.split('Version/')[1])<12))||(ua=
+.indexOf('Opera ')!=3D=3D-1&&parseFloat(ua.split(' Opera =
+')[1])<10)||ua.match(/BlackBerry[^\/]*\/[1-5]\./)||ua.match(/webOS\/1\.[0=
+-4]/)||ua.match(/PlayStation/i)||ua.match(/SymbianOS|Series60/)||ua.match=
+(/NetFront/)||ua.match(/Opera =
+Mini/)||ua.match(/S40OviBrowser/)||(ua.match(/Glass/)&&ua.match(/Android/=
+)));}var startUp=3Dfunction(){mw.config=3Dnew =
+mw.Map(true);mw.loader.addSource({"local":"/load.php"});mw.loader.registe=
+r([["site",1499777522,[],"site"],["noscript",1499777522,[],"noscript"],["=
+filepage",1499777522],["user.groups",1499777522,[],"user"],["user",149977=
+7522,[],"user"],["user.cssprefs",1499777522=0A=
+,[],"private"],["user.defaults",1499777522],["user.options",1499777522,[6=
+],"private"],["user.tokens",1499777522,[],"private"],["mediawiki.language=
+.data",1499777522,[149]],["mediawiki.skinning.elements",1499777522],["med=
+iawiki.skinning.content",1499777522],["mediawiki.skinning.interface",1499=
+777522],["mediawiki.skinning.content.parsoid",1499777522],["mediawiki.ski=
+nning.content.externallinks",1499777522],["jquery.accessKeyLabel",1499783=
+593,[25,43]],["jquery.appear",1499777522],["jquery.arrowSteps",1499777522=
+],["jquery.async",1499777522],["jquery.autoEllipsis",1499777522,[37]],["j=
+query.badge",1499777522,[146]],["jquery.byteLength",1499777522],["jquery.=
+byteLimit",1499777522,[21]],["jquery.checkboxShiftClick",1499777522],["jq=
+uery.chosen",1499777522],["jquery.client",1499777522],["jquery.color",149=
+9777522,[27]],["jquery.colorUtil",1499777522],["jquery.confirmable",14997=
+77522,[150]],["jquery.cookie",1499777522],["jquery.expandableField",14997=
+77522],["jquery.farbtastic",1499777522,[27]],[=0A=
+"jquery.footHovzer",1499777522],["jquery.form",1499777522],["jquery.fulls=
+creen",1499777522],["jquery.getAttrs",1499777522],["jquery.hidpi",1499777=
+522],["jquery.highlightText",1499777522,[43]],["jquery.hoverIntent",14997=
+77522],["jquery.localize",1499777522],["jquery.makeCollapsible",149978359=
+3],["jquery.mockjax",1499777522],["jquery.mw-jump",1499777522],["jquery.m=
+wExtension",1499777522],["jquery.placeholder",1499777522],["jquery.qunit"=
+,1499777522],["jquery.qunit.completenessTest",1499777522,[45]],["jquery.s=
+pinner",1499777522],["jquery.jStorage",1499777522,[91]],["jquery.suggesti=
+ons",1499777522,[37]],["jquery.tabIndex",1499777522],["jquery.tablesorter=
+",1499786411,[43,151]],["jquery.textSelection",1499777522,[25]],["jquery.=
+throttle-debounce",1499777522],["jquery.validate",1499777522],["jquery.xm=
+ldom",1499777522],["jquery.tipsy",1499777522],["jquery.ui.core",149977752=
+2,[],"jquery.ui"],["jquery.ui.accordion",1499777522,[57,76],"jquery.ui"],=
+["jquery.ui.autocomplete",1499777522,[65],=0A=
+"jquery.ui"],["jquery.ui.button",1499777522,[57,76],"jquery.ui"],["jquery=
+.ui.datepicker",1499777522,[57],"jquery.ui"],["jquery.ui.dialog",14997775=
+22,[60,63,67,69],"jquery.ui"],["jquery.ui.draggable",1499777522,[57,66],"=
+jquery.ui"],["jquery.ui.droppable",1499777522,[63],"jquery.ui"],["jquery.=
+ui.menu",1499777522,[57,67,76],"jquery.ui"],["jquery.ui.mouse",1499777522=
+,[76],"jquery.ui"],["jquery.ui.position",1499777522,[],"jquery.ui"],["jqu=
+ery.ui.progressbar",1499777522,[57,76],"jquery.ui"],["jquery.ui.resizable=
+",1499777522,[57,66],"jquery.ui"],["jquery.ui.selectable",1499777522,[57,=
+66],"jquery.ui"],["jquery.ui.slider",1499777522,[57,66],"jquery.ui"],["jq=
+uery.ui.sortable",1499777522,[57,66],"jquery.ui"],["jquery.ui.spinner",14=
+99777522,[60],"jquery.ui"],["jquery.ui.tabs",1499777522,[57,76],"jquery.u=
+i"],["jquery.ui.tooltip",1499777522,[57,67,76],"jquery.ui"],["jquery.ui.w=
+idget",1499777522,[],"jquery.ui"],["jquery.effects.core",1499777522,[],"j=
+query.ui"],["jquery.effects.blind",1499777522,[77],=0A=
+"jquery.ui"],["jquery.effects.bounce",1499777522,[77],"jquery.ui"],["jque=
+ry.effects.clip",1499777522,[77],"jquery.ui"],["jquery.effects.drop",1499=
+777522,[77],"jquery.ui"],["jquery.effects.explode",1499777522,[77],"jquer=
+y.ui"],["jquery.effects.fade",1499777522,[77],"jquery.ui"],["jquery.effec=
+ts.fold",1499777522,[77],"jquery.ui"],["jquery.effects.highlight",1499777=
+522,[77],"jquery.ui"],["jquery.effects.pulsate",1499777522,[77],"jquery.u=
+i"],["jquery.effects.scale",1499777522,[77],"jquery.ui"],["jquery.effects=
+.shake",1499777522,[77],"jquery.ui"],["jquery.effects.slide",1499777522,[=
+77],"jquery.ui"],["jquery.effects.transfer",1499777522,[77],"jquery.ui"],=
+["json",1499777522,[],null,null,"return!!(window.JSON\u0026\u0026JSON.str=
+ingify\u0026\u0026JSON.parse);"],["moment",1499777522],["mediawiki.apihel=
+p",1499777522,[112]],["mediawiki.template",1499777522],["mediawiki.templa=
+te.mustache",1499777522],["mediawiki.apipretty",1499777522],["mediawiki.a=
+pi",1499777522,[128]],["mediawiki.api.category",=0A=
+1499777522,[123,97]],["mediawiki.api.edit",1499777522,[123,97,8]],["media=
+wiki.api.login",1499777522,[97]],["mediawiki.api.options",1499777522,[97]=
+],["mediawiki.api.parse",1499777522,[97]],["mediawiki.api.watch",14997775=
+22,[97,8]],["mediawiki.content.json",1499777522],["mediawiki.confirmClose=
+Window",1499777522],["mediawiki.debug",1499777522,[32,56]],["mediawiki.de=
+bug.init",1499777522,[106]],["mediawiki.feedback",1499777522,[123,116,204=
+]],["mediawiki.filewarning",1499777522,[204]],["mediawiki.helplink",14997=
+77522],["mediawiki.hidpi",1499777522,[36],null,null,"return'srcset'in =
+new =
+Image();"],["mediawiki.hlist",1499777522,[25]],["mediawiki.htmlform",1499=
+798747,[22,43]],["mediawiki.icon",1499777522],["mediawiki.inspect",149977=
+7522,[21,91]],["mediawiki.messagePoster",1499777522,[97,203]],["mediawiki=
+.messagePoster.wikitext",1499777522,[99,116]],["mediawiki.notification",1=
+499777522,[157]],["mediawiki.notify",1499777522],["mediawiki.pager.tableP=
+ager",1499777522],["mediawiki.searchSuggest",=0A=
+1499783593,[35,44,49,97]],["mediawiki.sectionAnchor",1499777522],["mediaw=
+iki.Title",1499777522,[21,128]],["mediawiki.toc",1499783593,[29]],["media=
+wiki.Uri",1499777522,[128]],["mediawiki.user",1499777522,[29,97,7,8]],["m=
+ediawiki.userSuggest",1499777522,[49,97]],["mediawiki.util",1499777522,[1=
+5,119]],["mediawiki.cookie",1499777522,[29]],["mediawiki.toolbar",1499777=
+522],["mediawiki.action.edit",1499777522,[22,52,132]],["mediawiki.action.=
+edit.styles",1499777522],["mediawiki.action.edit.collapsibleFooter",14997=
+77522,[29,40,114]],["mediawiki.action.edit.preview",1499777522,[33,47,52,=
+137,97,150]],["mediawiki.action.edit.stash",1499777522,[35,97]],["mediawi=
+ki.action.history",1499777522,[],"mediawiki.action.history"],["mediawiki.=
+action.history.diff",1499777522,[],"mediawiki.action.history"],["mediawik=
+i.action.view.dblClickEdit",1499777522,[157,7]],["mediawiki.action.view.m=
+etadata",1499785201],["mediawiki.action.view.categoryPage.styles",1499777=
+522],["mediawiki.action.view.postEdit",1499783593,[=0A=
+129,150,94]],["mediawiki.action.view.redirect",1499777522,[25]],["mediawi=
+ki.action.view.redirectPage",1499777522],["mediawiki.action.view.rightCli=
+ckEdit",1499777522],["mediawiki.action.edit.editWarning",1499884891,[52,1=
+05,150,7]],["mediawiki.language",1499783593,[147,9]],["mediawiki.cldr",14=
+99777522,[148]],["mediawiki.libs.pluralruleparser",1499777522],["mediawik=
+i.language.init",1499777522],["mediawiki.jqueryMsg",1499777522,[146,128]]=
+,["mediawiki.language.months",1499786411,[146]],["mediawiki.language.name=
+s",1499777522,[149]],["mediawiki.language.specialCharacters",1499777522,[=
+146]],["mediawiki.libs.jpegmeta",1499777522],["mediawiki.page.gallery",14=
+99777522,[53]],["mediawiki.page.ready",1499777522,[15,23,40,42,44]],["med=
+iawiki.page.startup",1499777522,[128]],["mediawiki.page.patrol.ajax",1499=
+777522,[47,123,97,157,8]],["mediawiki.page.watch.ajax",1499798961,[103,15=
+7]],["mediawiki.page.image.pagination",1499777522,[47,125]],["mediawiki.s=
+pecial",1499777522],["mediawiki.special.block",=0A=
+1499777522,[128]],["mediawiki.special.changeemail",1499777522,[128]],["me=
+diawiki.special.changeslist",1499777522],["mediawiki.special.changeslist.=
+legend",1499777522],["mediawiki.special.changeslist.legend.js",1499777522=
+,[29,40]],["mediawiki.special.changeslist.enhanced",1499777522],["mediawi=
+ki.special.edittags",1499777522,[24]],["mediawiki.special.edittags.styles=
+",1499777522],["mediawiki.special.import",1499777522],["mediawiki.special=
+.movePage",1499777522,[22]],["mediawiki.special.pageLanguage",1499777522]=
+,["mediawiki.special.pagesWithProp",1499777522],["mediawiki.special.prefe=
+rences",1499890613,[105,146]],["mediawiki.special.recentchanges",14997775=
+22,[161]],["mediawiki.special.search",1499783625],["mediawiki.special.und=
+elete",1499777522],["mediawiki.special.upload",1499777522,[47,123,97,105,=
+150,154,7,94]],["mediawiki.special.userlogin.common.styles",1499777522],[=
+"mediawiki.special.userlogin.signup.styles",1499777522],["mediawiki.speci=
+al.userlogin.login.styles",1499777522],[=0A=
+"mediawiki.special.userlogin.common.js",1499794602],["mediawiki.special.u=
+serlogin.signup.js",1499777522,[53,97,150]],["mediawiki.special.unwatched=
+Pages",1499777522,[123,103]],["mediawiki.special.javaScriptTest",14997775=
+22,[125]],["mediawiki.special.version",1499777522],["mediawiki.legacy.con=
+fig",1499777522],["mediawiki.legacy.ajax",1499777522,[193]],["mediawiki.l=
+egacy.commonPrint",1499777522],["mediawiki.legacy.protect",1499777522,[22=
+]],["mediawiki.legacy.shared",1499777522],["mediawiki.legacy.oldshared",1=
+499777522],["mediawiki.legacy.wikibits",1499777522,[128]],["mediawiki.ui"=
+,1499777522],["mediawiki.ui.checkbox",1499777522],["mediawiki.ui.radio",1=
+499777522],["mediawiki.ui.anchor",1499777522],["mediawiki.ui.button",1499=
+777522],["mediawiki.ui.input",1499777522],["mediawiki.ui.icon",1499777522=
+],["mediawiki.ui.text",1499777522],["es5-shim",1499777522,[],null,null,"r=
+eturn(function(){'use =
+strict';return!this\u0026\u0026!!Function.prototype.bind;}());"],["oojs",=
+1499777522,[202,91]],[=0A=
+"oojs-ui",1499777522,[203,205]],["oojs-ui.styles",1499777522],["skins.vec=
+tor.styles",1499777522],["skins.vector.js",1499777522,[50,53]],["ext.conf=
+irmAccount",1499777522]]);mw.config.set({"wgLoadScript":"/load.php","debu=
+g":false,"skin":"vector","stylepath":"/skins","wgUrlProtocols":"bitcoin\\=
+:|ftp\\:\\/\\/|ftps\\:\\/\\/|geo\\:|git\\:\\/\\/|gopher\\:\\/\\/|http\\:\=
+\/\\/|https\\:\\/\\/|irc\\:\\/\\/|ircs\\:\\/\\/|magnet\\:|mailto\\:|mms\\=
+:\\/\\/|news\\:|nntp\\:\\/\\/|redis\\:\\/\\/|sftp\\:\\/\\/|sip\\:|sips\\:=
+|sms\\:|ssh\\:\\/\\/|svn\\:\\/\\/|tel\\:|telnet\\:\\/\\/|urn\\:|worldwind=
+\\:\\/\\/|xmpp\\:|\\/\\/","wgArticlePath":"/wiki/$1","wgScriptPath":"","w=
+gScriptExtension":".php","wgScript":"/index.php","wgSearchType":null,"wgV=
+ariantArticlePath":false,"wgActionPaths":{},"wgServer":"http://forensicsw=
+iki.org","wgServerName":"forensicswiki.org","wgUserLanguage":"en","wgCont=
+entLanguage":"en","wgTranslateNumerals":true,"wgVersion":"1.25.2","wgEnab=
+leAPI":true,"wgEnableWriteAPI":true,=0A=
+"wgMainPageTitle":"Main =
+Page","wgFormattedNamespaces":{"-2":"Media","-1":"Special","0":"","1":"Ta=
+lk","2":"User","3":"User talk","4":"ForensicsWiki","5":"ForensicsWiki =
+talk","6":"File","7":"File talk","8":"MediaWiki","9":"MediaWiki =
+talk","10":"Template","11":"Template talk","12":"Help","13":"Help =
+talk","14":"Category","15":"Category =
+talk"},"wgNamespaceIds":{"media":-2,"special":-1,"":0,"talk":1,"user":2,"=
+user_talk":3,"forensicswiki":4,"forensicswiki_talk":5,"file":6,"file_talk=
+":7,"mediawiki":8,"mediawiki_talk":9,"template":10,"template_talk":11,"he=
+lp":12,"help_talk":13,"category":14,"category_talk":15,"image":6,"image_t=
+alk":7,"project":4,"project_talk":5},"wgContentNamespaces":[0],"wgSiteNam=
+e":"ForensicsWiki","wgDBname":"forensic_live","wgAvailableSkins":{"vector=
+":"Vector","fallback":"Fallback","apioutput":"ApiOutput"},"wgExtensionAss=
+etsPath":"/extensions","wgCookiePrefix":"forensic_live","wgCookieDomain":=
+"","wgCookiePath":"/","wgCookieExpiration":15552000,=0A=
+"wgResourceLoaderMaxQueryLength":2000,"wgCaseSensitiveNamespaces":[],"wgL=
+egalTitleChars":" =
+%!\"$\u0026'()*,\\-./0-9:;=3D?@A-Z\\\\\\^_`a-z~+\\u0080-\\uFFFF","wgResou=
+rceLoaderStorageVersion":1,"wgResourceLoaderStorageEnabled":false});};if(=
+isCompatible()){document.write("\u003Cscript =
+src=3D\"/load.php?debug=3Dfalse\u0026amp;lang=3Den\u0026amp;modules=3Djqu=
+ery%2Cmediawiki\u0026amp;only=3Dscripts\u0026amp;skin=3Dvector\u0026amp;v=
+ersion=3D20160831T181752Z\"\u003E\u003C/script\u003E");};=0A=
+/* cache key: =
+forensic_live:resourceloader:filter:minify-js:7:aa669a4308ef877e1948c5a3b=
+f99c70e */
+------=_NextPart_000_0015_01D30BB8.FB254C90--

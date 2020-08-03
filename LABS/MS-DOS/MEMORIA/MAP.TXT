@@ -1,0 +1,34 @@
+_________________________________________
+|										|
+| BOOT.BIN                              |
+| 			  	SEG  OFF                |
+| START ADDRESS 0000:7C00               |
+| END   ADDRESS 0000:7E00               |
+| LEN	  200H - 512D / 1024 = 0.5K     |
+|_______________________________________|
+|                                       |
+| COMMAND.COM                           |
+| 			  	SEG  OFF                |
+| START ADDRESS 0000:54B0               |
+| END   ADDRESS 0000:9A20               |
+| LEN	  4570H - 17776D / 1024 = 17K   |
+|_______________________________________|
+|										|
+| IBMDOS.COM - UWVRQSP 					|
+| (STRING LOCALIZADA)					|
+|										|
+|				SEG  OFF                |
+| START ADDRESS 0000:1AAC				|
+|_______________________________________|
+|                                       |
+| IBMIO.COM                             |
+|                                       |
+| 			  	SEG  OFF                |
+| START ADDRESS 0000:0700               |
+|_______________________________________|
+|                                       |
+| FAT É CARREGADA EM                    |
+|                                       |
+| 			  	SEG  OFF                |
+| START ADDRESS 0000:0500               |
+|_______________________________________|

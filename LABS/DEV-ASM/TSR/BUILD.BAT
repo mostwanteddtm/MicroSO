@@ -1,0 +1,4 @@
+SET PATH=C:\MASM615\BIN
+ML /AT MYTSR.ASM
+copy mytsr.COM a:
+PAUSE

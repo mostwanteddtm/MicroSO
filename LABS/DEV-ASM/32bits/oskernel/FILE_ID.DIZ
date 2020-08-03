@@ -1,0 +1,101 @@
+                              -= In Russian =-
+
+                Ядро крошечной операционной системы - Kernel
+
+  АВТОР НЕ НЕСЕТ НИКАКОЙ ОТВЕТСТВЕННОСТИ ЗА УЩЕРБ, КОТОРЫЙ МОЖЕТ БЫТЬ  НАНЕСЕН
+ЭТОЙ ПРОГРАММОЙ АППАРАТУРЕ ИЛИ ЗДОРОВЬЮ А ТАКЖЕ ЗА ПОТЕРЮ ДАННЫХ ИЛИ ЖИЗНИ!!!
+
+  Программа демонстрирует основы системного программирования в защищенном  ре-
+жиме процессора 386+.
+
+                     Перечень возможностей, свойств и др.
+
+  - 32-х битный код
+  - Обработка исключений
+  - Обработка прерываний от таймера и клавиатуры
+  - Мультизадачность (задачи 0-го и 3-го колец)
+
+                            Требования к системе
+
+  - Компьютер на базе 386-го или лучшего процессора
+  - EGA/VGA цветная видео система
+  - Чистый DOS 5.0 или лучше (без менеджеров памяти таких  как
+    EMM386.EXE) или WINDOWS 9x в режиме COMMAND PROMPT ONLY
+
+                              Как компилировать
+
+  Компилируйте программу используя TASM 3.1  (или лучший,  TASM 5.0, например)
+  и следующую  последовательность команд:
+
+    tasm /m2 /mx /o /t kernel.asm
+    tlink /3 /x kernel.obj
+
+  Если у Вас нету TASM'а, подойдет MASM 6.11 (с другими непроверялось):
+
+    ML /I. /Zm /Ta kernel.asm
+
+                           Перечень проблем/ошибок
+
+  Вроде пока исправлены все. Найдете - пишите.
+
+                               Благодарности
+
+  Aaron Nathaniel Gray - за советы по изменению исходных текстов так, чтобы
+  их было возможно компилировать не только TASM'ом, но и с помощью MASM'а.
+
+                                                         Автор: Алексей Фрунзе
+                                                                28-е мая, 2000
+                                                       E-Mail: alexfru@chat.ru
+                                         Homepage: http://www.chat.ru/~alexfru
+                                       Mirror: http://members.xoom.com/alexfru
+
+
+                              -= In English =-
+
+  AUTHOR CAN NOT BE RESPONSIBLE FOR  ANY  DAMAGE,  DATA  OR  HEALTH/LIFE  LOSS
+CAUSED BY THIS PROGRAM!!!
+
+  This program shows the basics of system programming for protected mode.
+
+                                  Features
+
+  - 32-bit Protected Mode Programming with 386+
+  - Exceptions Handling
+  - Timer & Keyboard Hardware Interrupts Handling
+  - Task Switching (Ring 0 and Ring 3 Tasks)
+
+                             System Requirements
+
+  - 386 or better computer
+  - EGA/VGA or better color video system
+  - DOS 5.0 or better (without any  memory  managers  such  as
+    EMM386.EXE) or Windows 9x loaded in the Command Prompt Only mode
+
+                               How to Compile
+
+  Compile using TASM 3.1 (or better, TASM 5.0, for example) with following
+  command sequence:
+
+    tasm /m2 /mx /o /t kernel.asm
+    tlink /3 /x kernel.obj
+
+  If you don't have TASM, you may use MASM 6.11 instead (tested only with
+  MASM 6.11):
+
+    ML /I. /Zm /Ta kernel.asm
+
+                          Known Bugs and Problems
+
+  There are no bugs as far as I know. If you find any, email me.
+
+                                Thanks to
+
+  Aaron Nathaniel Gray for his useful suggestions allowed to compile the
+  source code by MASM as well as by TASM.
+
+                                                     Author: Alexei A. Frounze
+                                                             28th of May, 2000
+                                                       E-Mail: alexfru@chat.ru
+                                         Homepage: http://www.chat.ru/~alexfru
+                                       Mirror: http://members.xoom.com/alexfru
+

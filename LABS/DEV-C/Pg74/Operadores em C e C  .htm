@@ -1,0 +1,1031 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0054)http://pt.wikipedia.org/wiki/Operadores_em_C_e_C%2B%2B -->
+<HTML class=client-nojs lang=pt dir=ltr 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>Operadores em C e C++ – Wikipédia, a enciclopédia livre</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+<META http-equiv=Content-Style-Type content=text/css>
+<META content="MSHTML 6.00.6000.16762" name=GENERATOR><LINK title=editar 
+href="/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;action=edit" 
+type=application/x-wiki rel=alternate><LINK title=editar 
+href="/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;action=edit" 
+rel=edit><LINK href="//pt.wikipedia.org/apple-touch-icon.png" 
+rel=apple-touch-icon><LINK href="/favicon.ico" rel="shortcut icon"><LINK 
+title="Wikipédia (pt)" href="/w/opensearch_desc.php" 
+type=application/opensearchdescription+xml rel=search><LINK 
+href="//pt.wikipedia.org/w/api.php?action=rsd" type=application/rsd+xml 
+rel=EditURI><LINK href="//creativecommons.org/licenses/by-sa/3.0/" 
+rel=copyright><LINK title="''Feed'' Atom Wikipédia" 
+href="/w/index.php?title=Especial:Mudan%C3%A7as_recentes&amp;feed=atom" 
+type=application/atom+xml rel=alternate><LINK media=all 
+href="Operadores%20em%20C%20e%20C++_arquivos/load.css" type=text/css 
+rel=stylesheet>
+<META content="" name=ResourceLoaderDynamicStyles><LINK media=all 
+href="Operadores%20em%20C%20e%20C++_arquivos/load(1).css" type=text/css 
+rel=stylesheet>
+<STYLE type=text/css media=all>UNKNOWN {
+	TEXT-DECORATION: none
+}
+</STYLE>
+
+<SCRIPT src="Operadores%20em%20C%20e%20C++_arquivos/load.php" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT type=text/javascript>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Operadores_em_C_e_C++","wgTitle":"Operadores em C e C++","wgCurRevisionId":27353315,"wgArticleId":335178,"wgIsArticle":true,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Linguagem de programação C","C++"],"wgBreakFrames":false,"wgPageContentLanguage":"pt","wgSeparatorTransformTable":[",	."," 	,"],"wgDigitTransformTable":["",""],"wgRelevantPageName":"Operadores_em_C_e_C++","wgRestrictionEdit":[],"wgRestrictionMove":[],"wgSearchNamespaces":[0,102],"wgVectorEnabledModules":{"collapsiblenav":true,"collapsibletabs":true,"editwarning":true,"expandablesearch":false,"footercleanup":false,"sectioneditlinks":false,"simplesearch":true,"experiments":true},"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"hidesig":true,"templateEditor":false,"templates":false,"preview":false,"previewDialog":false,"publish":false,"toc":false},"wgTrackingToken":"edb20832e95e37aa8662304d26a40a4a","wikilove-recipient":"","wikilove-edittoken":"+\\","wikilove-anon":0,"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","Geo":{"city":"","country":""},"wgNoticeProject":"wikipedia"});
+}</SCRIPT>
+
+<SCRIPT type=text/javascript>if(window.mw){
+mw.loader.implement("user.options",function(){mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"imagesize":2,"justify":0,"math":0,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":false,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":4,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":1,"watchdefault":0,"watchdeletion":0,"watchlistdays":3
+,"watchlisthideanons":0,"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"vector-simplesearch":1,"useeditwarning":1,"vector-collapsiblenav":1,"usebetatoolbar":1,"usebetatoolbar-cgd":1,"wikilove-enabled":1,"variant":"pt","language":"pt","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false,"searchNs100":false,"searchNs101":false,"searchNs102":true,"searchNs103":false,"searchNs104":false,"searchNs105":false,"gadget-Topicon":1,"gadget-Metacaixa":1,"gadget-TitleRewrite":1,"gadget-ElementosOcultaveis":1,"gadget-UploadForm":1,"gadget-Nova-esplanada":1,"gadget-wikibugs":1,"gadget-featuredLinks":1,"gadget-BuscaAprimorada":1,"gadget-WikiMiniAtlas":1,
+"gadget-PagesForDeletion":1,"gadget-ValidarBloqueio":1,"gadget-SVGPNG":1,"gadget-SysopSuggestions":1});;},{},{});mw.loader.implement("user.tokens",function(){mw.user.tokens.set({"editToken":"+\\","watchToken":false});;},{},{});
+
+/* cache key: ptwiki:resourceloader:filter:minify-js:7:5155d2b87f513cb3fbbe81956a589968 */
+}</SCRIPT>
+
+<SCRIPT type=text/javascript>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax"]);
+}</SCRIPT>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/w/skins-1.20wmf5/vector/csshover.min.htc")}</style><![endif]--></HEAD>
+<BODY 
+class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Operadores_em_C_e_C skin-vector action-view vector-animateLayout">
+<DIV class=noprint id=mw-page-base></DIV>
+<DIV class=noprint id=mw-head-base></DIV><!-- content -->
+<DIV class=mw-body id=content><A id=top></A>
+<DIV id=mw-js-message style="DISPLAY: none"></DIV><!-- sitenotice -->
+<DIV id=siteNotice><!-- centralNotice loads here -->
+<SCRIPT type=text/javascript>
+/* <![CDATA[ */
+document.writeln("\x3cdiv id=\"localNotice\" lang=\"pt\" dir=\"ltr\"\x3e\x3cp\x3e\x3c/p\x3e\n\x3c/div\x3e");
+/* ]]> */
+</SCRIPT>
+</DIV><!-- /sitenotice --><!-- firstHeading -->
+<H1 class=firstHeading id=firstHeading><SPAN dir=auto>Operadores em C e 
+C++</SPAN></H1><!-- /firstHeading --><!-- bodyContent -->
+<DIV id=bodyContent><!-- tagline -->
+<DIV id=siteSub>Origem: Wikipédia, a enciclopédia livre.</DIV><!-- /tagline --><!-- subtitle -->
+<DIV id=contentSub></DIV><!-- /subtitle --><!-- jumpto -->
+<DIV class=mw-jump id=jump-to-nav>Ir para: <A 
+href="http://pt.wikipedia.org/wiki/Operadores_em_C_e_C%2B%2B#mw-head">navegação</A>, 
+<A 
+href="http://pt.wikipedia.org/wiki/Operadores_em_C_e_C%2B%2B#p-search">pesquisa</A> 
+</DIV><!-- /jumpto --><!-- bodycontent -->
+<DIV class=mw-content-ltr lang=pt id=mw-content-text dir=ltr>
+<P>Esta é uma <B>lista de <A title=Operador 
+href="http://pt.wikipedia.org/wiki/Operador">operadores</A> nas linguagens <A 
+class=mw-redirect title="Linguagem de programação C" 
+href="http://pt.wikipedia.org/wiki/Linguagem_de_programa%C3%A7%C3%A3o_C">C</A> e 
+<A title=C++ href="http://pt.wikipedia.org/wiki/C%2B%2B">C++</A></B>. Todos os 
+operadores presentes existem em C++; uma terceira coluna indica se um operador 
+também está presente em C.</P>
+<P>C++ também contém os operadores para conversão de tipos de dados 
+<CODE>const_cast</CODE>, <CODE>static_cast</CODE>, <CODE>dynamic_cast</CODE> e 
+<CODE>reinterpret_cast</CODE>, que não estão listados na tabela.</P>
+<TABLE class=toc id=toc>
+  <TBODY>
+  <TR>
+    <TD>
+      <DIV id=toctitle>
+      <H2>Índice</H2></DIV>
+      <UL>
+        <LI class="toclevel-1 tocsection-1"><A 
+        href="http://pt.wikipedia.org/wiki/Operadores_em_C_e_C%2B%2B#Preced.C3.AAncia_de_operadores"><SPAN 
+        class=tocnumber>1</SPAN> <SPAN class=toctext>Precedência de 
+        operadores</SPAN></A> 
+        <LI class="toclevel-1 tocsection-2"><A 
+        href="http://pt.wikipedia.org/wiki/Operadores_em_C_e_C%2B%2B#Tabela"><SPAN 
+        class=tocnumber>2</SPAN> <SPAN class=toctext>Tabela</SPAN></A> 
+        <UL>
+          <LI class="toclevel-2 tocsection-3"><A 
+          href="http://pt.wikipedia.org/wiki/Operadores_em_C_e_C%2B%2B#Operadores_aritm.C3.A9ticos"><SPAN 
+          class=tocnumber>2.1</SPAN> <SPAN class=toctext>Operadores 
+          aritméticos</SPAN></A> 
+          <LI class="toclevel-2 tocsection-4"><A 
+          href="http://pt.wikipedia.org/wiki/Operadores_em_C_e_C%2B%2B#Operadores_comparativos"><SPAN 
+          class=tocnumber>2.2</SPAN> <SPAN class=toctext>Operadores 
+          comparativos</SPAN></A> 
+          <LI class="toclevel-2 tocsection-5"><A 
+          href="http://pt.wikipedia.org/wiki/Operadores_em_C_e_C%2B%2B#Operadores_de_deslocamento_de_bits"><SPAN 
+          class=tocnumber>2.3</SPAN> <SPAN class=toctext>Operadores de 
+          deslocamento de bits</SPAN></A> 
+          <LI class="toclevel-2 tocsection-6"><A 
+          href="http://pt.wikipedia.org/wiki/Operadores_em_C_e_C%2B%2B#Operadores_l.C3.B3gicos_sobre_bits"><SPAN 
+          class=tocnumber>2.4</SPAN> <SPAN class=toctext>Operadores lógicos 
+          sobre bits</SPAN></A> 
+          <LI class="toclevel-2 tocsection-7"><A 
+          href="http://pt.wikipedia.org/wiki/Operadores_em_C_e_C%2B%2B#Outros_operadores"><SPAN 
+          class=tocnumber>2.5</SPAN> <SPAN class=toctext>Outros 
+          operadores</SPAN></A> </LI></UL>
+        <LI class="toclevel-1 tocsection-8"><A 
+        href="http://pt.wikipedia.org/wiki/Operadores_em_C_e_C%2B%2B#Sin.C3.B4nimos_em_C.2B.2B"><SPAN 
+        class=tocnumber>3</SPAN> <SPAN class=toctext>Sinônimos em C++</SPAN></A> 
+        </LI></UL></TD></TR></TBODY></TABLE>
+<H2><SPAN class=editsection>[<A title="Editar secção: Precedência de operadores" 
+href="http://pt.wikipedia.org/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;action=edit&amp;section=1">editar</A>]</SPAN> 
+<SPAN class=mw-headline id=Preced.C3.AAncia_de_operadores>Precedência de 
+operadores</SPAN></H2>
+<P>A seguir é listada a ordem de precedência e associatividade dos operadores. 
+Elementos na mesma linha são calculados com a mesma precedência, de acordo com a 
+direção dada.</P>
+<P>A sintaxe das expressões é especificada por uma <A class=mw-redirect 
+title="Gramáticas livres de contexto" 
+href="http://pt.wikipedia.org/wiki/Gram%C3%A1ticas_livres_de_contexto">gramática 
+livre de contexto</A>, a tabela a seguir é inferida pela gramática.</P>
+<TABLE class=wikitable>
+  <TBODY>
+  <TR>
+    <TH>Operadores</TH>
+    <TH>Descrição</TH>
+    <TH><A title=Associatividade 
+      href="http://pt.wikipedia.org/wiki/Associatividade">Associatividade</A></TH></TR>
+  <TR>
+    <TD><CODE>::</CODE></TD>
+    <TD>Resolução de escopo</TD>
+    <TD>esquerda para direita</TD></TR>
+  <TR>
+    <TD><CODE>++</CODE> <CODE>--</CODE><BR>
+      <P><CODE>()</CODE><BR><CODE>[]</CODE><BR><CODE>.</CODE><BR><CODE>-&gt;</CODE></P></TD>
+    <TD>Incremento e decremento pósfixo<BR>
+      <P>Parênteses (chamada de função)<BR>Elemento de arranjo<BR>Seleção de 
+      elemento por identificador<BR>Seleção de elemento por ponteiro</P></TD>
+    <TD vAlign=top>esquerda para direita</TD></TR>
+  <TR>
+    <TD><CODE>++</CODE> <CODE>--</CODE><BR>
+      <P><CODE>+</CODE> <CODE>-</CODE><BR><CODE>!</CODE> 
+      <CODE>~</CODE><BR><CODE>(<I>tipo</I>)</CODE><BR><CODE>*</CODE><BR><CODE>&amp;</CODE><BR><CODE>sizeof</CODE><BR><CODE>new 
+      []</CODE><BR><CODE>delete []</CODE></P></TD>
+    <TD>Incremento e decremento prefixo<BR>
+      <P>Adição e subtração unária<BR><I>Não</I> lógico e 
+      complemento<BR>Conversão de tipo de dado<BR>Desreferência<BR>Referência 
+      (endereço de elemento)<BR>tamanho de elemento<BR>Alocação dinâmica de 
+      memória<BR>Desalocação dinâmica de memória</P></TD>
+    <TD vAlign=top>direita para esquerda</TD></TR>
+  <TR>
+    <TD><CODE>.* -&gt;*</CODE></TD>
+    <TD>Ponteiro para membro</TD>
+    <TD vAlign=top rowSpan=11>esquerda para direita</TD></TR>
+  <TR>
+    <TD><CODE>*</CODE> <CODE>/</CODE> <CODE>%</CODE></TD>
+    <TD>Multiplicação, divisão, e módulo (resto)</TD></TR>
+  <TR>
+    <TD><CODE>+</CODE> <CODE>-</CODE></TD>
+    <TD>Adição e subtração</TD></TR>
+  <TR>
+    <TD><CODE>&lt;&lt;</CODE> <CODE>&gt;&gt;</CODE></TD>
+    <TD>Deslocamento de bits à esquerda e à direita</TD></TR>
+  <TR>
+    <TD><CODE>&lt;</CODE> <CODE>&lt;=</CODE><BR>
+      <P><CODE>&gt;</CODE> <CODE>&gt;=</CODE></P></TD>
+    <TD>“menor que” e “menor ou igual que”<BR>
+      <P>“maior que” e “maior ou igual que”</P></TD></TR>
+  <TR>
+    <TD><CODE>==</CODE> <CODE>!=</CODE></TD>
+    <TD>“Igual a” e “diferente de ”</TD></TR>
+  <TR>
+    <TD><CODE>&amp;</CODE></TD>
+    <TD><I>E</I> para bits</TD></TR>
+  <TR>
+    <TD><CODE>^</CODE></TD>
+    <TD><I>Ou exclusivo</I> para bits</TD></TR>
+  <TR>
+    <TD><CODE>|</CODE></TD>
+    <TD><I>Ou</I> para bits</TD></TR>
+  <TR>
+    <TD><CODE>&amp;&amp;</CODE></TD>
+    <TD><I>E</I> lógico</TD></TR>
+  <TR>
+    <TD><CODE>||</CODE></TD>
+    <TD><I>Ou</I> lógico</TD></TR>
+  <TR>
+    <TD><CODE><I>c</I>?<I>t</I>:<I>f</I></CODE></TD>
+    <TD><A title="Operação ternária" 
+      href="http://pt.wikipedia.org/wiki/Opera%C3%A7%C3%A3o_tern%C3%A1ria">Condição 
+      ternária</A></TD>
+    <TD vAlign=top rowSpan=2>direita para esquerda</TD></TR>
+  <TR>
+    <TD><CODE>=</CODE><BR>
+      <P><CODE>+=</CODE> <CODE>-=</CODE><BR><CODE>*=</CODE> <CODE>/=</CODE> 
+      <CODE>%=</CODE><BR><CODE>&lt;&lt;=</CODE> 
+      <CODE>&gt;&gt;=</CODE><BR><CODE>&amp;=</CODE> <CODE>^=</CODE> 
+      <CODE>|=</CODE></P></TD>
+    <TD>Atribuição<BR>
+      <P>Atribuição por adição ou subtração<BR>Atribuição por multiplicação, 
+      divisão ou módulo (resto)<BR>Atribuição por deslocalmento de 
+      bits<BR>Atribuição por operações lógicas</P></TD></TR>
+  <TR>
+    <TD><CODE>throw</CODE></TD>
+    <TD>Lançamento de <A class=mw-redirect title=Exceção 
+      href="http://pt.wikipedia.org/wiki/Exce%C3%A7%C3%A3o">exceção</A></TD>
+    <TD>---</TD></TR>
+  <TR>
+    <TD><CODE>,</CODE></TD>
+    <TD>Vírgula</TD>
+    <TD>esquerda para direita</TD></TR></TBODY></TABLE>
+<H2><SPAN class=editsection>[<A title="Editar secção: Tabela" 
+href="http://pt.wikipedia.org/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;action=edit&amp;section=2">editar</A>]</SPAN> 
+<SPAN class=mw-headline id=Tabela>Tabela</SPAN></H2>
+<TABLE class=wikitable width="100%">
+  <TBODY>
+  <TR>
+    <TD colSpan=4>
+      <H3><SPAN class=editsection>[<A 
+      title="Editar secção: Operadores aritméticos" 
+      href="http://pt.wikipedia.org/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;action=edit&amp;section=3">editar</A>]</SPAN> 
+      <SPAN class=mw-headline id=Operadores_aritm.C3.A9ticos>Operadores 
+      aritméticos</SPAN></H3></TD></TR>
+  <TR>
+    <TH>Operador</TH>
+    <TH>Sintaxe</TH>
+    <TH>É sobrecarregável?</TH>
+    <TH>Presente em <A class=mw-redirect title="Linguagem de programação C" 
+      href="http://pt.wikipedia.org/wiki/Linguagem_de_programa%C3%A7%C3%A3o_C">C</A>?</TH></TR>
+  <TR>
+    <TD>Adição unária</TD>
+    <TD><TT><B>+</B>a</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Adição</TD>
+    <TD><TT>a <B>+</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Incremento pré-fixado</TD>
+    <TD><TT><B>++</B>a</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Incremento pós-fixado</TD>
+    <TD><TT>a<B>++</B></TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Atribuição por adição</TD>
+    <TD><TT>a <B>+=</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Subtração unária</TD>
+    <TD><TT><B>-</B>a</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Subtração</TD>
+    <TD><TT>a <B>-</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Decremento pré-fixado</TD>
+    <TD><TT><B>--</B>a</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Decremento pós-fixado</TD>
+    <TD><TT>a<B>--</B></TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Atribuição por subtração</TD>
+    <TD><TT>a <B>-=</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Multiplicação</TD>
+    <TD><TT>a <B>*</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Atribuição por multiplicação</TD>
+    <TD><TT>a <B>*=</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Divisão</TD>
+    <TD><TT>a <B>/</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Atribuição por divisão</TD>
+    <TD><TT>a <B>/=</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Módulo (resto)</TD>
+    <TD><TT>a <B>%</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Atribuição por módulo (resto)</TD>
+    <TD><TT>a <B>%=</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD colSpan=4>
+      <H3><SPAN class=editsection>[<A 
+      title="Editar secção: Operadores comparativos" 
+      href="http://pt.wikipedia.org/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;action=edit&amp;section=4">editar</A>]</SPAN> 
+      <SPAN class=mw-headline id=Operadores_comparativos>Operadores 
+      comparativos</SPAN></H3></TD></TR>
+  <TR>
+    <TH>Operador</TH>
+    <TH>Sintaxe</TH>
+    <TH>É sobrecarregável?</TH>
+    <TH>Presente em <A class=mw-redirect title="Linguagem de programação C" 
+      href="http://pt.wikipedia.org/wiki/Linguagem_de_programa%C3%A7%C3%A3o_C">C</A>?</TH></TR>
+  <TR>
+    <TD>Menor que</TD>
+    <TD><TT>a <B>&lt;</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Menor ou igual que</TD>
+    <TD><TT>a <B>&lt;=</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Maior que</TD>
+    <TD><TT>a <B>&gt;</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Maior ou igual que</TD>
+    <TD><TT>a <B>&gt;=</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Diferente de</TD>
+    <TD><TT>a <B>!=</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Igual a</TD>
+    <TD><TT>a <B>==</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD><I>Não</I> lógico</TD>
+    <TD><TT><B>!</B>a</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD><I>E</I> lógico</TD>
+    <TD><TT>a <B>&amp;&amp;</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD><I>Ou</I> lógico</TD>
+    <TD><TT>a <B>||</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD colSpan=4>
+      <H3><SPAN class=editsection>[<A 
+      title="Editar secção: Operadores de deslocamento de bits" 
+      href="http://pt.wikipedia.org/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;action=edit&amp;section=5">editar</A>]</SPAN> 
+      <SPAN class=mw-headline id=Operadores_de_deslocamento_de_bits>Operadores 
+      de deslocamento de bits</SPAN></H3></TD></TR>
+  <TR>
+    <TH>Operador</TH>
+    <TH>Sintaxe</TH>
+    <TH>É sobrecarregável?</TH>
+    <TH>Presente em <A class=mw-redirect title="Linguagem de programação C" 
+      href="http://pt.wikipedia.org/wiki/Linguagem_de_programa%C3%A7%C3%A3o_C">C</A>?</TH></TR>
+  <TR>
+    <TD>Deslocamento à esquerda</TD>
+    <TD><TT>a <B>&lt;&lt;</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Atribução de deslocamento à esquerda</TD>
+    <TD><TT>a <B>&lt;&lt;=</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Deslocamento à direita</TD>
+    <TD><TT>a <B>&gt;&gt;</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Atribuição de deslocamento à direita</TD>
+    <TD><TT>a <B>&gt;&gt;=</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD colSpan=4>
+      <H3><SPAN class=editsection>[<A 
+      title="Editar secção: Operadores lógicos sobre bits" 
+      href="http://pt.wikipedia.org/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;action=edit&amp;section=6">editar</A>]</SPAN> 
+      <SPAN class=mw-headline id=Operadores_l.C3.B3gicos_sobre_bits>Operadores 
+      lógicos sobre bits</SPAN></H3></TD></TR>
+  <TR>
+    <TH>Operador</TH>
+    <TH>Sintaxe</TH>
+    <TH>É sobrecarregável?</TH>
+    <TH>Presente em <A class=mw-redirect title="Linguagem de programação C" 
+      href="http://pt.wikipedia.org/wiki/Linguagem_de_programa%C3%A7%C3%A3o_C">C</A>?</TH></TR>
+  <TR>
+    <TD>Complemento</TD>
+    <TD><TT><B>~</B>a</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD><I>E</I></TD>
+    <TD><TT>a <B>&amp;</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Atribuição por <I>e</I></TD>
+    <TD><TT>a <B>&amp;=</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD><I>Ou</I></TD>
+    <TD><TT>a <B>|</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Atribuição por <I>ou</I></TD>
+    <TD><TT>a <B>|=</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD><I>Ou exclusivo</I></TD>
+    <TD><TT>a <B>^</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Atribuição por <I>ou exclusivo</I></TD>
+    <TD><TT>a <B>^=</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD colSpan=4>
+      <H3><SPAN class=editsection>[<A title="Editar secção: Outros operadores" 
+      href="http://pt.wikipedia.org/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;action=edit&amp;section=7">editar</A>]</SPAN> 
+      <SPAN class=mw-headline id=Outros_operadores>Outros 
+    operadores</SPAN></H3></TD></TR>
+  <TR>
+    <TH>Operador</TH>
+    <TH>Sintaxe</TH>
+    <TH>É sobrecarregável?</TH>
+    <TH>Presente em <A class=mw-redirect title="Linguagem de programação C" 
+      href="http://pt.wikipedia.org/wiki/Linguagem_de_programa%C3%A7%C3%A3o_C">C</A>?</TH></TR>
+  <TR>
+    <TD>Atribuição</TD>
+    <TD><TT>a <B>=</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Chamada de função</TD>
+    <TD><TT>a<B>()</B></TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Elemento de arranjo</TD>
+    <TD><TT>a<B>[]</B></TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>De referência</TD>
+    <TD><TT><B>*</B>a</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Referência</TD>
+    <TD><TT><B>&amp;</B>a</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Membro de ponteiro</TD>
+    <TD><TT>a<B>-&gt;</B>b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Membro de identificador</TD>
+    <TD><TT>a<B>.</B>b</TT></TD>
+    <TD align=middle><IMG height=17 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-X_mark.svg.png" 
+    width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>De referência de membro de identificador</TD>
+    <TD><TT>a<B>.*</B>b</TT></TD>
+    <TD align=middle><IMG height=17 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-X_mark.svg.png" 
+    width=15></TD>
+    <TD align=middle><IMG height=17 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-X_mark.svg.png" 
+    width=15></TD></TR>
+  <TR>
+    <TD>De-referência de membro de ponteiro</TD>
+    <TD><TT>a<B>-&gt;*</B>b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=17 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-X_mark.svg.png" 
+    width=15></TD></TR>
+  <TR>
+    <TD>Conversão de tipo de dados</TD>
+    <TD><TT>(<I>tipo</I>) a</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Vírgula</TD>
+    <TD><TT>a <B>,</B> b</TT></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Condição ternária</TD>
+    <TD><TT>a <B>?</B> b <B>:</B> c</TT></TD>
+    <TD align=middle><IMG height=17 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-X_mark.svg.png" 
+    width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Resolução de escopo</TD>
+    <TD><TT>a <B>::</B> b</TT></TD>
+    <TD align=middle><IMG height=17 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-X_mark.svg.png" 
+    width=15></TD>
+    <TD align=middle><IMG height=17 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-X_mark.svg.png" 
+    width=15></TD></TR>
+  <TR>
+    <TD>Tamanho de</TD>
+    <TD><TT><B>sizeof</B> a</TT></TD>
+    <TD align=middle><IMG height=17 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-X_mark.svg.png" 
+    width=15></TD>
+    <TD align=middle><IMG height=15 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-Yes_check.svg.png" 
+      width=15></TD></TR>
+  <TR>
+    <TD>Identificador de tipo</TD>
+    <TD><TT><B>typeid</B> (<I><A title="Tipo de dado" 
+      href="http://pt.wikipedia.org/wiki/Tipo_de_dado">tipo de 
+    dado</A></I>)</TT></TD>
+    <TD align=middle><IMG height=17 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-X_mark.svg.png" 
+    width=15></TD>
+    <TD align=middle><IMG height=17 alt="" 
+      src="Operadores%20em%20C%20e%20C++_arquivos/15px-X_mark.svg.png" 
+    width=15></TD></TR></TBODY></TABLE>
+<H2><SPAN class=editsection>[<A title="Editar secção: Sinônimos em C++" 
+href="http://pt.wikipedia.org/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;action=edit&amp;section=8">editar</A>]</SPAN> 
+<SPAN class=mw-headline id=Sin.C3.B4nimos_em_C.2B.2B>Sinônimos em 
+C++</SPAN></H2>
+<P>C++ define <A title=Palavra-chave 
+href="http://pt.wikipedia.org/wiki/Palavra-chave">palavras-chave</A> que atuam 
+como apelidos para alguns operadores: <CODE>and</CODE> 
+(<CODE>&amp;&amp;</CODE>), <CODE>bitand</CODE> (<CODE>&amp;</CODE>), 
+<CODE>and_eq</CODE> (<CODE>&amp;=</CODE>), <CODE>or</CODE> (<CODE>||</CODE>), 
+<CODE>bitor</CODE> (<CODE>|</CODE>), <CODE>or_eq</CODE> (<CODE>|=</CODE>), 
+<CODE>xor</CODE> (<CODE>^</CODE>), <CODE>xor_eq</CODE> (<CODE>^=</CODE>), 
+<CODE>not</CODE> (<CODE>!</CODE>), <CODE>not_eq</CODE> (<CODE>!=</CODE>), 
+<CODE>compl</CODE> (<CODE>~</CODE>). Eles são processados pelo <A 
+class=mw-redirect title="Analisador sintático" 
+href="http://pt.wikipedia.org/wiki/Analisador_sint%C3%A1tico">analisador 
+sintático</A> da mesma forma que seus equivalentes.</P>
+<P>Já C fornece na biblioteca padrão o cabeçalho <CODE>iso646.h</CODE>, que 
+define esses símbolos através de macros.</P><!-- 
+NewPP limit report
+Preprocessor node count: 401/1000000
+Post-expand include size: 4672/2048000 bytes
+Template argument size: 0/2048000 bytes
+Expensive parser function count: 0/500
+--><!-- Saved in parser cache with key ptwiki:pcache:idhash:335178-0!*!0!!pt!4!* and timestamp 20120229045947 generated by srv195 --></DIV><!-- /bodycontent --><!-- printfooter -->
+<DIV class=printfooter>Obtida de "<A 
+href="http://pt.wikipedia.org/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;oldid=27353315">http://pt.wikipedia.org/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;oldid=27353315</A>" 
+</DIV><!-- /printfooter --><!-- catlinks -->
+<DIV class=catlinks id=catlinks>
+<DIV class=mw-normal-catlinks id=mw-normal-catlinks><A title=Especial:Categorias 
+href="http://pt.wikipedia.org/wiki/Especial:Categorias">Categorias</A>: 
+<UL>
+  <LI><A title="Categoria:Linguagem de programação C" 
+  href="http://pt.wikipedia.org/wiki/Categoria:Linguagem_de_programa%C3%A7%C3%A3o_C">Linguagem 
+  de programação C</A></LI>
+  <LI><A title=Categoria:C++ 
+  href="http://pt.wikipedia.org/wiki/Categoria:C%2B%2B">C++</A></LI></UL></DIV></DIV><!-- /catlinks -->
+<DIV class=visualClear></DIV><!-- debughtml --><!-- /debughtml --></DIV><!-- /bodyContent --></DIV><!-- /content --><!-- header -->
+<DIV class=noprint id=mw-head><!-- 0 -->
+<DIV class="" id=p-personal>
+<H5>Ferramentas pessoais</H5>
+<UL>
+  <LI id=pt-createaccount><A 
+  href="http://pt.wikipedia.org/w/index.php?title=Especial:Entrar&amp;returnto=Operadores+em+C+e+C%2B%2B&amp;type=signup">Criar 
+  conta</A> </LI>
+  <LI id=pt-login><A 
+  title="Aconselhamos-lhe a criar uma conta na Wikipédia, embora tal não seja obrigatório. [o]" 
+  accessKey=o 
+  href="http://pt.wikipedia.org/w/index.php?title=Especial:Entrar&amp;returnto=Operadores+em+C+e+C%2B%2B">Entrar</A> 
+  </LI></UL></DIV><!-- /0 -->
+<DIV id=left-navigation><!-- 0 -->
+<DIV class=vectorTabs id=p-namespaces>
+<H5>Espaços nominais</H5>
+<UL>
+  <LI class=selected id=ca-nstab-main><SPAN><A 
+  title="Ver a página de conteúdo [c]" accessKey=c 
+  href="http://pt.wikipedia.org/wiki/Operadores_em_C_e_C%2B%2B">Artigo</A></SPAN> 
+  </LI>
+  <LI class=new id=ca-talk><SPAN><A 
+  title="Discussão sobre o conteúdo da página [t]" accessKey=t 
+  href="http://pt.wikipedia.org/w/index.php?title=Discuss%C3%A3o:Operadores_em_C_e_C%2B%2B&amp;action=edit&amp;redlink=1">Discussão</A></SPAN> 
+  </LI></UL></DIV><!-- /0 --><!-- 1 -->
+<DIV class="vectorMenu emptyPortlet" id=p-variants>
+<H4></H4>
+<H5><SPAN>Variantes</SPAN><A 
+href="http://pt.wikipedia.org/wiki/Operadores_em_C_e_C%2B%2B#"></A></H5>
+<DIV class=menu>
+<UL></UL></DIV></DIV><!-- /1 --></DIV>
+<DIV id=right-navigation><!-- 0 -->
+<DIV class=vectorTabs id=p-views>
+<H5>Vistas</H5>
+<UL>
+  <LI class=selected id=ca-view><SPAN><A 
+  href="http://pt.wikipedia.org/wiki/Operadores_em_C_e_C%2B%2B">Ler</A></SPAN> 
+  </LI>
+  <LI id=ca-edit><SPAN><A 
+  title='Pode editar esta página.&#10;Utilize o botão "Antever resultado" antes de gravar, por favor. [e]' 
+  accessKey=e 
+  href="http://pt.wikipedia.org/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;action=edit">Editar</A></SPAN> 
+  </LI>
+  <LI class=collapsible id=ca-history><SPAN><A 
+  title="Edições anteriores desta página. [h]" accessKey=h 
+  href="http://pt.wikipedia.org/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;action=history">Ver 
+  histórico</A></SPAN> </LI></UL></DIV><!-- /0 --><!-- 1 -->
+<DIV class="vectorMenu emptyPortlet" id=p-cactions>
+<H5><SPAN>Ações</SPAN><A 
+href="http://pt.wikipedia.org/wiki/Operadores_em_C_e_C%2B%2B#"></A></H5>
+<DIV class=menu>
+<UL></UL></DIV></DIV><!-- /1 --><!-- 2 -->
+<DIV id=p-search>
+<H5><LABEL for=searchInput>Busca</LABEL></H5>
+<FORM id=searchform action=/w/index.php>
+<DIV id=simpleSearch><INPUT id=searchInput title="Pesquisar na Wikipédia [f]" 
+accessKey=f name=search><BUTTON id=searchButton 
+title="Procurar páginas que contêm este texto" name=button type=submit 
+height="13" width="12"><IMG alt=Pesquisar 
+src="Operadores%20em%20C%20e%20C++_arquivos/search-ltr.png"></BUTTON> <INPUT 
+type=hidden value=Especial:Pesquisar name=title> 
+</DIV></FORM></DIV><!-- /2 --></DIV></DIV><!-- /header --><!-- panel -->
+<DIV class=noprint id=mw-panel><!-- logo -->
+<DIV id=p-logo><A title="Visite a página principal" 
+style="BACKGROUND-IMAGE: url(//upload.wikimedia.org/wikipedia/commons/c/c3/Wikipedia-logo-v2-pt.png)" 
+href="http://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal"></A></DIV><!-- /logo --><!-- SEARCH --><!-- /SEARCH --><!-- navigation -->
+<DIV class=portal id=p-navigation>
+<H5>Navegação</H5>
+<DIV class=body>
+<UL>
+  <LI id=n-mainpage-description><A title="Visitar a página principal [z]" 
+  accessKey=z 
+  href="http://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal">Página 
+  principal</A> </LI>
+  <LI id=n-featuredcontent><A 
+  href="http://pt.wikipedia.org/wiki/Portal:Conte%C3%BAdo_destacado">Conteúdo 
+  destacado</A> </LI>
+  <LI id=n-currentevents><A title="Informação temática sobre eventos atuais" 
+  href="http://pt.wikipedia.org/wiki/Portal:Eventos_atuais">Eventos atuais</A> 
+  </LI>
+  <LI id=n-villagepump><A 
+  href="http://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Esplanada">Esplanada</A> 
+  </LI>
+  <LI id=n-randompage><A title="Carregar página aleatória [x]" accessKey=x 
+  href="http://pt.wikipedia.org/wiki/Especial:Aleat%C3%B3ria">Página 
+  aleatória</A> </LI>
+  <LI id=n-portals><A 
+  href="http://pt.wikipedia.org/wiki/Portal:%C3%8Dndice">Portais</A> </LI>
+  <LI id=n-bug_in_article><A 
+  href="http://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Informe_um_erro">Informar um 
+  erro</A> </LI></UL></DIV></DIV><!-- /navigation --><!-- interaction -->
+<DIV class=portal id=p-interaction>
+<H5>Colaboração</H5>
+<DIV class=body>
+<UL>
+  <LI id=n-welcome><A 
+  href="http://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Boas-vindas">Boas-vindas</A> 
+  </LI>
+  <LI id=n-help><A title="Um local reservado para auxílio." 
+  href="http://pt.wikipedia.org/wiki/Ajuda:P%C3%A1gina_principal">Ajuda</A> 
+</LI>
+  <LI id=n-testpage><A 
+  href="http://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_de_testes">Página 
+  de testes</A> </LI>
+  <LI id=n-portal><A title="Sobre o projeto" 
+  href="http://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Portal_comunit%C3%A1rio">Portal 
+  comunitário</A> </LI>
+  <LI id=n-recentchanges><A title="A lista de mudanças recentes nesta wiki. [r]" 
+  accessKey=r 
+  href="http://pt.wikipedia.org/wiki/Especial:Mudan%C3%A7as_recentes">Mudanças 
+  recentes</A> </LI>
+  <LI id=n-maintenance><A 
+  href="http://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Estaleiro">Estaleiro</A> 
+  </LI>
+  <LI id=n-createpage><A 
+  href="http://pt.wikipedia.org/wiki/Ajuda:Guia_de_edi%C3%A7%C3%A3o/Como_come%C3%A7ar_uma_p%C3%A1gina">Criar 
+  página</A> </LI>
+  <LI id=n-newpages-description><A 
+  href="http://pt.wikipedia.org/wiki/Especial:P%C3%A1ginas_novas">Páginas 
+  novas</A> </LI>
+  <LI id=n-contact-description><A 
+  href="http://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Contato">Contato</A> </LI>
+  <LI id=n-sitesupport><A title=Ajude-nos 
+  href="http://donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=20120521SB001&amp;uselang=pt">Donativos</A> 
+  </LI></UL></DIV></DIV><!-- /interaction --><!-- coll-print_export -->
+<DIV class=portal id=p-coll-print_export>
+<H5>Imprimir/exportar</H5>
+<DIV class=body>
+<UL id=collectionPortletList>
+  <LI id=coll-create_a_book><A title="Cria um livro ou uma colecção de páginas" 
+  href="http://pt.wikipedia.org/w/index.php?title=Especial:Livro&amp;bookcmd=book_creator&amp;referer=Operadores+em+C+e+C%2B%2B" 
+  rel=nofollow>Criar um livro</A></LI>
+  <LI id=coll-download-as-rl><A 
+  title="Descarregar uma versão PDF desta página wiki" 
+  href="http://pt.wikipedia.org/w/index.php?title=Especial:Livro&amp;bookcmd=render_article&amp;arttitle=Operadores+em+C+e+C%2B%2B&amp;oldid=27353315&amp;writer=rl" 
+  rel=nofollow>Descarregar como PDF</A></LI>
+  <LI id=t-print><A title="Versão para impressão desta página [p]" accessKey=p 
+  href="http://pt.wikipedia.org/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;printable=yes">Versão 
+  para impressão</A></LI></UL></DIV></DIV><!-- /coll-print_export --><!-- TOOLBOX -->
+<DIV class=portal id=p-tb>
+<H5>Ferramentas</H5>
+<DIV class=body>
+<UL>
+  <LI id=t-whatlinkshere><A 
+  title="Lista de todas as páginas que contêm links para esta [j]" accessKey=j 
+  href="http://pt.wikipedia.org/wiki/Especial:P%C3%A1ginas_afluentes/Operadores_em_C_e_C%2B%2B">Páginas 
+  afluentes</A> </LI>
+  <LI id=t-recentchangeslinked><A 
+  title="Mudanças recentes nas páginas para as quais esta contém links [k]" 
+  accessKey=k 
+  href="http://pt.wikipedia.org/wiki/Especial:Altera%C3%A7%C3%B5es_relacionadas/Operadores_em_C_e_C%2B%2B">Alterações 
+  relacionadas</A> </LI>
+  <LI id=t-upload><A title="Upload de ficheiros [u]" accessKey=u 
+  href="http://pt.wikipedia.org/wiki/Wikipedia:Carregar_ficheiro">Carregar 
+  ficheiro</A> </LI>
+  <LI id=t-specialpages><A title="Lista de páginas especiais [q]" accessKey=q 
+  href="http://pt.wikipedia.org/wiki/Especial:P%C3%A1ginas_especiais">Páginas 
+  especiais</A> </LI>
+  <LI id=t-permalink><A title="Link permanente para esta versão desta página" 
+  href="http://pt.wikipedia.org/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;oldid=27353315">Ligação 
+  permanente</A> </LI>
+  <LI id=t-cite><A title="Informação sobre como citar esta página" 
+  href="http://pt.wikipedia.org/w/index.php?title=Especial:Citar&amp;page=Operadores_em_C_e_C%2B%2B&amp;id=27353315">Citar 
+  esta página</A> </LI></UL></DIV></DIV><!-- /TOOLBOX --><!-- LANGUAGES -->
+<DIV class=portal id=p-lang>
+<H5>Noutras línguas</H5>
+<DIV class=body>
+<UL>
+  <LI class=interwiki-en><A lang=en title="Operators in C and C++" 
+  href="http://en.wikipedia.org/wiki/Operators_in_C_and_C%2B%2B" 
+  hreflang=en>English</A> </LI>
+  <LI class=interwiki-es><A lang=es title="Operadores de C y C++" 
+  href="http://es.wikipedia.org/wiki/Operadores_de_C_y_C%2B%2B" 
+  hreflang=es>español</A> </LI>
+  <LI class=interwiki-hu><A lang=hu title="Operátorok (C++)" 
+  href="http://hu.wikipedia.org/wiki/Oper%C3%A1torok_(C%2B%2B)" 
+  hreflang=hu>magyar</A> </LI>
+  <LI class=interwiki-ja><A lang=ja title=CとC++の演算子 
+  href="http://ja.wikipedia.org/wiki/C%E3%81%A8C%2B%2B%E3%81%AE%E6%BC%94%E7%AE%97%E5%AD%90" 
+  hreflang=ja>日本語</A> </LI>
+  <LI class=interwiki-ko><A lang=ko title="C와 C++에서의 연산자" 
+  href="http://ko.wikipedia.org/wiki/C%EC%99%80_C%2B%2B%EC%97%90%EC%84%9C%EC%9D%98_%EC%97%B0%EC%82%B0%EC%9E%90" 
+  hreflang=ko>한국어</A> </LI>
+  <LI class=interwiki-mk><A lang=mk title="Оператори во C и C++" 
+  href="http://mk.wikipedia.org/wiki/%D0%9E%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%B8_%D0%B2%D0%BE_C_%D0%B8_C%2B%2B" 
+  hreflang=mk>македонски</A> </LI>
+  <LI class=interwiki-zh><A lang=zh title=C和C++運算子 
+  href="http://zh.wikipedia.org/wiki/C%E5%92%8CC%2B%2B%E9%81%8B%E7%AE%97%E5%AD%90" 
+  hreflang=zh>中文</A> </LI></UL></DIV></DIV><!-- /LANGUAGES --></DIV><!-- /panel --><!-- footer -->
+<DIV id=footer>
+<UL id=footer-info>
+  <LI id=footer-info-lastmod>Esta página foi modificada pela última vez à(s) 
+  19h38min de 22 de outubro de 2011. 
+  <LI id=footer-info-copyright>Este texto é disponibilizado nos termos da 
+  licença <A 
+  href="http://creativecommons.org/licenses/by-sa/3.0/deed.pt">Atribuição-Partilha 
+  nos Mesmos Termos 3.0 não Adaptada (CC BY-SA 3.0)</A>; pode estar sujeito a 
+  condições adicionais. Consulte as <A 
+  href="http://wikimediafoundation.org/wiki/Condições_de_Uso">condições de 
+  uso</A> para mais detalhes. </LI></UL>
+<UL id=footer-places>
+  <LI id=footer-places-privacy><A title="Wikipédia:Política de privacidade" 
+  href="http://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Pol%C3%ADtica_de_privacidade">Política 
+  de privacidade</A> </LI>
+  <LI id=footer-places-about><A title=Wikipédia:Sobre 
+  href="http://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Sobre">Sobre a Wikipédia</A> 
+  </LI>
+  <LI id=footer-places-disclaimer><A title="Wikipédia:Aviso geral" 
+  href="http://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Aviso_geral">Avisos 
+  gerais</A> </LI>
+  <LI id=footer-places-mobileview><A class=noprint 
+  href="http://pt.m.wikipedia.org/w/index.php?title=Operadores_em_C_e_C%2B%2B&amp;mobileaction=toggle_view_mobile">Versão 
+  móvel</A> </LI></UL>
+<UL class=noprint id=footer-icons>
+  <LI id=footer-copyrightico><A href="http://wikimediafoundation.org/"><IMG 
+  height=31 alt="Wikimedia Foundation" 
+  src="Operadores%20em%20C%20e%20C++_arquivos/wikimedia-button.png" 
+  width=88></A> </LI>
+  <LI id=footer-poweredbyico><A href="http://www.mediawiki.org/"><IMG height=31 
+  alt="Powered by MediaWiki" 
+  src="Operadores%20em%20C%20e%20C++_arquivos/poweredby_mediawiki_88x31.png" 
+  width=88></A> </LI></UL>
+<DIV style="CLEAR: both"></DIV></DIV><!-- /footer -->
+<SCRIPT type=text/javascript>if(window.mw){
+mw.loader.state({"site":"loading","user":"ready","user.groups":"ready"});
+}</SCRIPT>
+
+<SCRIPT src="Operadores%20em%20C%20e%20C++_arquivos/load(1).php" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT type=text/javascript>if(window.mw){
+mw.loader.load(["mediawiki.user","mediawiki.page.ready","mediawiki.legacy.mwsuggest","ext.gadget.Topicon","ext.gadget.Metacaixa","ext.gadget.TitleRewrite","ext.gadget.ElementosOcultaveis","ext.gadget.Nova-esplanada","ext.gadget.wikibugs","ext.gadget.featuredLinks","ext.gadget.BuscaAprimorada","ext.gadget.WikiMiniAtlas","ext.gadget.PagesForDeletion","ext.gadget.SVGPNG","ext.vector.collapsibleNav","ext.vector.collapsibleTabs","ext.vector.editWarning","ext.vector.simpleSearch","ext.UserBuckets","ext.articleFeedback.startup"], null, true);
+}</SCRIPT>
+
+<SCRIPT src="Operadores%20em%20C%20e%20C++_arquivos/index.php" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="Operadores%20em%20C%20e%20C++_arquivos/load(2).php" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="Operadores%20em%20C%20e%20C++_arquivos/geoiplookup_wikimedia_org" 
+type=text/javascript></SCRIPT>
+<!-- Served by mw22 in 0.196 secs. --></BODY></HTML>

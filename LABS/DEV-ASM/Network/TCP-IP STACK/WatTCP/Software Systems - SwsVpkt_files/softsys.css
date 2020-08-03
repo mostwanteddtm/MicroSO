@@ -1,0 +1,135 @@
+body {
+  color:black;
+  background-color:#cccccc;
+  background-image: url('images/chain.gif');
+  margin: 0;
+  font-family:"Comic Sans MS", cursive, sans-serif;
+  /*font-family:Verdana, Geneva, sans-serif;*/
+  font-size:100%;
+  text-align:center;
+}
+
+table.body {
+  border-style:none;
+  border-collapse:collapse;
+  margin-left:auto; margin-right:auto;
+  padding:0;
+  width:800px;
+  max-width:800px;
+  height:500px;
+  background-color:#ccffff;
+  color: black;
+  text-align:left;
+}
+td.body {
+  border-style:none;
+  border-collapse:collapse;
+  margin:0;
+  padding:0;
+}
+
+table.nav {
+  border-style:none;
+  border-collapse:collapse;
+  margin: 0;
+  padding:0;
+  width:100%;
+}
+td.navbar {
+  border-style:none;
+  margin:0;
+  padding:0;
+  overflow:hidden;
+}
+td.panel {
+  border-style:none;
+  margin:0;
+  padding:2px;
+  vertical-align:top;
+}
+#hdrpanel {
+  text-align:center;
+}
+#toppanel {
+  width:10%;
+  height:240px;
+  vertical-align:top;
+}
+#midpanel {
+  vertical-align:top;
+}
+#botpanel {
+  vertical-align:bottom;
+}
+
+a.navbar:link, a.navbar:visited {
+  display:block;
+  padding:4px;
+  color:white;
+  font-weight:bold;
+  text-decoration:none;
+}
+a.navbar:hover, a.navbar:active {
+  color:white;
+  background-color:#3399FF;
+  text-decoration:underline;
+}
+ul.navbar {
+  list-style-type:none;
+  padding:0;
+  margin:0;
+  overflow:hidden;
+}
+li.navbar {
+  float:left;
+  text-align:center;
+  width:120px;
+  /*line-height:1.5em;*/
+}
+li.vnavbar {
+  font-size:90%;
+}
+.navbar {
+  background-color:#33ccff;
+}
+
+.footer {
+  background-color:#33ccff;
+  font-size:70%;
+}
+
+h1.logo {
+  font-size:2.5em;
+  font-style:italic;
+  font-weight:bold;
+  color:#33ccff;
+  margin:0;
+  }
+a.logo:link, a.logo:visited {
+  color:#33ccff;
+  text-decoration:none;
+}
+img.logo {
+  vertical-align:top;
+  margin:5px;
+  border-style:none;
+}
+
+img.navicon {
+  vertical-align:middle;
+  margin-right:2px;
+  padding:2px;
+  /*border:2px solid transparent;*/
+  border-width:2px;
+  border-style:outset;
+  border-color:transparent;
+}
+img.navicon:hover {
+  border-style:outset;
+  border-color:#999999;
+}
+
+img.icon {
+  vertical-align:middle;
+  margin-right:4px;
+}

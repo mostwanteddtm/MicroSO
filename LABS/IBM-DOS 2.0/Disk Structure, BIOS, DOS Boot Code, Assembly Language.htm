@@ -1,0 +1,2316 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0033)http://rubbermallet.org/disk.html -->
+<HTML><HEAD><TITLE>Disk Structure, BIOS, DOS Boot Code, Assembly Language.</TITLE>
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type>
+<META name=description 
+content="Encryption and disk structure. BIOS routines, low level format, DOS and FDISK. Assembly Language.">
+<META name=keywords 
+content="Disk structure, BIOS, DOS boot code, assembler, low level format, FDISK, assembly language, Master boot record, FAT, system, file allocation table,  clusters, sectors, root directory, Windows, Linux, heads, sides tracks, cylinders, LBA, MS-DOS, translation, CHKDSK, formatting, interleaving, cylinder skewing, RLL encoding, CHS, slack space, MSDOS.SYS, IO.SYS">
+<STYLE type=text/css>DIV {
+	TEXT-ALIGN: justify
+}
+A {
+	TEXT-DECORATION: none
+}
+</STYLE>
+
+<SCRIPT src="">
+</SCRIPT>
+
+<META name=GENERATOR content="MSHTML 8.00.7601.17514"></HEAD>
+<BODY onload=startup() aLink=blue bgColor=white vLink=blue>
+<a href="http://rubbermallet.org/disk.html">http://rubbermallet.org/disk.html</a>
+<CENTER><FONT size=-1>Stolen with love (not gay) from <A 
+href="http://www.exegesis.uklinux.net/gandalf/index.htm">here</A>. Thanks, 
+Gandalf.</FONT><BR></CENTER>
+<TABLE border=0 cellSpacing=10 cellPadding=10 width="100%" align=center>
+  <TBODY>
+  <TR>
+    <TD>
+    <TD vAlign=top><FONT color=purple>
+      <H3><I>Current Page Contents</I></H3></FONT>
+      <TABLE border=0 width="100%" align=center>
+        <TBODY>
+        <TR>
+          <TD><FONT color=red>1</FONT></TD>
+          <TD colSpan=3><A 
+            href="http://rubbermallet.org/disk.html#1.0">Introduction</A></TD></TR>
+        <TR>
+          <TD><FONT color=red>2</FONT></TD>
+          <TD colSpan=3><A 
+            href="http://rubbermallet.org/disk.html#2.0">Physical Disk 
+            Structure</A></TD></TR>
+        <TR>
+          <TD><FONT color=red>3</FONT></TD>
+          <TD colSpan=3><A href="http://rubbermallet.org/disk.html#3.0">BIOS 
+            and Operating System Limits</A></TD></TR>
+        <TR>
+          <TD><FONT color=red>4</FONT></TD>
+          <TD colSpan=3><A 
+            href="http://rubbermallet.org/disk.html#4.0">Formatting - An 
+            Overview</A></TD></TR>
+        <TR>
+          <TD><FONT color=red>5</FONT></TD>
+          <TD colSpan=3><A href="http://rubbermallet.org/disk.html#5.0">The 
+            Low Level Format</A></TD></TR>
+        <TR>
+          <TD><FONT color=red>6</FONT></TD>
+          <TD colSpan=3><A href="http://rubbermallet.org/disk.html#6.0">FDISK 
+            - Master Boot Record and Partition Table</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=green>6.1</FONT></TD>
+          <TD colSpan=2><A 
+            href="http://rubbermallet.org/disk.html#6.1">Introduction</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=green>6.2</FONT></TD>
+          <TD colSpan=2><A href="http://rubbermallet.org/disk.html#6.2">Master 
+            Boot Record Code</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=green>6.3</FONT></TD>
+          <TD colSpan=2><A 
+            href="http://rubbermallet.org/disk.html#6.3">Partition Table 
+            Entries</A></TD></TR>
+        <TR>
+          <TD><FONT color=red>7</FONT></TD>
+          <TD colSpan=3><A href="http://rubbermallet.org/disk.html#7.0">FORMAT 
+            - High Level Formatting</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=green>7.1</FONT></TD>
+          <TD colSpan=2><A 
+            href="http://rubbermallet.org/disk.html#7.1">Introduction</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=green>7.2</FONT></TD>
+          <TD colSpan=2><A 
+            href="http://rubbermallet.org/disk.html#7.2">Logical Sectors and 
+            Clusters</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=green>7.3</FONT></TD>
+          <TD colSpan=2><A href="http://rubbermallet.org/disk.html#7.3">The 
+            Boot Sector</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=magenta>7.3.1</FONT></TD>
+          <TD><A 
+            href="http://rubbermallet.org/disk.html#7.3.1">Introduction</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=magenta>7.3.2</FONT></TD>
+          <TD><A href="http://rubbermallet.org/disk.html#7.3.2">Assembly 
+            Language Jump to Boot Code</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=magenta>7.3.3</FONT></TD>
+          <TD><A href="http://rubbermallet.org/disk.html#7.3.3">Disk 
+            Parameters Needed by DOS</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=magenta>7.3.4</FONT></TD>
+          <TD><A href="http://rubbermallet.org/disk.html#7.3.4">Assembly 
+            Language Boot Code</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=magenta>7.3.5</FONT></TD>
+          <TD><A href="http://rubbermallet.org/disk.html#7.3.5">Error 
+            Message</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=magenta>7.3.6</FONT></TD>
+          <TD><A href="http://rubbermallet.org/disk.html#7.3.6">System File 
+            Names</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=magenta>7.3.7</FONT></TD>
+          <TD><A href="http://rubbermallet.org/disk.html#7.3.7">DOS 
+            Signature</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=green>7.4</FONT></TD>
+          <TD colSpan=2><A href="http://rubbermallet.org/disk.html#7.4">The 
+            File Allocation Table</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=magenta>7.3.1</FONT></TD>
+          <TD><A 
+            href="http://rubbermallet.org/disk.html#7.4.1">Introduction</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=magenta>7.3.2</FONT></TD>
+          <TD><A href="http://rubbermallet.org/disk.html#7.4.2">Calculating 
+            Clusters</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=magenta>7.3.3</FONT></TD>
+          <TD><A 
+        href="http://rubbermallet.org/disk.html#7.4.3">Example</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=magenta>7.3.4</FONT></TD>
+          <TD><A href="http://rubbermallet.org/disk.html#7.4.4">Reserved 
+            Entries</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=green>7.5</FONT></TD>
+          <TD colSpan=2><A href="http://rubbermallet.org/disk.html#7.5">The 
+            Root Directory Entry</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=magenta>7.5.1</FONT></TD>
+          <TD><A 
+            href="http://rubbermallet.org/disk.html#7.5.1">Introduction</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=magenta>7.5.2</FONT></TD>
+          <TD><A 
+          href="http://rubbermallet.org/disk.html#7.5.2">Structure</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=magenta>7.5.3</FONT></TD>
+          <TD><A href="http://rubbermallet.org/disk.html#7.5.3">Sub 
+            Directories</A></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD><FONT color=green>7.6</FONT></TD>
+          <TD colSpan=2><A href="http://rubbermallet.org/disk.html#7.6">The 
+            Data Area</A></TD></TR>
+        <TR>
+          <TD><FONT color=red>8</FONT></TD>
+          <TD colSpan=3><A 
+            href="http://rubbermallet.org/disk.html#8.0">Conclusion</A></TD></TR></TBODY></TABLE><BR><A 
+      name=1.0></A><FONT color=red>
+      <H3><U>1 Introduction</U></H3></FONT>
+      <DIV>If we want to develop our own method of secure storage for encrypted 
+      data, we need to understand how data is stored on a hard disk. This 
+      section explains in detail how the hard disk works and how DOS takes care 
+      of tracking files on disk.<BR><BR>I've purposely chosen DOS for this 
+      section as it offers many advantages over Windows and Linux for storing 
+      encrypted information, especially if you want to develop your own routines 
+      from scratch.<BR><BR>It's certainly possible to develop secure filing 
+      systems under Windows and Linux, but it involves much more hard work to 
+      ensure that you are completely safe. For example, you need to write 
+      additional code to ensure the swap files are clean after you have viewed 
+      any encrypted data. That's just a single example, there are many more I 
+      could give.<BR><BR>If you don't have the need for extreme encryption, then 
+      use whatever program you want under Windows or Linux. However, if you have 
+      data that's extremely sensitive....You had better read this and the 
+      following sections ;)<BR><BR>OK, even if you don't have a DOS system, then 
+      go out and buy another hard drive. They're cheap enough. Put DOS on it and 
+      follow the rest of this guide and you'll end up with a system that's 
+      secure enough to beat the most determined of people who might take an 
+      interest in your files ;)<BR><BR>You don't need another computer for this 
+      as DOS will quite happily exist on another drive along side Windows or 
+      Linux. The <A 
+      href="http://rubbermallet.org/strategies.htm"><NOBR>Strategies</NOBR></A> 
+      and <A 
+      href="http://rubbermallet.org/examples.htm"><NOBR>Examples</NOBR></A> 
+      sections explain this in a bit more detail.<BR><BR>Let's face it, most of 
+      the information you might want to hide won't be specific to Windows or 
+      Linux, so use DOS to hide it and view it !<BR><BR>This section explains in 
+      detail how DOS works from startup. The <A 
+      href="http://rubbermallet.org/strategies.htm"><NOBR>Strategies</NOBR></A> 
+      and <A 
+      href="http://rubbermallet.org/examples.htm"><NOBR>Examples</NOBR></A> 
+      sections go on to develop the ideas and code needed to create your own 
+      secure filing system.<BR><BR>Unfortunately things get a bit heavy from now 
+      on. We need to take a look at hardware in detail. We also need to dabble 
+      in assembly language, or at least be able to understand it. Anyway, take a 
+      deep breath and go for it. I'm always willing to answer questions via 
+      email if you get stuck.<BR><BR>This section is quite large, so you might 
+      want to save this page to disk so you can read it at your 
+      leisure.<BR><BR><A name=2.0></A><FONT color=red>
+      <H3><U>2 Physical Disk Structure</U></H3></FONT>If you have ever taken a 
+      look at your BIOS Setup screens, you might have noticed disk parameters 
+      such as Cylinders, Heads, Sectors, Mode=LBA. You might also have come 
+      across the terminology of Sides, Tracks, Tracks per Side and Sectors Per 
+      Track.<BR><BR>So...What does this all mean ?<BR><BR>OK, let's start from 
+      the basics and work our way up. We will start with a 1.44MB floppy disk as 
+      an example.<BR><BR>The floppy disk has two sides (also referred to as 
+      heads). These are side (head) 0 and side (head) 1.<BR><BR>Each side has a 
+      80 concentric tracks starting at track 0 from the outer edge of the disk 
+      through to track 79 at the inner most part of the disk. Given the disk has 
+      two sides (heads), this means the disk has 2 x 80 tracks in total, i.e. 
+      160 tracks.<BR><BR>The concept of the cylinder is especially important to 
+      speed up the reading and writing to hard disks with multiple platters, ie 
+      having many sides. The cylinder can be thought of as a vertical set of all 
+      tracks with the same number on each side. So when writing a file, the 
+      operating system will try to fill all tracks on a cylinder with the file 
+      to avoid the need to move the heads excessively, thus also reducing wear 
+      and tear on the disk as well as speeding up the operation. So for the 
+      floppy disk cylinder 0 is track 0 on sides 0 and 1, cylinder 1 is track 1 
+      on sides 0 and 1 etc.<BR><BR>Tracks are split into sectors. For a 1.44MB 
+      floppy disk, each track has 18 sectors, with each sector size being able 
+      to hold 512 Bytes of information.<BR><BR>Therefore the size of a disk can 
+      be determined by the following formula :-<BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD>Bytes = Cylinders x Heads x Sectors per Track x Bytes Per 
+          Sector</TD></TR></TBODY></TABLE><BR>For the 1.44MB floppy disk this is 
+      :-<BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD>80 x 2 x 18 x 512 = 1,474,560 
+      Bytes</TD></TR></TBODY></TABLE><BR>Cylinder and Head numbers always start 
+      from 0, But sector numbers always start from 1. So for the floppy disk, it 
+      has 80 cylinders numbered 0 to 79, and 18 sectors per track numbered 1 to 
+      18.<BR><BR><A name=3.0></A><FONT color=red>
+      <H3><U>3 BIOS and Operating System Limits</U></H3></FONT>In the early days 
+      of the PC hard disks were expensive and only had storage capacities of 
+      typically 20 to 40MB. There weren't many disk manufacturers and the range 
+      of disks available was so small that it was possible to just give a 
+      particular disk a type number. When you installed your hard disk, you 
+      didn't have to worry about the physical structure of the disk, you just 
+      selected it's type number. The list is still there in todays BIOS's for 
+      backward compatability, although I can't see that anyone running a 750MHz 
+      Pentium is going to be using a 20MB hard disk!<BR><BR>The problems began 
+      as hard disks fell in price and became available in ever increasing 
+      capacities. Neither the BIOS nor DOS software writers ever expected GB 
+      disks to become available, so there were limitations on the size of disk 
+      that could be recognised depending on which version of DOS you were 
+      running and which BIOS version you had.<BR><BR>Disk manufacturers often 
+      bundled low level software to enable the user to get the full capacity of 
+      the disk. There were other problems with DOS which also meant you had to 
+      partition your hard disk to make several smaller logical hard 
+      drives.<BR><BR>Even the last issued version of MS-DOS had problems. 
+      Although it could use big hard drives, you still had to partition drives 
+      into several smaller ones to enable the full disk capacity to be used as 
+      it had a maximum cluster value of 65535 and a maximum FAT size of 256 
+      sectors.<BR><BR>The BIOS problem is still with us now. It only allows 10 
+      bits to specify a cylinder, meaning we can have a maximum of 1024 
+      cylinders. It only allows 5 bits to specify a sector number, thus limiting 
+      sectors per track to 63 (OK 5 bits gives 0-63, ie 64 discrete numbers, but 
+      sectors always have to start at 1, so that gives 63 sectors per track 
+      max). The odd thing is that the BIOS has always allowed 8 bits for the 
+      head number, giving up to 256 heads.<BR><BR>There aren't any disk 
+      manufacturers out there that produce hard disks with anywhere near that 
+      number of heads ! (or at least none that are available to the average PC 
+      user)<BR><BR>The problem was partially solved in 1994 when BIOS 
+      manufacturers developed a method of addressing the disk called Logical 
+      Block Addressing (LBA). This still had the 1024 cylinder limit, however, 
+      the number of heads was artificially increased to enable the full disk 
+      capacity to be reached. The number of cylinders, heads and tracks stored 
+      by the BIOS for LBA mode does not reflect the true physical structure of 
+      the disk, however it is used to calculate a logical address, ie the 
+      position on the disk where the data is stored.<BR><BR>LBA only works for 
+      disks up to 8.4GB. For disks of greater capacity, most recent BIOS 
+      versions have a mode called LARGE which once again is a translation mode 
+      to allow full disk access for drives greater than 8.4GB.<BR><BR>This won't 
+      affect our plans for providing an encryption storage method as we will be 
+      using BIOS calls to access the data, so we can use whatever LBA or LARGE 
+      parameters the BIOS uses when it does an auto-detect on the disk when it 
+      is first installed. All we will need to do is to supply a cylinder, head 
+      and sector number to any BIOS calls we make, and let the BIOS do the 
+      translation.<BR><BR>Incidentally, on the subject of disk sizes, the hard 
+      disk manufacturers define 1MB as being 1,000,000 bytes, whereas many 
+      operating systems and other disk software define 1MB as being 1,048,576 
+      bytes which is why for example your BIOS will report your disk as being of 
+      a different size than CHKDSK (and many other disk utilities) do.<BR><BR><A 
+      name=4.0></A><FONT color=red>
+      <H3><U>4 Formatting - An Overview</U></H3></FONT>Formatting is a complex 
+      procedure, involving three key stages. First of all, the disk is low level 
+      (hard) formatted by the manufacturer before it leaves the factory. This 
+      low level format writes the actual sector ID fields on the media. The user 
+      of a new disk then has to perform stages two and three.<BR><BR>The second 
+      stage involves building up a partition table for the disk using the FDISK 
+      utility that comes with both DOS and Linux. The partition process 
+      basically lays down information on the hard disk to allow the BIOS and 
+      operating system to identify individual partitions, ie where they start 
+      and end, and what operating system is used on that partition. It also 
+      places a Master Boot Record (MBR) on the disk if the disk has an active 
+      partition, ie is bootable.<BR><BR>The third stage is slightly different 
+      under DOS, Linux and other operating systems. This involves storing the 
+      information needed by the operating system to boot the machine, store and 
+      index data files etc. Under DOS this is performed using the FORMAT 
+      command. With Linux, one uses the mkfs (make file system) 
+      command.<BR><BR>We will be taking an in depth look at what happens when 
+      you use FDISK and FORMAT with the DOS operating system to show the sort of 
+      things you need to consider when developing your own storage method. We 
+      will be developing our own versions of FDISK and FORMAT in following 
+      sections to allow us to create our own secure filing system<BR><BR><A 
+      name=5.0></A><FONT color=red>
+      <H3><U>5 The Low Level Format</U></H3></FONT>As mentioned before, the low 
+      level format is carried out by the manufacturer before the hard disk 
+      leaves the factory. Most current BIOS versions do have this as an option, 
+      however, not all hard disks respond to this. In some cases, the disk can 
+      actually be rendered unusable, so take care to read the manual that came 
+      with your disk if you want to experiment with low level formatting. In any 
+      event, you don't have any control over settings for this, other than the 
+      chance to select an interleave, so it's not really worth considering using 
+      the BIOS low level format program. I might add a section on this at a 
+      later date after I have perfected my routines for rendering a disk 
+      apparently unreadable, even by the hard disk manufacturers and expert data 
+      recovery agencies ;)<BR><BR>I've been working on this on and off for about 
+      18 months now, so don't hold your breath !<BR><BR>During the low level 
+      format, the manufacturer uses software to write directly to the disk 
+      controller rather than to the BIOS. This sets up the disk so that sectors 
+      can be recognised. You might have read that a sector consists of 512 
+      bytes, however it is actually longer than this. The 512 bytes is the 
+      actual data area for the sector. There are other bytes either side of the 
+      data area which belong to that sector. These bytes aren't accessible to 
+      DOS, although the BIOS can access some of them via diagnostic calls 
+      through INT 13h.<BR><BR>The additional bytes are used for synchronisation 
+      and error control to ensure the controller can recognise the exact start 
+      and end of each sector.<BR><BR>The low level format also decides upon the 
+      actual sector numbering, and uses such methods as interleaving, track and 
+      cylinder skewing and multiple zone recording to get the absolute maximum 
+      capacity possible from the disk with the best possible access times. These 
+      techniques along with advancements in RLL encoding have lead to the 
+      availability of massive hard drives over the past few years.<BR><BR><A 
+      name=6.0></A><FONT color=red>
+      <H3><U>6 FDISK - Partition Table and Master Boot Record</U></H3></FONT><A 
+      name=6.1></A><FONT color=green>
+      <H3><I>6.1 Introduction</I></H3></FONT>The first sector of a hard disk is 
+      always reserved for the partition table. This is common to all operating 
+      systems. It also contains the Master Boot Record (MBR) if the disk is 
+      bootable. The DOS FDISK command is used to partition the disk and write 
+      the MBR.<BR><BR>From now on I'll be using C to denote cylinder, H for head 
+      and S for sector.<BR><BR>The MBR starts at CHS=0,0,1 and the partition 
+      table is at offset 01BEh (The h stands for hexadecimal).<BR><BR>When you 
+      switch your PC on, the BIOS program goes through various initialisation 
+      and system testing routines, then it loads the first sector from either 
+      the hard disk (or a bootable floppy disk) to memory segment 0000h, offset 
+      7C00h.<BR><BR>In the case of a hard drive, this is the MBR (also 
+      containing the partition table). For a floppy disk (under DOS), this 
+      sector is the boot sector. Either way, the BIOS then passes control to the 
+      code starting at 0000h:7C00h.<BR><BR><A name=6.2></A><FONT color=green>
+      <H3><I>6.2 Master Boot Record Code</I></H3></FONT>Here's what happens when 
+      you boot up your PC with a hard disk MBR created by DOS :-<BR><BR>
+      <TABLE border=1 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD><FONT color=red>Memory<BR>Offset</FONT></TD>
+          <TD><FONT color=red>Opcode</FONT></TD>
+          <TD><FONT color=red>Operand</FONT></TD>
+          <TD><FONT color=red>Comments</FONT></TD></TR>
+        <TR>
+          <TD colSpan=4><FONT color=red>Initialisation Stuff :-</FONT></TD></TR>
+        <TR>
+          <TD vAlign=top>7C00</TD>
+          <TD vAlign=top>CLI</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Clear the Interrupt Flag</TD></TR>
+        <TR>
+          <TD vAlign=top>7C01</TD>
+          <TD vAlign=top>XOR</TD>
+          <TD vAlign=top>AX,AX</TD>
+          <TD>Set AX to zero</TD></TR>
+        <TR>
+          <TD vAlign=top>7C03</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>SS,AX</TD>
+          <TD>Set Stack Segment to zero</TD></TR>
+        <TR>
+          <TD vAlign=top>7C05</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>SP,7C00 </TD>
+          <TD>Set Stack Pointer to 7C00h</TD></TR>
+        <TR>
+          <TD vAlign=top>7C08</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>SI,SP</TD>
+          <TD>Set Source Index register to 7C00h</TD></TR>
+        <TR>
+          <TD vAlign=top>7C0A</TD>
+          <TD vAlign=top>PUSH</TD>
+          <TD vAlign=top>AX</TD>
+          <TD>Store zero on the stack</TD></TR>
+        <TR>
+          <TD vAlign=top>7C0B</TD>
+          <TD vAlign=top>POP</TD>
+          <TD vAlign=top>ES</TD>
+          <TD>Zero ES</TD></TR>
+        <TR>
+          <TD vAlign=top>7C0C</TD>
+          <TD vAlign=top>PUSH</TD>
+          <TD vAlign=top>AX</TD>
+          <TD>Store zero on the stack</TD></TR>
+        <TR>
+          <TD vAlign=top>7C0D</TD>
+          <TD vAlign=top>POP</TD>
+          <TD vAlign=top>DS</TD>
+          <TD>Zero DS</TD></TR>
+        <TR>
+          <TD vAlign=top>7C0E</TD>
+          <TD vAlign=top>STI</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Set Interrupt Flag</TD></TR>
+        <TR>
+          <TD vAlign=top>7C0F</TD>
+          <TD vAlign=top>CLD</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Clear Direction Flag</TD></TR>
+        <TR>
+          <TD vAlign=top>7C10</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>DI,0600</TD>
+          <TD>Set DI to 0600h</TD></TR>
+        <TR>
+          <TD vAlign=top>7C13</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>CX,0100</TD>
+          <TD>Set CX to 0100h</TD></TR>
+        <TR>
+          <TD vAlign=top>7C16</TD>
+          <TD vAlign=top>REPNZ</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Repeat following MOVSW instruction 0100h times</TD></TR>
+        <TR>
+          <TD vAlign=top>7C17</TD>
+          <TD vAlign=top>MOVSW</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Copy the first 100h bytes of the MBR from 7C00h to 0600h to 
+            reserve room for the boot sector which needs to be copied later to 
+            7C00h</TD></TR>
+        <TR>
+          <TD vAlign=top>7C18</TD>
+          <TD vAlign=top>JMP</TD>
+          <TD vAlign=top>0000:061D</TD>
+          <TD>Continue from 061Dh rather than 7C1Dh</TD></TR>
+        <TR>
+          <TD colSpan=4><FONT color=red>Check Partition Table Entries 
+          :-</FONT></TD></TR>
+        <TR>
+          <TD vAlign=top>061D</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>SI,07BE</TD>
+          <TD>Partition table address into SI</TD></TR>
+        <TR>
+          <TD vAlign=top>0620</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>BL,04</TD>
+          <TD>04 into BL (The number of partitions DOS allows)</TD></TR>
+        <TR>
+          <TD vAlign=top>0622</TD>
+          <TD vAlign=top>CMP</TD>
+          <TD vAlign=top><NOBR>BYTE PTR [SI],80</NOBR></TD>
+          <TD>See if first byte in disk partition table entry is 80h, ie boot 
+            from this partition</TD></TR>
+        <TR>
+          <TD vAlign=top>0625</TD>
+          <TD vAlign=top>JZ</TD>
+          <TD vAlign=top>0635</TD>
+          <TD>If it is, jump to 0635h</TD></TR>
+        <TR>
+          <TD vAlign=top>0627</TD>
+          <TD vAlign=top>CMP</TD>
+          <TD vAlign=top>BYTE PTR [SI],00</TD>
+          <TD>It isn't, so see if it is zero, ie inactive</TD></TR>
+        <TR>
+          <TD vAlign=top>062A</TD>
+          <TD vAlign=top>JNZ</TD>
+          <TD vAlign=top>0648</TD>
+          <TD>If it isn't, display error message</TD></TR>
+        <TR>
+          <TD vAlign=top>062C</TD>
+          <TD vAlign=top>ADD</TD>
+          <TD vAlign=top>SI,+10</TD>
+          <TD>It is, so go to next partition table disk entry</TD></TR>
+        <TR>
+          <TD vAlign=top>062F</TD>
+          <TD vAlign=top>DEC</TD>
+          <TD vAlign=top>BL</TD>
+          <TD>BL=BL-1</TD></TR>
+        <TR>
+          <TD vAlign=top>0631</TD>
+          <TD vAlign=top>JNZ</TD>
+          <TD vAlign=top>0622</TD>
+          <TD>Go back to read next disk partition table entries.</TD></TR>
+        <TR>
+          <TD colSpan=4><FONT color=red>No DOS Partitions found, or partition 
+            table is corrupt:-</FONT></TD></TR>
+        <TR>
+          <TD vAlign=top>0633</TD>
+          <TD vAlign=top>INT</TD>
+          <TD vAlign=top>18</TD>
+          <TD>Try for ROM BASIC which usually isn't present so halts the 
+          system</TD></TR>
+        <TR>
+          <TD colSpan=4><FONT color=red>DOS Partition Found:-</FONT></TD></TR>
+        <TR>
+          <TD vAlign=top>0635</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>DX,[SI]</TD>
+          <TD>OK we've got a valid DOS partition. Copy partition table first 
+            byte into DX</TD></TR>
+        <TR>
+          <TD vAlign=top>0637</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>CX,[SI+02]</TD>
+          <TD>Copy DOS start Cylinder byte into CX</TD></TR>
+        <TR>
+          <TD vAlign=top>063A</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>BP,SI</TD>
+          <TD>SI into BP</TD></TR>
+        <TR>
+          <TD vAlign=top>063C</TD>
+          <TD vAlign=top>ADD</TD>
+          <TD vAlign=top>SI,+10</TD>
+          <TD>Change SI to reflect start address of next disk partition table 
+            entry</TD></TR>
+        <TR>
+          <TD vAlign=top>063F</TD>
+          <TD vAlign=top>DEC</TD>
+          <TD vAlign=top>BL</TD>
+          <TD>BL=BL-1</TD></TR>
+        <TR>
+          <TD vAlign=top>0641</TD>
+          <TD vAlign=top>JZ</TD>
+          <TD vAlign=top>065D</TD>
+          <TD>Checked all disk partition table entries ? Yes then jump to 
+          065D</TD></TR>
+        <TR>
+          <TD vAlign=top>0643</TD>
+          <TD vAlign=top>CMP</TD>
+          <TD vAlign=top>BYTE PTR [SI],00</TD>
+          <TD>No, then check if next disk partition is 0</TD></TR>
+        <TR>
+          <TD vAlign=top>0646</TD>
+          <TD vAlign=top>JZ</TD>
+          <TD vAlign=top>063C</TD>
+          <TD>If yes go back to repeat for next entry</TD></TR>
+        <TR>
+          <TD colSpan=4><FONT color=red>Error Message Handler :-</FONT></TD></TR>
+        <TR>
+          <TD vAlign=top>0648</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>SI,068B</TD>
+          <TD>Place error message address into SI</TD></TR>
+        <TR>
+          <TD vAlign=top>064B</TD>
+          <TD vAlign=top>LODSB</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Grab error message byte</TD></TR>
+        <TR>
+          <TD vAlign=top>064C</TD>
+          <TD vAlign=top>CMP</TD>
+          <TD vAlign=top>AL,00</TD>
+          <TD>AL=0 ?</TD></TR>
+        <TR>
+          <TD vAlign=top>064E</TD>
+          <TD vAlign=top>JZ</TD>
+          <TD vAlign=top>015B</TD>
+          <TD>Yes, goto 065Bh</TD></TR>
+        <TR>
+          <TD vAlign=top>0650</TD>
+          <TD vAlign=top>PUSH</TD>
+          <TD vAlign=top>SI</TD>
+          <TD>No, Save SI</TD></TR>
+        <TR>
+          <TD vAlign=top>0651</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>BX,0007</TD>
+          <TD>7 into BX</TD></TR>
+        <TR>
+          <TD vAlign=top>0654</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>AH,0E</TD>
+          <TD>0E into AH</TD></TR>
+        <TR>
+          <TD vAlign=top>0656</TD>
+          <TD vAlign=top>INT</TD>
+          <TD vAlign=top>10</TD>
+          <TD>Display error message characters on screen</TD></TR>
+        <TR>
+          <TD vAlign=top>0658</TD>
+          <TD vAlign=top>POP</TD>
+          <TD vAlign=top>SI</TD>
+          <TD>restore SI</TD></TR>
+        <TR>
+          <TD vAlign=top>0659</TD>
+          <TD vAlign=top>JMP</TD>
+          <TD vAlign=top>064B</TD>
+          <TD>Build up error message</TD></TR>
+        <TR>
+          <TD vAlign=top>065B</TD>
+          <TD vAlign=top>JMP</TD>
+          <TD vAlign=top>065B</TD>
+          <TD>Error message displayed, halt system in infinite loop</TD></TR>
+        <TR>
+          <TD colSpan=4><FONT color=red>OK, Now lets load the boot sector 
+            :-</FONT></TD></TR>
+        <TR>
+          <TD vAlign=top>065D</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>DI,0005</TD>
+          <TD>OK we've got a hard disk which seems fine, set DI to 5</TD></TR>
+        <TR>
+          <TD vAlign=top>0660</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>BX,7C00</TD>
+          <TD>and BX to 7C00h</TD></TR>
+        <TR>
+          <TD vAlign=top>0663</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>AX,0201</TD>
+          <TD>and AX to 0201h</TD></TR>
+        <TR>
+          <TD vAlign=top>0666</TD>
+          <TD vAlign=top>PUSH</TD>
+          <TD vAlign=top>DI</TD>
+          <TD>Save DI</TD></TR>
+        <TR>
+          <TD vAlign=top>0667</TD>
+          <TD vAlign=top>INT</TD>
+          <TD vAlign=top>13</TD>
+          <TD>Copy boot sector to 0000h:7C00h</TD></TR>
+        <TR>
+          <TD vAlign=top>0669</TD>
+          <TD vAlign=top>POP</TD>
+          <TD vAlign=top>DI</TD>
+          <TD>Restore DI</TD></TR>
+        <TR>
+          <TD vAlign=top>066A</TD>
+          <TD vAlign=top>JNB</TD>
+          <TD vAlign=top>0678</TD>
+          <TD>OK, jump to 0678h</TD></TR>
+        <TR>
+          <TD vAlign=top>066C</TD>
+          <TD vAlign=top>XOR</TD>
+          <TD vAlign=top>AX,AX</TD>
+          <TD>Not successful, clear AX</TD></TR>
+        <TR>
+          <TD vAlign=top>066E</TD>
+          <TD vAlign=top>INT</TD>
+          <TD vAlign=top>13</TD>
+          <TD>Try to reset disk</TD></TR>
+        <TR>
+          <TD vAlign=top>0670</TD>
+          <TD vAlign=top>DEC</TD>
+          <TD vAlign=top>DI</TD>
+          <TD>DI=DI-1</TD></TR>
+        <TR>
+          <TD vAlign=top>0671</TD>
+          <TD vAlign=top>JNZ</TD>
+          <TD vAlign=top>0660</TD>
+          <TD>Not successful, jump to 0660h and try again a further 4 
+        times</TD></TR>
+        <TR>
+          <TD vAlign=top>0673</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>SI,06A3</TD>
+          <TD>Error message address into SI</TD></TR>
+        <TR>
+          <TD vAlign=top>0676</TD>
+          <TD vAlign=top>JMP</TD>
+          <TD vAlign=top>064B</TD>
+          <TD>Display error message</TD></TR>
+        <TR>
+          <TD vAlign=top>0678</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>SI,06C2</TD>
+          <TD>Error message address into SI</TD></TR>
+        <TR>
+          <TD vAlign=top>067B</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>DI,7DFE</TD>
+          <TD>7DFE into DI</TD></TR>
+        <TR>
+          <TD vAlign=top>067E</TD>
+          <TD vAlign=top>CMP</TD>
+          <TD vAlign=top><NOBR>WORD PTR [DI],AA55</NOBR></TD>
+          <TD>Check for the DOS signature</TD></TR>
+        <TR>
+          <TD vAlign=top>0682</TD>
+          <TD vAlign=top>JNZ</TD>
+          <TD vAlign=top>064B</TD>
+          <TD>Nope - display error message</TD></TR>
+        <TR>
+          <TD colSpan=4><FONT color=red>Phew, everything OK. Now lets load the 
+            boot sector :-</FONT></TD></TR>
+        <TR>
+          <TD vAlign=top>0684</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>SI,BP</TD>
+          <TD>Set Base Pointer to Stack Index</TD></TR>
+        <TR>
+          <TD vAlign=top>0686</TD>
+          <TD vAlign=top>JMP</TD>
+          <TD vAlign=top>0000:7C00</TD>
+          <TD>Jump to Boot Sector Code and start 
+      DOS</TD></TR></TBODY></TABLE><BR>The error messages start at 068Bh (008Bh 
+      in the MBR) and are as follows :-<BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD><FONT color=red>Offset</FONT></TD>
+          <TD><FONT color=red>Message</FONT></TD></TR>
+        <TR>
+          <TD>068B</TD>
+          <TD>Invalid partition table</TD></TR>
+        <TR>
+          <TD>06A3</TD>
+          <TD>Error loading operating system</TD></TR>
+        <TR>
+          <TD>06C2</TD>
+          <TD>Missing operating system</TD></TR>
+        <TBODY></TBODY></TABLE><BR><A name=6.3></A><FONT color=green>
+      <H3><I>6.3 Partition Table Entries</I></H3></FONT>The partition table 
+      itself starts at 07BEh (01BEh in the MBR). There are four consecutive 
+      partition table entries, each consisting of 10h bytes, followed by the 
+      boot signature 55AAh. The format of each partition table entry is as 
+      follows :-<BR><BR>
+      <TABLE border=1 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD><FONT color=red>Offset</FONT></TD>
+          <TD><FONT color=red>Bytes</FONT></TD>
+          <TD><FONT color=red>Description</FONT></TD></TR>
+        <TR>
+          <TD>00</TD>
+          <TD>01</TD>
+          <TD>Partition status, 80h means active (ie boot from this partition) 
+            and 00h means inactive (ie present but don't boot from this 
+            partition). The 80h also indicates the drive number. A second hard 
+            drive fitted will often have 81h in it's partition table entry 
+            depending on the operating system</FONT></TD></TR>
+        <TR>
+          <TD>01</TD>
+          <TD>01</TD>
+          <TD>Head number for start of partition</TD></TR>
+        <TR>
+          <TD>02</TD>
+          <TD>02</TD>
+          <TD>Sector and Cylinder number for start of partition. This is in 
+            the format that the BIOS expects, i.e.<BR><BR>
+            <TABLE border=1 cellPadding=5 bgColor=cyan align=center>
+              <TBODY>
+              <TR>
+                <TD><FONT color=red>Bits</FONT></TD>
+                <TD><FONT color=red>Description</FONT></TD></TR>
+              <TR>
+                <TD>00-05</TD>
+                <TD>Sector number</TD></TR>
+              <TR>
+                <TD>06-07</TD>
+                <TD>Bits 08-09 of Cylinder number</TD></TR>
+              <TR>
+                <TD>08-0F</TD>
+                <TD>Bits 00-07 of Cylinder 
+number</TD></TR></TBODY></TABLE><BR></TD></TR>
+        <TR>
+          <TD>04</TD>
+          <TD>01</TD>
+          <TD>Partition type. 00 = not allocated, 06 = DOS 4.0 or greater. 
+            There are many different numbers to cover all available operating 
+            systems.</TD></TR>
+        <TR>
+          <TD>05</TD>
+          <TD>01</TD>
+          <TD>Head number for the end of the partition</TD></TR>
+        <TR>
+          <TD>06</TD>
+          <TD>02</TD>
+          <TD>Sector and Cylinder number for the end of the partition</TD></TR>
+        <TR>
+          <TD>08</TD>
+          <TD>04</TD>
+          <TD>Displacement for Boot Sector (in sectors)</TD></TR>
+        <TR>
+          <TD>0C</TD>
+          <TD>04</TD>
+          <TD>Number of sectors in the partition</TD></TR>
+        <TBODY></TBODY></TABLE><BR>Although the MBR/Partition table for DOS only 
+      occupies a single sector, the complete track 0 (ie CHS=0,0,1 to 
+      CHS=0,0,sectors per track) is reserved as other operating systems may use 
+      more than just one sector. These additional sectors have been used in the 
+      past by disk manufacturers to place translational code in to get around 
+      DOS and BIOS limits for disk sizes.<BR><BR>It's also an area that has been 
+      used by virus writers in the past to ensure that their code gets executed 
+      every time you boot your PC !<BR><BR><A name=7.0></A><FONT color=red>
+      <H3><U>7 FORMAT - High Level Formatting</U></H3></FONT><A 
+      name=7.1></A><FONT color=green>
+      <H3><I>7.1 Introduction</I></H3></FONT>OK. We've discussed what FDISK 
+      does, and have plowed through the assembly code for the MBR. As we found, 
+      the MBR loads the DOS boot sector to 0000h:7C00h (assuming the MBR and 
+      partition table passes a few tests).<BR><BR>Now we need to look at the DOS 
+      boot sector, which is placed on disk via the FORMAT command. We also need 
+      to take a close look at what else FORMAT does as it provides an indexing 
+      method to enable data files to be found on disk. If we can understand what 
+      is needed to do this by studying FORMAT in detail, we will be well on the 
+      way to understanding how we can hide encrypted data on disk by developing 
+      our own bespoke code to do this without it being public knowledge 
+      ;)<BR><BR>Unfortunately, this section involves further understanding of 
+      assembly code. Once again, I have presented assembly code with liberal 
+      comments.<BR><BR>So, let us continue and see how DOS stores and indexes 
+      information.<BR><BR>FORMAT does the following :-<BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD><FONT color=red>1</FONT></TD>
+          <TD>It creates the Boot Sector, containing code to boot DOS. The 
+            Boot Sector also contains information about your hard drive that DOS 
+            needs to refer to.</TD></TR>
+        <TR>
+          <TD><FONT color=red>2</FONT></TD>
+          <TD>It creates two copies of the File Allocation Table (FAT), which 
+            is a table maintained by DOS to keep track of where your files are 
+            on the disk.</TD></TR>
+        <TR>
+          <TD><FONT color=red>3</FONT></TD>
+          <TD>It creates the Root Directory Entry, which contains data such as 
+            filenames, dates and times and starting location for all files in 
+            your root directory.</TD></TR>
+        <TR>
+          <TD><FONT color=red>4</FONT></TD>
+          <TD>It creates the Data Area where all the rest of your files and 
+            subdirectories are stored (indexed by the FAT)</TD></TR>
+        <TBODY></TBODY></TABLE><BR><A name=7.2></A><FONT color=green>
+      <H3><I>7.2 Logical Sectors and Clusters</I></H3></FONT>We have already 
+      seen that any sector on a hard disk is referenced by a CHS number. This is 
+      inconvenient for DOS as disks come in many different sizes with different 
+      CHS numbers. DOS uses a logical sector number format to index every sector 
+      on the disk. Logical sector numbering starts at 0 rather than 1, starting 
+      from CHS=0,0,1 (ie the MBR/Partition Table). Logical sectors are numbered 
+      sequentially, filling complete cylinders at a time to avoid unneccessary 
+      head movement when writing to sequential sectors on disk.<BR><BR>The 
+      smallest piece of data the disk controller (through the BIOS routines) can 
+      read or write is a complete sector of 512 bytes. For floppy disks, DOS 
+      keeps track of all sectors on the disk. For disks of large capacity, this 
+      would involve maintaining a massive FAT. DOS uses multiple sector units 
+      called clusters to keep the size of the FAT down. This is a compromise 
+      however, and for large disks, leads to wasted disk space.<BR><BR>For 
+      example, on my 4.3GB drive, DOS has a cluster size of 64 sectors, ie 32KB. 
+      This means that if you write a 1KB file to disk, DOS uses a single cluster 
+      of 32KB for the file, thus wasting 31KB of disk space. This wasted space 
+      is often referred to as slack space. Wasting 31KB might not sound like 
+      much, but if you have say 2000 files on your disk which are 1KB in size, 
+      this actually uses 62.5MB disk space rather than 1.95MB !<BR><BR>Other 
+      operating systems allow you to choose the smallest unit of storage space, 
+      so if you know you are going to have many small files, you can choose a 
+      small cluster size. This is particularly important for Linux for example, 
+      where you might have several thousand small script files.<BR><BR>One way 
+      round this problem in DOS is to partition your drive, leaving a large 
+      partition for standard files and creating smaller partitions to store 
+      small files. DOS reduces the number of Sectors per Cluster for small 
+      partitions. The following table shows what cluster sizes DOS uses 
+      depending on the size of the disk<BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD><FONT color=red><NOBR>Max Disk Size</NOBR></FONT></TD>
+          <TD><FONT color=red><NOBR>Cluster Size</NOBR></FONT></TD></TR>
+        <TR>
+          <TD>32MB</TD>
+          <TD>1KB</TD></TR>
+        <TR>
+          <TD>128MB</TD>
+          <TD>2KB</TD></TR>
+        <TR>
+          <TD>256MB</TD>
+          <TD>4KB</TD></TR>
+        <TR>
+          <TD>512MB</TD>
+          <TD>8KB</TD></TR>
+        <TR>
+          <TD>1024MB</TD>
+          <TD>16KB</TD></TR>
+        <TR>
+          <TD>&gt;1024MB</TD>
+          <TD>32KB</TD></TR>
+        <TBODY></TBODY></TABLE><BR>Note that for disks greater than 2GB, DOS needs 
+      you to create multiple partitions as it allows a maximum FAT of 256 
+      sectors and a maximum of 65535 clusters.<BR><BR>Cluster numbering starts 
+      at 2, the first cluster being located at the beginning of the Data 
+      Area.<BR><BR><A name=7.3></A><FONT color=green>
+      <H3><I>7.3 The Boot Sector</I></H3></FONT><A name=7.3.1></A><FONT 
+      color=magenta>
+      <H3><I>7.3.1 Introduction</I></H3></FONT>The Boot Sector under DOS 
+      occupies the first sector immediately after the end of track 0, ie at 
+      CHS=0,1,1. It is copied from the hard disk to memory location 0000h:7C00h 
+      by the MBR on system startup and can be divided into 6 main areas, as 
+      indicated by the following table.<BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD><FONT color=red>Offset (hex)</FONT></TD>
+          <TD><FONT color=red>Description</FONT></TD></TR>
+        <TR>
+          <TD>000-002</TD>
+          <TD>Assembly Language Jump to Boot Code</TD></TR>
+        <TR>
+          <TD>003-03D</TD>
+          <TD>Disk Parameters Needed by DOS</TD></TR>
+        <TR>
+          <TD>03E-19F</TD>
+          <TD>Assembly Language Boot Code</TD></TR>
+        <TR>
+          <TD>1A0-1E5</TD>
+          <TD>Error Messages</TD></TR>
+        <TR>
+          <TD>1E6-1FD</TD>
+          <TD>System File Names</TD></TR>
+        <TR>
+          <TD>1FE-1FF</TD>
+          <TD>DOS Signature</TD></TR>
+        <TBODY></TBODY></TABLE><BR>The second area is the only part that is 
+      machine specific as it contains information relating to your own hard 
+      drive. All other areas should be the same from machine to 
+      machine.<BR><BR>I'll be using the Boot Sector from my 4.3GB hard drive to 
+      show what everything means as we look at the boot sector in detail. All 
+      address offsets will be in hex, and will reflect the 0000h:7C00h memory 
+      location that the boot sector is loaded to.<BR><BR>One thing to remember 
+      when you try to decipher the boot record is that data is stored in what is 
+      known as "Little Endian" format, ie you need to reverse the order of the 
+      bytes to get the real value !<BR><BR>The following table shows you how to 
+      do this :-<BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD colSpan=3><FONT color=red>Examples of Little Endian Format in 
+            hex</FONT></TD></TR>
+        <TR>
+          <TD>Data as read</TD>
+          <TD>Data rearranged</TD>
+          <TD>Decimal</TD></TR>
+        <TR>
+          <TD>01</TD>
+          <TD>01</TD>
+          <TD>01</TD></TR>
+        <TR>
+          <TD>01 00</TD>
+          <TD>00 01</TD>
+          <TD>01</TD></TR>
+        <TR>
+          <TD>00 03 02</TD>
+          <TD>02 03 00</TD>
+          <TD>131 840</TD></TR>
+        <TR>
+          <TD>02 FA 20 00</TD>
+          <TD>00 20 FA 02</TD>
+          <TD>2 161 154</TD></TR>
+        <TBODY></TBODY></TABLE><BR><A name=7.3.2></A><FONT color=magenta>
+      <H3><I>7.3.2 Assembly Language Jump to Boot Code</I></H3></FONT>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD colSpan=5><FONT color=red>Assembly Language Jump to Boot 
+            Code</FONT></TD></TR>
+        <TR>
+          <TD>Memory<BR>Offset</TD>
+          <TD>Data</TD>
+          <TD>Opcode</TD>
+          <TD>Operand</TD>
+          <TD>Comments</TD></TR>
+        <TR>
+          <TD vAlign=top>7C00</TD>
+          <TD vAlign=top><NOBR>EB 3C</NOBR></TD>
+          <TD vAlign=top>JMP</TD>
+          <TD>7C3E</TD>
+          <TD>Short jump to boot code at 7C3Eh</TD></TR>
+        <TR>
+          <TD vAlign=top>7C02</TD>
+          <TD vAlign=top>90</TD>
+          <TD vAlign=top>NOP</TD>
+          <TD>&nbsp;</TD>
+          <TD>No Operation. Certain versions of DOS do a near jump which 
+            requires this byte. If the jump is short, DOS puts a NOP here</TD></TR>
+        <TBODY></TBODY></TABLE><BR>Nice and easy to understand. The MBR (which we 
+      looked at previously) loads the boot sector to 0000h:7C00h and passes 
+      control to it. The boot sector then jumps directly to the code that will 
+      load DOS.<BR><BR>We'll now take a look at the second area, which contains 
+      disk parameters DOS needs to refer to.<BR><BR><A name=7.3.3></A><FONT 
+      color=magenta>
+      <H3><I>7.3.3 Disk Parameters Needed by DOS</I></H3></FONT>As mentioned 
+      before, the second section will be specific to your own hard drive. In 
+      this example I am going to use the boot sector from my 4.3GB hard drive. 
+      As such, I need to explain how I set this up using the BIOS and FDISK to 
+      allow you to understand the second section of the boot sector.<BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD><FONT color=red>My Hard Disk :-</FONT></TD></TR>
+        <TR>
+          <TD>Quantum Fireball 4.3GB</TD></TR>
+        <TR>
+          <TD>Physical characteristics are CHS=14848,9,63</TD></TR>
+        <TR>
+          <TD>BIOS uses LBA with CHS=524,255,63</TD></TR>
+        <TBODY></TBODY></TABLE><BR>FDISK wouldn't let me partition the lot as a 
+      single drive as it would exceed DOS 6.22's limit for a 256 sector FAT 
+      !<BR><BR>FDISK allowed me a primary partition of :- <BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD><FONT color=red>CHS</FONT></TD>
+          <TD><FONT color=red>Range</FONT></TD>
+          <TD><FONT color=red>Total</FONT></TD></TR>
+        <TR>
+          <TD>C</TD>
+          <TD>0 - 260</TD>
+          <TD>261 cylinders</TD></TR>
+        <TR>
+          <TD>H</TD>
+          <TD>0 - 254</TD>
+          <TD>255 heads</TD></TR>
+        <TR>
+          <TD>S</TD>
+          <TD>1 - 63</TD>
+          <TD>63 sectors per track</TD></TR>
+        <TBODY></TBODY></TABLE><BR>OK, let's take a look at the disk parameters 
+      :-<BR><BR>
+      <TABLE border=1 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD colSpan=3><FONT color=red>Disk Parameters Needed by 
+        DOS</FONT></TD></TR>
+        <TR>
+          <TD><FONT color=red>Memory<BR>Offset</FONT></TD>
+          <TD><FONT color=red>Data</FONT></TD>
+          <TD><FONT color=red>Description (numbers in decimal)</FONT></TD></TR>
+        <TR>
+          <TD vAlign=top>7C03</TD>
+          <TD vAlign=top><NOBR>4D53444F<BR>53352E30</NOBR></TD>
+          <TD>System ID in ASCII format. This reads MSDOS5.0 even though my 
+            disk was formatted with DOS 6.22 !</TD></TR>
+        <TR>
+          <TD vAlign=top>7C0B</TD>
+          <TD vAlign=top><NOBR>0002</NOBR></TD>
+          <TD>Bytes per sector, ie 512</TD></TR>
+        <TR>
+          <TD vAlign=top>7C0D</TD>
+          <TD vAlign=top><NOBR>40</NOBR></TD>
+          <TD>Sectors per cluster, ie 64</TD></TR>
+        <TR>
+          <TD vAlign=top>7C0E</TD>
+          <TD vAlign=top><NOBR>0100</NOBR></TD>
+          <TD>Reserved Sectors at beginning of disk, ie 1 for MBR</TD></TR>
+        <TR>
+          <TD vAlign=top>7C10</TD>
+          <TD vAlign=top><NOBR>02</NOBR></TD>
+          <TD>Number of FAT's, ie 2</TD></TR>
+        <TR>
+          <TD vAlign=top>7C11</TD>
+          <TD vAlign=top><NOBR>0002</NOBR></TD>
+          <TD>Root directory entries, ie 512</TD></TR>
+        <TR>
+          <TD vAlign=top>7C13</TD>
+          <TD vAlign=top><NOBR>0000</NOBR></TD>
+          <TD>Sectors on disk, see discussion</TD></TR>
+        <TR>
+          <TD vAlign=top>7C15</TD>
+          <TD vAlign=top><NOBR>F8</NOBR></TD>
+          <TD>Format ID. F8 indicates hard drive</TD></TR>
+        <TR>
+          <TD vAlign=top>7C16</TD>
+          <TD vAlign=top><NOBR>0001</NOBR></TD>
+          <TD>Sectors per FAT, ie 256. There are two FAT's so the total 
+            sectors occupied are 512</TD></TR>
+        <TR>
+          <TD vAlign=top>7C18</TD>
+          <TD vAlign=top><NOBR>3F00</NOBR></TD>
+          <TD>Sectors per track, ie 63</TD></TR>
+        <TR>
+          <TD vAlign=top>7C1A</TD>
+          <TD vAlign=top><NOBR>FF00</NOBR></TD>
+          <TD>Number of sides, ie 255</TD></TR>
+        <TR>
+          <TD vAlign=top>7C1C</TD>
+          <TD vAlign=top><NOBR>3F000000</NOBR></TD>
+          <TD>Hidden sectors, ie 63. See discussion</TD></TR>
+        <TR>
+          <TD vAlign=top>7C20</TD>
+          <TD vAlign=top><NOBR>86FA3F00</NOBR></TD>
+          <TD>Big Total Sectors on disk, ie 4192902. See discussion</TD></TR>
+        <TR>
+          <TD vAlign=top>7C24</TD>
+          <TD vAlign=top><NOBR>80</NOBR></TD>
+          <TD>Physical drive number, ie 128, first hard drive</TD></TR>
+        <TR>
+          <TD vAlign=top>7C25</TD>
+          <TD vAlign=top><NOBR>00</NOBR></TD>
+          <TD>Reserved</TD></TR>
+        <TR>
+          <TD vAlign=top>7C26</TD>
+          <TD vAlign=top><NOBR>29</NOBR></TD>
+          <TD>Extended Boot Record Signature</TD></TR>
+        <TR>
+          <TD vAlign=top>7C27</TD>
+          <TD vAlign=top><NOBR>D709453F</NOBR></TD>
+          <TD vAlign=top>Volume Serial Number</TD></TR>
+        <TR>
+          <TD vAlign=top>7C2B</TD>
+          <TD vAlign=top><NOBR>4E4F204E<BR>414D4520<BR>202020</NOBR></TD>
+          <TD vAlign=top>Volume Label in ASCII, reads -<BR>"NO NAME"</TD></TR>
+        <TR>
+          <TD vAlign=top>7C36</TD>
+          <TD vAlign=top><NOBR>46415431<BR>32202020</NOBR></TD>
+          <TD>ASCII File System Type, reads - "FAT16", ie a 16 Bit FAT</TD></TR>
+        <TBODY></TBODY></TABLE><BR>Most of the table is self explanatory, however, 
+      there are a few entries that need to be explained :-<BR><BR>Offset 7C13 
+      has the sectors on disk as being 0. Going back to early versions of DOS, 
+      there was a maximum partition size of 32MB. Sectors on disk could fit into 
+      this entry quite easily. Anything bigger than a 32MB partition under DOS 
+      requires more than two bytes to give the size. If the entry at 7C13 is 
+      zero, then the entry at 7C20 gives the number of sectors on the disk, ie 
+      4192902 in the case of my hard drive.<BR><BR>Offset 7C1C talks about 
+      hidden sectors. All it means is that the MBR occupies a single sector, but 
+      the rest of the track is reserved before the start of the boot sector. In 
+      the case of this hard disk, the MBR occupies CHS=0,0,1 to CHS=0,0,63. A 
+      total of 63 sectors are therefore used for the MBR, hence these are called 
+      hidden sectors.<BR><BR>We also need to take a diversion here to look at 
+      how DOS uses information from this section of the boot sector.<BR><BR>If 
+      you have calculated the number of sectors on disk from the CHS parameters, 
+      you will have noticed that this does not match up to the Big Total Sectors 
+      value that DOS puts into the boot sector.<BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD>CHS Sectors</TD>
+          <TD>4192965</TD></TR>
+        <TR>
+          <TD>Big Total Sectors</TD>
+          <TD>4192902</TD></TR>
+        <TR>
+          <TD>Difference</TD>
+          <TD>63</TD></TR>
+        <TBODY></TBODY></TABLE><BR>DOS does not count the number of hidden 
+      sectors, hence the 63 difference.<BR><BR>The number of clusters can be 
+      calculated from information in the boot sector. We need to find out how 
+      many sectors are used for the boot sector, 2 FAT's and the root 
+      directory.<BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD><FONT color=red>Section</FONT></TD>
+          <TD><FONT color=red>Sectors</FONT></TD>
+          <TD><FONT color=red>Comments</FONT></TD></TR>
+        <TR>
+          <TD>Boot Sector</TD>
+          <TD>1</TD>
+          <TD>The boot sector always occupies a single sector</TD></TR>
+        <TR>
+          <TD>FAT</TD>
+          <TD>512</TD>
+          <TD>From 7C16h</TD></TR>
+        <TR>
+          <TD>Root Directory</TD>
+          <TD>32</TD>
+          <TD>From 7C11h. There are 512 root directory entries, each being 32 
+            bytes, ie a total of 32 sectors</TD></TR>
+        <TR>
+          <TD colSpan=3><FONT color=red>Total system area sectors (excluding 
+            MBR/Partition Table) is 545</FONT></TD></TR>
+        <TBODY></TBODY></TABLE><BR>The number of clusters is :-<BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD>(Big Total Sectors - System Area Sectors) / Sectors per 
+          Cluster</TD></TR>
+        <TBODY></TBODY></TABLE><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD>(4192902 - 545) / 64 = 65505.6</TD></TR>
+        <TBODY></TBODY></TABLE><BR>Clusters have to be an integer number so we 
+      discard the number after the decimal point, so we have 65505 
+      clusters.<BR><BR>If you add up the system area sectors and cluster sectors 
+      you will find that there are 37 sectors left over. These sectors can never 
+      be used by DOS as they are insufficient to form a cluster, so are wasted 
+      space.<BR><BR><A name=7.3.4></A><FONT color=magenta>
+      <H3><I>7.3.4 Assembly Language Boot Code</I></H3></FONT>Here's what the 
+      assembly boot code looks like :-<BR><BR>
+      <TABLE border=1 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD colSpan=4><FONT color=red>Assembly Language Boot 
+        Code</FONT></TD></TR>
+        <TR>
+          <TD><FONT color=red>Memory<BR>Offset</FONT></TD>
+          <TD><FONT color=red>Opcode</FONT></TD>
+          <TD><FONT color=red>Operand</FONT></TD>
+          <TD><FONT color=red>Comments</FONT></TD></TR>
+        <TR>
+          <TD colSpan=4><FONT color=red>Initialisation stuff :-</FONT></TD></TR>
+        <TR>
+          <TD vAlign=top>7C3E</TD>
+          <TD vAlign=top>CLI</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Clear Interrupt Flag</TD></TR>
+        <TR>
+          <TD vAlign=top>7C3F</TD>
+          <TD vAlign=top>XOR</TD>
+          <TD vAlign=top>AX,AX</TD>
+          <TD>Clear AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7C41</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>SS,AX</TD>
+          <TD>0000 into Stack Segment</TD></TR>
+        <TR>
+          <TD vAlign=top>7C43</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>SP,7C00</TD>
+          <TD>7C00 into Stack Pointer</TD></TR>
+        <TR>
+          <TD vAlign=top>7C46</TD>
+          <TD vAlign=top>PUSH</TD>
+          <TD vAlign=top>SS</TD>
+          <TD>Zero onto stack</TD></TR>
+        <TR>
+          <TD vAlign=top>7C47</TD>
+          <TD vAlign=top>POP</TD>
+          <TD vAlign=top>ES</TD>
+          <TD>Then into ES</TD></TR>
+        <TR>
+          <TD vAlign=top>7C48</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>BX,0078</TD>
+          <TD>0078h into BX</TD></TR>
+        <TR>
+          <TD vAlign=top>7C4B</TD>
+          <TD vAlign=top>SS:</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Use SS rather than DS for next instruction, ie LSS SI,[BX]</TD></TR>
+        <TR>
+          <TD vAlign=top>7C4C</TD>
+          <TD vAlign=top>LDS</TD>
+          <TD vAlign=top>SI,[BX]</TD>
+          <TD>Load 0000h into SS and 0078h into SI. This memory address is 
+            part of the Interrupt Vector Table and holds the vector for INT 1Eh. 
+            Vectors are 4 bytes in IP:CS format</TD></TR>
+        <TR>
+          <TD vAlign=top>7C4E</TD>
+          <TD vAlign=top>PUSH</TD>
+          <TD vAlign=top>DS</TD>
+          <TD>Save DS (0000h)</TD></TR>
+        <TR>
+          <TD vAlign=top>7C4F</TD>
+          <TD vAlign=top>PUSH</TD>
+          <TD vAlign=top>SI</TD>
+          <TD>Save SI (0078h)</TD></TR>
+        <TR>
+          <TD vAlign=top>7C50</TD>
+          <TD vAlign=top>PUSH</TD>
+          <TD vAlign=top>SS</TD>
+          <TD>Save SS (0000h)</TD></TR>
+        <TR>
+          <TD vAlign=top>7C51</TD>
+          <TD vAlign=top>PUSH</TD>
+          <TD vAlign=top>BX</TD>
+          <TD>Save BX (0078h)</TD></TR>
+        <TR>
+          <TD vAlign=top>7C52</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>DI,7C3E</TD>
+          <TD>7C3Eh into DI</TD></TR>
+        <TR>
+          <TD vAlign=top>7C55</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>CX,000B</TD>
+          <TD>000Bh into CX</TD></TR>
+        <TR>
+          <TD vAlign=top>7C58</TD>
+          <TD vAlign=top>CLD</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Clear Direction Flag</TD></TR>
+        <TR>
+          <TD vAlign=top>7C59</TD>
+          <TD vAlign=top>REPZ</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Repeat next MOVSB 0Bh times</TD></TR>
+        <TR>
+          <TD vAlign=top>7C5A</TD>
+          <TD vAlign=top>MOVSB</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Copy eleven bytes from 0078h-0082h to 7C3Eh-7C48h<BR>0078h 
+            corresponds to INT 1Eh entry in the interrupt vector table and is 
+            the pointer to the diskette parameter table. Each entry is 4 bytes 
+            long, so we are also copying INT 1Fh vector, and 3 bytes from INT 
+            20h as well</TD></TR>
+        <TR>
+          <TD vAlign=top>7C5B</TD>
+          <TD vAlign=top>PUSH</TD>
+          <TD vAlign=top>ES</TD>
+          <TD>Save ES (0)</TD></TR>
+        <TR>
+          <TD vAlign=top>7C5C</TD>
+          <TD vAlign=top>POP</TD>
+          <TD vAlign=top>DS</TD>
+          <TD>Restore ES to DS (0)</TD></TR>
+        <TR>
+          <TD vAlign=top>7C5D</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>BYTE PTR [DI-02],0F</TD>
+          <TD>0Fh into 7C3C</TD></TR>
+        <TR>
+          <TD vAlign=top>7C61</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>CX,[7C18]</TD>
+          <TD>Sectors per track into CX</TD></TR>
+        <TR>
+          <TD vAlign=top>7C65</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>[DI-07],CL</TD>
+          <TD>Low word of sectors per track into 7C35h</TD></TR>
+        <TR>
+          <TD vAlign=top>7C68</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>[BX+02],AX</TD>
+          <TD>0 into CS pointer for diskette parameter table</TD></TR>
+        <TR>
+          <TD vAlign=top>7C6B</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top><NOBR>WORD PTR [BX],7C3E</NOBR></TD>
+          <TD>7C3E as new address for diskette parameter table</TD></TR>
+        <TR>
+          <TD vAlign=top>7C6F</TD>
+          <TD vAlign=top>STI</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Set Interrupt Flag</TD></TR>
+        <TR>
+          <TD vAlign=top>7C70</TD>
+          <TD vAlign=top>INT</TD>
+          <TD vAlign=top>13</TD>
+          <TD>Call interrupt 13 with disk reset. This is a bit dodgy as DL has 
+            not been set. It should still be 80h from the MBR boot code.</TD></TR>
+        <TR>
+          <TD vAlign=top>7C72</TD>
+          <TD vAlign=top>JB</TD>
+          <TD vAlign=top>7CED</TD>
+          <TD>On error jump to error handler</TD></TR>
+        <TR>
+          <TD vAlign=top>7C74</TD>
+          <TD vAlign=top>XOR</TD>
+          <TD vAlign=top>AX,AX</TD>
+          <TD>Clear AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7C76</TD>
+          <TD vAlign=top>CMP</TD>
+          <TD vAlign=top>[7C13],AX</TD>
+          <TD>See if Sectors on disk=0 (will be for disks larger than 
+        32MB)</TD></TR>
+        <TR>
+          <TD vAlign=top>7C7A</TD>
+          <TD vAlign=top>JZ</TD>
+          <TD vAlign=top>7C84</TD>
+          <TD>Yes, jump to 7C84</TD></TR>
+        <TR>
+          <TD vAlign=top>7C7C</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>CX,[7C13]</TD>
+          <TD>No, get Sectors into CX</TD></TR>
+        <TR>
+          <TD vAlign=top>7C80</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>[7C20],CX</TD>
+          <TD>And put into 7C20</TD></TR>
+        <TR>
+          <TD vAlign=top>7C84</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>AL,[7C10]</TD>
+          <TD>Get the number of FAT's into AL</TD></TR>
+        <TR>
+          <TD vAlign=top>7C87</TD>
+          <TD vAlign=top>MUL</TD>
+          <TD vAlign=top>WORD PTR [7C16]</TD>
+          <TD>Sectors per FAT x number of FAT's into DX:AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7C8B</TD>
+          <TD vAlign=top>ADD</TD>
+          <TD vAlign=top>AX,[7C1C]</TD>
+          <TD>Add Hidden Sectors First word to AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7C8F</TD>
+          <TD vAlign=top>ADC</TD>
+          <TD vAlign=top>DX,[7C1E]</TD>
+          <TD>Add with carry Hidden Sectors Second word to DX</TD></TR>
+        <TR>
+          <TD vAlign=top>7C93</TD>
+          <TD vAlign=top>ADD</TD>
+          <TD vAlign=top>AX,[7C0E]</TD>
+          <TD>Add number of reserved sectors to AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7C97</TD>
+          <TD vAlign=top>ADC</TD>
+          <TD vAlign=top>DX,+00</TD>
+          <TD>Add any carry to DX. DX:AX now contains number of sectors for 
+            MBR, boot record and FAT's.</TD></TR>
+        <TR>
+          <TD vAlign=top>7C9A</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>[7C50],AX</TD>
+          <TD>AX into 7C50</TD></TR>
+        <TR>
+          <TD vAlign=top>7C9D</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>[7C52],DX</TD>
+          <TD>DX into 7C52</TD></TR>
+        <TR>
+          <TD vAlign=top>7CA1</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>[7C49],AX</TD>
+          <TD>AX into 7C49</TD></TR>
+        <TR>
+          <TD vAlign=top>7CA4</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>[7C4B],DX</TD>
+          <TD>DX into 7C4B</TD></TR>
+        <TR>
+          <TD vAlign=top>7CA8</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>AX,0020</TD>
+          <TD>20h into AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7CAB</TD>
+          <TD vAlign=top>MUL</TD>
+          <TD vAlign=top>WORD PTR [7C11]</TD>
+          <TD>Root directory entries x 20h into DX:AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7CAF</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>BX,[7C0B]</TD>
+          <TD>Bytes per sector into BX</TD></TR>
+        <TR>
+          <TD vAlign=top>7CB3</TD>
+          <TD vAlign=top>ADD</TD>
+          <TD vAlign=top>AX,BX</TD>
+          <TD>Add BX to AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7CB5</TD>
+          <TD vAlign=top>DEC</TD>
+          <TD vAlign=top>AX</TD>
+          <TD>AX=AX-1</TD></TR>
+        <TR>
+          <TD vAlign=top>7CB6</TD>
+          <TD vAlign=top>DIV</TD>
+          <TD vAlign=top>BX</TD>
+          <TD>DX:AX / BX. The quotient goes into AX and the remainder goes 
+            into DX</TD></TR>
+        <TR>
+          <TD vAlign=top>7CB8</TD>
+          <TD vAlign=top>ADD</TD>
+          <TD vAlign=top>[7C49],AX</TD>
+          <TD>AX into 7C49, ie total number of sectors for complete system 
+          area</TD></TR>
+        <TR>
+          <TD vAlign=top>7CBC</TD>
+          <TD vAlign=top>ADC</TD>
+          <TD vAlign=top><NOBR>WORD PTR [7C4B],+00</NOBR></TD>
+          <TD>Any carry into 7C4B</TD></TR>
+        <TR>
+          <TD vAlign=top>7CC1</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>BX,0500</TD>
+          <TD>500h into BX</TD></TR>
+        <TR>
+          <TD vAlign=top>7CC4</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>DX,[7C52]</TD>
+          <TD>Number of sectors for MBR, boot record and FAT's into 
+DX:AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7CC8</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>AX,[7C50]</TD>
+          <TD>&nbsp;</TD></TR>
+        <TR>
+          <TD vAlign=top>7CCB</TD>
+          <TD vAlign=top>CALL</TD>
+          <TD vAlign=top>7D60</TD>
+          <TD>Get CHS for Root Directory entry</TD></TR>
+        <TR>
+          <TD vAlign=top>7CCE</TD>
+          <TD vAlign=top>JB</TD>
+          <TD vAlign=top>7CED</TD>
+          <TD>Error ?, Jump to Error Handler</TD></TR>
+        <TR>
+          <TD vAlign=top>7CD0</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>AL,01</TD>
+          <TD>No..continue. 01 into AL</TD></TR>
+        <TR>
+          <TD vAlign=top>7CD2</TD>
+          <TD vAlign=top>CALL</TD>
+          <TD vAlign=top>7D81</TD>
+          <TD>Read 1st sector of Root Directory to into 0000h:0500h</TD></TR>
+        <TR>
+          <TD vAlign=top>7CD5</TD>
+          <TD vAlign=top>JB</TD>
+          <TD vAlign=top>7CED</TD>
+          <TD>Error ? jump to handler</TD></TR>
+        <TR>
+          <TD vAlign=top>7CD7</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>DI,BX</TD>
+          <TD>500h into DI</TD></TR>
+        <TR>
+          <TD vAlign=top>7CD9</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>CX,000B</TD>
+          <TD>Bh into CX</TD></TR>
+        <TR>
+          <TD vAlign=top>7CDC</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>SI,7DE6</TD>
+          <TD>7DE6 into SI</TD></TR>
+        <TR>
+          <TD vAlign=top>7CDF</TD>
+          <TD vAlign=top>REPZ</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Repeat following 0Bh times</TD></TR>
+        <TR>
+          <TD vAlign=top>7CE0</TD>
+          <TD vAlign=top>CMPSB</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Compare string at 7DE6h with string at 0500h (root directory 
+            start). Should both be 
+        IO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYS.</TD></TR>
+        <TR>
+          <TD vAlign=top>7CE1</TD>
+          <TD vAlign=top>JNZ</TD>
+          <TD vAlign=top>7CED</TD>
+          <TD>Error ? jump to handler</TD></TR>
+        <TR>
+          <TD vAlign=top>7CE3</TD>
+          <TD vAlign=top>LEA</TD>
+          <TD vAlign=top>DI,[BX+20]</TD>
+          <TD>0500h+20h, ie root directory second entry, should be string 
+            MSDOS&nbsp;&nbsp;&nbsp;&nbsp;SYS</TD></TR>
+        <TR>
+          <TD vAlign=top>7CE6</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>CX,000B</TD>
+          <TD>0Bh into CX</TD></TR>
+        <TR>
+          <TD vAlign=top>7CE9</TD>
+          <TD vAlign=top>REPZ</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Repeat next instruction 0Bh times</TD></TR>
+        <TR>
+          <TD vAlign=top>7CEA</TD>
+          <TD vAlign=top>CMPSB</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Compare string at 7E06h with string at 0500h (root directory 
+            second entry). Should both be MSDOS&nbsp;&nbsp;&nbsp;SYS.</TD></TR>
+        <TR>
+          <TD vAlign=top>7CEB</TD>
+          <TD vAlign=top>JZ</TD>
+          <TD vAlign=top>7D05</TD>
+          <TD>OK ? jump to 7D05h, if not then continue (into error 
+        handler)</TD></TR>
+        <TR>
+          <TD colSpan=4><FONT color=red>Error Handler Routine :-</FONT></TD></TR>
+        <TR>
+          <TD vAlign=top>7CED</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>SI,7D9E</TD>
+          <TD>Error message address into SI</TD></TR>
+        <TR>
+          <TD vAlign=top>7CF0</TD>
+          <TD vAlign=top>CALL</TD>
+          <TD vAlign=top>7D52</TD>
+          <TD>Display Message on Screen</TD></TR>
+        <TR>
+          <TD vAlign=top>7CF3</TD>
+          <TD vAlign=top>XOR</TD>
+          <TD vAlign=top>AX,AX</TD>
+          <TD>Clear AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7CF5</TD>
+          <TD vAlign=top>INT</TD>
+          <TD vAlign=top>16</TD>
+          <TD>Wait for a key to be pressed</TD></TR>
+        <TR>
+          <TD vAlign=top>7CF7</TD>
+          <TD vAlign=top>POP</TD>
+          <TD vAlign=top>SI</TD>
+          <TD>Reset registers and interrupt vector table entries back to 
+            original values ready for reboot</TD></TR>
+        <TR>
+          <TD vAlign=top>7CF8</TD>
+          <TD vAlign=top>POP</TD>
+          <TD vAlign=top>DS</TD>
+          <TD>Ditto</TD></TR>
+        <TR>
+          <TD vAlign=top>7CF9</TD>
+          <TD vAlign=top>POP</TD>
+          <TD vAlign=top>[SI]</TD>
+          <TD>Ditto</TD></TR>
+        <TR>
+          <TD vAlign=top>7CFB</TD>
+          <TD vAlign=top>POP</TD>
+          <TD vAlign=top>[SI+02]</TD>
+          <TD>Ditto</TD></TR>
+        <TR>
+          <TD vAlign=top>7CFE</TD>
+          <TD vAlign=top>INT</TD>
+          <TD vAlign=top>19</TD>
+          <TD>Red Hot boot, ie no system checks or resets. Try to load DOS 
+            again from hard disk or floppy.</TD></TR>
+        <TR>
+          <TD colSpan=4><FONT color=red>Pre-error handler for when registers 
+            need to be reset :-</FONT></TD></TR>
+        <TR>
+          <TD vAlign=top>7D00</TD>
+          <TD vAlign=top>POP</TD>
+          <TD vAlign=top>AX</TD>
+          <TD>Clear last stack entry</TD></TR>
+        <TR>
+          <TD vAlign=top>7D01</TD>
+          <TD vAlign=top>POP</TD>
+          <TD vAlign=top>AX</TD>
+          <TD>Ditto</TD></TR>
+        <TR>
+          <TD vAlign=top>7D02</TD>
+          <TD vAlign=top>POP</TD>
+          <TD vAlign=top>AX</TD>
+          <TD>Ditto</TD></TR>
+        <TR>
+          <TD vAlign=top>7D03</TD>
+          <TD vAlign=top>JMP</TD>
+          <TD vAlign=top>7CED</TD>
+          <TD>Jump to error handler</TD></TR>
+        <TR>
+          <TD colSpan=4><FONT color=red>OK, load IO.SYS and pass control to it 
+            :-</FONT></TD></TR>
+        <TR>
+          <TD vAlign=top>7D05</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>AX,[BX+1A]</TD>
+          <TD>Starting cluster of IO.SYS into AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D08</TD>
+          <TD vAlign=top>DEC</TD>
+          <TD vAlign=top>AX</TD>
+          <TD>AX=AX-1</TD></TR>
+        <TR>
+          <TD vAlign=top>7D09</TD>
+          <TD vAlign=top>DEC</TD>
+          <TD vAlign=top>AX</TD>
+          <TD>AX=AX-1</TD></TR>
+        <TR>
+          <TD vAlign=top>7D0A</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>BL,[7C0D]</TD>
+          <TD>Sectors per cluster into BL</TD></TR>
+        <TR>
+          <TD vAlign=top>7D0E</TD>
+          <TD vAlign=top>XOR</TD>
+          <TD vAlign=top>BH,BH</TD>
+          <TD>Clear BH</TD></TR>
+        <TR>
+          <TD vAlign=top>7D10</TD>
+          <TD vAlign=top>MUL</TD>
+          <TD vAlign=top>BX</TD>
+          <TD>Start cluster x sectors per cluster into DX:AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D12</TD>
+          <TD vAlign=top>ADD</TD>
+          <TD vAlign=top>AX,[7C49]</TD>
+          <TD>Add total system area sectors to AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D16</TD>
+          <TD vAlign=top>ADC</TD>
+          <TD vAlign=top>DX,[7C4B]</TD>
+          <TD>Ditto for MSB word</TD></TR>
+        <TR>
+          <TD vAlign=top>7D1A</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>BX,0700</TD>
+          <TD>0700h into BX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D1D</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>CX,0003</TD>
+          <TD>3 into CX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D20</TD>
+          <TD vAlign=top>PUSH</TD>
+          <TD vAlign=top>AX</TD>
+          <TD>Save AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D21</TD>
+          <TD vAlign=top>PUSH</TD>
+          <TD vAlign=top>DX</TD>
+          <TD>Save DX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D22</TD>
+          <TD vAlign=top>PUSH</TD>
+          <TD vAlign=top>CX</TD>
+          <TD>Save CX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D23</TD>
+          <TD vAlign=top>CALL</TD>
+          <TD vAlign=top>7D60</TD>
+          <TD>Calculate CHS for IO.SYS</TD></TR>
+        <TR>
+          <TD vAlign=top>7D26</TD>
+          <TD vAlign=top>JB</TD>
+          <TD vAlign=top>7D00</TD>
+          <TD>Error ?, POP pushed values back off the stack and jump to error 
+            handler</TD></TR>
+        <TR>
+          <TD vAlign=top>7D28</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>AL,01</TD>
+          <TD>AL=1</TD></TR>
+        <TR>
+          <TD vAlign=top>7D2A</TD>
+          <TD vAlign=top>CALL</TD>
+          <TD vAlign=top>7D81</TD>
+          <TD>Read a sector of IO.SYS into 0000:BX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D2D</TD>
+          <TD vAlign=top>POP</TD>
+          <TD vAlign=top>CX</TD>
+          <TD>Restore CX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D2E</TD>
+          <TD vAlign=top>POP</TD>
+          <TD vAlign=top>DX</TD>
+          <TD>Restore DX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D2F</TD>
+          <TD vAlign=top>POP</TD>
+          <TD vAlign=top>AX</TD>
+          <TD>Restore AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D30</TD>
+          <TD vAlign=top>JB</TD>
+          <TD vAlign=top>7CED</TD>
+          <TD>Error ? jump to handler</TD></TR>
+        <TR>
+          <TD vAlign=top>7D32</TD>
+          <TD vAlign=top>ADD</TD>
+          <TD vAlign=top>AX,0001</TD>
+          <TD>Increment sector number in AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D35</TD>
+          <TD vAlign=top>ADC</TD>
+          <TD vAlign=top>DX,+00</TD>
+          <TD>Any carry into DX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D38</TD>
+          <TD vAlign=top>ADD</TD>
+          <TD vAlign=top>BX,[7C0B]</TD>
+          <TD>Add bytes per sector into BX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D3C</TD>
+          <TD vAlign=top>LOOP</TD>
+          <TD vAlign=top>7D20</TD>
+          <TD>Read a further 3 sectors from IO.SYS</TD></TR>
+        <TR>
+          <TD vAlign=top>7D3E</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>CH,[7C15]</TD>
+          <TD>Format ID media into CH (F8 for hard drive)</TD></TR>
+        <TR>
+          <TD vAlign=top>7D42</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>DL,[7C24]</TD>
+          <TD>Drive number into DL</TD></TR>
+        <TR>
+          <TD vAlign=top>7D46</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>BX,[7C49]</TD>
+          <TD>Total system sector LSW into BX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D4A</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>AX,[7C4B]</TD>
+          <TD>Total system sectors MSW into AX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D4D</TD>
+          <TD vAlign=top>JMP</TD>
+          <TD vAlign=top>0070:0000</TD>
+          <TD>All done, transfer control to IO.SYS</TD></TR>
+        <TR>
+          <TD colSpan=4><FONT color=red>Display Error Message on Screen 
+            :-</FONT></TD></TR>
+        <TR>
+          <TD vAlign=top>7D52</TD>
+          <TD vAlign=top>LODSB</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Load character</TD></TR>
+        <TR>
+          <TD vAlign=top>7D53</TD>
+          <TD vAlign=top>OR</TD>
+          <TD vAlign=top>AL,AL</TD>
+          <TD>AL=0? We're all done</TD></TR>
+        <TR>
+          <TD vAlign=top>7D55</TD>
+          <TD vAlign=top>JZ</TD>
+          <TD vAlign=top>7D80</TD>
+          <TD>Yes? Jump to return</TD></TR>
+        <TR>
+          <TD vAlign=top>7D57</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>AH,0E</TD>
+          <TD>No? 0Eh into AH, ie write to screen</TD></TR>
+        <TR>
+          <TD vAlign=top>7D59</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>BX,0007</TD>
+          <TD>7 into BX, text color, ie white</TD></TR>
+        <TR>
+          <TD vAlign=top>7D5C</TD>
+          <TD vAlign=top>INT</TD>
+          <TD vAlign=top>10</TD>
+          <TD>Write the character</TD></TR>
+        <TR>
+          <TD vAlign=top>7D5E</TD>
+          <TD vAlign=top>JMP</TD>
+          <TD vAlign=top>7D52</TD>
+          <TD>Loop until error message complete</TD></TR>
+        <TR>
+          <TD colSpan=4><FONT color=red>Calculate CHS for a particular area or 
+            file on disk :-</FONT></TD></TR>
+        <TR>
+          <TD vAlign=top>7D60</TD>
+          <TD vAlign=top>CMP</TD>
+          <TD vAlign=top>DX,[7C18]</TD>
+          <TD>Make sure DX isn't greater than sectors per track</TD></TR>
+        <TR>
+          <TD vAlign=top>7D64</TD>
+          <TD vAlign=top>JNB</TD>
+          <TD vAlign=top>7D7F</TD>
+          <TD>If it is...set CF to ensure calling routine gets error</TD></TR>
+        <TR>
+          <TD vAlign=top>7D66</TD>
+          <TD vAlign=top>DIV</TD>
+          <TD vAlign=top>WORD PTR [7C18]</TD>
+          <TD>No ? divide DX:AX by sectors per track</TD></TR>
+        <TR>
+          <TD vAlign=top>7D6A</TD>
+          <TD vAlign=top>INC</TD>
+          <TD vAlign=top>DL</TD>
+          <TD>DL=DL+1. Sector number</TD></TR>
+        <TR>
+          <TD vAlign=top>7D6C</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>[7C4F],DL</TD>
+          <TD>Store sector in 7C4F</TD></TR>
+        <TR>
+          <TD vAlign=top>7D70</TD>
+          <TD vAlign=top>XOR</TD>
+          <TD vAlign=top>DX,DX</TD>
+          <TD>Clear DX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D72</TD>
+          <TD vAlign=top>DIV</TD>
+          <TD vAlign=top>WORD PTR [7C1A]</TD>
+          <TD>DX:AX / number of heads</TD></TR>
+        <TR>
+          <TD vAlign=top>7D76</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>[7C25],DL</TD>
+          <TD>Head number into 7C25</TD></TR>
+        <TR>
+          <TD vAlign=top>7D7A</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>[7C4D],AX</TD>
+          <TD>Cylinder into 7C4D</TD></TR>
+        <TR>
+          <TD vAlign=top>7D7D</TD>
+          <TD vAlign=top>CLC</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Clear CF - ie no error</TD></TR>
+        <TR>
+          <TD vAlign=top>7D7E</TD>
+          <TD vAlign=top>RET</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Return</TD></TR>
+        <TR>
+          <TD vAlign=top>7D7F</TD>
+          <TD vAlign=top>STC</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Set CF - ie error</TD></TR>
+        <TR>
+          <TD vAlign=top>7D80</TD>
+          <TD vAlign=top>RET</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Return</TD></TR>
+        <TR>
+          <TD colSpan=4><FONT color=red>Read a number of sectors from disk via 
+            INT 13h.<BR>Expects AL to contain the number of sectors to read, and 
+            ES:BX to contain memory address to write sector to :-</FONT></TD></TR>
+        <TR>
+          <TD vAlign=top>7D81</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>AH,02</TD>
+          <TD>INT 13h service request 2, ie read sectors</TD></TR>
+        <TR>
+          <TD vAlign=top>7D83</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>DX,[7C4D]</TD>
+          <TD>Cylinder into DX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D87</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>CL,06</TD>
+          <TD>6 into CL</TD></TR>
+        <TR>
+          <TD vAlign=top>7D89</TD>
+          <TD vAlign=top>SHL</TD>
+          <TD vAlign=top>DH,CL</TD>
+          <TD>Multiply DH by 64</TD></TR>
+        <TR>
+          <TD vAlign=top>7D8B</TD>
+          <TD vAlign=top>OR</TD>
+          <TD vAlign=top>DH,[7C4F]</TD>
+          <TD>Or with Sector</TD></TR>
+        <TR>
+          <TD vAlign=top>7D8F</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>CX,DX</TD>
+          <TD>Copy DX to CX</TD></TR>
+        <TR>
+          <TD vAlign=top>7D91</TD>
+          <TD vAlign=top>XCHG</TD>
+          <TD vAlign=top>CH,CL</TD>
+          <TD>Cylinder now in CH and Sector in CL</TD></TR>
+        <TR>
+          <TD vAlign=top>7D93</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>DL,[7C24]</TD>
+          <TD>80h into DL (hard drive number)</TD></TR>
+        <TR>
+          <TD vAlign=top>7D97</TD>
+          <TD vAlign=top>MOV</TD>
+          <TD vAlign=top>DH,[7C25]</TD>
+          <TD>Head number into DH</TD></TR>
+        <TR>
+          <TD vAlign=top>7D9B</TD>
+          <TD vAlign=top>INT</TD>
+          <TD vAlign=top>13</TD>
+          <TD>Read sector(s)</TD></TR>
+        <TR>
+          <TD vAlign=top>7D9D</TD>
+          <TD vAlign=top>RET</TD>
+          <TD vAlign=top>&nbsp;</TD>
+          <TD>Return</TD></TR>
+        <TBODY></TBODY></TABLE><BR>I bet you're glad that's finished ;)<BR><BR>So 
+      what the boot sector does is primarily to check if we have a DOS operating 
+      system present (on the basis that IO.SYS is where it should be), and if 
+      so, it copies the first 4 sectors of IO.SYS to 0070h:0000h and passes 
+      control to IO.SYS.<BR><BR>IO.SYS continues with it's own setup procedure 
+      then passes control to MSDOS.SYS, which also has it's own stuff to process 
+      before passing control to COMMAND.COM which ends up giving you your C:\ 
+      prompt (after processing CONFIG.SYS and AUTOEXEC.BAT if they are 
+      present).<BR><BR>I could go further and put up the code for IO.SYS, 
+      MSDOS.SYS and COMMAND.COM, but this would end up as a MASSIVE page if I 
+      did, and it's big enough already !<BR><BR>We did need to look at the boot 
+      record code in detail as we will be modifying it in later sections as part 
+      of our intended encryption procedures.<BR><BR><A name=7.3.5></A><FONT 
+      color=magenta>
+      <H3><I>7.3.5 Error Message</I></H3></FONT>Here's the error message 
+      :-<BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD><FONT color=red>Offset</FONT></TD>
+          <TD><FONT color=red>Message</FONT></TD></TR>
+        <TR>
+          <TD>7D9E</TD>
+          <TD>Non-System disk or disk error<BR>Replace and press any key when 
+            ready</TD></TR>
+        <TBODY></TBODY></TABLE><BR>Basically, if anything goes wrong, you are 
+      prompted to put in a DOS disk and press any key for the "red hot" 
+      reboot.<BR><BR>This can easily happen for example if you have a non system 
+      disk in drive A and have that drive setup in the BIOS as primary choice 
+      for bootup.<BR><BR><A name=7.3.6></A><FONT color=magenta>
+      <H3><I>7.3.6 System File Names</I></H3></FONT>System file names are padded 
+      with spaces to use the DOS 8.3 (filename.extension) format. :-<BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD><FONT color=red>Offset</FONT></TD>
+          <TD><FONT color=red>Name</FONT></TD></TR>
+        <TR>
+          <TD>7DE6</TD>
+          <TD><FONT 
+            face=courier><B>IO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYS</B></FONT></TD></TR>
+        <TR>
+          <TD>7DF1</TD>
+          <TD><FONT 
+face=courier><B>MSDOS&nbsp;&nbsp;&nbsp;SYS</B></FONT></TD></TR>
+        <TBODY></TBODY></TABLE><BR>Note the full stop is missing between the 
+      filename and extension. DOS automatically assigns this.<BR><BR>DOS expects 
+      these files to be the first files on the disk, ie that IO.SYS will start 
+      at cluster 2, and MSDOS.SYS will start immediately after IO.SYS.<BR><BR>If 
+      not, then DOS will complain and won't be able to boot !<BR><BR><A 
+      name=7.3.7></A><FONT color=magenta>
+      <H3><I>7.3.7 DOS Signature</I></H3></FONT>The usual DOS signature (55AAh) 
+      has to be at location 7DFE for DOS to boot. <BR><BR><A name=7.4></A><FONT 
+      color=green>
+      <H3><I>7.4 The File Allocation Table</I></H3></FONT><A 
+      name=7.4.1></A><FONT color=magenta>
+      <H3><I>7.4.1 Introduction</I></H3></FONT>Finally we are about to find out 
+      how DOS keeps track of files on your computer.<BR><BR>OK. So far we have 
+      the MBR/Partition Table at CHS=0,0,1. We also have the boot record at 
+      CHS=0,1,1 (remember that the whole of track 0 is reserved for the MBR even 
+      though it usually only uses a single sector).<BR><BR>The start of the 
+      first copy of the FAT comes immediately after this, ie at CHS=0,1,2. The 
+      second copy of the FAT follows the first, so in the case of my hard drive 
+      which has a 256 sector FAT, the second copy starts at 
+      CHS=0,5,6.<BR><BR>When a file is saved to disk, it's starting cluster 
+      number is stored in it's directory entry as a two byte number (see the 
+      next section on Root Directory and Sub Directory entries).<BR><BR>This 
+      starting cluster number serves as a pointer to the FAT entry that contains 
+      the number of the second cluster.<BR><BR><A name=7.4.2></A><FONT 
+      color=magenta>
+      <H3><I>7.4.2 Calculating Clusters</I></H3></FONT>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD><FONT color=red>Action</FONT></TD>
+          <TD><FONT color=red>Description</FONT></TD></TR>
+        <TR>
+          <TD>1</TD>
+          <TD>Get starting cluster number from directory entry</TD></TR>
+        <TR>
+          <TD>2</TD>
+          <TD>Multiply cluster number by 2 to get the FAT offset for the next 
+            cluster number</TD></TR>
+        <TR>
+          <TD>3</TD>
+          <TD>Look at FAT offset to get next cluster number</TD></TR>
+        <TR>
+          <TD>4</TD>
+          <TD>If less than FFF8h loop back to Action 2</TD></TR>
+        <TBODY></TBODY></TABLE><BR><A name=7.4.3></A><FONT color=magenta>
+      <H3><I>7.4.3 Example</I></H3></FONT>Let's take IO.SYS as an example. 
+      According to it's directory entry, the starting cluster number is 02. So, 
+      we multiply this by 2 to get the FAT offset for the next cluster number, 
+      ie it should be at FAT offset 04. When we look at this offset, we find the 
+      cluster number is 03, so we know where to look for this part of IO.SYS. We 
+      now mutiply the cluster number by 2 again to find the next entry in the 
+      FAT, ie 06. So we now take a look at FAT offset 06 to find the next 
+      cluster number. This is listed as FFFFh.<BR><BR>FFFFh signifies the end of 
+      the file, ie there are no more clusters used.<BR><BR><A 
+      name=7.4.4></A><FONT color=magenta>
+      <H3><I>7.4.4 Reserved Entries</I></H3></FONT>OK. That's the way DOS 
+      handles FAT entries. However, if you have noticed, then in the example of 
+      finding clusters for IO.SYS, I said that FFFFh signified the end of the 
+      file, but in the above table, I've said that anything less than FFF8h is 
+      the end of the file.<BR><BR>There are a few number ranges reserved for FAT 
+      entries. These are as follows :-<BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD><FONT color=red>Entry</FONT></TD>
+          <TD><FONT color=red>Description</FONT></TD></TR>
+        <TR>
+          <TD>0000</TD>
+          <TD>Cluster available</TD></TR>
+        <TR>
+          <TD>FFF0-FFF6</TD>
+          <TD>Reserved cluster</TD></TR>
+        <TR>
+          <TD>FFF7</TD>
+          <TD>Bad cluster</TD></TR>
+        <TR>
+          <TD>FFF8-FFFF</TD>
+          <TD>Last cluster of file</TD></TR>
+        <TR>
+          <TD>Anything Else</TD>
+          <TD>Cluster Number for File</TD></TR>
+        <TBODY></TBODY></TABLE><BR><A name=7.5></A><FONT color=green>
+      <H3><I>7.5 The Root Directory Entry</I></H3></FONT><A name=7.5.1></A><FONT 
+      color=magenta>
+      <H3><I>7.5.1 Introduction</I></H3></FONT>As we have seen from the data 
+      area of the boot sector, the Root Directory has a maximum of 200h (512d) 
+      entries. Each entry in the Root Directory has 20h (32d) bytes, which 
+      describe the filename, date/time, start cluster number etc.<BR><BR>The 
+      root directory is the last part of the system area and starts immediately 
+      after the second copy of the FAT. In the case of my hard drive, it starts 
+      at CHS=0,9,A<BR><BR>For all hard drives under DOS the root directory 
+      occupies 32 sectors to accomodate the 512 entries.<BR><BR>This means that 
+      it is important you make liberal use of subdirectories as you will run out 
+      of disk space rapidly if you just use the root directory to store files. 
+      If you don't create any subdirectories, your disk will be full when you 
+      have 512 files on it !<BR><BR>The root directory is fixed in this respect, 
+      however, subdirectories are dynamic and can expand or contract to hold as 
+      many files as your disk can take.<BR><BR><A name=7.5.2></A><FONT 
+      color=magenta>
+      <H3><I>7.5.2 Structure</I></H3></FONT>As mentioned before, each directory 
+      entry contains 20h (32d) bytes. The meaning of each byte in the entry is 
+      given by the following table :-<BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD><FONT color=red><NOBR>Offset(h)</NOBR></FONT></TD>
+          <TD><FONT color=red>Description</FONT></TD></TR>
+        <TR>
+          <TD vAlign=top>00-07</TD>
+          <TD>Filename, padded with spaces if it has less than eight 
+            characters. There are a few special characters used for the first 
+            byte of the filename :-<BR><BR>
+            <TABLE border=1 cellPadding=5 bgColor=cyan align=center>
+              <TBODY>
+              <TR>
+                <TD><FONT color=red><NOBR>Value (h)</NOBR></FONT></TD>
+                <TD><FONT color=red>Description</FONT></TD></TR>
+              <TR>
+                <TD vAlign=top>00</TD>
+                <TD>Unused entry</TD></TR>
+              <TR>
+                <TD vAlign=top>05</TD>
+                <TD>First character of filename is actually E5h</TD></TR>
+              <TR>
+                <TD vAlign=top>2E</TD>
+                <TD>Cluster points to a Subdirectory Entry. If the second byte 
+                  is also 2E, then the cluster points to the parent directory. 
+                  If the cluster entry field is zero, then the parent directory 
+                  is the root directory<BR><BR>This is why when you do a DIR 
+                  when you're in a subdirectory, you get the 
+                  :-<BR><BR>.<BR>..<BR><BR>before the listing of the files. 2E 
+                  is a full stop. DOS uses these values to track where directory 
+                  tables are stored on disk. The first line is the directory 
+                  currently listed and the second represents the directories 
+                  parent.</TD></TR>
+              <TR>
+                <TD vAlign=top>E5</TD>
+                <TD>File has been deleted</TD></TR></TBODY></TABLE><BR></TD></TR>
+        <TR>
+          <TD vAlign=top>08-0A</TD>
+          <TD>File extension, padded with spaces if it has less than three 
+            characters</TD></TR>
+        <TR>
+          <TD vAlign=top>0B</TD>
+          <TD>File Attributes :-<BR><BR>
+            <TABLE border=1 cellPadding=5 bgColor=cyan align=center>
+              <TBODY>
+              <TR>
+                <TD><FONT color=red><NOBR>Bit</NOBR></FONT></TD>
+                <TD><FONT color=red>Description</FONT></TD></TR>
+              <TR>
+                <TD vAlign=top>0</TD>
+                <TD>Read only file if set</TD></TR>
+              <TR>
+                <TD vAlign=top>1</TD>
+                <TD>Hidden file if set</TD></TR>
+              <TR>
+                <TD vAlign=top>2</TD>
+                <TD>System file if set</TD></TR>
+              <TR>
+                <TD vAlign=top>3</TD>
+                <TD>Characters in the filename and extension form the volume 
+                  label for the disk if set. This must be in the root directory, 
+                  and there can be only one entry with this bit set</TD></TR>
+              <TR>
+                <TD vAlign=top>4</TD>
+                <TD>Directory entry corresponds to a subdirectory if set</TD></TR>
+              <TR>
+                <TD vAlign=top>5</TD>
+                <TD>Archive bit. DOS uses this with BACKUP to signify the file 
+                  has been modified since the last 
+          backup</TD></TR></TBODY></TABLE><BR></TD></TR>
+        <TR>
+          <TD vAlign=top>0C-15</TD>
+          <TD>Reserved</TD></TR>
+        <TR>
+          <TD vAlign=top>16-17</TD>
+          <TD>Time file was created or last modified.<BR>This is not in little 
+            endian format, ie byte 16h contains bits 0-7 and byte 17h contains 
+            bits 8-15. The meaning of the bits is as follows :-<BR><BR>
+            <TABLE border=1 cellPadding=5 bgColor=cyan align=center>
+              <TBODY>
+              <TR>
+                <TD><FONT color=red><NOBR>Bit</NOBR></FONT></TD>
+                <TD><FONT color=red>Description</FONT></TD></TR>
+              <TR>
+                <TD vAlign=top>00-04</TD>
+                <TD>Binary representation of seconds to the nearest 2 
+                seconds</TD></TR>
+              <TR>
+                <TD vAlign=top>05-0A</TD>
+                <TD>Binary representation of minutes (0-59)</TD></TR>
+              <TR>
+                <TD vAlign=top><NOBR>0B-0F</NOBR></TD>
+                <TD>Binary representation of hours 
+            (0-23)</TD></TR></TBODY></TABLE><BR></TD></TR>
+        <TR>
+          <TD vAlign=top>18-19</TD>
+          <TD>Date file was created or last modified.<BR>This is not in little 
+            endian format, ie byte 18h contains bits 0-7 and byte 19h contains 
+            bits 8-15. The meaning of the bits is as follows :-<BR><BR>
+            <TABLE border=1 cellPadding=5 bgColor=cyan align=center>
+              <TBODY>
+              <TR>
+                <TD><FONT color=red><NOBR>Bit</NOBR></FONT></TD>
+                <TD><FONT color=red>Description</FONT></TD></TR>
+              <TR>
+                <TD vAlign=top>00-04</TD>
+                <TD>Binary representation of day of the month (0-31)</TD></TR>
+              <TR>
+                <TD vAlign=top>05-08</TD>
+                <TD>Binary representation of month (1-12)</TD></TR>
+              <TR>
+                <TD vAlign=top><NOBR>09-0F</NOBR></TD>
+                <TD>Binary representation of year less 1980 (ie, 
+              0=1980)</TD></TR></TBODY></TABLE><BR></TD></TR>
+        <TR>
+          <TD vAlign=top>1A-1B</TD>
+          <TD>Starting cluster on disk in little endian format</TD></TR>
+        <TR>
+          <TD vAlign=top>1C-1F</TD>
+          <TD>File size</TD></TR>
+        <TBODY></TBODY></TABLE><BR><A name=7.5.3></A><FONT color=magenta>
+      <H3><I>7.5.3 Sub Directories</I></H3></FONT>The same format is also used 
+      to create other directory structures throughout the disk. The root 
+      directory entry is limited to 512 entries maximum as it is in the last 
+      part of the system area. Other directory entries are not as they are held 
+      in the data area.<BR><BR><A name=7.6></A><FONT color=green>
+      <H3><I>7.6 The Data Area</I></H3></FONT>The Data Area is the part of the 
+      disk that DOS stores files in.<BR><BR>If you use DOS to format a floppy 
+      disk, it overwrites the complete data area with F6h.<BR><BR>For a hard 
+      drive, DOS does nothing at all to the data area.<BR><BR><A 
+      name=8.0></A><FONT color=red>
+      <H3><U>8 Conclusion</U></H3></FONT>OK, after studying what DOS does upon 
+      bootup, we are now in a position to develop our own extremely secure 
+      filing system, that can be accessed via DOS.<BR><BR>To summarise what we 
+      have learned so far for a hard disk formatted under DOS:-<BR><BR>
+      <TABLE border=1 cellPadding=5 bgColor=yellow align=center>
+        <TBODY>
+        <TR>
+          <TD><FONT color=red>FDISK</FONT></TD>
+          <TD>Places the MBR/Partition Table into CHS=0,0,1. The rest of track 
+            0 is reserved even though it isn't used by DOS.</TD></TR>
+        <TR>
+          <TD><FONT color=red>FORMAT</FONT></TD>
+          <TD>Places the Boot Record into CHS=0,1,1.</TD></TR>
+        <TR>
+          <TD><FONT color=red>FORMAT</FONT></TD>
+          <TD>Places the first copy of the FAT immediately after the Boot 
+            Record.</TD></TR>
+        <TR>
+          <TD><FONT color=red>FORMAT</FONT></TD>
+          <TD>Places the second copy of the FAT immediately after the first 
+            copy.</TD></TR>
+        <TR>
+          <TD><FONT color=red>FORMAT</FONT></TD>
+          <TD>Places the Root Directory Entry immediately after the second 
+            FAT. The Root Directory has a maximum of 512 (decimal) 
+entries.</TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>The rest of the partition becomes the Data 
+      Area.</TD></TR></TBODY></TABLE><BR>We are now in a position to develop our 
+      own highly secure indexing system for DOS.<BR><BR>I hope you enjoy the 
+      next section ;)</DIV></TD></TR></TBODY></TABLE>
+<P align=right><A href="http://www.rota.uklinux.net/"><FONT color=#fafafa 
+size=1>The Rota</FONT></A></P>
+<P align=right><A href="http://www.bluecrab.uklinux.net/"><FONT color=#fafafa 
+size=1>BlueCrab Ltd</FONT></P></A></BODY></HTML>

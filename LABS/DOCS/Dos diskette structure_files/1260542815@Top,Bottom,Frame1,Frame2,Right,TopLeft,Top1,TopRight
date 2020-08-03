@@ -1,0 +1,26 @@
+function OAS_RICH(position) {
+if (position == 'Top') {
+document.write ('<A HREF="http://phoenix.untd.com/TRCK/CLCK//webservices/general/739470487/Top/default/empty.gif/794b4b4759315061664b674141375669?x" target="_blank"><IMG SRC="http://static.uolcontent.com/RealMedia/ads/Creatives/default/empty.gif"  WIDTH=1 HEIGHT=1 ALT="" BORDER=0 BORDER="0"></A>');
+}
+if (position == 'Bottom') {
+document.write ('<A HREF="http://phoenix.untd.com/TRCK/CLCK//webservices/general/510176148/Bottom/default/empty.gif/794b4b4759315061664b674141375669?x" target="_blank"><IMG SRC="http://static.uolcontent.com/RealMedia/ads/Creatives/default/empty.gif"  WIDTH=1 HEIGHT=1 ALT="" BORDER=0 BORDER="0"></A>');
+}
+if (position == 'Frame1') {
+document.write ('<A HREF="http://phoenix.untd.com/TRCK/CLCK//webservices/general/273156785/Frame1/default/empty.gif/794b4b4759315061664b674141375669?x" target="_blank"><IMG SRC="http://static.uolcontent.com/RealMedia/ads/Creatives/default/empty.gif"  WIDTH=1 HEIGHT=1 ALT="" BORDER=0 BORDER="0"></A>');
+}
+if (position == 'Frame2') {
+document.write ('<A HREF="http://phoenix.untd.com/TRCK/CLCK//webservices/general/1668185772/Frame2/default/empty.gif/794b4b4759315061664b674141375669?x" target="_blank"><IMG SRC="http://static.uolcontent.com/RealMedia/ads/Creatives/default/empty.gif"  WIDTH=1 HEIGHT=1 ALT="" BORDER=0 BORDER="0"></A>');
+}
+if (position == 'Right') {
+document.write ('<A HREF="http://phoenix.untd.com/TRCK/CLCK//webservices/general/1519738753/Right/default/empty.gif/794b4b4759315061664b674141375669?x" target="_blank"><IMG SRC="http://static.uolcontent.com/RealMedia/ads/Creatives/default/empty.gif"  WIDTH=1 HEIGHT=1 ALT="" BORDER=0 BORDER="0"></A>');
+}
+if (position == 'TopLeft') {
+document.write ('<A HREF="http://phoenix.untd.com/TRCK/CLCK//webservices/general/345646010/TopLeft/default/empty.gif/794b4b4759315061664b674141375669?x" target="_blank"><IMG SRC="http://static.uolcontent.com/RealMedia/ads/Creatives/default/empty.gif"  WIDTH=1 HEIGHT=1 ALT="" BORDER=0 BORDER="0"></A>');
+}
+if (position == 'Top1') {
+document.write ('<A HREF="http://phoenix.untd.com/TRCK/CLCK//webservices/general/1765410241/Top1/default/empty.gif/794b4b4759315061664b674141375669?x" target="_blank"><IMG SRC="http://static.uolcontent.com/RealMedia/ads/Creatives/default/empty.gif"  WIDTH=1 HEIGHT=1 ALT="" BORDER=0 BORDER="0"></A>');
+}
+if (position == 'TopRight') {
+document.write ('<A HREF="http://phoenix.untd.com/TRCK/CLCK//webservices/general/1947842539/TopRight/default/empty.gif/794b4b4759315061664b674141375669?x" target="_blank"><IMG SRC="http://static.uolcontent.com/RealMedia/ads/Creatives/default/empty.gif"  WIDTH=1 HEIGHT=1 ALT="" BORDER=0 BORDER="0"></A>');
+}
+}

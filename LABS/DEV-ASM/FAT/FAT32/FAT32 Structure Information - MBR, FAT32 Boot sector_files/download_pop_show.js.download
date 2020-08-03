@@ -1,0 +1,268 @@
+var download_fun=function(){};
+$(function(){
+	var download_mail=function(){
+		var submit_s='no';
+		var check_mail=function(s,error){
+			s=s.replace(/\s*/,'');
+			var pattern =/^[a-zA-Z0-9_\-.]{1,}@[a-zA-Z0-9_\-]{1,}\.[a-zA-Z0-9_\-.]{1,}$/;
+			if(s!=""){
+				 if(s.length<11){
+					error.removeClass('hidden').html('Please enter a valid e-mail');
+					submit_s='no';
+				 }else{
+					 if(!pattern.exec(s)){
+						error.removeClass('hidden').html('Please enter a valid e-mail');
+						submit_s='no';
+					 }else{
+						error.addClass('hidden');
+						submit_s='yes';
+					 }
+				 }
+			}else{
+				error.removeClass('hidden').html('E-mail can\'t be empty');
+				$('#download_email').val('');
+				submit_s='no';
+			}
+		}
+		var download_check=function(){
+			this.email=function(){
+				var download_html='<div class="download_pop_new"><div class="bg"></div><div class="content"><span class="close iconfont">&#xe8ee;</span><p class="title">Start Your Free Trial!</p><p class="email_title">Email<font>*</font></p><div class="input"><input type="text" id="download_email_new" name="email" value="" placeholder="Your email address" class="text" /><input type="hidden" name="ptype" id="ptype_new" value="tbhome"><input type="hidden" name="web" id="web_new" value="easeus"></div><p class="error hidden"></p><input type="button" class="submit" value="Try Todo Backup Trial" /><p class="check"><span class="c_box iconfont">&#xe618;</span>By entering your e-mail address you are signing up to our free newsletter. To unsubscribe, simply click the provided link inside the email. Your privacy is important to us (<a href="/privacy.htm" style="color:#808080; text-decoration:none;">Privacy Policy</a>).</p><span class="landing"></span></div></div>';
+				$('body').append(download_html);
+				var thisname='';
+				var error=$('.download_pop_new .error');
+                var newsletter='no';
+				$('#download_email_new').blur(function(){
+					check_mail($(this).val(),error);
+				});
+				$('.download_pop_new .close,.download_pop_new .bg').click(function(){
+					$('.download_pop_new').fadeOut(300);
+				});
+				$(document).on('click','.download_pop_show',function(){
+					thisname=$(this).attr('name');
+					$('#ptype_new').val(thisname);
+					var button_name;
+					if(thisname=='tbfree'){	
+						thisname+='&'+$(this).attr('href');
+						button_name='Try Todo Backup Free';
+						$('.download_pop_new .title').html('Start Your Free Version');
+					}else if(thisname=='tbhome'){
+						button_name='Try Todo Backup Trial';
+					}else if(thisname=='tbwork'){
+						button_name='Try Todo Backup Trial';
+					}else if(thisname=='tbserver'){
+						button_name='Try Todo Backup Trial';
+					}else if(thisname=='tbaserver'){
+						button_name='Try Todo Backup Trial';
+					}else if(thisname=='tbt'){
+						button_name='Try Todo Backup Trial';
+					}else if(thisname=='tbcmc'){
+						button_name='Try Backup Center Trial';
+					}else if(thisname=='edm'){
+						button_name='Try Deploy Manager Trial';
+					}else if(thisname=='epmfree'){
+						thisname+='&'+$(this).attr('href');
+						button_name='Try Partition Master Free';
+						$('.download_pop_new .title').html('Start Your Free Version');
+					}else{
+						return true;
+					}
+					$('.download_pop_new .submit').val(button_name);
+					$('.download_pop_new').fadeIn(300);
+					return false;
+				});
+                $(document).on('click','.download_pop_new .check',function(){
+                  if($(this).hasClass('current')){
+                      $(this).removeClass('current').find('.c_box').html('&#xe618;');
+                      newsletter='no';
+                  }else{
+                      $(this).addClass('current').find('.c_box').html('&#xe617;');
+                      newsletter='yes';
+                  }
+				});
+				$('.download_pop_new .submit').click(function(){
+					if(submit_s=='no'){
+						return false;
+					}else{
+						$('.download_pop_new .landing').show();
+						var email_val=$('#download_email_new').val();
+						var ptype_val=$('#ptype_new').val();
+						var web_val=$('#web_new').val();
+						var dom=document.createElement('script');
+                        var lang = (navigator.systemLanguage?navigator.systemLanguage:navigator.language);
+						$.ajax({
+							type : "GET",
+							url : 'https://www.easeus.com/mail/download/?email='+email_val+'&ptype='+ptype_val+'&web='+web_val+'&lang='+lang+'&newsletter='+newsletter,
+							dataType : "jsonp",
+							jsonp: 'callback',
+                            timeout:40000,
+							success : function(val){
+								var val = JSON.parse(val);
+								val=val.info;
+								if(val==1){
+									window.location.href="/landing/newsletter-download.html?"+thisname;
+								}else if(val==0){
+									error.removeClass('hidden').html('E-mail can\'t be empty');
+								}else{
+									error.removeClass('hidden').html('Please enter a valid e-mail');
+								}
+							},
+                            error:function(val){
+                                window.location.href="/landing/newsletter-download.html?"+thisname;
+                            }
+						});	
+					}
+				});
+			};
+			this.wap_email=function(){
+				var download_html='<div class="download_wap_pop"><span class="close"></span><span class="loading"></span><p class="title" id="download_wap_pop_title">EaseUS Data Recovery Wizard</p><p class="des">The program you want to try is for desktops. We will email the trial link to you right now.</p><div class="mail_box"><input id="download_email" class="text" type="text" placeholder="Your email address"/><input type="hidden" name="ptype" id="ptype" /><input type="hidden" name="web" id="web" value="easeus"><input class="submit" type="submit" value="Submit" /></div><p class="error hidden">&nbsp;</p><div class="success hidden"><p class="title">Submit Successfully!</p><p class="des">The trial link will be sent to you right now, please check your mailbox later. If the email cannot reach you, please check your email address availability. Thanks!</p></div><div class="this_scroll hidden" ><ul class="list clearfix"><li><div class="logo"><img src="/images_2016/drw_win/awards-4.png" width="320" height="70"></div><span class="quote_f">&nbsp;</span><div class="word">EaseUS Data Recovery Wizard can recover data from your hard drive, USB drives, memory cards, and other storage devices.</div><span class="quote_b">&nbsp;</span></li><li><div class="logo"><img src="/images_2016/drw_win/awards-pc-world.png" width="320" height="70"></div><span class="quote_f">&nbsp;</span><div class="word">EaseUS partitioning software helps to make disk partitions and manage data storage space in Windows easily.</div><span class="quote_b">&nbsp;</span></li><li><div class="logo"><img src="/images_2016/drw_win/awards-2.png" width="320" height="70"></div><span class="quote_f">&nbsp;</span><div class="word">EaseUS backup software protects your system & data against damage and gets everything recovered fast when disasters occur.</div><span class="quote_b">&nbsp;</span></li><li><div class="logo"><img src="/images_2016/drw_win/awards-1.png" width="320" height="70"></div><span class="quote_f">&nbsp;</span><div class="word">EaseUS software programs are efficient and user-friendly utilities that can successfully assist users to make digital life easy.</div><span class="quote_b">&nbsp;</span></li></ul><div class="ol"><span class="current" value="1"></span><span value="2"></span><span value="3"></span><span value="4"></span></div></div><div class="this_android hidden"><p class="title">Android Data Recovery App</p><p class="des">EaseUS MobiSaver for Android app is the easiest and fastest widget to recover your deleted files on the tips of your fingers.</p><a class="bt" href="https://play.google.com/store/apps/details?id=com.easeus.mobisaver" onclick="ga(\'send\', \'event\', \'msa_app_trial\', \'msa_app_trial\', \'pop_up_download\');"></a></div></div>';
+				$('body').append(download_html);
+				var thisname='';
+				var error=$('.download_wap_pop .error');
+				$('.download_wap_pop .text').blur(function(){
+					check_mail($(this).val(),error);
+				});
+				$('.download_wap_pop .close').click(function(){
+					$('.download_wap_pop').fadeOut(300);
+					$('body,html').removeClass('wap_pop');
+				});
+				var no=1;//fadein scrolls go
+				$(document).on('click','.download_pop_show',function(){
+					//get -> tb name
+					thisname=$(this).attr('name');
+					$('#ptype').val(thisname);
+					if(thisname=='drwf'){
+						var down_link=$(this).attr('href');
+						$('#download_wap_pop_title').html('EaseUS Data Recovery Wizard Free');
+					}else if(thisname=='drwp'){
+						$('#download_wap_pop_title').html('EaseUS Data Recovery Wizard Professional');
+					}else if(thisname=='drwt'){
+						$('#download_wap_pop_title').html('EaseUS Data Recovery Wizard Technician');
+					}else if(thisname=='drwmf'){
+						$('#download_wap_pop_title').html('EaseUS Data Recovery Wizard for Mac Free ');
+					}else if(thisname=='drwm'){
+						$('#download_wap_pop_title').html('EaseUS Data Recovery Wizard for Mac');
+					}else if(thisname=='drwmt'){
+						$('#download_wap_pop_title').html('EaseUS Data Recovery Wizard for Mac Technician');
+					}else if(thisname=='erw'){
+						$('#download_wap_pop_title').html('EaseUS Email Recovery Wizard');
+					}else if(thisname=='mobif'){
+						$('#download_wap_pop_title').html('EaseUS MobiSaver Free');
+					}else if(thisname=='mobi'){
+						$('#download_wap_pop_title').html('EaseUS MobiSaver');
+					}else if(thisname=='mobifm'){
+						$('#download_wap_pop_title').html('EaseUS MobiSaver Free for Mac');
+					}else if(thisname=='mobim'){
+						$('#download_wap_pop_title').html('EaseUS MobiSaver for Mac');
+					}else if(thisname=='mobiaf'){
+						$('#download_wap_pop_title').html('EaseUS MobiSaver for Android Free');
+					}else if(thisname=='mobia'){
+						$('#download_wap_pop_title').html('EaseUS MobiSaver for Android');
+					}else if(thisname=='epmfree'){
+						$('#download_wap_pop_title').html('EaseUS Partition Master Free');
+					}else if(thisname=='epmp'){
+						$('#download_wap_pop_title').html('EaseUS Partition Master Professional');
+					}else if(thisname=='epms'){
+						$('#download_wap_pop_title').html('EaseUS Partition Master Server');
+					}else if(thisname=='epmu'){
+						$('#download_wap_pop_title').html('EaseUS Partition Master Unlimited');
+					}else if(thisname=='epmt'){
+						$('#download_wap_pop_title').html('EaseUS Partition Master Technician');
+					}else if(thisname=='tbfree'){
+						$('#download_wap_pop_title').html('EaseUS Todo Backup Free');
+					}else if(thisname=='tbhome'){
+						$('#download_wap_pop_title').html('EaseUS Todo Backup Home');
+					}else if(thisname=='tbwork'){
+						$('#download_wap_pop_title').html('EaseUS Todo Backup Workstation');
+					}else if(thisname=='tbserver'){
+						$('#download_wap_pop_title').html('EaseUS Todo Backup Server');
+					}else if(thisname=='tbaserver'){
+						$('#download_wap_pop_title').html('EaseUS Todo Backup Advanced Server');
+					}else if(thisname=='tbt'){
+						$('#download_wap_pop_title').html('EaseUS Todo Backup Technician');
+					}else if(thisname=='tbm'){
+						$('#download_wap_pop_title').html('EaseUS Todo Backup for Mac');
+					}else if(thisname=='tbcmc'){
+						$('#download_wap_pop_title').html('EaseUS Backup Center');
+					}else if(thisname=='edm'){
+						$('#download_wap_pop_title').html('EaseUS Deploy Manager');
+					}else if(thisname=='pctf'){
+						$('#download_wap_pop_title').html('EaseUS Todo PCTrans Free');
+					}else if(thisname=='pctp'){
+						$('#download_wap_pop_title').html('EaseUS Todo PCTrans Professional');
+					}else if(thisname=='pctt'){
+						$('#download_wap_pop_title').html('EaseUS Todo PCTrans Technician');
+					}else if(thisname=='es'){
+						$('#download_wap_pop_title').html('EaseUS EverySync');
+					}else if(thisname=='cgm'){
+						$('#download_wap_pop_title').html('EaseUS CleanGenius for Mac');
+					}else if(thisname=='goback'){
+						$('#download_wap_pop_title').html('EaseUS System GoBack Free');
+
+					}else if(thisname=='mmfree'){
+						$('#download_wap_pop_title').html('EaseUS MobiMover Free');
+					}else if(thisname=='mmmacfree'){
+						$('#download_wap_pop_title').html('EaseUS MobiMover Free for Mac');
+					}else if(thisname=='mmtrial'){
+						$('#download_wap_pop_title').html('EaseUS MobiMover');
+					}else{
+						return true;
+					}
+					//
+					$('.download_wap_pop').fadeIn(400);
+					$('body,html').addClass('wap_pop');
+					//
+					if(thisname=='mobiaf' || thisname=='mobia'){
+						$('.download_wap_pop .this_scroll').addClass('hidden');
+						$('.download_wap_pop .this_android').removeClass('hidden');
+						var u = navigator.userAgent;
+						var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+						if(isAndroid){
+							$('.download_wap_pop .this_android .bt').attr({href:'market://details?id=com.easeus.mobisaver'});
+						}
+					}else{
+						$('.download_wap_pop .this_scroll').removeClass('hidden');
+						$('.download_wap_pop .this_android').addClass('hidden');
+						if(no==1){
+							var scrolls=new globle_scroll('.download_wap_pop .list','','','.download_wap_pop .ol');
+							scrolls.gos();
+							no=2;
+						}
+					}
+					return false;
+				});
+				//submit
+				$('.download_wap_pop .submit').click(function(){
+					if(submit_s=='no'){
+						return false;
+					}else{
+						$('.download_wap_pop .loading').show();
+						var email_val=$('#download_email').val();
+						var ptype_val=$('#ptype').val();
+						var web_val=$('#web').val();
+						var dom=document.createElement('script');
+						dom.src='https://www.easeus.com/mail.php?email='+email_val+'&ptype='+ptype_val+'&web='+web_val+'&callback=download_fun';	
+						document.getElementsByTagName('head')[0].appendChild(dom);
+					}
+				});
+				download_fun=function(val){
+					$('.download_wap_pop .loading').hide();
+					if(val==1){
+						$('.download_wap_pop .mail_box').addClass('hidden');
+						$('.download_wap_pop .success').removeClass('hidden');
+					}else if(val==0){
+						error.removeClass('hidden').html('E-mail can\'t be empty');
+					}else{
+						error.removeClass('hidden').html('Please enter a valid e-mail');
+					}
+				};
+			}
+		};
+		var download_checks=new download_check();
+		if(globle_variable.ispc){//is pc or wap
+			download_checks.email();
+		}else{
+			download_checks.wap_email();
+		}
+	};
+	download_mail();
+});

@@ -1,0 +1,233 @@
+
+ Start  Stop   Length Name                   Class
+ 00000H 00000H 00000H INT08H_TEXT            CODE
+ 00000H 00799H 0079AH _TEXT                  CODE
+ 007A0H 007A1H 00002H EMULATOR_TEXT          CODE
+ 007B0H 0080AH 0005BH COMDAT_SEG1            CODE
+ 0080CH 0080CH 00000H C_ETEXT                ENDCODE
+ 00810H 00810H 00000H EMULATOR_DATA          FAR_DATA
+ 00810H 00851H 00042H NULL                   BEGDATA
+ 00852H 008DFH 0008EH _DATA                  DATA
+ 008E0H 008E1H 00002H XIQC                   DATA
+ 008E2H 008EDH 0000CH DBDATA                 DATA
+ 008EEH 008FBH 0000EH CDATA                  DATA
+ 008FCH 008FCH 00000H XIFB                   DATA
+ 008FCH 008FCH 00000H XIF                    DATA
+ 008FCH 008FCH 00000H XIFE                   DATA
+ 008FCH 008FCH 00000H XIB                    DATA
+ 008FCH 008FCH 00000H XI                     DATA
+ 008FCH 008FCH 00000H XIE                    DATA
+ 008FCH 008FCH 00000H XPB                    DATA
+ 008FCH 008FCH 00000H XP                     DATA
+ 008FCH 008FCH 00000H XPE                    DATA
+ 008FCH 008FCH 00000H XCB                    DATA
+ 008FCH 008FCH 00000H XC                     DATA
+ 008FCH 008FCH 00000H XCE                    DATA
+ 008FCH 008FCH 00000H XCFB                   DATA
+ 008FCH 008FCH 00000H XCFCRT                 DATA
+ 008FCH 008FCH 00000H XCF                    DATA
+ 008FCH 008FCH 00000H XCFE                   DATA
+ 008FCH 008FCH 00000H XIFCB                  DATA
+ 008FCH 008FCH 00000H XIFU                   DATA
+ 008FCH 008FCH 00000H XIFL                   DATA
+ 008FCH 008FCH 00000H XIFM                   DATA
+ 008FCH 008FCH 00000H XIFCE                  DATA
+ 008FCH 008FCH 00000H CONST                  CONST
+ 008FCH 00903H 00008H HDR                    MSG
+ 00904H 009D9H 000D6H MSG                    MSG
+ 009DAH 009DBH 00002H PAD                    MSG
+ 009DCH 009DCH 00001H EPAD                   MSG
+ 009DEH 009DEH 00000H _BSS                   BSS
+ 009DEH 009DEH 00000H XOB                    BSS
+ 009DEH 009DEH 00000H XO                     BSS
+ 009DEH 009DEH 00000H XOE                    BSS
+ 009DEH 009DEH 00000H XOFB                   BSS
+ 009DEH 009DEH 00000H XOF                    BSS
+ 009DEH 009DEH 00000H XOFE                   BSS
+ 009E0H 009E4H 00005H c_common               BSS
+ 009F0H 011EFH 00800H STACK                  STACK
+
+ Origin   Group
+ 0081:0   DGROUP
+
+  Address         Publics by Name
+
+ 0081:01CE       _edata
+ 0081:01E0       _end
+ 0081:0082       _errno
+ 0000:01E3       _exit
+ 007B:0000       _main
+ 007B:0032       _our
+ 0081:01D0       _prev
+ 0081:0042       _scr
+ 0081:00C4       _STKHQQ
+ 0081:01D4       _ticks
+ 0081:00C0       __aaltstkovr
+ 0081:0066       __acfinfo
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 0000:D6D6  Abs  __aDBdoswp
+ 0081:00BC       __adbgmsg
+ 0081:0048       __aexit_rtn
+ 0000:02BE       __aFchkstk
+ 0081:0074       __aintdiv
+ 0081:00CA       __amblksiz
+ 0000:00EC       __amsg_exit
+ 0081:0042       __anullsize
+ 0081:0060       __aseghi
+ 0081:0062       __aseglo
+ 0081:004A       __asizds
+ 0000:0010       __astart
+ 0081:0046       __atopsp
+ 0000:01F2       __cexit
+ 0081:00B3       __child
+ 0000:02BE       __chkstk
+ 0000:011A       __cinit
+ 0000:00DD       __cintDIV
+ 0081:008F       __cpumode
+ 0000:026A       __ctermsub
+ 0000:01FC       __c_exit
+ 0000:0118       __dataseg
+ 0081:0090       __doserrno
+ 0000:069A       __dos_getvect
+ 0000:06AC       __dos_setvect
+ 0081:01CE       __edata
+ 007A:0000       __EmDataSeg
+ 0081:01E0       __end
+ 0081:00AC       __environ
+ 0000:01EA       __exit
+ 0081:00BB       __exitflag
+ 0081:0078       __fac
+ 0000:059A       __farstub
+ 0081:0064       __fDosExt
+ 0000:0296       __FF_MSGBANNER
+ 0000:0679       __findlast
+ 0081:00E0       __fpinit
+ 0000:02B8       __fptrap
+ 0000:059C       __growseg
+ 0000:0628       __incseg
+ 0081:00B6       __intno
+ 0000:0574       __myalloc
+ 0081:0092       __nfile
+ 0000:06C2       __nfree
+ 0081:004C       __nheap_desc
+ 0000:06E3       __nmalloc
+ 0000:0512       __NMSG_TEXT
+ 0000:053D       __NMSG_WRITE
+ 0000:02E2       __nullcheck
+ 0081:0090       __oserr
+ 0081:0094       __osfile
+ 0081:008B       __osmajor
+ 0081:008A       __osminor
+ 0081:008E       __osmode
+ 0081:008A       __osver
+ 0081:008C       __osversion
+ 0081:00B5       __ovlflag
+ 0081:00B7       __ovlvec
+ 0081:00AE       __pgmptr
+ 0081:00CC       __pnhNearHeap
+ 0081:0088       __psp
+ 0081:0086       __pspadr
+ 0000:071E       __searchseg
+ 0000:0306       __setargv
+ 0000:0494       __setenvp
+ 0081:0084       __umaskval
+ 0081:00D8       ___aDBexit
+ 0081:00D6       ___aDBrterr
+ 0081:00D4       ___aDBswpchk
+ 0081:00D2       ___aDBswpflg
+ 0081:00A8       ___argc
+ 0081:00AA       ___argv
+ 0081:00D0       ___qczrinit
+
+  Address         Publics by Value
+
+ 0000:0010       __astart
+ 0000:00DD       __cintDIV
+ 0000:00EC       __amsg_exit
+ 0000:0118       __dataseg
+ 0000:011A       __cinit
+ 0000:01E3       _exit
+ 0000:01EA       __exit
+ 0000:01F2       __cexit
+ 0000:01FC       __c_exit
+ 0000:026A       __ctermsub
+ 0000:0296       __FF_MSGBANNER
+ 0000:02B8       __fptrap
+ 0000:02BE       __chkstk
+ 0000:02BE       __aFchkstk
+ 0000:02E2       __nullcheck
+ 0000:0306       __setargv
+ 0000:0494       __setenvp
+ 0000:0512       __NMSG_TEXT
+ 0000:053D       __NMSG_WRITE
+ 0000:0574       __myalloc
+ 0000:059A       __farstub
+ 0000:059C       __growseg
+ 0000:0628       __incseg
+ 0000:0679       __findlast
+ 0000:069A       __dos_getvect
+ 0000:06AC       __dos_setvect
+ 0000:06C2       __nfree
+ 0000:06E3       __nmalloc
+ 0000:071E       __searchseg
+ 007A:0000       __EmDataSeg
+ 007B:0000       _main
+ 007B:0032       _our
+ 0081:0042       __anullsize
+ 0081:0042       _scr
+ 0081:0046       __atopsp
+ 0081:0048       __aexit_rtn
+ 0081:004A       __asizds
+ 0081:004C       __nheap_desc
+ 0081:0060       __aseghi
+ 0081:0062       __aseglo
+ 0081:0064       __fDosExt
+ 0081:0066       __acfinfo
+ 0081:0074       __aintdiv
+ 0081:0078       __fac
+ 0081:0082       _errno
+ 0081:0084       __umaskval
+ 0081:0086       __pspadr
+ 0081:0088       __psp
+ 0081:008A       __osver
+ 0081:008A       __osminor
+ 0081:008B       __osmajor
+ 0081:008C       __osversion
+ 0081:008E       __osmode
+ 0081:008F       __cpumode
+ 0081:0090       __oserr
+ 0081:0090       __doserrno
+ 0081:0092       __nfile
+ 0081:0094       __osfile
+ 0081:00A8       ___argc
+ 0081:00AA       ___argv
+ 0081:00AC       __environ
+ 0081:00AE       __pgmptr
+ 0081:00B3       __child
+ 0081:00B5       __ovlflag
+ 0081:00B6       __intno
+ 0081:00B7       __ovlvec
+ 0081:00BB       __exitflag
+ 0081:00BC       __adbgmsg
+ 0081:00C0       __aaltstkovr
+ 0081:00C4       _STKHQQ
+ 0081:00CA       __amblksiz
+ 0081:00CC       __pnhNearHeap
+ 0081:00D0       ___qczrinit
+ 0081:00D2       ___aDBswpflg
+ 0081:00D4       ___aDBswpchk
+ 0081:00D6       ___aDBrterr
+ 0081:00D8       ___aDBexit
+ 0081:00E0       __fpinit
+ 0081:01CE       __edata
+ 0081:01CE       _edata
+ 0081:01D0       _prev
+ 0081:01D4       _ticks
+ 0081:01E0       __end
+ 0081:01E0       _end
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 0000:D6D6  Abs  __aDBdoswp
+
+Program entry point at 0000:0010

@@ -1,0 +1,1 @@
+DEL *.H *.OBJ *.MAP *.BAK *.LIB *.LOG .\LIB\*.OBJ

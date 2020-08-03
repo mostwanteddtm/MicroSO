@@ -1,0 +1,1 @@
+Comunicação Serial em C++ Win32 Application, usando a Win32 API

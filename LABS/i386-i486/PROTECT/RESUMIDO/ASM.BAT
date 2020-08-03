@@ -1,0 +1,5 @@
+ML /Zm EN.ASM
+DEL EN.OBJ
+COPY EN.EXE A: /y
+PAUSE
+

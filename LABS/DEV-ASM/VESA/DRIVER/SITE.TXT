@@ -1,0 +1,13 @@
+###### VS800A.ASM ########
+http://www.eeworm.com/read/300523/3846221
+
+###### GCOMMON.ASM #######
+http://read.pudn.com/downloads107/sourcecode/windows/vxd/441415/PTDR101/SOURCE/1280_101/GCOMMON.ASM__.htm
+
+##############################################
+
+VESA BIOS EXTENSION (VBE) Core Functions Standard Version 3.0 located at www.vesa.org
+
+https://www.virtualbox.org/svn/vbox/trunk/src/VBox/Devices/Graphics/BIOS/vberom.asm
+https://www.virtualbox.org/svn/vbox/trunk/src/VBox/Devices/Graphics/BIOS/vgadefs.inc
+https://www.virtualbox.org/svn/vbox/trunk/src/VBox/Devices/BiosCommonCode/commondefs.inc

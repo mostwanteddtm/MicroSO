@@ -1,0 +1,13 @@
+######################## Pimeira comunicação com sucesso via Ethernet - 12/05/2020 ###########################
+
+Desde de 2012, quando comecei a estudar Assembly (motivado pelo filme Pirates of Silicon Valley), tinha como objetivo saber como se recebe e envia dados via Ethernet.
+Consegui a primeira comunicação via um simples protocolo, enviado via Realtek 8139.
+Se Deus quiser, esse foi apenas o primeiro passo e daqui pra frente, tem muito o que descobrir.
+
+##############################################################################################################
+
+1) O projeto que realizei essa primeira comunicação, está na pasta: p-guide(8139)\BORLAND v.3.0.0\SOURCE
+
+2) Para compilar corretamente, deve-se colar a Pasta BORLAND v.3.0.0 em um caminho curto, como: C:\BORLAND v.3.0.0
+
+3) Inclui junto a pasta com a versão do Turbo C++ e do Turbo Assembler que estou usando no momento. Que deve ser colado em: C:\TC

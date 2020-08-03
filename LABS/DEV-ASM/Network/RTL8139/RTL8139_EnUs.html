@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)https://www.wfbsoftware.de/2019/07/22/realtek-rtl8139-network-interface-card/ -->
+<html lang="en" slick-uniqueid="3" class=""><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="width=device-width">
+	<title>Realtek rtl8139 Network Interface Card | wfbsoftware</title>
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="https://www.wfbsoftware.de/xmlrpc.php">
+	<!--[if lt IE 9]>
+	<script src="https://www.wfbsoftware.de/wp-content/themes/twentythirteen/js/html5.js"></script>
+	<![endif]-->
+	<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link href="https://fonts.gstatic.com/" crossorigin="" rel="preconnect">
+<link rel="alternate" type="application/rss+xml" title="wfbsoftware » Feed" href="https://www.wfbsoftware.de/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.wfbsoftware.de\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.0"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./RTL8139_EnUs_files/wp-emoji-release.min.js.download" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="wp-block-library-css" href="./RTL8139_EnUs_files/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-block-library-theme-css" href="./RTL8139_EnUs_files/theme.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="twentythirteen-fonts-css" href="./RTL8139_EnUs_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="genericons-css" href="./RTL8139_EnUs_files/genericons.css" type="text/css" media="all">
+<link rel="stylesheet" id="twentythirteen-style-css" href="./RTL8139_EnUs_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="twentythirteen-block-style-css" href="./RTL8139_EnUs_files/blocks.css" type="text/css" media="all">
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentythirteen-ie-css'  href='https://www.wfbsoftware.de/wp-content/themes/twentythirteen/css/ie.css?ver=2013-07-18' type='text/css' media='all' />
+<![endif]-->
+<link rel="stylesheet" id="enlighter-local-css" href="./RTL8139_EnUs_files/EnlighterJS.min.css" type="text/css" media="all">
+<script type="text/javascript" src="./RTL8139_EnUs_files/jquery.js.download"></script>
+<script type="text/javascript" src="./RTL8139_EnUs_files/jquery-migrate.min.js.download"></script>
+<link rel="https://api.w.org/" href="https://www.wfbsoftware.de/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.wfbsoftware.de/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.wfbsoftware.de/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="C Unit Testing with cmocka" href="https://www.wfbsoftware.de/2019/07/18/c-unit-testing-with-cmocka/">
+<link rel="next" title="TCP/IP Stack ARP" href="https://www.wfbsoftware.de/2019/07/22/tcp-ip-stack/">
+<meta name="generator" content="WordPress 5.0">
+<link rel="canonical" href="https://www.wfbsoftware.de/2019/07/22/realtek-rtl8139-network-interface-card/">
+<link rel="shortlink" href="https://www.wfbsoftware.de/?p=448">
+<link rel="alternate" type="application/json+oembed" href="https://www.wfbsoftware.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.wfbsoftware.de%2F2019%2F07%2F22%2Frealtek-rtl8139-network-interface-card%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://www.wfbsoftware.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.wfbsoftware.de%2F2019%2F07%2F22%2Frealtek-rtl8139-network-interface-card%2F&amp;format=xml">
+	<style type="text/css" id="twentythirteen-header-css">
+		.site-header {
+		background: url(https://www.wfbsoftware.de/wp-content/themes/twentythirteen/images/headers/circle.png) no-repeat scroll top;
+		background-size: 1600px auto;
+	}
+	@media (max-width: 767px) {
+		.site-header {
+			background-size: 768px auto;
+		}
+	}
+	@media (max-width: 359px) {
+		.site-header {
+			background-size: 360px auto;
+		}
+	}
+			</style>
+	<link type="text/css" rel="stylesheet" charset="UTF-8" href="./RTL8139_EnUs_files/translateelement.css"></head>
+
+<body class="post-template-default single single-post postid-448 single-format-standard wp-embed-responsive single-author">
+		<div id="page" class="hfeed site">
+		<header id="masthead" class="site-header" role="banner">
+			<a class="home-link" href="https://www.wfbsoftware.de/" title="wfbsoftware" rel="home">
+				<h1 class="site-title">wfbsoftware</h1>
+				<h2 class="site-description">Learn something new every day!</h2>
+			</a>
+
+			<div id="navbar" class="navbar">
+				<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+					<button class="menu-toggle">Menu</button>
+					<a class="screen-reader-text skip-link" href="https://www.wfbsoftware.de/2019/07/22/realtek-rtl8139-network-interface-card/#content" title="Skip to content">Skip to content</a>
+					<div class="menu-default-menu-container"><ul id="primary-menu" class="nav-menu"><li id="menu-item-72" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.wfbsoftware.de/about-me/">About me</a></li>
+</ul></div>					<form role="search" method="get" class="search-form" action="https://www.wfbsoftware.de/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search …" value="" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="Search">
+			</form>				</nav><!-- #site-navigation -->
+			</div><!-- #navbar -->
+		</header><!-- #masthead -->
+
+		<div id="main" class="site-main">
+
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+
+						
+				
+<article id="post-448" class="post-448 post type-post status-publish format-standard hentry category-c-2 category-driver-development category-networkprogramming category-operatingsystems">
+	<header class="entry-header">
+		
+				<h1 class="entry-title">Realtek rtl8139 Network Interface Card</h1>
+		
+		<div class="entry-meta">
+			<span class="date"><a href="https://www.wfbsoftware.de/2019/07/22/realtek-rtl8139-network-interface-card/" title="Permalink to Realtek rtl8139 Network Interface Card" rel="bookmark"><time class="entry-date" datetime="2019-07-22T13:32:02+00:00">July 22, 2019</time></a></span><span class="categories-links"><a href="https://www.wfbsoftware.de/category/c-2/" rel="category tag">C</a>, <a href="https://www.wfbsoftware.de/category/c-2/driver-development/" rel="category tag">Driver Development</a>, <a href="https://www.wfbsoftware.de/category/networkprogramming/" rel="category tag">NetworkProgramming</a>, <a href="https://www.wfbsoftware.de/category/operatingsystems/" rel="category tag">OperatingSystems</a></span><span class="author vcard"><a class="url fn n" href="https://www.wfbsoftware.de/author/wbi/" title="View all posts by wbi" rel="author">wbi</a></span>					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		
+<h3>Introduction</h3>
+<p>This post will explain all I know about developing a driver for the Realtek rtl8139 network adapter. It is a network interface card that is capable of 10 / 100 Mbit/s network speeds. It is emulated by qemu which makes it a prime target for learning about driver development.</p>
+<p>To enable the rtl8139 in qemu, use</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" style="display: none;">qemu-system-i386 -net nic,model=rtl8139 -fda &lt;your_image&gt;</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="">qemu-system-i386 -net nic,model=rtl8139 -fda &lt;your_image&gt;</span></li></ol><pre style="display: none;">qemu-system-i386 -net nic,model=rtl8139 -fda &lt;your_image&gt;</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<p>The <a href="https://wiki.osdev.org/RTL8139">osdev wiki</a> says:</p>
+<blockquote>
+<p>If you find your driver suddenly freezes and stops receiving interrupts and you’re using kvm/qemu. Try the option -no-kvm-irqchip</p>
+</blockquote>
+<h3>Links</h3>
+<ul>
+<li><a href="https://github.com/lentinj/u-boot/blob/master/drivers/net/rtl8139.c">https://github.com/lentinj/u-boot/blob/master/drivers/net/rtl8139.c</a></li>
+<li><a href="https://wiki.osdev.org/RTL8139">https://wiki.osdev.org/RTL8139</a></li>
+<li><a href="https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software">Realtek</a></li>
+<li><a href="https://ftp.gwdg.de/pub/linux/tux/net/donald-becker/">Donald Becker’s Page</a></li>
+</ul>
+<h3>Initialization Process</h3>
+<p>In order to initialize the network card, there are several settings to configure. There are two types of locations where settings have to be applied:</p>
+<ol>
+<li>PCI Configuration Space</li>
+<li>ioaddr</li>
+</ol>
+<h5>Finding the Device in the System</h5>
+<p>The rtl8139 is connected to the <a href="https://wiki.osdev.org/PCI">PCI bus</a>. With PCI, every device is identified by a pair of IDs. The pair consists of a vendor ID and a device ID. The rtl8139 has a vendor ID of <code>0x10ec</code> and a device ID of <code>0x8139</code>. You can check any pair of vendor ID and device ID on <a href="https://www.pcilookup.com/">https://www.pcilookup.com</a> or <a href="http://pciengine.com/">http://pciengine.com/</a>.</p>
+<p>First, you have to check if the system has the rtl8139 build into it (or if qemu does emulate the card) by listing all the PCI devices of the system and searching for the vendor and device ID. PCI device listing is described <a href="http://anadoxin.org/blog/pci-device-enumeration-using-ports-0xcf8-0xcfc.html">here</a>.</p>
+<h6>PCI Configuration Space</h6>
+<p>PCI (Peripheral Component Interconnect) is a way to configure hardware on a pure software basis. Extension cards you put into your PC via a PCI slot, are part of the PCI system.</p>
+<p>A PCI system consists of up to 256 busses, each bus can contain up to 32 devices, every device can be a package of up to 8 functions. That means a PCI extension card can act as up to 8 devices when plugged into the PC. Each of these devices will get it’s own function via PCI.</p>
+<p>A PC usually only contains a single PCI bus, so instead of using 256 busses it only contains 1.</p>
+<p>One of these function in one of the devices on one of the busses will be the RTL 8139 but it is not predefined which one it is. That means the tuple of (bus, device, function) is unknown and the driver has to find the device.</p>
+<p>In order to find the touple, there are several ways to do it. The simplest way is to iterate over all busses, devices and functions. On each function, using the current touple (bus, device, function) it is possible to read data from the device at those coordinates. If the touple does not point to an existing device, contine with the next touple. If there is a device at the touple, it is possible to read the so called PCI configuration space of that device. The configuration space contains several registers on the PCI Hardware. Two important registers are the vendor and device registers.</p>
+<p><a href="https://en.wikipedia.org/wiki/PCI_configuration_space">Here</a> is a general depiction of the PCI configuration space of PCI card. You can see that the first four byte contain the vendor Id and the device Id.</p>
+<p>Reading and writing the PCI configuration space is done via ports. A port is a memory address that points to hardware instead of a memory cell. Ports can be used to write and read data and to communicate with hardware instead of writing and reading to memory. First you have to specify the address you want to manipulate by writing data to the configuration address 0xCF8. Once that location is configured, you can read or write data by reading and writing to the configuration data address 0xCFC.</p>
+<p>The RTL 8319 (and every PCI card) has specific values for vendor and device. Knowing these values, the card can be identified and the touple (bus, device, function) can be found.</p>
+<p>Having the touple (bus, device, function) the driver can start with the configuration.</p>
+<p>The code to iterate and find the RTL 8139 is listed here:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" style="display: none;">const u32int PCI_ENABLE_BIT = 0x80000000;
+const u32int PCI_CONFIG_ADDRESS = 0xCF8;
+const u32int PCI_CONFIG_DATA = 0xCFC;
+
+// func - 0-7
+// slot - 0-31
+// bus - 0-255
+//
+// described here: https://en.wikipedia.org/wiki/PCI_configuration_space under
+// the section "software implementation"
+// parameter pcireg: 0 will read the first 32bit dword of the pci control space
+// which is DeviceID and Vendor ID
+// pcireg = 1 will read the second 32bit dword which is status and command
+// and so on...
+u32int r_pci_32(u8int bus, u8int device, u8int func, u8int pcireg) {
+
+  // compute the index
+  //
+  // pcireg is left shifted twice to multiply it by 4 because each register
+  // is 4 byte long (32 bit registers)
+  u32int index = PCI_ENABLE_BIT | (bus &lt;&lt; 16) | (device &lt;&lt; 11) | (func &lt;&lt; 8) |
+                 (pcireg &lt;&lt; 2);
+
+  // write the index value onto the index port
+  outl(index, PCI_CONFIG_ADDRESS);
+
+  // read a value from the data port
+  return inl(PCI_CONFIG_DATA);
+}
+
+int realtek8319Found = 0;
+
+unsigned char pci_bus = 0;
+unsigned char pci_device = 0;
+unsigned char pci_device_fn = 0;
+
+// there are 256 busses allowed
+for (bus = 0; bus != 0xff; bus++) {
+
+// per bus there can be at most 32 devices
+for (device = 0; device &lt; 32; device++) {
+
+  // every device can be multi function device of up to 8 functions
+  for (func = 0; func &lt; 8; func++) {
+
+    // read the first dword (index 0) from the PCI configuration space
+    // dword 0 contains the vendor and device values from the PCI configuration space
+    data = r_pci_32(bus, device, func, 0);
+    if (data != 0xffffffff) {
+       
+       // parse the values
+       u16int device_value = (data &gt;&gt; 16);
+       u16int vendor = data &amp; 0xFFFF;
+
+       // check vendor and device against the values of the RTL 8139 PCI device
+       realtek8319Found = 0;
+       if (vendor == 0x10ec &amp;&amp; device_value == 0x8139) {
+
+        realtek8319Found = 1;
+
+        pci_bus = bus;
+        pci_device = device;
+        pci_device_fn = func;
+
+        k_printf("RTL8139 found! bus: %d", pci_bus);
+        k_printf(" device: %d", pci_device);
+        k_printf(" func: %d \n", pci_device_fn);
+      }
+
+    }
+  }
+}</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="kw1">const</span><span class=""> u32int PCI_ENABLE_BIT = </span><span class="nu0">0x80000000</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="kw1">const</span><span class=""> u32int PCI_CONFIG_ADDRESS = </span><span class="nu0">0xCF8</span><span class="">;</span></li><li class=" odd"><span class=""></span><span class="kw1">const</span><span class=""> u32int PCI_CONFIG_DATA = </span><span class="nu0">0xCFC</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="co1"></span></li><li class=" odd"><span class="co1">// func - 0-7</span><span class="co1"></span></li><li class=" even"><span class="co1">// slot - 0-31</span><span class="co1"></span></li><li class=" odd"><span class="co1">// bus - 0-255</span><span class="co1"></span></li><li class=" even"><span class="co1">//</span><span class="co1"></span></li><li class=" odd"><span class="co1">// described here: https://en.wikipedia.org/wiki/PCI_configuration_space under</span><span class="co1"></span></li><li class=" even"><span class="co1">// the section "software implementation"</span><span class="co1"></span></li><li class=" odd"><span class="co1">// parameter pcireg: 0 will read the first 32bit dword of the pci control space</span><span class="co1"></span></li><li class=" even"><span class="co1">// which is DeviceID and Vendor ID</span><span class="co1"></span></li><li class=" odd"><span class="co1">// pcireg = 1 will read the second 32bit dword which is status and command</span><span class="co1"></span></li><li class=" even"><span class="co1">// and so on...</span><span class=""></span></li><li class=" odd"><span class="">u32int </span><span class="de1">r_pci_32</span><span class="br0">(</span><span class="">u8int bus, u8int device, u8int func, u8int pcireg</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class=""> </span><span class="co1"> // compute the index</span><span class=""></span></li><li class=" even"><span class=""> </span><span class="co1"> //</span><span class=""></span></li><li class=" odd"><span class=""> </span><span class="co1"> // pcireg is left shifted twice to multiply it by 4 because each register</span><span class=""></span></li><li class=" even"><span class=""> </span><span class="co1"> // is 4 byte long (32 bit registers)</span><span class=""></span></li><li class=" odd"><span class="">  u32int index = PCI_ENABLE_BIT | </span><span class="br0">(</span><span class="">bus &lt;&lt; </span><span class="nu0">16</span><span class="br0">)</span><span class=""> | </span><span class="br0">(</span><span class="">device &lt;&lt; </span><span class="nu0">11</span><span class="br0">)</span><span class=""> | </span><span class="br0">(</span><span class="">func &lt;&lt; </span><span class="nu0">8</span><span class="br0">)</span><span class=""> |</span></li><li class=" even"><span class="">                 </span><span class="br0">(</span><span class="">pcireg &lt;&lt; </span><span class="nu0">2</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class=""> </span><span class="co1"> // write the index value onto the index port</span><span class=""></span></li><li class=" odd"><span class="">  </span><span class="de1">outl</span><span class="br0">(</span><span class="">index, PCI_CONFIG_ADDRESS</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class=""> </span><span class="co1"> // read a value from the data port</span><span class=""></span></li><li class=" even"><span class="">  </span><span class="kw1">return</span><span class=""> </span><span class="de1">inl</span><span class="br0">(</span><span class="">PCI_CONFIG_DATA</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class=""></span><span class="br0">}</span><span class=""></span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class=""></span><span class="kw1">int</span><span class=""> realtek8319Found = </span><span class="nu0">0</span><span class="">;</span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class=""></span><span class="kw1">unsigned</span><span class=""> </span><span class="kw1">char</span><span class=""> pci_bus = </span><span class="nu0">0</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="kw1">unsigned</span><span class=""> </span><span class="kw1">char</span><span class=""> pci_device = </span><span class="nu0">0</span><span class="">;</span></li><li class=" odd"><span class=""></span><span class="kw1">unsigned</span><span class=""> </span><span class="kw1">char</span><span class=""> pci_device_fn = </span><span class="nu0">0</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="co1"></span></li><li class=" odd"><span class="co1">// there are 256 busses allowed</span><span class=""></span></li><li class=" even"><span class=""></span><span class="kw1">for</span><span class=""> </span><span class="br0">(</span><span class="">bus = </span><span class="nu0">0</span><span class="">; bus != </span><span class="nu0">0xff</span><span class="">; bus++</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" odd"><span class=""></span><span class="co1"></span></li><li class=" even"><span class="co1">// per bus there can be at most 32 devices</span><span class=""></span></li><li class=" odd"><span class=""></span><span class="kw1">for</span><span class=""> </span><span class="br0">(</span><span class="">device = </span><span class="nu0">0</span><span class="">; device &lt; </span><span class="nu0">32</span><span class="">; device++</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class=""> </span><span class="co1"> // every device can be multi function device of up to 8 functions</span><span class=""></span></li><li class=" even"><span class="">  </span><span class="kw1">for</span><span class=""> </span><span class="br0">(</span><span class="">func = </span><span class="nu0">0</span><span class="">; func &lt; </span><span class="nu0">8</span><span class="">; func++</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">   </span><span class="co1"> // read the first dword (index 0) from the PCI configuration space</span><span class=""></span></li><li class=" odd"><span class="">   </span><span class="co1"> // dword 0 contains the vendor and device values from the PCI configuration space</span><span class=""></span></li><li class=" even"><span class="">    data = </span><span class="de1">r_pci_32</span><span class="br0">(</span><span class="">bus, device, func, </span><span class="nu0">0</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class="">    </span><span class="kw1">if</span><span class=""> </span><span class="br0">(</span><span class="">data != </span><span class="nu0">0xffffffff</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" even"><span class="">       </span></li><li class=" odd"><span class="">      </span><span class="co1"> // parse the values</span><span class=""></span></li><li class=" even"><span class="">       u16int device_value = </span><span class="br0">(</span><span class="">data &gt;&gt; </span><span class="nu0">16</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class="">       u16int vendor = data &amp; </span><span class="nu0">0xFFFF</span><span class="">;</span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class="">      </span><span class="co1"> // check vendor and device against the values of the RTL 8139 PCI device</span><span class=""></span></li><li class=" even"><span class="">       realtek8319Found = </span><span class="nu0">0</span><span class="">;</span></li><li class=" odd"><span class="">       </span><span class="kw1">if</span><span class=""> </span><span class="br0">(</span><span class="">vendor == </span><span class="nu0">0x10ec</span><span class=""> &amp;&amp; device_value == </span><span class="nu0">0x8139</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class="">        realtek8319Found = </span><span class="nu0">1</span><span class="">;</span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class="">        pci_bus = bus;</span></li><li class=" even"><span class="">        pci_device = device;</span></li><li class=" odd"><span class="">        pci_device_fn = func;</span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class="">        </span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">"RTL8139 found! bus: %d"</span><span class="">, pci_bus</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class="">        </span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">" device: %d"</span><span class="">, pci_device</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class="">        </span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">" func: %d \n"</span><span class="">, pci_device_fn</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class="">      </span><span class="br0">}</span><span class=""></span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">    </span><span class="br0">}</span><span class=""></span></li><li class=" odd"><span class="">  </span><span class="br0">}</span><span class=""></span></li><li class=" even"><span class=""></span><span class="br0">}</span></li></ol><pre style="display: none;">const u32int PCI_ENABLE_BIT = 0x80000000;
+const u32int PCI_CONFIG_ADDRESS = 0xCF8;
+const u32int PCI_CONFIG_DATA = 0xCFC;
+
+// func - 0-7
+// slot - 0-31
+// bus - 0-255
+//
+// described here: https://en.wikipedia.org/wiki/PCI_configuration_space under
+// the section "software implementation"
+// parameter pcireg: 0 will read the first 32bit dword of the pci control space
+// which is DeviceID and Vendor ID
+// pcireg = 1 will read the second 32bit dword which is status and command
+// and so on...
+u32int r_pci_32(u8int bus, u8int device, u8int func, u8int pcireg) {
+
+  // compute the index
+  //
+  // pcireg is left shifted twice to multiply it by 4 because each register
+  // is 4 byte long (32 bit registers)
+  u32int index = PCI_ENABLE_BIT | (bus &lt;&lt; 16) | (device &lt;&lt; 11) | (func &lt;&lt; 8) |
+                 (pcireg &lt;&lt; 2);
+
+  // write the index value onto the index port
+  outl(index, PCI_CONFIG_ADDRESS);
+
+  // read a value from the data port
+  return inl(PCI_CONFIG_DATA);
+}
+
+int realtek8319Found = 0;
+
+unsigned char pci_bus = 0;
+unsigned char pci_device = 0;
+unsigned char pci_device_fn = 0;
+
+// there are 256 busses allowed
+for (bus = 0; bus != 0xff; bus++) {
+
+// per bus there can be at most 32 devices
+for (device = 0; device &lt; 32; device++) {
+
+  // every device can be multi function device of up to 8 functions
+  for (func = 0; func &lt; 8; func++) {
+
+    // read the first dword (index 0) from the PCI configuration space
+    // dword 0 contains the vendor and device values from the PCI configuration space
+    data = r_pci_32(bus, device, func, 0);
+    if (data != 0xffffffff) {
+       
+       // parse the values
+       u16int device_value = (data &gt;&gt; 16);
+       u16int vendor = data &amp; 0xFFFF;
+
+       // check vendor and device against the values of the RTL 8139 PCI device
+       realtek8319Found = 0;
+       if (vendor == 0x10ec &amp;&amp; device_value == 0x8139) {
+
+        realtek8319Found = 1;
+
+        pci_bus = bus;
+        pci_device = device;
+        pci_device_fn = func;
+
+        k_printf("RTL8139 found! bus: %d", pci_bus);
+        k_printf(" device: %d", pci_device);
+        k_printf(" func: %d \n", pci_device_fn);
+      }
+
+    }
+  }
+}</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<p>&nbsp;</p>
+<h5>ioaddr</h5>
+<p>If the Realtek 8139 is build into a PC, it gets a ioaddr assigned during system boot. The device is mapped into memory at that ioaddr. By writing or reading data from memory at that ioaddr, the operating system can configure the card.</p>
+<p>The ioaddr can be read from the PCI configuration space at the byte 4. Byte 4 is where the command register starts. The ioaddr is stored in the lowest three bits of the command register.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" style="display: none;">// read the ioaddr/base_address
+u32int pci_ioaddr = r_pci_32(pci_bus, pci_device, pci_device_fn, 4);
+k_printf("pci_ioaddr: 0x%x \n", pci_ioaddr);
+
+unsigned long ioaddr = pci_ioaddr &amp; ~3;
+k_printf("ioaddr: 0x%x \n", ioaddr);</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="co1">// read the ioaddr/base_address</span><span class=""></span></li><li class=" even"><span class="">u32int pci_ioaddr = </span><span class="de1">r_pci_32</span><span class="br0">(</span><span class="">pci_bus, pci_device, pci_device_fn, </span><span class="nu0">4</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class=""></span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">"pci_ioaddr: 0x%x \n"</span><span class="">, pci_ioaddr</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class=""></span><span class="kw1">unsigned</span><span class=""> </span><span class="kw1">long</span><span class=""> ioaddr = pci_ioaddr &amp; ~</span><span class="nu0">3</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">"ioaddr: 0x%x \n"</span><span class="">, ioaddr</span><span class="br0">)</span><span class="">;</span></li></ol><pre style="display: none;">// read the ioaddr/base_address
+u32int pci_ioaddr = r_pci_32(pci_bus, pci_device, pci_device_fn, 4);
+k_printf("pci_ioaddr: 0x%x \n", pci_ioaddr);
+
+unsigned long ioaddr = pci_ioaddr &amp; ~3;
+k_printf("ioaddr: 0x%x \n", ioaddr);</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<p>Using the ioaddr, the driver can power up the card.</p>
+<h5>Powering up the card</h5>
+<p>Write the value 0 into the config1 address via the ioaddr.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" style="display: none;">// write a byte out to the specified port.
+void outb(u8int value, u16int port) {
+
+  __asm__ __volatile__("outb %1, %0" : : "dN"(port), "a"(value));
+}
+
+outb(0x00, ioaddr + Config1);
+k_printf("starting chip done.\n");</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="co1">// write a byte out to the specified port.</span><span class=""></span></li><li class=" even"><span class=""></span><span class="kw1">void</span><span class=""> </span><span class="de1">outb</span><span class="br0">(</span><span class="">u8int value, u16int port</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">  __asm__ </span><span class="de1">__volatile__</span><span class="br0">(</span><span class="st1">"outb %1, %0"</span><span class=""> : : </span><span class="st1">"dN"</span><span class="br0">(</span><span class="">port</span><span class="br0">)</span><span class="">, </span><span class="st1">"a"</span><span class="br0">(</span><span class="">value</span><span class="br0">)</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class=""></span><span class="br0">}</span><span class=""></span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class=""></span><span class="de1">outb</span><span class="br0">(</span><span class="nu0">0x00</span><span class="">, ioaddr + Config1</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">"starting chip done.\n"</span><span class="br0">)</span><span class="">;</span></li></ol><pre style="display: none;">// write a byte out to the specified port.
+void outb(u8int value, u16int port) {
+
+  __asm__ __volatile__("outb %1, %0" : : "dN"(port), "a"(value));
+}
+
+outb(0x00, ioaddr + Config1);
+k_printf("starting chip done.\n");</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<h5>Bus Mastering</h5>
+<p>Next step is to enable bus mastering. If you do not enable bus mastering, qemu will not transfer any data between the memory of the operating system and the memory on the RTL 8139 network card but it will transfer zeroes instead.</p>
+<p>A transfer of data is necessery to send a packet or to receive packets. To send a packet, first the data is copied from the memory of the operating system into a buffer on the PCI card. From the buffer the card transfers the data onto the wire.</p>
+<p>The transfer of data is performed via DMA (Direct Memory Access). If a PCI card is not assigned rights to be the bus master, it cannot perform DMA. Only the bus master is allowed to perform DMA. (Sidenote: It was reported that on some real hardware, enabling bus mastering is not needed. qemu was updated to make bus mastering mandatory. If you test on qemu, you need this step)</p>
+<p>If bus mastering is turned off, qemu will not copy any data to the card but it will only copy zeroes.</p>
+<p>The same goes for receiving. The PCI card receives data from the wire and writes that data into a buffer. The operating system will copy data from the buffer into the memory of the operating system via DMA. If bus mastering is turned off, qemu will only transfer zeroes instead of the real data.</p>
+<p>To enable bus mastering, you have to set bit 3 (zero indexed, bit3 is actually the fourth bit if you start counting from 1 instead from 0) inside the command register.</p>
+<p>The bit is set by reading the command register, flipping bit 3 and writing the value back into the command register.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" style="display: none;">// https://wiki.osdev.org/RTL8139
+// enable bus mastering in the command register
+// Some BIOS may enable Bus Mastering at startup, but some versions
+// of qemu don't. You should thus be careful about this step.
+k_printf("BUS mastering ...\n");
+
+u16int command_register =
+    pci_read_word(pci_bus, pci_device, pci_device_fn, 0x04);
+
+k_printf("BUS mastering command_register = %x\n", command_register);
+
+command_register |= 0x04;
+
+pci_write_word(pci_bus, pci_device, pci_device_fn, 0x04, command_register);
+
+command_register = pci_read_word(pci_bus, pci_device, pci_device_fn, 0x04);
+
+k_printf("BUS mastering command_register = %x\n", command_register);</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="co1">// https://wiki.osdev.org/RTL8139</span><span class="co1"></span></li><li class=" even"><span class="co1">// enable bus mastering in the command register</span><span class="co1"></span></li><li class=" odd"><span class="co1">// Some BIOS may enable Bus Mastering at startup, but some versions</span><span class="co1"></span></li><li class=" even"><span class="co1">// of qemu don't. You should thus be careful about this step.</span><span class=""></span></li><li class=" odd"><span class=""></span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">"BUS mastering ...\n"</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class="">u16int command_register =</span></li><li class=" even"><span class="">    </span><span class="de1">pci_read_word</span><span class="br0">(</span><span class="">pci_bus, pci_device, pci_device_fn, </span><span class="nu0">0x04</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class=""></span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">"BUS mastering command_register = %x\n"</span><span class="">, command_register</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">command_register |= </span><span class="nu0">0x04</span><span class="">;</span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class=""></span><span class="de1">pci_write_word</span><span class="br0">(</span><span class="">pci_bus, pci_device, pci_device_fn, </span><span class="nu0">0x04</span><span class="">, command_register</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">command_register = </span><span class="de1">pci_read_word</span><span class="br0">(</span><span class="">pci_bus, pci_device, pci_device_fn, </span><span class="nu0">0x04</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class=""></span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">"BUS mastering command_register = %x\n"</span><span class="">, command_register</span><span class="br0">)</span><span class="">;</span></li></ol><pre style="display: none;">// https://wiki.osdev.org/RTL8139
+// enable bus mastering in the command register
+// Some BIOS may enable Bus Mastering at startup, but some versions
+// of qemu don't. You should thus be careful about this step.
+k_printf("BUS mastering ...\n");
+
+u16int command_register =
+    pci_read_word(pci_bus, pci_device, pci_device_fn, 0x04);
+
+k_printf("BUS mastering command_register = %x\n", command_register);
+
+command_register |= 0x04;
+
+pci_write_word(pci_bus, pci_device, pci_device_fn, 0x04, command_register);
+
+command_register = pci_read_word(pci_bus, pci_device, pci_device_fn, 0x04);
+
+k_printf("BUS mastering command_register = %x\n", command_register);</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<h5>Software Reset</h5>
+<p>Next is a software reset</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" style="display: none;">// software reset
+// https://wiki.osdev.org/RTL8139
+// Sending 0x10 to the Command register (0x37) will send the RTL8139 into a
+// software reset. Once that byte is sent, the RST bit must be checked to
+// make sure that the chip has finished the reset. If the RST bit is high
+// (1), then the reset is still in operation.
+
+// ChipCmd is the Command Register 0x37 = 55
+// 0x10 == 0001 0000 == bit 5
+// k_printf("Reset the chip %d ...\n", i);
+outb(0x10, ioaddr + ChipCmd);
+while ((inb(ioaddr + ChipCmd) &amp; 0x10) != 0) {
+  k_printf("waiting for reset!\n");
+}
+k_printf("Reset done.\n");</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="co1">// software reset</span><span class="co1"></span></li><li class=" even"><span class="co1">// https://wiki.osdev.org/RTL8139</span><span class="co1"></span></li><li class=" odd"><span class="co1">// Sending 0x10 to the Command register (0x37) will send the RTL8139 into a</span><span class="co1"></span></li><li class=" even"><span class="co1">// software reset. Once that byte is sent, the RST bit must be checked to</span><span class="co1"></span></li><li class=" odd"><span class="co1">// make sure that the chip has finished the reset. If the RST bit is high</span><span class="co1"></span></li><li class=" even"><span class="co1">// (1), then the reset is still in operation.</span><span class=""></span></li><li class=" odd"><span class=""></span><span class="co1"></span></li><li class=" even"><span class="co1">// ChipCmd is the Command Register 0x37 = 55</span><span class="co1"></span></li><li class=" odd"><span class="co1">// 0x10 == 0001 0000 == bit 5</span><span class="co1"></span></li><li class=" even"><span class="co1">// k_printf("Reset the chip %d ...\n", i);</span><span class=""></span></li><li class=" odd"><span class=""></span><span class="de1">outb</span><span class="br0">(</span><span class="nu0">0x10</span><span class="">, ioaddr + ChipCmd</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="kw1">while</span><span class=""> </span><span class="br0">(</span><span class="br0">(</span><span class="de1">inb</span><span class="br0">(</span><span class="">ioaddr + ChipCmd</span><span class="br0">)</span><span class=""> &amp; </span><span class="nu0">0x10</span><span class="br0">)</span><span class=""> != </span><span class="nu0">0</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" odd"><span class="">  </span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">"waiting for reset!\n"</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="br0">}</span><span class=""></span></li><li class=" odd"><span class=""></span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">"Reset done.\n"</span><span class="br0">)</span><span class="">;</span></li></ol><pre style="display: none;">// software reset
+// https://wiki.osdev.org/RTL8139
+// Sending 0x10 to the Command register (0x37) will send the RTL8139 into a
+// software reset. Once that byte is sent, the RST bit must be checked to
+// make sure that the chip has finished the reset. If the RST bit is high
+// (1), then the reset is still in operation.
+
+// ChipCmd is the Command Register 0x37 = 55
+// 0x10 == 0001 0000 == bit 5
+// k_printf("Reset the chip %d ...\n", i);
+outb(0x10, ioaddr + ChipCmd);
+while ((inb(ioaddr + ChipCmd) &amp; 0x10) != 0) {
+  k_printf("waiting for reset!\n");
+}
+k_printf("Reset done.\n");</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<h5>Enable Receiver and Transmitter</h5>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" style="display: none;">// enable receiver and transmitter
+// Sets the RE and TE bits high
+// k_printf("Enable receiver and transmitter %d...\n", i);
+// 0x0C = 1100 = bit 2 und bit 3
+outb(0x0C, ioaddr + ChipCmd);
+k_printf("Enable receiver and transmitter done.\n");</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="co1">// enable receiver and transmitter</span><span class="co1"></span></li><li class=" even"><span class="co1">// Sets the RE and TE bits high</span><span class="co1"></span></li><li class=" odd"><span class="co1">// k_printf("Enable receiver and transmitter %d...\n", i);</span><span class="co1"></span></li><li class=" even"><span class="co1">// 0x0C = 1100 = bit 2 und bit 3</span><span class=""></span></li><li class=" odd"><span class=""></span><span class="de1">outb</span><span class="br0">(</span><span class="nu0">0x0C</span><span class="">, ioaddr + ChipCmd</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">"Enable receiver and transmitter done.\n"</span><span class="br0">)</span><span class="">;</span></li></ol><pre style="display: none;">// enable receiver and transmitter
+// Sets the RE and TE bits high
+// k_printf("Enable receiver and transmitter %d...\n", i);
+// 0x0C = 1100 = bit 2 und bit 3
+outb(0x0C, ioaddr + ChipCmd);
+k_printf("Enable receiver and transmitter done.\n");</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<h5>Set Transmit and Receive Configuration Registers</h5>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" style="display: none;">// https://www.lowlevel.eu/wiki/RTL8139
+// CR (Transmit Configuration Register, 0x40, 4 Bytes) und RCR
+// (Receive Configuration Register, 0x44, 4 Bytes) setzen.
+outl(0x03000700, ioaddr + TxConfig);
+outl(0x0000070a, ioaddr + RxConfig);</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="co1">// https://www.lowlevel.eu/wiki/RTL8139</span><span class="co1"></span></li><li class=" even"><span class="co1">// CR (Transmit Configuration Register, 0x40, 4 Bytes) und RCR</span><span class="co1"></span></li><li class=" odd"><span class="co1">// (Receive Configuration Register, 0x44, 4 Bytes) setzen.</span><span class=""></span></li><li class=" even"><span class=""></span><span class="de1">outl</span><span class="br0">(</span><span class="nu0">0x03000700</span><span class="">, ioaddr + TxConfig</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class=""></span><span class="de1">outl</span><span class="br0">(</span><span class="nu0">0x0000070a</span><span class="">, ioaddr + RxConfig</span><span class="br0">)</span><span class="">;</span></li></ol><pre style="display: none;">// https://www.lowlevel.eu/wiki/RTL8139
+// CR (Transmit Configuration Register, 0x40, 4 Bytes) und RCR
+// (Receive Configuration Register, 0x44, 4 Bytes) setzen.
+outl(0x03000700, ioaddr + TxConfig);
+outl(0x0000070a, ioaddr + RxConfig);</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<h5>Configuration Done</h5>
+<p>At this point the RTL 8139 is ready to send and receive data. Next the Sending of data is explained.</p>
+<h5>Sending Data</h5>
+<p>The data to send is written into a buffer (byte array) in operating system memory. Then the buffer is transferred over to the card via DMA (which is why the driver enables bus mastering). You have to specify the physical address for DMA! The PCI card does not understand paging! It only reads from memory at physical locations and does no go through the&nbsp; memory management unit.</p>
+<p>My tip for you is to turn off paging during your initial tests with the RTL 8139 just to rule out that source of error.</p>
+<h5>TSAD and TSD</h5>
+<p>The way that the RTL 8139 accepts data for sending is explained in this section. On a more abstract level, the card has four hardware buffers for sending.&nbsp; Those buffers are also called descriptors. At any one point in time, there is only a single hardware buffer active. After the reset of the card during initialization, the buffer with index 0 is the active buffer.</p>
+<p>The card will send the data stored in the currently active hardware buffer and then make the next hardware buffer in line the active buffer. Once data has been send from buffer 3, the index is reset to 0 and 0 is active again.</p>
+<p>Each one of the four hardware buffers is implemented via registers which are available via two memory locations. There is a memory location called TSAD and one called TSD per hardware buffer.</p>
+<p>TSAD is the transmission start register. It has to contain the physical address of the buffer that contains the data that the operating system wants to send. The data is transferred between the operating system and the card via DMA in the first step. Once the data is stored in the card’s internal memory, it is transferred onto the wire from there.</p>
+<p>TSD is the transmission status or transmission control register and has to be set to contain the length of the data to send in bits 0 to 12 which is the length of the buffer in TSAD in bytes. Also the bit 13 (OWN bit) has to be set to 0. If the OWN bit is zero (low), the hardware on the RTL 8139 card will start to transmit the data to the card and from the card onto the wire. If the DMA transfer between the operationg system and the card was successfull, the OWN bit is set to 1 (high) by the hardware. Once the OWN bit is high, the card will start to transfer the data from the cards internal memory over the wire. I think that the name OWN was choosen to tell the user that the card now owns the data to transfer.</p>
+<p>For each of the four buffers there is a pair of TSAD and TSD. The addresses are:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" style="display: none;">// TSAD = Transmit Start Registers = 32bit = Physical Address of data to
+// be sent
+u8int TSAD_array[4] = {0x20, 0x24, 0x28, 0x2C};
+
+// TSD - Transmit Status / Command Registers = 32bit
+u8int TSD_array[4] = {0x10, 0x14, 0x18, 0x1C};</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="co1">// TSAD = Transmit Start Registers = 32bit = Physical Address of data to</span><span class="co1"></span></li><li class=" even"><span class="co1">// be sent</span><span class=""></span></li><li class=" odd"><span class="">u8int TSAD_array</span><span class="br0">[</span><span class="nu0">4</span><span class="br0">]</span><span class=""> = </span><span class="br0">{</span><span class="nu0">0x20</span><span class="">, </span><span class="nu0">0x24</span><span class="">, </span><span class="nu0">0x28</span><span class="">, </span><span class="nu0">0x2C</span><span class="br0">}</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="co1"></span></li><li class=" odd"><span class="co1">// TSD - Transmit Status / Command Registers = 32bit</span><span class=""></span></li><li class=" even"><span class="">u8int TSD_array</span><span class="br0">[</span><span class="nu0">4</span><span class="br0">]</span><span class=""> = </span><span class="br0">{</span><span class="nu0">0x10</span><span class="">, </span><span class="nu0">0x14</span><span class="">, </span><span class="nu0">0x18</span><span class="">, </span><span class="nu0">0x1C</span><span class="br0">}</span><span class="">;</span></li></ol><pre style="display: none;">// TSAD = Transmit Start Registers = 32bit = Physical Address of data to
+// be sent
+u8int TSAD_array[4] = {0x20, 0x24, 0x28, 0x2C};
+
+// TSD - Transmit Status / Command Registers = 32bit
+u8int TSD_array[4] = {0x10, 0x14, 0x18, 0x1C};</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<p>The operating system has to remember which is the currently active buffer because it is not possible to ask the RTL 8139 card about which buffer is active at the moment. The variable tx_cur is used to store the index of the active buffer.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" style="display: none;">int tx_cur = 0;</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="kw1">int</span><span class=""> tx_cur = </span><span class="nu0">0</span><span class="">;</span></li></ol><pre style="display: none;">int tx_cur = 0;</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<p>The operating system prepares a buffer (array of byte / char) of data to send. For this example, let’s send 256 bytes containing the ASCII character ‘A’ which has the hex code 0x41 or decimal code 65.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" style="display: none;">int len = 256;
+unsigned char tx_buffer[len];
+for (int i = 0; i &lt; len; i++) {
+    tx_buffer[i] = 'A';
+}</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="kw1">int</span><span class=""> len = </span><span class="nu0">256</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="kw1">unsigned</span><span class=""> </span><span class="kw1">char</span><span class=""> tx_buffer</span><span class="br0">[</span><span class="">len</span><span class="br0">]</span><span class="">;</span></li><li class=" odd"><span class=""></span><span class="kw1">for</span><span class=""> </span><span class="br0">(</span><span class="kw1">int</span><span class=""> i = </span><span class="nu0">0</span><span class="">; i &lt; len; i++</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" even"><span class="">    tx_buffer</span><span class="br0">[</span><span class="">i</span><span class="br0">]</span><span class=""> = </span><span class="st0">'A'</span><span class="">;</span></li><li class=" odd"><span class=""></span><span class="br0">}</span></li></ol><pre style="display: none;">int len = 256;
+unsigned char tx_buffer[len];
+for (int i = 0; i &lt; len; i++) {
+    tx_buffer[i] = 'A';
+}</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<p>The variable len stores the size of the buffer.</p>
+<p>Fill TSAD and TSD of the currently active buffer with the data to send.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" style="display: none;">// Second, fill in physical address of data to TSAD
+outl(tx_buffer, ioaddr + TSAD_array[tx_cur]);
+
+// Fill the length to TSD and start the transmission by setting the OWN
+// bit to 0 Start https://wiki.osdev.org/RTL8139#Transmitting_Packets
+u32int status = 0;
+status |= len &amp; 0x1FFF; // 0-12: Length
+status |= 0 &lt;&lt; 13;      // 13: OWN bit
+
+outl(status, ioaddr + TSD_array[tx_cur]);</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="co1">// Second, fill in physical address of data to TSAD</span><span class=""></span></li><li class=" even"><span class=""></span><span class="de1">outl</span><span class="br0">(</span><span class="">tx_buffer, ioaddr + TSAD_array</span><span class="br0">[</span><span class="">tx_cur</span><span class="br0">]</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class=""></span><span class="co1"></span></li><li class=" even"><span class="co1">// Fill the length to TSD and start the transmission by setting the OWN</span><span class="co1"></span></li><li class=" odd"><span class="co1">// bit to 0 Start https://wiki.osdev.org/RTL8139#Transmitting_Packets</span><span class=""></span></li><li class=" even"><span class="">u32int status = </span><span class="nu0">0</span><span class="">;</span></li><li class=" odd"><span class="">status |= len &amp; </span><span class="nu0">0x1FFF</span><span class="">;</span><span class="co1"> // 0-12: Length</span><span class=""></span></li><li class=" even"><span class="">status |= </span><span class="nu0">0</span><span class=""> &lt;&lt; </span><span class="nu0">13</span><span class="">;     </span><span class="co1"> // 13: OWN bit</span><span class=""></span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class=""></span><span class="de1">outl</span><span class="br0">(</span><span class="">status, ioaddr + TSD_array</span><span class="br0">[</span><span class="">tx_cur</span><span class="br0">]</span><span class="br0">)</span><span class="">;</span></li></ol><pre style="display: none;">// Second, fill in physical address of data to TSAD
+outl(tx_buffer, ioaddr + TSAD_array[tx_cur]);
+
+// Fill the length to TSD and start the transmission by setting the OWN
+// bit to 0 Start https://wiki.osdev.org/RTL8139#Transmitting_Packets
+u32int status = 0;
+status |= len &amp; 0x1FFF; // 0-12: Length
+status |= 0 &lt;&lt; 13;      // 13: OWN bit
+
+outl(status, ioaddr + TSD_array[tx_cur]);</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<p>Wait until the OK bit (bit 15) is high. This signals that the transmission is completed. The OWN bit will tell you, when the data was transferred between the operating system and the card. Once the data is stored on the card, it will start to transmit that data over the wire. Once the wire transfer is complete, the card will set the OK bit in the TSD to high which means that the transfer is done and the next transfer buffer is active.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" style="display: none;">u32int transmit_ok = inl(ioaddr + TSD_array[tx_cur]);
+while (transmit_ok &amp; (1 &lt;&lt; 15) == 0) {
+    k_printf("Waiting for transmit_ok ...\n");
+    transmit_ok = inl(ioaddr + TSD_array[tx_cur]);
+}
+k_printf("Waiting for transmit_ok done. transmit_ok = %d\n", transmit_ok);</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="">u32int transmit_ok = </span><span class="de1">inl</span><span class="br0">(</span><span class="">ioaddr + TSD_array</span><span class="br0">[</span><span class="">tx_cur</span><span class="br0">]</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="kw1">while</span><span class=""> </span><span class="br0">(</span><span class="">transmit_ok &amp; </span><span class="br0">(</span><span class="nu0">1</span><span class=""> &lt;&lt; </span><span class="nu0">15</span><span class="br0">)</span><span class=""> == </span><span class="nu0">0</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" odd"><span class="">    </span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">"Waiting for transmit_ok ...\n"</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class="">    transmit_ok = </span><span class="de1">inl</span><span class="br0">(</span><span class="">ioaddr + TSD_array</span><span class="br0">[</span><span class="">tx_cur</span><span class="br0">]</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class=""></span><span class="br0">}</span><span class=""></span></li><li class=" even"><span class=""></span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">"Waiting for transmit_ok done. transmit_ok = %d\n"</span><span class="">, transmit_ok</span><span class="br0">)</span><span class="">;</span></li></ol><pre style="display: none;">u32int transmit_ok = inl(ioaddr + TSD_array[tx_cur]);
+while (transmit_ok &amp; (1 &lt;&lt; 15) == 0) {
+    k_printf("Waiting for transmit_ok ...\n");
+    transmit_ok = inl(ioaddr + TSD_array[tx_cur]);
+}
+k_printf("Waiting for transmit_ok done. transmit_ok = %d\n", transmit_ok);</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<p>Tell the operating system which buffer is active after the last buffer was used. In order to do that, increment tx_cur and wrap around back to zero if the last buffer was used in the prior send operation.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" style="display: none;">tx_cur++;
+if (tx_cur &gt; 3) {
+    tx_cur = 0;
+}</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="">tx_cur++;</span></li><li class=" even"><span class=""></span><span class="kw1">if</span><span class=""> </span><span class="br0">(</span><span class="">tx_cur &gt; </span><span class="nu0">3</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" odd"><span class="">    tx_cur = </span><span class="nu0">0</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="br0">}</span></li></ol><pre style="display: none;">tx_cur++;
+if (tx_cur &gt; 3) {
+    tx_cur = 0;
+}</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<p>Now that you are able to send an arbitray byte array into the network, you have to learn how to construct valid ethernet frames for a protocol such as ARP, ICMP, DHPC, TCP, IP, HTTP or anything else. This is not the RTL 8139 driver’s job so the details are not explained in this article.</p>
+<p>Constructing the frames for a specific protocol in the OSI model is the job of the so called IP-stack.</p>
+<h5>Retrieving the MAC Address</h5>
+<p>The RTL 8139 sends and receives data and is therefore a part of a network. As such it needs an address so packets can be sent point to point between the sender and the receiver.</p>
+<p>On the lower levels of the OSI stack where Ethernet frames are sent, the MAC address is used for this purpose. A MAC address is a unique address assigned to a RLT 8139 during manufacturing.</p>
+<p>When implementing ARP for example, you need to know the MAC address of your card. This section explains how to retrieve the NIC’s MAC address.</p>
+<p>On qemu, you can specify the MAC address on the command line. Knowing the MAC address when testing code is a big advantage because as soon as you retrieve the expected MAC address, it is proven that the code works correctly.</p>
+<p>The qemu command line parameter <strong>mac</strong> specifies the mac address.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" style="display: none;">/home/&lt;user&gt;/dev/qemu/build/i386-softmmu/qemu-system-i386 \
+-monitor stdio \
+-cdrom image.iso \
+-netdev user,id=network0 \
+-device rtl8139,netdev=network0,mac=52:54:00:12:34:56 \
+-object filter-dump,id=network_filter_object,netdev=network0,file=dump.dat</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="">/home/&lt;user&gt;/dev/qemu/build/i386-softmmu/qemu-system-i386 \</span></li><li class=" even"><span class="">-monitor stdio \</span></li><li class=" odd"><span class="">-cdrom image.iso \</span></li><li class=" even"><span class="">-netdev user,id=network0 \</span></li><li class=" odd"><span class="">-device rtl8139,netdev=network0,mac=52:54:00:12:34:56 \</span></li><li class=" even"><span class="">-object filter-dump,id=network_filter_object,netdev=network0,file=dump.dat</span></li></ol><pre style="display: none;">/home/&lt;user&gt;/dev/qemu/build/i386-softmmu/qemu-system-i386 \
+-monitor stdio \
+-cdrom image.iso \
+-netdev user,id=network0 \
+-device rtl8139,netdev=network0,mac=52:54:00:12:34:56 \
+-object filter-dump,id=network_filter_object,netdev=network0,file=dump.dat</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<p>Here 52:54:00:12:34:56 is used as a mac address.</p>
+<p>The MAC address is stored in a EEPROM chip on the card. To read the EEPROM you need a function.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" style="display: none;">// Delay between EEPROM clock transitions.
+// No extra delay is needed with 33Mhz PCI, but 66Mhz may change this.
+#define eeprom_delay() inl(ee_addr)
+
+// The EEPROM commands include the alway-set leading bit.
+#define EE_WRITE_CMD (5 &lt;&lt; 6)
+#define EE_READ_CMD (6 &lt;&lt; 6)
+#define EE_ERASE_CMD (7 &lt;&lt; 6)
+
+static int read_eeprom(long ioaddr, int location) {
+
+  unsigned retval = 0;
+  long ee_addr = ioaddr + Cfg9346;
+  int read_cmd = location | EE_READ_CMD;
+
+  outb(EE_ENB &amp; ~EE_CS, ee_addr);
+  outb(EE_ENB, ee_addr);
+
+  // Shift the read command bits out.
+  for (int i = 10; i &gt;= 0; i--) {
+
+    int dataval = (read_cmd &amp; (1 &lt;&lt; i)) ? EE_DATA_WRITE : 0;
+
+    outb(EE_ENB | dataval, ee_addr);
+    eeprom_delay();
+
+    outb(EE_ENB | dataval | EE_SHIFT_CLK, ee_addr);
+    eeprom_delay();
+  }
+
+  outb(EE_ENB, ee_addr);
+  eeprom_delay();
+
+  for (int i = 16; i &gt; 0; i--) {
+
+    outb(EE_ENB | EE_SHIFT_CLK, ee_addr);
+    eeprom_delay();
+
+    retval = (retval &lt;&lt; 1) | ((inb(ee_addr) &amp; EE_DATA_READ) ? 1 : 0);
+
+    outb(EE_ENB, ee_addr);
+    eeprom_delay();
+  }
+
+  // Terminate the EEPROM access.
+  outb(~EE_CS, ee_addr);
+
+  return retval;
+}</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="co1">// Delay between EEPROM clock transitions.</span><span class="co1"></span></li><li class=" even"><span class="co1">// No extra delay is needed with 33Mhz PCI, but 66Mhz may change this.</span><span class=""></span></li><li class=" odd"><span class=""></span><span class="kw2">#define eeprom_delay() inl(ee_addr)</span><span class=""></span></li><li class=" even"><span class=""></span><span class="co1"></span></li><li class=" odd"><span class="co1">// The EEPROM commands include the alway-set leading bit.</span><span class=""></span></li><li class=" even"><span class=""></span><span class="kw2">#define EE_WRITE_CMD (5 &lt;&lt; 6)</span><span class=""></span></li><li class=" odd"><span class=""></span><span class="kw2">#define EE_READ_CMD (6 &lt;&lt; 6)</span><span class=""></span></li><li class=" even"><span class=""></span><span class="kw2">#define EE_ERASE_CMD (7 &lt;&lt; 6)</span><span class=""></span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class=""></span><span class="kw1">static</span><span class=""> </span><span class="kw1">int</span><span class=""> </span><span class="de1">read_eeprom</span><span class="br0">(</span><span class="kw1">long</span><span class=""> ioaddr, </span><span class="kw1">int</span><span class=""> location</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">  </span><span class="kw1">unsigned</span><span class=""> retval = </span><span class="nu0">0</span><span class="">;</span></li><li class=" odd"><span class="">  </span><span class="kw1">long</span><span class=""> ee_addr = ioaddr + Cfg9346;</span></li><li class=" even"><span class="">  </span><span class="kw1">int</span><span class=""> read_cmd = location | EE_READ_CMD;</span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">  </span><span class="de1">outb</span><span class="br0">(</span><span class="">EE_ENB &amp; ~EE_CS, ee_addr</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class="">  </span><span class="de1">outb</span><span class="br0">(</span><span class="">EE_ENB, ee_addr</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class=""> </span><span class="co1"> // Shift the read command bits out.</span><span class=""></span></li><li class=" even"><span class="">  </span><span class="kw1">for</span><span class=""> </span><span class="br0">(</span><span class="kw1">int</span><span class=""> i = </span><span class="nu0">10</span><span class="">; i &gt;= </span><span class="nu0">0</span><span class="">; i--</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">    </span><span class="kw1">int</span><span class=""> dataval = </span><span class="br0">(</span><span class="">read_cmd &amp; </span><span class="br0">(</span><span class="nu0">1</span><span class=""> &lt;&lt; i</span><span class="br0">)</span><span class="br0">)</span><span class=""> ? EE_DATA_WRITE : </span><span class="nu0">0</span><span class="">;</span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">    </span><span class="de1">outb</span><span class="br0">(</span><span class="">EE_ENB | dataval, ee_addr</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class="">    </span><span class="de1">eeprom_delay</span><span class="br0">(</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class="">    </span><span class="de1">outb</span><span class="br0">(</span><span class="">EE_ENB | dataval | EE_SHIFT_CLK, ee_addr</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class="">    </span><span class="de1">eeprom_delay</span><span class="br0">(</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class="">  </span><span class="br0">}</span><span class=""></span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class="">  </span><span class="de1">outb</span><span class="br0">(</span><span class="">EE_ENB, ee_addr</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class="">  </span><span class="de1">eeprom_delay</span><span class="br0">(</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">  </span><span class="kw1">for</span><span class=""> </span><span class="br0">(</span><span class="kw1">int</span><span class=""> i = </span><span class="nu0">16</span><span class="">; i &gt; </span><span class="nu0">0</span><span class="">; i--</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">    </span><span class="de1">outb</span><span class="br0">(</span><span class="">EE_ENB | EE_SHIFT_CLK, ee_addr</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class="">    </span><span class="de1">eeprom_delay</span><span class="br0">(</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class="">    retval = </span><span class="br0">(</span><span class="">retval &lt;&lt; </span><span class="nu0">1</span><span class="br0">)</span><span class=""> | </span><span class="br0">(</span><span class="br0">(</span><span class="de1">inb</span><span class="br0">(</span><span class="">ee_addr</span><span class="br0">)</span><span class=""> &amp; EE_DATA_READ</span><span class="br0">)</span><span class=""> ? </span><span class="nu0">1</span><span class=""> : </span><span class="nu0">0</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class="">    </span><span class="de1">outb</span><span class="br0">(</span><span class="">EE_ENB, ee_addr</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class="">    </span><span class="de1">eeprom_delay</span><span class="br0">(</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class="">  </span><span class="br0">}</span><span class=""></span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class=""> </span><span class="co1"> // Terminate the EEPROM access.</span><span class=""></span></li><li class=" even"><span class="">  </span><span class="de1">outb</span><span class="br0">(</span><span class="">~EE_CS, ee_addr</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">  </span><span class="kw1">return</span><span class=""> retval;</span></li><li class=" odd"><span class=""></span><span class="br0">}</span></li></ol><pre style="display: none;">// Delay between EEPROM clock transitions.
+// No extra delay is needed with 33Mhz PCI, but 66Mhz may change this.
+#define eeprom_delay() inl(ee_addr)
+
+// The EEPROM commands include the alway-set leading bit.
+#define EE_WRITE_CMD (5 &lt;&lt; 6)
+#define EE_READ_CMD (6 &lt;&lt; 6)
+#define EE_ERASE_CMD (7 &lt;&lt; 6)
+
+static int read_eeprom(long ioaddr, int location) {
+
+  unsigned retval = 0;
+  long ee_addr = ioaddr + Cfg9346;
+  int read_cmd = location | EE_READ_CMD;
+
+  outb(EE_ENB &amp; ~EE_CS, ee_addr);
+  outb(EE_ENB, ee_addr);
+
+  // Shift the read command bits out.
+  for (int i = 10; i &gt;= 0; i--) {
+
+    int dataval = (read_cmd &amp; (1 &lt;&lt; i)) ? EE_DATA_WRITE : 0;
+
+    outb(EE_ENB | dataval, ee_addr);
+    eeprom_delay();
+
+    outb(EE_ENB | dataval | EE_SHIFT_CLK, ee_addr);
+    eeprom_delay();
+  }
+
+  outb(EE_ENB, ee_addr);
+  eeprom_delay();
+
+  for (int i = 16; i &gt; 0; i--) {
+
+    outb(EE_ENB | EE_SHIFT_CLK, ee_addr);
+    eeprom_delay();
+
+    retval = (retval &lt;&lt; 1) | ((inb(ee_addr) &amp; EE_DATA_READ) ? 1 : 0);
+
+    outb(EE_ENB, ee_addr);
+    eeprom_delay();
+  }
+
+  // Terminate the EEPROM access.
+  outb(~EE_CS, ee_addr);
+
+  return retval;
+}</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<p>Using this function, the MAC can be read and stored into an array. The array is then output to show that the correct MAC address is read.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" style="display: none;">// prepare mac address read
+int mac_address_index = 0;
+u32int mac_address[6];
+for (int i = 0; i &lt; 6; i++) {
+  mac_address[i] = 0;
+}
+
+// Read EEPROM
+//
+// Read the MAC Addresses from the NIC's EEPROM memory chip
+// k_printf("read_eeprom() ...\n");
+
+int readEEPROMResult = read_eeprom(ioaddr, 0) != 0xffff;
+if (readEEPROMResult) {
+
+  // loop three times to read three int (= 32 bit)
+  for (int i = 0; i &lt; 3; i++) {
+
+    u16int data = read_eeprom(ioaddr, i + 7);
+
+    mac_address[mac_address_index] = data &amp; 0xFF;
+    mac_address[mac_address_index + 1] = data &gt;&gt; 8;
+
+    mac_address_index += 2;
+  }
+
+} else {
+
+  // loop six times
+  for (int i = 0; i &lt; 6; i++) {
+
+    u16int data = inb(ioaddr + i);
+
+    mac_address_index += 1;
+  }
+}
+
+// DEBUG: print MAC Address
+k_printf("MAC: ");
+for (int i = 0; i &lt; 6; i++) {
+  k_printf("%x:", mac_address[i]);
+}
+k_printf("\n");</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="co1">// prepare mac address read</span><span class=""></span></li><li class=" even"><span class=""></span><span class="kw1">int</span><span class=""> mac_address_index = </span><span class="nu0">0</span><span class="">;</span></li><li class=" odd"><span class="">u32int mac_address</span><span class="br0">[</span><span class="nu0">6</span><span class="br0">]</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="kw1">for</span><span class=""> </span><span class="br0">(</span><span class="kw1">int</span><span class=""> i = </span><span class="nu0">0</span><span class="">; i &lt; </span><span class="nu0">6</span><span class="">; i++</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" odd"><span class="">  mac_address</span><span class="br0">[</span><span class="">i</span><span class="br0">]</span><span class=""> = </span><span class="nu0">0</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="br0">}</span><span class=""></span></li><li class=" odd"><span class=""></span><span class="co1"></span></li><li class=" even"><span class="co1">// Read EEPROM</span><span class="co1"></span></li><li class=" odd"><span class="co1">//</span><span class="co1"></span></li><li class=" even"><span class="co1">// Read the MAC Addresses from the NIC's EEPROM memory chip</span><span class="co1"></span></li><li class=" odd"><span class="co1">// k_printf("read_eeprom() ...\n");</span><span class=""></span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class=""></span><span class="kw1">int</span><span class=""> readEEPROMResult = </span><span class="de1">read_eeprom</span><span class="br0">(</span><span class="">ioaddr, </span><span class="nu0">0</span><span class="br0">)</span><span class=""> != </span><span class="nu0">0xffff</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="kw1">if</span><span class=""> </span><span class="br0">(</span><span class="">readEEPROMResult</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class=""> </span><span class="co1"> // loop three times to read three int (= 32 bit)</span><span class=""></span></li><li class=" odd"><span class="">  </span><span class="kw1">for</span><span class=""> </span><span class="br0">(</span><span class="kw1">int</span><span class=""> i = </span><span class="nu0">0</span><span class="">; i &lt; </span><span class="nu0">3</span><span class="">; i++</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class="">    u16int data = </span><span class="de1">read_eeprom</span><span class="br0">(</span><span class="">ioaddr, i + </span><span class="nu0">7</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class="">    mac_address</span><span class="br0">[</span><span class="">mac_address_index</span><span class="br0">]</span><span class=""> = data &amp; </span><span class="nu0">0xFF</span><span class="">;</span></li><li class=" even"><span class="">    mac_address</span><span class="br0">[</span><span class="">mac_address_index + </span><span class="nu0">1</span><span class="br0">]</span><span class=""> = data &gt;&gt; </span><span class="nu0">8</span><span class="">;</span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">    mac_address_index += </span><span class="nu0">2</span><span class="">;</span></li><li class=" odd"><span class="">  </span><span class="br0">}</span><span class=""></span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class=""></span><span class="br0">}</span><span class=""> </span><span class="kw1">else</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class=""> </span><span class="co1"> // loop six times</span><span class=""></span></li><li class=" even"><span class="">  </span><span class="kw1">for</span><span class=""> </span><span class="br0">(</span><span class="kw1">int</span><span class=""> i = </span><span class="nu0">0</span><span class="">; i &lt; </span><span class="nu0">6</span><span class="">; i++</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">    u16int data = </span><span class="de1">inb</span><span class="br0">(</span><span class="">ioaddr + i</span><span class="br0">)</span><span class="">;</span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">    mac_address_index += </span><span class="nu0">1</span><span class="">;</span></li><li class=" odd"><span class="">  </span><span class="br0">}</span><span class=""></span></li><li class=" even"><span class=""></span><span class="br0">}</span><span class=""></span></li><li class=" odd"><span class=""></span><span class="co1"></span></li><li class=" even"><span class="co1">// DEBUG: print MAC Address</span><span class=""></span></li><li class=" odd"><span class=""></span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">"MAC: "</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="kw1">for</span><span class=""> </span><span class="br0">(</span><span class="kw1">int</span><span class=""> i = </span><span class="nu0">0</span><span class="">; i &lt; </span><span class="nu0">6</span><span class="">; i++</span><span class="br0">)</span><span class=""> </span><span class="br0">{</span><span class=""></span></li><li class=" odd"><span class="">  </span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">"%x:"</span><span class="">, mac_address</span><span class="br0">[</span><span class="">i</span><span class="br0">]</span><span class="br0">)</span><span class="">;</span></li><li class=" even"><span class=""></span><span class="br0">}</span><span class=""></span></li><li class=" odd"><span class=""></span><span class="de1">k_printf</span><span class="br0">(</span><span class="st1">"\n"</span><span class="br0">)</span><span class="">;</span></li></ol><pre style="display: none;">// prepare mac address read
+int mac_address_index = 0;
+u32int mac_address[6];
+for (int i = 0; i &lt; 6; i++) {
+  mac_address[i] = 0;
+}
+
+// Read EEPROM
+//
+// Read the MAC Addresses from the NIC's EEPROM memory chip
+// k_printf("read_eeprom() ...\n");
+
+int readEEPROMResult = read_eeprom(ioaddr, 0) != 0xffff;
+if (readEEPROMResult) {
+
+  // loop three times to read three int (= 32 bit)
+  for (int i = 0; i &lt; 3; i++) {
+
+    u16int data = read_eeprom(ioaddr, i + 7);
+
+    mac_address[mac_address_index] = data &amp; 0xFF;
+    mac_address[mac_address_index + 1] = data &gt;&gt; 8;
+
+    mac_address_index += 2;
+  }
+
+} else {
+
+  // loop six times
+  for (int i = 0; i &lt; 6; i++) {
+
+    u16int data = inb(ioaddr + i);
+
+    mac_address_index += 1;
+  }
+}
+
+// DEBUG: print MAC Address
+k_printf("MAC: ");
+for (int i = 0; i &lt; 6; i++) {
+  k_printf("%x:", mac_address[i]);
+}
+k_printf("\n");</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<p>&nbsp;</p>
+<h5>Debugging</h5>
+<p>This section will introduce you to two ways of debugging the process of sending data using the RTL 8139.</p>
+<p>The first method is telling qemu to dump all incoming and outgoing packages to a file. The file is in the pcap format which makes it possible to open the file in wireshark. wireshark is a networking tool that can display all field in ethernet packages and knows a large array of protocols for detailed display of all fields in packets.</p>
+<p>If your RTL driver sends data, you can look at what data is send by loading the dump file and looking at the send packets using wireshark.</p>
+<p>The second method is to compile qemu and enable the debug output in the emulation layer of the RTL 8139 card. Sadly there is no command line parameter to enable the RTL 8139 debug output. You can only enable the debug output by changing qemu’s code and and compiling qemu. This sounds hard but it actually is pretty easy. If I managed to do it, you will easily be able to do it as well. This method was only tested on a Ubuntu linux. The steps to compile on windows or mac are unknown to me. You can follow method 2 on Ubuntu linux easily.</p>
+<h5>Dumping Network Traffic with qemu</h5>
+<p>qemu internally contains so called objects for diverse purposes. One of those objects is the filter-dump object. You can apply the filter-dump object to one of the network interface cards to dump all packets into a file.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" style="display: none;">/home/&lt;user&gt;/dev/qemu/build/i386-softmmu/qemu-system-i386 \
+-monitor stdio \
+-cdrom image.iso \
+-netdev user,id=network0 \
+-device rtl8139,netdev=network0,mac=52:54:00:12:34:56 \
+-object filter-dump,id=network_filter_object,netdev=network0,file=dump.dat</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="">/home/&lt;user&gt;/dev/qemu/build/i386-softmmu/qemu-system-i386 \</span></li><li class=" even"><span class="">-monitor stdio \</span></li><li class=" odd"><span class="">-cdrom image.iso \</span></li><li class=" even"><span class="">-netdev user,id=network0 \</span></li><li class=" odd"><span class="">-device rtl8139,netdev=network0,mac=52:54:00:12:34:56 \</span></li><li class=" even"><span class="">-object filter-dump,id=network_filter_object,netdev=network0,file=dump.dat</span></li></ol><pre style="display: none;">/home/&lt;user&gt;/dev/qemu/build/i386-softmmu/qemu-system-i386 \
+-monitor stdio \
+-cdrom image.iso \
+-netdev user,id=network0 \
+-device rtl8139,netdev=network0,mac=52:54:00:12:34:56 \
+-object filter-dump,id=network_filter_object,netdev=network0,file=dump.dat</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<p>The filter-dump object is pointed to the netdev. It will capture traffic on that netdev. The netdev is the RTL 8139 NIC. The output file is called dump.dat it is written into the folder where you start qemu.</p>
+<p>Open dump.dat in qemu. You should see the packet you have sent! If the RTL 8139 only sends zeroes, check that you are specifying virtual addresses and check the code that enables bis mastering.</p>
+<h5>Compile qemu and Enable RTL Debug Output</h5>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" style="display: none;">https://forum.osdev.org/viewtopic.php?f=1&amp;t=28285
+
+In qemu/hw/net/rtl8139.c
+
+#define DEBUG_RTL8139 1
+replace by
+define DEBUG_RTL8139 1
+
+Build Qemu
+https://en.wikibooks.org/wiki/QEMU/Installing_QEMU
+
+0. sudo apt-get install libglib2.0-dev libpango1.0-dev libatk1.0-dev libsdl2-dev
+1. git clone git://git.qemu-project.org/qemu.git
+2. cd qemu
+3. git submodule init
+4. git submodule update --recursive
+5. git submodule status --recursive
+6. git checkout stable-4.1
+7. mkdir build
+8. cd build
+9. ../configure --disable-kvm --prefix=PFX --target-list="i386-softmmu x86_64-softmmu" --enable-sdl
+10. make
+
+In step 6, replace the version number with the most current qemu release.
+In step 9, the command specifies targets and only lists i386. That way only x86 32 bit qemu is built.
+If you call ../configure without additional parameters, qemu will be build for all possible targets which will take forever.
+
+The qemu executable will be placed inside build folder. For example in /home/&lt;user&gt;/dev/qemu/build/i386-softmmu/qemu-system-i386&nbsp;
+
+</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="">https://forum.osdev.org/viewtopic.php?f=1&amp;t=28285</span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class="">In qemu/hw/net/rtl8139.c</span><span class="co1"></span></li><li class=" even"><span class="co1"></span></li><li class=" odd"><span class="co1">#define DEBUG_RTL8139 1</span><span class=""></span></li><li class=" even"><span class="">replace by</span></li><li class=" odd"><span class="">define DEBUG_RTL8139 1</span></li><li class=" even"><span class=""></span></li><li class=" odd"><span class="">Build Qemu</span></li><li class=" even"><span class="">https://en.wikibooks.org/wiki/QEMU/Installing_QEMU</span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">0. sudo apt-get install libglib2.0-dev libpango1.0-dev libatk1.0-dev libsdl2-dev</span></li><li class=" odd"><span class="">1. git clone git://git.qemu-project.org/qemu.git</span></li><li class=" even"><span class="">2. cd qemu</span></li><li class=" odd"><span class="">3. git submodule init</span></li><li class=" even"><span class="">4. git submodule update --recursive</span></li><li class=" odd"><span class="">5. git submodule status --recursive</span></li><li class=" even"><span class="">6. git checkout stable-4.1</span></li><li class=" odd"><span class="">7. mkdir build</span></li><li class=" even"><span class="">8. cd build</span></li><li class=" odd"><span class="">9. ../configure --disable-kvm --prefix=PFX --target-list=</span><span class="st0">"i386-softmmu x86_64-softmmu"</span><span class=""> --enable-sdl</span></li><li class=" even"><span class="">10. make</span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">In step 6, replace the version number with the most current qemu release.</span></li><li class=" odd"><span class="">In step 9, the command specifies targets and only lists i386. That way only x86 32 bit qemu is built.</span></li><li class=" even"><span class="">If you call ../configure without additional parameters, qemu will be build </span><span class="kw1">for</span><span class=""> all possible targets which will take forever.</span></li><li class=" odd"><span class=""></span></li><li class=" even"><span class="">The qemu executable will be placed inside build folder. For example </span><span class="kw1">in</span><span class=""> /home/&lt;user&gt;/dev/qemu/build/i386-softmmu/qemu-system-i386 </span></li></ol><pre style="display: none;">https://forum.osdev.org/viewtopic.php?f=1&amp;t=28285
+
+In qemu/hw/net/rtl8139.c
+
+#define DEBUG_RTL8139 1
+replace by
+define DEBUG_RTL8139 1
+
+Build Qemu
+https://en.wikibooks.org/wiki/QEMU/Installing_QEMU
+
+0. sudo apt-get install libglib2.0-dev libpango1.0-dev libatk1.0-dev libsdl2-dev
+1. git clone git://git.qemu-project.org/qemu.git
+2. cd qemu
+3. git submodule init
+4. git submodule update --recursive
+5. git submodule status --recursive
+6. git checkout stable-4.1
+7. mkdir build
+8. cd build
+9. ../configure --disable-kvm --prefix=PFX --target-list="i386-softmmu x86_64-softmmu" --enable-sdl
+10. make
+
+In step 6, replace the version number with the most current qemu release.
+In step 9, the command specifies targets and only lists i386. That way only x86 32 bit qemu is built.
+If you call ../configure without additional parameters, qemu will be build for all possible targets which will take forever.
+
+The qemu executable will be placed inside build folder. For example in /home/&lt;user&gt;/dev/qemu/build/i386-softmmu/qemu-system-i386 </pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<p>Now qemu will output debug statements to the command line. You should see lines like these:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" style="display: none;">RTL8139: +++ transmitting from descriptor 0
+RTL8139: +++ transmit reading 42 bytes from host memory at 0x0010504a
+RTL8139: +++ transmitted 42 bytes from descriptor 0</pre><div class="EnlighterJSWrapper enlighterEnlighterJSWrapper"><ol class="hoverEnabled enlighterEnlighterJS EnlighterJS"><li class=" odd"><span class="">RTL8139: +++ transmitting from descriptor 0</span></li><li class=" even"><span class="">RTL8139: +++ transmit reading 42 bytes from host memory at 0x0010504a</span></li><li class=" odd"><span class="">RTL8139: +++ transmitted 42 bytes from descriptor 0</span></li></ol><pre style="display: none;">RTL8139: +++ transmitting from descriptor 0
+RTL8139: +++ transmit reading 42 bytes from host memory at 0x0010504a
+RTL8139: +++ transmitted 42 bytes from descriptor 0</pre><div class="EnlighterJSToolbar"><a class="EnlighterJSInfoButton" title="EnlighterJS Syntax Highlighter"></a><a class="EnlighterJSRawButton" title="Toggle RAW Code"></a><a class="EnlighterJSWindowButton" title="Open Code in new Window"></a><span class="clear"></span></div></div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta">
+		
+			</footer><!-- .entry-meta -->
+</article><!-- #post -->
+						<nav class="navigation post-navigation" role="navigation">
+		<h1 class="screen-reader-text">Post navigation</h1>
+		<div class="nav-links">
+
+			<a href="https://www.wfbsoftware.de/2019/07/18/c-unit-testing-with-cmocka/" rel="prev"><span class="meta-nav">←</span> C Unit Testing with cmocka</a>			<a href="https://www.wfbsoftware.de/2019/07/22/tcp-ip-stack/" rel="next">TCP/IP Stack ARP <span class="meta-nav">→</span></a>
+		</div><!-- .nav-links -->
+	</nav><!-- .navigation -->
+						
+			
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+		</div><!-- #main -->
+		<footer id="colophon" class="site-footer" role="contentinfo">
+				<div id="secondary" class="sidebar-container" role="complementary">
+		<div class="widget-area masonry" style="position: relative; height: 1027px;">
+			<aside id="search-2" class="widget widget_search masonry-brick" style="position: absolute; left: 0px; top: 0px;"><form role="search" method="get" class="search-form" action="https://www.wfbsoftware.de/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search …" value="" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="Search">
+			</form></aside>		<aside id="recent-posts-2" class="widget widget_recent_entries masonry-brick" style="position: absolute; left: 265px; top: 0px;">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+											<li>
+					<a href="https://www.wfbsoftware.de/2020/02/29/assembly-programming-and-debugging-in-eclipse-on-linux/">Assembly Programming and Debugging in Eclipse on Linux</a>
+									</li>
+											<li>
+					<a href="https://www.wfbsoftware.de/2020/02/23/powering-the-sam7-la2-board/">Powering the SAM7-LA2 Board</a>
+									</li>
+											<li>
+					<a href="https://www.wfbsoftware.de/2020/02/22/stm32f103c8t6-with-eclipse-openstm32-under-mac-osx/">STM32F103C8T6 with Eclipse (OpenSTM32) under Mac OSX</a>
+									</li>
+											<li>
+					<a href="https://www.wfbsoftware.de/2020/01/31/stm32f103c8t6-with-arduino-ide/">STM32F103C8T6 with Arduino IDE</a>
+									</li>
+											<li>
+					<a href="https://www.wfbsoftware.de/2020/01/22/stm32cubemx-on-macos/">STM32CubeMX on MacOS</a>
+									</li>
+					</ul>
+		</aside><aside id="archives-2" class="widget widget_archive masonry-brick" style="position: absolute; left: 530px; top: 0px;"><h3 class="widget-title">Archives</h3>		<ul>
+			<li><a href="https://www.wfbsoftware.de/2020/02/">February 2020</a></li>
+	<li><a href="https://www.wfbsoftware.de/2020/01/">January 2020</a></li>
+	<li><a href="https://www.wfbsoftware.de/2019/12/">December 2019</a></li>
+	<li><a href="https://www.wfbsoftware.de/2019/11/">November 2019</a></li>
+	<li><a href="https://www.wfbsoftware.de/2019/10/">October 2019</a></li>
+	<li><a href="https://www.wfbsoftware.de/2019/08/">August 2019</a></li>
+	<li><a href="https://www.wfbsoftware.de/2019/07/">July 2019</a></li>
+	<li><a href="https://www.wfbsoftware.de/2019/06/">June 2019</a></li>
+	<li><a href="https://www.wfbsoftware.de/2019/01/">January 2019</a></li>
+	<li><a href="https://www.wfbsoftware.de/2018/12/">December 2018</a></li>
+		</ul>
+		</aside><aside id="categories-2" class="widget widget_categories masonry-brick" style="position: absolute; left: 795px; top: 0px;"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-24"><a href="https://www.wfbsoftware.de/category/net-core/">.NET Core</a>
+</li>
+	<li class="cat-item cat-item-17"><a href="https://www.wfbsoftware.de/category/javascript/angular/">Angular</a>
+</li>
+	<li class="cat-item cat-item-25"><a href="https://www.wfbsoftware.de/category/net-core/asp-net-core/">ASP.NET Core</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="https://www.wfbsoftware.de/category/assembler/">Assembler</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="https://www.wfbsoftware.de/category/c-2/">C</a>
+</li>
+	<li class="cat-item cat-item-26"><a href="https://www.wfbsoftware.de/category/net-core/c-net-core/">C#</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="https://www.wfbsoftware.de/category/c/">C++</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="https://www.wfbsoftware.de/category/python/django/">Django</a>
+</li>
+	<li class="cat-item cat-item-22"><a href="https://www.wfbsoftware.de/category/c-2/driver-development/">Driver Development</a>
+</li>
+	<li class="cat-item cat-item-27"><a href="https://www.wfbsoftware.de/category/embedded/">Embedded</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="https://www.wfbsoftware.de/category/javascript/node/express/">Express</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="https://www.wfbsoftware.de/category/c/flexbison/">FlexBison</a>
+</li>
+	<li class="cat-item cat-item-2"><a href="https://www.wfbsoftware.de/category/javascript/">JavaScript</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="https://www.wfbsoftware.de/category/javascript/jest/">Jest</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="https://www.wfbsoftware.de/category/microcontrollers/">Microcontrollers</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="https://www.wfbsoftware.de/category/modeltrains/">ModelTrains</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://www.wfbsoftware.de/category/mongodb/">MongoDB</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="https://www.wfbsoftware.de/category/networkprogramming/">NetworkProgramming</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="https://www.wfbsoftware.de/category/javascript/node/">Node</a>
+</li>
+	<li class="cat-item cat-item-31"><a href="https://www.wfbsoftware.de/category/opencv/">OpenCV</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="https://www.wfbsoftware.de/category/opengl/">OpenGL</a>
+</li>
+	<li class="cat-item cat-item-19"><a href="https://www.wfbsoftware.de/category/operatingsystems/">OperatingSystems</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="https://www.wfbsoftware.de/category/c/poco/">Poco</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="https://www.wfbsoftware.de/category/python/">Python</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://www.wfbsoftware.de/category/javascript/react/">React</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://www.wfbsoftware.de/category/javascript/redux/">Redux</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="https://www.wfbsoftware.de/category/javascript/node/sequelize/">Sequelize</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="https://www.wfbsoftware.de/category/embedded/stm32/">STM32</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://www.wfbsoftware.de/category/uncategorized/">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://www.wfbsoftware.de/category/c-2/unit-testing/">Unit Testing</a>
+</li>
+		</ul>
+</aside><aside id="meta-2" class="widget widget_meta masonry-brick" style="position: absolute; left: 0px; top: 94px;"><h3 class="widget-title">Meta</h3>			<ul>
+						<li><a href="https://www.wfbsoftware.de/wp-login.php">Log in</a></li>
+			<li><a href="https://www.wfbsoftware.de/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://www.wfbsoftware.de/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>			</ul>
+			</aside>		</div><!-- .widget-area -->
+	</div><!-- #secondary -->
+
+			<div class="site-info">
+												<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+	</div><!-- #page -->
+
+	<script type="text/javascript" src="./RTL8139_EnUs_files/imagesloaded.min.js.download"></script>
+<script type="text/javascript" src="./RTL8139_EnUs_files/masonry.min.js.download"></script>
+<script type="text/javascript" src="./RTL8139_EnUs_files/jquery.masonry.min.js.download"></script>
+<script type="text/javascript" src="./RTL8139_EnUs_files/functions.js.download"></script>
+<script type="text/javascript" src="./RTL8139_EnUs_files/mootools-core-yc.js.download"></script>
+<script type="text/javascript" src="./RTL8139_EnUs_files/EnlighterJS.min.js.download"></script>
+<script type="text/javascript" src="./RTL8139_EnUs_files/wp-embed.min.js.download"></script>
+<script type="text/javascript">/* <![CDATA[ */EnlighterJS_Config = {"selector":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"language":"generic","theme":"enlighter","indent":2,"hover":"hoverEnabled","showLinenumbers":true,"rawButton":true,"infoButton":true,"windowButton":true,"rawcodeDoubleclick":false,"grouping":true,"cryptex":{"enabled":false,"email":"mail@example.tld"}};!function(){var a=function(a){var b="Enlighter Error: ";console.error?console.error(b+a):console.log&&console.log(b+a)};return window.addEvent?"undefined"==typeof EnlighterJS?void a("Javascript Resources not loaded yet!"):"undefined"==typeof EnlighterJS_Config?void a("Configuration not loaded yet!"):void window.addEvent("domready",function(){EnlighterJS.Util.Init(EnlighterJS_Config.selector.block,EnlighterJS_Config.selector.inline,EnlighterJS_Config)}):void a("MooTools Framework not loaded yet!")}();;/* ]]> */</script><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./RTL8139_EnUs_files/translate_24dp.png" width="20" height="20" alt="Google Tradutor"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Texto original</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Sugerir uma tradução melhor</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div></body></html>

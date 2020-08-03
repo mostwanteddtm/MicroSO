@@ -1,0 +1,2 @@
+ML /AT /c /Zm RAMVIEW.ASM
+PAUSE

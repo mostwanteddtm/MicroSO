@@ -1,0 +1,5 @@
+function OAS_RICH(position) {
+if (position == 'Bottom') {
+document.write ('<A HREF="http://phoenix.untd.com/TRCK/CLCK//webservices/general/1509440516/Bottom/default/empty.gif/794b4b4759315061664b674141375669?x" target="_blank"><IMG SRC="http://static.uolcontent.com/RealMedia/ads/Creatives/default/empty.gif"  WIDTH=1 HEIGHT=1 ALT="" BORDER=0 BORDER="0"></A>');
+}
+}

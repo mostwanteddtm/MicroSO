@@ -1,0 +1,507 @@
+SUP {
+	VERTICAL-ALIGN: baseline; LINE-HEIGHT: 1; POSITION: relative; HEIGHT: 0px; _vertical-align: bottom
+}
+SUB {
+	VERTICAL-ALIGN: baseline; LINE-HEIGHT: 1; POSITION: relative; HEIGHT: 0px; _vertical-align: bottom
+}
+SUP {
+	BOTTOM: 1ex
+}
+SUB {
+	TOP: 0.5ex
+}
+BODY.page-Wikipédia_Página_principal #t-cite {
+	DISPLAY: none! important
+}
+BODY.page-Wikipédia_Página_principal #lastmod {
+	DISPLAY: none! important
+}
+BODY.page-Wikipédia_Página_principal #siteSub {
+	DISPLAY: none! important
+}
+BODY.page-Wikipédia_Página_principal #contentSub {
+	DISPLAY: none! important
+}
+BODY.page-Wikipédia_Página_principal H1.firstHeading {
+	DISPLAY: none! important
+}
+DIV.aviso-novo-item-esplanada {
+	FONT-STYLE: italic
+}
+DIV.aviso-novo-item-esplanada + P > A.new {
+	DISPLAY: none
+}
+.mw-search-results {
+	MARGIN-LEFT: 0px
+}
+.mw-search-results LI {
+	PADDING-RIGHT: 1em; PADDING-LEFT: 1em; LIST-STYLE-IMAGE: none; PADDING-BOTTOM: 0.35em; MARGIN: 0px; PADDING-TOP: 0.35em; BORDER-BOTTOM: #d3daed 1px solid; LIST-STYLE-TYPE: none; BACKGROUND-COLOR: #f6f8fc
+}
+.infobox {
+	CLEAR: right; BORDER-RIGHT: #aaaaaa 1px solid; PADDING-RIGHT: 0.2em; BORDER-TOP: #aaaaaa 1px solid; PADDING-LEFT: 0.2em; FLOAT: right; MARGIN-BOTTOM: 0.5em; PADDING-BOTTOM: 0.2em; MARGIN-LEFT: 1em; BORDER-LEFT: #aaaaaa 1px solid; PADDING-TOP: 0.2em; BORDER-BOTTOM: #aaaaaa 1px solid; BACKGROUND-COLOR: #f9f9f9
+}
+.infobox TR {
+	VERTICAL-ALIGN: top
+}
+.infobox CAPTION {
+	
+}
+.bordered.infobox {
+	BORDER-COLLAPSE: collapse
+}
+.bordered.infobox TD {
+	BORDER-RIGHT: #aaaaaa 1px solid; BORDER-TOP: #aaaaaa 1px solid; BORDER-LEFT: #aaaaaa 1px solid; BORDER-BOTTOM: #aaaaaa 1px solid
+}
+.bordered.infobox TH {
+	BORDER-RIGHT: #aaaaaa 1px solid; BORDER-TOP: #aaaaaa 1px solid; BORDER-LEFT: #aaaaaa 1px solid; BORDER-BOTTOM: #aaaaaa 1px solid
+}
+.sisterproject.infobox {
+	WIDTH: 22em
+}
+.hiddenStructure {
+	DISPLAY: none
+}
+TABLE.prettytable {
+	BORDER-RIGHT: #aaaaaa 1px solid; BORDER-TOP: #aaaaaa 1px solid; BACKGROUND: #f9f9f9; MARGIN: 1em 1em 1em 0px; BORDER-LEFT: #aaaaaa 1px solid; BORDER-BOTTOM: #aaaaaa 1px solid; BORDER-COLLAPSE: collapse
+}
+TABLE.prettytable TH {
+	BORDER-RIGHT: #aaaaaa 1px solid; PADDING-RIGHT: 0.2em; BORDER-TOP: #aaaaaa 1px solid; PADDING-LEFT: 0.2em; PADDING-BOTTOM: 0.2em; BORDER-LEFT: #aaaaaa 1px solid; PADDING-TOP: 0.2em; BORDER-BOTTOM: #aaaaaa 1px solid
+}
+TABLE.prettytable TD {
+	BORDER-RIGHT: #aaaaaa 1px solid; PADDING-RIGHT: 0.2em; BORDER-TOP: #aaaaaa 1px solid; PADDING-LEFT: 0.2em; PADDING-BOTTOM: 0.2em; BORDER-LEFT: #aaaaaa 1px solid; PADDING-TOP: 0.2em; BORDER-BOTTOM: #aaaaaa 1px solid
+}
+TABLE.prettytable TH {
+	BACKGROUND: #f2f2f2; TEXT-ALIGN: center
+}
+TABLE.prettytable CAPTION {
+	FONT-WEIGHT: bold
+}
+.caixa {
+	PADDING-RIGHT: 0.1em; PADDING-LEFT: 0.1em; FONT-SIZE: 95%; PADDING-BOTTOM: 0.1em; MARGIN: 0px auto; WIDTH: 80%; PADDING-TOP: 0.1em
+}
+.caixaMW {
+	CLEAR: both; PADDING-RIGHT: 0.1em; PADDING-LEFT: 0.1em; FONT-SIZE: 93%; PADDING-BOTTOM: 0.1em; MARGIN: 1px 0px; LINE-HEIGHT: 120%; PADDING-TOP: 0.1em
+}
+.info.caixaMW {
+	BORDER-RIGHT: #ccc 1px solid; BORDER-TOP: #ccc 1px solid; BORDER-LEFT: #ccc 1px solid; BORDER-BOTTOM: #ccc 1px solid; BACKGROUND-COLOR: white
+}
+.info.caixa {
+	BORDER-RIGHT: #ccc 1px solid; BORDER-TOP: #ccc 1px solid; BORDER-LEFT: #ccc 1px solid; BORDER-BOTTOM: #ccc 1px solid; BACKGROUND-COLOR: white
+}
+.infodestaque.caixaMW {
+	BORDER-RIGHT: #cedff2 1px solid; BORDER-TOP: #cedff2 1px solid; BORDER-LEFT: #cedff2 1px solid; BORDER-BOTTOM: #cedff2 1px solid; BACKGROUND-COLOR: #f5faff
+}
+.infodestaque.caixa {
+	BORDER-RIGHT: #cedff2 1px solid; BORDER-TOP: #cedff2 1px solid; BORDER-LEFT: #cedff2 1px solid; BORDER-BOTTOM: #cedff2 1px solid; BACKGROUND-COLOR: #f5faff
+}
+.aviso.caixaMW {
+	BORDER-RIGHT: #ffc9c9 1px solid; BORDER-TOP: #ffc9c9 1px solid; BORDER-LEFT: #ffc9c9 1px solid; BORDER-BOTTOM: #ffc9c9 1px solid; BACKGROUND-COLOR: #fff3f3
+}
+.aviso.caixa {
+	BORDER-RIGHT: #ffc9c9 1px solid; BORDER-TOP: #ffc9c9 1px solid; BORDER-LEFT: #ffc9c9 1px solid; BORDER-BOTTOM: #ffc9c9 1px solid; BACKGROUND-COLOR: #fff3f3
+}
+.avisodestaque.caixaMW {
+	BORDER-RIGHT: #f00 2px solid; BORDER-TOP: #f00 2px solid; BORDER-LEFT: #f00 2px solid; BORDER-BOTTOM: #f00 2px solid; BACKGROUND-COLOR: #fff
+}
+.avisodestaque.caixa {
+	BORDER-RIGHT: #f00 2px solid; BORDER-TOP: #f00 2px solid; BORDER-LEFT: #f00 2px solid; BORDER-BOTTOM: #f00 2px solid; BACKGROUND-COLOR: #fff
+}
+TABLE.navbox {
+	CLEAR: both; BORDER-RIGHT: #aaa 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #aaa 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 90%; PADDING-BOTTOM: 2px; MARGIN: 1em 0em 0em; BORDER-LEFT: #aaa 1px solid; WIDTH: 100%; PADDING-TOP: 2px; BORDER-BOTTOM: #aaa 1px solid; BACKGROUND-COLOR: #f9f9f9; TEXT-ALIGN: center
+}
+TABLE.navbox TH {
+	PADDING-RIGHT: 1em; PADDING-LEFT: 1em; BACKGROUND-COLOR: #ccf
+}
+UNKNOWN {
+	BACKGROUND-COLOR: #ddf
+}
+DIV.Boxmerge {
+	BORDER-RIGHT: #aaaaaa 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #aaaaaa 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 95%; PADDING-BOTTOM: 2px; MARGIN: 0px; BORDER-LEFT: #aaaaaa 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: #aaaaaa 1px solid; BORDER-COLLAPSE: collapse; TEXT-ALIGN: center
+}
+DIV.NavFrame {
+	BORDER-RIGHT: #aaaaaa 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #aaaaaa 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 95%; PADDING-BOTTOM: 2px; MARGIN: 0px; BORDER-LEFT: #aaaaaa 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: #aaaaaa 1px solid; BORDER-COLLAPSE: collapse; TEXT-ALIGN: center
+}
+DIV.Boxmerge DIV.NavFrame {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+DIV.NavFrame + DIV.NavFrame {
+	
+}
+DIV.NavPic {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; FLOAT: left; PADDING-BOTTOM: 2px; MARGIN: 0px; PADDING-TOP: 2px; BACKGROUND-COLOR: #ffffff
+}
+DIV.NavFrame DIV.NavHead {
+	FONT-WEIGHT: bold; FONT-SIZE: 100%; POSITION: relative; HEIGHT: 1.6em; BACKGROUND-COLOR: #efefef
+}
+DIV.NavFrame P {
+	FONT-SIZE: 100%
+}
+DIV.NavFrame DIV.NavContent {
+	FONT-SIZE: 100%
+}
+DIV.NavFrame DIV.NavContent P {
+	FONT-SIZE: 100%
+}
+DIV.NavEnd {
+	CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; LINE-HEIGHT: 1px; PADDING-TOP: 0px
+}
+A.NavToggle {
+	FONT-WEIGHT: normal; FONT-SIZE: smaller; RIGHT: 3px; POSITION: absolute; TOP: 0px
+}
+OL.references {
+	FONT-SIZE: 100%
+}
+OL.references > LI:unknown {
+	BACKGROUND-COLOR: #def
+}
+SPAN.citation:unknown {
+	BACKGROUND-COLOR: #def
+}
+SUP.reference:unknown {
+	BACKGROUND-COLOR: #def
+}
+SPAN.citation {
+	FONT-STYLE: normal; WORD-WRAP: break-word
+}
+CITE {
+	FONT-STYLE: normal; WORD-WRAP: break-word
+}
+
+@media Screen, Handheld    
+{
+SPAN.citation *.printonly {
+	DISPLAY: none
+}
+    }
+.references-small {
+	FONT-SIZE: 90%
+}
+.allpagesredirect A {
+	COLOR: green; FONT-STYLE: italic
+}
+.redirect-in-category A {
+	COLOR: green; FONT-STYLE: italic
+}
+.unusedtemplatesredirect A {
+	COLOR: green; FONT-STYLE: italic
+}
+.watchlistredir A {
+	COLOR: green; FONT-STYLE: italic
+}
+TABLE.metadata {
+	BORDER-RIGHT: #aaa 1px solid; BORDER-TOP: #aaa 1px solid; DISPLAY: none; BORDER-LEFT: #aaa 1px solid; BORDER-BOTTOM: #aaa 1px solid; speak: none
+}
+.metadata-label {
+	COLOR: #aaa
+}
+DIV.listenlist {
+	PADDING-LEFT: 40px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Gnome-speakernotes.png/30px-Gnome-speakernotes.png)
+}
+DIV.videolist {
+	PADDING-LEFT: 50px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/en/thumb/2/20/Tango-video-x-generic.png/40px-Tango-video-x-generic.png)
+}
+DIV.multivideolist {
+	PADDING-LEFT: 50px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/en/thumb/2/20/Tango-video-x-generic.png/40px-Tango-video-x-generic.png)
+}
+DIV.medialist {
+	BACKGROUND-POSITION: left top; MIN-HEIGHT: 50px; MARGIN: 1em; BACKGROUND-REPEAT: no-repeat
+}
+DIV.medialist UL {
+	LIST-STYLE-IMAGE: none; MARGIN: 0px; LIST-STYLE-TYPE: none
+}
+DIV.medialist UL LI {
+	PADDING-BOTTOM: 0.5em
+}
+DIV.medialist UL LI LI {
+	FONT-SIZE: 91%; PADDING-BOTTOM: 0px
+}
+#content A[href$='.pdf'].external {
+	PADDING-RIGHT: 16px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/23/Icons-mini-file_acrobat.gif) no-repeat right center
+}
+#content A[href*='.pdf?'].external {
+	PADDING-RIGHT: 16px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/23/Icons-mini-file_acrobat.gif) no-repeat right center
+}
+#content A[href*='.pdf#'].external {
+	PADDING-RIGHT: 16px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/23/Icons-mini-file_acrobat.gif) no-repeat right center
+}
+#content A[href$='.PDF'].external {
+	PADDING-RIGHT: 16px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/23/Icons-mini-file_acrobat.gif) no-repeat right center
+}
+#content A[href*='.PDF?'].external {
+	PADDING-RIGHT: 16px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/23/Icons-mini-file_acrobat.gif) no-repeat right center
+}
+#content A[href*='.PDF#'].external {
+	PADDING-RIGHT: 16px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/23/Icons-mini-file_acrobat.gif) no-repeat right center
+}
+#mw_content A[href$='.pdf'].external {
+	PADDING-RIGHT: 16px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/23/Icons-mini-file_acrobat.gif) no-repeat right center
+}
+#mw_content A[href*='.pdf?'].external {
+	PADDING-RIGHT: 16px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/23/Icons-mini-file_acrobat.gif) no-repeat right center
+}
+#mw_content A[href*='.pdf#'].external {
+	PADDING-RIGHT: 16px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/23/Icons-mini-file_acrobat.gif) no-repeat right center
+}
+#mw_content A[href$='.PDF'].external {
+	PADDING-RIGHT: 16px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/23/Icons-mini-file_acrobat.gif) no-repeat right center
+}
+#mw_content A[href*='.PDF?'].external {
+	PADDING-RIGHT: 16px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/23/Icons-mini-file_acrobat.gif) no-repeat right center
+}
+#mw_content A[href*='.PDF#'].external {
+	PADDING-RIGHT: 16px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/23/Icons-mini-file_acrobat.gif) no-repeat right center
+}
+#content SPAN.PDFlink A {
+	PADDING-RIGHT: 17px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/23/Icons-mini-file_acrobat.gif) no-repeat right center
+}
+#mw_content SPAN.PDFlink A {
+	PADDING-RIGHT: 17px; BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/23/Icons-mini-file_acrobat.gif) no-repeat right center
+}
+.messagebox {
+	BORDER-RIGHT: #aaa 1px solid; PADDING-RIGHT: 0.2em; BORDER-TOP: #aaa 1px solid; PADDING-LEFT: 0.2em; PADDING-BOTTOM: 0.2em; MARGIN: 0px auto 1em; BORDER-LEFT: #aaa 1px solid; WIDTH: 80%; PADDING-TOP: 0.2em; BORDER-BOTTOM: #aaa 1px solid; BACKGROUND-COLOR: #f9f9f9
+}
+.merge.messagebox {
+	BORDER-RIGHT: #c0b8cc 1px solid; BORDER-TOP: #c0b8cc 1px solid; BORDER-LEFT: #c0b8cc 1px solid; BORDER-BOTTOM: #c0b8cc 1px solid; BACKGROUND-COLOR: #f0e5ff; TEXT-ALIGN: center
+}
+.cleanup.messagebox {
+	BORDER-RIGHT: #9f9fff 1px solid; BORDER-TOP: #9f9fff 1px solid; BORDER-LEFT: #9f9fff 1px solid; BORDER-BOTTOM: #9f9fff 1px solid; BACKGROUND-COLOR: #efefff; TEXT-ALIGN: center
+}
+.standard-talk.messagebox {
+	BORDER-RIGHT: #c0c090 1px solid; BORDER-TOP: #c0c090 1px solid; BORDER-LEFT: #c0c090 1px solid; BORDER-BOTTOM: #c0c090 1px solid; BACKGROUND-COLOR: #f8eaba
+}
+.nested-talk.messagebox {
+	BORDER-RIGHT: #c0c090 1px solid; BORDER-TOP: #c0c090 1px solid; MARGIN: 2px 4px; BORDER-LEFT: #c0c090 1px solid; WIDTH: 100%; BORDER-BOTTOM: #c0c090 1px solid; BACKGROUND-COLOR: #f8eaba
+}
+.small.messagebox {
+	CLEAR: both; FONT-SIZE: 85%; FLOAT: right; MARGIN: 0px 0px 1em 1em; WIDTH: 238px; LINE-HEIGHT: 1.25em
+}
+.infobox_v2 {
+	CLEAR: right; BORDER-RIGHT: #aaa 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #aaa 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 90%; BACKGROUND: #f9f9f9; FLOAT: right; PADDING-BOTTOM: 2px; MARGIN: 0px 0px 0.5em 1em; BORDER-LEFT: #aaa 1px solid; WIDTH: 23em; COLOR: #000; LINE-HEIGHT: 1.1em; PADDING-TOP: 2px; BORDER-BOTTOM: #aaa 1px solid
+}
+.infobox_v2 TH {
+	VERTICAL-ALIGN: top; TEXT-ALIGN: left
+}
+.infobox_v2 .topo {
+	FONT-WEIGHT: bolder; FONT-SIZE: 120%; VERTICAL-ALIGN: middle; COLOR: #000; LINE-HEIGHT: 1.2em; HEIGHT: 45px; TEXT-ALIGN: center
+}
+.infobox_v2 .midia {
+	FONT-WEIGHT: bolder; VERTICAL-ALIGN: middle; COLOR: #000; HEIGHT: 35px; TEXT-ALIGN: center
+}
+.padrao.topo {
+	
+}
+.astronomia.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/e/ee/Picto_infobox_rocket.png) no-repeat right top
+}
+.bd.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/2c/Picto_infobox_comicballoon.png) no-repeat right top
+}
+.castelo.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/5/5c/Picto_infobox_chateau.png) no-repeat right top
+}
+.cerveja.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/0/04/Picto_infobox_beer.png) no-repeat right top
+}
+.cinema.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/e/ea/Picto_infobox_cinema.png) no-repeat right top
+}
+.computador.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/c/ce/Arduino_ftdi_chip-1.png) no-repeat right top
+}
+.comunicacao.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/a/a2/Picto_infobox_antenna.png) no-repeat right top
+}
+.edificioreligioso.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/3/30/Pictogram-infobox-religious.png) no-repeat right top
+}
+.europa.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/c/c0/Picto_Infobox_Europe.png) no-repeat right top
+}
+.fisica.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/3/37/Fourier_infobox.png) no-repeat right bottom
+}
+.internet.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/a/aa/Picto_infobox_internet_PD.svg) no-repeat right center
+}
+.humano.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/8/82/Picto_infobox_manwoman.png) no-repeat right top
+}
+.jogo.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/2d/Picto_infobox_gamepad.png) no-repeat right bottom
+}
+.jornal.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/23/Picto_infobox_journal.png) no-repeat right bottom
+}
+.mapa.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/7/7a/Picto_infobox_map.png) no-repeat right top
+}
+.musica.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/6/60/Picto_infobox_music.png) no-repeat right bottom
+}
+.novela.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/a/a6/Picto_infobox_TV-T%26PC.png) no-repeat right bottom
+}
+.palacio.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/5/5e/Pictogram_infobox_palace.png) no-repeat right top
+}
+.quimica.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/9/95/Picto_infobox_chemistry.png) no-repeat right bottom
+}
+.teatro.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/3/37/Picto_infobox_masks.png) no-repeat right top
+}
+.autor.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/1/1e/Picto_infobox_auteur.png) no-repeat right top
+}
+.wiki.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/24/Picto_infobox_default.png) no-repeat right top
+}
+.filme.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/4/4d/Picto_infobox_film.png) no-repeat right center
+}
+.ferramentas.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/c/cb/Picto_infobox_tools.png) no-repeat right top
+}
+.livro.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/4/42/Picto_infobox_book.png) no-repeat right center
+}
+.televisao.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/a/a6/Picto_infobox_TV-T%26PC.png) no-repeat right top
+}
+.televisao2.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/a/a6/Picto_infobox_TV-T%26PC.png) no-repeat right bottom
+}
+.espacial.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/9/94/Picto_infobox_shuttle.png) no-repeat right top
+}
+.rka.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/1/1b/Picto_infobox_RKA.png) no-repeat right top
+}
+.ginastica.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/9/92/Picto_infobox_gymnastic.png) no-repeat right top
+}
+.raio.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/2/27/Picto_infobox_raio.png) no-repeat right top
+}
+.robo.topo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/5/5f/Picto_infobox_robot.png) no-repeat right top
+}
+.audio.midia {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/thumb/8/87/Gnome-mime-sound-openclipart.svg/35px-Gnome-mime-sound-openclipart.svg.png) no-repeat left top
+}
+.video.midia {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Video-x-generic.svg/35px-Video-x-generic.svg.png) no-repeat left top
+}
+.fundologo {
+	BACKGROUND: url(//upload.wikimedia.org/wikipedia/commons/1/10/Wikipedia-logo-v2-200px-transparent.png)
+}
+.toclimit-2 .toclevel-2 {
+	DISPLAY: none
+}
+.toclimit-3 .toclevel-3 {
+	DISPLAY: none
+}
+.toclimit-4 .toclevel-4 {
+	DISPLAY: none
+}
+.toclimit-5 .toclevel-5 {
+	DISPLAY: none
+}
+.toclimit-6 .toclevel-6 {
+	DISPLAY: none
+}
+.toclimit-7 .toclevel-7 {
+	DISPLAY: none
+}
+DIV.thumb {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+DIV.tright {
+	MARGIN: 0.5em 0px 0.8em 1.4em; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+DIV.tleft {
+	MARGIN: 0.5em 1.4em 0.8em 0px; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.AFI {
+	FONT-FAMILY: "Charis SIL","Doulos SIL",Gentium,GentiumAlt,"DejaVu Sans",Code2000,"TITUS Cyberbit Basic","Arial Unicode MS","Lucida Sans Unicode","Chrysanthi Unicode"
+}
+.Unicode {
+	FONT-FAMILY: Code2000,Code2001,"Free Serif","TITUS Cyberbit Basic","Doulos SIL","Chrysanthi Unicode","Bitstream Cyberbit","Bitstream CyberBase",Thryomanes,Gentium,GentiumAlt,"Lucida Grande","Free Sans","Arial Unicode MS","Microsoft Sans Serif","Lucida Sans Unicode"
+}
+.politonico {
+	FONT-FAMILY: "Athena Unicode",Gentium,"Palatino Linotype","Arial Unicode MS","Lucida Sans Unicode","Lucida Grande",Code2000
+}
+.template-documentation {
+	CLEAR: both; BORDER-RIGHT: #c0c0c0 1px solid; PADDING-RIGHT: 1em; BORDER-TOP: #c0c0c0 1px solid; PADDING-LEFT: 1em; PADDING-BOTTOM: 1em; MARGIN: 1em 0px 0px; BORDER-LEFT: #c0c0c0 1px solid; PADDING-TOP: 1em; BORDER-BOTTOM: #c0c0c0 1px solid; BACKGROUND-COLOR: #ecfcf4
+}
+DIV.mw-geshi DIV {
+	FONT-FAMILY: monospace,"Courier New"! important
+}
+DIV.mw-geshi DIV PRE {
+	FONT-FAMILY: monospace,"Courier New"! important
+}
+SPAN.mw-geshi {
+	FONT-FAMILY: monospace,"Courier New"! important
+}
+PRE.source-css {
+	FONT-FAMILY: monospace,"Courier New"! important
+}
+PRE.source-javascript {
+	FONT-FAMILY: monospace,"Courier New"! important
+}
+.icon#ca-wikilove A {
+	BACKGROUND-IMAGE: url(//upload.wikimedia.org/wikipedia/commons/thumb/8/87/Symbol_thumbs_up.svg/16px-Symbol_thumbs_up.svg.png)
+}
+.icon#ca-wikilove A:hover {
+	BACKGROUND-POSITION: 5px 60%; BACKGROUND-IMAGE: url(//upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Symbol_thumbs_up_color.svg/16px-Symbol_thumbs_up_color.svg.png)
+}
+.icon#ca-wikilove A:focus {
+	BACKGROUND-POSITION: 5px 60%; BACKGROUND-IMAGE: url(//upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Symbol_thumbs_up_color.svg/16px-Symbol_thumbs_up_color.svg.png)
+}
+.sysop-show {
+	DISPLAY: none
+}
+.eliminator-show {
+	DISPLAY: none
+}
+#siteSub {
+	DISPLAY: inline; FONT-WEIGHT: normal; FONT-SIZE: 92%
+}
+#protegida {
+	Z-INDEX: 100; RIGHT: 10px; POSITION: absolute; TOP: 85px
+}
+#coordinates {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 85%; RIGHT: 0px; FLOAT: right; PADDING-BOTTOM: 0px; MARGIN: 0px; TEXT-TRANSFORM: none; TEXT-INDENT: 0px; LINE-HEIGHT: 1.5em; PADDING-TOP: 0px; WHITE-SPACE: nowrap; POSITION: absolute; TOP: -5px; TEXT-ALIGN: right
+}
+#atalho {
+	BORDER-RIGHT: #999 1px solid; PADDING-RIGHT: 0em; BORDER-TOP: #999 1px solid; PADDING-LEFT: 0em; FONT-SIZE: 85%; RIGHT: 0px; BACKGROUND: #fff; PADDING-BOTTOM: 0em; MARGIN: 0px 0px 0.5em 1em; TEXT-TRANSFORM: none; BORDER-LEFT: #999 1px solid; WIDTH: 95px; TEXT-INDENT: 0px; LINE-HEIGHT: 1.5em; PADDING-TOP: 0em; BORDER-BOTTOM: #999 1px solid; WHITE-SPACE: normal; POSITION: absolute; TOP: -15px; TEXT-ALIGN: center
+}
+.plainlinksneverexpand A.text.external:unknown {
+	DISPLAY: none! important
+}
+DIV.topicon {
+	DISPLAY: block! important; MARGIN-RIGHT: -10px; POSITION: absolute; TOP: -2em
+}
+#destaques1 {
+	DISPLAY: block! important; RIGHT: 10px; MARGIN-RIGHT: -10px; POSITION: absolute; TOP: -3em
+}
+#FIST1 {
+	DISPLAY: block! important; RIGHT: 10px; MARGIN-RIGHT: -10px; POSITION: absolute; TOP: -3em
+}
+SPAN.texhtml {
+	FONT-SIZE: 120%; LINE-HEIGHT: 1em; FONT-FAMILY: 'Times New Roman',serif
+}
+
+@media Print    
+{
+.ref-scroll {
+	OVERFLOW: visible; HEIGHT: 100%
+}
+.dablink {
+	DISPLAY: none
+}
+.navbox {
+	DISPLAY: none
+}
+
+}

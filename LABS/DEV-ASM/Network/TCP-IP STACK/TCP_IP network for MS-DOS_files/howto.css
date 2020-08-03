@@ -1,0 +1,116 @@
+/*
+* Koen Noens
+* CVO Graduaat Informatica 
+* examentaak MECG007 Multimedia
+* juni 2002 
+*
+* 	style sheet for "How To" pages
+*		bij voorkeur te gebruiken in combinatie met een algemene style sheet (main.css)
+*		omwille van
+*			1- eenheid van opmaak/stijl
+*			2- kleurcombinaties achtergrond/voorgrond : tekst moet leesbaar blijven
+*/
+
+	
+
+/* BODY en TITLES */
+
+	h1	{/* titel van artikel of pagina */
+		font-weight : bold;
+		color : #6600ff;
+		background-color : #ffffff;
+		text-align : center;
+		margin-top : 2em;
+		line-height : 1.3em
+		padding : 1.3em;
+		}
+
+	h2	{/* subtitle bij h1 */
+		font-weight : bold;
+		color : #6600ff;
+		background-color : #ffffff;
+		font-style : italic;
+		text-align : center;
+		margin : 1em;
+		line-height : 1.3em;
+		padding : 1.3em;
+		}
+
+table	{
+	font-size :	0.8em;
+	width :		100%;
+	font-family : 	verdana, arial, helvetica, sans-serif;
+	cellpadding : 	2em;
+	cellspacing : 	2em;
+	}
+
+th	{
+	text-align : left;
+	padding : 0.5em;
+	background-color : #cccccc;
+	}		
+
+td	{
+	vertical-align : top;
+	}
+
+/*links - similar to library style*/
+
+	a:hover	{
+		background-color : #3333cc;
+		color : #ffcc99;
+		text-decoration : none;
+		}    
+	
+/* SPECIALE SECTIES */
+
+	#author	{
+		font-style : italic;
+		margin-top : 24pt;
+		margin-bottom : 24pt;
+		}
+
+	.remark	
+		{
+		background-color : #cccccc;
+		color : #000000;
+		margin-left: 50pt;
+		padding : 11pt;
+		}
+
+	.ednote	/* editor's note */
+		{
+		background-color : #cccccc;
+		color : #000000;
+		text-align : center;
+		font-style : italic;
+		padding : 11pt;
+		}
+
+
+
+
+	/* for pages copied from dokuwiki notes : 
+           redefine code and file styles to match .cs */
+	.cs,
+  	.code,
+	.file	
+		{
+		font-family : courier, monospace;
+		background-color : #dddddd;
+		}
+	/* dokuwiki override ends */
+
+	pre.cs {
+		color : #000000;
+		margin-left: 7%;
+		padding: 18pt;
+		width: 65em;
+		}
+
+      /* standard code tag, inline text  */
+	code	{
+		font-size: 1.1em; /* just make it slightly bigger */
+		}
+	
+

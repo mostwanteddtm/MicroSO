@@ -1,0 +1,5 @@
+###### LINK PESQUISADO -> ms-dos invoke device driver ######
+http://stackoverflow.com/questions/23187134/writing-drivers-for-dos-where-to-begin
+
+###### APÓS LER COM CALMA O LINK ACIMA, VERIFIQUEI A DICA DO LINK ABAIXO ######
+http://cutemouse.sourceforge.net/

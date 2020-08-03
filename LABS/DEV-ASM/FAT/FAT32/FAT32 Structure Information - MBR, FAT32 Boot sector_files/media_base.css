@@ -1,0 +1,89 @@
+@media (max-width:1000px){
+html{font-size:40px;}
+body,textarea{font-size:0.45rem; line-height:0.6rem;}
+.wrap,.wrap_1200{margin:0 auto;width:90%;min-width:300px;}
+img{max-width:100%;height:auto;}
+.left_content{width:73%;}
+.right_sidebar{width:26%;}
+}
+@media (max-width:767px){
+.left_content,.right_sidebar{width:auto;float:none;}
+.float_livechat{display:none !important;}
+.for_wap{display:block;}
+.for_pc{display:none !important;}
+.float_totop{bottom:80px;}
+.pad_hidden {display:none !important;}
+.ioc_question{display:none;}
+.pc_hidden {display:block;}
+}
+@media (max-width:479px){
+.mobile_hidden { display:none !important;}
+}
+/*animate*/
+@media (max-width:767px){
+.animate_left,.animate_right,.animate_top,.animate_show,.animate_down{opacity:1;transform:translate(0px,0px) !important;}
+}
+/*classify_table*/
+@media (max-width:767px){
+.classify_table_fixed{display:none;}
+.classify_table .t_title{font-size:0.65rem; margin-bottom:0.5rem; text-align:center;}
+.classify_table > ul{display:none;}
+.classify_table > ul:first-child{display:block;}
+.classify_table > ul:first-child > li{display:block;width:100%;border:0;}
+.classify_table .click_com{display:none !important;}
+.classify_table .list_li{padding:0;border:0;}
+.classify_table .list_li > *{display:none;}
+.classify_table .list_li .name{display:block;color:#fff;padding:10px 10% 10px 2%;margin:0 0 2px 0;max-width:inherit;text-align:left;background:#757575 url(https://images.easeus.com/images/en/icon-up-down.png) 96% -86px no-repeat;text-decoration:none;cursor:pointer;}
+.classify_table .list_li .name a{color:#fff;text-decoration:none;}
+.classify_table .list_li .name_for{font-size:16px;display:inline-block;vertical-align:top;margin:0;}
+.classify_table li.current .name{background-position:96% 7px;}
+.classify_table li.current .price{display:block;}
+.classify_table li.current br{display:block;}
+.classify_table li.current .down, .classify_table li.current .buy,.classify_table li.current .try{display:inline-block;}
+.classify_table li.current .store_check_box{display:block;}
+.classify_table .list_li.current .table_media_content{display:block;}
+.classify_table .list_li .table_media_content ul{display:table-row !important;}
+.classify_table .list_li .table_media_content ul.small_title{display:none !important;}
+.classify_table .list_li .table_media_content ul li{width:48%;padding-left:2%;}
+.classify_table .table_media_content li{display:none;}
+.classify_table .list_li .c_title{display:table-cell;}
+.classify_table .list_li:nth-child(1) ul li:nth-child(1){display:table-cell;}
+.classify_table .list_li:nth-child(2) ul li:nth-child(2){display:table-cell;}
+.classify_table .list_li:nth-child(3) ul li:nth-child(3){display:table-cell;}
+.classify_table .list_li:nth-child(4) ul li:nth-child(4){display:table-cell;}
+.classify_table .list_li:nth-child(5) ul li:nth-child(5){display:table-cell;}
+.classify_table .hidden{display:none !important;}
+}
+/*download_pop and upgrade_pop*/
+@media (max-width:1000px){
+.download_pop .left{float:none;width:auto;}
+.download_pop .right{display:none;}
+.download_pop .content{margin-left:-375px;width:750px;}
+.google_search .left{width:auto;float:none;}
+.google_search .right{display:none;}
+}
+@media (max-width:767px){
+.download_pop .title{padding-right:50px;}
+.download_pop .content,.upgrade_pop .content{margin:0 0 0 -230px;top:10px;width:460px;}
+.download_pop .left{margin:30px 10px 0 10px;}
+.upgrade_pop .check_list .bt{width:auto; display:block; text-align:center; margin:10px 0;}
+}
+@media (max-width:479px){
+.download_pop .content,.upgrade_pop .content{margin-left:-150px;width:300px;}
+.download_pop .input .text,.download_pop .submit{width:150px;}
+.upgrade_pop .input .text,.upgrade_pop .submit{width:150px}
+.upgrade_pop .check_bt li{width:auto;float:none;border-bottom:1px solid #ddd;padding-bottom:20px;}
+.upgrade_pop .check_bt li a{font-size:14px;padding:0 10px;}
+}
+
+/*old artical*/
+@media (max-width:1000px){
+.RightContext{width:66%;}
+.topic_main_col{width:77%;}
+}
+@media (max-width: 767px){
+.topic_main_col,.RightContext{width:auto;}
+.topic_main_col p img{width:96% !important;height:auto !important;}
+.LeftSideBar{display:none;}
+.page_nav {line-height:0.6rem;}
+}

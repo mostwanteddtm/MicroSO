@@ -1,0 +1,3 @@
+### COMPILAR COM O FASM ####
+
+https://board.flatassembler.net/topic.php?t=9738

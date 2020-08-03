@@ -1,0 +1,1553 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0033)http://www.fysnet.net/rombios.htm -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>ROM BIOS and the first MEG of memory</title>
+    <meta name="AUTHOR" content="Forever Young Software">
+    <meta http-equiv="Keywords" content="Undocumented DOS Programming, DOS Help, DOS Source Code, Freeware">
+    
+    <link type="text/css" rel="stylesheet" href="./ROM BIOS and the first MEG of memory_files/doc.css">
+    <script src="./ROM BIOS and the first MEG of memory_files/signature.js" type="text/javascript"></script>
+  </head>
+
+  <body>
+	<a href="http://www.fysnet.net/index.htm">http://www.fysnet.net/index.htm</a>
+    <h3>ROM BIOS and the first MEG of memory</h3>
+
+    The following is the layout and contents of the first Meg of memory.<br>
+    <br>
+
+    <table width="75%" cellpadding="3">
+      <tbody><tr>
+        <td align="center" bgcolor="#eeeeee" width="8%">Offset (hex)</td>
+        <td align="center" bgcolor="#eeeeee" width="8%">Size (dec)</td>
+        <td align="left" bgcolor="#eeeeee" width="84%"> &nbsp; &nbsp; &nbsp;Description</td>
+      </tr>
+      <tr>
+        <td align="right">0000</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 00h (division by zero)</td>
+      </tr>
+      <tr>
+        <td align="right">0004</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 01h (single step)</td>
+      </tr>
+      <tr>
+        <td align="right">0008</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 02h (Nonmaskable)</td>
+      </tr>
+      <tr>
+        <td align="right">000C</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 03h (Break point)</td>
+      </tr>
+      <tr>
+        <td align="right">0010</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 04h (overflow)</td>
+      </tr>
+      <tr>
+        <td align="right">0014</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 05h (print screen)</td>
+      </tr>
+      <tr>
+        <td align="right">0018</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 06h (invalid opcode)</td>
+      </tr>
+      <tr>
+        <td align="right">001C</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 07h (processor extension not available)</td>
+      </tr>
+      <tr>
+        <td align="right">0020</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 08h (clock tick (hardware))</td>
+      </tr>
+      <tr>
+        <td align="right">0024</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 09h (keyboard)</td>
+      </tr>
+      <tr>
+        <td align="right">0028</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 0Ah (LPT2)</td>
+      </tr>
+      <tr>
+        <td align="right">002C</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 0Bh (COM2)</td>
+      </tr>
+      <tr>
+        <td align="right">0030</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 0Ch (COM1)</td>
+      </tr>
+      <tr>
+        <td align="right">0034</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 0Dh (IRQ5)</td>
+      </tr>
+      <tr>
+        <td align="right">0038</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 0Eh (floppy disk attention)</td>
+      </tr>
+      <tr>
+        <td align="right">003C</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 0Fh (printer control)</td>
+      </tr>
+      <tr>
+        <td align="right">0040</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 10h (video)</td>
+      </tr>
+      <tr>
+        <td align="right">0044</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 11h (equipment list)</td>
+      </tr>
+      <tr>
+        <td align="right">0048</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 12h (memory size)</td>
+      </tr>
+      <tr>
+        <td align="right">004C</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 13h (disk BIOS)</td>
+      </tr>
+      <tr>
+        <td align="right">0050</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 14h (communications BIOS)</td>
+      </tr>
+      <tr>
+        <td align="right">0054</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 15h (system BIOS)</td>
+      </tr>
+      <tr>
+        <td align="right">0058</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 16h (keyboard BIOS)</td>
+      </tr>
+      <tr>
+        <td align="right">005C</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 17h (printer BIOS)</td>
+      </tr>
+      <tr>
+        <td align="right">0060</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 18h (ROM Basic Language)</td>
+      </tr>
+      <tr>
+        <td align="right">0064</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 19h (boot-strap)</td>
+      </tr>
+      <tr>
+        <td align="right">0068</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 1Ah (Time and Date)</td>
+      </tr>
+      <tr>
+        <td align="right">006C</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 1Bh (Ctrl Break)</td>
+      </tr>
+      <tr>
+        <td align="right">0070</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 1Ch (Clock tick)</td>
+      </tr>
+      <tr>
+        <td align="right">0074</td>
+        <td align="right">4</td>
+        <td align="left">Holds address pointing to control parameters</td>
+      </tr>
+      <tr>
+        <td align="right">0078</td>
+        <td align="right">4</td>
+        <td align="left">Holds address pointing to floppy disk drive parameter table</td>
+      </tr>
+      <tr>
+        <td align="right">007C</td>
+        <td align="right">4</td>
+        <td align="left">Holds address pointing to second half of character table (128 - 255)</td>
+      </tr>
+      <tr>
+        <td align="right">0080</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 20h (terminate)</td>
+      </tr>
+      <tr>
+        <td align="right">0084</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 21h (MS-DOS function calls)</td>
+      </tr>
+      <tr>
+        <td align="right">0088</td>
+        <td align="right">4</td>
+        <td align="left">Holds address pointing to MS-DOS program terminate routine</td>
+      </tr>
+      <tr>
+        <td align="right">008C</td>
+        <td align="right">4</td>
+        <td align="left">Holds address pointing to MS-DOS keyboard-break handler</td>
+      </tr>
+      <tr>
+        <td align="right">0090</td>
+        <td align="right">4</td>
+        <td align="left">Holds address pointing to MS-DOS critical-error handler</td>
+      </tr>
+      <tr>
+        <td align="right">0094</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 25h (Absolute disk read)</td>
+      </tr>
+      <tr>
+        <td align="right">0098</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 26h (Absolute disk write)</td>
+      </tr>
+      <tr>
+        <td align="right">009C</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 27h (MS-DOS TSR)</td>
+      </tr>
+      <tr>
+        <td align="right">00A0</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 28h (MS-DOS IDLE)</td>
+      </tr>
+      <tr>
+        <td align="right">00A4</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 29h (Fast CON output)</td>
+      </tr>
+      <tr>
+        <td align="right">00A8</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 2Ah (NetBIOS)</td>
+      </tr>
+      <tr>
+        <td align="right">00A8</td>
+        <td align="right">12</td>
+        <td align="left">Interrupt Vector for INT 2Bh-2Dh (reserved)</td>
+      </tr>
+      <tr>
+        <td align="right">00B8</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 2Eh (Execute)</td>
+      </tr>
+      <tr>
+        <td align="right">00BC</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 2Fh (Multitask)</td>
+      </tr>
+      <tr>
+        <td align="right">00C0</td>
+        <td align="right">4</td>
+        <td align="left">(NOT A VECTOR!) - DOS 1+ - FAR JMP instruction</td>
+      </tr>
+      <tr>
+        <td align="right">00C4</td>
+        <td align="right">4</td>
+        <td align="left">overwritten by CP/M jump instruction in INT 30</td>
+      </tr>
+      <tr>
+        <td align="right">00C8</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 32h (user)</td>
+      </tr>
+      <tr>
+        <td align="right">00CC</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 33h (Mouse)</td>
+      </tr>
+      <tr>
+        <td align="right">00D0</td>
+        <td align="right">44</td>
+        <td align="left">Interrupt Vector for INT 34h-3Eh (FLOATING POINT EMULATION)</td>
+      </tr>
+      <tr>
+        <td align="right">00FC</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 3Fh (Overlay manager)</td>
+      </tr>
+      <tr>
+        <td align="right">0100</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 40h (Disk handler)</td>
+      </tr>
+      <tr>
+        <td align="right">0104</td>
+        <td align="right">4</td>
+        <td align="left">Holds address pointing to Parameter table for first hard drive</td>
+      </tr>
+      <tr>
+        <td align="right">0108</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 42h (video)</td>
+      </tr>
+      <tr>
+        <td align="right">010C</td>
+        <td align="right">4</td>
+        <td align="left">Holds address pointing to video graphics characters (EGA, PS/2s)</td>
+      </tr>
+      <tr>
+        <td align="right">0110</td>
+        <td align="right">4</td>
+        <td align="left">Holds address pointing to video graphics characters (PCjr)</td>
+      </tr>
+      <tr>
+        <td align="right">0114</td>
+        <td align="right">4</td>
+        <td align="left">Z100/Acron</td>
+      </tr>
+      <tr>
+        <td align="right">0118</td>
+        <td align="right">4</td>
+        <td align="left">Holds address pointing to Parameter table for second hard drive</td>
+      </tr>
+      <tr>
+        <td align="right">011C</td>
+        <td align="right">4</td>
+        <td align="left">Z100/Acorn/Western Digital/SQL Base</td>
+      </tr>
+      <tr>
+        <td align="right">0120</td>
+        <td align="right">4</td>
+        <td align="left">KEYBOARD (PCjr)</td>
+      </tr>
+      <tr>
+        <td align="right">0124</td>
+        <td align="right">4</td>
+        <td align="left">SYSTEM DATA (PCjr)</td>
+      </tr>
+      <tr>
+        <td align="right">0128</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 4Ah (USER ALARM HANDLER)</td>
+      </tr>
+      <tr>
+        <td align="right">012C</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 4Bh (IBM SCSI interface)</td>
+      </tr>
+      <tr>
+        <td align="right">0130</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 4Ch (Z100/Acorn/TI)</td>
+      </tr>
+      <tr>
+        <td align="right">0134</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 4Dh (Z100)</td>
+      </tr>
+      <tr>
+        <td align="right">0138</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 4Eh (Z100/TI)</td>
+      </tr>
+      <tr>
+        <td align="right">013C</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 4Fh (Common Access Method SCSI)</td>
+      </tr>
+      <tr>
+        <td align="right">0140</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 50h (IRQ0 relocated by software)</td>
+      </tr>
+      <tr>
+        <td align="right">0144</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 51h (IRQ1 relocated by software)</td>
+      </tr>
+      <tr>
+        <td align="right">0148</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 52h (IRQ2 relocated by software)</td>
+      </tr>
+      <tr>
+        <td align="right">014C</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 53h (IRQ3 relocated by software)</td>
+      </tr>
+      <tr>
+        <td align="right">0150</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 54h (IRQ4 relocated by software)</td>
+      </tr>
+      <tr>
+        <td align="right">0154</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 55h (IRQ5 relocated by software)</td>
+      </tr>
+      <tr>
+        <td align="right">0158</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 56h (IRQ6 relocated by software)</td>
+      </tr>
+      <tr>
+        <td align="right">015C</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 57h (IRQ7 relocated by software)</td>
+      </tr>
+      <tr>
+        <td align="right">0160</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 58h (IRQ8/0 relocated by software)</td>
+      </tr>
+      <tr>
+        <td align="right">0164</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 59h (IRQ9/1 relocated by software)</td>
+      </tr>
+      <tr>
+        <td align="right">0168</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 5Ah (IRQ10/2 relocated by software)</td>
+      </tr>
+      <tr>
+        <td align="right">016C</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 5Bh (IRQ11/3 relocated by software)</td>
+      </tr>
+      <tr>
+        <td align="right">0170</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 5Ch (IRQ12/4 relocated by software)</td>
+      </tr>
+      <tr>
+        <td align="right">0174</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 5Dh (IRQ13/5 relocated by software)</td>
+      </tr>
+      <tr>
+        <td align="right">0178</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 5Eh (IRQ14/6 relocated by software)</td>
+      </tr>
+      <tr>
+        <td align="right">017C</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 5Fh (IRQ15/7 relocated by software)</td>
+      </tr>
+      <tr>
+        <td align="right">0180</td>
+        <td align="right">28</td>
+        <td align="left">Interrupt Vector for INT 60h-66h (reserved for user interrupt)</td>
+      </tr>
+      <tr>
+        <td align="right">019C</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 67h (LIM Expanded Memory Manager)</td>
+      </tr>
+      <tr>
+        <td align="right">01A0</td>
+        <td align="right">16</td>
+        <td align="left">Interrupt Vector for INT 68h-6Bh (reserved for user interrupt)</td>
+      </tr>
+      <tr>
+        <td align="right">01B0</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 6Ch (DECnet DOS network scheduler)</td>
+      </tr>
+      <tr>
+        <td align="right">01B4</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 6Dh (VGA internal)</td>
+      </tr>
+      <tr>
+        <td align="right">01B8</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 6Eh (DECnet DOS)</td>
+      </tr>
+      <tr>
+        <td align="right">01BC</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 6Fh (Novell NetWare, MS Windows 3.0)</td>
+      </tr>
+      <tr>
+        <td align="right">01C0</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 70h (CMOS real-time clock)</td>
+      </tr>
+      <tr>
+        <td align="right">01C4</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 71h (redirected to int 0A)</td>
+      </tr>
+      <tr>
+        <td align="right">01C8</td>
+        <td align="right">8</td>
+        <td align="left">Interrupt Vector for INT 72h-73h (IRQ10-11 reserved)</td>
+      </tr>
+      <tr>
+        <td align="right">01D0</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 74h (IRQ12 Pointing device)</td>
+      </tr>
+      <tr>
+        <td align="right">01D4</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 75h (IRQ13 math coprocessor exception)</td>
+      </tr>
+      <tr>
+        <td align="right">01D8</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 76h (IRQ14 Hard disk controller)</td>
+      </tr>
+      <tr>
+        <td align="right">01DC</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 77h (IRQ15 reserved)</td>
+      </tr>
+      <tr>
+        <td align="right">01E0</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 78h (DOS extenders?)</td>
+      </tr>
+      <tr>
+        <td align="right">01E4</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 79h (reserved for user interrupt)</td>
+      </tr>
+      <tr>
+        <td align="right">01E8</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT 7Ah (Novell NetWare)</td>
+      </tr>
+      <tr>
+        <td align="right">01E8</td>
+        <td align="right">20</td>
+        <td align="left">Interrupt Vector for INT 7Bh-7Fh (reserved for user interrupt)</td>
+      </tr>
+      <tr>
+        <td align="right">0200</td>
+        <td align="right">24</td>
+        <td align="left">Interrupt Vector for INT 80h-85h (reserved for BASIC)</td>
+      </tr>
+      <tr>
+        <td align="right">0218</td>
+        <td align="right">420</td>
+        <td align="left">Interrupt Vector for INT 86h-EEh (reserved for BASIC)</td>
+      </tr>
+      <tr>
+        <td align="right">03BC</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT EFh (BASIC - orig. INT 09 vector)</td>
+      </tr>
+      <tr>
+        <td align="right">03C0</td>
+        <td align="right">4</td>
+        <td align="left">Interrupt Vector for INT F0h (BASIC - orig. INT 08 vector)</td>
+      </tr>
+      <tr>
+        <td align="right">03C4</td>
+        <td align="right">52</td>
+        <td align="left">Interrupt Vector for INT F1h-FDh (reserved for user interrupt)</td>
+      </tr>
+      <tr>
+        <td align="right">03F8</td>
+        <td align="right">8</td>
+        <td align="left">Interrupt Vector for INT FEh-FFh (AT/XT286/PS50+)</td>
+      </tr>
+
+      <!-- ***** 0040:0000h ****** -->
+      <tr>
+        <td align="left" bgcolor="#eeeeee" colspan="3">Remember that 0000:0400h = 0040:0000h</td>
+      </tr>
+      <tr>
+        <td align="right">0400</td>
+        <td align="right">2</td>
+        <td align="left">COM1 I/O base address (set to 0 if none found)</td>
+      </tr>
+      <tr>
+        <td align="right">0402</td>
+        <td align="right">2</td>
+        <td align="left">COM2 I/O base address (set to 0 if none found)</td>
+      </tr>
+      <tr>
+        <td align="right">0404</td>
+        <td align="right">2</td>
+        <td align="left">COM3 I/O base address (set to 0 if none found)</td>
+      </tr>
+      <tr>
+        <td align="right">0406</td>
+        <td align="right">2</td>
+        <td align="left">COM4 I/O base address (set to 0 if none found)</td>
+      </tr>
+      <tr>
+        <td align="right">0408</td>
+        <td align="right">2</td>
+        <td align="left">LPT1 I/O base address (set to 0 if none found)</td>
+      </tr>
+      <tr>
+        <td align="right">040A</td>
+        <td align="right">2</td>
+        <td align="left">LPT2 I/O base address (set to 0 if none found)</td>
+      </tr>
+      <tr>
+        <td align="right">040C</td>
+        <td align="right">2</td>
+        <td align="left">LPT3 I/O base address (set to 0 if none found)</td>
+      </tr>
+      <tr>
+        <td align="right">040E</td>
+        <td align="right">2</td>
+        <td align="left">LPT4 I/O base address (set to 0 if none found)</td>
+      </tr>
+      <tr>
+        <td align="right"></td>
+        <td align="right">2</td>
+        <td align="left">(if extended BIOS on system) Segment address of Extended BIOS Data Area (9FC0:0000h)</td>
+      </tr>
+      <tr>
+        <td align="right">0410</td>
+        <td align="right">2</td>
+        <td align="left">equipment list reported by interrupt 11h (see figure 1)</td>
+      </tr>
+      <tr>
+        <td align="right">0412</td>
+        <td align="right">1</td>
+        <td align="left">PCjr - Infrared Keyboard Link Error</td>
+      </tr>
+      <tr>
+        <td align="right">0413</td>
+        <td align="right">2</td>
+        <td align="left">usable memory size in kilobytes (interrupt 12h)<br>Usually set to 0280h.  If less, then denotes 640k-difference=size of Extended BIOS Data Area at (9FC0:0000h)</td>
+      </tr>
+      <tr>
+        <td align="right">0415</td>
+        <td align="right">2</td>
+        <td align="left">(AT+)  Error codes from the BIOS manufacturer</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right">2</td>
+        <td align="left">(PC,XT)  Adapter Memory Size</td>
+      </tr>
+      <tr>
+        <td align="right">0417</td>
+        <td align="right">2</td>
+        <td align="left">keyboard status bits  (see figure 2)</td>
+      </tr>
+      <tr>
+        <td align="right">0419</td>
+        <td align="right">1</td>
+        <td align="left">Alternate Keypad entry</td>
+      </tr>
+      <tr>
+        <td align="right">041A</td>
+        <td align="right">2</td>
+        <td align="left">points to current head of keyboard buffer at 0040:001Eh</td>
+      </tr>
+      <tr>
+        <td align="right">041C</td>
+        <td align="right">2</td>
+        <td align="left">points to current tail of keyboard buffer at 0040:001Eh</td>
+      </tr>
+      <tr>
+        <td align="right">041E</td>
+        <td align="right">32</td>
+        <td align="left">keyboard buffer - used as sixteen 2-byte entries</td>
+      </tr>
+      <tr>
+        <td align="right">043E</td>
+        <td align="right">1</td>
+        <td align="left">indicates whether a floppy drive should be re calibrated</td>
+      </tr>
+      <tr>
+        <td align="right">043F</td>
+        <td align="right">1</td>
+        <td align="left">floppy drive motor status (bits 0-3)</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right"> </td>
+        <td align="left">bit 0 = drive 0, if set - drive motor running</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right"> </td>
+        <td align="left">bit 1 = drive 1, if set - drive motor running, etc.</td>
+      </tr>
+      <tr>
+        <td align="right">0440</td>
+        <td align="right">1</td>
+        <td align="left">floppy drive motor status.  The value in this byte is</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right"> </td>
+        <td align="left">decremented with every tick of the system clock.</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right"> </td>
+        <td align="left">When the value returns 0, the BOIS turns off the motor</td>
+      </tr>
+      <tr>
+        <td align="right">0441</td>
+        <td align="right">1</td>
+        <td align="left">floppy drive motor status.  status code returned by the</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right"> </td>
+        <td align="left">ROM BIOS from the most recent disk operation</td>
+      </tr>
+      <tr>
+        <td align="right">0442</td>
+        <td align="right">7</td>
+        <td align="left">floppy drive controller status</td>
+      </tr>
+      <tr>
+        <td align="right">0449</td>
+        <td align="right">1</td>
+        <td align="left">current video mode</td>
+      </tr>
+      <tr>
+        <td align="right">044A</td>
+        <td align="right">2</td>
+        <td align="left">max number of chars in a row of text</td>
+      </tr>
+      <tr>
+        <td align="right">044C</td>
+        <td align="right">2</td>
+        <td align="left">number of bytes needed to display the screen (text=80x25)</td>
+      </tr>
+      <tr>
+        <td align="right">044E</td>
+        <td align="right">2</td>
+        <td align="left">offset of current display page</td>
+      </tr>
+      <tr>
+        <td align="right">0450</td>
+        <td align="right">16</td>
+        <td align="left">8 words, each giving the cursor location of each page</td>
+      </tr>
+      <tr>
+        <td align="right">0460</td>
+        <td align="right">2</td>
+        <td align="left">size of current cursor</td>
+      </tr>
+      <tr>
+        <td align="right">0462</td>
+        <td align="right">1</td>
+        <td align="left">current display page</td>
+      </tr>
+      <tr>
+        <td align="right">0463</td>
+        <td align="right">2</td>
+        <td align="left">port address of the hardware display controller chip</td>
+      </tr>
+      <tr>
+        <td align="right">0465</td>
+        <td align="right">1</td>
+        <td align="left">current setting of the display mode-register of the MDA and CGA</td>
+      </tr>
+      <tr>
+        <td align="right">0466</td>
+        <td align="right">1</td>
+        <td align="left">current setting of the CGA's CRT color register</td>
+      </tr>
+      <tr>
+        <td align="right">0467</td>
+        <td align="right">5</td>
+        <td align="left">cassette tape control</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right">4</td>
+        <td align="left">Reset Restart Address</td>
+      </tr>
+      <tr>
+        <td align="right">046C</td>
+        <td align="right">4</td>
+        <td align="left">master clock count (long integer) 0 = midnight and increments until a 24 hour equiv.</td>
+      </tr>
+      <tr>
+        <td align="right">0470</td>
+        <td align="right">1</td>
+        <td align="left">not 0 = passed midnight</td>
+      </tr>
+      <tr>
+        <td align="right">0471</td>
+        <td align="right">1</td>
+        <td align="left">if bit 7 is set, ctrl-break was pressed</td>
+      </tr>
+      <tr>
+        <td align="right">0472</td>
+        <td align="right">2</td>
+        <td align="left">set to 1234h after initial power up telling a warm boot to skip mem check</td>
+      </tr>
+      <tr>
+        <td align="right">0474</td>
+        <td align="right">1</td>
+        <td align="left">Fixed disk last operation status (except ESDI drives)</td>
+      </tr>
+      <tr>
+        <td align="right">0475</td>
+        <td align="right">1</td>
+        <td align="left">Number of fixed disk drives</td>
+      </tr>
+      <tr>
+        <td align="right">0476</td>
+        <td align="right">1</td>
+        <td align="left">Fixed disk control byte</td>
+      </tr>
+      <tr>
+        <td align="right">0477</td>
+        <td align="right">1</td>
+        <td align="left">Fixed disk I/O port offset (XT only)</td>
+      </tr>
+      <tr>
+        <td align="right">0478</td>
+        <td align="right">4</td>
+        <td align="left">contains a time-out value for the respective parallel ports</td>
+      </tr>
+      <tr>
+        <td align="right">047C</td>
+        <td align="right">4</td>
+        <td align="left">contains a time-out value for the respective RS-232 serial ports</td>
+      </tr>
+      <tr>
+        <td align="right">0480</td>
+        <td align="right">2</td>
+        <td align="left">points at the start of the keyboard buffer area</td>
+      </tr>
+      <tr>
+        <td align="right">0482</td>
+        <td align="right">2</td>
+        <td align="left">points at the end of the keyboard buffer area</td>
+      </tr>
+      <tr>
+        <td align="right">0484</td>
+        <td align="right">1</td>
+        <td align="left">this value is one less than the number of character rows displayed on the screen</td>
+      </tr>
+      <tr>
+        <td align="right">0485</td>
+        <td align="right">2</td>
+        <td align="left">height, in scan lines, of characters on the screen</td>
+      </tr>
+      <tr>
+        <td align="right">0487</td>
+        <td align="right">4</td>
+        <td align="left">Amount of video RAM available</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right"> </td>
+        <td align="left">Initial setting of the EGA configuration switches, as well as other misc video status info.</td>
+      </tr>
+      <tr>
+        <td align="right">048B</td>
+        <td align="right">11</td>
+        <td align="left">control and status information regarding the floppy and hard disk drives</td>
+      </tr>
+      <tr>
+        <td align="right">0496</td>
+        <td align="right">2</td>
+        <td align="left">data area used to support the 101-key keyboard</td>
+      </tr>
+      <tr>
+        <td align="right">0498</td>
+        <td align="right">9</td>
+        <td align="left">real time clock control</td>
+      </tr>
+      <tr>
+        <td align="right">04A1</td>
+        <td align="right">1</td>
+        <td align="left">LANA DMA channel flags</td>
+      </tr>
+      <tr>
+        <td align="right">04A2</td>
+        <td align="right">2</td>
+        <td align="left">Status of LANA 0,1</td>
+      </tr>
+      <tr>
+        <td align="right">04A4</td>
+        <td align="right">4</td>
+        <td align="left">Saved hard disk interrupt vector</td>
+      </tr>
+      <tr>
+        <td align="right">04A8</td>
+        <td align="right">4</td>
+        <td align="left">(EGA and VGA) contain segmented address of a table of video parameters and overrides</td>
+      </tr>
+      <tr>
+        <td align="right">04AC</td>
+        <td align="right">8</td>
+        <td align="left">(reserved)</td>
+      </tr>
+      <tr>
+        <td align="right">04B4</td>
+        <td align="right">1</td>
+        <td align="left">Keyboard NMI control flags (convertible)</td>
+      </tr>
+      <tr>
+        <td align="right">04B5</td>
+        <td align="right">4</td>
+        <td align="left">Keyboard Break pending flags (convertible)</td>
+      </tr>
+      <tr>
+        <td align="right">04B9</td>
+        <td align="right">1</td>
+        <td align="left">Port 60h single byte Queue (convertible)</td>
+      </tr>
+      <tr>
+        <td align="right">04BA</td>
+        <td align="right">1</td>
+        <td align="left">Scan code for last key (convertible)</td>
+      </tr>
+      <tr>
+        <td align="right">04BB</td>
+        <td align="right">1</td>
+        <td align="left">NMI Buffer head pointer (convertible)</td>
+      </tr>
+      <tr>
+        <td align="right">04BC</td>
+        <td align="right">1</td>
+        <td align="left">NMI Buffer tail pointer (convertible)</td>
+      </tr>
+      <tr>
+        <td align="right">04BD</td>
+        <td align="right">16</td>
+        <td align="left">NMI scan code Buffer (convertible)</td>
+      </tr>
+      <tr>
+        <td align="right">04CD</td>
+        <td align="right">1</td>
+        <td align="left">unknown</td>
+      </tr>
+      <tr>
+        <td align="right">04CE</td>
+        <td align="right">2</td>
+        <td align="left">Day Counter (convertible)</td>
+      </tr>
+      <tr>
+        <td align="right">04D0</td>
+        <td align="right">16</td>
+        <td align="left">unknown</td>
+      </tr>
+      <tr>
+        <td align="right">04F0</td>
+        <td align="right">16</td>
+        <td align="left">intra-application communications area (ICA)</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right"> </td>
+        <td align="left">ie: known area where one app can communicate with another app.</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right"> </td>
+        <td align="left">(not used much because of its small size)</td>
+      </tr>
+
+      <!-- ***** 0050:000h ****** -->
+      <tr>
+        <td align="left" bgcolor="#eeeeee" colspan="3">Remember that 0000:0500h = 0050:0000h</td>
+      </tr>
+      <tr>
+        <td align="right">0500</td>
+        <td align="right">1</td>
+        <td align="left">status of a print-screen operation</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right"> </td>
+        <td align="left">00h - OK</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right"> </td>
+        <td align="left">01h - a print-screen operation currently in progress</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right"> </td>
+        <td align="left">FFh - error occurred during a print-screen operation</td>
+      </tr>
+      <tr>
+        <td align="right">0501</td>
+        <td align="right">3</td>
+        <td align="left">Used by BASIC</td>
+      </tr>
+      <tr>
+        <td align="right">0504</td>
+        <td align="right">1</td>
+        <td align="left">if only 1 floppy installed, this byte indicates which drive letter it is using (a or b)</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right"> </td>
+        <td align="left">00h - acting as drive a:</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right"> </td>
+        <td align="left">01h - acting as drive b:</td>
+      </tr>
+      <tr>
+        <td align="right">0505</td>
+        <td align="right">10</td>
+        <td align="left">POST work area</td>
+      </tr>
+      <tr>
+        <td align="right">050F</td>
+        <td align="right">1</td>
+        <td align="left">BASIC shell flag (2 if currently in shell)</td>
+      </tr>
+      <tr>
+        <td align="right">0510</td>
+        <td align="right">2</td>
+        <td align="left">holds ROM Basics default DS value (DO NOT CHANGE)</td>
+      </tr>
+      <tr>
+        <td align="right">0512</td>
+        <td align="right">4</td>
+        <td align="left">segment offset address of Basic's clock-tick interrupt handler</td>
+      </tr>
+      <tr>
+        <td align="right">0516</td>
+        <td align="right">4</td>
+        <td align="left">address for ROM Basic's Break-key-handling routine</td>
+      </tr>
+      <tr>
+        <td align="right">051A</td>
+        <td align="right">4</td>
+        <td align="left">address for ROM Basic's floppy disk error-handling routine</td>
+      </tr>
+      <tr>
+        <td align="right">0520</td>
+        <td align="right">2</td>
+        <td align="left">DOS Dynamic Storage ???</td>
+      </tr>
+      <tr>
+        <td align="right">0522</td>
+        <td align="right">14</td>
+        <td align="left">DOS Diskette Initialization Table ???</td>
+      </tr>
+      <tr>
+        <td align="right">0530</td>
+        <td align="right">4</td>
+        <td align="left">MODE command ???</td>
+      </tr>
+      <tr>
+        <td align="right">0534</td>
+        <td align="right">206</td>
+        <td align="left">unknown</td>
+      </tr>
+
+      <!-- ***** 0060:000h ****** -->
+      <tr>
+        <td align="left" bgcolor="#eeeeee" colspan="3">Remember that 0000:0600h = 0060:0000h</td>
+      </tr>
+      <tr>
+        <td align="right">0600</td>
+        <td align="right">256</td>
+        <td align="left">scratch space used during DOS 2+ boot up</td>
+      </tr>
+
+      <!-- ***** 0070:000h ****** -->
+      <tr>
+        <td align="left" bgcolor="#eeeeee" colspan="3">Remember that 0000:0700h = 0070:0000h</td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#eeeeee" colspan="2">DOS 2+</td>
+        <td align="left"> </td>
+      </tr>
+      <tr>
+        <td align="right">0700</td>
+        <td align="right">256</td>
+        <td align="left">IO.SYS LOAD ADDRESS</td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#eeeeee" colspan="2">DOS 5+</td>
+        <td align="left"> </td>
+      </tr>
+      <tr>
+        <td align="right">0700</td>
+        <td align="right">25</td>
+        <td align="left">ORIGINAL INTERRUPT VECTORS 10h,13h,15h,19h,1Bh</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right"> </td>
+        <td align="left">Each value is stored as a BYTE for the interrupt number followed by a DWORD for the vector</td>
+      </tr>
+      <tr>
+        <td align="right">0719</td>
+        <td align="right">231</td>
+        <td align="left">unknown</td>
+      </tr>
+
+      <!-- ***** 0080:000h ****** -->
+      <tr>
+        <td align="left" bgcolor="#eeeeee" colspan="3">Remember that 0000:0800h = 0080:0000h</td>
+      </tr>
+      <tr>
+        <td align="right">0800</td>
+        <td align="right">102</td>
+        <td align="left">80286 CPU - LOADALL WORKSPACE</td>
+      </tr>
+      <tr>
+        <td align="right"> </td>
+        <td align="right"> </td>
+        <td align="left">On the 80286 (unlike 80386), the state buffer from which the LOADALL instruction loads all internal registers is hardwired to physical address 000800h Several versions 3.x of MS-DOS leave an empty space at offset 100h in IO.SYS (which is loaded at 0070h:0000h) so that HIMEM.SYS can use LOADALL on 80286 machines without having to save/restore the area of memory that LOADALL uses</td>
+      </tr>
+      <tr>
+        <td align="right">0866</td>
+        <td align="right">154</td>
+        <td align="left">unknown</td>
+      </tr>
+
+      <!-- ***** 0090:000h ****** -->
+      <tr>
+        <td align="left" bgcolor="#eeeeee" colspan="3">Remember that 0000:0900h = 0090:0000h</td>
+      </tr>
+      <tr>
+        <td align="right">0900</td>
+        <td align="right">653,056</td>
+        <td align="left" bgcolor="#eeeeee">DOS  (COMMAND.COM, etc., User Memory)</td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#eeeeee" colspan="3">9FC0h:0000h - If your system has Extended BIOS Data Area (see 0040:000Eh and :0013h above)</td>
+      </tr>
+      <tr>
+        <td align="right">0000</td>
+        <td align="right">1</td>
+        <td align="left">Size of Extended BIOS Data Area in 1k blocks</td>
+      </tr>
+      <tr>
+        <td align="right">0002</td>
+        <td align="right">21</td>
+        <td align="left">unknown</td>
+      </tr>
+      <tr>
+        <td align="right">0017</td>
+        <td align="right">1</td>
+        <td align="left">Number of POST error entries</td>
+      </tr>
+      <tr>
+        <td align="right">0018</td>
+        <td align="right">10</td>
+        <td align="left">Error Log for above</td>
+      </tr>
+      <tr>
+        <td align="right">0022</td>
+        <td align="right">4</td>
+        <td align="left">Mouse Driver Device Far Call</td>
+      </tr>
+      <tr>
+        <td align="right">0026</td>
+        <td align="right">1</td>
+        <td align="left">Mouse Flags 1</td>
+      </tr>
+      <tr>
+        <td align="right">0027</td>
+        <td align="right">1</td>
+        <td align="left">Mouse Flags 2</td>
+      </tr>
+      <tr>
+        <td align="right">0028</td>
+        <td align="right">8</td>
+        <td align="left">Mouse Data</td>
+      </tr>
+      <tr>
+        <td align="right">0030</td>
+        <td align="right">9</td>
+        <td align="left">unknown</td>
+      </tr>
+      <tr>
+        <td align="right">0039</td>
+        <td align="right">2</td>
+        <td align="left">Watch Dog Timer</td>
+      </tr>
+      <tr>
+        <td align="right">003B</td>
+        <td align="right">2</td>
+        <td align="left">unknown</td>
+      </tr>
+      <tr>
+        <td align="right">003D</td>
+        <td align="right">16</td>
+        <td align="left">Hard Disk 0 Parameter Table</td>
+      </tr>
+      <tr>
+        <td align="right">004D</td>
+        <td align="right">16</td>
+        <td align="left">Hard Disk 1 Parameter Table</td>
+      </tr>
+      <tr>
+        <td align="right">005D</td>
+        <td align="right">11</td>
+        <td align="left">unknown</td>
+      </tr>
+      <tr>
+        <td align="right">0068</td>
+        <td align="right">1</td>
+        <td align="left">Cache Control</td>
+      </tr>
+      <tr>
+        <td align="right">0069</td>
+        <td align="right">5</td>
+        <td align="left">unknown</td>
+      </tr>
+      <tr>
+        <td align="right">006E</td>
+        <td align="right">1</td>
+        <td align="left">Repeat Rate of Keyboard</td>
+      </tr>
+      <tr>
+        <td align="right">006F</td>
+        <td align="right">1</td>
+        <td align="left">Delay until Keyboard repeats</td>
+      </tr>
+      <tr>
+        <td align="right">0070</td>
+        <td align="right">1</td>
+        <td align="left">Number of Hard Drives attached</td>
+      </tr>
+      <tr>
+        <td align="right">0071</td>
+        <td align="right">1</td>
+        <td align="left">DMA channel Hard Drive</td>
+      </tr>
+      <tr>
+        <td align="right">0072</td>
+        <td align="right">1</td>
+        <td align="left">Hard Drive interrupt status</td>
+      </tr>
+      <tr>
+        <td align="right">0073</td>
+        <td align="right">1</td>
+        <td align="left">Hard Drive operation flags</td>
+      </tr>
+      <tr>
+        <td align="right">0074</td>
+        <td align="right">4</td>
+        <td align="left">Old interrupt 76h vector pointer</td>
+      </tr>
+      <tr>
+        <td align="right">0078</td>
+        <td align="right">1</td>
+        <td align="left">Hard Drive DMA type</td>
+      </tr>
+      <tr>
+        <td align="right">0079</td>
+        <td align="right">1</td>
+        <td align="left">(Hard Drive) status of last operation</td>
+      </tr>
+      <tr>
+        <td align="right">007A</td>
+        <td align="right">1</td>
+        <td align="left">(Hard Drive) timeout value</td>
+      </tr>
+      <tr>
+        <td align="right">007B</td>
+        <td align="right">3</td>
+        <td align="left">unknown</td>
+      </tr>
+      <tr>
+        <td align="right">007E</td>
+        <td align="right">16</td>
+        <td align="left">Hard Drive controller return status words</td>
+      </tr>
+      <tr>
+        <td align="right">008E</td>
+        <td align="right">89</td>
+        <td align="left">unknown</td>
+      </tr>
+      <tr>
+        <td align="right">00E7</td>
+        <td align="right">1</td>
+        <td align="left">Diskette Drive type</td>
+      </tr>
+      <tr>
+        <td align="right">00E8</td>
+        <td align="right">4</td>
+        <td align="left">unknown</td>
+      </tr>
+      <tr>
+        <td align="right">00EC</td>
+        <td align="right">1</td>
+        <td align="left">Hard Drive Parameters Loaded</td>
+      </tr>
+      <tr>
+        <td align="right">00ED</td>
+        <td align="right">1</td>
+        <td align="left">unknown</td>
+      </tr>
+      <tr>
+        <td align="right">00EE</td>
+        <td align="right">1</td>
+        <td align="left">CPU Family ID</td>
+      </tr>
+      <tr>
+        <td align="right">00EF</td>
+        <td align="right">1</td>
+        <td align="left">CPU Stepping</td>
+      </tr>
+      <tr>
+        <td align="right">00F0</td>
+        <td align="right">39</td>
+        <td align="left">unknown</td>
+      </tr>
+      <tr>
+        <td align="right">0117</td>
+        <td align="right">2</td>
+        <td align="left">Keyboard ID</td>
+      </tr>
+      <tr>
+        <td align="right">0119</td>
+        <td align="right">1</td>
+        <td align="left">unknown</td>
+      </tr>
+      <tr>
+        <td align="right">011A</td>
+        <td align="right">1</td>
+        <td align="left">Non-BIOS Interrupt 18h Flag</td>
+      </tr>
+      <tr>
+        <td align="right">011B</td>
+        <td align="right">2</td>
+        <td align="left">unknown</td>
+      </tr>
+      <tr>
+        <td align="right">011D</td>
+        <td align="right">4</td>
+        <td align="left">User Interrupt 18h Far Pointer</td>
+      </tr>
+      <tr>
+        <td align="right">0121</td>
+        <td align="right">735</td>
+        <td align="left">unknown</td>
+      </tr>
+
+      <!-- ***** A000:0000h ****** -->
+      <tr>
+        <td align="left" bgcolor="#eeeeee" colspan="3">A000:0000h</td>
+      </tr>
+      <tr>
+        <td align="right">0000</td>
+        <td align="right">65,536</td>
+        <td align="left">Graphics Video memory (EGA and above)</td>
+      </tr>
+
+      <!-- ***** B000:0000h ****** -->
+      <tr>
+        <td align="left" bgcolor="#eeeeee" colspan="3">B000:0000h</td>
+      </tr>
+      <tr>
+        <td align="right">0000</td>
+        <td align="right">32,768</td>
+        <td align="left">Graphics area for EGA and up</td>
+      </tr>
+      <tr>
+        <td align="right">8000</td>
+        <td align="right">4096</td>
+        <td align="left">Page 0  - 80x25 16 color and mono (B800:0000)</td>
+      </tr>
+      <tr>
+        <td align="right">9000</td>
+        <td align="right">4096</td>
+        <td align="left">Page 1  - 80x25 16 color and mono (B800:1000)</td>
+      </tr>
+      <tr>
+        <td align="right">A000</td>
+        <td align="right">4096</td>
+        <td align="left">Page 2  - 80x25 16 color and mono (B800:2000)</td>
+      </tr>
+      <tr>
+        <td align="right">B000</td>
+        <td align="right">4096</td>
+        <td align="left">Page 3  - 80x25 16 color and mono (B800:3000)</td>
+      </tr>
+      <tr>
+        <td align="right">C000</td>
+        <td align="right">4096</td>
+        <td align="left">Page 4  - 80x25 16 color and mono (B800:4000)</td>
+      </tr>
+      <tr>
+        <td align="right">D000</td>
+        <td align="right">4096</td>
+        <td align="left">Page 5  - 80x25 16 color and mono (B800:5000)</td>
+      </tr>
+      <tr>
+        <td align="right">E000</td>
+        <td align="right">4096</td>
+        <td align="left">Page 6  - 80x25 16 color and mono (B800:6000)</td>
+      </tr>
+      <tr>
+        <td align="right">F000</td>
+        <td align="right">4096</td>
+        <td align="left">Page 7  - 80x25 16 color and mono (B800:7000)</td>
+      </tr>
+
+      <!-- ***** C000:0000h ****** -->
+      <tr>
+        <td align="left" bgcolor="#eeeeee" colspan="3">C000:0000h</td>
+      </tr>
+      <tr>
+        <td align="right">0000</td>
+        <td align="right">65,536</td>
+        <td align="left">additional ROM-BIOS &amp; video memory</td>
+      </tr>
+
+      <!--Segment C800h - HARD DISK BIOS :0000 - 8k-16k  HARD DISK BIOS-->
+
+      <!-- ***** D000:0000h ****** -->
+      <tr>
+        <td align="left" bgcolor="#eeeeee" colspan="3">D000:0000h</td>
+      </tr>
+      <tr>
+        <td align="right">0000</td>
+        <td align="right">65,536</td>
+        <td align="left">ROM cartridges</td>
+      </tr>
+
+      <!-- ***** E000:0000h ****** -->
+      <tr>
+        <td align="left" bgcolor="#eeeeee" colspan="3">E000:0000h</td>
+      </tr>
+      <tr>
+        <td align="right">0000</td>
+        <td align="right">65,536</td>
+        <td align="left">ROM cartridges</td>
+      </tr>
+
+      <!-- ***** F000:0000h ****** -->
+      <tr>
+        <td align="left" bgcolor="#eeeeee" colspan="3">F000:0000h</td>
+      </tr>
+      <tr>
+        <td align="right">0000</td>
+        <td align="right">32,768</td>
+        <td align="left">IBM PC ROM BASIC</td>
+      </tr>
+      <tr>
+        <td align="right">E000</td>
+        <td align="right">8,192</td>
+        <td align="left">ORIGINAL IBM PC ROM BIOS</td>
+      </tr>
+      <tr>
+        <td align="right">FFF0</td>
+        <td align="right">5</td>
+        <td align="left">RESET JUMP</td>
+      </tr>
+      <tr>
+        <td align="right">FFF5</td>
+        <td align="right">8</td>
+        <td align="left">ASCII BIOS DATE</td>
+      </tr>
+      <tr>
+        <td align="right">FFFD</td>
+        <td align="right">1</td>
+        <td align="left">OFTEN USED TO ENSURE CORRECT BIOS CHECKSUM</td>
+      </tr>
+      <tr>
+        <td align="right">FFFE</td>
+        <td align="right">1</td>
+        <td align="left">MACHINE TYPE CODE</td>
+      </tr>
+      <tr>
+        <td align="right">FFFF</td>
+        <td align="right">1</td>
+        <td align="left">unknown</td>
+      </tr>
+
+      <!-- ***** Totals ****** -->
+      <tr>
+        <td align="left" bgcolor="#eeeeee" colspan="3">Total memory</td>
+      </tr>
+      <tr>
+        <td align="center">0000:0000—F000:FFFF</td>
+        <td align="right">1,048,576</td>
+        <td align="left">16 x 65,536  = 1 meg</td>
+      </tr>
+
+    </tbody></table>
+
+    <br><br>
+
+    <pre class="pretext">-------------------------- Figures ---------------------------
+
+****************************************************************
+       bit
+FEDCBA98 76543210  Described
+XX...... ........   Number of printers installed
+..X..... ........   (reserved)
+...X.... ........   set if game adapter installed
+....XXX. ........   Number of RS-232 serial ports
+.......X ........   (reserved)
+........ XX......   +1 = number of floppy drives (see bit 0) 00 - 1 drive, 01 - 2 drives, etc.
+........ ..XX....   Initial video mode
+                      01 - 40 column color
+                      10 - 80 column color
+                      11 - monochrome
+                      00 - none of the above
+........ ....XX..   For PC w/64k motherboard
+                      Amount of system board RAM
+                      00 - 16k,01 - 32k, 10 - 48k, 11 - 64k
+                    For PC/AT: not used
+                    For PS/2:
+                      Bit 3 not used
+                      Bit 2 - pointing device installed
+........ ......X.   set if math co processor installed
+........ .......X   set if any floppy drives installed
+                      if set, see bits 6 and 7
+****************************************************************
+FIGURE 1:   equipment list word at 0000:0410h
+
+
+
+****************************************************************
+  bits
+76543210  Described
+0000:0417h
+X....... insert state: (1 = active, 0 = inactive)
+.X...... caps lock:
+..X..... num lock:
+...X.... scroll lock:
+....X... set if alt pressed
+.....X.. set if ctrl pressed
+......X. set if left shift pressed
+.......X set if right shift pressed
+
+0000:0418h
+X.......   set if insert pressed
+.X......   set if caps lock pressed
+..X.....   set if num lock pressed
+...X....   set if scroll lock pressed
+....X...   hold state active (ctrl-num lock or pause pressed)
+.....X..   system request pressed
+......X.   left alt pressed
+.......X   right alt pressed
+****************************************************************
+FIGURE 2:   Keyboard status bits at 0000:0417h, lo order bits are set
+              only while a corresponding key is pressed
+    </pre>
+
+<!-- signature -->
+<script language="JavaScript" type="text/javascript">
+  signature();
+</script>    <br><br>    All rights reserved<br>    <a href="http://www.fysnet.net/legal.htm" target="_top">Legal Notice</a><br>    Copyright © 1984-2015  Forever Young Software<br>    <a href="http://www.fysnet.net/consult.htm" target="_top">Forever Young Software for Hire</a><br>    <a href="http://www.fysnet.net/index.htm" target="_top">Return to My Home Page</a><br>        <br>    <a href="https://www.ipage.com/join/index.bml?AffID=812664">Hosted By<img src="./ROM BIOS and the first MEG of memory_files/ipage-sm.gif" alt="Web Hosting by iPage" border="0" style="vertical-align:middle;"></a>        <br>    <a href="http://www.simplehitcounter.com/" target="_blank"><img src="./ROM BIOS and the first MEG of memory_files/hit.php" border="0" height="18" width="83" alt="web counter"></a><br><font size="1"><a href="http://www.simplehitcounter.com/" target="_blank" style="text-decoration:none;">free web counter</a></font>
+
+  
+
+</body></html>

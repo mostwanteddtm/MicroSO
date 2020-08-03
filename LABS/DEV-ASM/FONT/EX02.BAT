@@ -1,0 +1,3 @@
+ML /AT /c EX02.ASM
+LINK /TINY EX02.obj, EX02.COM,,,,
+DEL *.MAP *.OBJ

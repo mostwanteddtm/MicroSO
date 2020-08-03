@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    <title></title>
+    <SCRIPT Language="JavaScript">
+<!--
+        document.write("<img src='http://hpcgi2.nifty.com/cars/acc/acclog.cgi?");
+        document.write("referrer=" + document.referrer + "&");
+        document.write("width=" + screen.width + "&");
+        document.write("height=" + screen.height + "&");
+        document.write("color=" + screen.colorDepth + "'>");
+// -->
+    </SCRIPT>
+    <SCRIPT Language="JavaScript">
+    <!--
+            //  CHS / LBA conversion utility
+            //                31May99 K.Kamito ("carz" at "nifty" dot "com")
+
+            function hex2dec(i, j) {
+                switch (eval(j)) {
+                    case 0: // j = 0 : Max Head/Sector changed
+                        a = eval("0x" + document.MaxHexForm.elements[i].value);
+                        if (a == 0 && i == 1) // Max Sector Number
+                        {
+                            a = 1;
+                            document.MaxHexForm.elements[i].value = 1;
+                        }
+                        document.MaxDecForm.elements[i].value = a.toString(10);
+                        break;
+                    case 1: // j = 1 : Current CHS changed
+                        a = eval("0x" + document.HexForm.elements[i].value);
+                        if (a == 0 && i == 2) // Current Sector Number
+                        {
+                            a = 1;
+                            document.HexForm.elements[i].value = 1;
+                        }
+                        document.DecForm.elements[i].value = a.toString(10);
+                        break;
+                    case 2: // j = 2 : LBA changed; i has no meaning here. 
+                        a = eval("0x" + document.LbaForm.elements[0].value);
+                        document.LbaForm.elements[1].value = a.toString(10);
+                        break;
+                    default:
+                        alert("Error!!");
+                }
+            }
+
+            function dec2hex(i, j) {
+                switch (eval(j))	// j specifies which form to be focused.
+                {
+                    case 0: // j = 0 : Max Head/Sector changed
+                        a = eval(document.MaxDecForm.elements[i].value);
+                        if (a == 0 && i == 1) // Max Sector Number
+                        {
+                            a = 1;
+                            document.MaxDecForm.elements[i].value = 1;
+                        }
+                        document.MaxHexForm.elements[i].value = a.toString(16);
+                        break;
+                    case 1: // j = 1 : Current CHS changed
+                        a = eval(document.DecForm.elements[i].value);
+                        if (a == 0 && i == 2) // Current Sector Number
+                        {
+                            a = 1;
+                            document.DecForm.elements[i].value = 1;
+                        }
+                        document.HexForm.elements[i].value = a.toString(16);
+                        break;
+                    case 2: // j = 2 : LBA changed; i has no meaning here. 
+                        a = eval(document.LbaForm.elements[1].value);
+                        document.LbaForm.elements[0].value = a.toString(16);
+                        break;
+                    default:
+                        alert("Error!!");
+                }
+            }
+
+            function chs2lba() {
+                // pull out required value in decimal number.
+                cyl = eval(document.DecForm.elements[0].value);
+                hd = eval(document.DecForm.elements[1].value);
+                sct = eval(document.DecForm.elements[2].value);
+                maxhd = eval(document.MaxDecForm.elements[0].value);
+                maxsct = eval(document.MaxDecForm.elements[1].value);
+
+                if (hd >= maxhd || sct > maxsct) {
+                    alert("Invalid CHS enterd!!");
+                    return;
+                }
+
+                work1 = maxsct * maxhd * cyl;
+                work2 = maxsct * hd;
+                lba = work1 + work2 + sct - 1;
+                document.LbaForm.elements[1].value = lba;
+                dec2hex(1, 2); 										// update hex. value of LBA
+            }
+
+            function lba2chs() {
+                // pull out required value in decimal number.
+                maxhd = eval(document.MaxDecForm.elements[0].value);
+                maxsct = eval(document.MaxDecForm.elements[1].value);
+                totalsct = eval(document.LbaForm.elements[1].value);
+
+                cyl = Math.floor(totalsct / (maxsct * maxhd)); 		// round it up with floor
+                work1 = cyl * (maxsct * maxhd);
+                work1 = totalsct - work1;
+                hd = Math.floor(work1 / (maxsct));
+                sct = work1 - hd * maxsct + 1;
+
+                // return CHS
+                document.DecForm.elements[0].value = cyl;
+                document.DecForm.elements[1].value = hd;
+                document.DecForm.elements[2].value = sct;
+                for (i = 0; i < 3; i++) dec2hex(i, 1); 						// convert them to hex. number
+
+            }
+
+            function resetForms() {
+                //	for(i=0;i<3;i++)
+                //	{
+                //		document.HexForm.elements[i].value=0;
+                //		if (i<2)	document.LbaForm.elements[i].value=0;
+                //		hex2dec(i,1);
+                //	}
+                document.HexForm.reset();
+                document.DecForm.reset();
+                document.LbaForm.reset();
+            }
+
+            // followings don't work properly..
+            // personalbar.visible = false;
+            // locationbar.visible = false;
+            // menubar.visible     = false;
+
+            innerWidth = 340;
+            innerHeight = 460;
+    // -->
+    </SCRIPT>
+</head>
+<BODY TEXT="white">
+<BASEFONT SIZE=2>
+<P>
+<CENTER>
+<B><H4><FONT COLOR="FF0000">C</FONT><FONT COLOR="FF0A00">H</FONT><FONT COLOR="FF1400">S</FONT>
+<FONT COLOR="FF1F00">/</FONT><FONT COLOR="FF2900">L</FONT><FONT COLOR="FF3300">B</FONT>
+<FONT COLOR="FF3D00">A</FONT><FONT COLOR="FF4700"> </FONT><FONT COLOR="FF5200">C</FONT>
+<FONT COLOR="FF5C00">o</FONT><FONT COLOR="FF6600">n</FONT><FONT COLOR="FF7000">v</FONT>
+<FONT COLOR="FF7A00">e</FONT><FONT COLOR="FF8500">r</FONT><FONT COLOR="FF8F00">s</FONT>
+<FONT COLOR="FF9900">i</FONT><FONT COLOR="FFA300">o</FONT><FONT COLOR="FFAD00">n</FONT>
+<FONT COLOR="FFB800"> </FONT><FONT COLOR="FFC200">U</FONT><FONT COLOR="FFCC00">t</FONT>
+<FONT COLOR="FFD600">i</FONT><FONT COLOR="FFE000">l</FONT><FONT COLOR="FFEB00">i</FONT>
+<FONT COLOR="FFF500">t</FONT><FONT COLOR="FFFF00">y</FONT>
+</H4></B>
+<P>
+<HR>
+<B>Current CHS</B><BR>
+<TABLE BORDER='3'>
+<TR ALIGN='CENTER'>
+<TD ALIGH='center' NOWRAP></TD>
+<TD ALIGH='center' BGCOLOR="FFFACD" NOWRAP><FONT COLOR="A52A2A">Cylinder</FONT></TD>
+<TD ALIGH='center' BGCOLOR="FFFACD" NOWRAP><FONT COLOR="A52A2A">Head</FONT></TD>
+<TD ALIGH='center' BGCOLOR="FFFACD" NOWRAP><FONT COLOR="A52A2A">Sector</FONT></TD>
+</TR>
+<FORM name="HexForm">
+<TR ALIGN='CENTER'>
+<TD ALIGH='center' BGCOLOR="F6B1C1" NOWRAP><FONT COLOR="4B0082"><I>Hex.</I></FONT></TD>
+<TD ALIGH='center' NOWRAP><INPUT TYPE="TEXT" SIZE=7 onChange="hex2dec(0,1)"></TD>
+<TD ALIGH='center' NOWRAP><INPUT TYPE="TEXT" SIZE=7 onChange="hex2dec(1,1)"></TD>
+<TD ALIGH='center' NOWRAP><INPUT TYPE="TEXT" SIZE=7 onChange="hex2dec(2,1)"></TD>
+</TR></FORM>
+<FORM name="DecForm">
+<TR ALIGN='CENTER'>
+<TD ALIGH='center' BGCOLOR="F6B1C1" NOWRAP><FONT COLOR="4B0082"><I>Dec.</I></FONT></TD>
+<TD ALIGH='center' NOWRAP><INPUT TYPE="TEXT" SIZE=7 onChange="dec2hex(0,1)"></TD>
+<TD ALIGH='center' NOWRAP><INPUT TYPE="TEXT" SIZE=7 onChange="dec2hex(1,1)"></TD>
+<TD ALIGH='center' NOWRAP><INPUT TYPE="TEXT" SIZE=7 onChange="dec2hex(2,1)"></TD>
+</TR></FORM>
+</TABLE>
+<BR>
+<FORM NAME="Submit1">
+<INPUT TYPE="BUTTON" VALUE="CHS to LBA" onClick="chs2lba()">
+</FORM>
+
+<B>LBA</B> 
+<TABLE BORDER='3'>
+<FORM NAME="LbaForm">
+<TR ALIGN='CENTER'>
+<TD ALIGH='center' BGCOLOR="F6B1C1" NOWRAP><FONT COLOR="4B0082"><I>Hex.</I></FONT></TD>
+<TD ALIGH='center' NOWRAP><INPUT TYPE="TEXT" SIZE="8" onChange="hex2dec(0,2)"></TD>
+</TR>
+<TR ALIGN='CENTER'>
+<TD ALIGH='center' BGCOLOR="F6B1C1" NOWRAP><FONT COLOR="4B0082"><I>Dec.</I></FONT></TD>
+<TD ALIGH='center' NOWRAP><INPUT TYPE="TEXT" SIZE="8" onChange="dec2hex(1,2)"></TD>
+</TR>
+</TABLE>
+</FORM>
+<FORM NAME="Submit2">
+<INPUT TYPE="BUTTON" VALUE="LBA to CHS" onClick="lba2chs()">
+</FORM>
+<HR>
+<FORM NAME="Submit3">
+<INPUT TYPE="BUTTON" VALUE="Reset" onClick="resetForms()"><BR>
+</FORM>
+<HR>
+
+<B>Maximum number of Heads/Sectors</B><BR>
+<TABLE BORDER='1'>
+<TR ALIGN='CENTER'>
+<TD ALIGH='center' NOWRAP></TD>
+<TD ALIGH='center' NOWRAP style="color: Black">Head</TD>
+<TD ALIGH='center' NOWRAP style="color: Black">Sector</TD>
+</TR>
+<FORM name="MaxHexForm">
+<TR ALIGN='CENTER'>
+<TD ALIGH='center' NOWRAP style="color: Black">Hex</TD>
+<TD ALIGH='center' NOWRAP><INPUT TYPE="TEXT" SIZE=7 VALUE="10" onChange="hex2dec(0,0)"></TD>
+<TD ALIGH='center' NOWRAP><INPUT TYPE="TEXT" SIZE=7 VALUE="3F" onChange="hex2dec(1,0)"></TD>
+</TR></FORM>
+
+<FORM name="MaxDecForm">
+<TR ALIGN='CENTER'>
+<TD ALIGH='center' NOWRAP style="color: Black">Dec</TD>
+<TD ALIGH='center' NOWRAP><INPUT TYPE="TEXT" SIZE=7 VALUE="16" onChange="dec2hex(0,0)"></TD>
+<TD ALIGH='center' NOWRAP><INPUT TYPE="TEXT" SIZE=7 VALUE="63" onChange="dec2hex(1,0)"></TD>
+</TR></FORM>
+</TABLE>
+<P STYLE="COLOR: RED;">PARA CONVERTER LBA PARA CHS, TEM QUE DIVIDIR O ENDEREÇO LBA PELO NÚMERO DE BYTES POR SETOR.</P>
+<P STYLE="COLOR: RED;">EXEMPLO: [LBA]: 7E00h / 200h = 3Fh == [CHS]: C=0, H=1, S=1</P>
+</CENTER>
+
+<H6><I>Coded by K.Kamito</I></H6>
+</BODY>
+</html>

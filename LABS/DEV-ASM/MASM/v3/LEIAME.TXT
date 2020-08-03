@@ -1,0 +1,5 @@
+##########################  COMPILADO COM MASM ##########################
+
+PARA TESTAR, BASTA USAR O RawriteWin para copiar a imagem para o drive A:\>
+ou
+USAR O EMU8086 COM A IMAGEM FLOPPY_0

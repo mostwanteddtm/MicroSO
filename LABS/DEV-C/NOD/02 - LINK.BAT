@@ -1,0 +1,1 @@
+TLINK.EXE /c /m /s /t C0T.OBJ MAIN.OBJ, MAIN.COM

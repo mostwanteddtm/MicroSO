@@ -1,0 +1,236 @@
+/*
+* Koen Noens
+* july 2002 
+*
+* main style sheet : algemene stijlkenmerken
+*/
+
+/* NAVIGATION BAR */
+	div.navbar	{
+			background-color:#6666cc;
+			margin-top : 1.8em;
+			margin-bottom: 4em;
+			padding:0.4em;
+			
+			/* eventueel tekst in navbar :  */
+			color: #ffffff;		
+			font-weight: normal;
+			text-decoration : none;
+			font-family : verdana, arial, helvetica, sans-serif;
+			font-size : 0.8em;
+			}
+
+	a.navbar:link	
+			{
+			color: #ffffff;
+			background-color:#6666cc;
+			text-decoration : none;
+			font-weight : bold;
+			font-family : verdana, arial, helvetica, sans-serif;
+			}
+
+	a.navbar:visited
+			{
+			color: #ffffff;
+			background-color:#6666cc;
+			text-decoration : none;
+			font-weight : bold;
+			font-family : verdana, arial, helvetica, sans-serif;
+			}
+	a.navbar:active
+			{
+			color: #ff0000;
+			background-color:#6666cc;
+			font-weight : bold;
+			font-family : verdana, arial, helvetica, sans-serif;
+			}
+	a.navbar:hover	
+			{
+			color: #6666cc;
+			background-color:	#ffffff;
+			text-decoration : none;
+			font-weight : bold;
+			font-family : verdana, arial, helvetica, sans-serif;
+			}
+
+/* BLADSCHIKKING,  TEKST en TITELS */
+
+	body	{
+		font-family : 	verdana, arial, helvetica, sans-serif;
+		/*font-size 	:80%;*/
+		line-height :	1.3em;
+		margin-left : 	2%;
+		}
+
+	/* tables die bladschikking verzorgen : 
+	*  zelfde tekst-eigenschappen als body, paragraph, ...
+	*/
+
+	table.tekst	
+		{
+		width : 90%;
+		font-family : 	verdana, arial, helvetica, sans-serif;
+		border-style : none;
+		border-width : 0px;
+		margin-left : 2%;
+		}
+
+	td.tekst
+		{
+		vertical-align : top;
+		border-style : none;
+		border-width : 0pt;
+		}
+
+	td.derde	/* zoals td.tekst, maar met breedte 30 % van totaal 
+			 * voor tekst in 2 (67+33%) of 3(3x33%) kolommen
+			*/
+		{
+		width : 33%;
+		vertical-align : top;
+		border-style : none;
+		border-width : 0pt;
+		}
+
+
+
+	div.subtoc 
+		{	margin-top:		2em;
+			background-color:	#cccccc;
+			padding: 		1em;
+			border:			solid thin;
+			border-color:		#6666cc;
+		}
+
+/* dokuwiki TOC style redifined to match our subtoc */
+	div.toc 
+		{	margin-top:		2em;
+			background-color:	#cccccc;
+			padding: 		1em;
+			border:			solid thin;
+			border-color:		#6666cc;
+		}
+/* dokiwiki override ends */
+
+	p	{
+		margin-top : 2em;
+		margin-bottom : 2em;
+		margin-left : 5%;
+		}
+
+	p.extra
+		{
+		color : #000000;
+		background-color : #ccccff;
+		margin-left: 25%;
+		padding : 1.2em;
+		}
+
+	.blockquote
+		{
+		color : #000000;
+		background-color: #cccccc;
+		margin-left: 20%;
+		margin-right: 20%;
+		padding : 1.2em;
+		}
+	
+	h4, h3, h3
+		{
+		line-height :	1.3em;
+		margin-top: 2em;
+		margin-bottom :0.5em;
+		}
+
+	h1	{
+		line-height :	1.3em;
+		margin-top: 2em;
+		margin-bottom :1.2em;
+		}
+
+
+
+/* LIJST */
+
+	/* unordered list */
+
+	ul	{
+		margin-left : 15%;
+		list-style-type : disc;
+		}
+
+	.l2	{
+		margin-left : 15%;
+		list-style-type : square;
+		}
+
+	.l3	{
+		margin-left : 15%;
+		list-style-type : circle;
+		}
+
+	/*DEFINITION list*/
+
+	dl	{
+		margin-left : 15%;	/* identiek aan paragraph margin left */
+		}
+	dt	{
+		margin-top : 1.5em;
+		font-weight : bold;
+		}
+	dd	{
+		}
+	dd.i	{/*comment, italic*/
+		font-style : italic;
+		}
+
+	/* ordered list */
+
+	ol	{
+		margin-left : 12%;
+		}
+
+/* GRAPHICS en DESIGN ELEMENTS*/
+
+	iframe	{
+		width : 100%;
+		}
+
+	img 	{
+		vertical-align : top;
+		border : none;	
+		margin : 1em;
+		padding : 0em;
+		}
+
+	hr	{
+		color : #660099;
+		}
+
+/* SPECIAL EFFECTS */
+
+	div.nav {
+		color : #000099;
+		background-color:	#cccccc;
+		}
+
+	.emb	/* emphasis, bold */
+		{
+		font-style : italic;
+		font-weight : bold;
+		}
+
+	.em	/* emphasis */
+		{
+		font-style : italic;
+		}
+
+	.b	/* bold */
+		{
+		font-weight : bold;
+		}
+
+	.center, .centered
+		{
+		text-align : center ;
+		}

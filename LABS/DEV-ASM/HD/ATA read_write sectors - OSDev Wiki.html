@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://wiki.osdev.org/ATA_read/write_sectors -->
+<html lang="en" dir="ltr" class="client-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ATA read/write sectors - OSDev Wiki</title>
+
+<meta name="generator" content="MediaWiki 1.18.0">
+<link rel="shortcut icon" href="http://wiki.osdev.org/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd">
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom">
+<link rel="stylesheet" href="./ATA read_write sectors - OSDev Wiki_files/load.php">
+<style type="text/css" media="all">.mw-collapsible-toggle{float:right} li .mw-collapsible-toggle{float:none} .mw-collapsible-toggle-li{list-style:none}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:4250852ed2349a0d4d0fc6509a3e7d4c */
+</style><style type="text/css" media="all">.js-messagebox{margin:1em 5%;padding:0.5em 2.5%;border:1px solid #ccc;background-color:#fcfcfc;font-size:0.8em}.js-messagebox .js-messagebox-group{margin:1px;padding:0.5em 2.5%;border-bottom:1px solid #ddd}.js-messagebox .js-messagebox-group:last-child{border-bottom:thin none transparent}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:8b08bdc91c52a9ffba396dccfb5b473c */
+</style><meta name="ResourceLoaderDynamicStyles" content="">
+<link rel="stylesheet" href="./ATA read_write sectors - OSDev Wiki_files/load(1).php">
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="./ATA read_write sectors - OSDev Wiki_files/load(2).php"></script><script src="./ATA read_write sectors - OSDev Wiki_files/load(3).php"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "ATA_read/write_sectors", "wgTitle": "ATA read/write sectors", "wgCurRevisionId": 20723, "wgArticleId": 2984, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Stubs", "ATA"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script><script type="text/javascript" src="./ATA read_write sectors - OSDev Wiki_files/load(4).php"></script>
+<style type="text/css">/*<![CDATA[*/
+.source-asm {line-height: normal;}
+.source-asm li, .source-asm pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for asm
+ * CSS class: source-asm, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.asm.source-asm .de1, .asm.source-asm .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.asm.source-asm  {font-family:monospace;}
+.asm.source-asm .imp {font-weight: bold; color: red;}
+.asm.source-asm li, .asm.source-asm .li1 {font-weight: normal; vertical-align:top;}
+.asm.source-asm .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.asm.source-asm .li2 {font-weight: bold; vertical-align:top;}
+.asm.source-asm .kw1 {color: #00007f; font-weight: bold;}
+.asm.source-asm .kw2 {color: #0000ff; font-weight: bold;}
+.asm.source-asm .kw3 {color: #00007f;}
+.asm.source-asm .kw4 {color: #000000; font-weight: bold;}
+.asm.source-asm .kw5 {color: #000000; font-weight: bold;}
+.asm.source-asm .co1 {color: #666666; font-style: italic;}
+.asm.source-asm .co2 {color: #adadad; font-style: italic;}
+.asm.source-asm .es0 {color: #000099; font-weight: bold;}
+.asm.source-asm .br0 {color: #009900; font-weight: bold;}
+.asm.source-asm .sy0 {color: #339933;}
+.asm.source-asm .st0 {color: #7f007f;}
+.asm.source-asm .nu0 {color: #0000ff;}
+.asm.source-asm .ln-xtra, .asm.source-asm li.ln-xtra, .asm.source-asm div.ln-xtra {background-color: #ffc;}
+.asm.source-asm span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "/index.php?title=MediaWiki:Geshi.css&usemsgcache=yes&action=raw&ctype=text/css&smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-ATA_read_write_sectors action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;" class="js-messagebox"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">ATA read/write sectors</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="http://wiki.osdev.org/ATA_read/write_sectors#mw-head">navigation</a>,
+					<a href="http://wiki.osdev.org/ATA_read/write_sectors#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><p>Since interrupts (like INT 13h) can't be called easily in protected mode or long mode, direct disk access through ports might be the only solution. The below code is example of subroutines to read and write disk sectors directly from the first hard disk (80h) in long mode using CHS and LBA.
+</p>
+<table id="toc" class="toc"><tbody><tr><td><div id="toctitle"><h2>Contents</h2><span class="toctoggle">&nbsp;[<a href="http://wiki.osdev.org/ATA_read/write_sectors#" class="internal" id="togglelink">hide</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="http://wiki.osdev.org/ATA_read/write_sectors#ATA_read_sectors"><span class="tocnumber">1</span> <span class="toctext">ATA read sectors</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="http://wiki.osdev.org/ATA_read/write_sectors#Read_in_CHS_mode"><span class="tocnumber">1.1</span> <span class="toctext">Read in CHS mode</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="http://wiki.osdev.org/ATA_read/write_sectors#Read_in_LBA_mode"><span class="tocnumber">1.2</span> <span class="toctext">Read in LBA mode</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="http://wiki.osdev.org/ATA_read/write_sectors#ATA_write_sectors"><span class="tocnumber">2</span> <span class="toctext">ATA write sectors</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="http://wiki.osdev.org/ATA_read/write_sectors#See_also"><span class="tocnumber">3</span> <span class="toctext">See also</span></a></li>
+</ul>
+</td></tr></tbody></table>
+<h1> <span class="mw-headline" id="ATA_read_sectors">ATA read sectors</span></h1>
+<h2> <span class="mw-headline" id="Read_in_CHS_mode">Read in CHS mode</span></h2>
+<p>Accessing disk using CHS (cylinder,head,sector) indexes seem to be kinda old type but is the base for LBA access. The following NASM long-mode subroutine reads CH sectors to memory address indicated by RDI register.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">;=============================================================================</span>
+<span class="co1">; ATA read sectors (CHS mode) </span>
+<span class="co1">; Max head index is 15, giving 16 possible heads</span>
+<span class="co1">; Max cylinder index can be a very large number (up to 65535)</span>
+<span class="co1">; Sector is usually always 1-63, sector 0 reserved, max 255 sectors/track</span>
+<span class="co1">; If using 63 sectors/track, max disk size = 31.5GB</span>
+<span class="co1">; If using 255 sectors/track, max disk size = 127.5GB</span>
+<span class="co1">; See OSDev forum links in bottom of [http://wiki.osdev.org/ATA]</span>
+<span class="co1">;</span>
+<span class="co1">; @param EBX The CHS values; 2 bytes, 1 byte (BH), 1 byte (BL) accordingly</span>
+<span class="co1">; @param CH The number of sectors to read</span>
+<span class="co1">; @param RDI The address of buffer to put data obtained from disk               </span>
+<span class="co1">;</span>
+<span class="co1">; @return None</span>
+<span class="co1">;=============================================================================</span>
+ata_chs_read<span class="sy0">:</span>   pushfq
+                <span class="kw1">push</span> <span class="kw3">rax</span>
+                <span class="kw1">push</span> <span class="kw3">rbx</span>
+                <span class="kw1">push</span> <span class="kw3">rcx</span>
+                <span class="kw1">push</span> <span class="kw3">rdx</span>
+                <span class="kw1">push</span> <span class="kw3">rdi</span>
+&nbsp;
+                <span class="kw1">mov</span> <span class="kw3">rdx</span><span class="sy0">,</span><span class="nu0">1f6h</span>            <span class="co1">;port to send drive &amp; head numbers</span>
+                <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span><span class="kw3">bh</span>               <span class="co1">;head index in BH</span>
+                <span class="kw1">and</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">00001111b</span>        <span class="co1">;head is only 4 bits long</span>
+                <span class="kw1">or</span>  <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">10100000b</span>        <span class="co1">;default 1010b in high nibble</span>
+                <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span><span class="kw3">al</span>
+&nbsp;
+                <span class="kw1">mov</span> <span class="kw3">rdx</span><span class="sy0">,</span><span class="nu0">1f2h</span>            <span class="co1">;Sector count port</span>
+                <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span><span class="kw3">ch</span>               <span class="co1">;Read CH sectors</span>
+                <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span><span class="kw3">al</span>
+&nbsp;
+                <span class="kw1">mov</span> <span class="kw3">rdx</span><span class="sy0">,</span><span class="nu0">1f3h</span>            <span class="co1">;Sector number port</span>
+                <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span><span class="kw3">bl</span>               <span class="co1">;BL is sector index</span>
+                <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span><span class="kw3">al</span>
+&nbsp;
+                <span class="kw1">mov</span> <span class="kw3">rdx</span><span class="sy0">,</span><span class="nu0">1f4h</span>            <span class="co1">;Cylinder low port</span>
+                <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span><span class="kw3">ebx</span>             <span class="co1">;byte 2 in ebx, just above BH</span>
+                <span class="kw1">mov</span> <span class="kw3">cl</span><span class="sy0">,</span><span class="nu0">16</span>
+                <span class="kw1">shr</span> <span class="kw3">eax</span><span class="sy0">,</span><span class="kw3">cl</span>              <span class="co1">;shift down to AL</span>
+                <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span><span class="kw3">al</span>
+&nbsp;
+                <span class="kw1">mov</span> <span class="kw3">rdx</span><span class="sy0">,</span><span class="nu0">1f5h</span>            <span class="co1">;Cylinder high port</span>
+                <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span><span class="kw3">ebx</span>             <span class="co1">;byte 3 in ebx, just above byte 2</span>
+                <span class="kw1">mov</span> <span class="kw3">cl</span><span class="sy0">,</span><span class="nu0">24</span>
+                <span class="kw1">shr</span> <span class="kw3">eax</span><span class="sy0">,</span><span class="kw3">cl</span>              <span class="co1">;shift down to AL</span>
+                <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span><span class="kw3">al</span>
+&nbsp;
+                <span class="kw1">mov</span> <span class="kw3">rdx</span><span class="sy0">,</span><span class="nu0">1f7h</span>            <span class="co1">;Command port</span>
+                <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">20h</span>              <span class="co1">;Read with retry.</span>
+                <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span><span class="kw3">al</span>
+&nbsp;
+<span class="sy0">.</span>still_going<span class="sy0">:</span>   <span class="kw1">in</span> <span class="kw3">al</span><span class="sy0">,</span><span class="kw3">dx</span>
+                <span class="kw1">test</span> <span class="kw3">al</span><span class="sy0">,</span><span class="nu0">8</span>               <span class="co1">;the sector buffer requires servicing.</span>
+                <span class="kw1">jz</span> <span class="sy0">.</span>still_going         <span class="co1">;until the sector buffer is ready.</span>
+&nbsp;
+                <span class="kw1">mov</span> <span class="kw3">rax</span><span class="sy0">,</span><span class="nu0">512</span><span class="sy0">/</span><span class="nu0">2</span>           <span class="co1">;to read 256 words = 1 sector</span>
+                <span class="kw1">xor</span> <span class="kw3">bx</span><span class="sy0">,</span><span class="kw3">bx</span>
+                <span class="kw1">mov</span> <span class="kw3">bl</span><span class="sy0">,</span><span class="kw3">ch</span>               <span class="co1">;read CH sectors</span>
+                <span class="kw1">mul</span> <span class="kw3">bx</span>
+                <span class="kw1">mov</span> <span class="kw3">rcx</span><span class="sy0">,</span><span class="kw3">rax</span>             <span class="co1">;RCX is counter for INSW</span>
+                <span class="kw1">mov</span> <span class="kw3">rdx</span><span class="sy0">,</span><span class="nu0">1f0h</span>            <span class="co1">;Data port, in and out</span>
+                <span class="kw1">rep</span> <span class="kw1">insw</span>                <span class="co1">;in to [RDI]</span>
+&nbsp;
+                <span class="kw1">pop</span> <span class="kw3">rdi</span>
+                <span class="kw1">pop</span> <span class="kw3">rdx</span>
+                <span class="kw1">pop</span> <span class="kw3">rcx</span>
+                <span class="kw1">pop</span> <span class="kw3">rbx</span>
+                <span class="kw1">pop</span> <span class="kw3">rax</span>
+                popfq
+                <span class="kw1">ret</span></pre></div></div>
+<h2> <span class="mw-headline" id="Read_in_LBA_mode">Read in LBA mode</span></h2>
+<center>
+<table style="border: 1px solid #cfcfbf; margin-top: 25px; margin-bottom: 25px; background-color: #f0f0ff; text-align: center;">
+<tbody><tr>
+<td>
+<p><a href="http://wiki.osdev.org/File:Stub.png" class="image" title="This article is a stub!"><img alt="This article is a stub!" src="./ATA read_write sectors - OSDev Wiki_files/Stub.png" width="50" height="50"></a>
+This page or section is a <a href="http://wiki.osdev.org/Category:Stubs" title="Category:Stubs">stub</a>. You can help the wiki by <i>accurately</i> <a rel="nofollow" class="external text" href="http://wiki.osdev.org/index.php?title=ATA_read/write_sectors&amp;action=edit">contributing</a> to it.
+</p>
+</td>
+<td>
+</td></tr></tbody></table>
+</center>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">;=============================================================================</span>
+<span class="co1">; ATA read sectors (LBA mode) </span>
+<span class="co1">;</span>
+<span class="co1">; @param EAX Logical Block Address of sector</span>
+<span class="co1">; @param CL  Number of sectors to read</span>
+<span class="co1">; @param RDI The address of buffer to put data obtained from disk</span>
+<span class="co1">;</span>
+<span class="co1">; @return None</span>
+<span class="co1">;=============================================================================</span>
+ata_lba_read<span class="sy0">:</span>
+               pushfq
+               <span class="kw1">and</span> <span class="kw3">rax</span><span class="sy0">,</span> <span class="nu0">0x0FFFFFFF</span>
+               <span class="kw1">push</span> <span class="kw3">rax</span>
+               <span class="kw1">push</span> <span class="kw3">rbx</span>
+               <span class="kw1">push</span> <span class="kw3">rcx</span>
+               <span class="kw1">push</span> <span class="kw3">rdx</span>
+               <span class="kw1">push</span> <span class="kw3">rdi</span>
+&nbsp;
+               <span class="kw1">mov</span> <span class="kw3">rbx</span><span class="sy0">,</span> <span class="kw3">rax</span>         <span class="co1">; Save LBA in RBX</span>
+&nbsp;
+               <span class="kw1">mov</span> <span class="kw3">edx</span><span class="sy0">,</span> <span class="nu0">0x01F6</span>      <span class="co1">; Port to send drive and bit 24 - 27 of LBA</span>
+               <span class="kw1">shr</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">24</span>          <span class="co1">; Get bit 24 - 27 in al</span>
+               <span class="kw1">or</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">11100000b</span>     <span class="co1">; Set bit 6 in al for LBA mode</span>
+               <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span> <span class="kw3">al</span>
+&nbsp;
+               <span class="kw1">mov</span> <span class="kw3">edx</span><span class="sy0">,</span> <span class="nu0">0x01F2</span>      <span class="co1">; Port to send number of sectors</span>
+               <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="kw3">cl</span>           <span class="co1">; Get number of sectors from CL</span>
+               <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span> <span class="kw3">al</span>
+&nbsp;
+               <span class="kw1">mov</span> <span class="kw3">edx</span><span class="sy0">,</span> <span class="nu0">0x1F3</span>       <span class="co1">; Port to send bit 0 - 7 of LBA</span>
+               <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">ebx</span>         <span class="co1">; Get LBA from EBX</span>
+               <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span> <span class="kw3">al</span>
+&nbsp;
+               <span class="kw1">mov</span> <span class="kw3">edx</span><span class="sy0">,</span> <span class="nu0">0x1F4</span>       <span class="co1">; Port to send bit 8 - 15 of LBA</span>
+               <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">ebx</span>         <span class="co1">; Get LBA from EBX</span>
+               <span class="kw1">shr</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">8</span>           <span class="co1">; Get bit 8 - 15 in AL</span>
+               <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span> <span class="kw3">al</span>
+&nbsp;
+&nbsp;
+               <span class="kw1">mov</span> <span class="kw3">edx</span><span class="sy0">,</span> <span class="nu0">0x1F5</span>       <span class="co1">; Port to send bit 16 - 23 of LBA</span>
+               <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">ebx</span>         <span class="co1">; Get LBA from EBX</span>
+               <span class="kw1">shr</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">16</span>          <span class="co1">; Get bit 16 - 23 in AL</span>
+               <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span> <span class="kw3">al</span>
+&nbsp;
+               <span class="kw1">mov</span> <span class="kw3">edx</span><span class="sy0">,</span> <span class="nu0">0x1F7</span>       <span class="co1">; Command port</span>
+               <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">0x20</span>         <span class="co1">; Read with retry.</span>
+               <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span> <span class="kw3">al</span>
+&nbsp;
+<span class="sy0">.</span>still_going<span class="sy0">:</span>  <span class="kw1">in</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="kw3">dx</span>
+               <span class="kw1">test</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">8</span>           <span class="co1">; the sector buffer requires servicing.</span>
+               <span class="kw1">jz</span> <span class="sy0">.</span>still_going      <span class="co1">; until the sector buffer is ready.</span>
+&nbsp;
+               <span class="kw1">mov</span> <span class="kw3">rax</span><span class="sy0">,</span> <span class="nu0">256</span>         <span class="co1">; to read 256 words = 1 sector</span>
+               <span class="kw1">xor</span> <span class="kw3">bx</span><span class="sy0">,</span> <span class="kw3">bx</span>
+               <span class="kw1">mov</span> <span class="kw3">bl</span><span class="sy0">,</span> <span class="kw3">cl</span>           <span class="co1">; read CL sectors</span>
+               <span class="kw1">mul</span> <span class="kw3">bx</span>
+               <span class="kw1">mov</span> <span class="kw3">rcx</span><span class="sy0">,</span> <span class="kw3">rax</span>         <span class="co1">; RCX is counter for INSW</span>
+               <span class="kw1">mov</span> <span class="kw3">rdx</span><span class="sy0">,</span> <span class="nu0">0x1F0</span>       <span class="co1">; Data port, in and out</span>
+               <span class="kw1">rep</span> <span class="kw1">insw</span>             <span class="co1">; in to [RDI]</span>
+&nbsp;
+               <span class="kw1">pop</span> <span class="kw3">rdi</span>
+               <span class="kw1">pop</span> <span class="kw3">rdx</span>
+               <span class="kw1">pop</span> <span class="kw3">rcx</span>
+               <span class="kw1">pop</span> <span class="kw3">rbx</span>
+               <span class="kw1">pop</span> <span class="kw3">rax</span>
+               popfq
+               <span class="kw1">ret</span></pre></div></div>
+<h1> <span class="mw-headline" id="ATA_write_sectors">ATA write sectors</span></h1>
+<p>A write is mostly equivalent to performing a read operation. The only changes needed are a change in command (0x30 for chs write), and the direction of the data, which is written (rep outsw from *SI) to the data port rather than read (rep insw to *DI).
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="asm source-asm"><pre class="de1"><span class="co1">;=============================================================================</span>
+<span class="co1">; ATA write sectors (LBA mode) </span>
+<span class="co1">;</span>
+<span class="co1">; @param EAX Logical Block Address of sector</span>
+<span class="co1">; @param CL  Number of sectors to write</span>
+<span class="co1">; @param RDI The address of data to write to the disk</span>
+<span class="co1">;</span>
+<span class="co1">; @return None</span>
+<span class="co1">;=============================================================================</span>
+&nbsp;
+ata_lba_write<span class="sy0">:</span>
+    pushfq
+    <span class="kw1">and</span> <span class="kw3">rax</span><span class="sy0">,</span> <span class="nu0">0x0FFFFFFF</span>
+    <span class="kw1">push</span> <span class="kw3">rax</span>
+    <span class="kw1">push</span> <span class="kw3">rbx</span>
+    <span class="kw1">push</span> <span class="kw3">rcx</span>
+    <span class="kw1">push</span> <span class="kw3">rdx</span>
+    <span class="kw1">push</span> <span class="kw3">rdi</span>
+&nbsp;
+    <span class="kw1">mov</span> <span class="kw3">rbx</span><span class="sy0">,</span> <span class="kw3">rax</span>         <span class="co1">; Save LBA in RBX</span>
+&nbsp;
+    <span class="kw1">mov</span> <span class="kw3">edx</span><span class="sy0">,</span> <span class="nu0">0x01F6</span>      <span class="co1">; Port to send drive and bit 24 - 27 of LBA</span>
+    <span class="kw1">shr</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">24</span>          <span class="co1">; Get bit 24 - 27 in al</span>
+    <span class="kw1">or</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">11100000b</span>     <span class="co1">; Set bit 6 in al for LBA mode</span>
+    <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span> <span class="kw3">al</span>
+&nbsp;
+    <span class="kw1">mov</span> <span class="kw3">edx</span><span class="sy0">,</span> <span class="nu0">0x01F2</span>      <span class="co1">; Port to send number of sectors</span>
+    <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="kw3">cl</span>           <span class="co1">; Get number of sectors from CL</span>
+    <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span> <span class="kw3">al</span>
+&nbsp;
+    <span class="kw1">mov</span> <span class="kw3">edx</span><span class="sy0">,</span> <span class="nu0">0x1F3</span>       <span class="co1">; Port to send bit 0 - 7 of LBA</span>
+    <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">ebx</span>         <span class="co1">; Get LBA from EBX</span>
+    <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span> <span class="kw3">al</span>
+&nbsp;
+    <span class="kw1">mov</span> <span class="kw3">edx</span><span class="sy0">,</span> <span class="nu0">0x1F4</span>       <span class="co1">; Port to send bit 8 - 15 of LBA</span>
+    <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">ebx</span>         <span class="co1">; Get LBA from EBX</span>
+    <span class="kw1">shr</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">8</span>           <span class="co1">; Get bit 8 - 15 in AL</span>
+    <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span> <span class="kw3">al</span>
+&nbsp;
+&nbsp;
+    <span class="kw1">mov</span> <span class="kw3">edx</span><span class="sy0">,</span> <span class="nu0">0x1F5</span>       <span class="co1">; Port to send bit 16 - 23 of LBA</span>
+    <span class="kw1">mov</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="kw3">ebx</span>         <span class="co1">; Get LBA from EBX</span>
+    <span class="kw1">shr</span> <span class="kw3">eax</span><span class="sy0">,</span> <span class="nu0">16</span>          <span class="co1">; Get bit 16 - 23 in AL</span>
+    <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span> <span class="kw3">al</span>
+&nbsp;
+    <span class="kw1">mov</span> <span class="kw3">edx</span><span class="sy0">,</span> <span class="nu0">0x1F7</span>       <span class="co1">; Command port</span>
+    <span class="kw1">mov</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">0x30</span>         <span class="co1">; Write with retry.</span>
+    <span class="kw1">out</span> <span class="kw3">dx</span><span class="sy0">,</span> <span class="kw3">al</span>
+&nbsp;
+<span class="sy0">.</span>still_going<span class="sy0">:</span>  <span class="kw1">in</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="kw3">dx</span>
+    <span class="kw1">test</span> <span class="kw3">al</span><span class="sy0">,</span> <span class="nu0">8</span>           <span class="co1">; the sector buffer requires servicing.</span>
+    <span class="kw1">jz</span> <span class="sy0">.</span>still_going      <span class="co1">; until the sector buffer is ready.</span>
+&nbsp;
+    <span class="kw1">mov</span> <span class="kw3">rax</span><span class="sy0">,</span> <span class="nu0">256</span>         <span class="co1">; to read 256 words = 1 sector</span>
+    <span class="kw1">xor</span> <span class="kw3">bx</span><span class="sy0">,</span> <span class="kw3">bx</span>
+    <span class="kw1">mov</span> <span class="kw3">bl</span><span class="sy0">,</span> <span class="kw3">cl</span>           <span class="co1">; write CL sectors</span>
+    <span class="kw1">mul</span> <span class="kw3">bx</span>
+    <span class="kw1">mov</span> <span class="kw3">rcx</span><span class="sy0">,</span> <span class="kw3">rax</span>         <span class="co1">; RCX is counter for OUTSW</span>
+    <span class="kw1">mov</span> <span class="kw3">rdx</span><span class="sy0">,</span> <span class="nu0">0x1F0</span>       <span class="co1">; Data port, in and out</span>
+    <span class="kw1">mov</span> <span class="kw3">rsi</span><span class="sy0">,</span> <span class="kw3">rdi</span>
+    <span class="kw1">rep</span> <span class="kw1">outsw</span>            <span class="co1">; out</span>
+&nbsp;
+    <span class="kw1">pop</span> <span class="kw3">rdi</span>
+    <span class="kw1">pop</span> <span class="kw3">rdx</span>
+    <span class="kw1">pop</span> <span class="kw3">rcx</span>
+    <span class="kw1">pop</span> <span class="kw3">rbx</span>
+    <span class="kw1">pop</span> <span class="kw3">rax</span>
+    popfq
+    <span class="kw1">ret</span></pre></div></div>
+<h1> <span class="mw-headline" id="See_also">See also</span></h1>
+<ul><li> <a rel="nofollow" class="external text" href="http://forum.osdev.org/viewtopic.php?t=12268">Read/write disk sectors by Dex</a>
+</li><li> <a href="http://wiki.osdev.org/ATA_PIO_Mode" title="ATA PIO Mode">ATA PIO mode</a>
+</li><li> <a href="http://wiki.osdev.org/ATA" title="ATA" class="mw-redirect">ATA</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 59/1000000
+Post-expand include size: 492/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2984-0!*!0!!en!2!* and timestamp 20170818195443 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=ATA_read/write_sectors&amp;oldid=20723">http://wiki.osdev.org/index.php?title=ATA_read/write_sectors&amp;oldid=20723</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id="catlinks" class="catlinks"><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="http://wiki.osdev.org/Category:Stubs" title="Category:Stubs">Stubs</a></li><li><a href="http://wiki.osdev.org/Category:ATA" title="Category:ATA">ATA</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=ATA_read%2Fwrite_sectors" title="You are encouraged to log in; however, it is not mandatory [alt-o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li id="ca-nstab-main" class="selected"><span><a href="http://wiki.osdev.org/ATA_read/write_sectors" title="View the content page [alt-c]" accesskey="c">Page</a></span></li>
+					<li id="ca-talk"><span><a href="http://wiki.osdev.org/Talk:ATA_read/write_sectors" title="Discussion about the content page [alt-t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="http://wiki.osdev.org/ATA_read/write_sectors#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="http://wiki.osdev.org/ATA_read/write_sectors">Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=ATA_read/write_sectors&amp;action=edit" title="This page is protected.
+You can view its source [alt-e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=ATA_read/write_sectors&amp;action=history" title="Past revisions of this page [alt-h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="http://wiki.osdev.org/ATA_read/write_sectors#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.osdev.org/index.php" id="searchform">
+		<input type="hidden" name="title" value="Special:Search">
+				<input type="search" name="search" title="Search OSDev Wiki [alt-f]" accesskey="f" id="searchInput">		<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton">		<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton">			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="http://wiki.osdev.org/Main_Page" title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id="p-navigation">
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="http://wiki.osdev.org/Main_Page" title="Visit the main page [alt-z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="http://wiki.osdev.org/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="http://wiki.osdev.org/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [alt-x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id="p-about">
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="http://wiki.osdev.org/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="http://wiki.osdev.org/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="http://wiki.osdev.org/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [alt-r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id="p-tb">
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/ATA_read/write_sectors" title="A list of all wiki pages that link here [alt-j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/ATA_read/write_sectors" title="Recent changes in pages linked from this page [alt-k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [alt-q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=ATA_read/write_sectors&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=ATA_read/write_sectors&amp;oldid=20723" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 19 April 2017, at 00:42.</li>
+											<li id="footer-info-viewcount">This page has been accessed 19,278 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="http://wiki.osdev.org/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="http://wiki.osdev.org/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="http://wiki.osdev.org/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="./ATA read_write sectors - OSDev Wiki_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31"></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="./ATA read_write sectors - OSDev Wiki_files/load(5).php"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script><script type="text/javascript" src="./ATA read_write sectors - OSDev Wiki_files/load(6).php"></script>
+<script src="./ATA read_write sectors - OSDev Wiki_files/load(7).php"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.057 secs. -->
+	
+
+</body></html>

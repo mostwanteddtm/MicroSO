@@ -1,0 +1,1 @@
+..\qemu-system-x86_64.exe -L ..\ -name TACA-MAGICA -drive format=raw,file=TACA.IMA,index=0,if=floppy

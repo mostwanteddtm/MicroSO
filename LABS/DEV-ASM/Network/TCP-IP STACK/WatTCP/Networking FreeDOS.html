@@ -1,0 +1,1133 @@
+
+<!-- saved from url=(0046)http://wisdomtree.info/dos/dostcpip.htm#TCPDRV -->
+<html class=""><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <title>Networking FreeDOS</title>
+<link type="text/css" rel="stylesheet" charset="UTF-8" href="./Networking FreeDOS_files/translateelement.css"></head>
+<body>
+
+1. History of DOS networking
+<li><a href="http://wisdomtree.info/dos/dostcpip.htm#L48283">"PC centric" approach</a> Novell Netware, LAN Manager
+</li><li><a href="http://wisdomtree.info/dos/dostcpip.htm#L48323">"UNIX centric" approach</a>
+PC-IP, PC/TCP, Packet Drivers
+</li><li><a href="http://wisdomtree.info/dos/dostcpip.htm#Software">Software by universities and hobbyists</a>
+KA9Q, NCSA Telnet, CUTCP, Others
+</li><li><a href="http://wisdomtree.info/dos/dostcpip.htm#Proprietar">Proprietary software</a> Picking up the pieces
+<p>
+2. DOS networking today
+</p></li><li><a href="http://wisdomtree.info/dos/dostcpip.htm#Drivers">Drivers</a> | Protocols | Applications
+</li><li><a href="http://wisdomtree.info/dos/dostcpip.htm#Novell1">Novell "NetWare DOS" and "TCP/IP Client"</a> |
+ Microsoft "LAN Manager Client" and "MS Client 3.0" | TCP/IP applications
+<p>
+3. Practical Guide: Adding TCP/IP to DOS
+</p></li><li><a href="http://wisdomtree.info/dos/dostcpip.htm#Packet1">Packet drivers</a> | Installing a packet driver |
+ <a href="http://wisdomtree.info/dos/dostcpip.htm#drivers">ODI drivers</a> | Configuration of NET.CFG |
+ Explanation of the parameters
+</li><li><a href="http://wisdomtree.info/dos/dostcpip.htm#Installing1">Installing ODI drivers</a> |
+Alternative 1: ODIPKT | Alternative 2: PKT2ODI
+</li><li><a href="http://wisdomtree.info/dos/dostcpip.htm#NDIS">NDIS drivers</a> | Configuration of NDIS drivers |
+ Explanation of the parameters
+</li><li><a href="http://wisdomtree.info/dos/dostcpip.htm#Kernel">TCP/IP Kernel (Stack)</a> |
+ WatTCP / Watt-32 | Usage
+</li><li><a href="http://wisdomtree.info/dos/dostcpip.htm#TCPDRV">TCPDRV / NTCPDRV</a> | Usage | Other TCP/IP Kernels
+
+
+Download also as <a href="http://lazybrowndog.net/freedos/dosnet.pdf">PDF</a>.
+
+<h5>Introduction</h5>
+
+<a href="http://www.ulrich-hansen.de/"></a>
+
+<p>This document describes how to network a computer using DOS.
+System used for testing is <a href="http://www.freedos.org/">FreeDOS</a>. Most
+things are supposed to work with other versions of DOS as well.
+How to add TCP/IP capabilities to a DOS machine is a detailed guide through the installation and configuration of
+drivers and other required software.
+
+</p><h5><a name="system1">System</a></h5>
+
+All solutions described in this document were tested on a Compaq Contura
+Aero 486SX33 laptop with 20 MB RAM.
+
+<p>Tried the following <b>network interface cards (NIC)</b>, all PCMCIA:
+
+  </p></li><li>3Com Megahertz 3C574 10/100 LAN PC Card,
+  </li><li>3Com EtherLink III 3C589 10Mbit Card
+  </li><li>D-Link DFE-670TXD Fast Ethernet PC Card.
+
+
+<br>Cards are configured by SystemSofts CardSoft Software, which is
+available for the specified laptop as Compaq softpack <a href="ftp://ftp.compaq.com/pub/softpaq/sp1001-1500/SP1045.EXE"><code>SP1045.EXE</code></a>.
+It also can be downloaded from driverguide as "SystemSoft Version 3.1, <a href="http://www2.driverguide.com/uploads/uploads9/26188.html"><code>CARDSOFT.ZIP</code></a>".
+
+<p><b>Network</b> is 100Base-T Ethernet LAN connected to the internet through a DSL router.
+FreeDOS version is 1.0.
+
+</p><p>Parts of document inspired by Michael Bernardi's <a href="http://fd-doc.sourceforge.net/wiki/index.php?n=FdDocEn.DOSNetworking">"DOS
+Networking HOWTO"</a>. Links there and <a href="http://www.dendarii.co.uk/FAQs/">
+FAQs</a> and <a href="http://www.dendarii.co.uk/FAQs/dos-apps.html">applications</a> were of
+great value.
+
+Screenshot of "LAN Manager 2.1" in chapter <a href="http://lazybrowndog.net/freedos/#Manager">LAN Manager</a> was taken by
+Michal Necasek for his <a href="http://pages.prodigy.net/michaln/history">"History of OS/2"</a> with
+permission to use this screenshot.
+
+Photo of software package "Workgroup Add-On for MS-DOS" in the same
+chapter by Dirk Makowski for his <a href="http://www.winhistory.de/">"Winhistory"</a>, a huge collection of items
+and screenshots of historic software.
+
+</p><p>Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.2 or any
+later version published by the Free Software Foundation; with no Invariant
+Sections, no Front-Cover Texts, and no Back-Cover Texts.
+
+</p><h3>1. History of DOS networking</h3>
+
+More about the history of TCP/IP networking with DOS in
+Steven Baker's "<a href="http://www.ece.ubc.ca/~gillies/9802net.html">Net Worth - Desktop
+TCP/IP At Middle Age</a>".
+This left a time frame for others. Two approaches for DOS
+networking, <a href="http://www.sju.edu/~jhodgson/netw/kw_hwk4.html">described
+</a> as "PC
+centric" and "UNIX centric".
+<p>
+  </p></li><li>"PC centric" is a way to network a group of PCs
+  to share files and resources (f.i. printers).
+  </li><li>"UNIX centric" is to develop DOS versions of
+    standard UNIX network programs and use them to access or provide
+    UNIX-like services in LAN or internet (which, in the end, came down to
+    file and resource sharing as well).
+
+<h3><a name="L48283">"PC centric" approach</a></h3>
+
+<h5>Novell Netware</h5>
+
+<p>In 1985 Novell, a former hardware manufacture of CP/M systems, released
+its product "NetWare 86" (v 1.5) for the PC. A version for the AT followed
+with "NetWare 286" (v 2.0) in 1986.
+
+Novell networked computers according to the client/server model: Clients
+running MS DOS and some memory resident (TSR) Novell software were able to
+"log in" to a server that ran "Novell NetWare Server". Once connected they
+could "map" a volume on the server to a driveletter in DOS and then use it
+like a local drive. NetWare also enabled the clients to use printers
+connected to the server.
+
+Client and server communicated over Novell's "Internet Packet Exchange /
+Sequenced Packet Exchange" (IPX/SPX) protocol. The driver architecture was
+called "Open Datalink Interface" (ODI).
+
+NetWare established a dominant position in the market until the middle of
+the nineties.
+
+</p><h5>LAN Manager</h5>
+
+Microsoft tried to break Novell's dominance by its own networking software
+for DOS. "Microsoft LAN Manager" 1.0 was released in 1987.
+
+It's networking software came with an own network driver model
+called "Network Driver Interface Specification" (NDIS). Just like Novell
+NetWare Microsoft's LAN Manager implemented a <b>client/server</b>
+architecture:
+
+</li><li>Server ran OS/2 as operating system and LAN Manager as server
+    software.
+</li><li>Client ran DOS, OS/2 or Macintosh as OS and used a client software
+    like "LAN Manager client" or "MS Client" for the connection to the
+  server.
+
+
+<p>With the "Server Message Block" (SMB) protocol merged into LAN Manager
+since 1991, Microsoft networks became able to do <b>peer-to-peer
+networking</b> as well. This was used by Windows for Workgroups 3.11,
+released in 1993. The mechanism is known to Windows users as "Windows share",
+"network neighbourhood" or "Workgroup".
+
+<a href="http://www.winhistory.de/more/sammlung.htm"><img alt="Workgroup Add-On for MS-DOS" src="./Networking FreeDOS_files/workgroup-addon.png" style="margin-left: -220px;" align="left" border="0" hspace="10" vspace="0"></a>
+
+</p><p>In October 1993 Microsoft released a tool called "Microsoft Workgroup
+Add-On for DOS" which allowed to have the same peer-to-peer networking
+possibilities in DOS. While the tool itself is not sold any longer, most of
+its functionally is still available by usage of "MS Client" and a special
+update called "<code>WG1049</code>" (see <a href="http://wisdomtree.info/dos/dostcpip.htm#Microsoft">MS Client
+section</a>).
+
+</p><h4><a name="L48323">"UNIX centric" approach</a></h4>
+
+<h5>PC-IP</h5>
+A small TCP/IP implementation that was
+linked into a few applications like finger, whois and netwatch. PC-IP was
+released with its source into the public domain. Drew Perkins from Carnegie
+Mellon University (CMU) and Dan Lanciani from Harvard University improved the
+code further. PC-IP still can be found in <a href="http://members.aol.com/Karima4483/pcip/">the</a> <a href="ftp://ftp.kuzbass.ru/pub/networks/tcpip/tool/pcip.zip">web.</a>
+
+<h5>PC/TCP</h5>
+The success of PC-IP inspired Romkey and friends to take the CMU version
+of the code and develop it into a proprietary product: "PC/TCP", which they
+sold through their company <a href="http://en.wikipedia.org/wiki/FTP_Software">"FTP Software, Inc."</a>,
+founded in 1986. The name was chosen after the popular 'File Transfer
+Protocol': PC/TCP included one of the first applications for FTP services on
+the PC.
+
+<h5>Packet Drivers</h5>
+
+Along with PC/TCP, FTP Software Inc. developed the "<a href="http://www.crynwr.com/packet_driver.html">Packet Driver
+Specification</a>", the first multiprotocol driver specification for PC
+network interface cards. On 12 Dec 1988 this specification was released as an
+open standard, for anyone to implement.
+Packet drivers proved useful to hardware vendors and software developers
+alike. Most of the public-domain or shareware TCP/IP applications have been
+written to interface with packet drivers only.
+
+<p>Many packet drivers were written or managed by Russ Nelson at Clarkson
+University, who became known as the "Packet Driver King" - a story, he <a href="http://russnelson.com/bio.html">describes</a> at his website. Nelson
+still distributes these drivers as free software through the site of his
+company "<a href="http://www.crynwr.com/">Crynwr</a>" (which was named after
+the welsh word for "Quaker", his religious belief).
+
+</p><p>One cause for the success of FTP Software's PC/TCP was this open packet
+driver interface, which made it easy to develop drivers and applications.
+When other driver interfaces like ODI and NDIS appeared on the scene, PC/TCP
+included converters: With a tool called <code>ODIPKT.COM</code> ODI drivers
+became usable as packet drivers, a tool called <code>DIS_PKT.GUP</code> did
+the same for NDIS drivers.
+
+</p><p>PC/TCP also came with an external TCP/IP kernel called
+<code>ETHDRV.EXE</code> that allowed other programmers to call network
+functions within their applications without programming them themselves. All
+these features and an application suite that allowed DOS computers to access
+or provide TCP/IP services such as news, e-mail, ftp, telnet or network
+storage (PC/TCP even included a NFS client called InterDrive) made FTP
+Software Inc. market leader for DOS TCP/IP software.
+
+</p><h4><a name="Software">Software by universities and hobbyists</a></h4><a name="Software">
+
+<p>PC-IP and its successor PC/TCP may have been the first or most successful
+TCP/IP kernels for DOS but they were not the only ones.
+
+</p><h5>KA9Q</h5>
+Second after the early PC-IP kernel was the "</a><a href="http://www.ka9q.net/code/ka9qnos/">"KA9Q Network Operating System"
+(NOS)</a>" by Phil Karn in 1985. Karn, an engineer from Baltimore, Maryland
+had created it for CP/M two years before and then ported it to DOS. It also
+was one of the first TCP/IP applications for DOS that used FTP Software's
+packet driver specification.
+KA9Q simultaneously acted as an Internet client, a server and an IP packet
+router. The program was specialized for amateur packet radio, but also could
+be used f.i. as ftp- or webserver. KA9Q attracted many contributors. As Karn
+<a href="http://www.ka9q.net/code/ka9qnos/">describes</a>: "It was the Linux
+of its day".
+
+<p>In 2002 KA9Q became free software (GNU GPL). Its descendants, <a href="http://www.langelaar.net/projects/jnos2/">JNOS</a> and <a href="http://eznos.knevel.info/index.php">EZ-NOS</a> (see also <a href="http://www.hippy.freeserve.co.uk/eznos.htm">here</a> and <a href="http://www.dossolutions.pwp.blueyonder.co.uk/eznos.htm">here</a>) are
+still actively maintained.
+
+</p><h5>NCSA Telnet</h5>
+Based on the Packet Driver Specification several universities wrote TCP/IP
+applications and utilities for DOS PCs. In 1986 the "National Center for
+Supercomputing Applications" (NCSA) at the University of lllinois released
+"<a href="ftp://ftp.uu.net/.vol/1/applic/NCSA_Telnet/PC/tel2308b.zip">Telnet</a>"
+- a client for UNIX telnet services which could act as FTP and rcp server as
+well. It was accompanied by TCP/IP tools like finger, whois and lpr. NCSA
+Telnet came with its own TCP/IP kernel, which was already built-in into the
+applications. The software was developed until 1995 (v2.308) and released
+with <a href="ftp://ftp.uu.net/.vol/1/applic/NCSA_Telnet/PC/tel2308s.zip">source</a>
+into the public domain.
+
+<h5>CUTCP</h5>
+Clarkson University in Potsdam, New York took version 2.2 of NCSA
+Telnet and modified it. They called their version CUTE or CUTCP. Eventually
+Rutgers University, New Jersey took over the maintenance and published the
+latest <a href="ftp://ftp.cc.umanitoba.ca/software/pc_network/cutcp-b.zip">release</a>
+in July 1993. In difference to NCSA Telnet, CUTCP supported the IBM-3270
+emulation and was technically improved. It also became public domain.
+
+<h5>Others</h5>
+<b>Minuet Version 1.0 Beta 18A</b>
+<br>Other developments at universities that should be mentioned are "<a href="http://www.columbia.edu/kermit/">Kermit</a>", a terminal emulation for
+DOS written at the Columbia University, New York and the University of
+Minnesota's "Minnesota InterNet Users Essential Tool" (<a href="http://www.fdisk.com/doslynx/minuet/">"Minuet"</a>), a packet driver
+based suite of TCP/IP applications. Minuet provided a mouse driven graphical
+interface that integrated client applications as E-mail, Gopher, telnet,
+Usenet News, a web browser and FTP.
+
+<p>Minuet is a good example for the unfortunate design of DOS software
+licenses in this era. In difference to the GNU General Public License (GPL)
+that became a standard in the GNU/Linux world, licenses for DOS software
+written at Universities and by hobbyists were mostly homebrewed. The Minuet
+license f. i. allowed free usage for the University of Minnesota faculty,
+staff and students. All others were expected to pay 50$ after 15 days
+evaluation. Distribution was allowed for non-commercial reasons only.
+</p><ul>
+  <li>Free versions of packet driver converters for today's more common ODI
+    and NDIS drivers: <code>ODIPKT.COM</code>&nbsp;written by Dan Lanciani
+    (Harvard University) allows to use ODI drivers as packet drivers,
+    <code>DIS_PKT9.DOS</code> by Prof. Joe R. Doupnik (Utah State University)
+    and Dan Lanciani does the same with NDIS drivers.
+  </li><li>"WatTCP", a popular free TCP/IP kernel library written 1990 - 1992 by
+    Erick Engelke from Canadian Waterloo University and its successor Watt-32
+    by Gisle Vanem (Norway). These libraries enable programmers to include
+    TCP/IP functions into their applications without having to reinvent the
+    wheel.
+  </li><li>"Trumpet TCP driver (NTCPDRV)" from 1992, a free external TCP/IP kernel
+    created by Australian programmer Peter Tattam (also well known for his
+    Trumpet Winsock).
+</li></ul>
+<h4><a name="Proprietar">Proprietary software</a></h4><a name="Proprietar">
+
+Beneath FTP Software Inc.'s PC/TCP a lot of other commercial applications
+could be found on the market for DOS TCP/IP networking software ten or
+fifteen years ago.
+Up to </a><a href="ftp://ftp.cac.psu.edu/pub/dos/info/tcpip.packages">30
+TCP/IP packages</a> for DOS were available in the middle of the nineties,
+including IBM "TCP/IP for DOS", NetManage "Chameleon", Sun "PC-NFS", Novell
+"LAN WorkPlace", Frontier Technologies "SuperTCP" or Artisoft "Lantastic".
+A comparison of their features can be found <a href="http://img.cmpnet.com/nc/820/graphics/tcpip.pdf">here</a>. Read also
+the corresponding <a href="http://www.networkcomputing.com/820/820buyers.html">article</a> in the
+"Network Computing" magazine.
+
+<h5>Picking up the pieces</h5>
+Some Novell and Microsoft tools can still be legally downloaded and
+used. And TCP/IP solutions by universities and hobbyists that were released
+into the public domain, as shareware and even as postcardware, are still
+around.
+
+<p>A few projects are still alive: The graphical
+DOS browser Arachne is actively developed again by a group of programmers
+after it was released under the GNU GPL. Also ssh2dos, Watt-32 and the KA9Q
+successors EZ-NOS2 and JNOS2 are still maintained and developed. Even new DOS
+TCP/IP software has been written recently, although there seems to be some
+reluctance to release the source and give these creations a future as free
+software projects.
+
+</p><h3>2. DOS networking today</h3>
+Here we learn about network drivers, protocols
+and applications for a DOS PC.
+For more information try Eugene Blanchard's "<a href="http://www.techbooksforfree.com/intro_to_data_com/">Introduction to
+Data Communications</a>" More recent version
+<a href="http://www.cadvision.com/blanchas/Intro2dcRev2/">here</a>).
+
+<h5><a name="Drivers">Drivers</a></h5>
+Ethernet is today's dominant network hardware technology.
+For such network adapters three types of driver can be used.
+  </li><li><b>Packet drivers</b>, invented by FTP Software Inc.
+  </li><li>Open Datalink Interface (<b>ODI</b>) drivers, developed by Novell and
+    Apple
+  </li><li>Network Driver Interface Specification (<b>NDIS</b>) drivers, developed
+    by Microsoft and 3Com.
+
+<p>All are <i>multiprotocol</i> network drivers, meaning they
+are able to support multiple protocols over the same card. Earlier drivers
+did support only a single protocol. Multiprotocol drivers communicate
+directly with the network interface card and provide a published interface
+specification, to which applications can be written.
+
+Good general introduction <a href="http://www.eits.uga.edu/~ucns/lans/docs/netdrive.html">"Implementing
+Multi-Protocol Network Drivers in a DOS Environment"</a> by the University of
+Georgia, Athens, Georgia (U.S.).
+
+</p><h5>Protocols</h5>
+The following protocols are supported by these three drivers:
+<ul>
+  <li>Transmission Control Protocol / Internet Protocol (<b>TCP/IP</b>) used
+by the internet,
+  </li><li>Internet Packet Exchange / Sequenced Packet Exchange (<b>IPX/SPX</b>)
+protocols, used by Novell NetWare,
+</li><li>Network Basic Input Output System (NetBIOS) Extended User Interface
+<b>(NetBEUI</b>) protocol used by OS/2, Windows 9x, ME and 2000.
+</li></ul>
+
+<p>TCP/IP has become the default protocol for Local Area Networks (LAN).
+<br>NetBEUI was the default protocol for LANs in Microsoft systems until
+Windows 2000. Replaced by NetBIOS over TCP/IP (NBT) and then by
+TCP/IP. The application level network protocol SMB for instance <a href="http://support.microsoft.com/default.aspx?scid=kb;en-us;Q204279">can
+run</a> directly atop of TCP since Windows XP.
+<br>Novell's IPX was used in NetWare, which was the default
+networking solution for personal computers running DOS or Windows 3.x. Since
+1998 NetWare is able to run on TCP/IP, more recent versions use it per
+default.
+
+</p><h5>Applications</h5>
+Three ways of networking used with DOS.
+<ul>
+<li>ODI driver based <strong>Novell NetWare</strong>
+programs around for accessing a NetWare network and using TCP/IP services.
+  </li><li>NDIS driver based <strong>Microsoft "LAN Manager Client" or "MS Client
+    3.0"</strong> are supposed to integrate DOS machines into a Windows / SMB
+    workgroup.
+  </li><li>Packet driver based "UNIX-like" <strong>TCP/IP applications</strong>
+ can be used to access or provide network services.
+</li></ul>
+
+<p>While the above categories should cover most programs, there are a few
+exceptions. One of them is "<a href="http://www.invisiblesoft.com/invlan/index.shtml">Invisible LAN</a>", a
+NetWare-like DOS application that even comes with an own protocol called
+"TransBIOS".
+Another special type of applications are network bootdisks, which are able
+to work with a broad range of hardware and use multiple protocols. Bootdisks
+are mostly used for backup, restore and repair. They can be extremely
+helpful.
+<br>Examples are:
+<a href="http://www.nu2.nu/bootdisk/network/">Bart's Network Boot Disk</a> |
+<a href="http://drivesnapshot.de/en/index.htm">Drivesnapshot</a> |
+<a href="http://www.netbootdisk.com/">Netbootdisk</a>
+
+</p><h4><a name="Novell1">Novell "NetWare DOS" and "TCP/IP Client"</a></h4>
+
+Novell provides software for free:
+<ul>
+<li><a href="http://www.novell.com/coolsolutions/tools/13555.html">NetWare ODI
+    Client 16 Driver for MS-DOS</a> (1996) and <a href="http://www.novell.com/coolsolutions/tools/downloads/dw271e.zip">NetWare
+    Client 32-Driver</a> (1998) connect to a NetWare Server.
+  </li><li>Novell's TCP/IP kernel "<code><a href="http://bbs.actapricot.org/files/area37/tcp16.exe">TCP16.EXE</a></code>"
+    (1996) can still be used to run TCP/IP applications directly over ODI
+    (see chapter "<a href="http://wisdomtree.info/dos/dostcpip.htm#otherkernel">Other TCP/IP Kernel</a>").
+</li></ul>
+
+<p>On the sites above Novell includes a warning that this software is neither
+maintained nor supported any longer.
+Useful information about Novell's DOS clients can still be found at the
+newsgroup "<a href="http://groups.google.it/group/novell.support.os.client.dos-win3x">novell.support.os.client.dos-win3x</a>"
+which was active until 2004.
+More recent information and useful links about using NetWare with DOS can
+be found at "<a href="http://www.dossolutions.pwp.blueyonder.co.uk/network.htm#nware">DOS
+Solutions</a>".
+
+</p><h4>Microsoft "LAN Manager Client" and "MS Client 3.0"</h4>
+
+Download from Microsoft's ftp-site and are
+free for "internal use", but not for distribution.
+<ul>
+  <li>MS LAN Manager Client (1998) at: <a href="ftp://ftp.microsoft.com/bussys/Clients/LANMAN/">ftp://ftp.microsoft.com/bussys/Clients/LANMAN/</a>
+  </li><li>MS Client 3.0 (1995) at: <a href="ftp://ftp.microsoft.com/bussys/Clients/MSCLIENT/">ftp://ftp.microsoft.com/bussys/Clients/MSCLIENT/</a>
+</li></ul>
+
+Excellent <a href="http://www.jacco2.dds.nl/samba/dos.html">review,
+    installation report and comparison</a> of both Microsoft products
+ by Dutch programmer Jacco de Leeuw.
+Ken from British website "DOS Solutions" gives a detailed <a href="http://www.dossolutions.pwp.blueyonder.co.uk/network.htm#tcp">overview</a>
+    over many resources related to MS Client .
+U.S. programmer Jonathan Young has created a nice looking MS Client <a href="http://www.ocf.berkeley.edu/~joyoung/msnetclnt/Page1.shtml">installation
+    walkthrough</a> with many screenshots. James Hatridge wrote a nice <a href="http://www.linuxjournal.com/article/5837">article</a> about MS
+    Client for Linux Journal in 2002.
+Installation guides in German language have been written by <a href="http://medien.bildung.hessen.de/support/techhilf/msclient/#cl10">Volker
+    Rüddigkeit</a>, by <a href="http://www.comp-o-ass.de/dokumente/ms-dos-client.pdf">Gerhard
+    Zeiser</a>, by <a href="http://www.gerd-roethig.de/dosnet.html">Gerd
+    Röthig</a>, by <a href="http://home.arcor.de/michael-vogl/tcpip-fd.htm">Michael Vogl</a>
+    and by <a href="http://de.wikibooks.org/wiki/FreeDOS-Kompendium:_Konfiguration:_Netzwerk">Stefan
+    Mayrhofer</a>.
+
+<p>Popularity of the thirteen year old MS Client 3.0 may be caused by
+the possibility (but not officially supported) to use an update
+called "<code><a href="ftp://ftp.microsoft.com/softlib/mslfiles/wg1049.exe">WG1049.EXE</a></code>"
+to add server functionality to the client. This adds features
+comparable to those of the "Workgroup Add-On for DOS", no longer
+sold by Microsoft.
+
+</p><p>This "hack" seems to give people hope to be able to integrate their DOS
+machine into a modern Windows XP or GNU/Linux SMB Workgroup. There may be
+limits, though.
+
+</p><p>Steven Baker critically <a href="http://www.ece.ubc.ca/~gillies/9802net.html">remarks</a>, that, while
+the core TCP/IP protocol remained stable over the years, Microsoft's SMB
+protocols changed from upgrade to upgrade and exist "in a dozen different
+dialects". So compatibility is an issue. Other problems can be caused by the
+authentication methods that are used with Windows or Samba.
+Some files from the "MS Client" package are essential for use of TCP/IP applications over
+today's common NDIS drivers.
+
+</p><h4>TCP/IP applications</h4>
+
+DOS TCP/IP applications include classic networking tools as ping, lpr or
+finger as well as SSH and NFS clients, FTP servers, webservers, mail and news
+software or web browsers. There is even a complete peer-to-peer networking
+solution called <a href="http://ftp.carnet.hr/pub/pc/networking/NeOS/README">"Network Enhanced
+Operating System"</a> (NeOS) which was developed 1995-2000 as <a href="http://www.eureka.be/inaction/AcShowProject.do;jsessionid=7f00000122b839cfc1d1a5c44d359913f31b02769f2f?id=1317">part</a>
+of European Union's "EUREKA" project. Now it is postcardware.
+
+<p>Michael Bernardi has collected a <a href="http://www.dendarii.co.uk/FAQs/dos-apps.html">list of more than hundred
+TCP/IP applications</a> available for DOS. There also other lists <a href="ftp://ftp.technion.ac.il/pub/supported/pc/comm/drivers/pkt_drv/doc/software.doc">here</a>,
+<a href="ftp://ftp.cac.psu.edu/pub/dos/info/tcpip.packages">here</a> and <a href="http://www.fdisk.com/doslynx/">here</a>, which may contain additional
+information.
+A recent and constantly updated resource for DOS networking applications
+is the British "<a href="http://www.dossolutions.pwp.blueyonder.co.uk/network.htm">DOS
+Solutions</a>". Links to other DOS resources are collected in <a href="http://www.freedos.org/freedos/news/technote/157.html">FreeDOS technote
+157</a>. I also found the nostalgia site <a href="ftp://ftp.oldskool.org/pub/tvdog/internet/">oldskool.org</a> pretty
+helpful.
+
+Information can still retrieved from usenet newsgroup <a href="http://groups.google.com/group/comp.protocols.tcp-ip.ibmpc">comp.protocols.tcp-ip.ibmpc</a>,
+especially from their FAQ, which is posted in parts <a href="http://www.uni-giessen.de/faq/archiv/ibmpc-tcp-ip-faq.part1-3/msg00000.html">one</a>,
+<a href="http://www.uni-giessen.de/faq/archiv/ibmpc-tcp-ip-faq.part1-3/msg00001.html">two</a>
+and <a href="http://www.uni-giessen.de/faq/archiv/ibmpc-tcp-ip-faq.part1-3/msg00002.html">three</a>.
+
+</p><p>"<strong>Arachne</strong>" is a graphical web browser for DOS. It was
+created in 1996 by Czech programmer Michael Polak and his company <a href="http://www.arachne.cz/">xChaos / Arachne Labs</a>. In 2002 Michael
+Polak <a href="http://home.arachne.cz/archive/v01.n1917">decided</a> to make
+Arachne free software. The new license is the GNU GPL.
+It supports various picture formats. Tables and frames are shown
+correctly, it renders HTML 4 and CSS 1.0 and the latest version (1.90J3) even
+understands UTF-8. Other Arachne services include FTP, NNTP, IRC-Chat, RSS,
+POP3 and SMTP. Look here for a complete <a href="http://www.cisnet.com/glennmcc/ara-gpl/history.txt">history</a> of the
+software.
+Arachne is still actively developed - programmers are invited to join a <a href="http://tech.groups.yahoo.com/group/ArachneDevelopment/">mailing
+list</a>. The latest version can be found at the site of <a href="http://www.cisnet.com/glennmcc/arachne/">Glenn McCorkle</a>. Read more
+about it at <a href="http://en.wikipedia.org/wiki/Arachne_%28web_browser%29">Wikipedia.</a>
+
+</p><p>"<strong>EZ-NOS 2</strong>" is one of the descendants of Phil Karn's <a href="http://wisdomtree.info/dos/dostcpip.htm#KA9Q">KA9Q</a>. It is currently developed by <a href="http://www.dossolutions.pwp.blueyonder.co.uk/eznos.htm">DOS
+Solutions</a>. The software suite includes a webserver, a FTP-server and a
+bootp server as well as an email client.
+As all KA9Q descendants EZ-NOS 2 is licensed with the GNU GPL. The source
+can be downloaded as <a href="http://www.dossolutions.pwp.blueyonder.co.uk/progs/eznos/ez_src.zip">ez_src.zip</a>.
+
+</p><p>"<strong>SSH2DOS</strong>" is a SSH, SFTP and SCP client for DOS. These
+services more and more replace the classic telnet- and FTP-services, which
+are regarded as less secure. (The screenshot shows a closed SSH session to my
+Debian server.)
+SSH2DOS was created by Hungarian developer Nagy Daniel in 2000 and can be
+downloaded at <a href="http://sourceforge.net/projects/sshdos">Sourceforge.net</a>. It is
+released under the GNU GPL. It uses code of the PuTTY SSH client as well as
+the WatTCP kernel library.
+
+</p><h3>3. Practical Guide: Adding TCP/IP to DOS</h3>
+
+The majority of TCP/IP applications for DOS uses the packet driver
+interface. So to be able to run them, we need to install the appropriate
+drivers first.
+To install a generic packet driver is the simplest way. But it isn't
+always possible, as modern network cards often only come with ODI- and
+NDIS-drivers. Anyway: ODI- or NDIS-drivers can also be used as packet drivers
+through special converters ("shims").
+
+<h4><a name="Packet1">Packet drivers</a></h4>
+Packet drivers work as an interface between the hardware (the network
+interface card) and the TCP/IP kernel (which is also called "protocol
+stack"). One sort of TCP/IP kernels work as an external program that can be
+called and used by various network applications. Other TCP/IP kernels are
+already built into network applications, a web browser for instance or a
+ftp-client. We will learn more about these kernels a <a href="http://wisdomtree.info/dos/dostcpip.htm#Kernel">bit
+further</a> in this document.
+
+<p>As already mentioned, packet drivers are multiprotocol drivers so TCP/IP
+isn't the only kernel that can work atop of it. As you can see in the figure
+above, it is also possible to run Novell NetWare over of a packet driver:
+Specialized drivers like <code>IPXPD.COM</code> or <code>PDIPX.COM</code>
+support IPX over the packet driver interface. The NetBEUI protocol can't be
+used on top of a packet driver though, as the packet driver interface is too
+different from NDIS.
+
+</p><p>The first place to look for a packet driver should be the installation
+medium that came with your card. Packet drivers often have the letters
+"<code>PD</code>" in their names, so the packet driver of a 3com 3C589
+PC-Card is called "<code>3C589PD.COM</code>" and the driver of the D-Link
+DFE-670TXD PC-Card is called "<code>DFE670PD.COM</code>". Look for a
+directory "<code>PKTDRV</code>" on the CD or floppy that came with your
+card.
+
+</p><p>For ISA and PCI network cards a packet driver may be found at Russell Nelson's <a href="http://www.crynwr.com/">Crynwr</a> project - a resource of public
+domain packet drivers. PCMCIA drivers seem to be rare there, though.
+
+</p><p>Georg Potthast provides a <a href="http://www.georgpotthast.de/sioux/packet.htm">collection</a> of PCI
+card packet drivers and a tool called <a href="http://www.georgpotthast.de/sioux/pktdrv/nicscan.zip"><code>NICSCAN.EXE</code></a>
+to determine the chipset of PCI network cards. He found that
+packet drivers are often the same for many models by the same
+manufacturer; recommends finding a packet driver by chipset.
+
+</p><h4>Installing a packet driver</h4>
+To install a packet driver, add a line to
+<code>AUTOEXEC.BAT</code> (example for 3c589 PCMCIA card):
+<pre>LH 3C589PD.COM 0x60 5 0x300</pre>
+
+In the example above the driver is loaded into high memory by using the
+command "<code>LH</code>". The first option ("<code>0x60</code>") sets the
+software interrupt (vector) used by the driver. The most frequently used
+packet driver software interrupt number is 0x60. The second option
+("<code>5</code>") sets the IRQ, the third option ("<code>0x300</code>") sets
+the I/O port. Some drivers only need the vector and find the other values by
+themselves. Most packet drivers can be unloaded after use with the option
+"<code>-u</code>".
+
+<p>That's all. After successfully installing a packet driver, you can skip
+the next two steps (ODI / NDIS drivers) and proceed with the TCP/IP
+kernel.
+
+</p><h4><a name="drivers">ODI drivers</a></h4>
+
+"Open Datalink Interface" (ODI) drivers were originally needed for Novell
+NetWare. But that doesn't mean they can not be used for packet-driver-based
+TCP/IP applications. In fact, they were used for this since they were
+invented.
+An ODI driver is a good choice, if you cannot get a packet driver.
+Look for a directory called "<code>netware</code>",
+"<code>nwclient</code>", "<code>ODI</code>" or "<code>VLM</code>" on the
+installation floppy or CD-ROM. The drivers are executables,
+their names look like "<code>3C574.COM</code>" or
+"<code>DFE670.COM</code>".
+
+<p>In the language of the <a href="http://developer.novell.com/ndk/doc/lancomp/dos_psta/dos_pstack.pdf">ODI
+specification</a> these drivers of the network card are called <b>"Multiple
+Link Interface Driver" (MLID)</b>.
+The MLID communicates directly with the
+hardware of the network interface card. The MLID receives packets for
+different protocol stacks (kernels) in the system and passes these packets to
+a second piece of software, the <b>"Link Support Layer" (LSL)</b>. The LSL
+then determines which protocol stack is to receive the packet. Both, MLID and
+LSL form the ODI architecture.
+
+</p><p>Need an additional file to get ODI working: The LSL, which is a file
+called "<code>LSL.COM</code>". This file is part of the "DOS NetWare Client",
+which can be <a href="http://www.novell.com/coolsolutions/tools/downloads/dw271e.zip">downloaded</a>
+at Novell. Novell's <a href="http://www.novell.com/coolsolutions/tools/13555.html">download site</a>
+explicitly remarks "LICENSE: FREE" for it. After download and extraction, the
+file "<code>LSL.COM</code>" can be found in the folder
+"<code>NIOS</code>".
+To use ODI with packet driver based TCP/IP applications, need to download
+another software, a <b>"Packet Driver to ODI
+Converter"</b>. Converters are also called "wrappers" or a "shim". We have
+three options.
+
+</p><ul>
+  <li><code>ODIPKT.COM</code> v3.1 by Dan Lanciani (<a href="http://www.danlan.com/">danlan.com</a>) at Harvard
+    University. The software is public domain; its license allows free
+    redistribution of binary and source and the modification of the source
+    (assembler).
+  </li><li><code>PKT2ODI.EXE</code> by Caldera. File is part of DR
+    "WebSpyder", a graphical DOS browser that Caldera released in
+    1998. WebSpyder was licensed from xChaos/Arachne.
+    Downloaded <a href="http://uk.evolt.m.flirble.org/dr-webspyder/2.0/">here</a>. It's
+    license allows it to be evaluated and freely redistributed for
+    non-commercial purposes.
+  </li><li>If already running full NetWare, can use
+    <code>IPXPKT.COM</code> to run a packetdriver over <code>IPX.COM</code>.
+    <code>IPXPKT.COM</code> is free software by Crynwr and is a part of their
+    packet driver collection <a href="http://www.crynwr.com/drivers/pktd11.zip"><code>PKTD11.ZIP</code></a>.
+    This is a special case and will not be further investigated in this
+    document.
+</li></ul>
+
+<p>With the MLID, the LSL and the converter we have most of the files needed.
+The only one missing is the configuration file "<code>NET.CFG</code>". An
+example file with settings supposed for your card may be found on the CD or
+floppy that came with it and should be located in the same directory as the
+ODI driver.
+
+</p><h4>Configuration of NET.CFG</h4>
+
+Edit main configuration file <code>NET.CFG</code>. If it
+doesn't exist, create it. Choose a directory - default locations
+of <code>NET.CFG</code> seem to be <code>C:\NWCLIENT</code> or
+<code>C:\NET</code>. The location should be in same directory,
+where <code>LSL.COM</code> and driver is found.
+An <a href="http://lazybrowndog.net/freedos/net.cfg_example.txt">example <code>NET.CFG</code></a> which
+came with the 3Com 3C574 PC Card shows a lot of configuration settings, that
+are needed for Novell NetWare and other software. For using packet driver
+based TCP/IP applications the following four lines in <code>NET.CFG</code>
+are enough:
+<pre>--- NET.CFG ---
+Link Support
+  buffers 8 1600
+
+Link Driver 3C574
+ Frame Ethernet_II</pre>
+
+<h5>Explanation of the parameters</h5>
+
+Line "<code>Link Support</code>" configures the LSL. Options are:
+"<code>buffers</code>", "<code>max boards</code>", "<code>max stacks</code>"
+and "<code>mempool</code>". We only need to set: buffers 8 1600
+
+<p>Determines number and size of receive buffers of the LSL.
+Default communication number for TCP/IP is 8. Author of ODIPKT, Dan
+Lanciani <a href="http://groups.google.de/group/comp.protocols.tcp-ip/msg/b8ba79ab39cacc4f">recommends</a>
+to use a buffer size of 1600 bytes for ODIPKT.
+</p><p>Link Driver 3C574 configures the MLID (driver of network card). First,
+ the name of driver is specified.  Change to the name of your NIC.
+Configure the "<code>frame</code>" or "<code>envelope type</code>"
+(both declarations work and mean the same thing) used by this driver:
+</p><pre>Frame Ethernet_II</pre>
+
+It is possible to define more than one frame type here: We already heard
+that ODI is a multiprotocol driver, so the MLID is able to use more than one
+frame and protocol with the same hardware network board. For this purpose it
+defines <i>logical boards</i> for each defined frame. Possible frames are for
+instance "<code>ETHERNET_II</code>" (IP protocol),
+"<code>ETHERNET_802.2</code>" or "<code>ETHERNET_802.3</code>" (both IPX/SPX
+protocol).
+
+<p>For the packet driver converter, that we want to start later, it is
+mandatory to define at least the Ethernet II frame here. You also have to
+inform ODIPKT in a command line parameter to use the board with the
+<code>ETHERNET_II</code> frame (see below).
+
+</p><p>Full documentation of parameters in <code>NET.CFG</code> see
+<a href="http://www.docs.hp.com/en/J2771-90016/index.html">"NetWare Client
+for DOS and MS Windows Technical Reference"</a>.
+
+</p><h4><a name="Installing1">Installing ODI drivers</a></h4><a name="Installing1">
+
+Once configured <code>NET.CFG</code> start ODI drivers in
+<code>AUTOEXEC.BAT</code> at boot. The first thing to start is Link Support Layer:<br>
+LH C:\NETWORK\NWCLIENT\LSL.COM /C C:\NETWORK\NET\NET.CFG
+
+<p>Change paths for your system. The "<code>/C</code>" option tells LSL
+ where to find <code>NET.CFG</code>.
+Only necessary, if <code>NET.CFG</code> is not in the same
+directory as <code>LSL.COM</code>.
+<br>Now start MLID:  LH C:\NETWORK\PCMCIA\3C574\ODI\3C574.COM
+
+</p><p>Last install Packet Driver to ODI Converter. Choose between ODIPKT or
+PKT2ODI.
+
+</p><h4>Alternative 1: ODIPKT</h4>
+
+With free converter <code>ODIPKT.COM</code> by Dan Lanciani,
+start with a command in <code>AUTOEXEC.BAT</code>:
+<br>LH C:\NETWORK\NWCLIENT\ODIPKT.COM 0 96
+
+<p>First number of parameters above ("<code>0</code>") determines the
+board that uses <code>ETHERNET_II</code> frame. The following example
+assumes you defined different frames (also known as "envelope types") in
+<code>NET.CFG</code>:
+</p><pre>--- NET.CFG ---
+Link Driver 3C574
+  FRAME ETHERNET_II
+  FRAME ETHERNET_802.2
+  FRAME ETHERNET_802.3
+  FRAME ETHERNET_SNAP</pre>
+
+Tell ODIPKT index number of logical board that
+supports the Ethernet II frame. Count the frames in NET.CFG: Ethernet II
+is the first one, the frame 802.2 is the second, the frame 802.3 is the
+third, snap is fourth.
+<br>To make things a bit tricky, ODIPKT starts counting with "<code>0</code>"
+(like programmers do). According to example above:
+<pre>ODIPKT.COM 0 | board with ETHERNET_II
+ODIPKT.COM 1 | ETHERNET_802.2 (won't work)
+ODIPKT.COM 2 | ETHERNET_802.3 (won't work)
+ODIPKT.COM 3 | ETHERNET_SNAP (won't work)</pre>
+
+Only option that works for ODIPKT is the number that defines
+logical board with frame ETHERNET II, which is "<code>0</code>" in example.
+
+<p>Second parameter ("<code>96</code>") for ODIPKT. This defines software
+interrupt (vector) used by driver. As learned configuring a packet driver, the
+most frequently used software interrupt number is 0x60, which is the
+hexadecimal value 60 (the "0x" is hex format).  ODIPKT does not understand hex
+values; translate this parameter to a decimal number - which is 96.
+
+</p></a><p><a name="Installing1">To use other values may try a
+</a><a href="http://www.langeneggers.ch/Nuetzliches/Hex_Dez.htm">hex-dec
+calculator</a> or see the following list:
+</p><pre>0x60 = 96
+0x61 = 97
+0x62 = 98
+ ...
+0x69 = 105
+0x6A = 106
+ ...
+0x7D = 125
+0x7E = 126</pre>
+
+Packet driver is installed. Use command "ping" from the WATTCP package to test.
+
+<h4>Alternative 2: PKT2ODI</h4>
+
+An alternative is Caldera's <code>PKT2ODI.EXE</code> as
+Packet Driver to ODI Converter.
+<code>PKT2ODI.EXE</code> will be started in
+<code>AUTOEXEC.BAT</code> with command:
+LH C:\NETWORK\NWCLIENT\PKT2ODI.EXE /B:1 /I:69
+
+<p>The "<code>/B</code>" option tells <code>PKT2ODI</code> which logical
+board to use. As previously choose board that
+uses the Ethernet II frame. Different to ODIPKT, PKT2ODI starts counting
+with "<code>1</code>", so if <code>NET.CFG</code> appears:
+</p><pre>--- NET.CFG ---
+Link Driver 3C574
+  FRAME ETHERNET_II
+  FRAME ETHERNET_802.2
+  FRAME ETHERNET_802.3
+  FRAME ETHERNET_SNAP</pre>
+
+use parameter: PKT2ODI.EXE /B:1
+<br>Define use of first board (the one with <code>ETHERNET_II</code>).
+Remember to use the board with Ethernet II, otherwise converter cannot
+ communicate with driver and complain of finding MLID.
+Second parameter, "<code>/I</code>" sets the software interrupt
+(vector) used by driver. Should be 0x60 but won't work with PKT2ODI.
+Program doesn't accept interrupt vectors 0x60 to 0x68. <br>
+Use vector 0x69: PKT2ODI.EXE /I:69
+
+<p>Unusual interrupt vector like 0x69 can be a problem for some
+TCP/IP applications. Must be configured to use this vector. Some
+programs, like webserver SIOUX, may not function, if vector is not 0x60.
+
+</p><p>Start LSL, MLID and converter, the packet
+driver interface should function. Proceed with chapter "TCP/IP kernel".
+
+</p><h4><a name="NDIS">NDIS drivers</a></h4><a name="NDIS">
+
+Drivers based on the "Network Driver Interface Specification" (NDIS) are
+the default in the Windows and OS/2 world. Most recent version is NDIS 6
+used in Windows Vista. Windows 98 used NDIS 5, Windows 95 came with NDIS 3.1.
+In DOS use real-mode driver NDIS2.
+Probably a NDIS driver exists for your network card. Look for
+directory "<code>NDIS2</code>" in card installation files. Cannot
+ find a driver, look at </a><a href="http://drivesnapshot.de/en/makebootdisk.htm">this site</a>. The ending
+of the driver name has to be <code>*.DOS</code>, so for instance driver
+of 3com 3C574 PC-Card is "<code>EL3C574.DOS</code>". In the
+language of the NDIS architecture these are named <b>"Media Access
+Control" (MAC)</b> drivers.
+
+<p>The MAC driver is only one component of NDIS architecture.
+Check <a href="http://www.ndis.com/faq/ndis201.txt">NDIS 2.1 documentation</a>
+Procedure:
+</p><ul><li>Commands in <code>FDCONFIG.SYS</code> (FreeDOS) or
+ <code>CONFIG.SYS</code> (other DOS) load Protocol Manager driver
+    <code>PROTMAN.DOS</code>, MAC driver and protocol driver. This
+    can be done by lines for each of these drivers or by starting the
+    "Installable File System Helper" driver, which is loaded by
+    "<code>DEVICEHIGH=IFSHLP.SYS</code>" and starts all three
+ drivers according to <code>PROTOCOL.INI</code>.
+  </li><li>The Protocol Manager reads the configuration from
+    <code>PROTOCOL.INI</code> and makes them available to the MAC driver and
+    protocol driver which load after him.
+  </li><li>The MAC driver and the protocol driver load and configure themselve
+    according to that information. They identify themselves to the Protocol
+    Manager.
+  </li><li>Before MAC driver and protocol driver can communicate, they have to be
+    bound together, so they can access each others "entry points"
+    (communication ports). This bind process is controlled by the Protocol
+    Manager based on information in <code>PROTOCOL.INI</code>.
+  </li><li>The binding sequence can be triggered by <code>NET.EXE</code> or
+    <code>NETBIND.COM</code> (which can be done in
+  <code>AUTOEXEC.BAT</code>).
+  </li><li>The Protocol Manager (<code>PROTMAN.DOS</code>) then starts the memory
+    resident (Terminate and Stay Resident - TSR) program
+    <code>PROTMAN.EXE</code> to execute the bind command and to control the
+    correct ordering of drivers.
+  </li><li>After binding has occurred, the MAC and the protocol driver communicate
+    directly to each other. The Protocol Manager is not involved in this
+    communication process any longer, so <code>NETBIND.COM</code> frees most
+    of the memory previously reserved by the Protocol Manager.
+</li></ul>
+
+<p>Configuration of NDIS under DOS has changed over time with different
+versions of the package. Some hints about the differences can be found <a href="http://www.yale.edu/pclt/WINWORLD/NDIS.HTM">here</a>. In this document,
+ we use NDIS files from MS Client 3.0.
+To use the NDIS2 (MAC) driver need more files. These are:
+  </p></li><li>The Protocol Manager ("<code>PROTMAN.DOS</code>" and
+    "<code>PROTMAN.EXE</code>")
+  </li><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Networking FreeDOS_files/translate_24dp.png" width="20" height="20" alt="Google Tradutor"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Texto original</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Sugerir uma tradução melhor</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><li>The bind utility ("<code>NETBIND.COM</code>")
+
+<p>These are part of MS Client 3.0 downloaded here:
+<a href="ftp://ftp.microsoft.com/bussys/Clients/MSCLIENT/DSK3-1.EXE">ftp://ftp.microsoft.com/bussys/Clients/MSCLIENT/DSK3-1.EXE</a><br>
+<a href="ftp://ftp.microsoft.com/bussys/Clients/MSCLIENT/DSK3-2.EXE">ftp://ftp.microsoft.com/bussys/Clients/MSCLIENT/DSK3-2.EXE</a>
+
+</p><p>Three files are part of "<code>DSK3-1.EXE</code>". Use
+utility "<code>EXPAND.EXE</code>" included on the first disk to decompress.
+</p><ul>
+  <li>Copy <code>DSK3-1.EXE</code> to a directory like
+    <code>C:\MSCLIENT1</code>. Avoid a long path if done in Windows.
+    16-bit software won't execute, if path is too long.
+  </li><li>Run <code>DSK3-1.EXE</code> to unpack it's content.
+  </li><li>Decompress <code>PROTMAN.DO_</code> and <code>PROTMAN.EX_</code>.
+    <pre>expand -r protman.do_<br>
+expand -r protman.ex_</pre>
+</li></ul><code>NETBIND.COM</code> is already uncompressed. Files are ready.
+Last item is <b>"Packet Driver to NDIS Converter"</b>.
+Get the widely used "<code><a href="ftp://ftp.cc.umanitoba.ca/software/pc_network/dis_pkt9.zip">DIS_PKT9.DOS</a></code>"
+(version 9) or alternatively the slightly newer (version 11) "<code><a href="ftp://ftp.danlan.com/ftp.danlan.com/pdr_shim/dis_pkt/dis_pkt.zip">DIS_PKT.DOS</a></code>".
+There are no differences in usage and handling.
+Both written by Prof. Joe R. Doupnik (Utah State University) and Dan
+Lanciani (Harvard University).
+
+<h4>Configuration of NDIS drivers</h4>
+
+This is a minimal installation of MS Client 3.0. The only purpose is to use a
+packet-driver application. For this purpose:
+<br>Copy the four files
+<pre>PROTMAN.DOS
+PROTMAN.EXE
+NETBIND.COM
+DIS_PKT.DOS</pre>
+into a directory, for instance <code>C:\NET</code>.
+Copy the <b>MAC driver</b> of network interface card, for
+instance:  EL3C574.DOS into this directory. Create configuration file needed for NDIS
+architecture: Create a file with the name <code>PROTOCOL.INI</code> inside
+the <code>C:\NET</code> directory. For our minimal configuration it
+needs the following lines:
+<pre>--- PROTOCOL.INI ---
+[protman]
+DriverName=PROTMAN$
+
+[EL3C574]
+DriverName=EL3C574$
+
+[PKTDRV]
+drivername=PKTDRV$
+bindings=EL3C574
+intvec=0x60
+chainvec=0x68</pre>
+
+<h5>Explanation of the parameters</h5>
+
+Like other *.ini files, <code>PROTOCOL.INI</code> is structured into
+section names in square brackets and item names with values assigned.
+<pre>[protman]
+DriverName=PROTMAN$</pre>
+
+<code>[protman]</code> defines the Protocol Manager.
+ loaded as driver <code>PROTMAN.DOS</code> named "<code>PROTMAN$</code>".
+Section and line are mandatory.
+<pre>[EL3C574]
+DriverName=EL3C574$</pre>
+
+<code>[EL3C574]</code> defines network interface card. By
+default the section itself is named after the card - this is useful, if you
+have more than one network card and use different sections for different
+cards.
+Section name is the first value to change. Good idea to name it after your
+ network card. Could name section to "netcard", "NIC" or even "baked_beans" - as
+long as you also change all the other lines in <code>PROTOCOL.INI</code> that
+point to that section.
+
+<p>The next line is "<code>DriverName=EL3C574$</code>" which
+defines driver for network interface card. In example is
+<code>EL3C574.DOS</code>, named "<code>EL3C574$</code>".
+Modify with your driver name. Find correct name of driver
+in a text file "<code>PROTOCOL.INI</code>" that should be included with
+NDIS driver files supplied with card.
+
+</p><p>Possible to add more lines to this section, to define
+special settings for network card. Consult the
+"<code>PROTOCOL.INI</code>" supplied with NDIS driver for more
+information. In many cases the line with drivername should be enough.
+</p><pre>[PKTDRV]
+drivername=PKTDRV$
+bindings=EL3C574
+intvec=0x60
+chainvec=0x68</pre>
+
+"<code>[PKTDRV]</code>" defines Packet Driver to NDIS
+Converter, "<code>DIS_PKT.DOS</code>" or
+"<code>DIS_PKT9.DOS</code>". Both are called by the name
+"<code>PKTDRV$</code>".
+<br>Important that converter binds to driver of network
+card. Achieved by <code>"bindings=EL3C574"</code>.
+Note this name includes no "<code>$</code>" letter - it refers to the
+name of the <b>section</b> that defines the driver, not to driver itself.
+If you named section "<code>[baked_beans]</code>"
+ you would write "<code>bindings=baked_beans</code>" here ;-).
+
+<p>"<code>intvec</code>" specifies software interrupt vector
+used by packet driver. Hexadecimal value 0x60 per default.
+
+</p><p>"<code>chainvec</code>" defines an available software
+interrupt. It's function is still a mystery to me. <a href="http://groups.google.de/group/comp.protocols.tcp-ip.ibmpc/msg/17b6041f7a3cde7c?dmode=source">According</a>
+to packet driver inventor FTP, adding a chain vector interrupt may improve
+packet processing speed and reliability. Users <a href="http://groups.google.de/group/comp.protocols.nfs/msg/9b0c2e0d6aa47b32?dmode=source">saw</a>
+"a 10-fold increase in performance". To avoid EMM386 errors, some <a href="http://groups.google.de/group/bit.listserv.banyan-l/msg/aa961def5901f506?dmode=source">recommend</a>
+to set an interrupt that increases the vector by decimal 8. So if the
+<code>intvec</code> is 0x60 (that is decimal 96), then the
+<code>chainvec</code> should be decimal 104 (96+8) which is hexadecimal 0x68.
+This is also <a href="http://groups.google.de/group/comp.protocols.tcp-ip.ibmpc/msg/64f2b6060ff2b438?dmode=source">described</a>
+by one of the authors of <code>DIS_PKT.DOS</code>, Dan Lanciani. Please write
+if you find out more.
+
+</p><p>These are settings in <code>PROTOCOL.INI</code> needed for our
+purpose. Final hint: if you consider changing some of these values at
+boot, for instance by a DOS boot menu, could use
+Horst Schaeffer's freeware "<a href="http://home.mnet-online.de/horst.muc/wbat32.htm#inifile">Inifile</a>"
+Load drivers at boot. Modify system files with the following lines:
+</p><pre>--- FDCONFIG.SYS (FreeDOS) ---
+--- or CONFIG.SYS (MS DOS/other DOS) ---
+DEVICEHIGH=C:\NET\PROTMAN.DOS /I:C:\NET
+DEVICEHIGH=C:\NET\EL3C574.DOS
+DEVICEHIGH=C:\NET\DIS_PKT.DOS</pre>
+
+"<code>/I</code>" parameter tells Protocol Manager the location of
+<code>PROTOCOL.INI</code>.  Unneeded if both in same directory.
+<pre>--- AUTOEXEC.BAT ---
+C:\NET\NETBIND.COM</pre>
+
+Note that <code>NETBIND.COM</code> can not be loaded high and should just
+be executed from <code>AUTOEXEC.BAT</code>. If you try to load it like a
+driver, it will abort with the message "<code>run-time error R6009 - not
+enough space for environment</code>".
+<br>Test with ping.
+
+<h3><a name="Kernel">TCP/IP Kernel (Stack)</a></h3><a name="Kernel">
+
+TCP/IP kernel is also called "stack" or "protocol stack", because it
+consists of two layers: IP and TCP. IP runs on top of the hardware driver and
+TCP on top of IP, providing an interface to network applications.
+ Modern operating systems have their own TCP/IP kernel already built-in:
+Microsoft come with "Winsock" since Windows 95. In GNU/Linux
+TCP/IP stack is part of Linux kernel. For DOS different types of TCP/IP kernels are available.
+They can either work as external programs or already built into applications.
+<ul>
+<li>An <i>external</i> TCP/IP kernel is typically started by
+    <code>AUTOEXEC.BAT</code> or by a batch-file. It stays memory resident,
+    so it can answer ping requests for instance.
+  </li><li>Other network applications come with TCP/IP kernel functions already
+    <i>built-in</i> and do not need an external TSR kernel. An application
+    with built-in TCP kernel has the advantage that it doesn't need another
+    driver which consumes precious DOS memory. On the other hand TCP/IP
+    functions are limited to those of the network application and are only
+    provided as long as it runs.
+</li></ul>
+
+Every TCP/IP kernel must be configured with general information about the
+network, as IP address, netmask, nameservers and gateway, or it must be told
+to get this information via a BOOTP or DHCP server.
+Examples for external TCP/IP kernels for DOS are the free Trumpet TCP
+kernel <code>NTCPDRV.EXE</code>, the TCP/IP kernel of Novell NetWare
+<code>TCPIP.EXE</code>, Microsoft MS Client's <code>TCPTSR.EXE</code> and FTP
+Software Inc.'s <code>ETHDRV.EXE</code>.
+Examples for TCP/IP kernels that are already built-in into DOS
+applications are <strong>WatTCP</strong>, which is f.i. already built-in the
+graphical web browser "Arachne", the <strong>KA9Q</strong> kernel which is
+part of that program, the <strong>NCSA</strong> Telnet kernel which is built
+into the applications included in this suite, the <strong>CUTCP</strong>
+kernel and the University of Minnesota stack, which is part of
+"<strong>Minuet</strong>".
+</a><a href="ftp://ftp.oldskool.org/pub/tvdog/internet/readme.txt">According</a> to
+Jeffrey L. Hayes from the retrocomputing website <a href="http://www.oldskool.org/">http://www.oldskool.org</a> more than half of
+the DOS networking applications available use the WatTCP kernel.
+
+<p>First look at WatTCP and successor Watt-32. Then  examine NTCPDRV, the only
+free external TCP/IP kernel available. Last brief look at other external TCP/IP
+kernels.
+
+</p><h4>WatTCP / Watt-32</h4>
+
+Waterloo TCP (WatTCP) was written 1990 - 1992 at the University of
+Waterloo in Ontario Canada. Author Erick Engelke, then a developer
+in the Faculty of Engineering, today the university's <a href="http://www.eng.uwaterloo.ca/~erick/">Manager of Networks and System
+Integration</a>. The core TCP engine of WatTCP was based on Geoffrey H.
+Cooper's TinyTCP.
+WatTCP was originally released under a homebrewed public domain license -
+binary and source were free for use, distribution was allowed only for
+non-commercial reasons. In 2004 Erick Engelke copyrighted the libraries under
+the terms of the GNU LGPL. WatTCP can be found at Erick Engelke's <a href="http://www.erickengelke.com/wattcp/index.shtml">homepage</a> or as
+<code>WAT1104.ZIP</code> at <a href="http://frontier.eas.asu.edu/linux/software/dos/wat1104.zip">various</a>
+sites in the internet. While the software is free, the WatTCP Programmer's
+Reference is<a href="https://www.regsoft.net/regsoft/vieworderpage.php3?productid=60039">sold
+as PDF</a> for 55$.
+WatTCP was ported to 32-bit by Gisle Vanem at Bergen, Norway in 1999. The
+port is called <a href="http://www.bgnett.no/~giva/">Watt-32</a>. It
+supports 32-bit protected-mode as well as 16-bit real-mode. It comes with
+uncompiled applications, compiled versions can be downloaded <a href="http://www.filegate.net/utiln/utilnet/wt32apps.zip">here</a>. There is
+a <a href="http://tech.groups.yahoo.com/group/watt-32/messages/2617?viscount=-30&amp;l=1">developer
+forum</a> which is still active.
+WatTCP and Watt-32 are not external TCP/IP kernels. Both are just sets of
+<i>libraries</i> designated to programmers - they can use these libraries to
+implement TCP/IP functions into their applications. The WatTCP package
+includes such applications with built-in WatTCP kernel like "ping", "finger",
+"whois" or "lpr".
+
+<p>Some important DOS network applications use the WatTCP libraries like
+Arachne or ssh2dos. A list of these apps is available at "<a href="http://www.dossolutions.pwp.blueyonder.co.uk/wattcp.htm">DOS
+Solutions</a>".
+
+</p><h5>Usage</h5>
+
+No download needed to use WatTCP / Watt-32 kernel.
+It is already in the applications. What is required is a configuration
+file, named "<code>WATTCP.CFG</code>" basically the same in
+both versions. Located in applications directory per default.
+General settings:
+<pre>--- WATTCP.CFG ---
+# These are example values:
+my_ip = 192.168.1.10
+netmask = 255.255.255.0
+nameserver = 192.168.1.1
+nameserver = 129.97.128.196
+nameserver = 129.97.128.1
+gateway = 192.168.1.1
+
+# Uncomment, if your receive your configuration via DHCP
+# my_ip = dhcp</pre>
+
+Additional settings may be needed. A deeper
+introduction into the use of WatTCP programs at <a href="http://www.smashco.com/wattcp.asp">Smashco</a>.
+
+<h4><a name="TCPDRV">TCPDRV / NTCPDRV</a></h4><a name="TCPDRV">
+
+Trumpet TCP driver is an <i>external</i> TCP/IP kernel working as a
+TSR program running on top of a packet driver.
+TCPDRV was created in 1992 by Peter Tattam, a programmer in the Psychology
+department of the University of Tasmania at Hobart, Australia. According to a
+</a><a href="http://www.tattsoft.com/aboutUs.htm">biography</a> on his website,
+he developed the shareware "Trumpet Newsreader" short time before and wrote
+the TCP driver just because nothing else was openly available for Turbo
+Pascal. Development eventually lead to the popular Windows software "Trumpet
+Winsock", which Tattam sold through his own company "<a href="http://www.trumpet.com.au/">Trumpet International of Australia</a>",
+founded in 1994.
+
+<p>TCPDRV 2.01 was released as "experimental version". In 1993 a version 3.01
+followed, which was called NTCPDRV. Improvements included a more efficient
+memory usage and <a href="http://alumnus.caltech.edu/~dank/trumpet/">bug
+fixes</a>. Both versions and the textfile <a href="http://wiretap.area.com/Gopher/pub/tsoft/trumpet-abi/tcp201.specification"><code>TCP201.SPE</code></a>
+(the specification for programmers) were made publicly available from the
+Trumpet website: <a href="http://www.trumpet.com.au/dosapps/">trumpet.com.au/dosapps</a>
+Licensing issues are simple: "These DOS
+applications are provided free without support." Thanks to the popularity of
+the trumpet software, it can be downloaded from various <a href="http://wiretap.area.com/Gopher/pub/tsoft/trumpet-abi/">mirrors</a>. A
+commercial version of the TCP driver is available from Peter Tattams new
+company "<a href="http://www.tattsoft.com/TCPIPdriver.htm">Tattam Software
+Enterprises</a>".
+
+</p><h5>Usage</h5>
+
+Download <code><a href="http://wiretap.area.com/Gopher/pub/tsoft/trumpet-abi/ntcpdrv.zip">NTCPDRV.ZIP</a></code>
+and extract. For documentation, download the older version
+<code><a href="http://wiretap.area.com/Gopher/pub/tsoft/trumpet-abi/tcp201.zip">TCP201.ZIP</a></code>
+as well, which also includes several applications.
+The TCP/IP kernel has to be configured with the settings of your network.
+Done either by commandline parameters or by setting DOS environment
+variables.
+<br>Start <code>NTCPDRV.EXE</code> with command (one line):
+<br>NTCPDRV -ip=192.168.1.80 -netmask=255.255.255.0 -gateway=192.168.1.1 -dns-host=192.168.1.1
+
+<p>or configure by setting environment variables: Add lines to
+<code>AUTOEXEC.BAT</code> or batchfile to be started before
+<code>NTCPDRV.EXE.</code>
+</p><pre>--- AUTOEXEC.BAT ---
+set ip=192.168.1.80
+set netmask=255.255.255.0
+set gateway=192.168.1.1
+set dns=192.168.1.1</pre>
+
+The kernel automatically searchs for a usable interrupt vector, may also use parameter
+"<code>-vec=61</code>" to specify vector 0x61 provided by packet driver.
+ See documentation for more possibilities.
+Once Trumpet TCP/IP kernel operating able to run
+several TCP/IP applications (for instance Trumpet Newsreader, webservers Sioux
+or Webserv). Machine also reachable from the network, try a ping request.
+
+<h4>Other TCP/IP Kernels</h4>
+
+Other external TCP/IP kernels are still legally downloaded. From Novell and
+Microsoft may be of use.
+<ul><li>Novell distributes its popular 16-bit TCP/IP protocol stack "<code><a href="http://bbs.actapricot.org/files/area37/tcp16.exe">TCP16.EXE</a></code>",
+    which runs directly atop of the ODI driver. A few programs like <a href="http://josh.com/tiny/">Josh's "Tiny" remote control software</a>
+    and Tsoft's <a href="http://www.rawbandwidth.com/software/">"NFS Clients
+    for DOS"</a> still use this kernel.
+  </li><li>Microsoft's "<a href="ftp://ftp.microsoft.com/bussys/Clients/MSCLIENT/">MS Client
+    3.0</a>" includes its own TCP/IP kernel "<code>TCPTSR.EXE</code>". It
+    also can be used by external programs. It may be useful though, to check
+    memory requirements first. MS Client's TCP/IP seems to consume a lot of
+    conventional DOS memory.
+</li></ul>
+
+<b>Comments to this site? Ideas? Suggestions? Please drop a note!</b>
+Don't forget to add your email, if you wish a personal reply.
+The comments are sorted from date.
+Ulrich Hansen, 12.12.2007 modified by others 1.08.2008
+<br>
+Further questions visit <a href="http://www.freedos.org/freedos/lists/">FreeDOS User</a> mailing
+list.
+<a href="http://ulihansen.kicks-ass.net/dosnet/dosnetcommentf.htm">
+DosNetcomment</a> Ulrich's homepage
+
+
+
+</li><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div></body></html>

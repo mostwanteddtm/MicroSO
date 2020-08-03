@@ -1,0 +1,8 @@
+########### Linkando C++ e Assembly com o Visual Studio 1998 ##############
+
+1) Instalar o Visual Studio 1998
+2) Instalar o Service Pack 6
+3) Configurar o MASM 615 nas variáveis de ambiente do Windows
+4) Configurar o Custom Build do arquivo ASM 
+   (Explicação no arquivo: Link C++ Assembly.pdf
+5) Não precisa fazer a etapa do Irvine32.lib

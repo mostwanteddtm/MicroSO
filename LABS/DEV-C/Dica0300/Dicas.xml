@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Anotações>
+	<dica>
+		<numero>201</numero>
+		<tema>Inicio de exemplos da lib ctype.h</tema>
+		<descrição></descrição>
+		<exemplo>isaplha, isdigit...</exemplo>
+	</dica>
+	<dica>
+		<numero>225</numero>
+		<tema>Prototype</tema>
+		<descrição>Indica ao compilado os parametros e o tipo de retorno do método, antes de usa-lo</descrição>
+		<exemplo>int SOMA(a, b);</exemplo>
+	</dica>
+	<dica>
+		<numero>242</numero>
+		<tema>Ponteiros</tema>
+		<descrição>Ponteiros indicam um endereço de memória</descrição>
+		<exemplo>Atribuir um ponteiro: <!--int *ponteiro = &variável--></exemplo>
+	</dica>
+	<dica>
+		<numero>251</numero>
+		<tema>CDECL</tema>
+		<descrição>Indica ao compilador o Prototype da função escrita em outras linguagens, até mesmo em C</descrição>
+		<exemplo></exemplo>
+	</dica>
+</Anotações>

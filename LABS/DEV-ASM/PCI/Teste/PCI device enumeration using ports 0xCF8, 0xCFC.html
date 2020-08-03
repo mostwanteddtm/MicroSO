@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<!-- saved from url=(0076)http://anadoxin.org/blog/pci-device-enumeration-using-ports-0xcf8-0xcfc.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>PCI device enumeration using ports 0xCF8, 0xCFC - 0xcafebabe</title>
+
+    <!-- meta -->
+    
+    <meta name="author" content="antek">
+    <meta name="dc.language" content="en">
+    <meta name="dc.license" content="">
+
+    <!-- favicon -->
+    <link rel="icon" href="http://anadoxin.org/blog/theme/favicon.ico" type="image/x-icon">
+
+    <!-- newsfeeds -->
+        <link href="http://anadoxin.org/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="0xcafebabe Full Atom Feed">
+        <link href="http://anadoxin.org/blog/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="0xcafebabe Full RSS Feed">
+
+    <!-- assets -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="./PCI device enumeration using ports 0xCF8, 0xCFC_files/css" rel="stylesheet" type="text/css">
+    <link href="./PCI device enumeration using ports 0xCF8, 0xCFC_files/css(1)" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./PCI device enumeration using ports 0xCF8, 0xCFC_files/simplegrid.css" type="text/css">
+    <link rel="stylesheet" href="./PCI device enumeration using ports 0xCF8, 0xCFC_files/main.css" type="text/css">
+    <link rel="stylesheet" href="./PCI device enumeration using ports 0xCF8, 0xCFC_files/pygments.css" type="text/css">
+    <!--[if lt IE 8]>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet" type="text/css">
+    <![endif]-->
+    <link href="./PCI device enumeration using ports 0xCF8, 0xCFC_files/font-awesome.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" async="" src="./PCI device enumeration using ports 0xCF8, 0xCFC_files/ga.js.download"></script><script type="text/javascript" async="" src="./PCI device enumeration using ports 0xCF8, 0xCFC_files/embed.js.download"></script><link rel="preload" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.d49f53e192b9080ef8880a7c9b24f1c3.css"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.18932c85febf9520158697cdc31f08ae.js"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.e7b46487e9e041aabc7c7cff31722578.js"><link rel="preload" as="script" href="https://disqus.com/next/config.js"><script src="./PCI device enumeration using ports 0xCF8, 0xCFC_files/alfalfa.4a5fcca1fe50a757044dfd331b660625.js.download" async="" charset="UTF-8"></script></head>
+
+<body>
+
+   <div class="grid grid-pad">
+     <div class="col-1-1">
+       <ul id="mainnav">
+          <li><a href="http://anadoxin.org/blog/">home</a></li>
+          <li><a href="http://anadoxin.org/blog/about-myself.html">about</a></li>
+       </ul>
+       <div id="blogtitle"><a href="http://anadoxin.org/blog/">0xcafebabe</a></div>
+       <div id="blogsubtitle"><a href="http://anadoxin.org/blog/">a blog about everything and nothing at the same time.</a></div>
+     </div>
+    </div>
+
+    <div class="grid grid-pad">
+       <div id="left-side" class="col-8-12">
+          <section id="content" class="hyphenate">
+
+    <h1 class="title">PCI de­vice enu­mer­a­tion using ports 0xCF8, 0xCFC</h1>
+
+        <div class="date">
+            <p>writ­ten on Wed 02 July 2014
+ </p>
+        </div>
+
+    <div class="clearboth"><p>This is how you can enu­mer­ate your PCI de­vices by using ports <code>0xCF8</code> and
+<code>0xCFC</code>. Please note that this code is in­tended to run from the priv­i­leged mode
+(<code>ring 0</code>), thus it's com­piled as a ker­nel mod­ule for Linux.</p>
+<p>The PCI spec­i­fi­ca­tion can be down­loaded from <a href="http://tesla.desy.de/doocs/hardware/pci/pci21.pdf">here</a> (or, al­ter­na­tively, you
+can search <a href="https://duckduckgo.com/?q=pci21.pdf">here</a> if the pre­vi­ous link is no longer work­ing).</p>
+<p>The ex­am­ple below will read the <code>uint32_t</code> from the ad­dress of <code>0</code> (which is the
+last ar­gu­ment of the <code>r_pci_32</code> func­tion) of this struc­ture:</p>
+<p><img alt="PCI Configuration Space structure" src="./PCI device enumeration using ports 0xCF8, 0xCFC_files/pci-cs.png"></p>
+<p>This is the PCI Con­fig­u­ra­tion Space struc­ture, which holds basic in­for­ma­tion
+about the PCI de­vice.</p>
+<p>Here is the source code of the mod­ule:</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;linux/kernel.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linux/init.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linux/module.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;asm/io.h&gt;</span><span class="cp"></span>
+
+<span class="k">const</span> <span class="n">u32</span> <span class="n">PCI_ENABLE_BIT</span>     <span class="o">=</span> <span class="mh">0x80000000</span><span class="p">;</span>
+<span class="k">const</span> <span class="n">u32</span> <span class="n">PCI_CONFIG_ADDRESS</span> <span class="o">=</span> <span class="mh">0xCF8</span><span class="p">;</span>
+<span class="k">const</span> <span class="n">u32</span> <span class="n">PCI_CONFIG_DATA</span>    <span class="o">=</span> <span class="mh">0xCFC</span><span class="p">;</span>
+
+<span class="c1">// func - 0-7</span>
+<span class="c1">// slot - 0-31</span>
+<span class="c1">// bus - 0-255</span>
+<span class="n">u32</span> <span class="nf">r_pci_32</span><span class="p">(</span><span class="n">u8</span> <span class="n">bus</span><span class="p">,</span> <span class="n">u8</span> <span class="n">device</span><span class="p">,</span> <span class="n">u8</span> <span class="n">func</span><span class="p">,</span> <span class="n">u8</span> <span class="n">pcireg</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// unsigned long flags;</span>
+        <span class="c1">// local_irq_save(flags)</span>
+
+        <span class="n">outl</span><span class="p">(</span><span class="n">PCI_ENABLE_BIT</span> <span class="o">|</span> <span class="p">(</span><span class="n">bus</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">device</span> <span class="o">&lt;&lt;</span> <span class="mi">11</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">func</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">pcireg</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">),</span> <span class="n">PCI_CONFIG_ADDRESS</span><span class="p">);</span>
+        <span class="n">u32</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">inl</span><span class="p">(</span><span class="n">PCI_CONFIG_DATA</span><span class="p">);</span>
+
+        <span class="c1">// local_irq_restore(flags);</span>
+        <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="n">__init</span> <span class="kt">int</span> <span class="nf">init_pcilist</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">u8</span> <span class="n">bus</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">func</span><span class="p">;</span>
+        <span class="n">u32</span> <span class="n">data</span><span class="p">;</span>
+
+        <span class="k">for</span><span class="p">(</span><span class="n">bus</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">bus</span> <span class="o">!=</span> <span class="mh">0xff</span><span class="p">;</span> <span class="n">bus</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">for</span><span class="p">(</span><span class="n">device</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">device</span> <span class="o">&lt;</span> <span class="mi">32</span><span class="p">;</span> <span class="n">device</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">for</span><span class="p">(</span><span class="n">func</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">func</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">;</span> <span class="n">func</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="n">data</span> <span class="o">=</span> <span class="n">r_pci_32</span><span class="p">(</span><span class="n">bus</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+                                <span class="k">if</span><span class="p">(</span><span class="n">data</span> <span class="o">!=</span> <span class="mh">0xffffffff</span><span class="p">)</span> <span class="p">{</span>
+                                        <span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span> <span class="s">"bus %d, device %d, func %d: vendor=0x%08x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">bus</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+                                <span class="p">}</span>
+                        <span class="p">}</span>
+                <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="n">__exit</span> <span class="kt">void</span> <span class="nf">exit_pcilist</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">module_init</span><span class="p">(</span><span class="n">init_pcilist</span><span class="p">);</span>
+<span class="n">module_exit</span><span class="p">(</span><span class="n">exit_pcilist</span><span class="p">);</span>
+</pre></div>
+
+
+<p>This code is not adapted for pro­duc­tion code, be­cause if suf­fers from race
+con­di­tions. It doesn't lock the ac­cess to the ports, so the risk of using it is
+that you will end up with some de­vice in un­spec­i­fied state. In a con­trolled,
+home en­vi­ron­ment (vir­tual ma­chine) it works quite nicely though.</p>
+<p>The lock­ing part could be prob­a­bly im­ple­mented by using:</p>
+<div class="highlight"><pre><span></span><span class="n">raw_spin_lock_irqsave</span><span class="p">(</span><span class="o">&amp;</span> <span class="n">pci_config</span><span class="p">,</span> <span class="n">lock</span><span class="p">,</span> <span class="p">...);</span>
+</pre></div>
+
+
+<p>It should also tem­porar­ily dis­able in­ter­rupts. You could prob­a­bly also lock the
+ac­cess by using <code>request_region</code>. But, in­stead of di­rectly read­ing those ports
+by <code>outl</code> and <code>inl</code>, it's bet­ter to use Linux' mech­a­nism of read­ing PCI data,
+which lives in­site the <code>pci_bus</code> ob­ject in the <code>ops</code> field. More in­for­ma­tion
+about this mech­a­nism can be found in­side the <code>arch/x86/pci/direct.c</code> file.</p></div>
+
+
+    <div id="disqus_thread"><iframe id="dsq-app823" name="dsq-app823" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./PCI device enumeration using ports 0xCF8, 0xCFC_files/saved_resource.html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 680px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+
+    <script type="text/javascript">
+    var disqus_identifier = "pci-device-enumeration-using-ports-0xcf8-0xcfc.html";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://0xcafebabe.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+          </section>
+       </div>
+
+       <div id="right-side" class="col-1-12">&nbsp;</div>
+       <div id="right-side" class="col-3-12">
+
+<div class="section-container">
+    <p><img src="./PCI device enumeration using ports 0xCF8, 0xCFC_files/polish_flag.png"></p>
+</div>
+
+<div class="section-container">
+
+   <h3>Blogroll</h3>
+   <ul>
+      <li><a href="https://mydatasoftware.com/" target="_blank">TrueSight editor <i class="fa fa-globe fa-fw"></i></a></li>
+      <li><a href="http://www.facebook.com/opykaniunaubraniu" target="_blank">O Pykaniu na Ubraniu <i class="fa fa-globe fa-fw"></i></a></li>
+      <li><a href="http://www.mydata.pl/" target="_blank">Odzyskiwanie danych <i class="fa fa-globe fa-fw"></i></a></li>
+      <li><a href="http://www.secnews.pl/" target="_blank">Security News <i class="fa fa-globe fa-fw"></i></a></li>
+      <li><a href="http://blog.vokiel.com/" target="_blank">Vokiel's blog <i class="fa fa-globe fa-fw"></i></a></li>
+
+   </ul>
+</div>
+
+<div class="section-container">
+   <h3>Social Network</h3>
+   <ul>
+      <li>
+        <a href="https://mstdn.io/@antekone" target="_blank">Mastodon&nbsp;
+           <i class="fa fa-globe fa-fw"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/antekone" target="_blank">Twitter&nbsp;
+           <i class="fa fa-twitter fa-fw"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://plus.google.com/u/0/+GrzegorzAntoniak" target="_blank">Google+&nbsp;
+           <i class="fa fa-globe fa-fw"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/antekone" target="_blank">Github&nbsp;
+           <i class="fa fa-github fa-fw"></i>
+        </a>
+      </li>
+   </ul>
+</div>
+
+<div class="section-container">
+   <h3>Categories</h3>
+   <ul>
+        <li><a href="http://anadoxin.org/blog/category/hack.html">hack <i class="fa fa-folder-open fa-fw"></i></a></li>
+        <li><a href="http://anadoxin.org/blog/category/misc.html">misc <i class="fa fa-folder-open fa-fw"></i></a></li>
+        <li><a href="http://anadoxin.org/blog/category/programming.html">programming <i class="fa fa-folder-open fa-fw"></i></a></li>
+        <li><a href="http://anadoxin.org/blog/category/software.html">software <i class="fa fa-folder-open fa-fw"></i></a></li>
+        <li><a href="http://anadoxin.org/blog/category/sysop.html">sysop <i class="fa fa-folder-open fa-fw"></i></a></li>
+   </ul>
+</div>
+
+<div class="section-container">
+   <h3>Tags</h3>
+   <ul class="tagcloud">
+        <li class="tag-4"><a href="http://anadoxin.org/blog/tag/lldb.html">#lldb</a></li>
+        <li class="tag-4"><a href="http://anadoxin.org/blog/tag/gdb.html">#gdb</a></li>
+        <li class="tag-3"><a href="http://anadoxin.org/blog/tag/openbsd.html">#openbsd</a></li>
+        <li class="tag-3"><a href="http://anadoxin.org/blog/tag/hardware.html">#hardware</a></li>
+        <li class="tag-4"><a href="http://anadoxin.org/blog/tag/tabs.html">#tabs</a></li>
+        <li class="tag-1"><a href="http://anadoxin.org/blog/tag/linux.html">#linux</a></li>
+        <li class="tag-4"><a href="http://anadoxin.org/blog/tag/truesight.html">#truesight</a></li>
+        <li class="tag-4"><a href="http://anadoxin.org/blog/tag/kernel.html">#kernel</a></li>
+        <li class="tag-4"><a href="http://anadoxin.org/blog/tag/tv.html">#tv</a></li>
+        <li class="tag-4"><a href="http://anadoxin.org/blog/tag/virt.html">#virt</a></li>
+        <li class="tag-3"><a href="http://anadoxin.org/blog/tag/macos.html">#macos</a></li>
+        <li class="tag-2"><a href="http://anadoxin.org/blog/tag/crypto.html">#crypto</a></li>
+        <li class="tag-4"><a href="http://anadoxin.org/blog/tag/all.html">#all</a></li>
+        <li class="tag-4"><a href="http://anadoxin.org/blog/tag/openssl.html">#openssl</a></li>
+        <li class="tag-2"><a href="http://anadoxin.org/blog/tag/windows.html">#windows</a></li>
+        <li class="tag-1"><a href="http://anadoxin.org/blog/tag/c.html">#c++</a></li>
+        <li class="tag-1"><a href="http://anadoxin.org/blog/tag/rant.html">#rant</a></li>
+        <li class="tag-4"><a href="http://anadoxin.org/blog/tag/hack.html">#hack</a></li>
+        <li class="tag-4"><a href="http://anadoxin.org/blog/tag/testing.html">#testing</a></li>
+        <li class="tag-4"><a href="http://anadoxin.org/blog/tag/java.html">#java</a></li>
+        <li class="tag-4"><a href="http://anadoxin.org/blog/tag/spaces.html">#spaces</a></li>
+   </ul>
+</div>
+
+<div class="section-container">
+   <h3>Feeds</h3>
+   <ul>
+      <li><a href="http://anadoxin.org/blog/feeds/all.atom.xml" rel="alternate">atom feed <i class="fa fa-rss fa-fw"></i></a></li>
+      <li><a href="http://anadoxin.org/blog/feeds/all.rss.xml" rel="alternate">rss feed <i class="fa fa-rss-square fa-fw"></i></a></li>
+   </ul>
+</div>
+
+
+          <div class="section-container" id="copyright">
+             <p>This blog was generated by <a href="http://getpelican.com/">Pelican</a> using a slightly modified <a href="https://github.com/habibillah/pujangga">Pujangga</a> theme.
+          </p></div>
+       </div>
+    </div>
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-4258170-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+
+    <script type="text/javascript" src="./PCI device enumeration using ports 0xCF8, 0xCFC_files/hyphenator.js.download"></script>
+    <script type="text/javascript">
+      Hyphenator.config({
+          donthyphenateclassname: 'docutils',
+          useCSS3hyphenation: true
+      });
+      Hyphenator.run();
+    </script>
+
+
+
+<iframe style="display: none;" src="./PCI device enumeration using ports 0xCF8, 0xCFC_files/saved_resource(1).html"></iframe></body></html>

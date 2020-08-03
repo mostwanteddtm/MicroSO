@@ -1,0 +1,88 @@
+;************************************************************************
+;*
+;*  Chapter 1. How to use this patch file?
+;*
+;*      This file (PNPPD.TXT) contains info. that helps you patch
+;*      'PNPPD.COM'(v1.01) file into your own packet driver.
+;*
+;*      To generate your custom driver, please follow the steps
+;*      described below:
+;*
+;*      a). Follow the instructions to edit the message area in each
+;*          line. Save this file when you finish editing.
+;*          ( see CHAPTER 2 for more details ! )
+;*
+;*         !!! NOTE: DO NOT EDIT THE OFFSET AND LENGTH AREA !!!
+;*
+;*      b). Make sure that you have the following files in your working
+;*          directory:
+;*
+;*              RTPATCH.EXE     ------->   The patch execution file
+;*              PNPPD.COM      ------->   RTL8029 packet driver file
+;*              PNPPD.TXT      ------->   PNPPD.COM patch info. file
+;*
+;*      c). After you decide the name for your packet driver,
+;*          simply type:
+;*
+;*          > rtpatch  PNPPD.com  PNPPD.txt  <put driver name here>  <Ù
+;*
+;*         !!! NOTE: DO NOT USE THE SAME DRIVER NAME AS THE ORIGINAL
+;*                   DRIVER!!!
+;*
+;*      d). If no error occurs, you should find your custom driver is
+;*          generated under your working directory.
+;*
+;*
+;* Chapter 2. How to edit this file ?
+;*
+;*
+;*      Each line in this file contains a display message info. of the
+;*      driver. Each line has the same format:
+;*
+;*          <offset> <length> <message>
+;*      e.g.
+;*           1266      28      'Packet driver for RTL8029',0dh,0ah,'$';
+;*           ----      --      ----------------------------------------
+;*                                                                
+;*        Do not edit here!       |                                 | EOL
+;*                           Put your own message here!           |
+;*          (HEX)     (DEC)                                     delimiter
+;*
+;*
+;*
+;*      *NOTE: DO NOT EDIT THE <offset> AND <length> AREA !!!
+;*
+;*      *NOTE: Anything after comment character ';' will be ignored!
+;*
+;*      *NOTE: Always add ';'(EOL) at end of each line!
+;*
+;*      *NOTE: If delimiter is needed, keep delimiter intact! In this case,
+;*             leave the '$' as the last byte.
+;*
+;*      *NOTE: 0H can only be added as delimiter! Message after 0H will be lost!
+;*
+;*      *NOTE: Total length of your message should not exceed <length>.
+;*
+;*      *NOTE: If you must use the comment character (;) in your message,
+;*             put 3bh instead of ';'.
+;*
+;*      *NOTE: Do not exceed 250 characters in each line.
+;*
+;************************************************************************
+
+
+;************************************************************************
+;       Put your driver name here  (no delimiter)
+;************************************************************************
+
+9e3 8 'PNPPD',20h,20h;
+1205 8 'PNPPD',20h,20h;
+
+;************************************************************************
+;       Put your driver title here ( delimiter is '$')
+;************************************************************************
+
+1239 120 'Packet driver for RTL8019, PNP version 1.31',0dh,0ah,'$';
+12fa 50  'There is no 8019 PnP card on your system !',0dh,0ah,'$';
+18fa 120 'Copyright 1995 (c), Realtek Semiconductor Inc.',0dh,0ah,0dh,0ah,'$';
+

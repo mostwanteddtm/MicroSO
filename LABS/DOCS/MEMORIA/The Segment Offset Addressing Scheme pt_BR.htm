@@ -1,0 +1,289 @@
+
+<!-- saved from url=(0071)http://www.siliconkit.com/rebecca/help/segmentoffset/Segmentoffset.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>The Segment:Offset Addressing Scheme</title>
+<meta http-equiv="keywords" content="Assembly, Segment, Offset, Addressing, Absolute">
+<meta http-equiv="description" content="How to use SEGMENT:OFFSET addresses.">
+<meta name="COPYRIGHT" content="© 2001,2002 Daniel B. Sedory">
+<meta name="robots" content="ALL">
+<meta name="revisit-after" content="30 days">
+<meta name="distribution" content="Global">
+<meta name="robots" content="INDEX">
+<meta name="revisit-after" content="30">
+</head><body bgcolor="#FFFFFF"><br><br>
+<p align="CENTER"><font size="7"><b>Removing the Mystery from<br>SEGMENT : 
+OFFSET<br>Addressing</b></font><br><br><font size="4">Copyright©2001, 
+2002 by Daniel B. Sedory</font></p>
+<br><br>
+<p><font face="Times" size="4">For information on using MS-DEBUG, see <a href="http://www.siliconkit.com/rebecca/help/segmentoffset/debug.htm">A Guide to DEBUG</a>.</font></p>
+<br><br>
+<p><font face="Arial" size="4">
+Muitas vezes há muitos pares diferentes de Segmento:deslocamento que podem ser utilizados 
+para abordar o mesmo local na memória do seu computador. Este esquema é uma 
+<b><i>forma relativa</i></b> de visualização de memória do computador, em oposição a um 
+<b><i>Linear</i></b> ou <b><i>Absoluto</i></b> esquema de endereçamento. Quando um 
+esquema de endereçamento de memória é utilizado, cada local tem a sua própria
+<i>e única</i> designação; uma maneira muito mais fácil para as pessoas ver as coisas. Então, 
+por que ninguém havia criado um modo tão estranho como o segmento: offset
+para lidar com a memória do computador? Bem, aqui está uma breve lição de história:
+<br><br>
+Endereçamento Segment:Offset foi introduzido num momento em que o maior 
+registrador em uma CPU era de apenas 16 bits (ou dois bytes), o que significava que ele poderia 
+abordar apenas 65.536 bytes (64KB) de memória diretamente. Mas todo mundo procurava 
+uma maneira de executar programas que precisaria ir além dos 64kb! em vez de
+a criação de uma CPU com tamanhos de registroes maiores (de pelo menos 24 bits, ou seja, apenas adicionar 
+outro byte), os projetistas de CPUs da Intel decidiram ficar com apenas registradores de 16-bits,   
+para CPU 8086, e assim mudar a maneira como iria usá-los: eles 
+ampliaram o conjunto de instruções para que o processador pudesse<i>utilizar</i> &nbsp;dois registradores de 16 bits
+juntos sempre que o programa precisasse dizer a CPU para usar um 
+Local de memória absoluta..
+<br><br>
+Os engenheiros da Intel vieram com o regime de Segmento: esta compensação, permitiu 
+uma CPU acessar eficazmente apenas cerca de 1 megabyte de memória. Tenha em mente, 
+no entanto, que isso era numa época em que até mesmo Bill Gates não poderia sonhar com 
+quem deseja um PC com mais de 640KB de memória.
+<br><br>
+O esquema funciona assim: O valor em qualquer registo considerado um 
+Registrador de segmento é multiplicado por 16 (ou deslocado um byte hexadecimal para o 
+esquerda; adicionar um extra de 0 até ao fim do número hexadecimal) e, em seguida, o valor de um 
+Registo de deslocamento é adicionado a ele. Assim, o endereço absoluto de qualquer combinação 
+de Segmento e pares offset é encontrado usando a seguinte fórmula:<br><br>
+<table width="100%" cellspacing="2" cellpadding="7" border="2"><tbody><tr>
+<td bgcolor="#DDFFDD"><center><table border="0"><tbody><tr><td>
+<p align="right"><font face="Courier New" size="4"><b>Absolute &nbsp; 
+<br>Memory &nbsp; <br>Location &nbsp; </b></font></p></td><td>
+<p align="center"><font face="Courier New" size="4"><b> = (Segment value * 
+16) + Offset value</b></font></p></td></tr></tbody></table></center></td></tr></tbody></table>
+<br>
+Isso vai se tornar muito mais fácil uma vez que você já viu alguns exemplos. O endereço Absoluto, 
+ou endereço linear para o par de segmento: offset <font face="Verdana"><b>F000:FFFD</b>
+</font> pode ser calculado com bastante facilidade, simplesmente inserindo um zero 
+no fim do valor de segmento (que é a mesma como a multiplicação por 16) 
+e em seguida, adicionando o valor de desvio:</font></p><ul><pre><font face="Courier 
+New" size="5"><b>            F000<font color="blue">0</font>
+           + FFFD
+           ------
+            FFFFD  or  1,048,573</b></font>(decimal)
+
+<font face="Courier New" size="5"><b>Aqui um outro exemplo: 923F:E2FF -&gt;
+
+            923F<font color="blue">0</font>
+           + E2FF
+           ------
+            A06EF   or   657,135</b></font>(decimal)</pre></ul><font face="Arial" size="4">Agora vamos calcular a localização de memória absoluta para<span style="background-color: #FFFF00">
+ O maior valor que pode ser expressa utilizando uma referência de Segment:Offset </span></font><ul>
+<pre><font face="Courier New" size="5"><b>            FFFF<font color="blue">0</font>
+          +  FFFF   
+          -------
+          <span style="background-color: #FFFFCC"> 10FFEF </span> or <span style="background-color: #FFFFCC"> 1,114,095 </span></b></font>(decimal)
+</pre></ul><font face="Arial" size="4">Na realidade, durante 
+algum tempo após o lançamento do 8086, essa quantidade de memória era o suficiente. Assim que se tornou comum para PCs de ter mais de 1MB de 
+memória, os programadores desenvolveram maneiras de usá-lo em proveito próprio e este último 
+byte tornou-se parte do que hoje é chamado de HMA (área de memória alta). Mas até 
+naquele momento, se um programa tentasse usar um segmento: offset acima de 
+20-bit, com endereço absoluto de (1MB), a CPU iria <i>travar.</i>
+<span style="background-color: #00FF00"> Então 
+<font face="Verdana">
+<b>FFFFF</b></font>h (1,048,575) é o primeiro segmento de memória alta. 
+Assim o endereço FFFF:FFFF -> 10FFEFh -> 1.114.095 é o primeiro segmento de memória alta e
+o último segmento de memória convêncional foi mapeado como EFFF:FFFF -> EFFF0+FFFF = FFFEFh -> 1.048.559 (1MB).
+Dessa forma o primeiro segmento de memória alta é: FFFF0h (1.048.560) até FFFFFh (1.048.575) <br><br></span>
+Uma das <i>desvantagens</i> em usar Segment:Offset 
+(o que confunde a maioria) é o fato de que não pode haver um 
+grande número de <i>pares</i> que se referem à mesma posição de memória exata. 
+Por exemplo, abaixo de cada par refere-se a <b><i>exatamente o mesmo local</i>
+</b> na memória:</font><p></p><table><tbody><tr><td bgcolor="#C0DFFF">
+<p align="center"></p><pre><b>
+  0007:7B90   0008:7B80   0009:7B70   000A:7B60   000B:7B50   000C:7B40   
+
+  0047:7790   0048:7780   0049:7770   004A:7760   004B:7750   004C:7740   
+
+  0077:7490   0078:7480   0079:7470   007A:7460   007B:7450   007C:7440   
+
+  01FF:5C10   0200:5C00   0201:5BF0   0202:5BE0   0203:5BD0   0204:5BC0   
+
+  07BB:0050   07BC:0040   07BD:0030   07BE:0020   07BF:0010   07C0:0000   
+</b></pre><p></p></td></tr></tbody></table>
+
+<p><font face="Arial" size="4"><span style="background-color: #FFFF00">O Segmento: Offset listados acima, são apenas 
+algumas das maneiras de representar o endereço absoluto de memória: <font face="Verdana" size="5"><b>07C00</b></font>h.</span>
+<br><br>De fato, <i>há</i> até <span style="background-color: #FFFF00">
+<font face="Verdana"><b>4,096</b></font> </span> differentes Segment:Offset 
+que representa um único byte na memória; dependendo da sua
+localização!<span style="background-color: #FFFFCC"> para um endereço absoluto <font face="Verdana"><b>0</b></font>h 
+até <font face="Verdana"><b>FFEF</b></font>h ( 0 até 65,519 )</span>, 
+o número de pares diferentes pode ser calculado como se segue:<span style="background-color: #FFFFCC"> Divida o endereço Absoluto 
+por 16 (desloque todos os dígitos hexadecimais um para a direita), joge fora qualquer 
+restante fracionado e adicione 1. Esta é a mesma coisa que dizer: Adicionar 1 ao 
+número do segmento, se o deslocamento é 000Fh (15) ou menor. </span> Por exemplo, 
+o byte na memória referenciado pelo Segmento: Offset <font face="Verdana">
+<b>0040:0000</b></font> tem o total de 41h (or 65) diferentes combinações que pudem 
+ser utilizados para um endereço absoluto <font face="Verdana"><b>7C00</b>h</font>, 
+que foi mencionado acima, há um total de: <font face="Verdana">7C00 / 
+10h --&gt; 7C0 + 1 = 7C1 (or 1,985)</font> <i>formas</i> diferentes de lidar com 
+mesmo local de memória usando Segmento: Offset.
+<span style="background-color: #FFFFCC"> Para o endereço absoluto
+<font face="Verdana"><b>FFF0</b></font>h (65,520) até 
+<font face="Verdana"><b>FFFFF</b></font>h (1,048,575), sempre haverá 
+<b><font face="Verdana">4,096</font> Segment:Offset </b> que pode-se usar 
+para se referir a esses endereços!</span> Isso é um pouco mais <b>88%</b> da 
+memória que pode ser acessado usando Segmento: Offsets. Os últimos 65.520 bytes 
+que pode ser acessado por este método são chamados coletivamente de memória alta
+Área (HMA).<span style="background-color: #FFFFCC"> Para cada 16 bytes superiores 
+na<b>HMA</b> que apontam, há menos um Segmento: Offset 
+disponível para fazer referência a esse número.&nbsp;</span> Devido ao grande número 
+de possíveis segmento: offset para cada endereço, a maioria dos programadores tem decidiram
+ usar o mesmo <i> método de normalização </ i> ao escrever sobre a 
+determinado local na memória. ( See the note below on <a href="http://www.siliconkit.com/rebecca/help/segmentoffset/Segmentoffset.html#NORM">
+Normalized Notation</a> ).
+<br><br>
+The boundaries between various areas of Memory are graphically displayed in 
+the illustrations below.</font>
+<br><br>
+
+</p><hr>
+
+<br><br><center><font size="7"><b>Visualizing the Overlapping Segments</b>
+</font></center><br><br>
+<p><font face="Arial" size="5"><b>The following 
+illustrations should help students <i>visualize the artificial layout</i> 
+of the Segment boundaries in a system's Memory.</b></font>
+</p><p><br></p>
+<font face="Arial" size="4">SEGMENTS are more like a mental construct or a 
+way of visualizing a computer's Memory, rather than being closely tied to 
+the physical hardware itself. In <b>Figure 0</b>, we've tried to show how 
+each <i>Segment</i> of 65,536 bytes <i><b>overlaps</b> most of</i> &nbsp;the 
+preceding Segment. As you can see, each Segment begins only 16 bytes (or a 
+paragraph) after the preceding one. In computer terminology, <span style="background-color: #FFFFCC">a <b><i>paragraph</i></b> is used to refer 
+to 16 consecutive bytes of Memory</span>. For every 16 bytes higher in 
+Memory that we point to, the number of overlapping Segments will increase 
+by one <b>until</b> we arrive at the end of the first Segment. At that point, 
+each successive paragraph of Memory (up to 1MB) has a constant number of 
+4,096 overlapping Segments! Figure 0 also shows the Segment:Offset values 
+for each of the four <i>corners</i> of the first five of Segments.</font>
+<p></p>
+<center><img src="./The Segment Offset Addressing Scheme_files/Figure0.gif" width="466" height="380"></center>
+
+<p><font face="Arial" size="4">In Figure 1 (see below), the focus is on just 
+the beginning of Segments 1, 2, 3 and so on, rather than the whole Segment. 
+Notice how the first 16 bytes of memory appear in the Figure. There's only 
+one segment there: <i>no other segments overlap</i> these bytes. Therefore, 
+the Segment:Offset pairs for each of the first 16 bytes in memory is actually 
+unique! There's only one way to refer to them: with the Segment value of 
+<font face="Verdana">0000:</font> and one of the 16 Offsets, 0000 through 
+000F hex. The next 16 bytes in memory (10h through 1Fh) will each have 
+precisely <b>two</b> different Segment:Offset pairs that can be used to 
+address them. For each of the first five Segments, the exact number of 
+equivalent Segment:Offset pairs for the last byte in the paragraph has been 
+shown in the aqua (light-blue) colored boxes.
+<br><br>
+(For comments on the part of Figure 1 under the BLUE line, see text below.)
+</font></p>
+
+<center><img src="./The Segment Offset Addressing Scheme_files/Figure1.gif" width="466" height="380"></center>
+
+<p><font face="Arial" size="4">The second part of Figure 1 above, shows what 
+happens at the transition from a paragraph of memory that is still within the 
+<i>boundary</i> of the first 64kb Segment (Absolute addresses FFF0h 
+through FFFFh) to those paragraphs which are beyond its boundary (10000h and 
+following). Note that the first paragraph of Segment 0FFF: (which is the same 
+as the last 16 bytes within Segment 0000:) is the first paragraph in Memory 
+to have a total of 4,096 different Segment:Offset pairs that could be used 
+to reference its bytes. </font></p><br>
+
+<p><font face="Arial" size="4">Figure 2 shows that <b>Segment <font face="Verdana">9000</font>:</b> is the last whole 64kb segment to lie within 
+the bounds of what's called " <b>Conventional Memory</b> " ( the 
+first 640kb or 655,360 bytes). The first paragraph of <b>Segment <font face="Verdana">A000</font>:</b> is the beginning of the Upper Memory Area 
+(<b>UMA</b>). The UMA contains a total of 384kb or 393,216 bytes. <b>Segment 
+<font face="Verdana">F000</font>:</b> is the last whole segment that lies 
+within the bounds of the UMA.</font></p>
+
+<center><img src="./The Segment Offset Addressing Scheme_files/Figure2.gif" width="466" height="366"></center>
+
+<p align="center"><font face="Arial" size="5"> 640 kb + 384 kb = 1024 kb (or 
+1,048,576 bytes) = 1 Megabyte.<br>
+</font><font face="Comic Sans MS">(A long time ago, the UMA was called the 
+'Reserved Area.')</font></p>
+
+<p><font face="Arial" size="4">Another way of looking at the first 1MB of 
+Memory (and hopefully something that will help those who might still be a 
+bit confused ) is the fact that each of these 1,048,576 bytes can be 
+accessed by using one of just the following <b>16 Segment</b> references (<b>
+none of which overlap</b> any of the others): 
+<font face="Verdana"><b>0000:</b></font>, 
+<font face="Verdana"><b>1000:</b></font>, 
+<font face="Verdana"><b>2000:</b></font>, ... 
+<font face="Verdana"><b>9000:</b></font> and 
+<font face="Verdana"><b>A000:</b></font> through 
+<font face="Verdana"><b>F000:</b></font> plus one of their 65,536 Offsets. 
+Although it would really be nice if we could always refer to a particular 
+byte in Memory using just these 16 Segments, that would be rather wasteful of 
+memory resources: When it comes time for an OS like Windows to assign a full 
+64kb of free memory to an App such as DEBUG, it's not simply a matter of 
+convenience for it to use the very first 16-byte Segment reference of 
+continuous memory that it can find. Moving up to the next even 
+<font face="Verdana">1000</font>h Segment would leave even more unused 
+<b><i>holes</i></b> in Memory than there are already! (There is, however, an 
+agreed upon convention called <a href="http://www.siliconkit.com/rebecca/help/segmentoffset/Segmentoffset.html#NORM">Normalized Addressing</a> 
+which has been very helpful.)</font></p>
+<p><font face="Arial" size="4">Figure 3 shows the end of the <b>UMA</b> and 
+the beginning of the last Segment (<b>Segment 
+<font face="Verdana">FFFF</font>:</b>) in the Segment:Offset scheme. When 
+the 8086 was first created, there wasn't even 640kb of memory in most PCs. 
+And as you might recall from our history lesson above, addresses in this 
+part of the Segment:Offset scheme were first <i>mapped</i> to bytes in 
+Segment <font face="Verdana">0000</font>. Later, the memory above 1MB that 
+could still be accessed using Segment:Offset pairs became known as The High 
+Memory Area (<b>HMA</b>).</font></p>
+
+<center><img src="./The Segment Offset Addressing Scheme_files/Figure3.gif" width="466" height="316"></center>
+
+<p><font face="Arial" size="4">The High Memory Area (<b>HMA</b>) contains 
+<b>only</b> <i>one paragraph short</i> of 64kb (or just 65,520 bytes). 
+<b>Segment <font face="Verdana">FFFF</font>:</b> is the only segment that 
+can <i>reach</i> the last 16 bytes of the HMA. Here's a text file of a 
+boring <a href="http://www.siliconkit.com/rebecca/help/segmentoffset/HMAtable.htm">Table of HMA Segment:Offset pairs</a> which 
+shows how the number of pairs decreases to only one for the last 16 bytes 
+of the HMA.</font></p><font face="Arial" size="4">
+
+<center><img src="./The Segment Offset Addressing Scheme_files/Figure4.gif" width="466" height="208"></center>
+<a name="NORM"><br></a><hr>
+
+<br><br><center><font size="6"><b><i>Normalized</i> Segment:Offset Notation
+</b></font></center><br><br>
+
+<p><font face="Arial" size="4">Since there are so many different ways that a 
+single byte in Memory might be referenced using Segment:Offset pairs, most 
+programmers have agreed to use the same convention to <i>normalize</i> all 
+such pairs into values that will always be <b><i>unique</i></b>. These 
+unique pairs are called a <b>Normalized Address</b> or <b>Pointer</b>.
+<br><br>
+By confining the Offset to just the Hex values <font face="Verdana"><b>
+0</b></font>h through <font face="Verdana"><b>F</b></font>h (16 hex digits); 
+or a single <b>paragraph</b> and setting the Segment value accordingly, we 
+have a unique way to reference all Segment:Offset Memory pair locations. To 
+convert an arbitrary Segment:Offset pair into a normalized address or pointer 
+is a two-step process that's quite easy for an assembly programmer:</font></p><ol><font face="Arial" size="4">
+<li> Convert the pairs into a single physical (linear) address.</li>
+<li> Then simply insert the colon (:) between the last two hex digits!<br>
+</li></font></ol><font face="Arial" size="4">
+For example, in order to <i>normalize</i> <font face="Verdana"><b>1000:1B0F</b></font>, 
+the intermediate step is: <font size="5">&nbsp; <b>1000:1B0F</b> <img src="./The Segment Offset Addressing Scheme_files/rtar.gif" height="15" width="33"> 
+<font color="blue"><b>11B0F</b></font>h <img src="./The Segment Offset Addressing Scheme_files/rtar.gif" height="15" width="33"> 
+<font color="green"><b>11B0:F</b></font></font> (or 11B0:000F)<br><br>Since 
+the normalized form will always have three leading zero bytes in its Offset, 
+programmers often write it with just the digit that counts as shown here: 
+<font face="Verdana" color="green"><b>11B0:F</b></font> (when you see an 
+address like this, it's almost a sure sign that the author is using 
+normalized notation).</font><p></p>
+<br><br>
+<font face="Verdana" size="5"><i>Last Revised:</i> <b>22 JUL 2002</b>.</font>
+<hr>
+<p align="center"><b><font face="Arial">You can write to me using this: 
+<a href="http://www.siliconkit.com/rebecca/Feedback.html" target="SISTER">online reply form</a>. </font>
+(It opens in a new window.)</b>
+<br><br> <font size="5">
+<img src="./The Segment Offset Addressing Scheme_files/left.gif" width="33" height="14"> <a href="http://www.siliconkit.com/rebecca/tool/FreeTools.html">The Starman's ASSEMBLY Index Page</a> 
+<br><br><img src="./The Segment Offset Addressing Scheme_files/left.gif" width="33" height="14"> <a href="http://www.siliconkit.com/rebecca/index.html"><b>The Starman's Realm Index Page</b></a></font></p><font size="5">
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+
+</font></font></body></html>

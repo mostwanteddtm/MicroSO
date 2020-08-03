@@ -1,0 +1,1469 @@
+From: "Salvo pelo Windows Internet Explorer 8"
+Subject: Maverick - The Operating System
+Date: Tue, 29 Jul 2014 20:02:52 -0300
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0089_01CFAB68.147823C0"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.1.7601.17514
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0089_01CFAB68.147823C0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML lang=3Den><HEAD><TITLE>Maverick - The Operating System</TITLE>
+<META content=3D"text/html; charset=3Dwindows-1252" =
+http-equiv=3DContent-Type>
+<META name=3Dauthor content=3D"Lasse Krogh Thygesen">
+<META name=3Dcopyright content=3D"(C) 1999  Lasse Krogh Thygesen">
+<META name=3Dkeywords=20
+content=3D"maverick,operating =
+system,os,x86,intel,ata,ide,eide,atapi,pic,pit,dma,protected =
+mode,pmode">
+<META name=3Ddescription content=3D""><LINK rel=3Dstylesheet =
+type=3Dtext/css=20
+href=3D"http://www.maverick-os.dk/Maverick.css">
+<META name=3DGENERATOR content=3D"MSHTML 8.00.7601.17514"></HEAD>
+<BODY>
+<DIV class=3DMiniMenu>[<A title=3D"Standard Disk Format"=20
+href=3D"http://www.maverick-os.dk/FileSystemFormats/Standard_DiskFormat.h=
+tml">Previous</A>]=20
+- [<A title=3D"Go to main menu"=20
+href=3D"http://www.maverick-os.dk/Mainmenu_NoFrames.html">Main menu</A>] =
+- [<A=20
+title=3D"FAT16 File System"=20
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT16_FileSystem.html=
+">Next</A>]<BR></DIV>
+<H1 class=3DPreTitle>Specifications</H1>
+<H1>FAT12 File System</H1>
+<H1 class=3DSubTitle>Used: On most x86 3.5" floppydisks</H1>
+<HR>
+
+<DIV id=3DIntroduction>
+<H2>Introduction</H2>This is the 16-bit version of the FAT file system. =
+The=20
+16-bit part describes the way units are allocated on the drive. The =
+FAT16 file=20
+system uses a 16-bit number to identify each allocation unit (called =
+cluster),=20
+and this gives it a total of 65.536 clusters. The size of each cluster =
+is=20
+defined in the boot sector of the volume (volume =3D partition). The =
+File System=20
+ID number usually associated with FAT16 volumes are 04h and 06h. The =
+first is=20
+used on volumes with less than 65536 sectors (typical this is on drives =
+less=20
+than 32 Mb in size), and the latter one is used on volumes with more =
+than 65536=20
+sectors. There is also another variant which is used with the LBA =
+address mode,=20
+that variant has a File System ID of 0Eh. <SPAN class=3DNote>I do not =
+know if the=20
+LBA variant is different from the CHS type. So far I don't se why =
+anything=20
+should be changed to support LBA addresses.</SPAN><BR><BR></DIV>
+<DIV id=3DBasicStructure>
+<H3>Basic Structure</H3>The FAT16 file system structure contains the =
+following=20
+regions:<BR><BR>
+<DIV id=3DFAT16Structure class=3DCentered>
+<TABLE summary=3D"FAT16 File System Structure" width=3D"40%">
+  <CAPTION>FAT16 File System Structure </CAPTION>
+  <COLGROUP>
+  <COL vAlign=3Dtop align=3Dmiddle width=3D"100%"></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH vAlign=3Dcenter align=3Dmiddle>Region</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD>Reserved Region (incl. Boot Sector)</TD></TR>
+  <TR>
+    <TD>File Allocation Table (FAT)</TD></TR>
+  <TR>
+    <TD>Root Directory</TD></TR>
+  <TR>
+    <TD>Data Region</TD></TR></TBODY></TABLE></DIV><BR>The first sector =
+(boot=20
+sector) contain information which is used to calculate the sizes and =
+locations=20
+of the other regions. The boot sector also contain code to boot the =
+operating=20
+system installed on the volume. The data region is split up into logical =
+blocks=20
+called clusters. Each of these clusters has an accompanying entry in the =
+FAT=20
+region. The cluster specific entry can either contain a value of the =
+next=20
+cluster which contain data from the file, or a so called End-of-file =
+value which=20
+means that there are no more clusters which contain data from the file. =
+The root=20
+directory and its sub-directories contain filename, dates, attribute =
+flags and=20
+starting cluster information about the filesystem =
+objects.<BR><BR><BR></DIV>
+<DIV id=3DBootSector>
+<H2>Boot Sector</H2>The first sector in the reserved region is the boot =
+sector.=20
+Though this sector is typical 512 bytes in can be longer depending on =
+the media.=20
+The boot sector typical start with a 3 byte jump instruction to where =
+the=20
+bootstrap code is stored, followed by an 8 byte long string set by the =
+creating=20
+operating system. This is followed by the BIOS Parameter Block, and then =
+by an=20
+Extended BIOS Parameter Block. Finally the boot sector contain boot code =
+and a=20
+signature.<BR><BR>
+<DIV id=3DBootSectorStructure class=3DCentered>
+<TABLE summary=3D"Structure of the FAT16 Boot sector" width=3D"90%">
+  <CAPTION>Structure of the FAT16 Boot sector </CAPTION>
+  <COLGROUP>
+  <COL vAlign=3Dcenter align=3Dmiddle width=3D"10%">
+  <COL vAlign=3Dtop align=3Dmiddle width=3D"10%">
+  <COL vAlign=3Dtop align=3Dmiddle width=3D"10%">
+  <COL vAlign=3Dtop align=3Dleft width=3D"70%"></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH vAlign=3Dcenter align=3Dmiddle>Part</TH>
+    <TH vAlign=3Dcenter align=3Dmiddle>Offset</TH>
+    <TH vAlign=3Dcenter align=3Dmiddle>Size</TH>
+    <TH vAlign=3Dcenter align=3Dmiddle>Description</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD>Code</TD>
+    <TD>0000h</TD>
+    <TD>3 bytes</TD>
+    <TD>Code to jump to the bootstrap code.</TD></TR>
+  <TR>
+    <TD>OS Name</TD>
+    <TD>0003h</TD>
+    <TD>8 bytes</TD>
+    <TD>Oem ID - Name of the formatting OS</TD></TR>
+  <TR>
+    <TD rowSpan=3D12>BIOS Para- meter Block</TD>
+    <TD>000Bh</TD>
+    <TD>2 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#BytesPerSector">Bytes=20
+      per Sector</A></TD></TR>
+  <TR>
+    <TD>000Dh</TD>
+    <TD>1 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#SectorsPerCluster">Sectors=20
+      per Cluster</A> - Usual there is 512 bytes per sector.</TD></TR>
+  <TR>
+    <TD>000Eh</TD>
+    <TD>2 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#ReservedSectors">Reserved=20
+      sectors</A> from the start of the volume.</TD></TR>
+  <TR>
+    <TD>0010h</TD>
+    <TD>1 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#NumberOfFATs">Number=20
+      of FAT copies</A> - Usual 2 copies are used to prevent data =
+loss.</TD></TR>
+  <TR>
+    <TD>0011h</TD>
+    <TD>2 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#RootEntriesCount">Number=20
+      of possible root entries</A> - 512 entries are =
+recommended.</TD></TR>
+  <TR>
+    <TD>0013h</TD>
+    <TD>2 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#SmallNumberOfSectors">Small=20
+      number of sectors</A> - Used when volume size is less than 32 =
+Mb.</TD></TR>
+  <TR>
+    <TD>0015h</TD>
+    <TD>1 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#MediaDescriptor">Media=20
+      Descriptor</A></TD></TR>
+  <TR>
+    <TD>0016h</TD>
+    <TD>2 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#SectorsPerFAT">Sectors=20
+      per FAT</A></TD></TR>
+  <TR>
+    <TD>0018h</TD>
+    <TD>2 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#SectorsPerTrack">Sectors=20
+      per Track</A></TD></TR>
+  <TR>
+    <TD>001Ah</TD>
+    <TD>2 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#NumberOfHeads">Number=20
+      of Heads</A></TD></TR>
+  <TR>
+    <TD>001Ch</TD>
+    <TD>4 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#HiddenSectors">Hidden=20
+      Sectors</A></TD></TR>
+  <TR>
+    <TD>0020h</TD>
+    <TD>4 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#LargeNumberOfSectors">Large=20
+      number of sectors</A> - Used when volume size is greater than 32 =
+Mb.</TD></TR>
+  <TR>
+    <TD rowSpan=3D6>Ext. BIOS Para- meter Block</TD>
+    <TD>0024h</TD>
+    <TD>1 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#DriveNumber">Drive=20
+      Number</A> - Used by some bootstrap code, fx. MS-DOS.</TD></TR>
+  <TR>
+    <TD>0025h</TD>
+    <TD>1 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#Reserved">Reserved</A>=20
+      - Is used by Windows NT to decide if it shall check disk =
+integrity.</TD></TR>
+  <TR>
+    <TD>0026h</TD>
+    <TD>1 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#ExtendedBootSignature">Extended=20
+      Boot Signature</A> - Indicates that the next three fields are=20
+  available.</TD></TR>
+  <TR>
+    <TD>0027h</TD>
+    <TD>4 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#VolumeSerialNumber">Volume=20
+      Serial Number</A></TD></TR>
+  <TR>
+    <TD>002Bh</TD>
+    <TD>11 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#VolumeLabel">Volume=20
+      Label</A> - Should be the same as in the root directory.</TD></TR>
+  <TR>
+    <TD>0036h</TD>
+    <TD>8 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#FileSystemType">File=20
+      System Type</A> - The string should be 'FAT16 '</TD></TR>
+  <TR>
+    <TD>Code</TD>
+    <TD>003Eh</TD>
+    <TD>448 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#BootstrapCode">Bootstrap=20
+      code</A> - May schrink in the future.</TD></TR>
+  <TR>
+    <TD>Sig.</TD>
+    <TD>01FEh</TD>
+    <TD>2</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#BootSectorSignature">Boot=20
+      sector signature</A> - This is the AA55h=20
+signature.</TD></TR></TBODY></TABLE></DIV><BR><BR></DIV>
+<DIV id=3DBIOSParameterBlock>
+<H3>BIOS Parameter Block</H3>The BIOS Parameter Block contains basic =
+information=20
+about the overall structure of the FAT file system. That is information =
+such as=20
+sector and cluster size, location information of FAT copies, the root =
+directory=20
+size etc..<BR><BR>
+<DIV id=3DBytesPerSector>
+<H4>Bytes Per Sector</H4>This value is the number of bytes in each =
+physical=20
+sector. The allowed values are: 512, 1024, 2048 or 4096 bytes. A lot of =
+code=20
+outthere are assuming 512 bytes per sectors, so any other values can =
+give=20
+compatibility problems.<BR><BR></DIV>
+<DIV id=3DSectorsPerCluster>
+<H4>Sectors Per Cluster</H4>This is the number of sectors per cluster. =
+The=20
+allowed values are: 1, 2, 4, 8, 16, 32 or 128. But de-facto is that most =
+
+combinations of 'BytesPerCluster' * 'SectorsPerCluster' which gives a =
+total=20
+value over 32 Kb per cluster, are not supported on many =
+system.<BR><BR></DIV>
+<DIV id=3DReservedSectors>
+<H4>Reserved Sectors</H4>Since the reserved region always contain the =
+boot=20
+sector a zero value in this field is not allowed. The usual setting of =
+this=20
+value is 1. The value is used to calculate the location for the first =
+sector=20
+containing the FAT.<BR><BR></DIV>
+<DIV id=3DNumberOfFATs>
+<H4>Number of FAT copies</H4>This is the number of FAT copies in the =
+file=20
+system. The recommended value is 2 (and then have two FAT copies), but =
+other=20
+values are validm though they may not be supported on some system. The =
+usage of=20
+two copies are to prevent data loss if one or part of one FAT copy is=20
+corrupted.<BR><BR></DIV>
+<DIV id=3DRootEntriesCount>
+<H4>Root Entries Count</H4>This value contain the number of entries in =
+the root=20
+directory. Its recommended that the number of entries is an even =
+multiple of the=20
+BytesPerSector values. The recommended value for FAT16 volumes is 512 =
+entries=20
+(compatibility reasons).<BR><BR></DIV>
+<DIV id=3DSmallNumberOfSectors>
+<H4>Small Number of Sectors</H4>This field states the total number of =
+sectors in=20
+the volume. That includes the number of sectors occupied by the four =
+regions=20
+which the FAT16 file system consist of. For FAT16 volumes that use less =
+than=20
+65536 sectors this field is used. The File System Id in the MBR is then =
+04h. For=20
+FAT16 volumes that use more the 65535 sectors the <A=20
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#LargeNumberOfSectors">Large=20
+Number of Sectors</A> field is used and this one should be set to=20
+0h.<BR><BR></DIV>
+<DIV id=3DMediaDescriptor>
+<H4>Media Descriptor</H4>These are the possible media descriptors values =
+in the=20
+FAT boot sector. <SPAN class=3DNote>This is the same value which must be =
+in the=20
+low byte in the first entry of the FAT.</SPAN><BR><BR>
+<DIV id=3DMediaDescriptors class=3DCentered>
+<TABLE summary=3D"The possible media descriptors" width=3D"60%">
+  <CAPTION>Media Descriptors </CAPTION>
+  <COLGROUP>
+  <COL vAlign=3Dtop align=3Dmiddle width=3D"20%">
+  <COL vAlign=3Dtop align=3Dmiddle width=3D"20%">
+  <COL vAlign=3Dtop align=3Dleft width=3D"60%"></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH vAlign=3Dcenter align=3Dmiddle>Hex Value</TH>
+    <TH vAlign=3Dcenter align=3Dmiddle>Capacity</TH>
+    <TH vAlign=3Dcenter align=3Dmiddle>Physical Format</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD>F0</TD>
+    <TD>2.88 MB</TD>
+    <TD>3.5-inch, 2-sided, 36-sector</TD></TR>
+  <TR>
+    <TD>F0</TD>
+    <TD>1.44 MB</TD>
+    <TD>3.5-inch, 2-sided, 18-sector</TD></TR>
+  <TR>
+    <TD>F8</TD>
+    <TD>?</TD>
+    <TD>Fixed disk</TD></TR>
+  <TR>
+    <TD>F9</TD>
+    <TD>720 KB</TD>
+    <TD>3.5-inch, 2-sided, 9-sector</TD></TR>
+  <TR>
+    <TD>F9</TD>
+    <TD>1.2 MB</TD>
+    <TD>5.25-inch, 2-sided, 15-sector</TD></TR>
+  <TR>
+    <TD>FA</TD>
+    <TD>?</TD>
+    <TD>?</TD></TR>
+  <TR>
+    <TD>FB</TD>
+    <TD>?</TD>
+    <TD>?</TD></TR>
+  <TR>
+    <TD>FC</TD>
+    <TD>180 KB</TD>
+    <TD>5.25-inch, 1-sided, 9-sector</TD></TR>
+  <TR>
+    <TD>FD</TD>
+    <TD>360 KB</TD>
+    <TD>5.25-inch, 2-sided, 9-sector</TD></TR>
+  <TR>
+    <TD>FE</TD>
+    <TD>160 KB</TD>
+    <TD>5.25-inch, 1-sided, 8-sector</TD></TR>
+  <TR>
+    <TD>FF</TD>
+    <TD>320 KB</TD>
+    <TD>5.25-inch, 2-sided, =
+8-sector</TD></TR></TBODY></TABLE></DIV><BR><BR></DIV>
+<DIV id=3DSectorsPerFAT>
+<H4>Sectors Per FAT</H4>This is the number of sectors occupied by one =
+copy of=20
+the FAT.<BR><BR></DIV>
+<DIV id=3DSectorsPerTrack>
+<H4>Sectors Per Track</H4>This value is used when the volume is on a =
+media which=20
+have a geometry, that is when the <ABBR title=3D"Logical Block =
+Address">LBA</ABBR>=20
+number is broken down into a Cylinder-Head-Sector address. This field =
+represents=20
+the multiple of the max. Head and Sector value used when the volume was=20
+formatted. The field itself is used to check if the LBA to <ABBR=20
+title=3DCylinder-Head-Sector>CHS</ABBR> translation has changed, since =
+the=20
+formatting. And for calculating the correct Cylinder, Head and Sector =
+values for=20
+the translation algorithm.<BR><BR></DIV>
+<DIV id=3DNumberOfHeads>
+<H4>Number of Heads</H4>This value is used when the volume is on a media =
+which=20
+have a geometry, that is when the <ABBR title=3D"Logical Block =
+Address">LBA</ABBR>=20
+number is broken down into a Cylinder-Head-Sector address. This field =
+represents=20
+the Head value used when the volume was formatted. The field itself is =
+used to=20
+check if the LBA to <ABBR title=3DCylinder-Head-Sector>CHS</ABBR> =
+translation has=20
+changed, since the formatting. And for calculating the correct Cylinder, =
+Head=20
+and Sector values for the translation algorithm.<BR><BR></DIV>
+<DIV id=3DHiddenSectors>
+<H4>Hidden Sectors</H4>When the volume is on a media that is =
+partitioned, this=20
+value contains the number of sectors preceeding the first sector of the=20
+volume.<BR><BR></DIV>
+<DIV id=3DLargeNumberOfSectors>
+<H4>Large Number of Sectors</H4>This field states the total number of =
+sectors in=20
+the volume. That includes the number of sectors occupied by the four =
+regions=20
+which the FAT16 file system consist of. For FAT16 volumes that use more =
+than=20
+65535 sectors this field is used. The File System Id in the MBR is then =
+06h. For=20
+FAT16 volumes that use less than 65536 sectors the <A=20
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#SmallNumberOfSectors">Small=20
+Number of Sectors</A> field is used and this one should be set to=20
+0h.<BR><BR></DIV><BR></DIV>
+<DIV id=3DExtendedBIOSParameterBlock>
+<H3>Extended BIOS Parameter Block</H3>The Extended BIOS Parameter Block =
+contains=20
+information that is only used in the FAT16 file system.<BR><BR>
+<DIV id=3DDriveNumber>
+<H4>Drive Number</H4>This is the int 13h drive number of the drive. The =
+value=20
+00h is used for the first floppy drive and the value 80h is used for the =
+first=20
+harddrive. MS-DOS's bootstrap uses this value to find the correct=20
+drive.<BR><BR></DIV>
+<DIV id=3DReserved>
+<H4>Reserved</H4>Reserved byte. It was original used to store the =
+cylinder on=20
+which the boot sector is located. But Windows NT uses this byte to store =
+two=20
+flags. The lowest bit would indicates that a check disk should be run at =
+boot=20
+time, and the second lowest flag indicates that a surface scan should be =
+
+run.<BR><BR></DIV>
+<DIV id=3DExtendedBootSignature>
+<H4>Extended Boot Signature</H4>If this byte contain a value of 29h it =
+indicates=20
+that the following three fields are available.<BR><BR></DIV>
+<DIV id=3DVolumeSerialNumber>
+<H4>Volume Serial Number</H4>This value is a 32 bit random number, =
+which,=20
+combined with the <A=20
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#VolumeLabel">volume=20
+label</A>, makes is possible to track removable media and check if the =
+correct=20
+one is inserted.<BR><BR></DIV>
+<DIV id=3DVolumeLabel>
+<H4>Volume Label</H4>This 11 byte long string should match the volume =
+label=20
+entry in the root directory. If no such entry is available this field =
+should=20
+contain the string 'NO NAME ' (11 bytes long string). When updating the =
+volume=20
+label, both, this field and the entry in the root directory should be=20
+updated.<BR><BR></DIV>
+<DIV id=3DFileSystemType>
+<H4>File System Type</H4>This 8 byte long string should be used for=20
+informational display only. Thats because its sometime incorrectly set. =
+The=20
+field should contain the string 'FAT16 ' (8 bytes long=20
+string).<BR><BR></DIV><BR></DIV>
+<DIV id=3DBootstrapCode>
+<H3>Bootstrap Code</H3>The bootstrap code is different between operating =
+system=20
+and versions which are intended to be loaded of this FAT16 volume. The=20
+responsability of the bootstrap code is to continue the boot sequence. =
+If ex.=20
+MS-DOS is installed the bootstrap code will locate the file IO.SYS in =
+the file=20
+system, load part of it into memory and then jump to a specific =
+entrypoint in=20
+IO.SYS. What the bootstrap code does is vary between operating=20
+system.<BR><BR><BR></DIV>
+<DIV id=3DBootSectorSignature>
+<H3>Boot Sector Signature</H3>The word at offset 1FEh should contain the =
+
+signature AA55h. This will indicate to the BIOS that the sector is =
+executable.=20
+The signature is also used by other applications when validating that =
+the=20
+correct sector has been loaded. <SPAN class=3DNote>No matter what the =
+Bytes Per=20
+Sector value is this signature should always be at offset=20
+1FEh.</SPAN><BR><BR><BR></DIV>
+<DIV id=3DFileAllocationTable>
+<H2>File Allocation Table</H2>The <ABBR title=3D"File Allocation =
+Table">FAT</ABBR>=20
+structure contain linked lists of files in the file system. Any file or=20
+directory entry in a (sub)directory list contain a cluster number for =
+the first=20
+chunk of the file/directory. This cluster number also has an associated =
+entry in=20
+the FAT. At this entry in the FAT a single word value either points to =
+the next=20
+cluster/chunk or it contain an End-of-file value. These are the valid=20
+values:<BR><BR>
+<DIV id=3DValidFATValue class=3DCentered>
+<TABLE summary=3D"Valid FAT16 values" width=3D"60%">
+  <CAPTION>Valid FAT16 values </CAPTION>
+  <COLGROUP>
+  <COL vAlign=3Dtop align=3Dmiddle width=3D"30%">
+  <COL vAlign=3Dtop align=3Dleft width=3D"70%"></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH vAlign=3Dcenter align=3Dmiddle>Value</TH>
+    <TH vAlign=3Dcenter align=3Dmiddle>Description</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD>0000h</TD>
+    <TD>Free cluster</TD></TR>
+  <TR>
+    <TD>0001h - 0002h</TD>
+    <TD>Not allowed</TD></TR>
+  <TR>
+    <TD>0003h - FFEFh</TD>
+    <TD>Number of the next cluster</TD></TR>
+  <TR>
+    <TD>FFF7h</TD>
+    <TD>One or more bad sectors in cluster</TD></TR>
+  <TR>
+    <TD>FFF8h - FFFFh</TD>
+    <TD>End-of-file</TD></TR></TBODY></TABLE></DIV><BR>Each FAT copy =
+start with a=20
+value of FFxxh for the first cluster, where xx is equal to the <A=20
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#MediaDescriptor">Media=20
+Descriptor</A> field in the BIOS Parameter Block. The FAT entry for the =
+second=20
+cluster is set to the End-of-file value (FFFFh). The two highest bits of =
+this=20
+value may be used for dirty volume flags in the following way.<BR><BR>
+<DIV id=3DFATValue class=3DCentered>
+<TABLE summary=3D"FAT Entry Value for 2nd cluster" width=3D"60%">
+  <CAPTION>FAT Entry Value for 2nd cluster </CAPTION>
+  <COLGROUP vAlign=3Dcenter span=3D32 align=3Dmiddle =
+width=3D"6%"></COLGROUP>
+  <COLGROUP>
+  <COL vAlign=3Dcenter align=3Dmiddle width=3D"4%"></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH class=3DBitTable>15</TH>
+    <TH class=3DBitTable>14</TH>
+    <TH class=3DBitTable>13</TH>
+    <TH class=3DBitTable>12</TH>
+    <TH class=3DBitTable>11</TH>
+    <TH class=3DBitTable>10</TH>
+    <TH class=3DBitTable>9</TH>
+    <TH class=3DBitTable>8</TH>
+    <TH class=3DBitTable>7</TH>
+    <TH class=3DBitTable>6</TH>
+    <TH class=3DBitTable>5</TH>
+    <TH class=3DBitTable>4</TH>
+    <TH class=3DBitTable>3</TH>
+    <TH class=3DBitTable>2</TH>
+    <TH class=3DBitTable>1</TH>
+    <TH class=3DBitTable>0</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD class=3DBitTable>C</TD>
+    <TD class=3DBitTable>E</TD>
+    <TD class=3DBitTable colSpan=3D14>These bits must be set</TD>
+    <TH class=3DBitTable>0000h</TH></TR></TBODY>
+  <TBODY>
+  <TR>
+    <TD class=3DNoColor colSpan=3D15 align=3Dleft>C =3D If clear then =
+the volume may=20
+      be dirty because it was not cleanly dismounted. If the bit is set =
+then the=20
+      volume is clean.<BR></TD></TR>
+  <TR>
+    <TD class=3DNoColor colSpan=3D15 align=3Dleft>E =3D If clear a =
+read/write error=20
+      was encountered during the last time the volume was mounted. If =
+the bit is=20
+      set then no read/write error was=20
+encountered.<BR></TD></TR></TBODY></TABLE></DIV><BR>It should be noted =
+that the=20
+last entry in the FAT should be calculated by taking the number of =
+clusters in=20
+the data area, and not relying on the <A=20
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#SectorsPerFAT">Sectors=20
+Per FAT</A> field in the BIOS Parameter Block. This is because the =
+number of=20
+entries in the FAT doesn't have to be an even multiple of the bytes per =
+sector=20
+value.<BR><BR>The maximum size of each FAT copy is 128 Kb (2 *=20
+65536).<BR><BR><BR></DIV>
+<DIV id=3DDirectoryEntry>
+<H2>Directory Entry Structure</H2>Each of the entries in a directory =
+list is 32=20
+byte long. The only directory which is in a fixed location is the root=20
+directory. This is also the only directory which may contain an entry =
+with the=20
+Volume Label attribute set. The size of the <A=20
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#RootEntriesCount">root=20
+directory</A> is defined in the BIOS Parameter =
+Block.<BR><BR>Sub-directories are=20
+created by allocating a cluster which then are cleared so it doesn't =
+contain any=20
+directory entries. Two default entries are then created: The '.' entry =
+point to=20
+the directory itself, and the '..' entry points to the parent directory. =
+If the=20
+contents of a sub-directory grows beyond what can be in the cluster a =
+new=20
+cluster is allocated in the same way as for files.<BR><BR>This is the =
+format of=20
+the directory entries:<BR><BR>
+<DIV id=3DDirectoryEntryStructure class=3DCentered>
+<TABLE summary=3D"Structure of the Directory Entries" width=3D"90%">
+  <CAPTION>Structure of the Directory Entries </CAPTION>
+  <COLGROUP>
+  <COL vAlign=3Dtop align=3Dmiddle width=3D"15%">
+  <COL vAlign=3Dtop align=3Dmiddle width=3D"15%">
+  <COL vAlign=3Dtop align=3Dleft width=3D"70%"></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH vAlign=3Dcenter align=3Dmiddle>Offset</TH>
+    <TH vAlign=3Dcenter align=3Dmiddle>Size</TH>
+    <TH vAlign=3Dcenter align=3Dmiddle>Description</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD>00h</TD>
+    <TD>8 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#FilenameAndExtension">Filename</A></TD></TR>
+  <TR>
+    <TD>08h</TD>
+    <TD>3 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#FilenameAndExtension">Filename=20
+      Extension</A></TD></TR>
+  <TR>
+    <TD>0Bh</TD>
+    <TD>1 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#AttributeByte">Attribute=20
+      Byte</A></TD></TR>
+  <TR>
+    <TD>0Ch</TD>
+    <TD>1 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#ReservedForWindowsNT">Reserved</A>=20
+      for Windows NT</TD></TR>
+  <TR>
+    <TD>0Dh</TD>
+    <TD>1 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#CreationTimeMillisecond">Creation</A>=20
+      - Millisecond stamp (actual 100th of a second)</TD></TR>
+  <TR>
+    <TD>0Eh</TD>
+    <TD>2 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#CreationTimeDate">Creation=20
+      Time</A></TD></TR>
+  <TR>
+    <TD>10h</TD>
+    <TD>2 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#CreationTimeDate">Creation=20
+      Date</A></TD></TR>
+  <TR>
+    <TD>12h</TD>
+    <TD>2 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#LastAccessDate">Last=20
+      Access Date</A></TD></TR>
+  <TR>
+    <TD>14h</TD>
+    <TD>2 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#ReservedForFAT32">Reserved=20
+      for FAT32</A></TD></TR>
+  <TR>
+    <TD>16h</TD>
+    <TD>2 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#LastWriteTime">Last=20
+      Write Time</A></TD></TR>
+  <TR>
+    <TD>18h</TD>
+    <TD>2 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#LastWriteDate">Last=20
+      Write Date</A></TD></TR>
+  <TR>
+    <TD>1Ah</TD>
+    <TD>2 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#StatingCluster">Starting=20
+      cluster</A></TD></TR>
+  <TR>
+    <TD>1Ch</TD>
+    <TD>4 bytes</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#FileSize">File=20
+      size</A> in bytes</TD></TR></TBODY></TABLE></DIV><BR></DIV>
+<DIV id=3DFilenameAndExtension>
+<H4>Filename &amp; Extension</H4>The filename is 8 byte long. Shorter =
+names must=20
+be trailing padded with space bytes (ASCII: 20h). The extension is 3 =
+byte long=20
+and shorter names also have to be trailing padded. The characters =
+allowed in the=20
+filename and extension are basicly the uppercase letters of the english=20
+alphabet, plus the digits 0 to 9.<BR><BR>The first byte in the filename =
+is=20
+treated special. The following rules apply:<BR>
+<OL>
+  <LI>A value of 00h is interpertated as 'stop the search, there is no =
+more=20
+  entries in this directory'.</LI>
+  <LI>A value of 05h is should be replaced with the ASCII character E5h. =
+The=20
+  character is used in Japan.</LI>
+  <LI>Must not contain the value 20h.</LI>
+  <LI>A value of E5h is interpertated as 'the entry is free'.</LI>
+  <LI>Any of the values mentioned below are allowed.</LI></OL><BR>The =
+following=20
+characters are not allowed in the filename or its extension:<BR>
+<OL>
+  <LI>Any character below 20h, except the 05h character.</LI>
+  <LI>Any character in the following list: 22h ("), 2Ah (*), 2Bh (+), =
+2Ch (,),=20
+  2Eh (.), 2Fh (/), 3Ah (:), 3Bh (;), 3Ch (&lt;), 3Dh (=3D), 3Eh (&gt;), =
+3Fh (?),=20
+  5Bh ([), 5Ch (\), 5Dh (]), 7Ch (|).</LI></OL><BR>For compatibility =
+reasons it is=20
+recommended to limit the characters to:<BR>
+<OL>
+  <LI>Any uppercase characters from A to Z.</LI>
+  <LI>Any digit from 0 to 1.</LI>
+  <LI>Any of the following characters: #, $, %, &amp;, ', (, ), -,=20
+@</LI></OL><BR></DIV>
+<DIV id=3DAttributeByte>
+<H4>Attribute Byte</H4>The attribute byte defines a set of flags which =
+can be=20
+set for directories, volume name, hidden files, system files, etc. These =
+are the=20
+flags:<BR><BR>
+<DIV id=3DFlags class=3DCentered>
+<TABLE summary=3D"Flags in the Attribute byte" width=3D"60%">
+  <CAPTION>Flags in the Attribute byte </CAPTION>
+  <COLGROUP vAlign=3Dcenter span=3D8 align=3Dmiddle =
+width=3D"3%"></COLGROUP>
+  <COLGROUP>
+  <COL vAlign=3Dcenter align=3Dmiddle width=3D"4%"></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH class=3DBitTable>7</TH>
+    <TH class=3DBitTable>6</TH>
+    <TH class=3DBitTable>5</TH>
+    <TH class=3DBitTable>4</TH>
+    <TH class=3DBitTable>3</TH>
+    <TH class=3DBitTable>2</TH>
+    <TH class=3DBitTable>1</TH>
+    <TH class=3DBitTable>0</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD class=3DBitTable colSpan=3D2>Reserved</TD>
+    <TD class=3DBitTable>A</TD>
+    <TD class=3DBitTable>D</TD>
+    <TD class=3DBitTable>V</TD>
+    <TD class=3DBitTable>S</TD>
+    <TD class=3DBitTable>H</TD>
+    <TD class=3DBitTable>R</TD>
+    <TH class=3DBitTable>0000h</TH></TR></TBODY></TABLE></DIV><BR></DIV>
+<DIV id=3DReadOnly>
+<H5>Read Only</H5>This flag is used to prevent programs from not =
+automatically=20
+overwriting or deleting this entry.<BR><BR></DIV>
+<DIV id=3DHidden>
+<H6>Hidden</H6>This flag indicates to the system that the file should be =
+hidden=20
+when doing normal directory listings. But in a lot of programs this can =
+be=20
+overwritten by the user.<BR><BR></DIV>
+<DIV id=3DSystem>
+<H5>System</H5>This flag indicates that the file/directory is important =
+for the=20
+system, and shouldn't be manipulated without any concern.<BR><BR></DIV>
+<DIV id=3DVolumeName>
+<H5>Volume Name</H5>When this flag is set, the directory entry is not =
+pointing=20
+to a file, but to nothing. Thus the the Starting cluster must point the =
+cluster=20
+0. The only information used from this entry is the filename (8 bytes) =
+plus the=20
+filename extension (3 bytes). These bytes form an 11 byte long volume =
+label=20
+(without any .) There may be only <B>one</B> valid entry in the entire =
+volume=20
+with this flag set. This entry must be in the root directory and =
+preferably=20
+among the first entries, if not, then MS-DOS can have trouble displaying =
+the=20
+right volume label if there are long file names present. This volume =
+name should=20
+be the same as the one in the boot sector.<BR><BR>
+<DIV id=3DDirectory>
+<H5>Directory</H5>This flag is set, when an entry in the directory table =
+is not=20
+pointing to the beginning of a file, but to another directory table. A=20
+sub-directory. The sub-directory is placed in the cluster, which the =
+Starting=20
+Cluster field points to. The format of this sub-directory table is =
+identical to=20
+the root directory table.<BR><BR></DIV>
+<DIV id=3DAchieve>
+<H5>Achieve Flag</H5>This flag is used by backup utilities. The flag is =
+set when=20
+ever a file is created, renamed or changed. Backup utilities can then =
+use this=20
+flag to determine which files that has been modified since the last=20
+backup.<BR><BR><BR></DIV>
+<DIV id=3DReservedForWindowsNT>
+<H4>Reserved for Windows NT</H4>This byte is used by Windows NT. It set =
+the=20
+value to 0 when the file is created and then never look at it again. For =
+what=20
+purpose it uses it is unknown.<BR><BR></DIV>
+<DIV id=3DCreationTimeMillisecond>
+<H4>Creation Time - Millisecond</H4>Due to size limitations this field =
+(1 byte)=20
+only contains the millisecond stamp in counts of 10 milliseconds. =
+Therefore=20
+valid values are between 0 and 199 inclusive.<BR><BR></DIV>
+<DIV id=3DCreationTimeDate>
+<H4>Creation Time &amp; Date</H4>The 16 bit time field contain the time =
+of day=20
+when this entry was created. The 16 bit date field contain the date when =
+the=20
+entry was created. These two values never change. Both the <A=20
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#TimeFormat">time</A>=20
+field and the <A=20
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#DateFormat">date</A>=20
+field are in a special format.<BR><BR></DIV>
+<DIV id=3DLastAccessDate>
+<H4>Last Access Date</H4>This 16 bit field contain the date when the =
+entry was=20
+last read or written to. In case of writes this field of cause contain =
+the same=20
+value as the <A=20
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#LastWriteDate">Last=20
+Write Date</A> field. The <A=20
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#DateFormat">date</A>=20
+field is the same special format as the other dates.<BR><BR></DIV>
+<DIV id=3DReservedForFAT32>
+<H4>Reserved for FAT32</H4>This word is reserved for the FAT32 File =
+System. When=20
+used in that file system it will contain the high word of the starting =
+cluster.=20
+In the FAT16 File System this word should be set to 0.<BR><BR></DIV>
+<DIV id=3DLastWriteTime>
+<H4>Last Write Time</H4>This 16 bit field is set to the time when the =
+last write=20
+occured. When the entry is create this field and the <A=20
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#CreationTimeDate">Creation=20
+Time</A> field should contain the same values. In case the entry is a =
+directory=20
+entry this field should change when the contents of the sub-directory=20
+changes.<BR><BR>The field is in the special format described below:<BR>
+<DIV id=3DTimeFormat class=3DCentered>
+<TABLE summary=3D"Time Format" width=3D"90%">
+  <CAPTION>Time Format </CAPTION>
+  <COLGROUP vAlign=3Dcenter span=3D32 align=3Dmiddle =
+width=3D"6%"></COLGROUP>
+  <COLGROUP>
+  <COL vAlign=3Dcenter align=3Dmiddle width=3D"4%"></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH class=3DBitTable>15</TH>
+    <TH class=3DBitTable>14</TH>
+    <TH class=3DBitTable>13</TH>
+    <TH class=3DBitTable>12</TH>
+    <TH class=3DBitTable>11</TH>
+    <TH class=3DBitTable>10</TH>
+    <TH class=3DBitTable>9</TH>
+    <TH class=3DBitTable>8</TH>
+    <TH class=3DBitTable>7</TH>
+    <TH class=3DBitTable>6</TH>
+    <TH class=3DBitTable>5</TH>
+    <TH class=3DBitTable>4</TH>
+    <TH class=3DBitTable>3</TH>
+    <TH class=3DBitTable>2</TH>
+    <TH class=3DBitTable>1</TH>
+    <TH class=3DBitTable>0</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD class=3DBitTable colSpan=3D5>Hours (0-23)</TD>
+    <TD class=3DBitTable colSpan=3D6>Minutes (0-59)</TD>
+    <TD class=3DBitTable colSpan=3D5>Seconds (0-29)</TD>
+    <TH class=3DBitTable>0000h</TH></TR></TBODY>
+  <TBODY>
+  <TR>
+    <TD class=3DNoColor colSpan=3D16 align=3Dleft><SPAN =
+class=3DNote>Seconds are=20
+      counted with 2 seconds interval, so a value of 29 in this field =
+gives 58=20
+      seconds.</SPAN></TD></TR></TBODY></TABLE></DIV><BR></DIV>
+<DIV id=3DLastWriteDate>
+<H4>Last Write Date</H4>This 16 bit field is set to the date when the =
+last write=20
+occured. When the entry is create this field and the <A=20
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#CreationTimeDate">Creation=20
+Date</A> field should contain the same values. In case the entry is a =
+directory=20
+entry this field should change when the contents of the sub-directory=20
+changes.<BR><BR>The field is in the special format described below:<BR>
+<DIV id=3DDateFormat class=3DCentered>
+<TABLE summary=3D"Date Format" width=3D"90%">
+  <CAPTION>Date Format </CAPTION>
+  <COLGROUP vAlign=3Dcenter span=3D32 align=3Dmiddle =
+width=3D"6%"></COLGROUP>
+  <COLGROUP>
+  <COL vAlign=3Dcenter align=3Dmiddle width=3D"4%"></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH class=3DBitTable>15</TH>
+    <TH class=3DBitTable>14</TH>
+    <TH class=3DBitTable>13</TH>
+    <TH class=3DBitTable>12</TH>
+    <TH class=3DBitTable>11</TH>
+    <TH class=3DBitTable>10</TH>
+    <TH class=3DBitTable>9</TH>
+    <TH class=3DBitTable>8</TH>
+    <TH class=3DBitTable>7</TH>
+    <TH class=3DBitTable>6</TH>
+    <TH class=3DBitTable>5</TH>
+    <TH class=3DBitTable>4</TH>
+    <TH class=3DBitTable>3</TH>
+    <TH class=3DBitTable>2</TH>
+    <TH class=3DBitTable>1</TH>
+    <TH class=3DBitTable>0</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD class=3DBitTable colSpan=3D5>Day of month (1-31)</TD>
+    <TD class=3DBitTable colSpan=3D4>Month of year (1-12)</TD>
+    <TD class=3DBitTable colSpan=3D7>Years from 1980 (0-127 -&gt; =
+1980-2107)</TD>
+    <TH class=3DBitTable>0000h</TH></TR></TBODY>
+  <TBODY>
+  <TR>
+    <TD class=3DNoColor colSpan=3D16=20
+align=3Dleft></TD></TR></TBODY></TABLE></DIV><BR></DIV>
+<DIV id=3DFirstCluster>
+<H4>First Cluster</H4>This 16-bit field points to the starting cluster =
+number of=20
+entrys data. If the entry is a directory this entry point to the cluster =
+which=20
+contain the beginning of the sub-directory. If the entry is a file then =
+this=20
+entry point to the cluster holding the first chunk of data from the=20
+file.<BR><BR></DIV>
+<DIV id=3DFileSize>
+<H4>File Size</H4>This 32-bit field count the total file size in bytes. =
+For this=20
+reason the file system driver must not allow more than 4 Gb to be =
+allocated to a=20
+file. For other entries than files then file size field should be set to =
+
+0.<BR><BR></DIV><BR></DIV>
+<DIV id=3DCalculationAlgorithms>
+<H2>Calculation Algorithms</H2>How to calculate the starting location of =
+each=20
+region. The VolumeStart variable contain a <ABBR=20
+title=3D"Logical Block Addressing">LBA address</ABBR> of the first =
+sector in the=20
+volume. On drives which are not partitioned the VolumeStart value is 0. =
+On=20
+drives which are partitioned the VolumeStart variable contain the sector =
+number=20
+at which the partition start.<BR><BR>
+<DIV id=3DRegionCalculations class=3DCentered>
+<TABLE summary=3D"How to calculate regions and their sizes" =
+width=3D"90%">
+  <CAPTION>How to calculate regions and their size (in sectors) =
+</CAPTION>
+  <COLGROUP>
+  <COL vAlign=3Dtop align=3Dright width=3D"30%">
+  <COL vAlign=3Dtop align=3Dleft width=3D"70%"></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH vAlign=3Dcenter align=3Dmiddle>Region Start</TH>
+    <TH vAlign=3Dcenter align=3Dmiddle>Calculation</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD>ReservedRegion =3D</TD>
+    <TD>VolumeStart</TD></TR>
+  <TR>
+    <TD>FATRegion =3D</TD>
+    <TD><SPAN class=3DPreviousCalculated>ReservedRegion</SPAN> + <A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#ReservedSectors">ReservedSectors</A></TD></TR>
+  <TR>
+    <TD>RootDirectoryRegion =3D</TD>
+    <TD><SPAN class=3DPreviousCalculated>FATRegion</SPAN> + (<A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#NumberOfFATs">NumberOfFATs</A>=20
+      * <A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#SectorsPerFAT">SectorsPerFAT</A>)</TD></TR>
+  <TR>
+    <TD>DataRegion =3D</TD>
+    <TD><SPAN class=3DPreviousCalculated>RootDirectoryRegion</SPAN> + =
+((<A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#RootEntriesCount">RootEntiesCount</A>=20
+      * 32) / <A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#BytesPerSector">BytesPerSector</A>)</TD></TR>
+  <TR>
+    <TD>ReservedRegion_Size =3D</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#ReservedSectors">ReservedSectors</A></TD></TR>
+  <TR>
+    <TD>FATRegion_Size =3D</TD>
+    <TD><A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#NumberOfFATs">NumberOfFATs</A>=20
+      * <A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#SectorsPerFAT">SectorsPerFAT</A></TD></TR>
+  <TR>
+    <TD>RootDirectoryRegion_Size =3D</TD>
+    <TD>(<A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#RootEntriesCount">RootEntiesCount</A>=20
+      * 32) / <A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#BytesPerSector">BytesPerSector</A>=20
+      (Remember to round up!)</TD></TR>
+  <TR>
+    <TD>DataRegion_Size =3D</TD>
+    <TD>(<A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#LargeNumberOfSectors">TotalNumberOfSectors</A>=20
+      - (<SPAN class=3DPreviousCalculated>ReservedRegion_Size</SPAN> + =
+<SPAN=20
+      class=3DPreviousCalculated>FATRegion_Size</SPAN> + <SPAN=20
+      class=3DPreviousCalculated>RootDirectoryRegion_Size</SPAN>)) / <A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#SectorsPerCluster">SectorsPerCluster</A></TD></TR></TBODY>
+  <TBODY>
+  <TR>
+    <TD class=3DNoColor colSpan=3D2 align=3Dmiddle>Previous calculated =
+values which=20
+      are used again, are marked with <SPAN =
+class=3DPreviousCalculated>this=20
+      color</SPAN>. </TD></TR></TBODY></TABLE></DIV><BR><BR>
+<DIV id=3DFATRelatedValues class=3DCentered>
+<TABLE summary=3D"How to calculate FAT related values" width=3D"90%">
+  <CAPTION>How to calculate FAT related values </CAPTION>
+  <COLGROUP>
+  <COL vAlign=3Dtop align=3Dright width=3D"30%">
+  <COL vAlign=3Dtop align=3Dleft width=3D"70%"></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH vAlign=3Dcenter align=3Dmiddle>Region Start</TH>
+    <TH vAlign=3Dcenter align=3Dmiddle>Calculation</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD>Location of n'th FAT copy</TD>
+    <TD><SPAN class=3DPreviousCalculated>ReservedRegion</SPAN> + (N * <A =
+
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#ReservedSectors">SectorsPerFAT</A>)</TD></TR>
+  <TR>
+    <TD>Number of FAT entries</TD>
+    <TD><SPAN class=3DPreviousCalculated>DataRegion_Size</SPAN> =
+</TD></TR>
+  <TR>
+    <TD>Which FAT sector contain the cluster entry I need ?</TD>
+    <TD><SPAN class=3DPreviousCalculated>ReservedRegion</SPAN> + (N * <A =
+
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#ReservedSectors">SectorsPerFAT</A>)=20
+      + (FAT Entry / <A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#BytesPerSector">BytesPerSector</A>)</TD></TR></TBODY>
+  <TBODY>
+  <TR>
+    <TD class=3DNoColor colSpan=3D2 align=3Dmiddle>Previous calculated =
+values which=20
+      are used again, are marked with <SPAN =
+class=3DPreviousCalculated>this=20
+      color</SPAN>. </TD></TR></TBODY></TABLE></DIV><BR><BR>
+<DIV id=3DOtherValues class=3DCentered>
+<TABLE summary=3D"How to calculate other values" width=3D"90%">
+  <CAPTION>How to calculate other values </CAPTION>
+  <COLGROUP>
+  <COL vAlign=3Dtop align=3Dright width=3D"30%">
+  <COL vAlign=3Dtop align=3Dleft width=3D"70%"></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH vAlign=3Dcenter align=3Dmiddle>Region Start</TH>
+    <TH vAlign=3Dcenter align=3Dmiddle>Calculation</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD>First sector of cluster N =3D</TD>
+    <TD><SPAN class=3DPreviousCalculated>DataRegion</SPAN> + ((N - 2) * =
+<A=20
+      =
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT12_FileSystem.html=
+#SectorsPerCluster">SectorsPerCluster</A>)</TD></TR></TBODY>
+  <TBODY>
+  <TR>
+    <TD class=3DNoColor colSpan=3D2 align=3Dmiddle>Previous calculated =
+values which=20
+      are used again, are marked with <SPAN =
+class=3DPreviousCalculated>this=20
+      color</SPAN>. </TD></TR></TBODY></TABLE></DIV><BR><BR></DIV>
+<DIV id=3DSpecialNotes>
+<H2>Special Notes</H2>When creating a FAT16 volume special care should =
+be taken=20
+to ensure best compatibility. Following these rules ensure the best=20
+compatibility:<BR>
+<UL>
+  <LI>A FAT16 partition may not have less than 4085 clusters or more =
+than 65524=20
+  clusters.</LI>
+  <LI></LI>
+  <LI></LI>
+  <LI></LI>
+  <LI></LI>
+  <LI></LI>
+  <LI></LI>
+  <LI></LI>
+  <LI></LI>
+  <LI></LI></UL><BR><BR></DIV>
+<DIV id=3DConclusion>
+<H2>Conclusion</H2>The FAT family of file systems are relative simple =
+file=20
+systems. The complexity can be enhanced by adding support for long file =
+names,=20
+using the <A=20
+href=3D"http://www.maverick-os.dk/FileSystemFormats/VFAT_LongFileNames.ht=
+ml">VFAT=20
+Long File Names</A>. Also have a look at the <A=20
+href=3D"http://www.maverick-os.dk/FileSystemFormats/FAT32_FileSystem.html=
+">32 bit=20
+version</A> of the FAT file system.<BR></DIV></BODY></HTML>
+
+------=_NextPart_000_0089_01CFAB68.147823C0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.maverick-os.dk/Maverick.css
+
+BODY {
+	TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; =
+TEXT-INDENT: 0px; MARGIN: 0.5em; FONT-FAMILY: sans-serif; WHITE-SPACE: =
+normal; LETTER-SPACING: normal; COLOR: #202020; FONT-SIZE: 8pt; =
+FONT-WEIGHT: normal; WORD-SPACING: normal; TEXT-DECORATION: none
+}
+BODY.Menu {
+	BACKGROUND-COLOR: #f0f0ff; COLOR: #000000
+}
+BODY.Title {
+	BACKGROUND-COLOR: #f0f0ff; MARGIN: 0em; COLOR: #000000
+}
+.Calculation {
+	COLOR: #000080
+}
+.Centered {
+	TEXT-ALIGN: center
+}
+.Code {
+	BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: left; BORDER-LEFT: =
+#000000 1px solid; PADDING-BOTTOM: 10px; BACKGROUND-COLOR: #e0e0e0; =
+PADDING-LEFT: 10px; PADDING-RIGHT: 10px; FONT-FAMILY: monospace; =
+WHITE-SPACE: pre; MARGIN-LEFT: 2em; FONT-SIZE: 7pt; BORDER-TOP: #000000 =
+1px solid; FONT-WEIGHT: normal; MARGIN-RIGHT: 2em; BORDER-RIGHT: #000000 =
+1px solid; PADDING-TOP: 10px
+}
+.Copyright {
+	TEXT-ALIGN: center; MARGIN: 1em; FONT-SIZE: 6pt
+}
+.Date {
+	FONT-SIZE: 10pt; FONT-WEIGHT: bold
+}
+.DefinitionTerm {
+	BACKGROUND-COLOR: #c0ffc0; FONT-WEIGHT: bolder
+}
+.DefinitionData {
+	BACKGROUND-COLOR: #f0f0ff
+}
+.Important {
+	COLOR: #ff0000; FONT-SIZE: 110%; FONT-WEIGHT: bold
+}
+.MiniMenu {
+	TEXT-ALIGN: right; FONT-SIZE: 6pt
+}
+.Note {
+	COLOR: #ff0000
+}
+.Note:before {
+	CONTENT: "Note: "; FONT-WEIGHT: bold
+}
+.PreviousCalculated {
+	COLOR: #8000ff
+}
+.Recomendation {
+	COLOR: #ff0000
+}
+.Reserved {
+	COLOR: #ff0000
+}
+.Revision {
+	TEXT-ALIGN: right; FONT-SIZE: 7pt
+}
+A {
+	TEXT-DECORATION: none
+}
+A:link {
+	COLOR: #0000ff
+}
+A:visited {
+	COLOR: #0000ff
+}
+A:hover {
+	COLOR: #ff0000
+}
+A:active {
+	COLOR: #ff0000
+}
+H1 {
+	TEXT-ALIGN: center; MARGIN: 0em; FONT-FAMILY: sans-serif; FONT-SIZE: =
+24pt; FONT-WEIGHT: bold
+}
+H1.Menu {
+	TEXT-TRANSFORM: uppercase; FONT-SIZE: 10pt; TEXT-DECORATION: underline =
+overline
+}
+H1.PreTitle {
+	COLOR: #505050; FONT-SIZE: 10pt
+}
+H1.SubTitle {
+	COLOR: #505050; FONT-SIZE: 10pt
+}
+H2 {
+	TEXT-ALIGN: left; MARGIN: 0em; FONT-SIZE: 14pt
+}
+H2.Menu {
+	TEXT-ALIGN: left; TEXT-TRANSFORM: lowercase; MARGIN: 0em; FONT-SIZE: =
+9pt; FONT-WEIGHT: normal; TEXT-DECORATION: underline
+}
+H3 {
+	MARGIN: 0em; FONT-SIZE: 10pt; FONT-WEIGHT: bold
+}
+H3.Menu {
+	TEXT-ALIGN: left; TEXT-TRANSFORM: lowercase; MARGIN: 0em; FONT-SIZE: =
+9pt; TEXT-DECORATION: underline
+}
+H4 {
+	MARGIN: 0em; FONT-SIZE: 9pt; FONT-WEIGHT: normal; TEXT-DECORATION: =
+underline
+}
+H5 {
+	FONT-STYLE: italic; MARGIN: 0em; FONT-SIZE: 9pt; FONT-WEIGHT: normal
+}
+H6 {
+	FONT-STYLE: oblique; MARGIN: 0em; FONT-SIZE: 9pt; FONT-WEIGHT: normal
+}
+HR {
+	TEXT-ALIGN: right; HEIGHT: 1px; COLOR: #505050
+}
+P {
+	MARGIN: 0.1em 0px 0.9em
+}
+TABLE {
+	FONT-FAMILY: sans-serif; FONT-SIZE: 8pt
+}
+TR {
+	FONT-FAMILY: sans-serif; FONT-SIZE: 8pt
+}
+TD {
+	FONT-FAMILY: sans-serif; FONT-SIZE: 8pt
+}
+TH {
+	FONT-FAMILY: sans-serif; FONT-SIZE: 8pt
+}
+CAPTION {
+	FONT-FAMILY: sans-serif; FONT-SIZE: 8pt
+}
+TD {
+	BACKGROUND-COLOR: #f0f0ff
+}
+TH {
+	BACKGROUND-COLOR: #c0c0ff
+}
+TD.BitTable {
+	TEXT-ALIGN: center; FONT-SIZE: 7pt
+}
+TH.BitTable {
+	TEXT-ALIGN: center; FONT-SIZE: 7pt; FONT-WEIGHT: normal
+}
+TD.Code {
+	BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: =
+#000000 1px solid; PADDING-BOTTOM: 1px; BACKGROUND-COLOR: #e0e0e0; =
+PADDING-LEFT: 1px; PADDING-RIGHT: 1px; MARGIN-LEFT: 1em; FONT-SIZE: 6pt; =
+BORDER-TOP: #000000 1px solid; FONT-WEIGHT: normal; MARGIN-RIGHT: 1em; =
+BORDER-RIGHT: #000000 1px solid; PADDING-TOP: 1px
+}
+TD.NoColor {
+	BACKGROUND-COLOR: #ffffff
+}
+TH.NoColor {
+	BACKGROUND-COLOR: #ffffff
+}
+CAPTION {
+	FONT-SIZE: 9pt; FONT-WEIGHT: normal
+}
+DL {
+	MARGIN: 0em
+}
+DD {
+	MARGIN: 0em
+}
+DT {
+	MARGIN-TOP: 1.5em; FONT-FAMILY: sans-serif; MARGIN-LEFT: 0.2em; =
+FONT-SIZE: 10pt; FONT-WEIGHT: bold
+}
+UL {
+	MARGIN: 0em 0em 0em 2em
+}
+OL {
+	MARGIN: 0em 0em 0em 2em
+}
+
+------=_NextPart_000_0089_01CFAB68.147823C0--

@@ -1,0 +1,691 @@
+
+<!-- saved from url=(0011)about:blank -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body class="lc2 https" style="margin: 0px; padding: 0px;"><style type="text/css">#content-container{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;z-index:6;line-height:22px}#content{border-radius:10px 10px 0 0;box-shadow:inset 1px 1px 1px rgba(255,255,255,.2)}#content #full-view-button{display:block;position:relative;padding:0;outline:0;color:#fff;font-size:14px;text-decoration:none;font-weight:700}#content #open-label{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding:6px 15px}.lc2 #content #open-icon{float:right;position:relative}#mobile_invitation_container{position:absolute;left:0;right:0;width:100%;font-size:.9em}#mobile_invitation_container:hover{cursor:pointer}.invitation_message{margin-right:1em;display:table-cell;vertical-align:middle;width:100%}#operator_avatar_container{display:table-cell;padding:.1em}#invitation_message_text{float:right;color:#4a546c;background:#e7eaf1;border-radius:.3em;font-size:1em;padding:.7em .9em;margin-right:.8em;max-height:3.2em;line-height:1.15em;overflow:hidden;display:block;border:1px solid rgba(0,0,0,.07);box-shadow:0 1px 5px rgba(0,0,0,.1);margin-left:.5em}.invitation_message:after{border:.5em solid transparent;border-color:transparent transparent transparent #DFE1E4;display:block;position:absolute;content:"";margin-top:.5em;right:5.1em;top:1.5em}#operator_avatar{float:right;border-radius:50%;width:4.5em;height:4.5em;box-shadow:0 1px 3px rgba(0,0,0,.2);border:.3em solid #fff;box-sizing:content-box;overflow:hidden;color:#fff;text-align:center;position:relative;transition:background-color .2s ease-in-out .2s;-webkit-transition:background-color .2s ease-in-out .2s;-ms-transition:background-color .2s ease-in-out .2s;-o-transition:background-color .2s ease-in-out .2s}.avatar-loaded #operator_avatar{background-color:#fff}#operator_avatar img{width:0;height:0;border-radius:50%;overflow:hidden;box-sizing:border-box;margin-top:50%;margin-left:50%;opacity:.5;position:absolute;top:0;left:0;transition:all 1s;-webkit-transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-ms-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out}.avatar-loaded #operator_avatar img{width:4.5em;height:4.5em;margin-top:0;margin-left:0;opacity:1;background-color:#fff}#content-container.new-mobile #content,#extra.new-mobile{margin-top:1.5em!important;border-radius:.5em!important}#extra.new-mobile{left:.5em!important;right:.5em!important;width:auto!important}#content [class*=" icon-"],#content [class^=icon-]{-webkit-font-smoothing:none}.icon-agentonline:before{font-size:2em}.icon-leavemessage:before{font-size:1.8em}.icon-leavemessage{line-height:4.5em!important}.icon-agentonline{line-height:4.6em!important}.rtl-lang{direction:rtl}.rtl-lang.lc2 #content #open-icon{left:12px;right:auto;float:left}.rtl-lang #content #open-label{text-align:right}@font-face {
+    font-family: 'livechat-modern';
+    src:    url('https://cdn.livechatinc.com/widget/fonts/modern/livechat-modern_fa44078c17.eot?ekgvz6');
+    src:    url('https://cdn.livechatinc.com/widget/fonts/modern/livechat-modern_fa44078c17.eot?ekgvz6#iefix') format('embedded-opentype'),
+        url('https://cdn.livechatinc.com/widget/fonts/modern/livechat-modern_7cf45543dc.ttf?ekgvz6') format('truetype'),
+        url('https://cdn.livechatinc.com/widget/fonts/modern/livechat-modern_27a85e5f71.woff?ekgvz6') format('woff'),
+        url('https://cdn.livechatinc.com/widget/fonts/modern/livechat-modern_bfb0fd8212.svg?ekgvz6#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'livechat-modern' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tick:before {
+    content: "\e915";
+}
+.icon-leavemessage:before {
+    content: "\e90b";
+}
+.icon-agentonline:before {
+    content: "\e90c";
+}
+.icon-clip:before {
+    content: "\e90d";
+}
+.icon-close:before {
+    content: "\e90e";
+}
+.icon-email:before {
+    content: "\e90f";
+}
+.icon-maximize:before {
+    content: "\e910";
+}
+.icon-minimize:before {
+    content: "\e911";
+}
+.icon-mobile:before {
+    content: "\e912";
+}
+.icon-thumbs-down:before {
+    content: "\e913";
+}
+.icon-thumbs-up:before {
+    content: "\e914";
+}
+ @font-face{font-family:Lato;font-style:normal;font-weight:400;src:local('Lato Regular'),local('Lato-Regular'),url(https://themes.googleusercontent.com/static/fonts/lato/v6/9k-RPmcnxYEPm8CNFsH2gg.woff) format('woff')}body{font-family:Lato,sans-serif!important}#content{padding:0;background:#FFF;border-radius:4px 4px 0 0!important;box-shadow:none;background-clip:padding-box!important;border:0!important;height:100%}#content #open-icon{top:8px;right:8px}.icon-maximize{font-size:18px}.lc2 #content #full-view-button{white-space:nowrap;font-size:16px;font-weight:400}#full-view-button span:nth-child(2){width:100%!important;box-sizing:border-box;overflow:hidden;text-overflow:ellipsis;padding-right:38px!important;display:inline-block!important}.rtl-lang #full-view-button span:nth-child(2){padding-left:38px!important;padding-right:15px!important}#content { background-color: #28467E; } #operator_avatar { background-color: #28467E; }#operator_avatar {
+border: none !important;
+}
+
+#livechat-full {
+  bottom: 0 !important;
+  right: 0 !important;
+  height: 740px !important;
+  max-height: 100% !important;
+  width: 400px !important;
+}
+
+#wrapper {
+  padding: 2rem 2rem 2rem 2rem !important;
+  top: -20px !important;
+}
+
+.pop-in #content, #wrapper {
+  background: none;
+  border-radius: 0.5rem !important;
+}
+
+.title-bg, #body-inner, #operators td, #survey-after-greeting, #footer td {
+  background: rgba(0,0,0,.65) !important;
+  box-shadow: none !important;
+}
+
+.operators-bar .wrapper, .title-button, .title-button:hover {
+  background: none !important;
+}
+
+.operator-name, .operator-role, .icon-thumbs-down, .icon-thumbs-up, .icon-email {
+  color: #fff !important;
+  border-right-color: #fff !important;
+}
+
+.avatar {
+  border-radius: 100% !important;
+}
+
+#title {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+#body-container p {
+  padding: .25rem 1rem;
+}
+
+.msg-text {
+  padding: .9rem 1.1rem;
+  width:auto;
+  display: inline-block;
+  margin-bottom: .125rem !important;
+}
+
+.msg-text a {
+  color: inherit!important;
+}
+
+.client .msg-text {
+  background: #28467E;
+  color: #fff;
+  border-radius: 1.4rem 1.4rem .3rem 1.4rem;
+}
+
+.client.same-author .msg-text {
+  border-radius: 1.4rem .3rem .3rem 1.4rem;
+}
+
+.client.last-sent .msg-text {
+  border-radius: 1.4rem .3rem 1.4rem 1.4rem;
+}
+
+.operator .msg-text {
+  background: #fff;
+  color: #000;
+  border-radius: 1.3rem 1.4rem 1.4rem .3rem;
+}
+
+.operator.same-author .msg-text {
+  border-radius: .3rem 1.4rem 1.4rem .3rem;
+}
+
+.client .author, .operator .author {
+  color: #fff !important;
+}
+
+.client {
+  text-align: right;
+}
+
+.time {
+  display: none;
+}
+
+.last-sent .delivered-indicator, .last-seen .last-seen-indicator {
+  display: block !important;
+  color: hsla(0,0%,100%,.8);
+  font-size: .65rem;
+  clear: both;
+  padding: .2rem;
+}
+
+.last-seen .delivered-indicator {
+  display: none !important;
+}
+
+#typing-indicator {
+  color: hsla(0,0%,100%,.8);
+  text-align: right;
+}
+
+#rate_me_feedback_form, #email_transcript_form, #view-offline-form-sent div, #view-offline-message-sent p {
+  margin: 2rem 1rem 1rem !important;
+  border-radius: 1rem;
+  background: #fff;
+  color: #000;
+  text-align: center;
+  padding: 1rem .5rem !important;
+  box-shadow: 0px 0px 20px 2px rgba(0,0,0,1) !important;
+}
+
+.system {
+  text-align: center;
+}
+
+.system .msg-text, .system .msg-text a {
+  padding: .5rem;
+  color: hsla(0,0%,100%,.8);
+}
+
+#email_transcript_form input[type=submit], #operators #rate_me_feedback_form input[type=submit], .submit input, #send-file, #leave-chat {
+  background-color: #28467E!important;
+  box-shadow: none !important;
+}
+
+.submit input:hover {
+  opacity: 1 !important;
+}
+
+#confirm-closing p.actions {
+  width: 100% !important;
+}
+
+#confirm-closing {
+  color: hsla(0,0%,100%,.8);
+}
+
+.form {
+  border-radius: 1rem;
+  background: #fff;
+  color: #000;
+}
+
+#body label {
+  color: #000;
+}
+
+.message-wrapper {
+  padding: 0 !important;
+}
+
+#footer td {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  padding: 3px;
+}
+
+#powered .footer {
+  background: none!important;
+  color:#fff;
+}
+
+#footer #powered {
+  text-shadow: 0 0.1rem 0.6rem rgba(0,0,0,.7);
+}
+
+#content .form .form_header {
+  margin: 10px 0px !important;
+}
+
+#message-wrapper .btn-send {
+  display: block;
+  right: 2.75rem!important;
+  position: absolute;
+  color:transparent;
+  height: 20px;
+  z-index: 3;
+  bottom: 3.5rem;
+  border: none;
+  background: url('https://static.livechatinc.com/1520/R5WJ1/c8fc72cefff281b99213b7bb921b6fb6/send_blue.png') transparent no-repeat center center;
+  background-size: auto 100%;
+}
+
+#message {
+  padding-right: 2.65rem;
+}
+
+#send-file-clip {
+  right: 1.05rem;
+  top: .5rem;
+}
+
+#send-file-clip .icon-clip {
+  font-weight: bold;
+  color: #28467E;
+  text-shadow: 0 0.1rem 0.1rem rgba(0,0,0,.175);
+}
+
+#popup-file {
+  border-radius: 1rem;
+  background: #fff;
+  color: #000;
+  left: 10%;
+  width: 80%;
+}
+
+.thumbnail {
+  border: none!important;
+  margin: 5px auto;
+}
+
+.integration {
+  text-align:center;
+}
+
+.integration .msg-text {
+  padding: .9rem 1.1rem;
+  width:auto;
+  display: inline-block;
+  margin-bottom: .125rem !important;
+  background: #fff;
+  border-radius: 1.4rem;
+}
+
+.url-preview {
+  background: #fff;
+  padding: .5rem;
+  border: none;
+  border-radius: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.details .title, .details .description {
+  color: #000 !important;
+}
+
+.url-preview.hover .details .title {
+  color: #28467E!important;
+}
+
+#invitation_message_text {
+  color: white;
+  background: #2095F2;
+}
+
+.invitation_message:after {
+  border-color: transparent;
+}
+
+.rating .icon-thumbs-up, .rating .icon-thumbs-down {
+color: #646669 !important;
+}
+
+/* custom for LiveChat */ 
+
+#message-placeholder {
+    color: transparent;
+}
+
+#message-placeholder::before {
+    content: 'Type a message here...';
+    color: #b3b3b3;
+}
+
+#title #title-text {
+  padding-left: 94px!important;
+    display: inline-block;
+    font-size: 14px !important;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 246px;
+}
+
+#rating-and-transcript {
+    position: fixed;
+    top: 24px;
+    left: 50px;
+}
+
+#operators .rating-button {
+    border: none !important;
+}
+
+#operators .rate-good {
+    margin-right: 0 !important;
+}
+
+.client .author, .operator .author, .last-sent .delivered-indicator, .last-seen .last-seen-indicator, .system .msg-text {
+    opacity: 0.5
+}
+
+textarea, form p, form input, form label, .operator .msg-text, #content .form .form_header p, .cancel, #operators #rate_me_feedback_form .cancel a, #operators #email_transcript_form .cancel a, *::placeholder {
+    color: #5A6976 !important;
+}
+
+#footer, #footer td {
+    border-bottom-left-radius: 1rem !important;
+    border-bottom-right-radius: 1rem !important;
+}
+
+.state-chatting #footer, .state-chatting #footer td {
+    background: #fff !important;
+}
+
+#title {
+    border-top-left-radius: 1rem !important;
+    border-top-right-radius: 1rem !important;
+}
+
+.pop-in #content, #wrapper {
+    border-radius: 1rem !important;
+}
+
+#message-wrapper .btn-send {
+    bottom: 3.5rem;
+}
+
+#message {
+    padding-right: 2.65rem !important;
+}
+
+#powered {
+    display: none;
+}
+
+#send-file-clip {
+    bottom: -1.5em;
+    right: auto;
+    top: auto;
+    left: 1em;
+}
+
+.icon-clip {
+    text-shadow: none !important;
+    font-size: 1.5em;
+}
+
+#operators #email_transcript_form input[type=submit], #operators #rate_me_feedback_form input[type=submit], .submit input, #send-file, #leave-chat {
+    border-radius: 6px;
+    padding: 12px 12px;
+    color: #fff !important;
+}
+
+.form {
+    border-radius: .5rem;
+}
+
+#body textarea, input.text, textarea {
+    border-color: #C7D1D9 !important;
+}
+
+#notification {
+    top: 20px;
+    left: 40px;
+    right: 40px;
+    text-align: center;
+}
+
+#rate_me_feedback_form, #email_transcript_form, #view-offline-form-sent div, #view-offline-message-sent p {
+    box-shadow: 0px 0px 20px 2px rgba(0,0,0,.5) !important;
+}
+
+#operators #rate_me_feedback_form form, #operators #rate_me_feedback_form label, #operators #email_transcript_form form label, #operators #email_transcript_form form {
+    margin: 0;
+    padding: 0;
+}
+
+#view-postchat-survey .form {
+    padding: 0;
+}
+
+#operators #rate_me_feedback_form label, #operators #email_transcript_form form label, #operators #email_transcript_form span {
+    width: 70%;
+    margin: 20px auto;
+    font-size: 14px;
+    line-height: 1.26;
+}
+
+#operators #email_transcript_form form label {
+    width: 100%;
+    margin: 20px auto 0;
+}
+
+#operators #email_transcript_form span {
+    color: #5A6976 !important;
+}
+
+#operators #rate_me_feedback_form textarea.text, #operators #email_transcript_form #transcript_email_input {
+    margin: 20px auto;
+    width: 85%;
+}
+
+#operators #rate_me_feedback_form .cancel, #operators #email_transcript_form .cancel {
+    display:block;
+    margin-top: 10px;
+    position: absolute;
+    top: 0px;
+    right: 68px;
+}
+
+#message {
+    padding: 5px !important;
+}
+
+#rate_me_feedback_form, #email_transcript_form {
+    margin: 1rem 2rem 0 !important;
+    top: 0 !important;
+}
+
+.url-preview {
+    display: none!important;
+}
+
+#operators #rate_me_feedback_form .cancel a, #operators #rate_me_feedback_form .cancel .or, #operators #email_transcript_form .cancel .or, #operators #email_transcript_form .cancel a {
+    visibility: hidden;
+    text-decoration: none;
+}
+
+.cancel a::after {
+    visibility: visible;
+    content: "+";
+}
+
+#operators #rate_me_feedback_form .cancel a, #operators #email_transcript_form .cancel a {
+    position: absolute;
+    font-size: 30px;
+    transform: rotate(-45deg);
+    color: #000 !important;
+    font-weight: 300;
+}
+
+#operators #email_transcript_form .cancel a {
+    top: 25px;
+    right: -72px;
+}
+
+#rate_me_feedback_form, #email_transcript_form {
+    background-image: url('https://static.livechatinc.com/1520/6AS4V/491b74dea66069e4869d2afdf97bcde6/comment.png');
+    background-repeat: no-repeat;
+    background-size: 80px 80px;
+    background-position: center 45px;
+    padding: 125px 0 0 !important;
+    border-radius: 8px;
+    box-shadow: 0px 0px 80px 0px rgba(0,0,0,0.75) !important;
+}
+
+#content .form {
+padding-bottom: 0;
+}
+
+.form .submit input, .submit input {
+background-color:#28467E!important;
+}
+
+#rate_me_feedback_form input[type=submit], #view-prechat-survey .form input[type=submit], #view-offline-form .form input[type=submit], #email_transcript_form input[type=submit], #view-postchat-survey input[type=submit] {
+    width: 100%;
+    margin: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+    padding: 17px 12px !important;
+}
+
+.operator .thumbnail, .client .thumbnail {
+    margin: 5px 0;
+    border-radius: 10px;
+}
+
+*::placeholder {
+    opacity: .5;
+}
+
+#view-prechat-survey .form, #view-postchat-survey form {
+    background-image: url('https://static.livechatinc.com/1520/6AS4V/0a997ec4468da982e66fb44115b6b87c/hello-v2.png');
+    background-repeat: no-repeat;
+    background-size: 80px 80px;
+    background-position: center 45px;
+    padding: 135px 0 0 !important;
+    border-radius: 8px;
+}
+
+#content .form div.submit p, #content .form div.submit{
+    padding: 10px 0 0 !important;
+}
+
+#view-prechat-survey .form #container_2 {
+    margin-top: 10px;
+}
+
+#operators a.rate-good {
+    float: none;
+    color: transparent;
+}
+
+#body .client a, #body .operator a {
+    clear: both;
+}
+
+#body .client .msg-text, #body .client a {
+    float: right;
+}
+
+#body .operator .msg-text, #body .operator a {
+    float: left;
+}
+
+#body .msg-text a {
+    clear: none;
+    float: none;
+}
+
+#operators .rating-button {
+    margin-right: 2px;
+}
+
+.rating-component .icon-thumbs-up, .rating-component .icon-thumbs-down {
+color: #646669 !important;
+}
+
+#footer td {
+    padding-top: 23px;
+}
+
+.state-chatting #footer #powered {
+    text-shadow: none;
+    display: block;
+}
+
+#powered .footer {
+    color: #5A6976 !important;
+}
+
+#confirm-closing p.actions a {
+box-shadow: none;
+}
+
+@livechat-mobile {
+    #title #title-text {
+            margin-left: 20% !important;
+    }
+
+    #livechat-compact-container {
+        transform: none;
+        -webkit-transform: none;
+    } 
+#wrapper {
+padding: 0!important;
+top: 0!important;
+}
+#message-wrapper .btn-send {
+display: inline-block;
+    font-size: 1rem;
+    z-index: 100;
+    position: absolute;
+    height: 3rem;
+    line-height: 3rem;
+    right: 0!important;
+    text-align: center;
+    width: 5rem;
+    color: #1F65CD;
+    border: 0;
+    border-left: .1rem solid #D4D4D4;
+    border-top: 0;
+    text-transform: uppercase;
+    background: 0 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+bottom:0;
+}
+#send-file-clip {
+    line-height: 3rem;
+    width: 2rem;
+    padding: 0;
+    right: .5rem;
+    text-align: center;
+    bottom: 0;
+    top: 0;
+    left: auto;
+}
+#message-wrapper {
+padding-right: 5rem!important;
+}
+#rating-and-transcript {
+position: absolute;
+top: -.02rem;
+left: 0;
+}
+#operators #email_transcript_form input[type=submit] {
+    display: block;
+    margin: 0 auto!important;
+    float: none!important;
+    margin-top: 2em!important;
+    clear: both;
+border-radius: .3em!important;
+}
+#content .form form > div {
+padding-left: 1rem!important;
+padding-right: 1rem!important;
+}
+#view-prechat-survey .form, #view-postchat-survey form {
+padding-top: 1em!important;
+    background: #fff;
+}
+}#livechat-full{height: 650px !important;width:420px !important;}
+#title-container{background:#808080;}
+.pop-in #content{background:#808080;overflow:hidden;}
+#body-container,#body-inner{background-color:#c2d9fb !important;}
+body.has-operators-bar #body-inner{background-color:transparent !important;}
+#title{border-bottom:1px solid #808080;}
+#title,.title-bg,#operators td,.pop-in #content,#title-container{background-color:#fff !important;}
+#title #title-text,.title,.operator-name, .operator-role, .icon-thumbs-down, .icon-thumbs-up, .icon-email,.icon-minimize,.footer, .icon-close, .title-font,.client .author, .operator .author,.client .author, .operator .author, .last-sent .delivered-indicator, .last-seen .last-seen-indicator, .system .msg-text{color:#333 !important;opacity:1;}
+#view-prechat-survey .form, #view-postchat-survey form{padding-top:10px !important;background-image:none;margin-top:15px;}
+#body-inner{padding-top:10px;}
+textarea, form p, form input, form label, .operator .msg-text, #content .form .form_header p, .cancel, #operators #rate_me_feedback_form .cancel a, #operators #email_transcript_form .cancel a, *::placeholder{color:#333 !important;}
+#body input, #body label, #body select, #body table, #body textarea, a, body, input, label, select, table, table#content, textarea{font-family:Arial,Calibri !important;}
+#content .form .form_header p{text-align:left;}</style><div id="content-container" style="display:none">	<div id="content">	<a id="full-view-button" href="javascript:void(null)" onclick="parent.LC_API.open_chat_window({source:&#39;minimized&#39;})"><span id="open-icon" class="icon-maximize"></span><span id="open-label">Chat now</span></a>	</div></div><div id="mobile_invitation_container" style="display:block"><div onclick="parent.LC_API.open_chat_window({source:&#39;minimized&#39;}); return false" class="invitation_message" style="display:none"><div id="invitation_message_text"></div></div><div id="operator_avatar_container"><div id="operator_avatar" onclick="parent.LC_API.open_chat_window({source:&#39;minimized&#39;}); return false"><span class="icon-agentonline"></span></div></div></div></body></html>

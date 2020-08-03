@@ -1,0 +1,5 @@
+08-06-2020
+
+Esse projeto em Visual Studio C++ 6.0, vai ajudar bastante no entendimento da estrutura de pilha de protocolo TCP/IP.
+Facilmente testado Usando o QEMU com Windows 98, Visual Studio 6.0 e placa de rede, Ne2000.
+Neste momento estou comprando duas placas Realtek 8029, para descobrir se servirá pra testar no hardware físico.

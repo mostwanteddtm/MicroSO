@@ -1,0 +1,10 @@
+.asm.obj:
+ 	tasm $*;
+
+NE2000.com: head.obj NE2000.obj tail.obj
+	tlink /t/m head+NE2000+tail,NE2000;
+
+zip:
+	del *.obj
+	del *.map
+	zip -a NE2000

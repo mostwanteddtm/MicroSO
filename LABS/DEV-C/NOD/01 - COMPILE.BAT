@@ -1,0 +1,1 @@
+NASM MAIN.ASM -fobj -o MAIN.OBJ

@@ -1,0 +1,14 @@
+################ PARA RECOMPILAÇÃO DO EXECUTÁVEL .COM FILE #####################
+
+1) DEIXAR SELECIONADAS AS OPÇÕES NO IDA PRO, DE ACORDO COM A IMAGEM IDA PRO.PNG
+2) AJUSTAR O OFFSET DA MENSAGEM, EX:
+
+   - MOV AX, 1658h  ->  MOV AX, OFFSET aProgramaFeitoE
+
+3) APÓS GERAR O ARQUIVO.ASM, ACERTAR O SEGMENTO CONFORME ABAIXO:
+
+   DE:
+   - seg000		segment	byte public 'CODE'
+
+   PARA:
+   seg000		segment	public 'CODE'

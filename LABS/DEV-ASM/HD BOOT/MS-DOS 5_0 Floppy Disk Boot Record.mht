@@ -1,0 +1,854 @@
+From: "Salvo pelo Windows Internet Explorer 8"
+Subject: MS-DOS 5.0 Floppy Disk Boot Record
+Date: Thu, 27 Jul 2017 18:41:48 -0300
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0001_01D30708.012BB210"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.1.7601.17514
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0001_01D30708.012BB210
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://thestarman.pcministry.com/asm/mbr/DOS50FDB.htm
+
+=EF=BB=BF<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>MS-DOS 5.0 Floppy Disk Boot Record</TITLE>
+<META content=3D"text/html; charset=3Dutf-8" http-equiv=3DContent-Type>
+<META=20
+content=3D"Boot Record, Assembly, MSDOS5.0, MSDOS5, OS Boot Record, =
+boot, boot-up"=20
+http-equiv=3Dkeywords>
+<META=20
+content=3D"Complete examination of Microsoft's MSDOS5.0 Floppy Disk Boot =
+Record."=20
+http-equiv=3Ddescription>
+<META name=3DCOPYRIGHT content=3D"=C2=A9 2003,2006,2011 by Daniel B. =
+Sedory">
+<META name=3Drobots content=3DALL>
+<META name=3Drevisit-after content=3D"30 days">
+<META name=3Ddistribution content=3DGlobal>
+<META name=3Drobots content=3DINDEX>
+<META name=3Drevisit-after content=3D30><LINK rel=3Dstylesheet =
+type=3Dtext/css=20
+href=3D"http://thestarman.pcministry.com/asm/mbr/mbr.css">
+<META name=3DGENERATOR content=3D"MSHTML 8.00.7601.17514"></HEAD>
+<BODY bgColor=3D#fffffc>
+<CENTER>
+<DIV>Sponsoring website: <A =
+href=3D"http://prime-expert.com/ebcd/">Emergency Boot=20
+CD</A></DIV></CENTER>
+<HR>
+<BR><BR>
+<CENTER>
+<P><B><FONT size=3D7 face=3D"Times New Roman, Times, serif">The =
+&nbsp;MS-DOS=20
+&nbsp;5.0<BR>Floppy Disk Boot Record<BR></FONT></B><FONT size=3D7=20
+face=3D"Times New Roman, Times, serif">&nbsp;</FONT><B><FONT size=3D7=20
+face=3D"Times New Roman, Times, serif"><FONT size=3D6>(on a 1200 KiB =
+floppy=20
+diskette)</FONT></FONT><BR><BR><FONT size=3D4>Web Presentation and Text =
+are=20
+Copyright=C2=A92003-2011 by Daniel B. Sedory<BR><FONT =
+color=3D#ff0000>NOT to be=20
+reproduced in any form without Permission of the Author=20
+!</FONT></FONT></B></P></CENTER>
+<HR>
+
+<UL>
+  <LI><FONT size=3D4><A=20
+  =
+href=3D"http://thestarman.pcministry.com/asm/mbr/DOS50FDB.htm#intro">Intr=
+oduction</A></FONT>=20
+
+  <LI><FONT size=3D4><A=20
+  =
+href=3D"http://thestarman.pcministry.com/asm/mbr/DOS50FDB.htm#DEview">Dis=
+k=20
+  Editor View of the Sector</A></FONT>=20
+  <LI><FONT size=3D4><A=20
+  =
+href=3D"http://thestarman.pcministry.com/asm/mbr/DOS50FDB.htm#BPB">Detail=
+s of=20
+  the Sector's BPB (BIOS Parameter Block)</A></FONT>=20
+  <LI><FONT size=3D4 face=3DArial><A=20
+  =
+href=3D"http://thestarman.pcministry.com/asm/mbr/DOS50FDB.htm#CODE">Exami=
+nation=20
+  of the Code</A> -</FONT> <FONT size=3D3=20
+  face=3D"Times New Roman, Times, serif">Where does a computer's =
+<B>BIOS</B> place=20
+  the Boot Record in Memory before it's executed? What does this code do =
+once=20
+  it's been copied there?</FONT>=20
+  <LI><FONT size=3D4 face=3D"Times New Roman, Times, serif"><A=20
+  =
+href=3D"http://thestarman.pcministry.com/asm/mbr/DOS50FDB.htm#EMsg">Locat=
+ion of=20
+  Error Message/File Names in Memory</A></FONT> </LI></UL><A =
+name=3Dintro></A>
+<HR>
+
+<P><B><FONT size=3D6=20
+face=3D"Times New Roman, Times, serif">Introduction</FONT></B></P>
+<P><FONT size=3D4 face=3DArial>Since floppy disks <I><B>never</B> =
+have</I> an=20
+<B>MBR</B>, the first sector of any diskette (that's Absolute <B>Sector =
+0</B> or=20
+<B>CHS 0,0,1</B>) </FONT><FONT size=3D4 face=3DArial>normally contains =
+the Boot=20
+Record for some OS. And since they <I>are</I> <I><B>floppy</B></I> =
+disks, you'll=20
+most likely read about <B>Tracks</B> ( instead of Cylinders) and =
+<B>Sides</B> (=20
+instead of Heads) when dealing with them. These terms seem to make more =
+sense to=20
+people, since you actually hold the removable media in your hands and =
+can=20
+observe that the jacket (or hard plastic shell) contains a circular disc =
+having=20
+two sides without ever having to think about the heads and mechanical =
+parts=20
+inside a floppy drive.<A name=3DDEview></A></FONT></P>
+<P><FONT size=3D6 face=3D"Times New Roman, Times, serif">Disk Editor =
+View</FONT></P>
+<P><FONT size=3D4 face=3DArial>This section is a <I>disk editor view</I> =
+of how the=20
+Boot Record is stored on a 1200 KiB Floppy Diskette (often incorrectly =
+called a=20
+1.2mb floppy).</FONT></P>
+<P><FONT size=3D4 face=3DArial>The bytes between the <SPAN =
+class=3Ddblu>&nbsp;=20
+&nbsp;</SPAN><U>two <I>dark blue </I>bands</U><SPAN class=3Ddblu>&nbsp;=20
+&nbsp;</SPAN> (from offsets <FONT=20
+face=3D"Verdana, Arial, Helvetica, sans-serif"><B>00B</B></FONT>h =
+through <FONT=20
+face=3D"Verdana, Arial, Helvetica, sans-serif"><B>03D</B></FONT>h) in =
+this <I>disk=20
+editor view</I> of the sector are called the <B>BPB</B> (or <B>B</B>IOS=20
+<B>P</B>arameter <B>B</B>lock); <A=20
+href=3D"http://thestarman.pcministry.com/asm/mbr/DOS50FDB.htm#BPB">a =
+detailed=20
+explanation of the BPB</A> is found below. </FONT><FONT size=3D4 =
+face=3DVerdana>Most=20
+of the Boot Record is <B class=3Dltgrn>executable code</B>; from offsets =
+<SPAN=20
+class=3Dltgrn><B>03E</B>h through <B>19D</B>h</SPAN>. The code is =
+followed by one=20
+long <B class=3Dvio>error message</B> and the two system filenames: =
+<SPAN=20
+class=3Dltpnk>IO.SYS</SPAN> and <SPAN class=3Dltcyn>MSDOS.SYS</SPAN>. =
+Finally, the=20
+sector ends with the <I>Word-sized</I> <B>signature</B> ID (or=20
+<B><I>Magic</I></B> number) of <SPAN class=3Dyel><B>AA55</B> hex</SPAN> =
+(remember=20
+hex Words for Intel x86 CPUs are stored in memory with the Lowest-byte =
+first and=20
+the Highest-byte last to make processing quicker).<BR></FONT></P>
+<CENTER>
+<TABLE border=3D1 cellSpacing=3D0 borderColor=3D#000000 cellPadding=3D7 =
+align=3Dcenter>
+  <TBODY>
+  <TR>
+    <TD><PRE>                                             <SPAN =
+class=3Ddblu> </SPAN><SPAN class=3Dltred> <B>BPB</B> </SPAN><SPAN =
+class=3Ddblu> </SPAN>
+Absolute Sector <B>0</B> (Track 0, Side 0, Sector <B>1</B>)   |       =
+<SPAN class=3Dyel99><U>OEM System Name</U></SPAN>
+       0  1  2  3  4  5  6  7  8  9  A  B  C  D |E  F         |
+0000  <SPAN class=3Dltgrn>EB 3C <FONT color=3D#ff0000>90</FONT></SPAN> =
+<SPAN class=3Dyel99>4D 53 44 4F 53 35 2E 30</SPAN><SPAN class=3Ddblu> =
+</SPAN><SPAN class=3Dltred>00 02 01 01 00</SPAN>  .&lt;.<SPAN =
+class=3Dyel99>MSDOS5.0</SPAN>.....
+0010  <SPAN class=3Dltred>02 E0 00 60 09 F9 07 00 0F 00 02 00 <FONT =
+color=3D#ff0000>00 00 00 00</FONT></SPAN>  ...`............
+0020  <SPAN class=3Dltred><FONT color=3D#ff0000>00 00 00 00 </FONT>00 =
+<B><FONT color=3D#ff0000>00</FONT></B> </SPAN><SPAN class=3Dyel99>29 =
+</SPAN><U>FC 18 52 21</U> <SPAN class=3Dltcyn>4E 4F 20 4E 41</SPAN>  =
+......)..R!<SPAN class=3Dltcyn>NO NA</SPAN>
+0030  <SPAN class=3Dltcyn>4D 45 20 20 20 20</SPAN> <SPAN =
+class=3Dltpnk>46 41 54 31 32 20 20 20</SPAN><SPAN class=3Ddblu> =
+</SPAN><SPAN class=3Dltgrn>FA 33</SPAN>  <SPAN class=3Dltcyn>ME    =
+</SPAN><SPAN class=3Dltpnk><B>FAT12</B>   </SPAN>.3
+0040  <SPAN class=3Dltgrn>C0 8E D0 BC 00 7C 16 07 BB 78 00 36 C5 37 1E =
+56</SPAN>  .....|...x.6.7.V
+0050  <SPAN class=3Dltgrn>16 53 BF 3E 7C B9 0B 00 FC F3 A4 06 1F C6 45 =
+FE</SPAN>  .S.&gt;|.........E.
+0060  <SPAN class=3Dltgrn>0F 8B 0E 18 7C 88 4D F9 89 47 02 C7 07 3E 7C =
+FB</SPAN>  ....|.M..G...&gt;|.
+0070  <SPAN class=3Dltgrn>CD 13 72 79 33 C0 39 06 13 7C 74 08 8B 0E 13 =
+7C</SPAN>  ..ry3.9..|t....|
+0080  <SPAN class=3Dltgrn>89 0E 20 7C A0 10 7C F7 26 16 7C 03 06 1C 7C =
+13</SPAN>  .. |..|.&amp;.|...|.
+0090  <SPAN class=3Dltgrn>16 1E 7C 03 06 0E 7C 83 D2 00 A3 50 7C 89 16 =
+52</SPAN>  ..|...|....P|..R
+00A0  <SPAN class=3Dltgrn>7C A3 49 7C 89 16 4B 7C B8 20 00 F7 26 11 7C =
+8B</SPAN>  |.I|..K|. ..&amp;.|.
+00B0  <SPAN class=3Dltgrn>1E 0B 7C 03 C3 48 F7 F3 01 06 49 7C 83 16 4B =
+7C</SPAN>  ..|..H....I|..K|
+00C0  <SPAN class=3Dltgrn>00 BB 00 05 8B 16 52 7C A1 50 7C E8 92 00 72 =
+1D</SPAN>  ......R|.P|...r.
+00D0  <SPAN class=3Dltgrn>B0 01 E8 AC 00 72 16 8B FB B9 0B 00 BE E6 7D =
+F3</SPAN>  .....r........}.
+00E0  <SPAN class=3Dltgrn>A6 75 0A 8D 7F 20 B9 0B 00 F3 A6 74 18 BE 9E =
+7D</SPAN>  .u... .....t...}
+00F0  <SPAN class=3Dltgrn>E8 5F 00 33 C0 CD 16 5E 1F 8F 04 8F 44 02 CD =
+19</SPAN>  ._.3...^....D...
+0100  <SPAN class=3Dltgrn>58 58 58 EB E8 8B 47 1A 48 48 8A 1E 0D 7C 32 =
+FF</SPAN>  XXX...G.HH...|2.
+0110  <SPAN class=3Dltgrn>F7 E3 03 06 49 7C 13 16 4B 7C BB 00 07 B9 03 =
+00</SPAN>  ....I|..K|......
+0120  <SPAN class=3Dltgrn>50 52 51 E8 3A 00 72 D8 B0 01 E8 54 00 59 5A =
+58</SPAN>  PRQ.:.r....T.YZX
+0130  <SPAN class=3Dltgrn>72 BB 05 01 00 83 D2 00 03 1E 0B 7C E2 E2 8A =
+2E</SPAN>  r..........|....
+0140  <SPAN class=3Dltgrn>15 7C 8A 16 24 7C 8B 1E 49 7C A1 4B 7C EA 00 =
+00</SPAN>  .|..$|..I|.K|...
+0150  <SPAN class=3Dltgrn>70 00 AC 0A C0 74 29 B4 0E BB 07 00 CD 10 EB =
+F2</SPAN>  p....t).........
+0160  <SPAN class=3Dltgrn>3B 16 18 7C 73 19 F7 36 18 7C FE C2 88 16 4F =
+7C</SPAN>  ;..|s..6.|....O|
+0170  <SPAN class=3Dltgrn>33 D2 F7 36 1A 7C 88 16 25 7C A3 4D 7C F8 C3 =
+F9</SPAN>  3..6.|..%|.M|...
+0180  <SPAN class=3Dltgrn>C3 B4 02 8B 16 4D 7C B1 06 D2 E6 0A 36 4F 7C =
+8B</SPAN>  .....M|.....6O|.
+0190  <SPAN class=3Dltgrn>CA 86 E9 8A 16 24 7C 8A 36 25 7C CD 13 =
+C3</SPAN> <SPAN class=3Dvio>0D 0A</SPAN>  .....$|.6%|...<SPAN =
+class=3Dvio>..</SPAN>
+01A0  <SPAN class=3Dvio>4E 6F 6E 2D 53 79 73 74 65 6D 20 64 69 73 6B =
+20</SPAN>  <SPAN class=3Dvio>Non-System disk </SPAN>
+01B0  <SPAN class=3Dvio>6F 72 20 64 69 73 6B 20 65 72 72 6F 72 0D 0A =
+52</SPAN>  <SPAN class=3Dvio>or disk error..R</SPAN>
+01C0  <SPAN class=3Dvio>65 70 6C 61 63 65 20 61 6E 64 20 70 72 65 73 =
+73</SPAN>  <SPAN class=3Dvio>eplace and press</SPAN>
+01D0  <SPAN class=3Dvio>20 61 6E 79 20 6B 65 79 20 77 68 65 6E 20 72 =
+65</SPAN>  <SPAN class=3Dvio> any key when re</SPAN>
+01E0  <SPAN class=3Dvio>61 64 79 0D 0A <FONT =
+color=3Dred><B>00</B></FONT></SPAN> <SPAN class=3Dltpnk>49 4F 20 20 20 =
+20 20 20 53 59</SPAN>  <SPAN class=3Dvio>ady..<FONT =
+color=3Dred>.</FONT></SPAN><SPAN class=3Dltpnk>IO      SY</SPAN>
+01F0  <SPAN class=3Dltpnk>53</SPAN> <SPAN class=3Dltcyn>4D 53 44 4F 53 =
+20 20 20 53 59 53</SPAN> 00 00 <B class=3Dyel>55 AA</B>  <SPAN =
+class=3Dltpnk>S</SPAN><SPAN class=3Dltcyn>MSDOS   SYS</SPAN>..U.
+        0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
+</PRE></TD></TR></TBODY></TABLE></CENTER>
+<UL>
+  <P><FONT size=3D4 face=3DVerdana><SPAN class=3Dltgrn>The first three =
+bytes</SPAN> of=20
+  the 512-byte Boot Sector are often <I>called</I> the Jump Instruction =
+(but the=20
+  third byte, which has always been a <FONT color=3D#ff0000>90</FONT>h =
+in all of=20
+  the IBM PC and MS-DOS OS releases, <I>hasn't</I> ever been part of the =
+actual=20
+  <SPAN class=3Dltgrn>Jump code</SPAN> itself; it's a NOP which simply =
+means 'No=20
+  Operation,' it's just there so programmers could use the three-byte =
+'Direct'=20
+  form of the JMP instruction if they ever wanted to). <BR><BR>This is =
+followed=20
+  by the <SPAN class=3Dyel99>OEM System Name</SPAN> which happens to be =
+'<SPAN=20
+  class=3Dyel99>MSDOS5.0</SPAN>' in this case, but could be anything as =
+far as the=20
+  code is concerned (CAUTION: Any diskette that is <B>not</B> =
+write-protected,=20
+  will have these bytes overwritten by any <I>Microsoft</I> Win 9x <I>or =
+
+  later</I> OS; for more info see: <A=20
+  =
+href=3D"http://thestarman.pcministry.com/asm/debug/debug2.htm#IHC">Notes =
+about=20
+  the "IHC" string under DEBUG's <B>L</B>oad Instruction here</A> =
+).</FONT><FONT=20
+  size=3D4 face=3DVerdana><A name=3DBPB></A><BR><BR></FONT></P></UL>
+<P><FONT size=3D6 face=3D"Times New Roman, Times, serif">The BIOS =
+Parameter=20
+Block</FONT></P>
+<P><FONT size=3D4 face=3DVerdana>Next we have the <SPAN =
+class=3Ddblu>_</SPAN><SPAN=20
+class=3Dltred> <B>B</B>IOS <B>P</B>arameter <B>B</B>lock </SPAN><SPAN=20
+class=3Ddblu>_</SPAN> (or <B>BPB</B>); some of which dates back to the =
+release of=20
+version 2.0 of (IBM/MS) DOS. Beginning at offset <B>0B</B>h, the BPB =
+data on=20
+this diskette is interpreted as follows: </FONT></P>
+<TABLE border=3D0 cellSpacing=3D0 cellPadding=3D0 width=3D600 =
+align=3Dcenter>
+  <TBODY>
+  <TR>
+    <TD><PRE><FONT size=3D2 face=3D"Courier New, Courier, mono">        =
+0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
+  00:                                  <SPAN class=3Ddblu> </SPAN><SPAN =
+class=3Dltred><U>00 02</U> 01 <U>01 00</U></SPAN>
+  10:  <SPAN class=3Dltred>02 <U>E0 00</U> <U>60 09</U> F9 <U>07 00</U> =
+<U>0F 00</U> <U>02 00</U> <U><FONT color=3D#ff0000>00 00 00 =
+00</FONT></U></SPAN>
+  20:  <SPAN class=3Dltred><U><FONT color=3D#ff0000>00 00 00 =
+00</FONT></U><B> </B>00 <B><FONT =
+color=3D#ff0000>00</FONT></B></SPAN><SPAN class=3Dyel> 29 </SPAN><U>FC =
+18 52 21</U> <SPAN class=3Dltcyn>4E 4F 20 4E 41</SPAN>   =
+......)..R!<SPAN class=3Dltcyn>NO NA</SPAN>
+  30:  <SPAN class=3Dltcyn>4D 45 20 20 20 20</SPAN> <SPAN =
+class=3Dltpnk>46 41 54 31 32 20 20 20</SPAN><SPAN class=3Ddblu> </SPAN>  =
+      <SPAN class=3Dltcyn>ME    </SPAN><SPAN class=3Dltpnk><B>FAT12</B>  =
+ </SPAN>
+
+ Hex   As seen
+<B>OFFSET</B> on Disk <B>HEX</B> value       <B>Meaning / =
+Description</B>
+------ ------- ---------  =
+-----------------------------------------------
+ 0B-0C  00 02     0200h =3D  512 <B>Bytes per Sector</B>,
+   0D      01       01h =3D    1 <B>Sector</B>(s)<B> per Cluster</B>,
+ 0E-0F  01 00     0001h =3D    1 Reserved sector (starting at Sector 0),
+   10      02       02h =3D    2 <B>FAT</B>s on the diskette,
+ 11-12  E0 00     00E0h =3D  224 possible <B>Root Directory entries</B>,
+ 13-14  60 09     0960h =3D 2400 <B>Total Sectors</B> on the diskette,
+                              ( 2400 x 512 =3D <B>1,228,800 bytes</B> =
+total ),
+
+   15      <B>F9</B>        =3D&gt;   <B>Media Descriptor Byte:  F9</B>  =
+means that this is
+                      <I>    either</I> a Double-Sided diskette with 15 =
+Sectors
+                          per Track, <I>or</I> a Double-Sided (720KB) =
+diskette
+                          with only 9 Sectors per Track! ( Obviously you
+                          need more info than just this one byte to know
+                          for sure what type and capacity it is.  Mabye
+                          this fact signaled the end of its =
+usefulness.<B><FONT color=3D#ff0000 size=3D3>*</FONT></B>)
+
+ 16-17  07 00     0007h =3D    7 <B>Sectors per FAT</B>,
+ 18-19  0F 00     000Fh =3D   15 <B>Sectors per Track</B>,
+ 1A-1B  02 00     0002h =3D    2 <B>Sides</B> (or Heads).
+ 1C-25               =3D&gt;   See the text below (should be all zeros).
+
+   26      <B>29</B>        =3D&gt;   Extended BPB Signature Byte (if =
+present, then
+                          the following strings will also have meaning): =
+=20
+ 27-2A    xx xx xx xx   =3D <B>Volume Serial Number</B>.
+ 2B-35    (11 bytes)    =3D <B>Volume Label.</B>
+ 36-3B                  =3D File System ID (see discussion below).
+ <B>______________
+ <FONT color=3D#ff0000 size=3D3>*</FONT></B> <B>FF</B>=3DDS,8 SPT; =
+<B>FE</B>=3DSS,8 SPT; <B>FD</B>=3DDS, 9 SPT (the <B>360</B>kb diskette);
+   <B>FC</B>=3DSS,9 SPT; <B>F9</B> =3D DS,9 SPT (a 720kb) <B>or</B> =
+DS,15 SPT. As noted above,
+   since <B>F9</B> could mean either of these, it wasn't very =
+useful.</FONT></PRE></TD></TR></TBODY></TABLE><FONT=20
+size=3D4 face=3DVerdana><BR>Checking the data, we see that our diskette =
+has a=20
+capacity of 1200 Kbytes with two sides and 15 Sectors per Track; that =
+should=20
+mean you're looking at a standard <B>5.25</B> inch 'DSHD'=20
+<B>D</B>ouble-<B>S</B>ided <B>H</B>igh <B>D</B>ensity diskette. (For a=20
+<B>3.5</B> inch <B>1440</B> kb diskette, you'll find the Word =
+<B>0B40</B>h at=20
+offsets <B>13-14</B>h for a total of 2,880 sectors, and offsets 16-17h =
+and=20
+18-19h would contain the Words 0009h and 0012h for <B>9</B> Sectors per =
+FAT and=20
+<B>18</B> Sectors per Track, respectively.)<BR><BR>The bytes from =
+offsets=20
+<B>1C</B>h through <B>1F</B>h are a <I>Double-Word</I> containing the =
+Number of=20
+Hidden Sectors. Floppy disks should have only zeros here, since there =
+are no=20
+sectors before the Boot Sector on a normal floppy diskette. The next =
+four bytes=20
+(offsets <B>20</B>h through <B>23</B>h), another <I>Double-Word</I>, are =
+used in=20
+<B>DOS versions 3 and above</B> for disk partitions having more than =
+65,535=20
+sectors! That's far beyond the size of any diskette, so this field =
+should be all=20
+zeros as well. (The bytes at offsets <B>13-14</B> hex are where you'll =
+find the=20
+Total Number of Sectors for a floppy diskette.) The byte at offset =
+<B>25</B>h is=20
+=E2=80=9CReserved=E2=80=9D and always set to <B><FONT =
+color=3D#990000>zero</FONT></B>. [<FONT=20
+size=3D3>Some documents state that offset <B>24</B>h is for a drive =
+number under=20
+DOS 4.0 or above, so a <B>zero-byte</B> would mean the first floppy =
+drive. The=20
+only way it can be used for floppy diskettes in a 2nd drive is if the =
+whole BPB=20
+is first copied into memory and altered there, since you can't change =
+the byte=20
+on a write-protected floppy disk!</FONT>]<BR><BR>Beginning with <B>DOS =
+version=20
+4.0</B>, if the byte at offset <B>26</B>h is a <B class=3Dyel>29</B>, =
+then the=20
+next four bytes (offsets <B>27</B>h through <B>2A</B>h) will contain a =
+<U>Serial=20
+Number</U> based on the date and time that the diskette was formatted; =
+these=20
+bytes (along with the OEM ID and the Volume Label) can, of course, be =
+changed by=20
+a disk editor. If the <B class=3Dyel>29</B> <SPAN =
+class=3Dltyel><B><I>Extended BPB=20
+Signature Byte</I></B></SPAN> is present, then the bytes at offsets =
+<SPAN=20
+class=3Dltcyn><B>2B</B>h through <B>35</B>h</SPAN> may contain an <SPAN=20
+class=3Dltcyn>11-byte Volume Label</SPAN> <I>and</I> the bytes at =
+offsets <SPAN=20
+class=3Dltpnk><B>36</B>h through <B>3D</B>h</SPAN> <B>should</B> contain =
+the <SPAN=20
+class=3Dltpnk>File System ID</SPAN> of: "<SPAN class=3Dltpnk><B><FONT=20
+face=3D"Courier New">FAT12&nbsp;&nbsp;&nbsp;</FONT></B></SPAN>"; with =
+three=20
+trailing space bytes (20h).<BR><BR>If you require more information on =
+<B>the=20
+BPB</B>, then see the TABLE on this page: <A=20
+href=3D"http://thestarman.pcministry.com/asm/mbr/MSWIN41.htm">The =
+MSWIN4.1 Hard=20
+Disk Boot Record</A>.</FONT>=20
+<P>&nbsp;</P><A name=3DCODE></A>
+<HR>
+
+<H1 align=3Dcenter>Examination of the Code</H1>
+<H1 align=3Dcenter><FONT color=3D#ff00ff size=3D5 face=3DArial><B>This =
+Listing is still=20
+missing<BR>many necessary comments!</B></FONT></H1>
+<P><FONT size=3D4>The first sector of the floppy disk is copied into =
+Memory at=20
+location <B>0000:7C00</B> by a 'bootstrap' routine in the computer's =
+BIOS=20
+chip.</FONT></P><PRE>
+
+7C00 EB3C          JMP     <FONT color=3D#006e00><B>7C3E</B></FONT>      =
+    ; Jump over the <B>BPB</B>.
+7C02 90            NOP                   ; Do nothing. Address not used.
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+               OEM string and <B>B</B>IOS <B>P</B>arameter <B>B</B>lock =
+Data
+       0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
+7C00           <SPAN class=3Dltyel>4D 53 44 4F 53 35 2E 30</SPAN><SPAN =
+class=3Ddblu> </SPAN><SPAN class=3Dltred>00 02 01 01 00</SPAN>     <SPAN =
+class=3Dltyel>MSDOS5.0</SPAN>.....
+7C10  <SPAN class=3Dltred>02 E0 00 60 09 F9 07 00 0F 00 02 00 00 00 00 =
+00</SPAN>  ...`............
+7C20  <SPAN class=3Dltred>00 00 00 00 00 00 29 FC 18 52 21</SPAN> <SPAN =
+class=3Dltcyn>4E 4F 20 4E 41</SPAN>  ......)..R!<SPAN class=3Dltcyn>NO =
+NA</SPAN>
+7C30  <SPAN class=3Dltcyn>4D 45 20 20 20 20</SPAN> <SPAN =
+class=3Dltpnk>46 41 54 31 32 20 20 20</SPAN><SPAN class=3Ddblu> </SPAN>  =
+     <SPAN class=3Dltcyn>ME    </SPAN><SPAN class=3Dltpnk><B>FAT12</B>   =
+</SPAN>
+       0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+;      After setting up various registers, this code copies data from =
+the
+; Diskette Drive Parameters table which a <I>far pointer</I> =
+(Segment:Offset) in
+; the <B><A href=3D"http://thestarman.pcministry.com/asm/mbr/IVT.htm" =
+target=3DIVT>Interrupt Vector Table (IVT)</A></B> at <B>0:0078</B> and =
+following points to; for
+; later use.  This data <I>overwrites</I> the first 11 bytes =
+(<B>7C3E</B> thru <B>7C48</B>) of
+; its own code following the BPB area:
+
+<B><FONT color=3D#006e00>7C3E</FONT></B> FA            CLI               =
+; <FONT color=3D#ff0000><B>Disable</B> maskable Interrupts</FONT>
+7C3F 33C0          XOR	AX,AX        ; Zero-out the Accumulator and set
+7C41 8ED0          MOV	SS,AX        ;  Stack Segment register to ZERO.
+7C43 BC007C        MOV	SP,<B>7C00</B>	     ; Stack Pointer top now =
+0000:7C00
+7C46 16            PUSH	SS           ;|
+7C47 07            POP	ES           ;|Makes sure Extra Segment =3D ZERO.
+7C48 BB7800        MOV	BX,0078      ; 0078h ---&gt; BX
+7C4B 36C537        LDS	SI,SS:[BX]   ; SS is still zero...
+                                     ; Load Far Pointer from [SS:0078]
+                                     ; into DS:SI  (usually 0000:0522).
+7C4E 1E            PUSH	DS
+7C4F 56            PUSH	SI
+7C50 16            PUSH	SS
+7C51 53            PUSH	BX
+
+; The following four instructions will overwrite 11 code bytes starting =
+at <B>7C3E</B>h:
+7C52 BF3E7C        MOV	DI,<B>7C3E</B>      ; Will overwrite some code =
+bytes!
+7C55 B90B00        MOV	CX,000B      ; Copy CX (0Bh =3D 11) bytes from =
+...
+7C58 FC            CLD               ; <FONT color=3D#006a00><B>Clear =
+Direction Flag</B></FONT> (df=3D0).
+7C59 F3A4          REP	MOVSB        ; ... DS:SI to ES:DI (0000:7C3E) and
+                                     ; following; DI increases to =
+<B>7C49</B>.
+7C5B 06            PUSH    ES
+7C5C 1F            POP     DS        ; Data Segment set to ZERO.
+7C5D C645FE0F      MOV     BYTE PTR [DI-02],0F  ; 0Fh ---&gt; [7C47].
+7C61 8B0E187C      MOV     CX,[7C18]            ; Copy SPT ([7C18]) into =
+CX
+7C65 884DF9        MOV     [DI-07],CL           ; Sectors/Track --&gt; =
+[7C42].
+
+; The next two instructions set the <B>D</B>iskette <B>P</B>arameters =
+<B>T</B>able SEG:OFF vector
+; at [0:<B>0078</B>] from the original <B>vector</B> of <B>0000:0522</B> =
+to our <B>0000:7C3E</B> address,
+; so any <B>DPT</B> <I>look-ups</I> will access the data created here =
+instead:
+
+7C68 894702        MOV     [BX+02],AX           ; 0000 --&gt; [0:007A]
+7C6B C7073E7C      MOV     <B>WORD</B> PTR [BX],<B>7C3E</B>   ; 7C3E =
+--&gt; [0:0078]
+
+7C6F FB            STI               ; <FONT =
+color=3D#009900><B>Enable</B> maskable Interrupts</FONT>
+                                     ; after the next instruction.
+;------------------------------------------------------------------------=
+---
+; INT 13 - DISK - RESET DISK SYSTEM
+;	AH =3D 00h
+;	DL =3D drive (if bit 7 is set both hard disks and floppy disks reset)
+; Return: AH =3D status (see #00234)
+;	CF clear if successful (returned AH=3D00h)
+;	CF set on error
+;------------------------------------------------------------------------=
+---
+7C70 CD13          <B><I>INT</I>     13</B>
+7C72 7279          JC	   <B><FONT color=3D#ff0000>7CED</FONT></B>        =
+  ; If CF set, there's a disk error,
+                                         ; so jump to Error Msg. =
+routine!
+
+7C74 33C0          XOR     AX,AX
+7C76 3906137C      CMP     [7C13],AX
+7C7A 7408          JZ      7C84
+7C7C 8B0E137C      MOV     CX,[7C13]        ; [7C13] =3D Total Sectors=20
+                                            ; 960h =3D 2400 sectors.
+7C80 890E207C      MOV     [7C20],CX
+7C84 A0107C        MOV     AL,[7C10]        ; FAT12 F.S. has two FATs
+7C87 F726167C      MUL     WORD PTR [7C16]  ; of 7 sectors each, plus...
+7C8B 03061C7C      ADD     AX,[7C1C]
+7C8F 13161E7C      ADC     DX,[7C1E]
+7C93 03060E7C      ADD     AX,[7C0E]        ; 1 Rsrvd sector (VBR =
+itself)
+7C97 83D200        ADC     DX,+00
+7C9A A3507C        MOV     [7C50],AX
+7C9D 8916527C      MOV     [7C52],DX
+7CA1 A3497C        MOV     [7C49],AX
+7CA4 89164B7C      MOV     [7C4B],DX
+
+7CA8 B82000        MOV     AX,0020          ; 20h =3D 32 bytes per Dir =
+entry
+7CAB F726117C      MUL     WORD PTR [7C11]  ; [7C11] is number of =
+possible
+                                            ; Root Directory entries =
+(224).
+;    So, AX now contains (32 x 224 =3D 7,168) more used system area in =
+bytes.
+
+7CAF 8B1E0B7C      MOV     BX,[7C0B]        ; [7C0B] is 512 bytes per =
+sector.
+7CB3 03C3          ADD     AX,BX            ; Add 1 more sector in =
+bytes.
+7CB5 48            DEC     AX               ; Subtract 1 byte.
+7CB6 F7F3          DIV     BX               ; Divide by 512 to get =
+sectors.
+7CB8 0106497C      ADD     [7C49],AX
+7CBC 83164B7C00    ADC     WORD PTR [7C4B],+00
+7CC1 BB0005        MOV     BX,0500          ; 500h =3D 1,280
+7CC4 8B16527C      MOV     DX,[7C52]
+7CC8 A1507C        MOV     AX,[7C50]
+7CCB E89200        <B><FONT color=3D#0000cc>CALL</FONT></B>    <FONT =
+color=3D#0000cc><B>7D60</B></FONT>
+
+7CCE 721D          JB      <B><FONT color=3D#ff0000>7CED</FONT></B>
+7CD0 B001          MOV     AL,01
+7CD2 E8AC00        <B><FONT color=3D#0000cc>CALL</FONT></B>    <FONT =
+color=3D#0000cc><B>7D81</B></FONT>             ; -&gt; Read Sectors
+
+7CD5 7216          JB      <B><FONT color=3D#ff0000>7CED</FONT></B>
+7CD7 8BFB          MOV     DI,BX
+7CD9 B90B00        MOV     CX,000B          ; 11 characters per file =
+name.
+7CDC BEE67D        MOV     SI,<B><FONT color=3D#0000ff>7DE6</FONT></B>   =
+       ; Points to<SPAN class=3Dltpnk> <B>IO.SYS</B> </SPAN>
+7CDF F3            REPZ
+7CE0 A6            CMPSB                    ; Compare  "IO.SYS"  name  =
+to
+                          ; first file name in Root Directory of =
+diskette.
+7CE1 750A          JNZ     <B><FONT color=3D#ff0000>7CED</FONT></B>      =
+       ; If not identical, there's a
+                                   ; disk error or it's not a System =
+disk!
+
+; Now we check if "MSDOS.SYS" is the second file in the Root Directory:
+7CE3 8D7F20        LEA     DI,[BX+20]       ; Points to<SPAN =
+class=3Dltcyn> <B>MSDOS.SYS</B> </SPAN>
+7CE6 B90B00        MOV     CX,000B
+7CE9 F3            REPZ
+7CEA A6            CMPSB
+7CEB 7418          <B>JZ      <FONT color=3D#006e00>7D05</FONT></B>
+
+<B><FONT color=3D#ff0000>7CED</FONT></B> BE9E7D        MOV     =
+SI,<B><FONT color=3D#0000ff>7D9E</FONT></B>          ; Points to<SPAN =
+class=3Dvio> <B>Error Message</B> </SPAN>
+7CF0 E85F00        <B><FONT color=3D#0000cc>CALL</FONT></B>    <FONT =
+color=3D#0000cc><B>7D52</B></FONT>             ; Display Character =
+String
+7CF3 33C0          XOR     AX,AX
+7CF5 CD16          <B><I>INT</I>     16</B>               ; Get =
+Keystroke from Keyboard
+
+7CF7 5E            POP     SI
+7CF8 1F            POP     DS
+7CF9 8F04          POP     [SI]
+7CFB 8F4402        POP     [SI+02]
+7CFE CD19          <FONT color=3D#ff0000><B><I>INT</I>     19</B></FONT> =
+              ; If a key was pressed, then
+                                            ;   <B><I><FONT =
+color=3D#ff0000>Start over again</FONT></I></B> with
+                                            ;   System <B>BOOTSTRAP =
+LOADER.</B></PRE>
+<HR>
+<PRE>7D00 58            POP     AX
+7D01 58            POP     AX
+7D02 58            POP     AX
+7D03 EBE8          <B><FONT color=3D#ff0000>JMP     7CED</FONT></B>
+
+
+<B><FONT color=3D#006e00>7D05</FONT></B> 8B471A        MOV     =
+AX,[BX+1A]
+7D08 48            DEC     AX
+7D09 48            DEC     AX
+7D0A 8A1E0D7C      MOV     BL,[7C0D]
+7D0E 32FF          XOR     BH,BH
+7D10 F7E3          MUL     BX
+7D12 0306497C      ADD     AX,[7C49]
+7D16 13164B7C      ADC     DX,[7C4B]
+7D1A BB0007        MOV     BX,0700
+7D1D B90300        MOV     CX,0003
+7D20 50            PUSH    AX
+7D21 52            PUSH    DX
+7D22 51            PUSH    CX
+7D23 E83A00        <B><FONT color=3D#0000cc>CALL</FONT></B>    <FONT =
+color=3D#0000cc><B>7D60</B></FONT>
+7D26 72D8          JB      7D00
+7D28 B001          MOV     AL,01
+7D2A E85400        <B><FONT color=3D#0000cc>CALL</FONT></B>    <FONT =
+color=3D#0000cc><B>7D81</B></FONT>                ; -&gt; Read Sectors
+7D2D 59            POP     CX
+7D2E 5A            POP     DX
+7D2F 58            POP     AX
+7D30 72BB          JB      7CED
+7D32 050100        ADD     AX,0001
+7D35 83D200        ADC     DX,+00
+7D38 031E0B7C      ADD     BX,[7C0B]
+7D3C E2E2          <B>LOOP</B>    7D20
+
+7D3E 8A2E157C      MOV     CH,[7C15]
+7D42 8A16247C      MOV     DL,[7C24]
+7D46 8B1E497C      MOV     BX,[7C49]
+7D4A A14B7C        MOV     AX,[7C4B]
+7D4D EA00007000    <U><B>JMP     <FONT color=3D#008000>FAR PTR =
+0070:0000</FONT></B></U>   ; Same as jumping to
+                                               ;  0000:0<B>700</B> =
+(<B><I>start</I> DOS</B>).
+
+</PRE>
+<HR>
+<FONT size=3D5>
+<CENTER>SUBROUTINES </CENTER></FONT>
+<HR>
+<FONT size=3D4 face=3D"Courier New, Courier, mono">; <B>Display =
+Zero-terminated=20
+Character String</B></FONT> <PRE><FONT =
+color=3D#0000cc><B>7D52</B></FONT> AC            LODSB
+7D53 0AC0          OR      AL,AL
+7D55 7429          <B>JZ      <FONT color=3D#006e00>7D80</FONT></B>      =
+     ; -&gt; <B><FONT color=3D#0000ff>RETurn</FONT></B> from Subroutine.
+7D57 B40E          MOV     AH,0E          ; Video Function 0<B>E</B>h
+7D59 BB0700        MOV     BX,0007        ;  Page 0, Mode 7...
+7D5C CD10          <B>INT     10</B>             ;  of INT 10. 'Tele-
+                                          ;  type Output' AL =3D
+                                          ; character to write.
+
+7D5E EBF2          JMP     <FONT color=3D#800000><B>7D52</B></FONT>      =
+     ; Loop until done.
+
+;=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+<B><FONT color=3D#0000aa>7D60</FONT></B> 3B16187C      CMP     DX,[7C18]
+7D64 7319          JNB     <B><FONT color=3D#006600>7D7F</FONT></B>
+7D66 F736187C      DIV     WORD PTR [7C18]
+7D6A FEC2          INC     DL
+7D6C 88164F7C      MOV     [7C4F],DL
+7D70 33D2          XOR     DX,DX
+7D72 F7361A7C      DIV     WORD PTR [7C1A]
+7D76 8816257C      MOV     [7C25],DL
+7D7A A34D7C        MOV     [7C4D],AX
+7D7D F8            CLC                      ; Clear Carry Flag (CF=3D0)
+7D7E C3            <B><FONT color=3D#0000ff>RET</FONT></B>
+<B><FONT color=3D#006600>7D7F</FONT></B> F9            STC               =
+       ;   Set Carry Flag (CF=3D1)
+<FONT color=3D#006600><B>7D80</B></FONT> C3            <B><FONT =
+color=3D#0000ff>RET</FONT></B>
+</PRE>
+<HR>
+<FONT size=3D4 face=3D"Courier New, Courier, mono">; <B>READ SECTORS =
+INTO=20
+MEMORY</B></FONT> <PRE><B><FONT color=3D#0000cc>7D81</FONT></B> B402     =
+     MOV     AH,02            ; Function <B>02</B> of <I><B>INT</B></I> =
+<B>13</B>
+7D83 8B164D7C      MOV     DX,[7C4D]
+7D87 B106          MOV     CL,06
+7D89 D2E6          SHL     DH,CL
+7D8B 0A364F7C      OR      DH,[7C4F]
+7D8F 8BCA          MOV     CX,DX
+7D91 86E9          XCHG    CH,CL
+7D93 8A16247C      MOV     DL,[7C24]
+7D97 8A36257C      MOV     DH,[7C25]
+7D9B CD13          <B><I>INT</I>     13</B>
+
+7D9D C3            <B><FONT color=3D#0000ff>RET</FONT></B>
+</PRE><A name=3DEMsg></A>
+<HR>
+
+<H2 align=3Dcenter>Location of Error Messages and File Names in =
+Memory</H2><PRE><B><FONT color=3D#0000ff>7D9E</FONT></B>                 =
+                          <SPAN class=3Dvio> 0D 0A</SPAN>                =
+<SPAN class=3Dvio>..</SPAN>
+7DA0  <SPAN class=3Dvio>4E 6F 6E 2D 53 79 73 74 65 6D 20 64 69 73 6B =
+20</SPAN>  <SPAN class=3Dvio>Non-System disk </SPAN>
+7DB0  <SPAN class=3Dvio>6F 72 20 64 69 73 6B 20 65 72 72 6F 72 0D 0A =
+52</SPAN>  <SPAN class=3Dvio>or disk error..R</SPAN>
+7DC0  <SPAN class=3Dvio>65 70 6C 61 63 65 20 61 6E 64 20 70 72 65 73 =
+73</SPAN>  <SPAN class=3Dvio>eplace and press</SPAN>
+7DD0  <SPAN class=3Dvio>20 61 6E 79 20 6B 65 79 20 77 68 65 6E 20 72 =
+65</SPAN>  <SPAN class=3Dvio> any key when re</SPAN>
+7DE0  <SPAN class=3Dvio>61 64 79 0D 0A <FONT =
+color=3Dred><B>00</B></FONT></SPAN> <SPAN class=3Dltpnk>49 4F 20 20 20 =
+20 20 20 53 59</SPAN>  <SPAN class=3Dvio>ady..<FONT =
+color=3Dred>.</FONT></SPAN><SPAN class=3Dltpnk>IO      SY</SPAN>
+7DF0  <SPAN class=3Dltpnk>53</SPAN> <SPAN class=3Dltcyn>4D 53 44 4F 53 =
+20 20 20 53 59 53</SPAN> 00 00 <B class=3Dyel>55 AA</B>  <SPAN =
+class=3Dltpnk>S</SPAN><SPAN class=3Dltcyn>MSDOS   SYS</SPAN>..U.
+
+       0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
+</PRE>
+<P>&nbsp;</P><FONT size=3D5 face=3DVerdana><FONT =
+size=3D4><I>Updates:</I> <B>18=20
+December 2007</B> (18/12/2007).</FONT><BR><I>Last Update:</I> <B>24 =
+September=20
+2011</B> (24/09/2011).</FONT>=20
+<HR>
+
+<P align=3Dcenter><B><FONT face=3DArial>You can write to me using this: =
+<A=20
+href=3D"http://thestarman.pcministry.com/Feedback.html" =
+target=3DSISTER>online reply=20
+form</A>. </FONT>(It opens in a new window.)</B> <BR><BR><FONT =
+size=3D5><IMG=20
+src=3D"http://thestarman.pcministry.com/img/left.gif" width=3D33 =
+height=3D14> <A=20
+href=3D"http://thestarman.pcministry.com/asm/mbr/index.html"><B>MBR and =
+Boot=20
+Records Index</B></A> <BR><BR><IMG=20
+src=3D"http://thestarman.pcministry.com/img/left.gif" width=3D33 =
+height=3D14> <A=20
+href=3D"http://thestarman.pcministry.com/index.html"><B>The Starman's =
+Realm Index=20
+Page</B></A></FONT></P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P></BODY></HTML>
+
+------=_NextPart_000_0001_01D30708.012BB210
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://thestarman.pcministry.com/img/left.gif
+
+R0lGODlhIQAOAKIGAAAAAAAAgL+/v4CAgAAA/////8zMzAAAACH5BAEAAAYALAAAAAAhAA4AAANq
+aLrc/jCCSWe8qpbNiwCYQwlfZ35LRaXTRgLeBwhnRdx4xpHD/P4mFwCXM/hkqtiE1nkRbyxQSuib
+7QS9JwFDoZK+g2yAMA5wvZ8BLwwok7fcpWcS7lEC+HwINgfULRl5ensqgAyFIYkRCQAh/h0AACH/
+CwA7
+
+------=_NextPart_000_0001_01D30708.012BB210
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Location: http://thestarman.pcministry.com/asm/mbr/mbr.css
+
+.ltpnk {
+	BACKGROUND-COLOR: #ffccff
+}
+.ltred {
+	BACKGROUND-COLOR: #ffcccc
+}
+.ltyel {
+	BACKGROUND-COLOR: #ffffcc
+}
+.yel99 {
+	BACKGROUND-COLOR: #ffff99
+}
+.yel66 {
+	BACKGROUND-COLOR: #ffff66
+}
+.yel {
+	BACKGROUND-COLOR: #ffff00
+}
+.ltgrn {
+	BACKGROUND-COLOR: #ccffcc
+}
+.grn99 {
+	BACKGROUND-COLOR: #99ff99
+}
+.grnb {
+	BACKGROUND-COLOR: #b3ffb3
+}
+.ltgry {
+	BACKGROUND-COLOR: #cccccc
+}
+.ltcyn {
+	BACKGROUND-COLOR: #ccffff
+}
+.sblu {
+	BACKGROUND-COLOR: #00ccff
+}
+.vio {
+	BACKGROUND-COLOR: #ccccff
+}
+.mystb {
+	BACKGROUND-COLOR: #99ccff
+}
+.dblu {
+	BACKGROUND-COLOR: #6666cc
+}
+.pnk99 {
+	BACKGROUND-COLOR: #ff99ff
+}
+.blu {
+	COLOR: #0000ff; FONT-WEIGHT: bold
+}
+.brn {
+	COLOR: #990000; FONT-WEIGHT: bold
+}
+.grn {
+	COLOR: #006600; FONT-WEIGHT: bold
+}
+.red {
+	COLOR: #ff0000; FONT-WEIGHT: bold
+}
+
+------=_NextPart_000_0001_01D30708.012BB210--

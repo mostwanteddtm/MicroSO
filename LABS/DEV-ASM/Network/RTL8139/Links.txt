@@ -1,0 +1,2 @@
+https://www.lowlevel.eu/wiki/RTL8139
+https://www.wfbsoftware.de/2019/07/22/realtek-rtl8139-network-interface-card/

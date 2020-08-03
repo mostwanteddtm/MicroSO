@@ -1,0 +1,168 @@
+/* Smashco.com CSS1 Style Sheet */
+/* By Greg Covey - 12/24/99 */
+
+BODY{
+background: white;
+color: black;
+margin-top: 0;
+margin-left: 0;
+scrollbar-face-color:#blue;
+scrollbar-3dlight-color:#aqua;
+scrollbar-highlight-color:#green;
+scrollbar-shadow-color:#aqua;
+scrollbar-darkshadow-color:#989898;
+scrollbar-track-color:#red;
+scrollbar-arrow-color:#red;
+}
+
+A:link{
+color: #0C00BF;
+text-decoration: underline;
+}
+
+A:visited{
+color: #B20000;
+text-decoration: underline;
+}
+
+A:active{
+text-decoration: none;
+background-color: #CCCC99;
+}
+
+A:hover{
+text-decoration: none;
+}
+
+P{
+text-align: justify;
+/* font-family: Times, serif; */
+font-family: sans-serif;
+color: black;
+background-color: white;
+font-size: .9em
+}
+
+P.indent{
+text-align: justify;
+font-family: sans-serif;
+color: black;
+background-color: white;
+margin-left: 1.5em;
+font-size: .9em
+}
+
+P.startstory{
+text-align: justify;
+font-family: sans-serif;
+color: black;
+background-color: white;
+margin-left: 1.5em;
+margin-top: 2em;
+font-size: .9em
+}
+
+P.alert{
+text-align: justify;
+border-color: red;
+border-width: thin;
+border-style: solid;
+padding: .5em;
+margin-left: 2em;
+margin-right: 3em;
+font-family: sans-serif;
+color: red;
+background-color: white;
+font-size: .9em
+}
+
+P.code{
+/* border-width: thin; */
+/* border-style: solid; */
+padding: .5em;
+margin-left: 3em;
+font-family: sans-serif;
+color: black;
+background-color: #CCCC99;
+font-size: .8em
+}
+
+
+li{
+text-align: justify;
+list-style-image: url(/web/20060220102026im_/http://smashco.com/images/square2.gif);
+font-family: sans-serif;
+font-style: normal;
+background-color: white;
+font-size: .9em;
+}
+
+address{
+font-family: verdana, helvetica, sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 0.6em
+}
+
+span{
+font-family: verdana, sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 1.1em;
+color: navy;
+background-color: white
+}
+
+span.alt{
+font-family: arial, sans-serif;
+font-style: italic;
+font-weight: bold;
+font-size: 1.1em;
+color: maroon;
+background-color: white
+}
+
+span.alt2{
+font-family: arial, sans-serif;
+font-style: italic;
+font-weight: bold;
+font-size: 1.1em;
+color: maroon;
+background-color: white
+}
+
+pre{
+font-family: monospace;
+font-style: normal;
+font-weight: normal;
+font-size: .9em;
+margin-left: 2em;
+}
+
+h1{
+font-family: verdana, helvetica, sans-serif;
+font-style: oblique;
+font-variant: small-caps;
+font-size: 2em
+}
+/*
+     FILE ARCHIVED ON 10:20:26 Feb 20, 2006 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 18:31:27 May 21, 2020.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  CDXLines.iter: 14.776 (3)
+  esindex: 0.018
+  exclusion.robots: 0.257
+  exclusion.robots.policy: 0.242
+  PetaboxLoader3.resolve: 89.664
+  captures_list: 375.318
+  RedisCDXSource: 143.802
+  LoadShardBlock: 212.122 (3)
+  PetaboxLoader3.datanode: 2637.743 (4)
+  load_resource: 2587.897
+*/

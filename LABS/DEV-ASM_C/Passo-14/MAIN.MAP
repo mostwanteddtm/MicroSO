@@ -1,0 +1,12 @@
+
+ Start  Stop   Length Name                   Class
+ 00000H 00138H 00139H _TEXT                  CODE
+ 0013AH 0019FH 00066H _DATA                  DATA
+ 001A0H 001A0H 00000H CONST                  CONST
+ 001A0H 001A0H 00000H _BSS                   BSS
+ 001A0H 00203H 00064H STACK                  STACK
+
+ Origin   Group
+ 0000:0   DGROUP
+
+Program entry point at 0000:0100

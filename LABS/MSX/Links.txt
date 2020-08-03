@@ -1,0 +1,8 @@
+########## Como rodar os emuladores #############
+
+http://www.icongames.com.br/msxfiles/tut-pt.htm
+
+######### GitHub do Emulador em Assembly #######
+
+https://github.com/ricbit/brmsx
+

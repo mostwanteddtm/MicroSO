@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Anotações>
+	<dica>
+		<numero>25</numero>
+		<tema>Variáveis primárias</tema>
+		<descrição>Os quatro tipos de variáveis primárias são: char, int, long e double</descrição>
+		<exemplo></exemplo>
+	</dica>
+	<dica>
+		<numero>29</numero>
+		<tema>Iniciar Multiplas variáveis</tema>
+		<descrição>Iniciar multiplas variáveis do mesmo tipo com valores diferentes</descrição>
+		<exemplo>int a = 10, b, c = 20;</exemplo>
+	</dica>
+	<dica>
+		<numero>42</numero>
+		<tema>Modificadores de Tipos de variáveis</tema>
+		<descrição>unsigned, register, signed (podem ser utilizados combinadamente)</descrição>
+		<exemplo>
+			char (-128 | +127) 
+			unsigner char (0 | 255) 
+			register int (modificador de variável mais utilizado por contador, por residir no registrador e não na memória)
+			signed char garante que qualquer compilador irá trabalhar com os valores negativos e positivos ex: (-128 | +127)
+		</exemplo>
+	</dica>
+	<dica>
+		<numero>46</numero>
+		<tema>Multiplas operações de atribuição</tema>
+		<descrição>Multiplas operações de atribuição de valores de variáveis</descrição>
+		<exemplo>int a = b = c = 10;</exemplo>
+	</dica>
+	<dica>
+		<numero>48</numero>
+		<tema>Criando o próprio tipo de variável</tema>
+		<descrição>Com typedef, definimos um tipo próprio de variável</descrição>
+		<exemplo>typedef unsigned long int MEUTIPO;</exemplo>
+	</dica>
+	<dica>
+		<numero>49</numero>
+		<tema>Usando valores Octal e Hexadecimal</tema>
+		<descrição>Atribuindo valores ocatis e hexadecimais as variáveis</descrição>
+		<exemplo>OCTAL: 0227 - Hexadecimal: 0xFF</exemplo>
+	</dica>
+	<dica>
+		<numero>51</numero>
+		<tema>Precisão do resultado</tema>
+		<descrição>No comando abaixo: \t (tab) - %2.3f (numero minimo de digitos a ser exibidonumero minimo de digitos a ser exibido e 3 casas depois da vírgula.</descrição>
+		<exemplo>printf("Dados \t %2.3f", value);</exemplo>
+	</dica>
+	<dica>
+		<numero>52</numero>
+		<tema>Lista de Caracteres especiais</tema>
+		<descrição>Como atribuir apóstrofo em variável char</descrição>
+		<exemplo>char chr = '\'';</exemplo>
+	</dica>
+	<dica>
+		<numero>55</numero>
+		<tema>Formatando valor de saída</tema>
+		<descrição>printf com saída hexadecimal</descrição>
+		<exemplo>printf("Saida decimal %X\n", c);</exemplo>
+	</dica>
+	<dica>
+		<numero>56</numero>
+		<tema>Formatando valor de saída unsigned</tema>
+		<descrição>Formatando valor de saída unsigned</descrição>
+		<exemplo>printf("%u\n", c);</exemplo>
+	</dica>
+	<dica>
+		<numero>64</numero>
+		<tema>Imprime o endereço de memória da variável (PONTEIRO)/tema>
+		<descrição>Imprime o endereço de memória da variável (PONTEIRO)</descrição>
+		<exemplo>printf("%p\n", &exato);</exemplo>
+	</dica>
+</Anotações>

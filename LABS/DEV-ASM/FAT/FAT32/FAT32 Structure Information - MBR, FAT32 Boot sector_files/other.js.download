@@ -1,0 +1,519 @@
+var LC_API;
+$(function(){
+	var float_js={
+		all_pop:function(id,links,title){
+			if($(id).length>0){
+				var left=$(window).width()/2-290;
+				var top=$(window).height()/2-290;//获取高宽
+				var openvalue='height=580,width=580,top='+top+',left='+left+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no';//设置弹出属性
+				$(document).on('click',id,function(){
+					window.open(links,title,openvalue);
+				});
+			}
+		},
+		mail_pop_show:function(){
+			function download_pop_show(){
+				if($('.download_pop_show').length>0){
+					var dom=document.createElement('script');
+					dom.src='/default/js/download_pop_show.js';
+					document.body.appendChild(dom);
+				}
+			}
+			download_pop_show();
+			
+			var upgrade_pop_show=function(){
+				if($('.upgrade_pop_show').length>0){
+					var dom=document.createElement('script');
+					dom.src='/default/js/upgrade_mail_pop.js';
+					document.body.appendChild(dom);
+				}
+			};
+			upgrade_pop_show();
+			var check_pop=function(){
+				if($('.check_pop_button').length>0){
+					var dom=document.createElement('script');
+					dom.src='/default/js/check_pop.js';
+					document.body.appendChild(dom);
+				}
+			};
+			check_pop();
+		},
+		to_top:function(){//and livechat
+			var totop_html='<div class="float_totop iconfont hidden">&#xe8ef;</div>';
+			$('body').append(totop_html);
+			$(window).scroll(function(){//totop滚动
+				if($(window).scrollTop()>450){
+					$('.float_totop').removeClass('hidden');
+				}else{
+					$('.float_totop').addClass('hidden');
+				}
+			});
+			$('.float_totop').click(function(){
+				$('body,html').animate({scrollTop:0},600);
+			});
+		},
+        window_mouse_bind:function(clas,currents,mouse){//bind window mouse
+            function fun(){
+                currents.removeClass('current');
+                $(document).unbind('click',fun);
+            }
+            clas.click(function(){
+                if(currents.hasClass('current')){
+                    currents.removeClass('current');
+                }else{
+                    currents.addClass('current');
+                }
+            });
+            mouse.unbind('mouseleave').unbind('mouseenter');
+            mouse.mouseleave(function(){
+                $(document).bind('click',fun);
+            }).mouseenter(function(){
+                $(document).unbind('click',fun);
+            });
+        },
+        livechat:function(){
+			var self=this;
+            var globleJs=new globle_js();
+            var livechat_high_version=new Array(//高版本显示自己写的，不要插件
+                '/backup-software/backup-center-purchase.html',
+                '/backup-software/backup-solution.html',
+                '/backup-software/business.html',
+                '/backup-software/central-management.html',
+                '/backup-software/deploy-manager.html',
+                '/backup-software/service-provider.html',
+                '/backup-software/tb-advanced-server-buy.html',
+                '/backup-software/tb-advanced-server.html',
+                '/backup-software/tb-technician-buy.html',
+                '/backup-software/tb-technician.html',
+                '/backup-software/todo-backup-mac-purchase.html',
+                '/datarecoverywizardpro/drw-pro-technician-buy.html',
+                '/datarecoverywizardpro/drwpro-unlimited.htm',
+                '/disk-copy/technician-edition/index.htm',
+                '/mac-data-recovery-software/drw-mac-technician-buy.html',
+                '/mac-data-recovery-software/drw-mac-technician.html',
+                '/partition-manager/business.html',
+                '/partition-manager/epm-technician-buy.html',
+                '/partition-manager/epm-technician.html',
+                '/partition-manager/epm-unlimited-buy.html',
+                '/partition-manager/epm-unlimited.html',
+                '/partition-manager/service-provider.html',
+                '/pc-transfer-software/pctrans-technician-buy.html',
+                '/pc-transfer-software/pctrans-technician.html',
+				'/pc-transfer-software/pctrans-technician-test.html',
+                '/review/central-management.html',
+                '/review/deploy-manager.html',
+                '/review/pctrans-technician.html',
+                '/review/tb-advanced-server.html',
+                '/review/tb-technician.html',
+                '/spec/central-management.html',
+                '/spec/deploy-manager.html',
+                '/spec/pctrans-technician.html',
+                '/spec/tb-advanced-server.html',
+                '/spec/tb-technician.html',
+                '/store/tb-technician-renewal.html',
+                '/tutorial/central-management-user-guide.html',
+                '/tutorial/deploy-manager-user-guide.html',
+                '/tutorial/pctrans-technician-user-guide.html',
+                '/tutorial/tb-advanced-server-user-guide.html',
+                '/tutorial/tb-technician-user-guide.html',
+                '/backup-software/tb-server.html'
+            );
+            livechat_high_version=globleJs.url_in(livechat_high_version);
+            var livechat_side_hidden=new Array(//这些文件只展示头部，侧边都不要
+                '/mobile-tool/free-iphone-data-recovery.html',
+                '/mobile-tool/iphone-data-recovery-pro.html',
+                '/mobile-tool/free-iphone-data-recovery-mac-test.html',
+                '/mobile-tool/free-iphone-data-recovery-mac.html',
+                '/mobile-tool/iphone-data-recovery-pro-test.html',
+                '/ios-data-recovery-software/',
+                '/android-data-recovery-software/',
+                '/android-data-recovery-software/free-android-data-recovery.html',
+                '/android-data-recovery-software/android-data-recovery.html',
+                '/android-data-recovery-software/app-version.html',
+                '/mobile-tool/free-iphone-data-recovery-test.html',
+                '/tutorial/mobisaver-free-user-guide.html',
+                '/spec/mobisaver-free.html',
+                '/spec/free-iphone-data-recovery-mac.html',
+                '/tutorial/free-iphone-data-recovery-mac.html',
+                '/tutorial/mobisaver-android-free-user-guide.html',
+                '/spec/mobisaver-android-free.html',
+                '/sales-faq/refund-policy.html',
+                '/todo-backup-resource/how-to-stop-windows-10-from-automatically-update.html',
+                '/partition-manager-software/fix-windows-10-100-disk-usage-in-task-manager.html',
+                '/file-sync/',
+                '/tutorial/everysync-user-guide.html',
+                '/spec/everysync.html',
+                '/review/everysync.html',
+                '/system-utilities/mac.htm',
+                '/tutorial/cg-mac-user-guide.html',
+                '/spec/cg-mac.html',
+                '/review/cleangenius-mac.html',
+                '/phone-transfer/',
+                '/phone-transfer/mobimover-free.html',
+                '/tutorial/mobimover-user-guide.html',
+                '/spec/mobimover.html',
+                '/phone-transfer/mobimover.html',
+                '/backup-software/deploy-manager.html',
+                '/tutorial/deploy-manager-user-guide.html',
+                '/spec/deploy-manager.html',
+                '/review/deploy-manager.html',
+                '/backup-software/todo-backup-mac.html',
+                '/emailrecoverywizard/',
+                '/spec/email-recovery-wizard.html',
+                '/review/email-recovery-wizard.html',
+                '/partition-recovery/',
+                '/data-recovery/windows-cannot-access-the-specified-device-path-or-file.html',
+                '/mac-file-recovery/ssd-trim-data-recovery.html',
+                '/file-recovery/recover-gmail-email.html',
+                '/storage-media-recovery/fix-fatal-device-hardware-error-and-recover-data.html',
+                '/resource/there-is-no-media-in-the-specified-device.html',
+                '/format-recovery/recover-data-after-low-level-format.html',
+                '/iphone-recovery/transfer-pictures-from-disabled-iphone.html',
+                '/file-recovery/fix-xbox-one-stuck-on-green-loading-screen-of-death.html',
+                '/file-recovery/remove-shortcut-virus-using-cmd.html',
+                '/partition-master/format-a-write-protected-usb-flash-drive.html',
+                '/partition-master/copy-virtual-hard-disk.html',
+                '/data-recovery/windows-cannot-access-the-specified-device-path-or-file.html',
+                '/mac-file-recovery/ssd-trim-data-recovery.html',
+                '/android-data-recovery-software/free-android-data-recovery-b.html',
+                '/storage-media-recovery/restore-data-when-hard-drive-not-detected-in-bios.html',
+                '/iphone-recovery/fix-iphone-stuck-at-apple-logo-without-data-loss.html'
+            );
+            livechat_side_hidden=globleJs.url_in(livechat_side_hidden);
+            var livechat_side_hidden_files=new Array(//这些文件夹里的所有文件，只展示头部，侧边都不要
+                '/iphone-data-transfer/',
+                '/ios-tips/',
+                '/android-data-recovery/',
+                '/thankyou/',
+                '/survey/',
+                '/mac-cleanup/',
+                '/computer-instruction/',
+                '/mac-backup-recovery/'
+            );
+            livechat_side_hidden_files=globleJs.url_in(livechat_side_hidden_files,'files');
+            var livechat_scroll=new Array(//排除这些文件，第一屏要隐藏起来，滚动到第二瓶才出现
+                '/buynow.htm',
+                '/store/data-recovery.html',
+                '/store/partition-manager.html',
+                '/store/backup.html',
+                '/store/data-transfer.html',
+                '/store/utilities.html',
+                '/backup-software/tb-server-purchase.html'
+            );
+            livechat_scroll=globleJs.url_in(livechat_scroll);
+            var livechat_icon=new Array(//这些页面，用新图标
+                '/datarecoverywizard/free-data-recovery-software.htm',
+                '/mac-data-recovery-software/drw-mac-free.htm',
+                '/partition-manager/epm-free.html',
+                '/backup-software/tb-free.html',
+                '/free-pc-transfer-software/',
+                '/phone-transfer/mobimover-free.html',
+                '/system-go-back/'
+            );
+            livechat_icon=globleJs.url_in(livechat_icon);
+            var livechat_icon_files=new Array(//这些文件夹，用新图标
+                '/resource/',
+                '/data-recovery/',
+                '/storage-media-recovery/',
+                '/file-recovery/',
+                '/data-recovery-solution/',
+                '/mac-file-recovery/',
+                '/mac-photo-recovery/',
+                '/mac/mac-data-recovery-resource/',
+                '/format-recovery/',
+                '/partition-recovery-software/',
+                '/recover-deleted-files/',
+                '/backup-recovery/',
+                '/backup-utility/',
+                '/todo-backup-resource/',
+                '/partition-manager-software/',
+                '/partition-master/',
+                '/pc-transfer/',
+                '/disk-copy/clone-resource/',
+                '/mac-backup-recovery/',
+                '/computer-instruction/',
+                '/iphone-recovery/'
+            )
+            livechat_icon_files=globleJs.url_in(livechat_icon_files,'files');
+            var livechat=function(){
+                 $('.toplink li.support').after('<li class="livechat"><span class="livechat_hover" onclick="ga(\'send\', \'event\', \'navigation\', \'category\', \'livechat\');">Live Chat</span><span>|</span></li>');
+                if(livechat_high_version){
+                    //高版本用自己的
+                    var livechat_outside_html='<div class="float_livechat current"><div class="show"><span class="iconfont">&#xe66f;</span>LiveChat</div></div>';
+                    var livechat_inside_html='<div class="livechat_content"><div class="bg">LiveChat<span class="close iconfont">&#xe603;</span></div><p class="c_title">Chat with a representative</p><ul class="list"><li class="q"><font class="click">Pre-Sales Inquiry</font></li><li class="s"><a target="_blank" href="https://secure.livechatinc.com/licence/1389892/open_chat.cgi?groups=2">Technical Support</a><span>(For paid users only)</span></li></ul><p class="call">Call 1-800-570-4634 for free <i class="offline current">&nbsp;</i><span>(Available from 5pm to 6am on Mon to Fri PST)</span></p></div>';
+                    $('body').append(livechat_outside_html);
+                    $('.float_livechat,.toplink li.livechat').append(livechat_inside_html);
+                    //time
+                    var livechat_online=function(hour){
+                        hour=Number(hour);
+                        if(hour>=17 || hour<6){
+                            $('.livechat_content .offline').addClass('current');
+                        }else{
+                            //off
+                            $('.livechat_content .offline').removeClass('current');
+                        }
+                    };
+                    var data=new Date();
+                    livechat_online(data.getHours());
+                    $.ajax({
+                        type : "GET",
+                        url : "https://www.easeus.com/mail/giveaway/getDateTime.php?type=hour",
+                        dataType : "jsonp",
+                        jsonp: 'callback',
+                        success : function(hour){
+                          livechat_online(hour);
+                        }
+                    });	
+                    //time end
+                }else{
+                    //其它的顶部用自己的
+                    var livechat_inside_html='<div class="livechat_content"><div class="bg">LiveChat<span class="close iconfont">&#xe603;</span></div><p class="title">Need help? We\'re here for you.</p><dl class="tech"><dt>Technical Support</dt><dd class="dis">For paid users only. Professional support on all technique problems.</dd></dl><dl class="click"><dt>Pre-Sales Inquiry</dt><dd class="dis">Inquiry,quote,sales order,license code, invoice and download link,etc.</dd></dl><a class="link" href="/easeus-customer-service-privacy-statement.html">Privacy Statement >></a></div>';
+                    $('.toplink li.livechat').append(livechat_inside_html);
+                    //插件
+                    if(!(livechat_side_hidden || livechat_side_hidden_files)){//这些页面不要插件
+                        $('body').append('<div id="livechat-for-own"><span class="iconfont">&#xe66f;</span>LiveChat</div>');
+                        if(livechat_icon || livechat_icon_files){//这些页面用新图标
+                            $('#livechat-for-own').addClass('icon_1').html('<span class="iconfont">&#xe685;</span>');
+                        }
+                        window.__lc = window.__lc || {};
+                        window.__lc.license = 1389892;
+                        if(globleJs.url_in(new Array('/support.htm'))){
+                             window.__lc.group = 2;//support用2
+                        }else{
+                            window.__lc.group = 3;//其它用3
+                        }
+                        (function() {
+                          var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
+                          lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+                          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
+                        })();
+                        LC_API = LC_API || {};
+                        LC_API.on_after_load = function() {
+                            $('#livechat-for-own').click(function(){
+                                LC_API.open_chat_window();
+                            });
+                        };
+                    }
+                }
+                    //float_livechat run接上面 绑定弹窗
+                self.all_pop('.livechat_window_pop','https://secure.livechatinc.com/licence/1389892/open_chat.cgi?groups=3','livechat');
+                
+                if(livechat_high_version){//高版本用5，其他用3
+                    self.all_pop('.livechat_content .click','https://secure.livechatinc.com/licence/1389892/v2/open_chat.cgi?groups=5','livechat');
+                }else{
+                    self.all_pop('.livechat_content .click','https://secure.livechatinc.com/licence/1389892/v2/open_chat.cgi?groups=3','livechat');
+                }
+                
+                $('.livechat_content .tech').click(function(){window.open('https://secure.livechatinc.com/licence/1389892/open_chat.cgi?groups=2');});
+                //绑定点击
+                self.window_mouse_bind($('.livechat .livechat_hover'),$('.livechat .livechat_hover').parent(),$('.livechat .livechat_hover').parent());//bind window mouse run
+                self.window_mouse_bind($('.float_livechat .show'),$('.float_livechat .show').parent(),$('.float_livechat .show').parent());
+                $(document).on('click','.livechat_content .close',function(){$(this).parent().parent().parent().removeClass('current');});
+                
+                //绑定滚动事件，第一屏不展示，
+                if(!(livechat_high_version || livechat_scroll)){//livechat_high_version高版本和livechat_scroll页面排除掉
+                    var float_livechat=$('.float_livechat,#livechat-for-own');
+                    var sc=function(){
+                        if($(window).scrollTop()>450){
+                            float_livechat.show();
+                        }else{
+                            float_livechat.hide();
+                        }
+                    }
+                    sc();
+                    $(window).scroll(function(){//totop滚动
+                        sc();
+                    });
+                }
+            }
+            livechat();  
+        },
+		all_float:function(){
+			var self=this;
+			//all share
+			var share_pop=function(){
+				var url=document.URL;
+				var title=$('title').eq(0).html();
+				var twitter_title='';//twitter用的title
+				var text_len=120-url.length;
+				if(title.length>text_len){
+					twitter_title=title.substr(0,text_len)+'...';
+				}else{
+					twitter_title=title;
+				}
+				self.all_pop('.share_facebook','http://www.facebook.com/sharer/sharer.php?u='+url,'facebook');
+				self.all_pop('.share_twitter','https://twitter.com/intent/tweet?text='+twitter_title+'&url='+url+'&via=EaseUS','twitter');
+				self.all_pop('.share_google','https://plus.google.com/share?url='+url,'google');
+			};
+			share_pop();
+			//多语言弹出的那玩意
+			var language_html='<div class="language_top"><div class="wrap clearfix"><span class="close iconfont">&#xe8ee;</span><p class="title">CHOOSE YOUR REGION</p><div class="list_box"><dl class="list"><dt>North America</dt><dd><a class="current" href="https://www.easeus.com">United States<span>(English)</span></a><a href="https://www.easeus.com">Canada<span>(English)</span></a><a class="canada_fr" href="https://www.easeus.fr">Canada<span>(Francais)</span></a></dd></dl><dl class="list"><dt>Latin America </dt><dd><a href="https://br.easeus.com">Brasil<span>(Português)</span></a><a href="https://es.easeus.com">México<span>(Español)</span></a><a href="https://es.easeus.com">Chile<span>(Español)</span></a><a href="https://es.easeus.com">Argentina<span>(Español)</span></a></dd></dl></div><div class="list_box"><dl class="list"><dt>Europe</dt><dd><a class="deutschland_de" href="https://www.easeus.de/">Deutschland<span>(Deutsch)</span></a><a class="deutschland_de" href="https://www.easeus.de/">Österreich<span>(Deutsch)</span></a><a class="france_fr" href="https://www.easeus.fr">France<span>(Francais)</span></a><a class="belgique_fr" href="https://www.easeus.fr">Belgique<span>(Francais)</span></a><a href="https://nl.easeus.com/">België<span>(Nederlands)</span></a><a href="https://es.easeus.com">España<span>(Español)</span></a><a href="https://it.easeus.com">Italia<span>(Italiano)</span></a><a href="https://br.easeus.com">Portugal<span>(Português)</span></a><a href="https://uk.easeus.com">United Kingdom<span>(English)</span></a><a href="https://nl.easeus.com">Nederland<span>(Nederlands)</span></a><a href="http://www.easeus.net.pl">Polska<span>(Polski)</span></a><a href="http://www.easeus.cz">Česká<span>(Čeština)</span></a></dd></dl></div><div class="list_box last"><dl class="list"><dt>Asia Pacific</dt><dd><a href="https://www.easeus.com">Australia<span>(English)</span></a><a href="https://www.easeus.com">Singapore<span>(English)</span></a><a href="https://www.easeus.com">New Zealand<span>(English)</span></a><a class="japan" href="https://jp.easeus.com/">日本<span>（日本語）</span></a><a href="http://www.easeus.co.kr">대한민국<span>(한국어)</span></a><a href="http://cn.easeus.com/">中国<span>(简体中文)</span></a><a href="https://tw.easeus.com/">台灣<span>(繁體中文)</span></a><a href="https://tw.easeus.com/">香港<span>(繁體中文)</span></a><a href="/">Hong Kong<span>(English)</span></a><a href="https://www.easeus.com">India<span>(English)</span></a><a href="http://www.easeus.co.id">Indonesia<span>(Bahasa Indonesia)</span></a><a href="http://www.easeus.ae">امارات عربية متحدة&lrm;<span>(العربية)</span></a><a href="http://tr.easeus.com/">Türkiye<span>(Türkçe)</span></a></dd></dl><dl class="list"><dt>International</dt><dd><a href="https://www.easeus.com">English</a></dd></dl></div></div></div>';
+			$('body').append(language_html);
+			self.window_mouse_bind($('.toplink .united_span,.language_bottom_click'),$('.language_top'),$('.toplink .united_span,.language_bottom_click,.language_top'));
+			$('.language_top .close').click(function(){
+				$('.language_top').removeClass('current');
+			});
+			//语言切换
+			var dom=document.createElement('script');
+			dom.src='/default/js/language.js';
+			document.body.appendChild(dom);
+			//新增的弹出窗口
+			self.all_pop('#Context .bt_livechat .this_bt','https://secure.livechatinc.com/licence/1389892/open_chat.cgi?groups=2','livechat');
+            //用户第一次进入页面
+            if(cookie.getcookie('usernotice_pop')==0){
+                 $('body').append('<div class="usernotice_pop">EaseUS uses cookies to ensure you get the best experience on our website. &nbsp; <a href="/privacy.htm">Learn more</a> <span class="button">Got it</span></div>');
+                $('.usernotice_pop .button').click(function(){
+                    $(this).parent().slideUp(400);
+                    cookie.setcookie('usernotice_pop','in');
+                })
+            }
+		},
+		input_word_show:function(){
+			$('.word_hide_show').each(function(){
+				var word_hide_show=$(this);
+				var word=word_hide_show.val();
+				word_hide_show.focus(function(){
+					var this_word=$(this).val();
+					if(word==this_word){
+						word_hide_show.val('');
+					}
+				}).blur(function(){
+					var this_word=$(this).val();
+					if(this_word==''){
+						word_hide_show.val(word);
+					}
+				});
+			});
+		},
+		article:function(){
+			var float_bottom=function(){
+				if($('.float_bottom').length>0){
+					var gura_f_top=$('.footer').offset().top;
+					var scs=function(){
+						var top=$(window).scrollTop()+$(window).height();
+						if(top>=gura_f_top){
+							$(".float_bottom").removeClass('current');
+						}else{
+							$(".float_bottom").addClass('current');
+						}
+					};
+					$(window).bind('scroll',scs);
+					$('.float_bottom .colse').click(function(){
+						$(this).parent().parent().removeClass('current');
+						$(window).unbind('scroll',scs);
+					});
+				}
+			};
+			//float_bottom();
+			//button->change->linkid
+			var article_linkid=function(){
+				var buy_linkid=document.URL;
+				buy_linkid=buy_linkid.replace(/http\:\/\/.*?\/|\?.*|\.html{0,1}/g,'');
+				buy_linkid=buy_linkid.replace(/\//g,'---');
+				//set buy_linkid
+				$('.article_content .article_button.buy').each(function(){
+					var url=$(this).attr('href');
+					var linkids=url.match(/linkid\=.*/);
+					if(linkids!=null){
+						linkids=linkids[0];
+						if(/\&/.test(linkids)){
+							linkids=linkids.split('&');
+							linkids=linkids[0];
+						}
+						url=url.replace(linkids,linkids+'_'+buy_linkid);
+						$(this).attr({href:url});
+					}else{
+						if(!(/javascript\:void\(0\)/.test(url))){
+							$(this).attr({href:url+'&linkid=_'+buy_linkid});
+						}
+					}
+				});
+			};
+			article_linkid();
+		}
+	};
+	float_js.to_top();
+    float_js.livechat();
+	float_js.all_float();
+	float_js.article();
+	float_js.mail_pop_show();
+	float_js.input_word_show();
+});
+//ab测试
+/*
+$(function(){
+	var num=0;
+	var test_fun=function(clicks,down_url1,down_url2,fun1,fun2,data1,data2){
+		num++;
+		var ab_test_fun=function(data,iscookie){
+			if(data==0){
+				cookie.setcookie(clicks,'no1');
+				window.location.href=down_url1;
+				fun1();
+				if(iscookie!='cookie'){
+					$.ajax({
+						type: "POST",
+						url: "/collect/drw.php",
+						data:"url="+data1,
+						cache: false
+					});
+				}
+			}else if(data==1){
+				cookie.setcookie(clicks,'no2');
+				window.location.href=down_url2;
+				fun2();
+				if(iscookie!='cookie'){
+					$.ajax({
+						type: "POST",
+						url: "/collect/drw.php",
+						data:"url="+data2,
+						cache: false
+					});
+				}
+			}
+		};
+		$(clicks).click(function(){
+			var pctrans_ab_test_data=cookie.getcookie(clicks);
+			if(pctrans_ab_test_data=='no1'){
+				ab_test_fun(0,'cookie');
+			}else if(pctrans_ab_test_data=='no2'){
+				ab_test_fun(1,'cookie');
+			}else{
+				$.ajax({
+					type : "GET",
+					url : "https://www.easeus.com/getflag2.php?num="+num,
+					dataType : "jsonp",
+					jsonp: 'callback',
+					success : function(data){
+						ab_test_fun(data);
+					}
+				});
+			}
+			return false;
+		});
+	};
+	//for->drw_pro_test
+	test_fun('.donwlload_changeurl','http://down.easeus.com/product/drw_trial','http://down.easeus.com/product/drw_trial',function(){
+		ga('send', 'event', 'drw_trial_win_download', 'product', 'trial_a');
+	},function(){
+		ga('send', 'event', 'drw_trial_win_download', 'product', 'trial_b');
+	},'drw_12012','drw_11952');
+	//for->drw_free_test
+	test_fun('.drw_free_test','http://down.easeus.com/product/drw_free','http://down.easeus.com/product/drw_free',function(){
+		ga('send', 'event', 'drw_free_win_download', 'product', 'free_a');
+	},function(){
+		ga('send', 'event', 'drw_free_win_download', 'product', 'free_b');
+	},'drw_12011','drw_11911');
+	//for->drw_mac_free_test
+	test_fun('.drw_mac_free_test','http://down.easeus.com/product/mac_drw_free','http://down.easeus.com/product/mac_drw_free',function(){
+		ga('send', 'event', 'drw_free_mac_download', 'download_page', 'free_a');
+	},function(){
+		ga('send', 'event', 'drw_free_mac_download', 'download_page', 'free_b');
+	},'free_11.2test','free_11.0test');
+	//for->mac_data_recovery_test
+	test_fun('.mac_data_recovery_test','http://down.easeus.com/product/mac_drw_trial','http://down.easeus.com/product/mac_drw_trial',function(){
+		ga('send', 'event', 'drw_trial_mac_download', 'product', 'trial_a');
+	},function(){
+		ga('send', 'event', 'drw_trial_mac_download', 'product', 'trial_b');
+	},'trial_11.2test','trial_11.0test');
+});*/

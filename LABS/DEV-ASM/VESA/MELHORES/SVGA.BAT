@@ -1,0 +1,1 @@
+NASM -f bin SVGA.ASM -o SVGA.COM

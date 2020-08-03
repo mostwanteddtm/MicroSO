@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Anotações>
+	<dica>
+		<numero>111</numero>
+		<tema>Constantes</tema>
+		<descrição>Definição de constantes</descrição>
+		<exemplo>#define VALOR 1 tipos (int, float, char, string, double)</exemplo>
+	</dica>
+	<dica>
+		<numero>135</numero>
+		<tema>Contantes de Pré Processador</tema>
+		<descrição>Direvita __FILE__ Exibe o nome do arquivo fonte</descrição>
+		<exemplo>printf("%s", __FILE__);</exemplo>
+	</dica>
+	<dica>
+		<numero>137</numero>
+		<tema>Contantes de Pré Processador</tema>
+		<descrição>Direvita __LINE__ Bom para depurar</descrição>
+		<exemplo>printf("%s", __LINE__);</exemplo>
+	</dica>
+	<dica>
+		<numero>145</numero>
+		<tema>Pragmas</tema>
+		<descrição>Direvitas de pré-processador do compilador</descrição>
+		<exemplo>#pragma comment (lib, "stdlib.lib")</exemplo>
+	</dica>
+	<dica>
+		<numero>149</numero>
+		<tema>Testando se o símbolo está definido</tema>
+		<descrição>Analisar esta parte, pois será muito utilizado</descrição>
+		<exemplo>#ifdef #ifndef #if defined</exemplo>
+	</dica>
+	<dica>
+		<numero>161</numero>
+		<tema>Inicio de documentação de string</tema>
+		<descrição>Documentação de string "string.h"</descrição>
+		<exemplo>strlen, strcpy....</exemplo>
+	</dica>
+	<dica>
+		<numero>197</numero>
+		<tema>Fim da documentação de string</tema>
+		<descrição>Documentação de string "string.h"</descrição>
+		<exemplo>strstr_rep</exemplo>
+	</dica>
+</Anotações>

@@ -1,0 +1,4 @@
+@ECHO Compilado com o Borland C++ v5.02 32Bits
+SET PATH=C:\BC5\BIN
+BCC32 -B MAIN.CPP FUNC.ASM
+PAUSE

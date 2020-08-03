@@ -1,0 +1,4 @@
+############# 28-12-18 ##################
+
+O exercício EX01, é o mesmo da pasta: ..\PCI\EX05.
+Transferi pra cá, para melhor organização.

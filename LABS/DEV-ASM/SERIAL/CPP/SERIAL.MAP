@@ -1,0 +1,339 @@
+Stack Allocation = 5120 bytes
+
+ Start  Stop   Length Name                   Class
+ 00000H 021E2H 021E3H _TEXT                  CODE
+ 021F0H 021F1H 00002H EMULATOR_TEXT          CODE
+ 021F2H 021F2H 00000H C_ETEXT                ENDCODE
+ 02200H 02200H 00000H EMULATOR_DATA          FAR_DATA
+ 02200H 02241H 00042H NULL                   BEGDATA
+ 02242H 02667H 00426H _DATA                  DATA
+ 02668H 02669H 00002H XIQC                   DATA
+ 0266AH 02675H 0000CH DBDATA                 DATA
+ 02676H 02683H 0000EH CDATA                  DATA
+ 02684H 02684H 00000H XIFB                   DATA
+ 02684H 02684H 00000H XIF                    DATA
+ 02684H 02684H 00000H XIFE                   DATA
+ 02684H 02684H 00000H XIB                    DATA
+ 02684H 02684H 00000H XI                     DATA
+ 02684H 02684H 00000H XIE                    DATA
+ 02684H 02684H 00000H XPB                    DATA
+ 02684H 02685H 00002H XP                     DATA
+ 02686H 02686H 00000H XPE                    DATA
+ 02686H 02686H 00000H XCB                    DATA
+ 02686H 02686H 00000H XC                     DATA
+ 02686H 02686H 00000H XCE                    DATA
+ 02686H 02686H 00000H XCFB                   DATA
+ 02686H 02686H 00000H XCFCRT                 DATA
+ 02686H 02686H 00000H XCF                    DATA
+ 02686H 02686H 00000H XCFE                   DATA
+ 02686H 02686H 00000H XIFCB                  DATA
+ 02686H 02686H 00000H XIFU                   DATA
+ 02686H 02686H 00000H XIFL                   DATA
+ 02686H 02686H 00000H XIFM                   DATA
+ 02686H 02686H 00000H XIFCE                  DATA
+ 02686H 02686H 00000H CONST                  CONST
+ 02686H 0268DH 00008H HDR                    MSG
+ 0268EH 02763H 000D6H MSG                    MSG
+ 02764H 02765H 00002H PAD                    MSG
+ 02766H 02766H 00001H EPAD                   MSG
+ 02768H 02768H 00000H _BSS                   BSS
+ 02768H 02768H 00000H XOB                    BSS
+ 02768H 02768H 00000H XO                     BSS
+ 02768H 02768H 00000H XOE                    BSS
+ 02768H 02768H 00000H XOFB                   BSS
+ 02768H 02768H 00000H XOF                    BSS
+ 02768H 02768H 00000H XOFE                   BSS
+ 02770H 03B6FH 01400H STACK                  STACK
+
+ Origin   Group
+ 0220:0   DGROUP
+
+  Address         Publics by Name
+
+ 0000:00F6       ?c_inial@@YAXXZ
+ 0000:018A       ?Delay@@YAXH@Z
+ 0000:0160       ?reces@@YADXZ
+ 0000:012E       ?sends@@YADD@Z
+ 0000:006E       ?TestSerial@@YAXXZ
+ 0220:0568       _edata
+ 0220:0570       _end
+ 0220:013E       _errno
+ 0000:039A       _exit
+ 0000:07A8       _fclose
+ 0000:0B5A       _fflush
+ 0000:0010       _main
+ 0000:1E62       _memset
+ 0000:085E       _printf
+ 0000:21D6       _remove
+ 0000:089A       _scanf
+ 0220:017C       _STKHQQ
+ 0000:1D58       _strcat
+ 0000:1D98       _strcpy
+ 0000:1A6A       _ungetc
+ 0220:017A       __aaltstkovr
+ 0220:0122       __acfinfo
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 0000:D6D6  Abs  __aDBdoswp
+ 0220:0178       __adbgmsg
+ 0220:0104       __aexit_rtn
+ 0000:1000  Abs  __AHINCR
+ 0000:000C  Abs  __AHSHIFT
+ 0220:0130       __aintdiv
+ 0220:034E       __amblksiz
+ 0000:029D       __amsg_exit
+ 0000:048A       __aNchkstk
+ 0000:1EFE       __aNlmul
+ 0000:1F30       __aNNalmul
+ 0000:1F30       __aNNaulmul
+ 0220:0042       __anullsize
+ 0000:1EFE       __aNulmul
+ 0220:011C       __aseghi
+ 0220:011E       __aseglo
+ 0220:0106       __asizds
+ 0220:0362       __asizeC
+ 0220:0363       __asizeD
+ 0000:01CC       __astart
+ 0220:0102       __atopsp
+ 0000:03A9       __cexit
+ 0220:0350       __cfltcvt_tab
+ 0220:0198       __cflush
+ 0220:016F       __child
+ 0000:048A       __chkstk
+ 0000:02C8       __cinit
+ 0000:028E       __cintDIV
+ 0000:1ACE       __close
+ 0000:1E90       __cltoasub
+ 0000:1E0A       __commit
+ 0220:014B       __cpumode
+ 0000:0428       __ctermsub
+ 0220:0364       __ctype
+ 0220:0364       __ctype_
+ 0000:1E9C       __cxtoa
+ 0000:03B3       __c_exit
+ 0000:02C6       __dataseg
+ 0220:014C       __doserrno
+ 0000:0750       __dosret0
+ 0000:0765       __dosretax
+ 0000:0758       __dosreturn
+ 0000:1EF0       __dos_commit
+ 0220:0568       __edata
+ 021F:0000       __EmDataSeg
+ 0220:0570       __end
+ 0000:08B8       __endstdio
+ 0220:0168       __environ
+ 0000:03A1       __exit
+ 0220:0177       __exitflag
+ 0220:0134       __fac
+ 0000:07A6       __farstub
+ 0000:1DE6       __fcloseall
+ 0220:0120       __fDosExt
+ 0000:0464       __FF_MSGBANNER
+ 0000:08CA       __filbuf
+ 0000:1D37       __findlast
+ 0000:095E       __flsbuf
+ 0000:0BA8       __flush
+ 0000:0C1E       __flushall
+ 0000:1F50       __fmemcpy
+ 0220:0478       __fpinit
+ 0000:0484       __fptrap
+ 0000:0A3E       __freebuf
+ 0000:0B1B       __ftbuf
+ 0000:0A68       __getbuf
+ 0000:1C5A       __growseg
+ 0000:1CE6       __incseg
+ 0000:0C8C       __input
+ 0220:0172       __intno
+ 0220:019A       __iob
+ 0220:023A       __iob2
+ 0000:1DCA       __itoa
+ 0220:02DA       __lastiob
+ 0000:1AEE       __lseek
+ 0220:034C       __lseekchk
+ 0000:0772       __maperror
+ 0000:072C       __myalloc
+ 0220:014E       __nfile
+ 0000:20FE       __nfree
+ 0220:0108       __nheap_desc
+ 0000:211F       __nmalloc
+ 0000:06CC       __NMSG_TEXT
+ 0000:06F7       __NMSG_WRITE
+ 0000:04A2       __nullcheck
+ 0220:014C       __oserr
+ 0220:0150       __osfile
+ 0220:0147       __osmajor
+ 0220:0146       __osminor
+ 0220:014A       __osmode
+ 0220:0146       __osver
+ 0220:0148       __osversion
+ 0000:1594       __output
+ 0220:0171       __ovlflag
+ 0220:0173       __ovlvec
+ 0220:016A       __pgmptr
+ 0220:0466       __pnhNearHeap
+ 0220:0144       __psp
+ 0220:0142       __pspadr
+ 0000:1B70       __read
+ 0000:215A       __searchseg
+ 0000:04C4       __setargv
+ 0000:064E       __setenvp
+ 0220:0360       __sigintoff
+ 0220:035E       __sigintseg
+ 0000:20EC       __stackavail
+ 0000:0AAA       __stbuf
+ 0220:0140       __umaskval
+ 0000:21D6       __unlink
+ 0000:1FAE       __write
+ 0220:0470       ___aDBexit
+ 0220:046E       ___aDBrterr
+ 0220:046C       ___aDBswpchk
+ 0220:046A       ___aDBswpflg
+ 0220:0164       ___argc
+ 0220:0166       ___argv
+ 0220:0468       ___qczrinit
+
+  Address         Publics by Value
+
+ 0000:000C  Abs  __AHSHIFT
+ 0000:0010       _main
+ 0000:006E       ?TestSerial@@YAXXZ
+ 0000:00F6       ?c_inial@@YAXXZ
+ 0000:012E       ?sends@@YADD@Z
+ 0000:0160       ?reces@@YADXZ
+ 0000:018A       ?Delay@@YAXH@Z
+ 0000:01CC       __astart
+ 0000:028E       __cintDIV
+ 0000:029D       __amsg_exit
+ 0000:02C6       __dataseg
+ 0000:02C8       __cinit
+ 0000:039A       _exit
+ 0000:03A1       __exit
+ 0000:03A9       __cexit
+ 0000:03B3       __c_exit
+ 0000:0428       __ctermsub
+ 0000:0464       __FF_MSGBANNER
+ 0000:0484       __fptrap
+ 0000:048A       __chkstk
+ 0000:048A       __aNchkstk
+ 0000:04A2       __nullcheck
+ 0000:04C4       __setargv
+ 0000:064E       __setenvp
+ 0000:06CC       __NMSG_TEXT
+ 0000:06F7       __NMSG_WRITE
+ 0000:072C       __myalloc
+ 0000:0750       __dosret0
+ 0000:0758       __dosreturn
+ 0000:0765       __dosretax
+ 0000:0772       __maperror
+ 0000:07A6       __farstub
+ 0000:07A8       _fclose
+ 0000:085E       _printf
+ 0000:089A       _scanf
+ 0000:08B8       __endstdio
+ 0000:08CA       __filbuf
+ 0000:095E       __flsbuf
+ 0000:0A3E       __freebuf
+ 0000:0A68       __getbuf
+ 0000:0AAA       __stbuf
+ 0000:0B1B       __ftbuf
+ 0000:0B5A       _fflush
+ 0000:0BA8       __flush
+ 0000:0C1E       __flushall
+ 0000:0C8C       __input
+ 0000:1000  Abs  __AHINCR
+ 0000:1594       __output
+ 0000:1A6A       _ungetc
+ 0000:1ACE       __close
+ 0000:1AEE       __lseek
+ 0000:1B70       __read
+ 0000:1C5A       __growseg
+ 0000:1CE6       __incseg
+ 0000:1D37       __findlast
+ 0000:1D58       _strcat
+ 0000:1D98       _strcpy
+ 0000:1DCA       __itoa
+ 0000:1DE6       __fcloseall
+ 0000:1E0A       __commit
+ 0000:1E62       _memset
+ 0000:1E90       __cltoasub
+ 0000:1E9C       __cxtoa
+ 0000:1EF0       __dos_commit
+ 0000:1EFE       __aNlmul
+ 0000:1EFE       __aNulmul
+ 0000:1F30       __aNNaulmul
+ 0000:1F30       __aNNalmul
+ 0000:1F50       __fmemcpy
+ 0000:1FAE       __write
+ 0000:20EC       __stackavail
+ 0000:20FE       __nfree
+ 0000:211F       __nmalloc
+ 0000:215A       __searchseg
+ 0000:21D6       _remove
+ 0000:21D6       __unlink
+ 021F:0000       __EmDataSeg
+ 0220:0042       __anullsize
+ 0220:0102       __atopsp
+ 0220:0104       __aexit_rtn
+ 0220:0106       __asizds
+ 0220:0108       __nheap_desc
+ 0220:011C       __aseghi
+ 0220:011E       __aseglo
+ 0220:0120       __fDosExt
+ 0220:0122       __acfinfo
+ 0220:0130       __aintdiv
+ 0220:0134       __fac
+ 0220:013E       _errno
+ 0220:0140       __umaskval
+ 0220:0142       __pspadr
+ 0220:0144       __psp
+ 0220:0146       __osminor
+ 0220:0146       __osver
+ 0220:0147       __osmajor
+ 0220:0148       __osversion
+ 0220:014A       __osmode
+ 0220:014B       __cpumode
+ 0220:014C       __oserr
+ 0220:014C       __doserrno
+ 0220:014E       __nfile
+ 0220:0150       __osfile
+ 0220:0164       ___argc
+ 0220:0166       ___argv
+ 0220:0168       __environ
+ 0220:016A       __pgmptr
+ 0220:016F       __child
+ 0220:0171       __ovlflag
+ 0220:0172       __intno
+ 0220:0173       __ovlvec
+ 0220:0177       __exitflag
+ 0220:0178       __adbgmsg
+ 0220:017A       __aaltstkovr
+ 0220:017C       _STKHQQ
+ 0220:0198       __cflush
+ 0220:019A       __iob
+ 0220:023A       __iob2
+ 0220:02DA       __lastiob
+ 0220:034C       __lseekchk
+ 0220:034E       __amblksiz
+ 0220:0350       __cfltcvt_tab
+ 0220:035E       __sigintseg
+ 0220:0360       __sigintoff
+ 0220:0362       __asizeC
+ 0220:0363       __asizeD
+ 0220:0364       __ctype_
+ 0220:0364       __ctype
+ 0220:0466       __pnhNearHeap
+ 0220:0468       ___qczrinit
+ 0220:046A       ___aDBswpflg
+ 0220:046C       ___aDBswpchk
+ 0220:046E       ___aDBrterr
+ 0220:0470       ___aDBexit
+ 0220:0478       __fpinit
+ 0220:0568       __edata
+ 0220:0568       _edata
+ 0220:0570       __end
+ 0220:0570       _end
+ 0000:9876  Abs  __acrtused
+ 0000:9876  Abs  __acrtmsg
+ 0000:D6D6  Abs  __aDBdoswp
+
+Program entry point at 0000:01CC

@@ -1,0 +1,555 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0038)https://www.brutman.com/mTCP/mTCP.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <title>mTCP TCP/IP applications for DOS PCs</title>
+
+  
+  
+  
+
+  
+  <meta content="Michael B Brutman" name="author">
+
+  
+  <meta content="mTCP - Small and fast TCP/IP applications for DOS machines" name="description">
+
+  
+  <meta content="DOS, MS-DOS, PC-DOS, FreeDOS, Networking, DOS Networking, TCP/IP, mTCP, FTP, IRC, Telnet, DHCP, SNTP, FTP Server" name="keywords">
+
+  
+  <style>
+    h1 { font-size:125%; line-height:150% }
+    #downloads_table { }
+    #downloads_table td { vertical-align: top; text-align: left; }
+    .downloads_table_link { white-space: nowrap; }
+    .downloads_table_shortdesc { white-space: nowrap; }
+  </style>
+</head><body>
+<table style="text-align: left; width: 100%;" border="0" cellpadding="5" cellspacing="5">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: center; white-space: nowrap;"><a href="https://www.brutman.com/mTCP/mTCP.html"><img style="width: 268px; height: 129px;" alt="mTCP DOS Logo" src="./mTCP TCP_IP applications for DOS PCs_files/mTCP.gif"></a>
+      <p style="font-weight: bold;">TCP/IP applications for your PC
+compatible retro-computers </p>
+      <p style="font-style: italic;">Current version: March 7th, 2020<br>
+      </p>
+      </td>
+      <td style="vertical-align: top; text-align: center;"><img style="width: 400px; height: 175px;" alt="" src="./mTCP TCP_IP applications for DOS PCs_files/IBM_PC_AT_Linksys_small.gif"></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr style="width: 100%; height: 2px;">
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td><br>
+      <img style="width: 150px; height: 121px;" alt="" src="./mTCP TCP_IP applications for DOS PCs_files/Professor-Farnsworth_yuehfu_small.jpg"></td>
+      <td style="vertical-align: middle; font-style: italic; font-weight: bold;"><big><big><br>
+Good
+news everyone! A new version of mTCP is available!</big></big></td>
+    </tr>
+  </tbody>
+</table>
+
+<span style="font-weight: bold;"></span><br>
+
+<h1>Overview</h1>
+
+<p>mTCP is a set of TCP/IP applications for personal computers running
+PC-DOS, MS-DOS, FreeDOS, and other flavors of DOS. The applications
+include:<br>
+</p>
+
+<ul>
+
+  <li><a href="https://www.brutman.com/mTCP/mTCP_DHCP.html">DHCP</a>: a DHCP client for
+auto-configuring your machine for use on your network.</li>
+  <li><a href="https://www.brutman.com/mTCP/mTCP_FTP.html">FTP</a>: an FTP client for
+transferring files across the network at high speed.</li>
+  <li><a href="https://www.brutman.com/mTCP/mTCP_FTPSrv.html">FTPSRV</a>: a high performance FTP
+server that allows multiple connected clients, a sandbox
+area for untrusted users, etc.</li>
+  <li><a href="https://www.brutman.com/mTCP/mTCP_HTGet.html">HTGET</a>: the HTGet program
+for downloading files/content from web (HTTP) servers</li>
+  <li><a href="https://www.brutman.com/mTCP/mTCP_HTTPServ.html">HTTPSERV</a>: an HTTP server
+supporting HTTP 0.9, 1.0, 1.1<br>
+  </li>
+  <li><a href="https://www.brutman.com/mTCP/IRCjr.html">IRCJR</a>: the IRCjr IRC (Internet Relay
+Chat)
+client for chatting on IRC networks.</li>
+  <li><a href="https://www.brutman.com/mTCP/mTCP_Netcat.html">NC</a>: the Netcat command
+which can be used to send and receive data easily across a network.</li>
+  <li><a href="https://www.brutman.com/mTCP/mTCP_Ping.html">PING</a>: the Ping command for
+checking basic network connectivity.</li>
+  <li><a href="https://www.brutman.com/mTCP/mTCP_PktTool.html">PKTTOOL</a>: A packet sniffer and
+diagnostic tool for packet drivers<br>
+  </li>
+  <li><a href="https://www.brutman.com/mTCP/mTCP_Sntp.html">SNTP</a>: an SNTP client for getting
+the current date and time from public
+servers on the Internet.</li>
+  <li><a href="https://www.brutman.com/mTCP/mTCP_Telnet.html">TELNET</a>: a Telnet client for
+connecting to Unix systems, BBS systems, or any computer that supports
+Telnet.</li>
+</ul>
+
+<p>mTCP runs on all variants of DOS including IBM PC-DOS,
+Microsoft
+MS-DOS, DR-DOS and FreeDOS. All of these applications will run well on
+the oldest, slowest PC that you
+can find - I routinely use them on an IBM PCjr made in 1983 because
+nothing beats
+the fun of putting a 35+ year old computer on the Internet.</p>
+
+<p>People are using mTCP for goofing off and for real work. If
+you have a DOS machine that needs to send data across the network mTCP
+can help you get that done. Besides its utility to vintage computers I
+have heard of people using it to transfer lab data from dedicated
+industrial PCs, allowing backups to be run on old machines, and sending
+sales reports from the branch offices of a retail store to a central
+server.</p>
+
+<p>Don't have a vintage computer laying around? No problem! mTCP
+applications will run in a variety of virtual and emulated
+environments. It has been tested with modified DOSBox builds,&nbsp;
+VirtualBox, VMWare, and QEMU. See the documentation for the details.</p>
+
+<h1>Requirements</h1>
+
+<p>mTCP applications should work on any IBM PC compatible personal
+computer running
+DOS. To be more specific:</p>
+
+<ul>
+
+  <li>An IBM PC compatible with an 8088 or better CPU</li>
+  <li>96KB to 256KB of system memory depending on the application</li>
+  <li>DOS 2.1 or newer</li>
+  <li>A network card (Ethernet adapter, or a device emulating Ethernet)
+that has a "packet driver" (see below).</li>
+</ul>
+
+<p>
+A packet driver is a utility that lets a program send and receive
+Ethernet packets using your network card. The packet driver
+specification is widely supported by both old and new
+Ethernet cards. If your Ethernet card does not have a packet driver
+available an NDIS or ODI driver with a "shim" to convert to the packet
+specification should work but that will require more memory and be
+slower
+than having a real packet driver. SLIP and PPP connections are also
+supported if they use a packet driver that emulates Ethernet. See <a href="http://crynwr.com/packet_driver.html">http://crynwr.com/packet_driver.html</a>
+for more information on the packet driver specification.
+</p>
+
+<p>My personal testing includes:</p>
+
+<p>Machines:</p>
+
+<ul>
+
+  <li>8088 class: IBM PC, IBM PC XT, IBM PCjr, IBM Portable PC, IBM
+Convertible, IBM PS/2 Model 25, Compaq Portable</li>
+  <li>80286/80386/80486: IBM PC AT, generic 80386-40, several generic
+80486 systems, Compaq Deskpro 433i</li>
+  <li>Pentium and better: generic Pentium 1, IBM Aptiva (AMD), generic
+Pentium II</li>
+  <li>Virtual machines: VMWare, VirtualBox</li>
+  <li>Emulation environments: DOSBox (H-A-L 9000 "megabuild")<br>
+  </li>
+</ul>
+
+Ethernet adapters:<br>
+
+<ul>
+
+  <li> <a href="http://www.brutman.com/Dos_Networking/xircom_pe3.html">Xircom
+PE3-10BT</a></li>
+  <li>Novell NE1000, NE2000 and clones</li>
+  <li>3Com 3C503</li>
+  <li>WD/SMC 8003 series</li>
+  <li>Intel EtherExpress 8/16</li>
+  <li>Davicom DM9008F</li>
+  <li>LinkSys PCI</li>
+  <li>SLIP/PPP connections using "EtherSLIP" (emulates Ethernet using a
+serial connection.)<br>
+  </li>
+</ul>
+
+Hundreds (thousands?) of people are using mTCP on a diverse set of
+hardware. If your machine runs DOS and you have a packet driver for
+your Ethernet card, then mTCP will probably work for you.&nbsp; SLIP
+and PPP are also supported via EtherSLIP, so any machine with a serial
+port can work too.<br>
+
+<h1>
+Downloads
+</h1>
+
+<p>This is the official mTCP home page. There are other sites that
+mirror
+mTCP but only this page guaranteed to have the original, unmodified
+binaries. Anything you find on github, ibiblio or other sites is not
+verified by me.<br>
+</p>
+
+<div style="margin-left: 40px;">
+<table id="downloads_table" style="text-align: left;" border="1" cellpadding="2" cellspacing="0">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;" rowspan="1" colspan="3"><span style="font-weight: bold;">Current version: Binaries and source code
+available under the GPLv3 license</span><br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="https://www.brutman.com/mTCP/mTCP_2020-03-07.zip">mTCP_2020-03-07.zip</a></td>
+      <td>Standard binaries</td>
+      <td>The mTCP applications and sample files.</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.brutman.com/mTCP/mTCP_2020-03-07_upx.zip">mTCP_2020-03-07_upx.zip</a></td>
+      <td>UPX compressed binaries</td>
+      <td>The same as above, but the EXEs are compressed to take less
+disk space. Ideal for floppy based systems.</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.brutman.com/mTCP/mTCP_2020-03-07.pdf">mTCP_2020-03-07.pdf</a></td>
+      <td>User documentation</td>
+      <td>The one true PDF file that will answer all of your questions.</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.brutman.com/mTCP/mTCP-src_2020-03-07.zip">mTCP-src_2020-03-07.zip</a></td>
+      <td>Source code</td>
+      <td>Source code and developer documentation for this release.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+Release notes can be found at <a href="https://www.brutman.com/mTCP/mTCP_2020-03-07_Release_Notes.html">mTCP_2020-03-07_Release_Notes.html</a>.<br>
+
+<h1>Support</h1>
+
+<p>mTCP is a hobby project that I started in 2005. While it is only a
+hobby project, I take
+pride in my work. If you have a comment, bug, or suggestion for a
+feature please email me at mbbrutman at gmail.com. I might ask for
+further
+information or a trace from the program you are having trouble with.
+Your bug reports help me make mTCP better for everybody else.</p>
+
+<p>If you need a change to make mTCP work better for you I am
+interested in hearing your requirements. I am willing to write custom
+code if needed, but instead of charging for that service I suggest
+making a donation to a local animal shelter of your choice. (I have
+never seen an over-funded animal shelter.) Contact me with what you
+need and I'll see what I can do. (And thank you to those who have taken
+me up on this offer!)<br>
+</p>
+
+<h1>Recent changes</h1>
+
+<ul>
+
+  <li>January 2020: Improved flow control to make TCP more reliable
+when packets are lost, HTGet significantly improved, Telnet ANSI
+emulation improvements, the FTP client will try to automatically set
+BIN mode to prevent accidental file corruption, CGA "snow"
+work-arounds, and many small tweaks and fixes.<br>
+  </li>
+  <li>July 2015: Added the HTTPSERV and PKTTOOL programs; moved
+documentation to a PDF file; many small improvements and some bug fixes<br>
+  </li>
+  <li>April 2013: IRCjr, Telnet client, FTP client, FTP server, and
+TCP/IP stack improvements</li>
+  <li>May 2012: Power awareness, Xmodem and Ymodem
+transfers in Telnet, faster FTP client sends, etc.</li>
+  <li>October 2011: Upgrades and fixes for the FTP server; added
+user input editing to IRCjr, fix Telnet options negotiation</li>
+  <li>July 2011: HTGet added</li>
+</ul>
+
+<p>Interested in seeing the source code that lets you talk
+directly to a
+packet driver? I have taken the lowest layer of the mTCP code and
+packaged it
+with a sample application that shows you how to interface a C program
+with the software interrupt mechanism used by packet drivers. Check it
+out here: <a href="https://www.brutman.com/mTCP/mTCP_tcpacket.html">mTCP_tcpacket.html</a></p>
+
+<h1>For developers</h1>
+
+<p><span style="font-style: italic;"></span>Jump in!&nbsp; See the mTCP
+Programming Sample! <a href="http://brutman.com/mTCP/mTCP_Programming_Sample.html">http://brutman.com/mTCP/mTCP_Programming_Sample.html</a><br>
+</p>
+
+<p>All of the applications use the mTCP TCP/IP library which is
+designed
+for high performance even on small, slower machines. The code is
+written in a combination of C++ and assembler. The style of coding is
+more like "C with classes" to improve the structure of the code with
+assembler being used in limited areas to improve the performance. The
+source code is fairly well commented. You can look at
+it as a framework for writing TCP/IP applications for DOS, complete
+with plenty of examples.</p>
+
+<p>Features include ARP, UDP, DNS, IP fragments, listen and
+accept calls
+for server applications, configurable buffer sizes, automatic
+retransmit using Karne's algorithm, and run-time switchable tracing for
+helping you debug. Features may be compiled in or out as needed so that
+you can minimize the overhead of the TCP/IP library and include only
+the features that you need. mTCP does not use floating point
+operations, avoiding the code bloat of the floating point emulation
+library.</p>
+
+<p>mTCP is designed to be robust. DOS is a challenging
+environment to work
+in because quite frankly, it is not much of an operating system. mTCP
+attempts to minimize problems by using defensive programming
+techniques. Not every programming error can be prevented, but the
+library tries to help you where it can. For example, to prevent
+fragmentation in the DOS heap mTCP generally preallocates pools of
+objects and manages the objects instead of repeatedly allocating and
+freeing memory using the DOS heap. The FTP server and the IRC client
+have been demonstrated to run for days without leaking memory or
+crashing the machine.</p>
+
+<p>High performance is a key feature of mTCP. The library is
+written to
+avoid excess memory copying wherever possible. Assembler is used on
+some code for both performance and to avoid making expensive library
+calls that will just invoke BIOS or DOS routines anyway. For the
+ultimate in performance you can choose to handle raw packets directly
+in your application layer code, or you can use higher level "send" and
+"recv" type calls instead. The ability to adjust buffer sizes allows
+you to balance speed versus memory footprint. Want to see how fast mTCP
+is? Here are some performance measurements
+for FTP and for raw socket performance: <a href="https://www.brutman.com/mTCP/mTCP_Performance.html">mTCP
+Performance notes</a></p>
+
+<p>mTCP is only available as a library that you link with your
+application. A TSR version that can be used by software interrupt is
+not available. While a TSR version would allow more programming
+environments access to TCP/IP services, it is a much more difficult
+environment to work in and debug. Performance would also suffer too. It
+would be an interesting project though - if you want to collaborate on
+the design for a TSR version of mTCP please contact me.</p>
+
+<p>(For a TCP/IP stack that loads as a TSR see Trumpet by Peter Tattam.
+Trumpet can usually be found by searching for TCPDRV or NTCPDRV. WATTCP
+is an older, more widespread TCP/IP stack that can be used as an
+alternative to mTCP. Neither Trumpet or WATTCP are actively
+maintained.)</p>
+
+<p>mTCP is developed using <a href="http://openwatcom.org/">Open
+Watcom</a>, an open source tool chain that supports C, C++, and
+assembler. Open Watcom is flexible and generates reasonably optimized
+code. Open Watcom also runs under modern environments such as Windows
+and Linux so you can develop in the environment of your choice while
+still generating 16 bit DOS executables. Open Watcom is regularly
+updated; mTCP is using version 1.9 which was released in June 2010.
+Porting to other environments such as Borland Turbo C++ for DOS is
+possible without too much pain. (mTCP originally started with Borland
+Turbo C++ for DOS.)</p>
+
+<h1>Related resources</h1>
+
+<div style="margin-left: 40px;">
+<table style="text-align: left;" border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td><a href="http://www.brutman.com/Dos_Networking/dos_networking.html" target="_blank">DOS TCP/IP Networking with Packet Drivers</a><br>
+      </td>
+      <td>A detailed tutorial on packet
+drivers and how they work.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.brutman.com/Wireless_for_Classics/Wireless_for_Classics.html" target="_blank">Wireless Networking for Classic Machines<br>
+      </a></td>
+      <td>Use a small travel router to get
+your old machines using wired Ethernet onto WiFi.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a target="_blank" href="http://crynwr.com/packet_driver.html">Packet
+Driver specification</a><br>
+      </td>
+      <td>The PC/TCP Packet Driver
+Specification hosted by Crynwr Software.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://crynwr.com/drivers/" target="_blank">Crynwr
+Software
+Packet Drivers</a><br>
+      </td>
+      <td>A large collection of open
+source packet drivers.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.georgpotthast.de/sioux/packet.htm" target="_blank">Georg
+Potthast's collection of Packet Drivers</a><br>
+      </td>
+      <td>A collection of more recent
+packet drivers.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://openwatcom.org/" target="_blank">OpenWatcom</a><br>
+      </td>
+      <td>The compiler used to build mTCP;
+runs on several platforms and cross-compiles to 16 bit DOS.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><br>
+      </td>
+      <td><br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" rowspan="1"><a href="https://www.youtube.com/watch?v=q0qGq3SpDt0" target="_blank">Alistair
+Ross: How to set up a retro DOS PC to use the web, IRC chat, email,
+twitter, connect to BBS's and more!</a> </td>
+    </tr>
+    <tr>
+      <td colspan="2" rowspan="1"> <a href="https://www.youtube.com/watch?v=kQyYQHmFAUg" target="_blank">DaveJustDave:
+Ethernet the Easy Way on your Vintage DOS PC</a> (YouTube)<br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" rowspan="1"><a href="https://devrant.com/rants/426309/eureka-the-ibm-5150-is-on-the-internet" target="_blank">lquessenberry: Eureka! The IBM 5150 is on the internet!</a>
+(Blog)<br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" rowspan="1"><a href="https://medium.com/swlh/connecting-a-286-dos-pc-to-the-internet-through-a-serial-connection-in-2019-b93a422ff094" target="_blank">Adam Pachulski: Connecting a 286 DOS PC to the
+Internet Through a Serial Connection… in 2019</a> (Blog)<br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" rowspan="1"><a href="https://www.youtube.com/watch?v=CgATAo9WVHs" target="_blank">PhilsComputerLab:
+MS-DOS networking with mTCP</a> (YouTube)<br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" rowspan="1"><a href="https://www.youtube.com/watch?v=moKVor7HE-A" target="_blank">Alistair
+Ross: The Internet connected Hot Rod IBM PC XT!</a> (YouTube)<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h1>
+Older versions</h1>
+
+These are obsolete and have been replaced with newer versions that have
+more features and less bugs. They are posted here for archival purposes
+- please don't use them.<br>
+
+<br>
+
+<div style="margin-left: 40px;">
+<table id="downloads_table" style="text-align: left;" border="1" cellpadding="2" cellspacing="0">
+  <tbody>
+    <tr>
+      <td colspan="3" rowspan="1"><span style="font-weight: bold;">(Obsolete) 2020-01-01 version: Binaries and
+source code released under the GPLv3 license</span><br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="https://www.brutman.com/mTCP/mTCP_2020-01-01.zip">mTCP_2020-01-01.zip</a></td>
+      <td>Standard binaries</td>
+      <td>The mTCP applications and sample files.</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.brutman.com/mTCP/mTCP_2020-01-01_upx.zip">mTCP_2020-01-01_upx.zip</a></td>
+      <td>UPX compressed binaries</td>
+      <td>The same as above, but the EXEs are compressed to take less
+disk space. Ideal for floppy based systems.</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.brutman.com/mTCP/mTCP_2020-01-01.pdf">mTCP_2020-01-01.pdf</a></td>
+      <td>User documentation</td>
+      <td>The one true PDF file that will answer all of your questions.</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.brutman.com/mTCP/mTCP-src_2020-01-01.zip">mTCP-src_2020-01-01.zip</a></td>
+      <td>Source code</td>
+      <td>Source code and developer documentation for this release.</td>
+    </tr>
+    <tr>
+      <td><br>
+      </td>
+      <td><br>
+      </td>
+      <td><br>
+      </td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td colspan="3">(Obsolete) 2015-07-05 version: Binaries only,
+source code not distributed<br>
+      </td>
+    </tr>
+    <tr>
+      <td class="downloads_table_link"><a href="https://www.brutman.com/mTCP/mTCP_2015-07-05.zip">mTCP_2015-07-05.zip</a></td>
+      <td class="downloads_table_shortdesc">Standard binaries</td>
+      <td>The mTCP applications and sample files.</td>
+    </tr>
+    <tr>
+      <td class="downloads_table_link"><a href="https://www.brutman.com/mTCP/mTCP_2015-07-05_upx.zip">mTCP_2015-07-05_upx.zip</a></td>
+      <td class="downloads_table_shortdesc">UPX compressed binaries</td>
+      <td>The same as above, but the EXEs are compressed to take less
+disk space. Ideal for floppy based systems.</td>
+    </tr>
+    <tr>
+      <td class="downloads_table_link"><a href="https://www.brutman.com/mTCP/mTCP_2015-07-05.pdf">mTCP_2015-07-05.pdf</a><br>
+      </td>
+      <td>Documentation<br>
+      </td>
+      <td>A single PDF file with all of
+the documentation.<br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">&nbsp;</td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top;" vertical-align:="" top;="" colspan="3">(Obsolete) 2013-05-23 version: <span style="font-weight: bold;">Binaries and source code released under
+the GPLv3 license</span> </td>
+    </tr>
+    <tr>
+      <td class="downloads_table_link"><a href="https://www.brutman.com/mTCP/mTCP_2013-05-23.zip">mTCP_2013-05-23.zip</a></td>
+      <td class="downloads_table_shortdesc">Standard binaries</td>
+      <td>The mTCP applications, sample files and user documentation.</td>
+    </tr>
+    <tr>
+      <td class="downloads_table_link"><a href="https://www.brutman.com/mTCP/mTCP_2013-05-23_upx.zip">mTCP_2013-05-23_upx.zip</a></td>
+      <td class="downloads_table_shortdesc">UPX compressed binaries</td>
+      <td>The same as above, but the EXEs are compressed to take less
+disk space. Ideal for floppy based systems.</td>
+    </tr>
+    <tr>
+      <td class="downloads_table_link"><a href="https://www.brutman.com/mTCP/mTCP-src_2013-05-23.zip">mTCP-src_2013-05-23.zip</a></td>
+      <td class="downloads_table_shortdesc">Source code</td>
+      <td>The source code to mTCP with design documentation and notes.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+<hr style="width: 100%; height: 2px;"><i>Created July 29th, 2008, Last
+updated April 18th, 2020<br>
+(C)opyright Michael B. Brutman, mbbrutman at gmail.com</i>
+<script async="" src="./mTCP TCP_IP applications for DOS PCs_files/analytics.js.download"></script><script type="text/javascript" src="./mTCP TCP_IP applications for DOS PCs_files/ga.js.download"></script>
+</body></html>

@@ -1,0 +1,15 @@
+CHECKVSA.LZH
+
+CheckVESA is a simple assembler routine to check to see if the particular
+computer running is VESA-compatible.
+
+I wrote this code for a project that never got off the ground, so it
+is hereby released into the public domain for all to use and steal.
+
+No support is granted for it---take it and use it as much as you want.
+
+Thanx all..
+
+London Fog
+ProtoStar Plus
+

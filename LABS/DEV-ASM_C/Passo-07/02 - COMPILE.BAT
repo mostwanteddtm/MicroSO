@@ -1,0 +1,3 @@
+.\BUILD\LIB.EXE -c STDIO.LIB STDIOA.OBJ STDIO.OBJ
+.\BUILD\TCC.EXE -1 -K- -k -ms -N- -c -w- -v -y MAIN.C >>MAIN.LOG
+

@@ -1,0 +1,151 @@
+;MACRO2	includes steps 1,2,3,4
+
+INTNO	equ	21		;number interrupt vectors
+DSCPSIZE	equ	8		;size of descriptor
+INTSIZE	equ	4		;size interrupt service routine
+TWO		equ	2		;2 byte hex number
+prot_enable	equ	01h		;protected mode enable bit CR0
+attribute	equ	07h		;display character attribute
+space	equ	20h		;ASCII code for space
+fsseg	equ	0		;set fs seg to 0000h
+gsseg	equ	9000h		;set gs seg to 9000h
+
+;------------------------------------------
+;	STEP 1:
+;	Global Descriptor Table
+;------------------------------------------
+
+GDT	segment	para	public 	use16	'GDT'
+
+gdt_tab		label	qword	;quad word = 8 bytes
+null_selec	equ	$-gdt_tab	;null selector
+	dscp	<>			;first one must be a null
+					;descriptor
+
+code_selec	equ	$-gdt_tab  	;code segment selector
+	dscp	<0ffffh,,,09ah,,>	;code segment descriptor
+
+task0_TSS_selec	equ	$-gdt_tab 	;TSS selector
+	dscp	<task0_TSS_limit,,,089h,,>	;TSS segment descriptor
+
+stk0_selec	equ	$-gdt_tab	;selector for privilege level 0
+					;stack
+	dscp	<stk0_limit,,,92h,,>	;stack segment descriptor with
+					;privilege level 0
+
+stk1_selec	equ	$-gdt_tab or 1	;selector for privilege level 1
+					;stack
+	dscp	<stk1_limit,,,0b2h,,>	;stack segment descriptor with
+					;privilege level 1
+
+stk2_selec	equ	$-gdt_tab  or 2	;selector for privilege level 2
+					;stack
+	dscp	<stk2_limit,,,0d2h,,>	;stack segment descriptor with
+					;privilege level 2
+
+dmy_selec	equ	$-gdt_tab	;dummy segment selector
+	dscp	<0ffffh,,,92h,,>	;dummy segment descriptor
+
+video_selec	equ	$-gdt_tab or 3	;video segment selector
+	dscp	<0ffffh,8000h,0bh,0f2h,,>   ;video segment descriptor
+
+fsseg_selec	equ	$-gdt_tab       ;FS segment selector
+	dscp	<0ffffh,0000h,0f8h,0f2h,,>   ;FS segment descriptor
+
+gsseg_selec	equ	$-gdt_tab      	;GS segment selector
+	dscp	<0ffffh,9000h,0f4h,0f2h,,>   ;GS segment descriptor
+
+gdata_selec	equ	$-gdt_tab 	;data segment selector
+	dscp	<0ffffh,0000h,00h,0f2h,,>   ;data segment descriptor
+;org dscp	<gdata_limit,,,0f2h,,>	;data segment descriptor
+
+int_selec	equ	$-gdt_tab 	;interrupt segment selector
+	dscp	<0ffffh,,,09ah,,> 	;interrupt segment descriptor
+
+gdt_limit	equ	$-gdt_tab
+GDT	ends
+
+;-------------------------------------------
+;	STEP 2:
+;	Interrupt Descriptor Table
+;-------------------------------------------
+
+IDT	segment para	public use16	'idt'
+idt_tab equ	$			;REPT = MASM 5.01 repeat
+	REPT	INTNO			;21 interrupt entries 0 to 14h
+	dscp	<,int_selec,0,0eeh,,>	;DPL = 3
+	ENDM
+idt_limit	equ	$
+IDT	ends
+
+;---------------------------
+;	DATA 	Segment
+;---------------------------
+
+Gdata	segment	para	public 	use16	'Gdata'
+
+;------------------------------------------------------
+;	STEP 3:
+;	variable to save GDT/IDT limit and linear address.
+;------------------------------------------------------
+
+pGDT		label	fword
+pGDT_limit	dw	?		;GDT limit
+pGDT_addr	dd	?		;GDT segment linear address
+
+pIDT		label	fword
+pIDT_limit	dw	?		;IDT limit
+pIDT_addr	dd	?		;IDT segment linear address
+
+pold		label	fword
+dIDT_limit	dw	03ffh		;DOS IDT limit
+dIDT_addr	dd	0		;DOS IDT segment linear address
+
+;----------------------------------------------------------
+;	STEP 4: table defines mapping of descriptor to segment
+;----------------------------------------------------------
+
+db 8 dup(90h)			;slowdown millisecond to avoid
+					;avoid typematic error on
+					;return from EDMOD
+gdt_phys_tab	label	word
+	dw	task0_TSS_selec		;TSS segment selector
+	dw	task0_TSS		;TSS segment
+	dw	stk0_selec		;stk0 segment selector
+	dw	stk0			;stk0 segment
+	dw	stk1_selec		;stk1 segment selector
+	dw	stk1			;stk1 segment
+	dw	stk2_selec		;stk2 segment selector
+	dw	stk2			;stk2 segment
+	dw	dmy_selec		;dummy segment selector
+	dw	dmy			;dummy segment
+	dw	code_selec		;code segment selector
+	dw	code			;code segment
+	dw	gdata_selec		;DS segment selector
+	dw	gdata			;data segment
+	dw	fsseg_selec		;FS segment selector
+fseg	dw	fsseg			;data segment
+	dw	gsseg_selec		;GS segment descriptor
+gseg	dw	gsseg			;data segment
+intseg dw	int_selec		;interrupt segment selector
+	dw	code			;code segment
+
+gdt_tab_size	equ	($ - gdt_phys_tab) / 4	;entry numbers in
+
+;---------------------------------------------
+;	STEP 5:
+;	message define area + mini-keyboard table
+;---------------------------------------------
+
+in_protected	db	'Now in protected mode',0
+savdi1	dw	?		;disp_it's next line begin
+savdi4	dw	?		;display control/debug regs
+savcl	db	4		;nominal keyboard delay
+
+db 9100h dup(0)			;was db 7000h
+
+Gdata_limit	equ	$
+
+Gdata	ends
+
+

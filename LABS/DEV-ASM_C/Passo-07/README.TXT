@@ -1,0 +1,4 @@
+################### COMPILAÇÃO COMBINADA - C & ASSEMBLY ############################
+
+	ESTE É UM MODELO DE CHAMADA EM C, DE UMA FUNÇÃO EM ASSEMBLY.
+	FUNÇÃO BÁSICA DE PRINTF ESTÁ PRONTA.

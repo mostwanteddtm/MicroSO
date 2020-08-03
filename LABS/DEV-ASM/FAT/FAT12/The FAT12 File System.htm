@@ -1,0 +1,553 @@
+
+<!-- saved from url=(0059)http://homepage.cs.uri.edu/courses/fall2004/hpr108b/FAT.htm -->
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<meta name="ProgId" content="Word.Document">
+<meta name="Generator" content="Microsoft Word 9">
+<meta name="Originator" content="Microsoft Word 9">
+<link rel="File-List" href="http://homepage.cs.uri.edu/courses/fall2004/hpr108b/FAT_files/filelist.xml">
+<link rel="Edit-Time-Data" href="http://homepage.cs.uri.edu/courses/fall2004/hpr108b/FAT_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>The FAT File System</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Victor Fay-Wolfe</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Victor Fay-Wolfe</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>68</o:TotalTime>
+  <o:Created>2003-09-23T00:48:00Z</o:Created>
+  <o:LastSaved>2003-09-23T01:56:00Z</o:LastSaved>
+  <o:Pages>4</o:Pages>
+  <o:Words>837</o:Words>
+  <o:Characters>4773</o:Characters>
+  <o:Company>Univ. of RI</o:Company>
+  <o:Lines>39</o:Lines>
+  <o:Paragraphs>9</o:Paragraphs>
+  <o:CharactersWithSpaces>5861</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:2;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:0 268435456 0 0 -2147483648 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:16.0pt;
+	font-family:Arial;
+	mso-font-kerning:16.0pt;}
+h2
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:14.0pt;
+	font-family:Arial;
+	font-style:italic;}
+p.MsoList, li.MsoList, div.MsoList
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.25in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:6.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+span.articlebody1
+	{mso-style-name:articlebody1;
+	mso-ansi-font-size:10.5pt;
+	mso-bidi-font-size:10.5pt;
+	mso-ascii-font-family:Arial;
+	mso-hansi-font-family:Arial;
+	mso-bidi-font-family:Arial;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:233199019;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1956843970 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l1
+	{mso-list-id:407382935;
+	mso-list-type:hybrid;
+	mso-list-template-ids:13813306 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l1:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l2
+	{mso-list-id:413672534;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1722423076 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l2:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l3
+	{mso-list-id:998264887;
+	mso-list-type:hybrid;
+	mso-list-template-ids:185350936 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l3:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l4
+	{mso-list-id:1182359884;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-794115120 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l4:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Symbol;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+</head>
+
+<body lang="EN-US" style="tab-interval:.5in">
+
+<div class="Section1">
+
+<p class="MsoBodyText"><b><span style="font-size:16.0pt;mso-bidi-font-size:12.0pt">The
+FAT File System<o:p></o:p></span></b></p>
+
+<p class="MsoBodyText"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoBodyText">As described in the Disk Geometry readings, data <span class="articlebody1"><span style="font-size:10.5pt;font-family:Arial;color:black"><span style="mso-spacerun: yes">&nbsp;</span></span></span><span class="articlebody1"><span style="mso-ansi-font-size:12.0pt;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;
+color:black">is stored on the surface of a platter in <b><i>sectors</i></b><i> </i>and
+<b><i>tracks</i></b>. Tracks are concentric circles, and sectors are pie-shaped
+wedges on a track, like this:</span></span></p>
+
+<p class="MsoBodyText"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoBodyText"><span style="font-size:9.0pt;font-family:Arial;color:black"><!--[if gte vml 1]><v:shapetype
+ id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+ path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1027" type="#_x0000_t75" alt="" style='width:222pt;
+ height:229.5pt'>
+ <v:imagedata src="./FAT_files/image001.gif" o:href="http://static.howstuffworks.com/gif/hard-disk-track.gif"/>
+</v:shape><![endif]--><!--[if !vml]--><img width="296" height="306" src="./The FAT12 File System_files/image001.gif" v:shapes="_x0000_i1027"><!--[endif]--></span></p>
+
+<p class="MsoBodyText"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoBodyText">A normal 1.4 Mbyte PC floppy disk has 80 tracks,
+containing 18 sectors, and may hold 720 Kbytes of data on each side (80 x 18 x
+512B) To access data on the disk, the controller hardware needs track, surface
+and sector values, (referred to as CHS, Cylinder Head &amp; Sector values). But
+at a higher level, files are located by cluster number. A <b><i>cluster</i></b>
+is just four contiguous 512 Byte sectors. In FAT-12 systems, each cluster is
+given a unique 12 bit address. The disk directory, which is held on the first
+two tracks, starting at sector 19, allows file names to be paired with the
+number of the initial file cluster.</p>
+
+<p class="MsoBodyText">The floppy disk layout is as follows:</p>
+
+<p class="MsoList" style="margin-left:.5in;mso-list:l2 level1 lfo1;tab-stops:
+list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->sector 0 boot track</p>
+
+<p class="MsoList" style="margin-left:.5in;mso-list:l2 level1 lfo1;tab-stops:
+list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->sectors 1-9 first File Allocation Table (FAT)</p>
+
+<p class="MsoList" style="margin-left:.5in;mso-list:l2 level1 lfo1;tab-stops:
+list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->sectors 10-18 second FAT</p>
+
+<p class="MsoList" style="margin-left:.5in;mso-list:l2 level1 lfo1;tab-stops:
+list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->sectors 19-32 disk directory</p>
+
+<p class="MsoList" style="margin-left:.5in;mso-list:l2 level1 lfo1;tab-stops:
+list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->sectors 33-2879 data area</p>
+
+<p class="MsoList" style="text-indent:0in"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoBodyText">On floppy disks, the boot track is one (512 byte) sector
+long, each FAT is 9 sectors and the directory is 14 sectors. When a disk is
+formatted, it shows only 698 sectors available. Double-sided floppies also have
+1 sector boot tracks.</p>
+
+<h1>Directory Structure</h1>
+
+<p class="MsoBodyText">The root or main directory is in the 14 consecutive
+sectors mentioned above. A sub-directory<span style="mso-spacerun: yes">&nbsp;
+</span>(folder or path) is actually a file on the disk. While the root
+directory is limited in the maximum number of files it can take, since files
+need not be contiguous, a subdirectory is not so limited.</p>
+
+<p class="MsoBodyText">Each directory entry is 32 bytes long. There are 16 entries
+per sector, laid out (the 32 bytes of a directory entry shown in the top row)</p>
+
+<table border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt">
+ <tbody><tr>
+  <td width="74" valign="top" style="width:55.35pt;border:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt">
+  <p class="MsoBodyText">0-7<span style="mso-spacerun: yes">&nbsp;&nbsp; </span></p>
+  </td>
+  <td width="74" valign="top" style="width:55.35pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+  <p class="MsoBodyText">8-10</p>
+  </td>
+  <td width="74" valign="top" style="width:55.35pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+  <p class="MsoBodyText">11</p>
+  </td>
+  <td width="74" valign="top" style="width:55.35pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+  <p class="MsoBodyText">12-21<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+  </td>
+  <td width="74" valign="top" style="width:55.35pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+  <p class="MsoBodyText">22-23<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span></p>
+  </td>
+  <td width="74" valign="top" style="width:55.35pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+  <p class="MsoBodyText">24-25<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span></p>
+  </td>
+  <td width="74" valign="top" style="width:55.35pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+  <p class="MsoBodyText">26-27</p>
+  </td>
+  <td width="74" valign="top" style="width:55.35pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+  <p class="MsoBodyText">28-31</p>
+  </td>
+ </tr>
+ <tr>
+  <td width="74" valign="top" style="width:55.35pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+  <p class="MsoBodyText">File name</p>
+  </td>
+  <td width="74" valign="top" style="width:55.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt">
+  <p class="MsoBodyText">exten</p>
+  </td>
+  <td width="74" valign="top" style="width:55.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt">
+  <p class="MsoBodyText">attributes</p>
+  </td>
+  <td width="74" valign="top" style="width:55.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt">
+  <p class="MsoBodyText">Reserved</p>
+  <p class="MsoBodyText">space</p>
+  </td>
+  <td width="74" valign="top" style="width:55.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt">
+  <p class="MsoBodyText">Time</p>
+  </td>
+  <td width="74" valign="top" style="width:55.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt">
+  <p class="MsoBodyText">date</p>
+  </td>
+  <td width="74" valign="top" style="width:55.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt">
+  <p class="MsoBodyText">Starting</p>
+  <p class="MsoBodyText">cluster</p>
+  </td>
+  <td width="74" valign="top" style="width:55.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt">
+  <p class="MsoBodyText">File size</p>
+  </td>
+ </tr>
+</tbody></table>
+
+<p class="MsoBodyText"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoList">Here is the directory listing:</p>
+
+<p class="MsoList"><!--[if gte vml 1]><v:shape id="_x0000_i1025" type="#_x0000_t75"
+ style='width:431.25pt;height:130.5pt'>
+ <v:imagedata src="./FAT_files/image002.jpg" o:title="FS1"/>
+</v:shape><![endif]--><!--[if !vml]--><img width="575" height="174" src="./The FAT12 File System_files/image002.jpg" v:shapes="_x0000_i1025"><!--[endif]--></p>
+
+<p class="MsoNormal"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoNormal">Here are the bytes shown in hex:</p>
+
+<p class="MsoNormal"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoNormal"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoNormal"><!--[if gte vml 1]><v:shape id="_x0000_i1026" type="#_x0000_t75"
+ style='width:431.25pt;height:333.75pt'>
+ <v:imagedata src="./FAT_files/image003.jpg" o:title="fs2"/>
+</v:shape><![endif]--><!--[if !vml]--><img width="575" height="445" src="./The FAT12 File System_files/image004.jpg" v:shapes="_x0000_i1026"><!--[endif]--></p>
+
+<p class="MsoBodyText"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoBodyText"><b>File name</b> - ASCII characters padded with blanks.
+The first byte of the name field can indicate status:</p>
+
+<p class="MsoBodyText" style="margin-left:.5in;text-indent:-.25in;mso-list:l1 level1 lfo2;
+tab-stops:list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->$00 entry unused,</p>
+
+<p class="MsoBodyText" style="margin-left:.5in;text-indent:-.25in;mso-list:l1 level1 lfo2;
+tab-stops:list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->$E5 file erased. </p>
+
+<p class="MsoBodyText" style="margin-left:.5in;text-indent:-.25in;mso-list:l1 level1 lfo2;
+tab-stops:list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->$2E subdirectory file.</p>
+
+<p class="MsoBodyText"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoBodyText"><b>Name Extension</b> - up to 3 ASCII chars, such as TXT,
+C, DOC, TMP.</p>
+
+<p class="MsoBodyText"><b>Attr ibutes</b> - describe how the files are treated by
+the system. If the bit is 0, the attribute is off, if 1 it is on or used:</p>
+
+<p class="MsoList" style="margin-left:.5in;mso-list:l0 level1 lfo3;tab-stops:
+list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->bit 0 read only</p>
+
+<p class="MsoList" style="margin-left:.5in;mso-list:l0 level1 lfo3;tab-stops:
+list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->bit 1 hidden</p>
+
+<p class="MsoList" style="margin-left:.5in;mso-list:l0 level1 lfo3;tab-stops:
+list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->bit 2 system file</p>
+
+<p class="MsoList" style="margin-left:.5in;mso-list:l0 level1 lfo3;tab-stops:
+list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->bit 3 volume label, not a file</p>
+
+<p class="MsoList" style="margin-left:.5in;mso-list:l0 level1 lfo3;tab-stops:
+list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->bit 4 subdirectory</p>
+
+<p class="MsoList" style="margin-left:.5in;mso-list:l0 level1 lfo3;tab-stops:
+list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->bit 5 archive bit</p>
+
+<p class="MsoList" style="margin-left:.5in;mso-list:l0 level1 lfo3;tab-stops:
+list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->bits 6 and 7 are unused at present</p>
+
+<p class="MsoNormal"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoNormal"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoNormal"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoBodyText">The subdirectory attribute indicates a path folder rather
+than a file, although they are stored in the same manner. A subdirector y is
+structured in the same manner as a root directory except that has no fixed size
+and can grow as large as necessary.</p>
+
+<p class="MsoBodyText">The archive bit is set if a file has been changed since
+its last backup. (Used normally only with hard disks) Attributes are marked on
+the disk infor mation screen by a single letter. If an ’x’ appears below that
+letter, then the attribute is set.</p>
+
+<p class="MsoBodyText"><b>Time and date stamps</b> - record the last change of a
+file. </p>
+
+<p class="MsoBodyText"><span style="mso-spacerun: yes">&nbsp;</span>time stamp: </p>
+
+<p class="MsoBodyText" style="margin-left:.5in;text-indent:-.25in;mso-list:l3 level1 lfo4;
+tab-stops:list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->bits 0-4 are seconds/2 (0 - 29) </p>
+
+<p class="MsoBodyText" style="margin-left:.5in;text-indent:-.25in;mso-list:l3 level1 lfo4;
+tab-stops:list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->bits 5-10 are minutes (0 - 59) </p>
+
+<p class="MsoBodyText" style="margin-left:.5in;text-indent:-.25in;mso-list:l3 level1 lfo4;
+tab-stops:list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->bits 11-15 are hours (0 - 23) </p>
+
+<p class="MsoBodyText">date stamp:</p>
+
+<p class="MsoBodyText" style="margin-left:.5in;text-indent:-.25in;mso-list:l4 level1 lfo5;
+tab-stops:list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->bits 0-4 are the date (1-31)</p>
+
+<p class="MsoBodyText" style="margin-left:.5in;text-indent:-.25in;mso-list:l4 level1 lfo5;
+tab-stops:list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->bits 5-8 are the month (1-12) </p>
+
+<p class="MsoBodyText" style="margin-left:.5in;text-indent:-.25in;mso-list:l4 level1 lfo5;
+tab-stops:list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->bits 9-15 are the year (add 1980 to get the correct
+value)</p>
+
+<p class="MsoBodyText" style="margin-left:.5in;text-indent:-.25in;mso-list:l4 level1 lfo5;
+tab-stops:list .5in"><!--[if !supportLists]--><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]--><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoBodyText"><b>Starting cluster</b> - an Intel format integer : that
+is, the low byte comes before the high byte in memory order. It is simply the
+cluster number where the file begins (there are four 512 byte sectors in each
+cluster). For where the file goes after that, see the FAT (as described below).</p>
+
+<p class="MsoBodyText"><b>File size</b> - contains the size on disk in bytes but
+the actual size in memory may be smaller if the last cluster in the FAT is
+reached before this many bytes are read.</p>
+
+<p class="MsoBodyText"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoBodyText"><b>File Allocation Table - FAT<o:p></o:p></b></p>
+
+<p class="MsoBodyText"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoBodyText">The disk FAT contains many linked chains indicating the
+clusters associated with each file; the FAT has a one-to-one correspondence
+with the disk clusters after the first two entries. Each subsequent entry
+refers to the next cluster on the disk. The FAT and directory size is the same
+on single and double sided floppies.</p>
+
+<p class="MsoBodyText">On floppies, each 12 bit number in the FAT records a
+cluster belonging to a particular file. 12 bits means an entry can range from
+zero to 4096. On a hard disk, each is 16 bits, or a (byte-swapped) integer
+(which allows a range to 65535).</p>
+
+<p class="MsoBodyText">If a FAT entry is zero, then the associated cluster is
+unused and available. If 4081 to 4087, then the cluster is unuseable due to a
+formatting error (usually a bad sector). If the entry contains 4088 to 4095
+(FFF), then the cluster contains the end of a file and does not point to
+another. </p>
+
+<p class="MsoBodyText">In the figure below, the rectangle shows the disk
+directory, which is always in Sectors 19-32 (see the beginning of this
+reading). Each row is a directory entry using the 32 bytes described earlier.
+This figure shows a single file on the disk called “TEST.DAT”.<span style="mso-spacerun: yes">&nbsp; </span>It shows that the first cluster is cluster
+4, so when a user opens TEST.DAT the disk head goes first to cluster 4 (as
+shown by the CHS (Cluster Head Sector) pointer leading into the disk in the
+figure). The disk controller reads the first data in TEST.DAT from cluster 4,
+then it moves to cluster 7 because the FAT for the disk has a pointer to
+cluster 7 stored in position 4. This tells the disk head to move from cluster 4
+to cluster 7.<span style="mso-spacerun: yes">&nbsp; </span>Similarly when it is done
+with cluster 7, it follows the pointer and goes to cluster 6 and reads data,
+finally from cluster 6 it goes to cluster 10 and read data. The pointer in
+cluster 10 is FFF so it knows the file has been completely read.</p>
+
+<p class="MsoBodyText"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoBodyText"><!--[if gte vml 1]><v:shape id="_x0000_i1028" type="#_x0000_t75"
+ style='width:6in;height:357.75pt'>
+ <v:imagedata src="./FAT_files/image005.jpg" o:title="fs3"/>
+</v:shape><![endif]--><!--[if !vml]--><img width="576" height="477" src="./The FAT12 File System_files/image006.jpg" v:shapes="_x0000_i1028"><!--[endif]--></p>
+
+<p class="MsoBodyText"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></p>
+
+<p class="MsoBodyText">Each file system can define clusters and tables
+differently (this reading is how FAT does it), but they all basically do the
+same thing – lay out how files are placed on sectors.</p>
+
+</div>
+
+
+
+
+</body></html>

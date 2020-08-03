@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual C++ Express 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPBIN", "CPBIN.vcproj", "{22AF8F7F-F9BD-43C0-922F-66D027525524}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{22AF8F7F-F9BD-43C0-922F-66D027525524}.Debug|Win32.ActiveCfg = Debug|Win32
+		{22AF8F7F-F9BD-43C0-922F-66D027525524}.Debug|Win32.Build.0 = Debug|Win32
+		{22AF8F7F-F9BD-43C0-922F-66D027525524}.Release|Win32.ActiveCfg = Release|Win32
+		{22AF8F7F-F9BD-43C0-922F-66D027525524}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,780 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0057)http://www.brutman.com/Dos_Networking/dos_networking.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+
+
+  <title>DOS TCP/IP Networking with Packet Drivers</title>
+  
+  <meta content="M Brutman" name="author">
+  <style type="text/css">
+    h1 {font-size:200%;line-height:225%}
+    h2 {font-size:150%;line-height:175%;font-weight: bold;}
+    h3 {font-size:100%;line-height:125%;font-weight: bold;}
+    .setting { font-family: monospace; }
+    .explain { font-style: italic; }  
+  </style></head><body>
+<h1 style="text-align: center;">DOS TCP/IP Networking with Packet Drivers</h1>
+<div style="text-align: center;"><span style="font-style: italic;">Why
+on Earth would anybody want to do that?</span>
+</div>
+<h2><img src="./DOS TCP_IP Networking with Packet Drivers_files/IBM_PC_AT_Linksys_small.gif" alt="Stylized IBM PC AT with Linksys router" style="width: 400px; height: 175px;" align="right" vspace="100">Table
+of Contents</h2>
+<div style="margin-left: 40px;">
+<a href="http://www.brutman.com/Dos_Networking/dos_networking.html#Introduction">Introduction</a><br>
+<a href="http://www.brutman.com/Dos_Networking/dos_networking.html#Survey">A survey of DOS networking techniques</a><br>
+<div style="margin-left: 40px;"><a href="http://www.brutman.com/Dos_Networking/dos_networking.html#Common_devices_used_to_connect_">Common devices used to connect
+computers</a><br>
+<a href="http://www.brutman.com/Dos_Networking/dos_networking.html#Less_common_devices_used_to_connect">Less&nbsp;common&nbsp;devices&nbsp;used&nbsp;to&nbsp;connect&nbsp;computers</a><br>
+<a href="http://www.brutman.com/Dos_Networking/dos_networking.html#Software_solutions_for_serial_ports:">Software solutions for
+serial ports</a><br>
+<a href="http://www.brutman.com/Dos_Networking/dos_networking.html#Software_solutions_for_parallel_ports:">Software solutions
+for parallel ports</a><br>
+<a href="http://www.brutman.com/Dos_Networking/dos_networking.html#Protocol_suites_for_network_cards">Protocol suites for
+network adapters</a><br>
+<a href="http://www.brutman.com/Dos_Networking/dos_networking.html#High_level_applications">High level applications</a><br>
+<a href="http://www.brutman.com/Dos_Networking/dos_networking.html#Miscellaneous_notes">Miscellaneous notes</a>
+</div>
+<a href="http://www.brutman.com/Dos_Networking/dos_networking.html#CloserLook">A closer look at TCP/IP</a><br>
+<a href="http://www.brutman.com/Dos_Networking/dos_networking.html#DOS_and_TCPIP">DOS and TCP/IP</a><br>
+<a href="http://www.brutman.com/Dos_Networking/dos_networking.html#A_Warning_About_DOS">A warning about old PC hardware and DOS</a><br>
+<a href="http://www.brutman.com/Dos_Networking/dos_networking.html#Packet_drivers">Packet drivers</a><br>
+<a href="http://www.brutman.com/Dos_Networking/dos_networking.html#Using_a_packet_driver">Using a packet driver</a><br>
+<a href="http://www.brutman.com/Dos_Networking/dos_networking.html#Choosing_Hardware">Choosing Hardware</a><br>
+<a href="http://www.brutman.com/Dos_Networking/dos_networking.html#Some_notes_on_networking_software">Some notes on networking
+software</a><br>
+<a href="http://www.brutman.com/Dos_Networking/dos_networking.html#Additional_resources">Additional resources</a>
+</div>
+<br>
+<hr style="width: 100%; height: 2px;">
+<h2><a name="Introduction"></a>Introduction</h2>
+<p style="font-style: italic; margin-left: 40px;">From Wikipedia:
+"Sneakernet" is an informal term describing the transfer
+of electronic information, especially computer files, by physically
+moving removable media such as magnetic tape, floppy disks, compact
+discs, USB flash drives (thumb drives, USB stick), or external hard
+drives from one computer to another. This is usually in lieu of
+transferring the information over a computer network. The name is a
+tongue-in-cheek sound-alike to Ethernet, and refers to the use of
+someone wearing sneakers as the transport mechanism for the data.</p>
+<p>DOS has been an obsolete operating system for close to twenty years
+but it still shows up in a few places:</p>
+<ul>
+  <li>In embedded applications like cash registers, lab equipment, and
+industrial equipment that keep doing what they were designed to do 20
+years ago.</li>
+  <li>For running old software that people might be still using in
+their businesses. (Sometimes on real hardware, and sometimes in a
+virtual machine.)</li>
+  <li>Hobbyists experimenting with old computers that run DOS</li>
+</ul>
+<p>Back when DOS was a current operating system many machines were not
+network connected at all. Back then people did not have home networks
+and networking equipment was much more expensive. If people had any
+sort of connectivity it might have been to use a bulletin board system
+(BBS) through a dial-up modem or to talk to a Novell Netware server
+running on their local network. "Sneakernet", or the art of carrying
+software around on floppy disks, was the standard method of moving data
+around.</p>
+<p>Networking started to become more popular as businesses obtained
+multiple computers and they needed a way to communicate. This drove the
+cost of networking adapters and equipment down, which made it more
+affordable for home users. The growth of DSL and cable modem devices in
+the early 2000s made home networks almost a requirement, if only to
+allow sharing the one connection point to the Internet.
+</p>
+<p>The good news is that networking adapters and equipment is as
+inexpensive as it will ever get, and most machines running DOS can
+easily make use of used equipment that people are just throwing away.
+And although DOS came a little bit before the era of widespread
+networking on home computers, there was enough overlap such that
+reasonably good networking software exists for DOS.</p>
+<p>On a modern operating system networking is a standard function and
+great effort has been made to make it easy to setup. Networking for DOS
+is always an add-on feature so it takes a little bit of work to set up,
+but nothing too difficult.
+</p>
+<p>Even the slowest DOS machines dating back to the early 1980s can do
+the following once networked:
+</p>
+<ul>
+  <li>Get a network address automatically from a router using DHCP</li>
+  <li>Set their date and time from a network time server on the
+Internet </li>
+  <li>Send and receive files using FTP client</li>
+  <li>Use Telnet to connect Unix systems and online BBSes</li>
+  <li>Connect to Internet Relay Chat (IRC) servers </li>
+  <li>Fetch files from HTTP servers</li>
+  <li>Send and receive files as an FTP server</li>
+</ul>
+<p>Almost every old machine can use floppy disks or the serial port for
+data transfer and for a machine that is rarely used that is all you
+need. But if you enable networking you get the following advantages:</p>
+<ul>
+  <li>Transferring data using floppy drives is slow and painful. Floppy
+drives need periodic maintenance and floppy diskettes wear out.</li>
+  <li>Ethernet adapters are far faster than serial ports. A
+typical serial port on an 8088 class system is good for about 1KB per
+second of data transfer if everything is running perfectly. The same
+system with an Ethernet adapter can transfer data 30 to 100 times
+faster
+depending on the Ethernet device being used. On an 80486 system the
+advantage becomes even greater because transferring data using Ethernet
+is more efficient than through a serial port.</li>
+  <li>Data transfer over Ethernet is more reliable than over a serial
+port. You will get faster transfers speeds because there is less chance
+of errors and the hardware helps to detect errors.</li>
+</ul>
+<p>Using a home network cuts down on your time "doing the floppy
+shuffle" and saves wear and tear on your system. It also saves you
+time.
+</p>
+<p>Being realistic, you are not going to want to use DOS to surf the
+web. Modern web sites are generally too complex to render on old
+machines and the extensive use of Javascript has made it difficult for
+old machines. But for basic file transfer and running some useful
+utilities like SNTP (Simple Network Time Protocol) it can not be beat.
+And it enables some fun uses too, like chatting on Internet Relay Chat
+(IRC).</p>
+<h2><a name="Survey"></a>A survey of DOS networking techniques
+</h2>
+<p>There are lots of ways to connect computers together. This page
+primarily discusses TCP/IP and packet drivers (to be introduced later).
+Before getting into the details of those I'd like to present a brief
+survey of ways to network PCs running DOS.
+</p>
+<h3><a name="Common_devices_used_to_connect_"></a>Common devices used
+to connect computers
+</h3>
+<ul>
+  <li>Serial ports: a serial port is a simple hardware interface that
+was in widespread use on PCs until a few years ago when manufacturers
+generally stopped including them on motherboards. Originally they were
+used to connect low speed devices such as printers, modems and mice. A
+computer can use the serial port and a modem to connect to another
+computer with a serial port and modem through the telephone
+system. For computers that are close by a "null modem" device or cable
+can be used to connect the serial ports of the two computers
+directly together, eliminating the need for modems. The word "serial"
+is
+a description of how the bits of data are sent - the port effectively
+sends one bit of data at at time down the wire. Typical speeds range
+from 110 bits per second to 115,000 bits per second. </li>
+  <li>Parallel ports: a parallel port is a slightly more complex port
+that can send data to a device faster than a serial port. Parallel
+ports are faster than serial ports because they can send eight bits of
+data down eight different wires at the same time. Parallel ports were
+originally used to connect pinters but they were enhanced to allow
+fairly high speed data transfer with other devices, such as CD-ROM
+drives, scanners, portable hard drives, etc. Like the serial port,
+parallel ports have fallen out of favor.</li>
+  <li>Ethernet adapterss: An Ethernet adapter or Network Interface Card
+(NIC) allows a computer to attach to a Local Area Network (LAN) that
+uses the
+Ethernet standards. Ethernet originally allowed for 10Mb/s (megabits
+per second) data rates and has been enhanced several times. Modern
+Ethernets generally operate at 100 or 1000Mb/s. An Ethernet adapter
+might not actually be in the form of a card - Ethernet can be added
+using a
+parallel port, through a USB adapter, or even directly included on a
+motherboard. </li>
+</ul>
+<h3><a name="Less_common_devices_used_to_connect"></a>Less common
+devices used to connect computers</h3>
+<ul>
+  <li>ARCNET was a popular microcomputer networking technology in the
+early 1980s </li>
+  <li>Token Ring was a competitor to Ethernet for networking introduced
+by IBM. Token Ring was a good technology but it lost out to Ethernet
+which had greater market support and generally cost less.</li>
+</ul>
+<h3><a name="Software_solutions_for_serial_ports:"></a>Software
+solutions for serial ports</h3>
+<p>Serial ports are relatively easy devices to program and lots of
+people wrote software that uses the serial port. As a result, there was
+a great variety of programs that used different rules for sending data.
+Examples include:</p>
+<ul>
+  <li>Terminal emulators that just made the PC look like a generic
+terminal to whatever was on the other end of the serial port</li>
+  <li>Terminal emulators with file transfer protocols such as Kermit,
+Xmodem, Ymodem and Zmodem built into them. Some of the early file
+transfer protocols were not specified very well leading to all sorts of
+strange and wonderful glitches and incompatibilities.</li>
+  <li>Low-end networking solutions that allowed for file and printer
+sharing. These allowed for simple networks but were limited by the
+speed of the serial port and the point-to-point nature of the serial
+port.<br>
+  </li>
+  <li>TCP/IP using Serial Line Internet Protocol (SLIP) or PPP
+(Point-to-Point Protocol). TCP/IP, SLIP and PPP had the benefit of
+being fairly well defined so interoperability was not much of a
+concern. As modems became faster and operating systems became
+networking aware more home computer users progressed from calling
+simple BBSes to Internet Service Providers using TCP/IP, enabled by
+SLIP and PPP.</li>
+</ul>
+<h3><a name="Software_solutions_for_parallel_ports:"></a>Software
+solutions for parallel ports</h3>
+<p>Parallel ports were not used for communications as much as serial
+ports were. Often there was just one parallel port compared with two
+serial ports on a computer, and the parallel port was often connected
+to a printer. Serial ports supported "hot plugging" (removing and
+connecting devices while running) while parallel ports did not, so
+swapping devices on a parallel port often required shutting the
+computer and the devices off.</p>
+<p>
+A notable exception was LapLink by Traveling Software. LapLink provided
+software and a special cable that allowed two computers to directly
+connect to each other through their parallel ports. The software
+allowed the computers to move files back and forth. Later versions of
+DOS provided a similar function with INTERLNK and INTERSRV.</p>
+<p>TCP/IP over the parallel port was also possible using a protocol
+called Parallel Line Internet Protocol (PLIP).</p>
+<p>Transfers on the parallel port were inherently faster than those
+over
+serial ports because of the nature of the parallel port. Parallel ports
+also evolved to operate at faster and faster speeds using improved
+handshaking on the wires and even DMA. Those enhancements were made to
+improve the speeds of connected devices, but they would help data
+transfer of any type.
+</p>
+<h3><a name="Protocol_suites_for_network_cards"></a>Protocol suites for
+network adapters</h3>
+Network adapters are quite a bit more complex than serial and parallel
+ports and usually a network adapter is used with a set of protocols.
+The
+set of protocols are designed to work together and are more commonly
+known as protocol suite. Functions of the protocol suite include data
+sending and receiving form the hardware, basic routing of data packets,
+creating virtual connections between applications, etc.
+<p>Protocol suites are interesting but most people do not interact with
+them; they use applications that hide the details of the protocol suite
+and underlying data transfer medium.</p>
+<ul>
+  <li>IPX/SPX: Internetwork Packet Exchange/Sequenced Packet Exchange
+was an early competitor to TCP/IP that is often associated with Novell
+NetWare. </li>
+  <li>TCP/IP: Transmission Control Protocol/Internet Protocol is the
+predominant set of protocols used over Ethernet today. Besides Ethernet
+it runs well over serial links using SLIP or PPP, Token Ring, wireless
+variants of Ethernet, and almost any other networking technology that
+you can think of.</li>
+  <li>NetBIOS: Originally developed for IBM to run on the IBM PC
+Network, NetBIOS is actually an API and not a protocol. The NetBIOS
+Frames (NBF) protocol is what ran "over the wire" on the original IBM
+PC Network which NetBIOS was designed for. The NetBIOS API was
+preserved when IBM introduced Token Ring; an emulator was provided for
+the new networking technology. Novell supported NetBIOS by running it
+over IPX/SPX with a protocol called NBX. And NetBIOS can run today
+directly over TCP/IP using a protocol called NBT.</li>
+  <li>SNA: Systems Network Architecture was a networking suite from
+IBM. Originally designed for connecting terminals to IBM mainframes,
+SNA evolved to becomes a more complete protocol suite but it failed to
+attract users outside of IBM customers.</li>
+</ul>
+<h3><a name="High_level_applications"></a>High level applications</h3>
+<ul>
+  <li>NetWare: Novell Netware was one of the original file serving
+operating systems available for PCs. NetWare implemented its file and
+printer sharing using NetWare
+Core Protocol (NCP) which ran on top of IPX/SPX. A disadvantage of
+NetWare is that you generally need a dedicated server although that
+server can probably run in a virtual machine now. Your local computer
+would run a NetWare client to access files on the server using either
+IPX/SPX or TCP/IP. </li>
+  <li>Server Message Block (SMB): SMB provides for file and printer
+sharing.
+Originally it was designed to run using the NetBIOS API, which in turn
+can run over NBF, IPX/SPX or TCP/IP. Most people have used this in
+Windows and just refer to it as "file and print sharing." The current
+version of this is called Common Internet File System (CIFS).</li>
+  <li>TCP/IP applications: TCP/IP is the foundation of the Internet and
+if there was an idea for using a network to do something, there is a
+probably a program for it that uses TCP/IP. Examples include:
+    <ul>
+      <li>File sharing using FTP and NFS</li>
+      <li>Printing to remote printers</li>
+      <li>Telnet or SSH to allow you to use remote computers just like
+you were sitting in front of them.</li>
+      <li>Web servers and web browsers</li>
+      <li>Chat programs</li>
+      <li>etc ...</li>
+    </ul>
+  </li>
+</ul>
+<h3><a name="Miscellaneous_notes"></a>Miscellaneous notes</h3>
+<ul>
+  <li>An Ethernet device is a device that connects to an internet
+network. Often it is an adapter that plugs into your computer, but it
+can
+be something different like a device that plugs into your parallel port
+and then connects to your Ethernet network. On other architectures
+Ethernet was sometimes attached using a SCSI bus. So when you read
+"Ethernet adapter", keep an open mind - it might not be on a card.</li>
+</ul>
+<h2><a name="CloserLook"></a>A closer look at TCP/IP</h2>
+<p>TCP/IP is the protocol suite that the Internet is built on and the
+term "Internet" refers to a global system of interconnected computer
+networks that use TCP/IP. In addition to powering the Internet, TCP/IP
+is used on countless private networks. Simply put, TCP/IP allows
+computers to send and receive data across these networks. The path the
+data takes might be confined to one room in your house or might span
+several continents and satellites; TCP/IP is robust enough to handle it
+all.</p>
+<p>TCP/IP is composed of layers of protocols:
+</p>
+<ul>
+  <li>Internet Protocol (IP): This is the lowest layer of TCP/IP -
+anything "closer to the wire" than this is covered by the standards for
+the device that you are using, for example Ethernet or Token Ring. IP
+packets contain information such as the source IP address and the
+target IP address, but not much more. IP packets are not
+guaranteed to arrive in the order they were transmitted or arrive at
+all! IP packets can be sent to individual machines or groups of
+machines.</li>
+  <li>User Datagram Protocol (UDP): UDP is a higher level protocol that
+rides inside of the IP packet payload; another way to say this is that
+IP encapsulates UDP. UDP adds the concept of "ports" to the network so
+that a packet does not just target a machine anymore; it can target
+a specific application running on that machine listening to a specific
+port. (A good real world analogy is that an IP address is like a
+building number, and a port is like a mailbox number for an apartment
+in that building.) Like IP packets, UDP packets are delivered on a
+"best effort" basis - UDP packets are not guaranteed to arrive in order
+or arrive
+at all. Each UDP packet is a self contained unit, like
+a single piece of mail.</li>
+  <li>TCP: TCP is another high level protocol that rides inside of IP
+packets. TCP also uses ports to target specific applications, but
+unlike UDP
+where the port works kind of like a mailbox for single packets TCP uses
+the ports to establish connections between two applications that last
+for a longer time. The real world analogy is that of a telephone
+connection - instead of hanging up and redialing after each word you
+stay on the connection that you already made. Unlike UDP, TCP
+guarantees that the data sent will arrive and it will be in order. TCP
+does this by adding meta data to each packet that allows it to detect
+when a packet has been lost or arrived out of squence.</li>
+</ul>
+<p>In addition to IP, UDP and TCP there are additional protocols that
+help. Examples include ICMP, ARP, and DNS. Most of these other
+protocols work silently in the background so you do not need to worry
+about them.</p>
+<p>TCP/IP is a fairly comprehensive protocol and it can be ver
+complicated. A full implementation requires more memory than is usually
+available on an old PC. With some sensible performance and feature
+trade-offs it is possible to get a reasonably complete TCP/IP
+implementation running on an old PC with decent performance. Smaller
+machines can run TCP/IP, but they often wind up making trade-offs that
+hurt performance or limit features.</p>
+<p><img style="width: 150px; height: 158px;" alt="carrier pigeon line drawing" src="./DOS TCP_IP Networking with Packet Drivers_files/carrier_pigeon.jpg" align="right">While most people associate TCP/IP with high performance
+networking,
+it can be used on very low performance networking technologies. For
+example:</p>
+<ul>
+  <li>Bongo drums (<a href="http://eagle.auc.ca/~dreid/index.html">http://eagle.auc.ca/~dreid/index.html</a>)</li>
+  <li>Carrier pigeon (<a href="http://www.ietf.org/rfc/rfc1149.txt">http://www.ietf.org/rfc/rfc1149.txt</a>)</li>
+</ul>
+<p>I would stick to classic Ethernet over these two alternatives - they
+tend to drop a lot of packets.</p>
+<h2><a name="DOS_and_TCPIP"></a>DOS and TCP/IP
+</h2>
+<p>As noted earlier, DOS generally predates the widespread use of
+TCP/IP. That means that TCP/IP is going to be a feature of your
+programs and not integrated into the operating system at all.</p>
+<p>On a DOS PC there are generally two ways to used TCP/IP in
+applications:</p>
+<ul>
+  <li>TCP/IP is built into an application that does something with it,
+like
+transfer files or update the time. Examples include the NCSA Telnet
+program, programs that use the WATTCP TCP/IP library or programs that
+use the
+mTCP TCP/IP library. </li>
+  <li>TCP/IP is provided a Terminate and Stay Resident (TSR) program
+that is loaded as a separate piece of software. After loading the
+TCP/IP
+TSR you then run another application which uses it to do something. The
+application accesses TCP/IP through a software interrupt. A good
+example of this is Trumpet by Peter Tattam.</li>
+</ul>
+<p>The first approach generally works well because the TCP/IP code and
+application are combined together in one program, reducing complexity
+and improving performance. But it also makes every application that
+needs the TCP/IP code bigger in size because the application has to
+include its
+own copy of TCP/IP. A change to TCP/IP also requires all of the
+affected programs to be updated. On the other hand, the TCP/IP code is
+included can be tailored and customized to the specific application.
+</p>
+<p> The second approach allows multiple applications to share the
+TCP/IP code, allowing them to be smaller on disk. If the TCP/IP code
+needs to be changed the programs do not need to change too - you can
+just swap out the TCP/IP part. This makes the TCP/IP code more of an
+operating system extension or a dynamically shared library that other
+programs can use. But performance is not as good as with the first
+approach and the
+"one size fits all" philosophy leads to some design compromises that
+may not be good for the individual programs.
+</p>
+<p>The approach that you choose will probably be driven by the
+applications that you want to use. A pragmatic approach says to find
+the application that you like and use that, letting it worry about
+about how it gets access to TCP/IP services.</p>
+<h2><a name="A_Warning_About_DOS"></a>A warning About old PC
+hardware and DOS</h2>
+<p>If you are not comfortable installing new hardware in your machine,
+editing CONFIG.SYS, or trying to debug hardware that has not been
+supported in years, then TCP/IP in DOS is not for you. At
+a minimum you are going to have to:</p>
+<ul>
+  <li>Install your Ethernet hardware. This implies successfully
+avoiding IRQ and port conflicts on your system.</li>
+  <li>Get the right cabling. Cabling for newer adapters using RJ45
+jacks
+and CAT5 wiring is generally easy but older adapters using Thinnet or
+AUI
+can be challenging and difficult to diagnose if problems arise.</li>
+  <li>Find the right packet driver for your adapter and parameters.
+Older adapters often have open source packet drivers and are well
+understood. If
+your adapter does not have a packet driver you might be able to use an
+ODI
+or NDIS driver with a "shim" that makes it look like a packet driver.</li>
+  <li>Possibly debug your network setup. Not all problems will be the
+fault of the old PC. Bad cabling, flakey routers, and network
+configuration problems are not unheard of.</li>
+</ul>
+<p>On the other hand, the rewards are well worth it. Blasting files
+around
+the house at speeds ranging from 25KB per second (on a slow machine
+with a parallel-port Ethernet adapter) to 600KB per second (on a high
+end 386 with a 16 bit NE2000 compatible adapter) sure beats the heck
+out of 'sneakernet.' And once it is setup there is little to no
+maintenance required to keep it setup.</p>
+<h2><a name="Packet_drivers"></a>Packet drivers</h2>
+<p>At the beginning of the networking era for DOS PCs there were very
+few
+network adapters to choose from and network applications were highly
+specialized. As a result, networking applications generally included
+code to talk to a few specific models of network adapters directly.
+This
+was a simple approach that worked back when there were few network
+adapters, but you can see a few problems with it.</p>
+<ul>
+  <li>If a new network adapter were introduced none of the existing
+applications would be able to use it.</li>
+  <li>Even if the applications changed to support the new network
+adapters
+coming out the applications would have to grow to accomodate all of
+them or you would have to have several versions of the same program,
+each targeting a specific network adapter.</li>
+  <li>If there was a bug in the network adapter part of the code the
+whole
+application had to be shipped again.</li>
+</ul>
+<p>This was not a sustainable way to do software development.</p>
+<p>
+In 1986 FTP Software Inc. created the PC/TCP Packet Driver
+specification which defined an API for sending and receiving packets
+over networking devices. A device manufacturer needed to provide a
+packet driver, which was a small TSR that provided the API in the form
+of software interrupts. Application software would use the API to send
+and receive packets. Decoupling the network hardware programming from
+the applications made the applications smaller and less complex while
+allowing them to handle new adapters with no changes, provided that the
+new adapters provided a packet driver. The packet driver for an adapter
+is
+effectively the device driver for the adapter.</p>
+<p><img style="width: 361px; height: 206px;" alt="Packet driver diagram" src="./DOS TCP_IP Networking with Packet Drivers_files/packet_driver_diagram.gif" align="right">Another way to look at
+it is that your networking software never really
+talks directly to the networking hardware. It talks to the packet
+driver for that hardware, and as far as the networking software is
+concerned all packet drivers all look and behave the same way. The
+complexity of the hardware is hidden by the packet driver. An 8-bit
+Western Digital WD8003 Ethernet card from 1989 is very different from a
+NE2000 clone in a 486 PC, yet the packet drivers for each card make
+them look the same to the rest of the system.
+</p>
+<p>Inside the packet driver is code to talk to a specific piece of
+hardware. That hardware might be a network adapter, an Ethernet chipset
+connected through the parallel port, or even just a plain serial port.
+Your TCP/IP code really does not care because the packet driver
+provides a consistent way to send packets and receive packets from the
+chosen network hardware. A packet driver makes the hardware and network
+accessible in an easy manner.</p>
+<p>The PC/TCP packet driver specification can be found at <a href="http://crynwr.com/packet_driver.html">http://crynwr.com/packet_driver.html</a>
+.</p>
+<p>The Network Driver Interface Specification (NDIS) is a similar API
+used primarily with Microsoft Windows. Open Data-Link Interface (ODI)
+is another similar API that was used primarily by Novell NetWare and
+Apple Macintosh environments. If your adapter does not provide a packet
+driver you might be able to use DIS_PKT which provides NDIS to packet
+driver translation or ODIPKT which provides ODI to packet driver
+translation.
+</p>
+<h2><a name="Using_a_packet_driver"></a>Using a packet driver</h2>
+<p>Packet drivers are usually specific to a particular model of
+Ethernet device. Here are some places to look for a packet driver for a
+specific Ethernet device.
+</p>
+<ul>
+  <li>The original floppy disks or CD-ROM that came with your Ethernet
+adapter</li>
+  <li>Crynwr software, the author of many open source packet drivers
+for older adapters: <a href="http://crynwr.com/drivers/">http://crynwr.com/drivers/</a>
+.</li>
+  <li>Georg Potthast's site: <a href="http://www.georgpotthast.de/sioux/packet.htm">http://www.georgpotthast.de/sioux/packet.htm</a></li>
+  <li>The Internet - just Google for your adapters model number</li>
+</ul>
+<p>The packet driver is a DOS TSR (Terminate and Stay Resident)
+utility. When a TSR returns you to the command line it has stopped
+running, but it leaves itself loaded in memory which allows other
+programs to call it and use the code. This behavior makes it look like
+an extension to DOS; once it is loaded your computer knows how to do
+something new. (In this
+case, talk to a piece of networking hardware.)</p>
+<p>
+When the packet driver loads it is going to look for the Ethernet
+adapter and
+try to communicate with it to ensure that the Ethernet adapter is
+available. To find the Ethernet adapter, the packet driver is going to
+talk to a
+set of I/O ports. Usually you have to specify those I/O ports on the
+command line of the packet driver. If the packet driver can not find
+the expected Ethernet adapter at the specified I/O ports, it will give
+up and not load itself.</p>
+<p>The packet driver will probably require other command line options
+too:
+</p>
+<ul>
+  <li>Which IRQ to use: most networking hardware
+requires an IRQ to function.</li>
+  <li>Which software interrupt to use: explained below</li>
+  <li>Hardware specific options: these depend on your
+Ethernet adapter</li>
+</ul>
+<p>
+As mentioned earlier, all packet drivers talk to higher level software
+using the packet driver interface/programming API. The packet driver
+makes itself available to higher level software by taking control of a
+software interrupt. After the packet driver is installed, other
+software will use the packet driver by setting parameters and issuing
+the software interrupt.</p>
+<p>
+For this system to work you need to tell the packet driver what
+software interrupt it should claim. You also need to tell the other
+software what software interrupt that the packet driver is listening
+too. The software interrupt to use is usually specified on the command
+line when the packet driver is loaded. Here are some examples:</p>
+<p>
+Davicom 9008 Ethernet card (an NE2000 clone) in an AMD 386-40 using
+software interupt 0x60. The hardware interrupt is 0xA and the
+hardware I/O port address is 0x300.
+</p>
+<div style="margin-left: 40px;">
+<table style="text-align: left; background-color: rgb(192, 192, 192);" border="1" cellpadding="3" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><code>C:\PACKET&gt;pkt9008 0x60<br>
+Packet driver for UM9008, version 11.4.3<br>
+Packet driver skeleton copyright 1988-93, Crynwr Software.<br>
+      <br>
+System: [345]86 processor, ISA bus, Two 8259s<br>
+Packet driver software interrupt is 0x60 (96)<br>
+Interrupt number 0xA (10)<br>
+I/O port 0x300 (768)<br>
+My Ethernet address is 00:80:AD:C9:14:50</code></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<p><a href="http://www.brutman.com/Dos_Networking/xircom_pe3.html">Xircom
+PE3 10BT Parallel-port to Ethernet Adapter</a> running on a PCjr
+with software interrupt 0x61 and hardware interrupts disabled.</p>
+<div style="margin-left: 40px;">
+<table style="text-align: left; background-color: rgb(192, 192, 192);" border="1" cellpadding="3" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><code>C:\ETHERNET\PACKET&gt;pe3pd sint=61 int=0<br>
+      <br>
+Xircom Pocket Ethernet Adapter III Packet Driver, V3.08 (940920)<br>
+Packet Driver (C) Copyright 1990-1994 Xircom Inc.<br>
+      <br>
+Configuration:&nbsp;&nbsp;&nbsp; SINT 0x61, LPT2:, No IRQ, Bidirectional<br>
+      <br>
+Ethernet Address: 00:80:C7:2E:F3:3B</code></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>At this point your machine is physically ready to talk on your
+network.
+A "software service" for sending and receiving raw Ethernet packets is
+in place, courtesy of the packet driver. </p>
+<h2><a name="Choosing_Hardware"></a>Choosing
+Hardware</h2>
+<p>There are lots of factors that go into choosing networking hardware.
+Here is my set of criteria:</p>
+<ul>
+  <li>Can I get the hardware for my machine? A
+machine
+with a 16 bit ISA bus or PCI bus is easy to find hardware for.
+A machine with 8 bit PC bus slots or non-standard slots is
+much more difficult to find networking hardware for.</li>
+  <li>Does the selected hardware have a good packet driver?
+A good packet driver not only makes the adapter work, but it
+affects performance. Not having a packet driver might not be a deal
+breaker; you may be able to use an NDIS or ODI driver with a "shim"
+that makes those look like a packet driver. But having a real
+packet driver is preferable.</li>
+  <li>Can I connect it to my network? Newer adapters
+use
+twisted pair wiring (CAT5) with an RJ45 connector. Before
+twisted pair was standardized there were non-standard adapters that
+used
+twisted pair, there was 'Thinnet', and there was 'Thicknet'.
+Be prepared to dive into the world of AUI adapters, BNC
+jacks, transceivers, hubs and switches if you choose an older adapter.</li>
+</ul>
+<span style="font-weight: bold;">
+</span>
+<p>For 16 bit ISA bus machines you can use nearly anything. I
+would look for a adapter from a well-known manufacturer with an RJ45
+connector and a good packet driver. 3Com, Intel, and
+NE2000 compatible adapters are safe bets.</p>
+<p>
+For 8 bit ISA bus machines your choices are more limited. The 3Com
+3C503 based adapters are good choices. Western Digital/SMC 8003 based
+adapters and NE1000 adapters are good as well. I have not experienced
+one but I have read in many places that if you find a 3Com
+3C501 based adapter
+that you should burn it and bury it. Some 16 bit cards might
+be able to function in an 8 bit slot, but you will have to experiment
+with that.</p>
+<p>
+For machines without slots or where you want a temporary solution I
+would use a parallel-port to Ethernet adapter. The <a href="http://www.brutman.com/Dos_Networking/xircom_pe3.html">Xircom
+PE3-10BT</a> is a good example of this type of adapter. It
+connects to the machine using the parallel port and the packet driver
+makes it look just like a real Ethernet adapter. But the
+overhead of the parallel port does hurt performance, so while it is a
+good basic solution it will never beat the performance of an Ethernet
+adapter on a card.</p>
+<p>
+Of course you might have a machine new enough to have PCI slots or an
+Ethernet adapter on the motherboard. If you
+are running DOS on such a high powered machine, I applaud you. :-)</p>
+<h2><a name="Some_notes_on_networking_software"></a>Some notes on
+networking software</h2>
+<p>There is a lot of software out there for networking using a packet
+driver and there are already a lot of resources on the Internet that
+describe those resources. Here are some notes on the ones that I have
+tried.
+</p>
+<h3>NCSA Telnet</h3>
+<p style="margin-left: 40px;">NCSA is a great Telnet program for DOS.
+Features include:</p>
+<ul style="margin-left: 40px;">
+  <li>VT100 emulation</li>
+  <li>Multiple sessions to different computers at the same time</li>
+  <li>FTP server </li>
+</ul>
+<p style="margin-left: 40px;">Stated requirements are DOS 2.0 and a
+80286 or better CPU. It will
+run with a NEC V20 and it might be possible to recompile it to get rid
+of the 80286 specific instructions.</p>
+<p style="margin-left: 40px;">
+NCSA Telnet has its own TCP/IP software built in to the application so
+a separate TCP/IP stack such as Trumpet is not necessary. NCSA Telnet
+can use a packet driver or it can talk directly to several different
+Ethernet cards without the need for a packet driver. (They switched to
+a packet driver interface when the variety of Ethernet cards
+mushroomed.) The FTP server is very old and it does not support PASSIVE
+mode connections. I don't think it supports the PORT FTP command
+either, so you will have to work hard to find an FTP client that will
+work with it. (It assumes a specific data transfer port number, which
+is what was standard years ago. The mTCP FTP client is compatible with
+the FTP server.)
+</p>
+<p style="margin-left: 40px;">One of the great things about NCSA Telnet
+is that the source code is
+readily available for download - with the correct build environment,
+you can modify it!</p>
+<p style="margin-left: 40px;">
+The NCSA Telnet home page is gone, but the files can still be
+downloaded using ftp at ftp://ftp.ncsa.uiuc.edu/Telnet/DOS/ .</p>
+<h3>Trumpet for DOS</h3>
+<p style="margin-left: 40px;">Trumpet is a DOS TSR (Terminate and Stay
+Resident) that adds TCP/IP
+functions to your system. On one side it talks to a packet driver to
+move data in and out of your Ethernet card, while on the other side it
+provides TCP/IP functions to your application. Applications wishing to
+use Trumpet communicate with it using a software interrupt, in much the
+same way that Trumpet or other TCP/IP stacks talk to a packet driver.</p>
+<p style="margin-left: 40px;">
+Trumpet came with some sample applications including an FTP client, IRC
+client, and a finger client. Other applications were written to use it
+too. Trumpet published the programming interface to their TCP/IP stack,
+but the source code is not available. So you can use it, but you will
+have to live with any bugs and limitations.</p>
+<p style="margin-left: 40px;">
+Unfortunately the web pages for Trumpet are gone now. Search for
+tcp201.zip to find an archive of it on the Internet.</p>
+<h3>WATTCP</h3>
+<p style="margin-left: 40px;">WATTCP is a TCP library that is linked
+with specific applications.
+There is a 16 bit real mode version for use on the older machines and a
+32 bit protected mode version for newer machines. The 32 bit versions
+compile under a variety of C compilers.
+</p>
+<p style="margin-left: 40px;">WATTCP is one of the older DOS TCP/IP
+implementations and one of the
+most widely used. I do not have a lot of experience with WATTCP (yet)
+because I got sidetracked with writing my own TCP/IP library. I had a
+fairly long email conversation with Erick Engelke about WATTCP and the
+lessons he learned, and it was suprising how much of his work I
+duplicated. :-)</p>
+<p style="margin-left: 40px;">
+WATTCP can be found at its new home: <a href="http://www.erickengelke.com/wattcp">http://www.erickengelke.com/wattcp</a></p>
+<h3>mTCP</h3>
+<p style="margin-left: 40px;">mTCP is a TCP library and a set of
+applications that I started
+working on in late 2006. It is designed for low spec machines like the
+original IBM PC, PCjr, PC XT, PC AT, PC Convertible, etc. All of the
+code is 16 bit and most of the programs will run on a 265K system using
+DOS 2.1 or better. The library includes features like DNS, IP
+fragments, automatic retransmission of lost packets, listening sockets
+for server applications, some ICMP support, etc.</p>
+<p style="margin-left: 40px;">The current list of applications includes
+a DHCP client, Telnet
+client, IRC client, Simple Network Time Protocol (SNTP) client, FTP
+client, FTP server, HTTP server, Ping, Netcat, HTGet (an HTTP file fetcher) and PktTool (a diagnostic tool).<br>
+</p>
+<p style="margin-left: 40px;">More information on mTCP can be found at <a href="http://www.brutman.com/mTCP/mTCP.html">http://www.brutman.com/mTCP/mTCP.html</a>
+.</p>
+<h2><a name="Additional_resources"></a>Additional resources</h2>
+<p>This page barely scratches the surface of DOS networking. Most of my
+experience has been with packet drivers and related software; a list of
+additional resources is provided to help you understand packet driver
+based solutions and other solutions that I mentioned earlier.
+</p>
+<ul>
+  <li>"DOS Networking HOWTO": <a href="http://www.dendarii.co.uk/FAQs/dos-net.html">http://www.dendarii.co.uk/FAQs/dos-net.html</a></li>
+  <li>"FAQ: DOS Applications for Internet Use": <a href="http://www.dendarii.co.uk/FAQs/dos-apps.html">http://www.dendarii.co.uk/FAQs/dos-apps.html</a></li>
+  <li>"MS-DOS Networking": <a href="http://bbright.tripod.com/information/dosnetwork.htm">http://bbright.tripod.com/information/dosnetwork.htm</a></li>
+  <li>"FreeDOS Networking with VirtualBox 4.x": <a href="http://lazybrowndog.net/freedos/virtualbox/">http://lazybrowndog.net/freedos/virtualbox/</a></li>
+  <li>"DOS TCP/IP: DOS TCP/IP connectivity from scratch": <a href="http://users.telenet.be/mydotcom/library/network/dostcpip.htm">http://users.telenet.be/mydotcom/library/network/dostcpip.htm</a></li>
+  <li>"Trumpet TCP Driver for DOS": <a href="http://www.pld.ttu.ee/~priidu/library/net/trumpet.html">http://www.pld.ttu.ee/~priidu/library/net/trumpet.html</a></li>
+  
+  <li>"The packet driver specification": <a href="http://crynwr.com/packet_driver.html">http://crynwr.com/packet_driver.html</a></li>
+  <li>"NetBIOS, NetBEUI, NBF, NBT, NBIPX, SMB, CIFS Networking": <a href="http://timothydevans.me.uk/nbf2cifs/nbf2cifs.pdf">http://timothydevans.me.uk/nbf2cifs/nbf2cifs.pdf</a><br>
+  </li>
+</ul>
+<hr style="width: 100%; height: 2px;">
+<p style="font-style: italic;">Created August 13th 2007, last updated April 2nd, 2020<br>
+(C)opyright Michael B. Brutman, mbbrutman at gmail.com</p>
+<script async="" src="./DOS TCP_IP Networking with Packet Drivers_files/analytics.js.download"></script><script type="text/javascript" src="./DOS TCP_IP Networking with Packet Drivers_files/ga.js.download"></script>
+</body></html>

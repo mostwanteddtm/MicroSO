@@ -1,0 +1,2 @@
+nasm -f bin FAT32.ASM -o FAT32.BIN
+PAUSE

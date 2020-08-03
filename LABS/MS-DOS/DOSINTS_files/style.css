@@ -1,0 +1,43 @@
+pre {
+  border: 1px solid black;
+  border-width: 1px 2px;
+  width: 632px;
+  min-height: 352px;
+  margin: auto;
+}
+a {
+  color: #5555FF;
+  text-decoration: none;
+}
+a:hover {
+  background: #5555ff;
+  color: #ffffff;
+}
+.color1 {
+  color: #FF55FF;
+}
+.color2 {
+  color: #FF5555;
+}
+.color3 {
+  color: #0000AA;
+}
+a.headerlink {
+  color: #c60f0f;
+  font-size: 0.6em;
+  padding: 0 4px 0 4px;
+  text-decoration: none;
+}
+a.headerlink:hover {
+  background-color: #c60f0f;
+  color: white;
+}
+a.headerlink {
+  visibility: hidden;
+}
+h1 {
+  text-align: center;
+}
+h1:hover > a.headerlink {
+    visibility: visible;
+}

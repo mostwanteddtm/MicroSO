@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)http://www.win3x.org/win3board/viewtopic.php?t=2063 -->
+<html dir="ltr" lang="en-gb"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Connecting from a DOS-system using TCP/IP - Win3x.Org</title>
+
+
+	<link rel="canonical" href="http://www.win3x.org/win3board/viewtopic.php?t=2063">
+
+<!--
+	phpBB style name:  Legacy
+	Based on style:    subSilver (the default phpBB 2.0.x style)
+	Original author:   Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:       Big Monstro ( http://www.win3x.org/ )
+-->
+
+<link rel="stylesheet" href="./Connecting from a DOS-system using TCP_IP - Win3x.Org_files/stylesheet.css" type="text/css" media="all">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1"><script type="text/javascript"><!--
+	function redirect(goal) { var url = window.location.href; if (url.indexOf(goal) == -1 && location.protocol != "file:") { if (url.indexOf('#') > -1) { url = url.replace('#','&'+ goal +'#'); } else { url += '&'+ goal; } if (url.indexOf('?') == -1) { url = url.replace('&','?'); } window.location.href=url; } } if (document.querySelector && !document.all) { if ((typeof screen == 'object' && (screen.availWidth < 600))) { redirect('style=30'); } } if (navigator.language || (document.uniqueID && (navigator.browserLanguage))) {	if (navigator.language) { var language = navigator.language; } else { var language = navigator.browserLanguage; } if (language.indexOf('fr') > -1) { redirect('language=fr'); } }//--></script>
+
+
+
+</head>
+<body class="ltr dropdown-enabled hasjs">
+
+<script type="text/javascript"><!--
+	if (document.fireEvent || window.XMLHttpRequest) {document.body.className += " dropdown-enabled";}
+//--></script>
+
+
+<a name="top" class="anchor"></a>
+
+
+<table cellspacing="0" width="100%"><tbody><tr>
+	<td class="site-logo" height="100" width="200"><a href="http://www.win3x.org/win3board/index.php"><img src="./Connecting from a DOS-system using TCP_IP - Win3x.Org_files/site_logo.gif" alt="" border="0"></a></td>
+	<td align="center" class="site-description"><h1>Win3x.Org</h1><div class="big">Windows &amp; DOS Community</div></td>
+	<td align="right" class="search-header" width="200">
+							<div class="search-box">
+				<form action="http://www.win3x.org/win3board/search.php" method="get" name="search">
+					<input type="text" class="inputbox" name="keywords" size="20" title="Search for keywords" value="Search…" onfocus="if (this.value == &#39;Search\u2026&#39;) {this.value=&#39;&#39;;}">
+					<input type="image" src="./Connecting from a DOS-system using TCP_IP - Win3x.Org_files/icon_mini_search.gif" alt="*" title="Search" style="height: 13px; margin-bottom: -3px; width: 12px" onclick="var h = document.forms[&#39;search&#39;].elements[0]; if (h.value == &#39;&#39; || h.value == &#39;Search\u2026&#39;) {h.focus(); return false;}">
+					
+				</form>
+				<p><a href="http://www.win3x.org/win3board/search.php">Advanced search</a></p>
+			</div>
+					</td>
+</tr></tbody></table>
+
+
+
+<div id="menubar" style="position: relative; z-index: 1;"><table width="100%" cellspacing="0">
+	<tbody><tr class="bigger" valign="top"><td style="padding: 0">
+		<div style="padding: 4px 2px">
+							<span class="quicktools"><a href="http://www.win3x.org/win3board/viewtopic.php?t=2063#" id="quick_link"><img src="./Connecting from a DOS-system using TCP_IP - Win3x.Org_files/icon_mini_members.gif" width="12" height="13" alt=""> Quick links</a>&nbsp;</span>
+			
+						<a href="http://www.win3x.org/win3board/app.php/help/faq"><img src="./Connecting from a DOS-system using TCP_IP - Win3x.Org_files/icon_mini_faq.gif" width="12" height="13" alt=""> FAQ</a>
+					</div>
+
+					<div id="quick_links_list" style="border-width: 0; display: none; left: 0"> 
+				<div>																												<a href="http://www.win3x.org/win3board/search.php?search_id=unanswered">Unanswered topics</a><br><a href="http://www.win3x.org/win3board/search.php?search_id=active_topics">Active topics</a><br><div class="separator"></div><a href="http://www.win3x.org/win3board/search.php">Search</a>
+												</div>
+			</div>
+			</td>
+	<td style="padding: 0">
+					<div align="right" style="padding: 4px 2px">
+				
+									<a href="https://www.win3x.org/win3board/ucp.php?mode=register"><img src="./Connecting from a DOS-system using TCP_IP - Win3x.Org_files/icon_mini_register.gif" width="12" height="13" alt=""> Register</a>&nbsp;
+				
+				<a href="https://www.win3x.org/win3board/ucp.php?mode=login&amp;redirect=viewtopic.php%3Ft%3D2063"><img src="./Connecting from a DOS-system using TCP_IP - Win3x.Org_files/icon_mini_login.gif" width="12" height="13" alt=""> Login</a>
+			</div>
+			</td></tr>
+	</tbody></table></div>
+
+<script type="text/javascript" src="./Connecting from a DOS-system using TCP_IP - Win3x.Org_files/forum_fn.js.download"></script>
+
+
+	<div class="hidden_links"><table cellspacing="0" style="margin: 14px 0 0" width="100%"><tbody><tr class="bigger">
+			<td>
+			<a href="http://www.win3x.org/win3board/search.php?search_id=unanswered">Unanswered topics</a> | <a href="http://www.win3x.org/win3board/search.php?search_id=active_topics">Active topics</a>					</td>
+			</tr></tbody></table></div>
+
+<table cellspacing="1" width="100%" class="main" style="margin: 4px 0 8px">
+<tbody><tr class="bg1"><td><table cellspacing="0" width="100%"><tbody><tr class="breadcrumbs">
+	<td>		<b><span itemscope="" itemtype="http://schema.org/BreadcrumbList">		<span itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope=""><a href="http://www.win3x.org/win3board/index.php" itemtype="https://schema.org/Thing" itemscope="" itemprop="item" data-navbar-reference="index"><span itemprop="name">Index</span></a><meta itemprop="position" content="1"></span>
+		 » <span itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope="" data-forum-id="40"><a href="http://www.win3x.org/win3board/viewforum.php?f=40" itemtype="https://schema.org/Thing" itemscope="" itemprop="item"><span itemprop="name">[== Discussions ==]</span></a><meta itemprop="position" content="2"></span>   » <span itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope="" data-forum-id="90"><a href="http://www.win3x.org/win3board/viewforum.php?f=90" itemtype="https://schema.org/Thing" itemscope="" itemprop="item"><span itemprop="name">International Board</span></a><meta itemprop="position" content="3"></span>   » <span itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope="" data-forum-id="79"><a href="http://www.win3x.org/win3board/viewforum.php?f=79" itemtype="https://schema.org/Thing" itemscope="" itemprop="item"><span itemprop="name">Resources</span></a><meta itemprop="position" content="4"></span>  		</span></b>
+		</td><td style="padding: 0" width="20"><a href="http://twitter.com/Win3xOrg" style="background-image: url(&#39;./ext/win3x/customcode/styles/legacy/theme/images/twitter.gif&#39;); display: block; height: 14px; width: 20px; _display: none"></a>	</td>
+</tr></tbody></table></td></tr>
+</tbody></table>
+
+
+<div style="margin: 16px 0 4px">
+		<h2><a class="header" href="http://www.win3x.org/win3board/viewtopic.php?f=79&amp;t=2063">Connecting from a DOS-system using TCP/IP</a></h2>
+	</div>
+
+
+
+<div class="action-bar">
+	<table width="100%" cellspacing="1">
+	<tbody><tr valign="bottom">
+		<td class="bigger">
+			<table cellspacing="0">
+			<tbody><tr>
+				<td nowrap="nowrap" style="padding-bottom: 0; padding-top: 0; padding-left: 0">
+					
+											<a class="button" href="http://www.win3x.org/win3board/posting.php?mode=reply&amp;f=79&amp;t=2063" title="Post a reply">Post Reply</a>
+					
+									</td>
+
+									<td style="padding: 0">
+						<span class="quicktools"><a class="button" id="topictools_link" name="#topictools" style="background-image: url(&#39;./styles/legacy/theme/images/icon_topic_tools.gif&#39;); background-repeat: no-repeat; background-position: center; display: block; margin: 0 3px; padding-left: 14px; padding-right: 14px" href="http://www.win3x.org/win3board/viewtopic.php?t=2063#topictools">&nbsp;</a></span>
+
+						<div id="topictools_list" style="border-width: 0; display: none; margin-left: 2px"> 
+							<div> 																												<a href="http://www.win3x.org/win3board/viewtopic.php?f=79&amp;t=2063&amp;view=print">Print view</a> </div>
+						</div>
+					</td>
+				
+									<td class="small" nowrap="nowrap" style="padding-bottom: 0; padding-top: 0; padding-left: 5px">
+						<b>Page <strong>1</strong> of <strong>1</strong></b> &nbsp;[ 2 posts ]
+					</td>
+							</tr>
+			</tbody></table>
+		</td>
+		<td align="right" valign="middle"></td>
+	</tr>
+	</tbody></table>
+</div>
+
+	<div class="hidden_links"><table width="100%" cellspacing="1"><tbody><tr class="bigger"><td>
+						<a href="http://www.win3x.org/win3board/viewtopic.php?f=79&amp;t=2063&amp;view=print">Print view</a>					</td></tr></tbody></table></div>
+
+	<script type="text/javascript"><!--
+		if (document.body.className.indexOf('dropdown-enabled') > -1 && typeof removeComment === 'function') {
+			var ttl = document.getElementById('topictools_list'); removeComment(ttl); ttl.onclick = function(e) {if (e) {e.stopPropagation();} else {window.event.cancelBubble = true;}};
+			document.getElementById('topictools_link').onclick = function(e) {if (e) {e.stopPropagation();} else {window.event.cancelBubble = true;} toggleLists(ttl, this, ttl.parentNode); return false;};
+			document.getElementById('topictools_link').href = document.getElementById('topictools_link').name;
+		}
+	//--></script>
+
+
+	<table class="main" width="100%" cellspacing="1">
+			<tbody><tr>
+			<th nowrap="nowrap">Author</th>
+			<th width="100%">Message</th>
+		</tr>
+				<tr class="bg1">
+			<td align="center">
+						<a name="p15991" class="anchor"></a>
+						<b><a href="http://www.win3x.org/win3board/memberlist.php?mode=viewprofile&amp;u=1393" style="color: #006699;" class="username-coloured">Maxoul</a></b>
+					</td>
+		<td height="20" width="100%">
+			<table cellspacing="0" width="100%">
+			<tbody><tr>
+				<td>
+					<table cellspacing="0"><tbody><tr>						<td class="bigger"><b>Post subject:</b> <a href="http://www.win3x.org/win3board/viewtopic.php?p=15991#p15991">Connecting from a DOS-system using TCP/IP</a></td>
+					</tr></tbody></table>
+				</td>
+				<td align="right" class="bigger">					<a href="http://www.win3x.org/win3board/viewtopic.php?p=15991#p15991"><img src="./Connecting from a DOS-system using TCP_IP - Win3x.Org_files/icon_post_target.gif" width="12" height="9" alt="" border="0"></a><b>Posted:</b> 30 Dec 2005 16:36
+				</td>
+			</tr>
+			</tbody></table>
+		</td>
+		</tr>
+
+		<tr class="bg1" valign="top">
+
+		<td>
+			<table cellspacing="0" width="150"><tbody><tr><td><table cellspacing="4">
+										<tbody><tr>
+					<td class="bigger">Membre d'honneur</td>
+				</tr>
+						
+										<tr>
+					<td><a href="http://www.win3x.org/win3board/memberlist.php?mode=viewprofile&amp;u=1393"><img class="avatar" src="./Connecting from a DOS-system using TCP_IP - Win3x.Org_files/1393.gif" width="80" height="80" alt="User avatar"></a></td>
+				</tr>
+						
+							<tr>
+					<td class="bigger"><b class="offline">Offline</b></td>
+				</tr>
+			
+						</tbody></table>
+
+			<table class="profile"><tbody><tr><td>&nbsp;</td><td width="100%"><table class="fixed"><tbody><tr><td>
+				<div><b>Posts:</b> <a href="http://www.win3x.org/win3board/search.php?author_id=1393&amp;sr=posts">179</a></div>								<div><b>Joined:</b> 05 Jul 2004 11:17</div>
+												
+															</td></tr></tbody></table></td><td>&nbsp;</td></tr></tbody></table>
+			</td></tr></tbody></table>
+		</td>
+		<td>
+			<table cellspacing="5" width="100%">
+			<tbody><tr>
+				<td>
+				
+					<div class="postbody"><div class="content"><b>Connecting from a DOS-system using TCP/IP</b><br>
+<br>
+ <img class="smilies" src="./Connecting from a DOS-system using TCP_IP - Win3x.Org_files/icon_arrow.gif" width="15" height="17" alt=":arrow:" title="Arrow"> <a href="http://www.windowsnetworking.com/j_helmig/doscltcp.htm" class="postlink">http://www.windowsnetworking.com/j_helmig/doscltcp.htm</a><br>
+
+<blockquote><div class="quotetitle"><table class="table1"><tbody><tr><td class="cite">Quote:</td></tr></tbody></table></div><div class="quotecontent">The "Microsoft Network Client 3.0" can be used with the 'simple' protocols NetBEUI and IPX/SPX, but can also be used with the more complex and powerful TCP/IP-protocol.</div></blockquote></div></div>
+
+				
+												
+												
+				
+				<br clear="all"><br>
+
+																</td>
+			</tr>
+			</tbody></table>
+		</td>
+		</tr>
+
+		<tr class="bg1">
+
+			<td><table cellspacing="0"><tbody><tr><td><b><a class="top" href="http://www.win3x.org/win3board/viewtopic.php?t=2063#top">Top</a></b></td></tr></tbody></table></td>
+			<td>
+			<table width="100%" cellspacing="0"><tbody><tr>
+				<td><a class="button" href="http://www.win3x.org/win3board/memberlist.php?mode=viewprofile&amp;u=1393" title="Profile: Maxoul">Profile</a></td>				<td align="right">
+																							<a class="button" href="http://www.win3x.org/win3board/posting.php?mode=quote&amp;f=79&amp;p=15991" title="Reply with quote">Quote</a>															</td>
+			</tr></tbody></table>
+			</td>
+			</tr>
+			</tbody></table>
+			<div class="spacer"></div>
+		
+	<table class="main" width="100%" cellspacing="1">
+				<tbody><tr class="bg2">
+			<td align="center">
+						<a name="p15993" class="anchor"></a>
+						<b><a href="http://www.win3x.org/win3board/memberlist.php?mode=viewprofile&amp;u=1393" style="color: #006699;" class="username-coloured">Maxoul</a></b>
+					</td>
+		<td height="20" width="100%">
+			<table cellspacing="0" width="100%">
+			<tbody><tr>
+				<td>
+					<table cellspacing="0"><tbody><tr>						<td class="bigger"><b>Post subject:</b> <a href="http://www.win3x.org/win3board/viewtopic.php?p=15993#p15993"></a></td>
+					</tr></tbody></table>
+				</td>
+				<td align="right" class="bigger">					<a href="http://www.win3x.org/win3board/viewtopic.php?p=15993#p15993"><img src="./Connecting from a DOS-system using TCP_IP - Win3x.Org_files/icon_post_target.gif" width="12" height="9" alt="" border="0"></a><b>Posted:</b> 30 Dec 2005 16:40
+				</td>
+			</tr>
+			</tbody></table>
+		</td>
+		</tr>
+
+		<tr class="bg2" valign="top">
+
+		<td>
+			<table cellspacing="0" width="150"><tbody><tr><td><table cellspacing="4">
+										<tbody><tr>
+					<td class="bigger">Membre d'honneur</td>
+				</tr>
+						
+										<tr>
+					<td><a href="http://www.win3x.org/win3board/memberlist.php?mode=viewprofile&amp;u=1393"><img class="avatar" src="./Connecting from a DOS-system using TCP_IP - Win3x.Org_files/1393.gif" width="80" height="80" alt="User avatar"></a></td>
+				</tr>
+						
+							<tr>
+					<td class="bigger"><b class="offline">Offline</b></td>
+				</tr>
+			
+						</tbody></table>
+
+			<table class="profile"><tbody><tr><td>&nbsp;</td><td width="100%"><table class="fixed"><tbody><tr><td>
+				<div><b>Posts:</b> <a href="http://www.win3x.org/win3board/search.php?author_id=1393&amp;sr=posts">179</a></div>								<div><b>Joined:</b> 05 Jul 2004 11:17</div>
+												
+															</td></tr></tbody></table></td><td>&nbsp;</td></tr></tbody></table>
+			</td></tr></tbody></table>
+		</td>
+		<td>
+			<table cellspacing="5" width="100%">
+			<tbody><tr>
+				<td>
+				
+					<div class="postbody"><div class="content">Here is an alternative to the Microsoft TCP/IP solution : WATTCP<br>
+
+<blockquote><div class="quotetitle"><table class="table1"><tbody><tr><td class="cite">by Greg Covey wrote:</td></tr></tbody></table></div><div class="quotecontent">This document outlines using the University of Waterloo TCP (WATTCP) clients under MS-DOS. There are a few commercial TCP/IP stacks available for MS-DOS, along with Microsoft's own version (found on the NT4.0 server CD), but the WATTCP clients are entirely free. With that, they are completely unsupported by the original author. Monkeying around with these utilities is merely a hobby. I did not write the WATTCP libraries nor any of the clients. I simply find it interesting and wish to share my experiences with you here.<br>
+<br>
+The Waterloo TCP is not actually a TCP/IP stack. It is merely a set of programming libraries used for making TCP/IP socket connections. Since each of the WATTCP clients is pre-complied, the necessary library commands used in each one are complied into the binary. This means that the overhead to use these clients is quite low. The only drawback is that the computer running the WATTCP clients is not actually a true host on the IP network. You can't ping it, for example, from another box unless it's running a daemon (see below).<br>
+<br>
+Over the past few days, I have experimented with these programs. The box I'm using is an Intel Pentium 133 with 32Mb of ram, with a Connor 120Mb fixed hard drive. I've installed MS-DOS version 6.22 along with the packet driver for my net card (Samsung 1200-tx). My local network consists of two NT4 servers and an NT4 workstation. All of this is connected to the Internet through a SDSL router.<br>
+<br>
+<b><span style="color:#BF0000">Getting Started</span></b><br>
+The only hard part to using the WATTCP clients is finding and loading the packet driver for your particular net card. Usually this is a single file, with the '.com' extension, and can be found on the floppy that came with your net card. If you don't have the original floppy disk that came with your net card, check the manufacturers web site for downloadable drivers. It is possible that some manufacturers don't write (or support) packet drivers for their products. Once you obtain the packet driver, copy it to your boot drive of your DOS install. Then, load it with a command in the AUTOEXEC.BAT file, like this: <table class="fixed"><tbody><tr><td><div class="codebox"><div class="codetitle">Code: <a href="http://www.win3x.org/win3board/viewtopic.php?t=2063#" onclick="selectCode(this); return false;">Select all</a></div><div class="codecontent"><pre>C:\DRIVERS\SC1200</pre></div></div></td></tr></tbody></table>  where 'SC1200' is the name of the packet driver. (In this example, my netcard is a Samsung SC1200-tx.) That's all you have to do. Some packet drivers may require more memory than others. If you're loading other devices, try loading them into upper memory using the DEVICEHIGH command in CONFIG.SYS, or the LOADHIGH command in AUTOEXEC.BAT<br>
+<br>
+<b><span style="color:#BF0000">The WATTCP.CFG file</span></b><br>
+Each of the WATTCP clients expects to see the WATTCP.CFG file somewhere in the current path. This file defines basic information about your host, and how it will interact with other hosts on the network. Here's a sample WATTCP.CFG file. The '#' indicates a comment and is not required. <table class="fixed"><tbody><tr><td><div class="codebox"><div class="codetitle">Code: <a href="http://www.win3x.org/win3board/viewtopic.php?t=2063#" onclick="selectCode(this); return false;">Select all</a></div><div class="codecontent"><pre>my_ip=192.168.0.69			#The ip address of my dos box
+netmask=255.255.255.0			#The subnet mask for my ip
+nameserver=192.168.0.2			#The nameserver for my domain
+gateway=192.168.0.1			#The gateway for my subnet
+hostname=lala.smashco.com		#The hostname of my dos box</pre></div></div></td></tr></tbody></table> <span style="color:#FF0000">DO NOT use these settings! Make sure to configure your WATTCP.CFG file correctly. This example is used to show the reader the basic requirements in the WATTCP.CFG file, and define the correct syntax.</span><br>
+<br>
+I'm assuming the reader will understand each entry. This is the basic information that ANY host needs to participate on a TCP/IP network. Some WATTCP clients require more entries in this file. More on that later.<br>
+<br>
+<b><span style="color:#BF0000">Organize your files</span></b><br>
+I like to put all the WATTCP clients, along with the WATTCP.CFG file, into one directory. Call it what you will, and to make your life easier, add it to the SET PATH command in AUTOEXEC.BAT.<br>
+<br>
+<b><span style="color:#BF0000">The clients</span></b><br>
+This is not an exhaustive list. There may be more utilities, or different versions, available. This list represents the archives I was able to find at the time of writing. I have only tested about a third of these utilities.<br>
+
+<ul><li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/ftpbeta.zip" class="postlink">ftpbeta.zip</a> Version .65 of the FTP client</li>
+<li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/gophserv.zip" class="postlink">gophserv.zip</a> Gopher server. One of two daemons I have found</li>
+<li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/htget102.zip" class="postlink">htget102.zip</a> Retrieve an HTML document without a browser</li>
+<li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/irc101.zip" class="postlink">irc101.zip</a> An IRC client.</li>
+<li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/lynx_386.zip" class="postlink">lynx_386.zip</a> A Lynx Web Browser specifically for WATTCP</li>
+<li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/mt.zip" class="postlink">mt.zip</a> Telnet client</li>
+<li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/newsnuz.zip" class="postlink">newsnuz.zip</a> Newsreader</li>
+<li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/nslb01a.zip" class="postlink">nslb01a.zip</a> Nslookup and nsquery</li>
+<li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/pc_pine3.96/pcp_wat.zip" class="postlink">pc_pine3.96</a> mail &amp; news reader, here written for WATTCP</li>
+<li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/pc_pine3.91/pcpine_p.zip" class="postlink">pc_pine3.91</a> version 3.91 is much slimmer than 3.96</li>
+<li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/pprd200.zip" class="postlink">pprd200.zip</a> send jobs to the printers from any machine.</li>
+<li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/rdemo01a.zip" class="postlink">rdemo01a.zip</a> These are the three simple demo programs from SunRPC compiled with the WatTCP tcp/ip library and a port of SunRPC to DOS.</li>
+<li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/rmtd091.zip" class="postlink">rmtd091.zip</a> Remote MagTape Protocol Daemon.</li>
+<li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/simplftp.zip" class="postlink">simplftp.zip</a> Trivial FTP client</li>
+<li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/smbpd094.zip" class="postlink">smbpd094.zip</a> SMBPD is a small program that turns an XT or AT running DOS into a dedicated SMB printer server.</li>
+<li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/smtpserv.zip" class="postlink">smtpserv.zip</a> SMTPSERV is a program which runs on your pc and allows it to accept SMTP based mail from other sources, even from several sources at one time.</li>
+<li><a href="http://web.archive.org/web/20071011014112/http://www.smashco.com/wattcp/talk-10.zip" class="postlink">talk-10.zip</a> A simple talk client. I haven't tested it.</li></ul></div></blockquote> Source : <a href="http://web.archive.org/web/20051125175359/http://www.smashco.com/wattcp.asp" class="postlink">http://www.smashco.com/wattcp.asp</a></div></div>
+
+				
+												
+												
+				
+				<br clear="all"><br>
+
+																</td>
+			</tr>
+			</tbody></table>
+		</td>
+		</tr>
+
+		<tr class="bg2">
+
+			<td><table cellspacing="0"><tbody><tr><td><b><a class="top" href="http://www.win3x.org/win3board/viewtopic.php?t=2063#top">Top</a></b></td></tr></tbody></table></td>
+			<td>
+			<table width="100%" cellspacing="0"><tbody><tr>
+				<td><a class="button" href="http://www.win3x.org/win3board/memberlist.php?mode=viewprofile&amp;u=1393" title="Profile: Maxoul">Profile</a></td>				<td align="right">
+																																						</td>
+			</tr></tbody></table>
+			</td>
+			</tr>
+			</tbody></table>
+			<table cellspacing="0" width="100%">
+		<tbody><tr>
+			<td class="cat" align="center"><form method="post" action="http://www.win3x.org/win3board/viewtopic.php?f=79&amp;t=2063"><div class="sort-tools">
+	<span class="bigger">Display:</span> <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select> <span class="bigger">Sort by:</span> <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select> <span class="bigger">Direction:</span> <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select> <input class="button2" type="submit" name="sort" value="Go">
+</div></form></td>
+		</tr>
+		</tbody></table>
+		
+
+
+<div class="action-bar">
+	<table width="100%" cellspacing="1">
+	<tbody><tr valign="top">
+		<td class="bigger">
+			<table cellspacing="0">
+			<tbody><tr>
+				<td nowrap="nowrap" style="padding-bottom: 0; padding-top: 0; padding-left: 0">
+					
+											<a class="button" href="http://www.win3x.org/win3board/posting.php?mode=reply&amp;f=79&amp;t=2063" title="Post a reply">Post Reply</a>
+					
+									</td>
+
+				<td style="display: none">&nbsp;</td>
+
+									<td class="small" nowrap="nowrap" style="padding-bottom: 0; padding-top: 0; padding-left: 5px">
+						<b>Page <strong>1</strong> of <strong>1</strong></b> &nbsp;[ 2 posts ]
+					</td>
+							</tr>
+			</tbody></table>
+		</td>
+		<td align="right" valign="middle"><b><a class="nowrap" href="http://www.win3x.org/win3board/viewforum.php?f=79">Return to “Resources”</a></b></td>
+	</tr>
+	</tbody></table>
+</div>
+
+
+
+	<table cellspacing="0" width="100%"><tbody><tr valign="top">
+	<td>		<div class="search-box">
+			<form action="http://www.win3x.org/win3board/search.php" method="get" name="topic-search">
+				<input type="text" class="inputbox" name="keywords" size="20" value="Search this topic…" onfocus="if (this.value == &#39;Search\u0020this\u0020topic\u2026&#39;) {this.value=&#39;&#39;;}">
+				<input type="submit" class="button2" title="Search" value="Go" onclick="var h = this.form.elements[0]; if (h.value == &#39;&#39; || h.value == &#39;Search\u0020this\u0020topic\u2026&#39;) {h.focus(); return false;}">
+				<input type="hidden" name="t" value="2063">
+<input type="hidden" name="sf" value="msgonly">
+
+			</form>
+		</div>
+	</td>
+	<td>	<div align="right" class="jumpbox"><form method="get" action="http://www.win3x.org/win3board/viewforum.php" onsubmit="if(this.form.f.value == -1){return false;}">
+		<span class="bigger">Jump to:</span> <select name="f" onchange="if (this.options[this.selectedIndex].value != -1) {this.form.submit();}">
+		<option value="-1">Select a forum</option>
+		<option value="-1">------------------</option>
+														<option value="40">[== Discussions ==]</option>							<option value="24"> &nbsp;Informatique des vieux systèmes</option>							<option value="2"> &nbsp; &nbsp;Documentations et tutoriels</option>							<option value="51"> &nbsp; &nbsp;Questions et problèmes résolus</option>							<option value="19"> &nbsp;Informatique moderne</option>							<option value="52"> &nbsp; &nbsp;Questions et problèmes résolus</option>							<option value="77"> &nbsp;Emulation et virtualisation</option>							<option value="84"> &nbsp; &nbsp;Questions et problèmes résolus</option>							<option value="16"> &nbsp;Vos contributions</option>							<option value="93"> &nbsp; &nbsp;Règlement d'ordre intérieur</option>							<option value="90"> &nbsp;International Board</option>							<option value="70"> &nbsp; &nbsp;Retrocomputing</option>							<option value="79"> &nbsp; &nbsp;Resources</option>							<option value="85"> &nbsp; &nbsp;Other stuffs</option>							<option value="39"> &nbsp;Salon des membres</option>							<option value="49"> &nbsp; &nbsp;Anciennes consoles</option>							<option value="50"> &nbsp; &nbsp;HiFi/TV/Magnétoscopes</option>							<option value="42">[== Téléchargements (Downloads) ==]</option>							<option value="41"> &nbsp;Systèmes d'exploitation (OS)</option>							<option value="11"> &nbsp; &nbsp;DOS</option>							<option value="34"> &nbsp; &nbsp;Microsoft&nbsp;Windows</option>							<option value="35"> &nbsp; &nbsp;Autres systèmes</option>							<option value="91"> &nbsp;Logiciels (Software Library)</option>							<option value="4"> &nbsp; &nbsp;Applications</option>							<option value="6"> &nbsp; &nbsp;Jeux (Games)</option>							<option value="37"> &nbsp; &nbsp;Programmation</option>							<option value="92"> &nbsp;Autres (Misc.)</option>							<option value="8"> &nbsp; &nbsp;Pilotes (Drivers)</option>							<option value="22"> &nbsp; &nbsp;Dépannage (Bootdisks)</option>							<option value="65">[== Projets de membres ==]</option>							<option value="14"> &nbsp;Projets en cours</option>							<option value="68"> &nbsp;Projets aboutis</option>							<option value="69"> &nbsp;Projets abandonnés</option>					</select> <span class="noscript"><input class="button2" type="submit" value="Go"></span>
+	</form></div>
+
+
+
+
+</td>
+	</tr></tbody></table>
+
+
+
+<table cellspacing="1" width="100%" class="main" style="margin: 8px 0">
+<tbody><tr class="bg1"><td><table cellspacing="0" width="100%"><tbody><tr class="breadcrumbs">
+	<td>
+		<b>		 <a href="http://www.win3x.org/win3board/index.php" data-navbar-reference="index">Index</a> </b>
+	</td>
+	<td align="right" class="bigger">
+		<a href="http://www.win3x.org/win3board/memberlist.php?mode=contactadmin">Contact us</a>&nbsp;| 		  		<a href="http://www.win3x.org/win3board/ucp.php?mode=delete_cookies">Delete cookies</a>&nbsp;| 		 All times are <span title="Europe/Paris">UTC+02:00</span> 	</td>
+</tr></tbody></table></td></tr>
+</tbody></table>
+
+
+<div align="center" class="copyright">
+		<p class="footer-row">
+		Powered by <a href="https://www.phpbb.com/">phpBB</a>® Forum Software © phpBB Limited
+	</p>
+		
+	<p class="footer-row">
+		<a href="http://www.win3x.org/win3board/ucp.php?mode=privacy">Privacy</a> | <a href="http://www.win3x.org/win3board/ucp.php?mode=terms">Terms</a>
+	</p>
+
+		</div>
+
+
+</body></html>

@@ -1,0 +1,26 @@
+
+ Start  Stop   Length Name               Class
+
+ 00000H 00107H 00108H _TEXT              CODE
+ 00108H 00108H 00000H _DATA              DATA
+ 00108H 00108H 00000H _BSS               BSS
+
+
+Detailed map of segments
+
+ 0000:0000 0108 C=CODE   S=_TEXT          G=DGROUP  M=c0.asm     ACBP=28
+ 0000:0108 0000 C=DATA   S=_DATA          G=DGROUP  M=c0.asm     ACBP=28
+ 0000:0108 0000 C=BSS    S=_BSS           G=DGROUP  M=c0.asm     ACBP=28
+
+  Address         Publics by Name
+
+ 0000:0103 idle  _abort
+ 0000:0103 idle  __terminate
+
+  Address         Publics by Value
+
+ 0000:0103 idle  __terminate
+ 0000:0103 idle  _abort
+
+Error: Undefined symbol main in module c0.asm
+

@@ -1,0 +1,44 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: C_ASM - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\Marcos\AppData\Local\Temp\RSP88BA.bat" with contents
+[
+@echo off
+ml /c /Cx /coff .\FUNC.ASM
+]
+Creating command line "C:\Users\Marcos\AppData\Local\Temp\RSP88BA.bat"
+Creating temporary file "C:\Users\Marcos\AppData\Local\Temp\RSP88CB.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/C_ASM.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Projects\C_ASM\MAIN.CPP"
+]
+Creating command line "cl.exe @C:\Users\Marcos\AppData\Local\Temp\RSP88CB.tmp" 
+Performing Custom Build Step on .\FUNC.ASM
+Microsoft (R) Macro Assembler Version 6.14.8444
+Copyright (C) Microsoft Corp 1981-1997.  All rights reserved.
+
+ Assembling: .\FUNC.ASM
+Creating temporary file "C:\Users\Marcos\AppData\Local\Temp\RSP8977.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/C_ASM.pdb" /debug /machine:I386 /out:"Debug/C_ASM.exe" /pdbtype:sept 
+.\Debug\MAIN.OBJ
+.\FUNC.obj
+]
+Creating command line "link.exe @C:\Users\Marcos\AppData\Local\Temp\RSP8977.tmp"
+<h3>Output Window</h3>
+Compiling...
+MAIN.CPP
+Linking...
+
+
+
+<h3>Results</h3>
+C_ASM.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

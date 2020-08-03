@@ -1,0 +1,50 @@
+;MACRO4
+
+;-------------------------------------------
+;	STEP 6:
+;	Stack Segment for privilege level 0,1,2
+;-------------------------------------------
+
+stk0	segment	para	public use16	'stk0'
+	db	100h	dup(0)
+stk0_limit	equ	$
+stk0	ends
+
+stk1	segment	para	public use16	'stk1'
+	db	100h	dup(0)
+stk1_limit	equ	$
+stk1	ends
+
+stk2	segment	para	public	use16	'stk2'
+	db	100h	dup(0)
+stk2_limit	equ	$
+stk2	ends
+
+;------------------------------
+;	STEP 7:
+;	Task State Segment 
+;------------------------------
+
+task0_TSS	segment	para	public use16	'task0'
+	TSS_stack	stk0_selec,stk0_limit,stk1_selec,stk1_limit,stk2_selec,stk2_limit
+	TSS_cr3		;cr3
+	TSS_regs	0,0,0,0,0,0,0,0,0,stk0_limit
+;	TSS_seg		fsseg_selec,code_selec,stk0_selec,gsseg_selec,gdata_selec,gdata_selec
+	
+	dd	0	;LDT field
+	dw	0	;task trap flag
+	dw	68h	;I/O base address
+db 3	dup(0)
+task0_TSS_limit	equ	$
+task0_TSS	ends
+
+;--------------------------
+;	STEP 8:
+;	Dummy Segment
+;--------------------------
+
+dmy	segment	para	public use16	'dmy'
+	db	128	dup(0)
+dmy	ends
+
+
