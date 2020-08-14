@@ -1,58 +1,58 @@
 Stack Allocation = 5120 bytes
 
  Start  Stop   Length Name                   Class
- 00000H 03749H 0374AH _TEXT                  CODE
- 03750H 05E3FH 026F0H EMULATOR_TEXT          CODE
- 05E40H 05E40H 00000H C_ETEXT                ENDCODE
- 05E40H 05FAFH 00170H EMULATOR_DATA          FAR_DATA
- 05FB0H 05FF1H 00042H NULL                   BEGDATA
- 05FF2H 065ADH 005BCH _DATA                  DATA
- 065AEH 065AFH 00002H XIQC                   DATA
- 065B0H 065BBH 0000CH DBDATA                 DATA
- 065BCH 065C9H 0000EH CDATA                  DATA
- 065CAH 065CAH 00000H XIFB                   DATA
- 065CAH 065CAH 00000H XIF                    DATA
- 065CAH 065CAH 00000H XIFE                   DATA
- 065CAH 065CAH 00000H XIB                    DATA
- 065CAH 065CDH 00004H XI                     DATA
- 065CEH 065CEH 00000H XIE                    DATA
- 065CEH 065CEH 00000H XPB                    DATA
- 065CEH 065CFH 00002H XP                     DATA
- 065D0H 065D0H 00000H XPE                    DATA
- 065D0H 065D0H 00000H XCB                    DATA
- 065D0H 065D0H 00000H XC                     DATA
- 065D0H 065D0H 00000H XCE                    DATA
- 065D0H 065D0H 00000H XCFB                   DATA
- 065D0H 065D0H 00000H XCFCRT                 DATA
- 065D0H 065D0H 00000H XCF                    DATA
- 065D0H 065D0H 00000H XCFE                   DATA
- 065D0H 065D0H 00000H XIFCB                  DATA
- 065D0H 065D0H 00000H XIFU                   DATA
- 065D0H 065D0H 00000H XIFL                   DATA
- 065D0H 065D0H 00000H XIFM                   DATA
- 065D0H 065D0H 00000H XIFCE                  DATA
- 065D0H 065E7H 00018H CONST                  CONST
- 065E8H 065EFH 00008H HDR                    MSG
- 065F0H 067CFH 001E0H MSG                    MSG
- 067D0H 067D1H 00002H PAD                    MSG
- 067D2H 067D2H 00001H EPAD                   MSG
- 067D4H 067E5H 00012H _BSS                   BSS
- 067E6H 067E6H 00000H XOB                    BSS
- 067E6H 067E6H 00000H XO                     BSS
- 067E6H 067E6H 00000H XOE                    BSS
- 067E6H 067E6H 00000H XOFB                   BSS
- 067E6H 067E6H 00000H XOF                    BSS
- 067E6H 067E6H 00000H XOFE                   BSS
- 067F0H 06813H 00024H c_common               BSS
- 06820H 07C1FH 01400H STACK                  STACK
+ 00000H 03B09H 03B0AH _TEXT                  CODE
+ 03B10H 061FFH 026F0H EMULATOR_TEXT          CODE
+ 06200H 06200H 00000H C_ETEXT                ENDCODE
+ 06200H 0636FH 00170H EMULATOR_DATA          FAR_DATA
+ 06370H 063B1H 00042H NULL                   BEGDATA
+ 063B2H 0696DH 005BCH _DATA                  DATA
+ 0696EH 0696FH 00002H XIQC                   DATA
+ 06970H 0697BH 0000CH DBDATA                 DATA
+ 0697CH 06989H 0000EH CDATA                  DATA
+ 0698AH 0698AH 00000H XIFB                   DATA
+ 0698AH 0698AH 00000H XIF                    DATA
+ 0698AH 0698AH 00000H XIFE                   DATA
+ 0698AH 0698AH 00000H XIB                    DATA
+ 0698AH 0698DH 00004H XI                     DATA
+ 0698EH 0698EH 00000H XIE                    DATA
+ 0698EH 0698EH 00000H XPB                    DATA
+ 0698EH 0698FH 00002H XP                     DATA
+ 06990H 06990H 00000H XPE                    DATA
+ 06990H 06990H 00000H XCB                    DATA
+ 06990H 06990H 00000H XC                     DATA
+ 06990H 06990H 00000H XCE                    DATA
+ 06990H 06990H 00000H XCFB                   DATA
+ 06990H 06990H 00000H XCFCRT                 DATA
+ 06990H 06990H 00000H XCF                    DATA
+ 06990H 06990H 00000H XCFE                   DATA
+ 06990H 06990H 00000H XIFCB                  DATA
+ 06990H 06990H 00000H XIFU                   DATA
+ 06990H 06990H 00000H XIFL                   DATA
+ 06990H 06990H 00000H XIFM                   DATA
+ 06990H 06990H 00000H XIFCE                  DATA
+ 06990H 069A7H 00018H CONST                  CONST
+ 069A8H 069AFH 00008H HDR                    MSG
+ 069B0H 06B8FH 001E0H MSG                    MSG
+ 06B90H 06B91H 00002H PAD                    MSG
+ 06B92H 06B92H 00001H EPAD                   MSG
+ 06B94H 06BA5H 00012H _BSS                   BSS
+ 06BA6H 06BA6H 00000H XOB                    BSS
+ 06BA6H 06BA6H 00000H XO                     BSS
+ 06BA6H 06BA6H 00000H XOE                    BSS
+ 06BA6H 06BA6H 00000H XOFB                   BSS
+ 06BA6H 06BA6H 00000H XOF                    BSS
+ 06BA6H 06BA6H 00000H XOFE                   BSS
+ 06BB0H 06C10H 00061H c_common               BSS
+ 06C20H 0801FH 01400H STACK                  STACK
 
  Origin   Group
- 05FB:0   DGROUP
+ 0637:0   DGROUP
 
   Address         Publics by Name
 
- 0000:1E46       $i8_output
- 0000:2107       $i8_tpwr10
+ 0000:1E76       $i8_output
+ 0000:2137       $i8_tpwr10
  0000:0063       CRLF
  0000:FE32  Abs  FIARQQ
  0000:0E32  Abs  FICRQQ
@@ -66,97 +66,116 @@ Stack Allocation = 5120 bytes
  0000:0058       PRINTHEADER
  0000:1688       _atof
  0000:1684       _atoi
- 05FB:0840       _configs
- 05FB:0824       _edata
- 05FB:0870       _end
- 05FB:0124       _errno
+ 0637:0840       _Buffer
+ 0000:38EC       _BuildPacket
+ 0637:0842       _configs
+ 0000:39E6       _CopyFromPacketToBuffer
+ 0637:0824       _edata
+ 0637:08B0       _end
+ 0637:0124       _errno
  0000:025E       _exit
- 0000:2EB3       _exp
+ 0000:2EE3       _exp
  0000:066C       _fclose
  0000:0B66       _fflush
- 0000:1C7A       _fFYTOX
+ 0000:1CAA       _fFYTOX
  0000:1846       _fgets
  0000:074A       _fopen
- 0000:35E4       _getconfigkey
- 0000:3564       _getconfigvalue
- 05FB:0858       _inthandler
- 0000:2EA8       _log
- 0000:2EAE       _log10
- 0000:33EA       _main
+ 0000:361E       _getconfigkey
+ 0000:359E       _getconfigvalue
+ 0000:37B8       _initsoftware
+ 0637:0884       _inthandler
+ 0000:3984       _IssueCMD
+ 0000:2ED8       _log
+ 0000:2EDE       _log10
+ 0000:341A       _main
+ 0000:19B2       _memcpy
  0000:196A       _memmove
- 0000:19B2       _memset
+ 0000:19DE       _memset
+ 0000:396A       _NextDesc
  0000:0082       _outpdw
- 0000:2EA2       _pow
+ 0637:0892       _PhysicalAddrBuffer
+ 0000:2ED2       _pow
  0000:0010       _printdw
  0000:075E       _printf
- 0000:367E       _readcfg
- 0000:33CE       _remove
- 0000:3716       _resetnic
- 05FB:0162       _STKHQQ
+ 0000:36B8       _readcfg
+ 0000:33FE       _remove
+ 0000:3750       _resetnic
+ 0637:088C       _RxBuffer
+ 0637:0888       _RxBufferOriginal
+ 0637:088E       _RxBufferPhysicalAddress
+ 0637:089E       _RxReadPtrOffset
+ 0000:3ADA       _send
+ 0000:3A38       _SendPacket
+ 0637:0162       _STKHQQ
  0000:15F6       _strcat
  0000:1636       _strcpy
  0000:1910       _strcspn
  0000:1668       _strlen
- 0000:1A4C       _strtol
- 0000:1A40       _strtoul
- 0000:3446       _strtoulong
- 05FB:0160       __aaltstkovr
- 05FB:0108       __acfinfo
+ 0000:1A78       _strtol
+ 0000:1A6C       _strtoul
+ 0000:3480       _strtoulong
+ 0637:085C       _TxDesc
+ 0637:08A0       _TxHwFinishPtr
+ 0637:085A       _TxHwFreeDesc
+ 0637:088A       _TxHwSetupPtr
+ 0637:0160       __aaltstkovr
+ 0637:0108       __acfinfo
  0000:9876  Abs  __acrtmsg
  0000:9876  Abs  __acrtused
  0000:D6D6  Abs  __aDBdoswp
- 05FB:015E       __adbgmsg
- 05FB:00EA       __aexit_rtn
- 05FB:0116       __aintdiv
- 05FB:0330       __amblksiz
+ 0637:015E       __adbgmsg
+ 0637:00EA       __aexit_rtn
+ 0637:0116       __aintdiv
+ 0637:0330       __amblksiz
  0000:0161       __amsg_exit
  0000:034E       __aNchkstk
- 0000:2EC9       __aNCIexp
- 0000:2EBE       __aNCIlog
- 0000:2EC4       __aNCIlog10
- 0000:2EB8       __aNCIpow
- 0000:3054       __aNftol
- 05FB:0042       __anullsize
- 05FB:0102       __aseghi
- 05FB:0104       __aseglo
- 05FB:00EC       __asizds
- 05FB:0344       __asizeC
- 05FB:0345       __asizeD
+ 0000:2EF9       __aNCIexp
+ 0000:2EEE       __aNCIlog
+ 0000:2EF4       __aNCIlog10
+ 0000:2EE8       __aNCIpow
+ 0000:3084       __aNftol
+ 0637:0042       __anullsize
+ 0637:0102       __aseghi
+ 0637:0104       __aseglo
+ 0637:00EC       __asizds
+ 0637:0344       __asizeC
+ 0637:0345       __asizeD
  0000:0090       __astart
- 05FB:00E8       __atopsp
+ 0637:00E8       __atopsp
  0000:16CA       __catox
  0000:026D       __cexit
- 0000:2E32       __cfltcvt
- 05FB:0332       __cfltcvt_tab
- 05FB:017E       __cflush
- 0000:2B20       __cftoe
- 0000:2C6E       __cftof
- 0000:2D88       __cftog
- 05FB:0155       __child
+ 0000:2E62       __cfltcvt
+ 0637:0332       __cfltcvt_tab
+ 0637:017E       __cflush
+ 0000:2B50       __cftoe
+ 0000:2C9E       __cftof
+ 0000:2DB8       __cftog
+ 0637:0155       __child
  0000:034E       __chkstk
  0000:018C       __cinit
  0000:0152       __cintDIV
- 0000:2EF7       __cintrindisp1
- 0000:2ECE       __cintrindisp2
+ 0000:2F27       __cintrindisp1
+ 0000:2EFE       __cintrindisp2
  0000:11B0       __close
- 0000:19E0       __cltoasub
+ 0000:1A0C       __cltoasub
  0000:18B8       __commit
- 05FB:032C       __commode
- 05FB:045C       __cpower
- 05FB:0131       __cpumode
- 0000:2A44       __cropzeros
+ 0637:032C       __commode
+ 0637:045C       __cpower
+ 0637:0131       __cpumode
+ 0000:2A74       __cropzeros
  0000:02EC       __ctermsub
- 0000:2F2C       __ctrandisp1
- 0000:2F19       __ctrandisp2
- 05FB:0346       __ctype
- 05FB:0346       __ctype_
+ 0000:2F5C       __ctrandisp1
+ 0000:2F49       __ctrandisp2
+ 0637:0346       __ctype
+ 0637:0346       __ctype_
  0000:13FD       __cXENIXtoDOSmode
- 0000:19EC       __cxtoa
+ 0000:1A18       __cxtoa
  0000:0277       __c_exit
  0000:018A       __dataseg
+ 0000:1BA6       __disable
  0000:17E9       __DOSCREATECSALIAS
  0000:17B4       __DOSDEVCONFIG
- 05FB:0132       __doserrno
+ 0637:0132       __doserrno
  0000:17FF       __DOSFREESEG
  0000:17CB       __DOSGETMACHINEMODE
  0000:0614       __dosret0
@@ -164,147 +183,148 @@ Stack Allocation = 5120 bytes
  0000:061C       __dosreturn
  0000:17E0       __DOSSETVEC
  0000:1808       __DOSWRITE
- 0000:1B6C       __dos_commit
- 05FB:0824       __edata
- 0375:0000       __EmDataSeg
- 05FB:0870       __end
+ 0000:1B98       __dos_commit
+ 0637:0824       __edata
+ 03B1:0000       __EmDataSeg
+ 0000:1BA8       __enable
+ 0637:08B0       __end
  0000:079A       __endstdio
- 05FB:014E       __environ
+ 0637:014E       __environ
  0000:0265       __exit
- 05FB:015D       __exitflag
- 05FB:0500       __expjmptab
- 05FB:011A       __fac
+ 0637:015D       __exitflag
+ 0637:0500       __expjmptab
+ 0637:011A       __fac
  0000:066A       __farstub
- 0000:2ADE       __fassign
+ 0000:2B0E       __fassign
  0000:1822       __fcloseall
- 05FB:0106       __fDosExt
- 0000:1C86       __fFEXP
- 0000:1DAE       __ffexpm1
- 0000:1D33       __fFLN
+ 0637:0106       __fDosExt
+ 0000:1CB6       __fFEXP
+ 0000:1DDE       __ffexpm1
+ 0000:1D63       __fFLN
  0000:0328       __FF_MSGBANNER
  0000:07AC       __filbuf
  0000:15D5       __findlast
  0000:0840       __flsbuf
- 0000:3088       __fltin
- 0000:30DE       __fltout
+ 0000:30B8       __fltin
+ 0000:310E       __fltout
  0000:9876  Abs  __fltused
  0000:0BB4       __flush
  0000:0C2A       __flushall
- 05FB:032A       __fmode
- 0000:29E0       __forcdecpt
- 0375:0873       __fpemulator
- 0375:0010       __fpemulatorbegin
- 0375:2668       __fpemulatorend
- 0375:02DE       __FPEXCEPTION87
- 05FB:060E       __fpinit
- 0375:267A       __FPINSTALL87
- 0375:003A       __fpmath
- 0000:3124       __fpsignal
- 05E4:0169       __fptaskdata
- 0375:26A9       __FPTERMINATE87
+ 0637:032A       __fmode
+ 0000:2A10       __forcdecpt
+ 03B1:0873       __fpemulator
+ 03B1:0010       __fpemulatorbegin
+ 03B1:2668       __fpemulatorend
+ 03B1:02DE       __FPEXCEPTION87
+ 0637:060E       __fpinit
+ 03B1:267A       __FPINSTALL87
+ 03B1:003A       __fpmath
+ 0000:3154       __fpsignal
+ 0620:0169       __fptaskdata
+ 03B1:26A9       __FPTERMINATE87
  0000:173A       __fptostr
  0000:0348       __fptrap
  0000:0920       __freebuf
  0000:0722       __fsopen
  0000:0B27       __ftbuf
- 0000:3054       __ftol
+ 0000:3084       __ftol
  0000:094A       __getbuf
  0000:117E       __getstream
  0000:14F8       __growseg
- 05FB:05F2       __HUGE
+ 0637:05F2       __HUGE
  0000:1584       __incseg
- 05FB:0448       __indefinite
- 05FB:046E       __infinity
- 05FB:0158       __intno
- 05FB:0180       __iob
- 05FB:0220       __iob2
- 05FB:032A       __iomode
+ 0637:0448       __indefinite
+ 0637:046E       __infinity
+ 0637:0158       __intno
+ 0637:0180       __iob
+ 0637:0220       __iob2
+ 0637:032A       __iomode
  0000:171E       __itoa
- 05FB:02C0       __lastiob
- 0000:24D1       __LD12MULT
- 0000:23FC       __LD12MULTTENPOWER
- 05FB:04E8       __lnjmptab
- 05FB:0478       __logemax
- 05FB:04D0       __logjmptab
+ 0637:02C0       __lastiob
+ 0000:2501       __LD12MULT
+ 0000:242C       __LD12MULTTENPOWER
+ 0637:04E8       __lnjmptab
+ 0637:0478       __logemax
+ 0637:04D0       __logjmptab
  0000:11D0       __lseek
- 05FB:032E       __lseekchk
- 0000:2656       __MANTOLD12
+ 0637:032E       __lseekchk
+ 0000:2686       __MANTOLD12
  0000:0636       __maperror
- 0000:317A       __matherr
- 05FB:05FA       __matherr_flag
- 05FB:085C       __mbac
+ 0000:31AA       __matherr
+ 0637:05FA       __matherr_flag
+ 0637:0896       __mbac
  0000:05F0       __myalloc
- 05FB:0134       __nfile
- 0000:32DA       __nfree
- 05FB:00EE       __nheap_desc
- 0000:32FB       __nmalloc
+ 0637:0134       __nfile
+ 0000:330A       __nfree
+ 0637:00EE       __nheap_desc
+ 0000:332B       __nmalloc
  0000:0590       __NMSG_TEXT
  0000:05BB       __NMSG_WRITE
  0000:0366       __nullcheck
  0000:126C       __open
  0000:098C       __openfile
- 05FB:0132       __oserr
- 05FB:0136       __osfile
- 05FB:012D       __osmajor
- 05FB:012C       __osminor
- 05FB:0130       __osmode
- 05FB:012C       __osver
- 05FB:012E       __osversion
- 0000:33DC       __outp
+ 0637:0132       __oserr
+ 0637:0136       __osfile
+ 0637:012D       __osmajor
+ 0637:012C       __osminor
+ 0637:0130       __osmode
+ 0637:012C       __osver
+ 0637:012E       __osversion
+ 0000:340C       __outp
  0000:0CA8       __output
- 05FB:0157       __ovlflag
- 05FB:0159       __ovlvec
- 05FB:0150       __pgmptr
- 05FB:0452       __piby2
- 05FB:05FC       __pnhNearHeap
- 0000:2AB0       __positive
- 05FB:012A       __psp
- 05FB:0128       __pspadr
+ 0637:0157       __ovlflag
+ 0637:0159       __ovlvec
+ 0637:0150       __pgmptr
+ 0637:0452       __piby2
+ 0637:05FC       __pnhNearHeap
+ 0000:2AE0       __positive
+ 0637:012A       __psp
+ 0637:0128       __pspadr
  0000:140E       __read
- 0000:1C42       __rtbignan
- 0000:1C71       __rtchsifneg
- 0000:1C68       __rtifprojnpop
- 0000:1C49       __rtifprojpop
- 0000:1C53       __rtindfnpop
- 0000:1C50       __rtindfpop
- 0000:1D93       __rtinfnpop
- 0000:1D26       __rtinfnpopse
- 0000:1D90       __rtinfpop
- 0000:1D23       __rtinfpopse
- 0000:1C25       __rtnospop
- 0000:1C29       __rtnospopde
- 0000:1C3B       __rtonenpop
- 0000:1C38       __rtonepop
- 0000:1C28       __rttosnpop
- 0000:1C61       __rttosnpopde
- 0000:1C22       __rttospop
- 0000:1C1F       __rttospopde
- 0000:1C31       __rtzeronpop
- 0000:1C2E       __rtzeropop
- 0000:3336       __searchseg
+ 0000:1C72       __rtbignan
+ 0000:1CA1       __rtchsifneg
+ 0000:1C98       __rtifprojnpop
+ 0000:1C79       __rtifprojpop
+ 0000:1C83       __rtindfnpop
+ 0000:1C80       __rtindfpop
+ 0000:1DC3       __rtinfnpop
+ 0000:1D56       __rtinfnpopse
+ 0000:1DC0       __rtinfpop
+ 0000:1D53       __rtinfpopse
+ 0000:1C55       __rtnospop
+ 0000:1C59       __rtnospopde
+ 0000:1C6B       __rtonenpop
+ 0000:1C68       __rtonepop
+ 0000:1C58       __rttosnpop
+ 0000:1C91       __rttosnpopde
+ 0000:1C52       __rttospop
+ 0000:1C4F       __rttospopde
+ 0000:1C61       __rtzeronpop
+ 0000:1C5E       __rtzeropop
+ 0000:3366       __searchseg
  0000:0388       __setargv
  0000:0512       __setenvp
- 05FB:0342       __sigintoff
- 05FB:0340       __sigintseg
+ 0637:0342       __sigintoff
+ 0637:0340       __sigintseg
  0000:1252       __sopen
- 0000:32C8       __stackavail
+ 0000:32F8       __stackavail
  0000:0AB6       __stbuf
- 0000:2710       __STRINGTOD
- 0000:2778       __STRINGTOLD
- 0000:1B7A       __trandisp1
- 0000:1BBC       __trandisp2
- 05FB:0126       __umaskval
- 0000:33CE       __unlink
- 0000:318A       __write
- 0000:33B2       __wrt2err
- 05FB:04A0       __ytoxjmptab
- 05FB:0606       ___aDBexit
- 05FB:0604       ___aDBrterr
- 05FB:0602       ___aDBswpchk
- 05FB:0600       ___aDBswpflg
- 05FB:014A       ___argc
- 05FB:014C       ___argv
- 05FB:05FE       ___qczrinit
+ 0000:2740       __STRINGTOD
+ 0000:27A8       __STRINGTOLD
+ 0000:1BAA       __trandisp1
+ 0000:1BEC       __trandisp2
+ 0637:0126       __umaskval
+ 0000:33FE       __unlink
+ 0000:31BA       __write
+ 0000:33E2       __wrt2err
+ 0637:04A0       __ytoxjmptab
+ 0637:0606       ___aDBexit
+ 0637:0604       ___aDBrterr
+ 0637:0602       ___aDBswpchk
+ 0637:0600       ___aDBswpflg
+ 0637:014A       ___argc
+ 0637:014C       ___argv
+ 0637:05FE       ___qczrinit
 
   Address         Publics by Value
 
@@ -385,173 +405,193 @@ Stack Allocation = 5120 bytes
  0000:18B8       __commit
  0000:1910       _strcspn
  0000:196A       _memmove
- 0000:19B2       _memset
- 0000:19E0       __cltoasub
- 0000:19EC       __cxtoa
- 0000:1A40       _strtoul
- 0000:1A4C       _strtol
- 0000:1B6C       __dos_commit
- 0000:1B7A       __trandisp1
- 0000:1BBC       __trandisp2
- 0000:1C1F       __rttospopde
- 0000:1C22       __rttospop
- 0000:1C25       __rtnospop
- 0000:1C28       __rttosnpop
- 0000:1C29       __rtnospopde
- 0000:1C2E       __rtzeropop
- 0000:1C31       __rtzeronpop
- 0000:1C38       __rtonepop
- 0000:1C3B       __rtonenpop
- 0000:1C42       __rtbignan
- 0000:1C49       __rtifprojpop
- 0000:1C50       __rtindfpop
- 0000:1C53       __rtindfnpop
- 0000:1C61       __rttosnpopde
- 0000:1C68       __rtifprojnpop
- 0000:1C71       __rtchsifneg
- 0000:1C7A       _fFYTOX
- 0000:1C86       __fFEXP
- 0000:1D23       __rtinfpopse
- 0000:1D26       __rtinfnpopse
- 0000:1D33       __fFLN
- 0000:1D90       __rtinfpop
- 0000:1D93       __rtinfnpop
- 0000:1DAE       __ffexpm1
- 0000:1E46       $i8_output
- 0000:2107       $i8_tpwr10
- 0000:23FC       __LD12MULTTENPOWER
- 0000:24D1       __LD12MULT
- 0000:2656       __MANTOLD12
- 0000:2710       __STRINGTOD
- 0000:2778       __STRINGTOLD
- 0000:29E0       __forcdecpt
- 0000:2A44       __cropzeros
- 0000:2AB0       __positive
- 0000:2ADE       __fassign
- 0000:2B20       __cftoe
- 0000:2C6E       __cftof
- 0000:2D88       __cftog
- 0000:2E32       __cfltcvt
- 0000:2EA2       _pow
- 0000:2EA8       _log
- 0000:2EAE       _log10
- 0000:2EB3       _exp
- 0000:2EB8       __aNCIpow
- 0000:2EBE       __aNCIlog
- 0000:2EC4       __aNCIlog10
- 0000:2EC9       __aNCIexp
- 0000:2ECE       __cintrindisp2
- 0000:2EF7       __cintrindisp1
- 0000:2F19       __ctrandisp2
- 0000:2F2C       __ctrandisp1
- 0000:3054       __aNftol
- 0000:3054       __ftol
- 0000:3088       __fltin
- 0000:30DE       __fltout
- 0000:3124       __fpsignal
- 0000:317A       __matherr
- 0000:318A       __write
- 0000:32C8       __stackavail
- 0000:32DA       __nfree
- 0000:32FB       __nmalloc
- 0000:3336       __searchseg
- 0000:33B2       __wrt2err
- 0000:33CE       _remove
- 0000:33CE       __unlink
- 0000:33DC       __outp
- 0000:33EA       _main
- 0000:3446       _strtoulong
- 0000:3564       _getconfigvalue
- 0000:35E4       _getconfigkey
- 0000:367E       _readcfg
- 0000:3716       _resetnic
- 0375:0000       __EmDataSeg
- 0375:0010       __fpemulatorbegin
- 0375:003A       __fpmath
- 0375:02DE       __FPEXCEPTION87
- 0375:0873       __fpemulator
- 0375:2668       __fpemulatorend
- 0375:267A       __FPINSTALL87
- 0375:26A9       __FPTERMINATE87
- 05E4:0169       __fptaskdata
- 05FB:0042       __anullsize
- 05FB:00E8       __atopsp
- 05FB:00EA       __aexit_rtn
- 05FB:00EC       __asizds
- 05FB:00EE       __nheap_desc
- 05FB:0102       __aseghi
- 05FB:0104       __aseglo
- 05FB:0106       __fDosExt
- 05FB:0108       __acfinfo
- 05FB:0116       __aintdiv
- 05FB:011A       __fac
- 05FB:0124       _errno
- 05FB:0126       __umaskval
- 05FB:0128       __pspadr
- 05FB:012A       __psp
- 05FB:012C       __osver
- 05FB:012C       __osminor
- 05FB:012D       __osmajor
- 05FB:012E       __osversion
- 05FB:0130       __osmode
- 05FB:0131       __cpumode
- 05FB:0132       __oserr
- 05FB:0132       __doserrno
- 05FB:0134       __nfile
- 05FB:0136       __osfile
- 05FB:014A       ___argc
- 05FB:014C       ___argv
- 05FB:014E       __environ
- 05FB:0150       __pgmptr
- 05FB:0155       __child
- 05FB:0157       __ovlflag
- 05FB:0158       __intno
- 05FB:0159       __ovlvec
- 05FB:015D       __exitflag
- 05FB:015E       __adbgmsg
- 05FB:0160       __aaltstkovr
- 05FB:0162       _STKHQQ
- 05FB:017E       __cflush
- 05FB:0180       __iob
- 05FB:0220       __iob2
- 05FB:02C0       __lastiob
- 05FB:032A       __fmode
- 05FB:032A       __iomode
- 05FB:032C       __commode
- 05FB:032E       __lseekchk
- 05FB:0330       __amblksiz
- 05FB:0332       __cfltcvt_tab
- 05FB:0340       __sigintseg
- 05FB:0342       __sigintoff
- 05FB:0344       __asizeC
- 05FB:0345       __asizeD
- 05FB:0346       __ctype_
- 05FB:0346       __ctype
- 05FB:0448       __indefinite
- 05FB:0452       __piby2
- 05FB:045C       __cpower
- 05FB:046E       __infinity
- 05FB:0478       __logemax
- 05FB:04A0       __ytoxjmptab
- 05FB:04D0       __logjmptab
- 05FB:04E8       __lnjmptab
- 05FB:0500       __expjmptab
- 05FB:05F2       __HUGE
- 05FB:05FA       __matherr_flag
- 05FB:05FC       __pnhNearHeap
- 05FB:05FE       ___qczrinit
- 05FB:0600       ___aDBswpflg
- 05FB:0602       ___aDBswpchk
- 05FB:0604       ___aDBrterr
- 05FB:0606       ___aDBexit
- 05FB:060E       __fpinit
- 05FB:0824       _edata
- 05FB:0824       __edata
- 05FB:0840       _configs
- 05FB:0858       _inthandler
- 05FB:085C       __mbac
- 05FB:0870       __end
- 05FB:0870       _end
+ 0000:19B2       _memcpy
+ 0000:19DE       _memset
+ 0000:1A0C       __cltoasub
+ 0000:1A18       __cxtoa
+ 0000:1A6C       _strtoul
+ 0000:1A78       _strtol
+ 0000:1B98       __dos_commit
+ 0000:1BA6       __disable
+ 0000:1BA8       __enable
+ 0000:1BAA       __trandisp1
+ 0000:1BEC       __trandisp2
+ 0000:1C4F       __rttospopde
+ 0000:1C52       __rttospop
+ 0000:1C55       __rtnospop
+ 0000:1C58       __rttosnpop
+ 0000:1C59       __rtnospopde
+ 0000:1C5E       __rtzeropop
+ 0000:1C61       __rtzeronpop
+ 0000:1C68       __rtonepop
+ 0000:1C6B       __rtonenpop
+ 0000:1C72       __rtbignan
+ 0000:1C79       __rtifprojpop
+ 0000:1C80       __rtindfpop
+ 0000:1C83       __rtindfnpop
+ 0000:1C91       __rttosnpopde
+ 0000:1C98       __rtifprojnpop
+ 0000:1CA1       __rtchsifneg
+ 0000:1CAA       _fFYTOX
+ 0000:1CB6       __fFEXP
+ 0000:1D53       __rtinfpopse
+ 0000:1D56       __rtinfnpopse
+ 0000:1D63       __fFLN
+ 0000:1DC0       __rtinfpop
+ 0000:1DC3       __rtinfnpop
+ 0000:1DDE       __ffexpm1
+ 0000:1E76       $i8_output
+ 0000:2137       $i8_tpwr10
+ 0000:242C       __LD12MULTTENPOWER
+ 0000:2501       __LD12MULT
+ 0000:2686       __MANTOLD12
+ 0000:2740       __STRINGTOD
+ 0000:27A8       __STRINGTOLD
+ 0000:2A10       __forcdecpt
+ 0000:2A74       __cropzeros
+ 0000:2AE0       __positive
+ 0000:2B0E       __fassign
+ 0000:2B50       __cftoe
+ 0000:2C9E       __cftof
+ 0000:2DB8       __cftog
+ 0000:2E62       __cfltcvt
+ 0000:2ED2       _pow
+ 0000:2ED8       _log
+ 0000:2EDE       _log10
+ 0000:2EE3       _exp
+ 0000:2EE8       __aNCIpow
+ 0000:2EEE       __aNCIlog
+ 0000:2EF4       __aNCIlog10
+ 0000:2EF9       __aNCIexp
+ 0000:2EFE       __cintrindisp2
+ 0000:2F27       __cintrindisp1
+ 0000:2F49       __ctrandisp2
+ 0000:2F5C       __ctrandisp1
+ 0000:3084       __ftol
+ 0000:3084       __aNftol
+ 0000:30B8       __fltin
+ 0000:310E       __fltout
+ 0000:3154       __fpsignal
+ 0000:31AA       __matherr
+ 0000:31BA       __write
+ 0000:32F8       __stackavail
+ 0000:330A       __nfree
+ 0000:332B       __nmalloc
+ 0000:3366       __searchseg
+ 0000:33E2       __wrt2err
+ 0000:33FE       __unlink
+ 0000:33FE       _remove
+ 0000:340C       __outp
+ 0000:341A       _main
+ 0000:3480       _strtoulong
+ 0000:359E       _getconfigvalue
+ 0000:361E       _getconfigkey
+ 0000:36B8       _readcfg
+ 0000:3750       _resetnic
+ 0000:37B8       _initsoftware
+ 0000:38EC       _BuildPacket
+ 0000:396A       _NextDesc
+ 0000:3984       _IssueCMD
+ 0000:39E6       _CopyFromPacketToBuffer
+ 0000:3A38       _SendPacket
+ 0000:3ADA       _send
+ 03B1:0000       __EmDataSeg
+ 03B1:0010       __fpemulatorbegin
+ 03B1:003A       __fpmath
+ 03B1:02DE       __FPEXCEPTION87
+ 03B1:0873       __fpemulator
+ 03B1:2668       __fpemulatorend
+ 03B1:267A       __FPINSTALL87
+ 03B1:26A9       __FPTERMINATE87
+ 0620:0169       __fptaskdata
+ 0637:0042       __anullsize
+ 0637:00E8       __atopsp
+ 0637:00EA       __aexit_rtn
+ 0637:00EC       __asizds
+ 0637:00EE       __nheap_desc
+ 0637:0102       __aseghi
+ 0637:0104       __aseglo
+ 0637:0106       __fDosExt
+ 0637:0108       __acfinfo
+ 0637:0116       __aintdiv
+ 0637:011A       __fac
+ 0637:0124       _errno
+ 0637:0126       __umaskval
+ 0637:0128       __pspadr
+ 0637:012A       __psp
+ 0637:012C       __osver
+ 0637:012C       __osminor
+ 0637:012D       __osmajor
+ 0637:012E       __osversion
+ 0637:0130       __osmode
+ 0637:0131       __cpumode
+ 0637:0132       __oserr
+ 0637:0132       __doserrno
+ 0637:0134       __nfile
+ 0637:0136       __osfile
+ 0637:014A       ___argc
+ 0637:014C       ___argv
+ 0637:014E       __environ
+ 0637:0150       __pgmptr
+ 0637:0155       __child
+ 0637:0157       __ovlflag
+ 0637:0158       __intno
+ 0637:0159       __ovlvec
+ 0637:015D       __exitflag
+ 0637:015E       __adbgmsg
+ 0637:0160       __aaltstkovr
+ 0637:0162       _STKHQQ
+ 0637:017E       __cflush
+ 0637:0180       __iob
+ 0637:0220       __iob2
+ 0637:02C0       __lastiob
+ 0637:032A       __iomode
+ 0637:032A       __fmode
+ 0637:032C       __commode
+ 0637:032E       __lseekchk
+ 0637:0330       __amblksiz
+ 0637:0332       __cfltcvt_tab
+ 0637:0340       __sigintseg
+ 0637:0342       __sigintoff
+ 0637:0344       __asizeC
+ 0637:0345       __asizeD
+ 0637:0346       __ctype
+ 0637:0346       __ctype_
+ 0637:0448       __indefinite
+ 0637:0452       __piby2
+ 0637:045C       __cpower
+ 0637:046E       __infinity
+ 0637:0478       __logemax
+ 0637:04A0       __ytoxjmptab
+ 0637:04D0       __logjmptab
+ 0637:04E8       __lnjmptab
+ 0637:0500       __expjmptab
+ 0637:05F2       __HUGE
+ 0637:05FA       __matherr_flag
+ 0637:05FC       __pnhNearHeap
+ 0637:05FE       ___qczrinit
+ 0637:0600       ___aDBswpflg
+ 0637:0602       ___aDBswpchk
+ 0637:0604       ___aDBrterr
+ 0637:0606       ___aDBexit
+ 0637:060E       __fpinit
+ 0637:0824       _edata
+ 0637:0824       __edata
+ 0637:0840       _Buffer
+ 0637:0842       _configs
+ 0637:085A       _TxHwFreeDesc
+ 0637:085C       _TxDesc
+ 0637:0884       _inthandler
+ 0637:0888       _RxBufferOriginal
+ 0637:088A       _TxHwSetupPtr
+ 0637:088C       _RxBuffer
+ 0637:088E       _RxBufferPhysicalAddress
+ 0637:0892       _PhysicalAddrBuffer
+ 0637:0896       __mbac
+ 0637:089E       _RxReadPtrOffset
+ 0637:08A0       _TxHwFinishPtr
+ 0637:08B0       __end
+ 0637:08B0       _end
  0000:9876  Abs  __acrtused
  0000:9876  Abs  __fltused
  0000:9876  Abs  __acrtmsg

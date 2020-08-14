@@ -192,6 +192,8 @@
 //Prototypes
 
 extern void inpdw(int PORT);
-extern void outpdw(int PORT, unsigned WRCMD);
+extern void outpdw(int PORT, unsigned long WRCMD);
 
+void send();
+void initsoftware();
 void resetnic(unsigned IOBase);

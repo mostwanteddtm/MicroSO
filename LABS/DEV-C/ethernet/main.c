@@ -14,7 +14,9 @@ int main(int argc, char *argv[])
 
     printf("\n");
   
+    initsoftware();
     resetnic(configs[0].value);
+    send();
 
     //printf("0x%04X\n", configs[0].value);
 
