@@ -29,8 +29,9 @@ TCR_IFG1    equ 2000000h
 
 R39_INTERRUPT_MASK EQU 7Fh                               
 
-OUTP PROTO C PORT:WORD, VALUE:BYTE  
-OUTPDW PROTO C PORT:WORD, VALUE:DWORD
+PRINTDW		PROTO C VALUE:DWORD
+OUTP 		PROTO C PORT:WORD, VALUE:BYTE  
+OUTPDW 		PROTO C PORT:WORD, VALUE:DWORD
 
 STACK SEGMENT STACK 'STACK'
     DB      100h  DUP(0) 
@@ -38,9 +39,12 @@ STACK SEGMENT STACK 'STACK'
 STACK ENDS
 
 DATA SEGMENT PUBLIC 'DATA' USE16
-     
+    
+	BUFFER		DD 0
+    TAB     	DB  '0123456789ABCDEF'
+	
     physaddr    DD  0
-    buffer      DB  40h DUP(0FFh)
+    FRAME      	DB  40h DUP(0FFh)
     
 DATA ENDS
 
@@ -52,7 +56,25 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         MOV     AX, DATA
         MOV     DS, AX
         MOV     ES, AX
-         
+		
+		XOR     EAX, EAX
+        XOR     ESI, ESI
+        MOV     AX, CS
+        SHL     EAX, 4
+        MOV     SI, OFFSET FRAME
+        ADD     EAX, ESI
+        MOV     DWORD PTR physaddr, EAX
+		
+		XOR		EAX, EAX
+		MOV		AX, CS
+		INVOKE	PRINTDW, EAX
+		CALL	CRLF
+		XOR		EAX, EAX
+		MOV		AX, OFFSET FRAME
+		INVOKE	PRINTDW, EAX
+		CALL	CRLF
+		INVOKE	PRINTDW, physaddr
+		      
         CALL    RESET 
         CALL    ISSUECMD
         
@@ -62,14 +84,6 @@ CODE SEGMENT PUBLIC 'CODE' USE16
     MAIN ENDP  
     
     RESET PROC 
-         
-        XOR     EAX, EAX
-        XOR     ESI, ESI
-        MOV     AX, CS
-        SHL     EAX, 4
-        MOV     SI, OFFSET buffer
-        ADD     EAX, ESI
-        MOV     DWORD PTR physaddr, EAX
 
         INVOKE  OUTP, IOBase + CR, CR_RST
         INVOKE  OUTP, IOBase + CR, CR_RE + CR_TE 
@@ -110,7 +124,65 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         RET
         
     OUTPDW ENDP
-    
+	
+	PRINTDW PROC C VALUE:DWORD 
+
+        MOV     ESI, DWORD PTR VALUE
+
+        MOV     DI, OFFSET BUFFER
+        MOV     EAX, ESI
+        STOSD
+
+        CALL    PRINTHEADER
+
+        MOV     BX, OFFSET TAB
+        MOV     SI, OFFSET BUFFER
+        MOV     ECX, 4
+        ADD     ESI, 3
+
+    @@: MOV     AH, 0Eh 
+        LODSB
+        MOV     DL, AL
+        SHR     AL, 4
+        XLATB
+        INT     10h
+        MOV     AL, DL
+        AND     AL, 0Fh
+        XLATB
+        INT     10h
+        SUB     SI, 2
+        LOOP    @b
+
+        RET
+                    
+    PRINTDW ENDP
+
+    PRINTHEADER PROC
+
+        MOV     AH, 0Eh
+        MOV     AL, '0'
+        INT     10h
+
+        MOV     AL, 'x'
+        INT     10h
+
+        RET
+
+    PRINTHEADER ENDP
+
+    CRLF PROC
+
+        MOV     AH, 0Eh
+        MOV     AL, 0Ah
+        INT     10h
+
+        MOV     AL, 0Dh
+        INT     10h
+
+        RET
+
+    CRLF ENDP
+ 
 CODE ENDS
 
 END MAIN
