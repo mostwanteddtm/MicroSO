@@ -1,0 +1,24 @@
+Stack Allocation = 5120 bytes
+
+ Start  Stop   Length Name                   Class
+ 00000H 013FFH 01400H STACK                  STACK
+ 01400H 01443H 00044H DATA                   DATA
+ 01450H 014FFH 000B0H CODE                   CODE
+
+  Address         Publics by Name
+
+ 0145:0076       ISSUECMD
+ 0145:0000       MAIN
+ 0145:0012       RESET
+ 0145:0096       _OUTP
+ 0145:00A2       _OUTPDW
+
+  Address         Publics by Value
+
+ 0145:0000       MAIN
+ 0145:0012       RESET
+ 0145:0076       ISSUECMD
+ 0145:0096       _OUTP
+ 0145:00A2       _OUTPDW
+
+Program entry point at 0145:0000
