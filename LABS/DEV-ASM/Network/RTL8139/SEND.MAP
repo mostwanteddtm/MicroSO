@@ -1,30 +1,37 @@
 Stack Allocation = 5120 bytes
 
  Start  Stop   Length Name                   Class
- 00000H 013FFH 01400H STACK                  STACK
- 01400H 01457H 00058H DATA                   DATA
- 01460H 0158CH 0012DH CODE                   CODE
+ 00000H 00000H 00000H _TEXT                  CODE
+ 00000H 0016EH 0016FH CODE                   CODE
+ 00170H 00170H 00000H _DATA                  DATA
+ 00170H 001C8H 00059H DATA                   DATA
+ 001D0H 015CFH 01400H STACK                  STACK
+
+ Origin   Group
+ 0017:0   DGROUP
 
   Address         Publics by Name
 
- 0146:0122       CRLF
- 0146:00A2       ISSUECMD
- 0146:0000       MAIN
- 0146:0117       PRINTHEADER
- 0146:0054       RESET
- 0146:00C2       _OUTP
- 0146:00CE       _OUTPDW
- 0146:00DC       _PRINTDW
+ 0000:0131       CRLF
+ 0000:00B1       ISSUECMD
+ 0000:0000       MAIN
+ 0000:0126       PRINTHEADER
+ 0000:0063       RESET
+ 0000:00D1       _OUTP
+ 0000:00DD       _OUTPDW
+ 0000:00EB       _PRINTDW
+ 0000:013C       _PRINTMEM
 
   Address         Publics by Value
 
- 0146:0000       MAIN
- 0146:0054       RESET
- 0146:00A2       ISSUECMD
- 0146:00C2       _OUTP
- 0146:00CE       _OUTPDW
- 0146:00DC       _PRINTDW
- 0146:0117       PRINTHEADER
- 0146:0122       CRLF
+ 0000:0000       MAIN
+ 0000:0063       RESET
+ 0000:00B1       ISSUECMD
+ 0000:00D1       _OUTP
+ 0000:00DD       _OUTPDW
+ 0000:00EB       _PRINTDW
+ 0000:0126       PRINTHEADER
+ 0000:0131       CRLF
+ 0000:013C       _PRINTMEM
 
-Program entry point at 0146:0000
+Program entry point at 0000:0000

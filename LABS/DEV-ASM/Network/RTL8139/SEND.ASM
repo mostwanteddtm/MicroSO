@@ -1,4 +1,5 @@
 .386 
+.MODEL SMALL
 
 IOBase      EQU 0C000h
 
@@ -30,6 +31,7 @@ TCR_IFG1    equ 2000000h
 R39_INTERRUPT_MASK EQU 7Fh                               
 
 PRINTDW		PROTO C VALUE:DWORD
+PRINTMEM    PROTO C LEN:DWORD, POINTER:WORD
 OUTP 		PROTO C PORT:WORD, VALUE:BYTE  
 OUTPDW 		PROTO C PORT:WORD, VALUE:DWORD
 
@@ -45,6 +47,8 @@ DATA SEGMENT PUBLIC 'DATA' USE16
 	
     physaddr    DD  0
     FRAME      	DB  40h DUP(0FFh)
+
+    BASE        DB 10h
     
 DATA ENDS
 
@@ -74,6 +78,7 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 		INVOKE	PRINTDW, EAX
 		CALL	CRLF
 		INVOKE	PRINTDW, physaddr
+        INVOKE  PRINTMEM, 40h, OFFSET FRAME
 		      
         CALL    RESET 
         CALL    ISSUECMD
@@ -82,6 +87,8 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         INT     21h    
     
     MAIN ENDP  
+
+    ;==================================================================================
     
     RESET PROC 
 
@@ -95,6 +102,8 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         RET
         
     RESET ENDP  
+
+    ;==================================================================================
     
     ISSUECMD PROC
           
@@ -106,6 +115,8 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         RET
         
     ISSUECMD ENDP
+
+    ;==================================================================================
     
     OUTP PROC C PORT:WORD, VALUE:BYTE
        
@@ -115,6 +126,8 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         RET
         
     OUTP ENDP
+
+    ;==================================================================================
     
     OUTPDW PROC C PORT:WORD, VALUE:DWORD
             
@@ -124,6 +137,8 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         RET
         
     OUTPDW ENDP
+
+    ;==================================================================================
 	
 	PRINTDW PROC C VALUE:DWORD 
 
@@ -157,6 +172,8 @@ CODE SEGMENT PUBLIC 'CODE' USE16
                     
     PRINTDW ENDP
 
+    ;==================================================================================
+
     PRINTHEADER PROC
 
         MOV     AH, 0Eh
@@ -170,6 +187,8 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 
     PRINTHEADER ENDP
 
+    ;==================================================================================
+
     CRLF PROC
 
         MOV     AH, 0Eh
@@ -182,6 +201,42 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         RET
 
     CRLF ENDP
+
+    ;==================================================================================
+
+    PRINTMEM PROC C LEN:DWORD, POINTER:WORD
+
+        MOV     ECX, DWORD PTR LEN
+        MOV     SI, WORD PTR POINTER
+        MOV     BX, OFFSET TAB
+
+    @@: 
+        MOV     AX, CX
+        DIV     BASE
+
+        CMP     AH, 0
+        JNE     CONT
+        CALL    CRLF
+
+    CONT:
+        LODSB
+        
+        MOV     DL, AL
+        AND     AL, 0Fh
+        XLATB
+        MOV     AH, 0Eh
+        INT     10h
+        MOV     AL, DL
+        SHR     AL, 4
+        XLATB
+        MOV     AH, 0Eh
+        INT     10h
+
+        LOOP    @b
+
+        RET
+
+    PRINTMEM ENDP
  
 CODE ENDS
 
