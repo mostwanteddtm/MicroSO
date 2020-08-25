@@ -34,6 +34,7 @@ unsigned int	RxReadPtrOffset;
 PPACKET		pLeadingReadPacket;	//should be a link list
 unsigned long	PacketReceivedGood = 0;
 unsigned long	ByteReceived = 0;
+unsigned long	device = 0;
 
 #define	RX_BUFFER_SIZE		16*1024
 #define RX_MAX_PACKET_LENGTH	1600
@@ -66,6 +67,7 @@ FindIOIRQ(ULONG *IOBase,ULONG *IRQ)
 			PciData=inpdw(0xcfc);
 			if(PciData==0x813910ec)
 			{
+			   device = j | 0x04; 
 			   outpdw(0xcf8,j+0x10);
 			   *IOBase=inpdw(0xcfc);
 			   *IOBase &= 0xfffffff0;
@@ -386,6 +388,19 @@ RxInterruptHandler(
     return (TRUE);              //Done
 }
 
+void EnableBusMastering()
+{
+	unsigned int cmr = 0; 	
+	
+	outpdw(0xcf8, device);
+	cmr = inport(0xcfc);
+	
+	cmr |= 0x04;
+	
+	outpdw(0xcf8, device);
+	outport(0xcfc, cmr);
+}
+
 /////////////////////////////////////////////////////////////////////////
 //Load / Unload
 /////////////////////////////////////////////////////////////////////////
@@ -395,6 +410,7 @@ LoadDriver()
 	int	INTR;
 	FindIOIRQ(&IOBase, &Irq);
 	INTR = ComputeInterrupt(Irq);
+	EnableBusMastering();
 	OldFunction = getvect(INTR);
 //hook interrupt vector
 	disable();
