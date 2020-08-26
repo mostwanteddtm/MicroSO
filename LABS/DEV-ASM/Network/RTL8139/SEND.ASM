@@ -1,39 +1,55 @@
 .386 
 .MODEL SMALL
 
-IOBase      EQU 0C000h
+EXTERN DEBUGRMODE:PROC
+;======================================================================================|
+;	PUBLIC METHOD FOR DEBUG ON REAL MODE                                               |
+;                                                                                      |
+;	DEBUGRMODE:                                                                        |
+;	IN:                                                                                |
+;		CX = SIZE OF BUFFER TO BE COPIED                                               |
+;		DS:SI = ORIGIN OF THE CONTENT TO BE COPIED TO THE BUFFER                       |
+;		AX, BX, CX, DX, SI, DI, BP, SP, DS, ES, SS = VALUE DEFINED ON MAIN PROGRAM     |
+;                                                                                      |
+;	OUT: BUFFER = COPIED FROM CONTENT LOADED IN MEMORY                                 |
+;		 SHOW REGISTERS VALUES (AX, BX, CX, DX, SI, DI, BP, SP, CS, DS, ES, SS)        |
+;======================================================================================| 
 
-TSD0        EQU 10h
-TSAD0       EQU 20h
+EXTERN          KEYPRESSED:BYTE
+EXTERN          BUFFER:WORD
 
-CR_TE       EQU 04h
-CR_RE       EQU 08h
-CR_RST      EQU 10h  
-CR          EQU 37h
+CONFIG_ADDRESS  EQU 0CF8h
+CONFIG_DATA     EQU 0CFCh 
 
-RBSTART     equ 30h
-TCR         EQU 40h
-RRCR        EQU 44h 
-IMR         equ 3Ch 
+FIRSTDEVICE		EQU 80000000h
+LASTDEVICE		EQU 80FFF800h
 
-RCR_APM     EQU 02h
-RCR_AM      EQU 04h
-RCR_AB      EQU 08h               
-RCR_MXDMA1  EQU 200h
-RCR_MXDMA2  EQU 400h
-RCR_RBLEN0  EQU 800h
+TSD0            EQU 10h
+TSAD0           EQU 20h
+
+CR_TE           EQU 04h
+CR_RE           EQU 08h
+CR_RST          EQU 10h  
+CR              EQU 37h
+
+RBSTART         EQU 30h
+TCR             EQU 40h
+RRCR            EQU 44h 
+IMR             EQU 3Ch 
+
+RCR_APM         EQU 02h
+RCR_AM          EQU 04h
+RCR_AB          EQU 08h               
+RCR_MXDMA1      EQU 200h
+RCR_MXDMA2      EQU 400h
+RCR_RBLEN0      EQU 800h
  
-TCR_MXDMA1  EQU 200h
-TCR_MXDMA2  EQU 400h
-TCR_IFG0    EQU 1000000h 
-TCR_IFG1    equ 2000000h 
+TCR_MXDMA1      EQU 200h
+TCR_MXDMA2      EQU 400h
+TCR_IFG0        EQU 1000000h 
+TCR_IFG1        EQU 2000000h 
 
 R39_INTERRUPT_MASK EQU 7Fh                               
-
-PRINTDW		PROTO C VALUE:DWORD
-PRINTMEM    PROTO C LEN:DWORD, POINTER:WORD
-OUTP 		PROTO C PORT:WORD, VALUE:BYTE  
-OUTPDW 		PROTO C PORT:WORD, VALUE:DWORD
 
 STACK SEGMENT STACK 'STACK'
     DB      100h  DUP(0) 
@@ -42,62 +58,279 @@ STACK ENDS
 
 DATA SEGMENT PUBLIC 'DATA' USE16
     
-	BUFFER		DD 0
-    TAB     	DB  '0123456789ABCDEF'
-	
-    physaddr    DD  0
-    FRAME      	DB  40h DUP(0FFh)
+    PCICONFIG 		DD 	80000000h
 
-    BASE        DB 10h
+	TOTALDEVICES	DB	20h
+	TOTALBUS		DB 	255
+	
+	BUSNUMBER		DD	0
+
+    CONTENTLOADED	DD	3Fh DUP(?)
+	
+	ETHDEVICE		DD 	813910ECh						; NETWORK CARD REALTEK 8139
+	DEVICEID		DD 	?
+
+    physaddr        DD  0
+
+    BASE            DB 10h
     
+    IOBase          DW 00h
+
+    ALIGN           4
+    FRAME      	    DB  40h DUP(0FFh)
+
 DATA ENDS
+
+;==================================================================================
 
 CODE SEGMENT PUBLIC 'CODE' USE16
     ASSUME CS:CODE, DS:DATA, ES:DATA
     
     MAIN PROC
-    
-        MOV     AX, DATA
-        MOV     DS, AX
-        MOV     ES, AX
+
+        MOV 	AX, DATA	
+        MOV 	DS, AX	
+        MOV 	ES, AX
+
+        CALL    CLS
+	
+	@@: MOV		DH, 17h									; ROW 23d
+		MOV		DL, 0									; COL 0
+		XOR		BX, BX	
+		MOV		AH, 02h									; SET CURSOR POSITION
+		INT		10h	
+
+		MOV     EAX, PCICONFIG							; CHECK PCI ENABLE BIT 80000000h
+        MOV     DX, CONFIG_ADDRESS						; PCI CONFIG REGISTER 0CF8h
+        OUT     DX, EAX									; SELECT PCICONFIG TO GET DATA
+			
+        IN      EAX, DX									; GET CONFIG REGISTER 0CF8h
+        CMP     EAX, PCICONFIG							; PCI IS ENABLE ?
+        JNE     EOF										; IF NO GOTO END
+			
+		CALL	FINDDEVICE								; FIND ALL PCI DEVICES
+		JC		@f	
+
+        CALL    GETIOBASE                               ; GET I/O ADDRESS									
+			
+		MOV		EAX, PCICONFIG							; PCICONFIG = BUS, DEVICE, FUNCTION
+		MOV		DX, CONFIG_ADDRESS						; GET CONFIG REGISTER 0CF8h
+		OUT		DX, EAX									; SELECT FIRST REGISTER IN PCICONFIG
+			
+		MOV		ECX, 3Fh	
+		MOV     SI, OFFSET CONTENTLOADED	
+			
+	NEXTREG:	
+			
+		PUSH	EAX	
+			
+        MOV     DX, CONFIG_DATA							; PCI DATA REGISTER 0CFCh
+        IN      EAX, DX									; GET DATA FROM PCI REGISTER
+	
+		CMP		ECX, 3Fh								; (3Fh X 4h) + 4h = FFh (TOTAL PCI REGISTERS) 
+		JNE		EBXOK	
+		MOV		EBX, EAX	
+			
+	EBXOK:	
+	
+        MOV     [SI], EAX								; MOV PCI DATA TO BUFFER 
+			
+		POP		EAX	
+			
+		ADD		EAX, 4									; FOR EVERY INTERACTION 4 BYTES DATA
+		ADD		SI, 4	
+			
+		MOV		DX, CONFIG_ADDRESS						; PCI CONFIG REGISTER 0CF8h 
+		OUT		DX, EAX									; SELECT PCICONFIG TO GET DATA
 		
-		XOR     EAX, EAX
-        XOR     ESI, ESI
-        MOV     AX, CS
-        SHL     EAX, 4
-        MOV     SI, OFFSET FRAME
-        ADD     EAX, ESI
-        MOV     DWORD PTR physaddr, EAX
+		LOOP	NEXTREG
 		
-		XOR		EAX, EAX
-		MOV		AX, CS
-		INVOKE	PRINTDW, EAX
-		CALL	CRLF
-		XOR		EAX, EAX
-		MOV		AX, OFFSET FRAME
-		INVOKE	PRINTDW, EAX
-		CALL	CRLF
-		INVOKE	PRINTDW, physaddr
-        INVOKE  PRINTMEM, 40h, OFFSET FRAME
-		      
+	@@: XOR     EDX, EDX	
+        MOV		DX, WORD PTR IOBase
+		MOV     SI, OFFSET CONTENTLOADED				; SI = BUFFER TO PRINT DATA		
+		MOV		CX, 0FFh								; TOTAL DATA TO PRINT
+		
+		CALL	DEBUGRMODE								; PRINT DATA
+        CALL    ENABLEBUSMASTERING
         CALL    RESET 
         CALL    ISSUECMD
-        
+
+		XOR		AX, AX									; GET KEY PRESS
+		INT		16h
+		
+		CMP		AH, 01h									; KEY PRESSED ESC
+		JE		EOF
+		CMP		AH, 1Ch									; KEY PRESSED ENTER
+		JE		EOF
+		
+		MOV		KEYPRESSED, AH
+		JMP		@b
+		
+    EOF:  
         MOV     AX, 4C00h
         INT     21h    
     
-    MAIN ENDP  
+    MAIN ENDP
+
+    ;==================================================================================
+
+    GETIOBASE PROC
+
+        MOV		EAX, PCICONFIG							; PCICONFIG = BUS, DEVICE, FUNCTION 
+        ADD     EAX, 10h
+		MOV		DX, CONFIG_ADDRESS						; GET CONFIG REGISTER 0CF8h
+		OUT		DX, EAX									; SELECT PCICONFIG TO GET DATA
+		
+		MOV		DX, CONFIG_DATA							; PCI DATA REGISTER 0CFCh
+		IN		EAX, DX									; GET DATA FROM PCI REGISTER
+
+        AND     AL, 0FEh                                ; MASK ADDRESS
+        MOV     WORD PTR IOBase, AX
+
+        RET
+
+    GETIOBASE ENDP
+
+    ;==================================================================================
+
+    CLS PROC
+
+        PUSH    ES
+        XOR     AX, 0B800h
+        MOV     ES, AX 
+        XOR     DI, DI
+
+        MOV     CX, 0F00h
+        MOV     AX, 720h
+
+    @@: MOV     ES:[DI], AX
+        ADD     DI, 2
+        LOOP    @b
+
+        POP     ES
+
+        RET
+
+    CLS ENDP  
+
+    ;==================================================================================
+
+    FINDDEVICE PROC
+
+		XOR		ECX, ECX
+		MOV 	CL, TOTALDEVICES						; TOTAL DEVICES 0~31 = 32	
+		
+	@@: MOV		EAX, PCICONFIG							; PCICONFIG = BUS, DEVICE, FUNCTION 
+		MOV		DX, CONFIG_ADDRESS						; GET CONFIG REGISTER 0CF8h
+		OUT		DX, EAX									; SELECT PCICONFIG TO GET DATA
+		
+		MOV		DX, CONFIG_DATA							; PCI DATA REGISTER 0CFCh
+		IN		EAX, DX									; GET DATA FROM PCI REGISTER
+
+		MOV		DI, OFFSET DEVICEID						; ADDRESS TO STORE PCI DATA
+		STOSD											; COPY DATA TO DEVICEID ADDRESS
+		PUSH	ECX
+		MOV		ECX, 4
+		MOV		SI, OFFSET ETHDEVICE
+		MOV		DI, OFFSET DEVICEID	
+		REPE	CMPSB									; CMP PCIDEVICE WITH ETHDEVICE
+		JE		DEVICEFOUND								; IF EQUAL, DEVICE FOUND
+		POP		ECX
+		ADD		DWORD PTR PCICONFIG, 800h				; ADD DEVICE
+		LOOP	@b
+		
+		CMP		DWORD PTR PCICONFIG, LASTDEVICE			; CMP LAST BUS AND LAST DEVICE = 80FFFF00h
+		JGE		NODEVICE								; IF EQUAL OR GREATER ETHDEVICE NOT FOUND
+		
+		MOV		DWORD PTR PCICONFIG, FIRSTDEVICE		; START PCI BUS 80000000h
+		ADD		DWORD PTR BUSNUMBER, 10000h				; NEXT PCI BUS
+		
+		MOV		ECX, DWORD PTR BUSNUMBER
+		ADD		DWORD PTR PCICONFIG, ECX				; PCI DEVICE = PCICONFIG + BUSNUMBER
+		
+		JMP		FINDDEVICE
+
+	NODEVICE:
+	
+		STC												; SET CARRY FLAG IF NOT FOUND DEVICE
+		RET
+		
+	DEVICEFOUND:
+
+		POP		ECX
+		RET
+		
+	FINDDEVICE ENDP
+
+    ;==================================================================================
+
+    ENABLEBUSMASTERING PROC
+
+        MOV     EAX, PCICONFIG                          ; PCICONFIG = BUS, DEVICE, FUNCTION 
+        ADD     AL, 04h                                 ; PCI COMMAND
+        MOV		DX, CONFIG_ADDRESS						; GET CONFIG REGISTER 0CF8h
+		OUT		DX, EAX									; SELECT PCICONFIG TO GET DATA
+
+        MOV		DX, CONFIG_DATA							; PCI DATA REGISTER 0CFCh
+		IN		EAX, DX									; GET DATA FROM PCI REGISTER
+
+        OR      AL, 04h                                 ; ENABLE BUS MASTERING
+        MOV     EBX, EAX                                ; SAVE EAX
+
+        MOV     EAX, PCICONFIG                          ; PCICONFIG = BUS, DEVICE, FUNCTION 
+        ADD     AL, 04h                                 ; PCI COMMAND
+        MOV		DX, CONFIG_ADDRESS						; GET CONFIG REGISTER 0CF8h
+		OUT		DX, EAX									; SELECT PCICONFIG TO GET DATA
+
+        MOV     EAX, EBX
+        MOV		DX, CONFIG_DATA							; PCI DATA REGISTER 0CFCh
+        OUT     DX, AX
+
+        RET
+
+    ENABLEBUSMASTERING ENDP
 
     ;==================================================================================
     
     RESET PROC 
 
-        INVOKE  OUTP, IOBase + CR, CR_RST
-        INVOKE  OUTP, IOBase + CR, CR_RE + CR_TE 
-        INVOKE  OUTPDW, IOBase + TCR, TCR_IFG0 OR TCR_IFG1 OR TCR_MXDMA2 OR TCR_MXDMA1 
-        INVOKE  OUTPDW, IOBase + RRCR, RCR_RBLEN0 OR RCR_MXDMA2 OR RCR_MXDMA1 OR RCR_AB OR RCR_AM OR RCR_APM 
-        INVOKE  OUTPDW, IOBase + RBSTART, physaddr
-        INVOKE  OUTP, IOBase + IMR, R39_INTERRUPT_MASK  
+        XOR     EAX, EAX
+        XOR     ESI, ESI
+        MOV     AX, DATA
+        SHL     EAX, 4
+        MOV     SI, OFFSET FRAME
+        ADD     EAX, ESI
+        MOV     DWORD PTR physaddr, EAX
+
+        MOV     DX, IOBase
+        ADD     DX, CR
+        MOV     AL, CR_RST
+        OUT     DX, AL
+
+        MOV     DX, IOBase
+        ADD     DX, CR
+        MOV     AL, CR_RE + CR_TE
+        OUT     DX, AL
+
+        MOV     DX, IOBase
+        ADD     DX, TCR
+        MOV     EAX, TCR_IFG0 OR TCR_IFG1 OR TCR_MXDMA2 OR TCR_MXDMA1 
+        OUT     DX, EAX
+
+        MOV     DX, IOBase
+        ADD     DX, RRCR
+        MOV     EAX, RCR_RBLEN0 OR RCR_MXDMA2 OR RCR_MXDMA1 OR RCR_AB OR RCR_AM OR RCR_APM 
+        OUT     DX, EAX
+
+        MOV     DX, IOBase
+        ADD     DX, RBSTART
+        MOV     EAX, physaddr
+        OUT     DX, EAX
+
+        MOV     DX, IOBase
+        ADD     DX, IMR
+        MOV     AL, R39_INTERRUPT_MASK 
+        OUT     DX, AL  
         
         RET
         
@@ -108,8 +341,16 @@ CODE SEGMENT PUBLIC 'CODE' USE16
     ISSUECMD PROC
           
         CLI
-        INVOKE  OUTPDW, IOBase + TSAD0, physaddr
-        INVOKE  OUTPDW, IOBase + TSD0, 40h
+
+        MOV     DX, IOBase
+        ADD     DX, TSAD0
+        MOV     EAX, physaddr
+        OUT     DX, EAX
+
+        MOV     DX, IOBase
+        ADD     DX, TSD0
+        MOV     EAX, 40h                                ; PACKET LENGHT
+        OUT     DX, EAX
         STI 
          
         RET
@@ -117,127 +358,7 @@ CODE SEGMENT PUBLIC 'CODE' USE16
     ISSUECMD ENDP
 
     ;==================================================================================
-    
-    OUTP PROC C PORT:WORD, VALUE:BYTE
-       
-        MOV       AL, BYTE PTR VALUE        
-        MOV       DX, WORD PTR PORT
-        OUT       DX, AL
-        RET
-        
-    OUTP ENDP
-
-    ;==================================================================================
-    
-    OUTPDW PROC C PORT:WORD, VALUE:DWORD
-            
-        MOV     EAX, DWORD PTR VALUE
-        MOV     DX, WORD PTR PORT
-        OUT     DX, EAX
-        RET
-        
-    OUTPDW ENDP
-
-    ;==================================================================================
 	
-	PRINTDW PROC C VALUE:DWORD 
-
-        MOV     ESI, DWORD PTR VALUE
-
-        MOV     DI, OFFSET BUFFER
-        MOV     EAX, ESI
-        STOSD
-
-        CALL    PRINTHEADER
-
-        MOV     BX, OFFSET TAB
-        MOV     SI, OFFSET BUFFER
-        MOV     ECX, 4
-        ADD     ESI, 3
-
-    @@: MOV     AH, 0Eh 
-        LODSB
-        MOV     DL, AL
-        SHR     AL, 4
-        XLATB
-        INT     10h
-        MOV     AL, DL
-        AND     AL, 0Fh
-        XLATB
-        INT     10h
-        SUB     SI, 2
-        LOOP    @b
-
-        RET
-                    
-    PRINTDW ENDP
-
-    ;==================================================================================
-
-    PRINTHEADER PROC
-
-        MOV     AH, 0Eh
-        MOV     AL, '0'
-        INT     10h
-
-        MOV     AL, 'x'
-        INT     10h
-
-        RET
-
-    PRINTHEADER ENDP
-
-    ;==================================================================================
-
-    CRLF PROC
-
-        MOV     AH, 0Eh
-        MOV     AL, 0Ah
-        INT     10h
-
-        MOV     AL, 0Dh
-        INT     10h
-
-        RET
-
-    CRLF ENDP
-
-    ;==================================================================================
-
-    PRINTMEM PROC C LEN:DWORD, POINTER:WORD
-
-        MOV     ECX, DWORD PTR LEN
-        MOV     SI, WORD PTR POINTER
-        MOV     BX, OFFSET TAB
-
-    @@: 
-        MOV     AX, CX
-        DIV     BASE
-
-        CMP     AH, 0
-        JNE     CONT
-        CALL    CRLF
-
-    CONT:
-        LODSB
-        
-        MOV     DL, AL
-        AND     AL, 0Fh
-        XLATB
-        MOV     AH, 0Eh
-        INT     10h
-        MOV     AL, DL
-        SHR     AL, 4
-        XLATB
-        MOV     AH, 0Eh
-        INT     10h
-
-        LOOP    @b
-
-        RET
-
-    PRINTMEM ENDP
- 
 CODE ENDS
 
 END MAIN
