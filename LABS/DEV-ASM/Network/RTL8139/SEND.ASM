@@ -18,38 +18,46 @@ EXTERN DEBUGRMODE:PROC
 EXTERN          KEYPRESSED:BYTE
 EXTERN          BUFFER:WORD
 
+; PCI REGISTERS
 CONFIG_ADDRESS  EQU 0CF8h
 CONFIG_DATA     EQU 0CFCh 
 
+; PCI BITS:  	(BUS 23~16 | DEVICE 15~11 | FUNCTION 10~8 | REGISTER 7~0)
 FIRSTDEVICE		EQU 80000000h
 LASTDEVICE		EQU 80FFF800h
 
+; 5.Register Descriptions
 TSD0            EQU 10h
 TSAD0           EQU 20h
-
-CR_TE           EQU 04h
-CR_RE           EQU 08h
-CR_RST          EQU 10h  
-CR              EQU 37h
-
 RBSTART         EQU 30h
+CR              EQU 37h
 TCR             EQU 40h
-RRCR            EQU 44h 
+RRCR            EQU 44h									; RCR REGSTER
 IMR             EQU 3Ch 
 
+; 5.1 	Transmit Configuration Register 				(Offset 0040-0043h,R/W) 
+TCR_MXDMA1      EQU 200h
+TCR_MXDMA2      EQU 400h
+TCR_IFG0        EQU 1000000h 
+TCR_IFG1        EQU 2000000h 
+
+; 5.3 	Interrupt Status(mask) Register        			(Offset 003e-003fh,R/W)
+R39_INTERRUPT_MASK EQU 7Fh
+
+; 5.5   Media Status Register                   		(Offset 0058	  ,R/W)
+; 5.6   Receive Configuration Register          		(Offset 0044-0047h,R/W)
 RCR_APM         EQU 02h
 RCR_AM          EQU 04h
 RCR_AB          EQU 08h               
 RCR_MXDMA1      EQU 200h
 RCR_MXDMA2      EQU 400h
 RCR_RBLEN0      EQU 800h
- 
-TCR_MXDMA1      EQU 200h
-TCR_MXDMA2      EQU 400h
-TCR_IFG0        EQU 1000000h 
-TCR_IFG1        EQU 2000000h 
 
-R39_INTERRUPT_MASK EQU 7Fh                               
+; 5.9   ERSR:Early Rx Status Register           		(Offset 0036h     ,R)
+; 5.10  Command Register 
+CR_TE           EQU 04h
+CR_RE           EQU 08h
+CR_RST          EQU 10h                               
 
 STACK SEGMENT STACK 'STACK'
     DB      100h  DUP(0) 
@@ -78,6 +86,7 @@ DATA SEGMENT PUBLIC 'DATA' USE16
 
     ALIGN           4
     FRAME      	    DB  40h DUP(0FFh)
+					DB	60h DUP(00h)
 
 DATA ENDS
 
@@ -147,7 +156,7 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 		
 	@@: XOR     EDX, EDX	
         MOV		DX, WORD PTR IOBase
-		MOV     SI, OFFSET CONTENTLOADED				; SI = BUFFER TO PRINT DATA		
+		MOV     SI, OFFSET FRAME						; SI = BUFFER TO PRINT DATA		
 		MOV		CX, 0FFh								; TOTAL DATA TO PRINT
 		
 		CALL	DEBUGRMODE								; PRINT DATA

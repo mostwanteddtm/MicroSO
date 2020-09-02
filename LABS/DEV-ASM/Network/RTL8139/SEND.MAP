@@ -4,15 +4,15 @@ Stack Allocation = 5120 bytes
  00000H 00000H 00000H _TEXT                  CODE
  00000H 0052EH 0052FH CODE                   CODE
  00530H 00530H 00000H _DATA                  DATA
- 00530H 009A4H 00475H DATA                   DATA
- 009B0H 01DAFH 01400H STACK                  STACK
+ 00530H 00A04H 004D5H DATA                   DATA
+ 00A10H 01E0FH 01400H STACK                  STACK
 
  Origin   Group
  0053:0   DGROUP
 
   Address         Publics by Name
 
- 0053:01A8       BUFFER
+ 0053:0208       BUFFER
  0000:046B       CLEARSCR
  0000:00B3       CLS
  0000:01E0       DEBUGRMODE
@@ -21,7 +21,7 @@ Stack Allocation = 5120 bytes
  0000:009B       GETIOBASE
  0000:0478       HEADERBUFFER
  0000:01BB       ISSUECMD
- 0053:0160       KEYPRESSED
+ 0053:01C0       KEYPRESSED
  0000:0000       MAIN
  0000:0409       PRINTBUFFER
  0000:04EF       PRINTFLAGS
@@ -51,7 +51,7 @@ Stack Allocation = 5120 bytes
  0000:0478       HEADERBUFFER
  0000:04AC       PRINTOPTIONS
  0000:04EF       PRINTFLAGS
- 0053:0160       KEYPRESSED
- 0053:01A8       BUFFER
+ 0053:01C0       KEYPRESSED
+ 0053:0208       BUFFER
 
 Program entry point at 0000:0000
