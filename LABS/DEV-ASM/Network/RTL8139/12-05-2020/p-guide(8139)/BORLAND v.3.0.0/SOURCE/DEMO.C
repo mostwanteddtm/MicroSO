@@ -12,7 +12,6 @@ int	INTR;
 extern far void outpdw(unsigned int,unsigned long);
 extern far unsigned long inpdw(unsigned int);
 
-
 void InitHardware();
 void InitSoftware();
 void IssueCMD();
@@ -46,15 +45,13 @@ unsigned char *Buffer;
 ULONG	PhysicalAddrBuffer;
 
 
-void ShowStatistics(
-)
+void ShowStatistics()
 {
     gotoxy(2,22); printf("Packet Received:: %u",PacketReceivedGood);
     gotoxy(2,23); printf("Byte   Received:: %9lu",ByteReceived);
 }
 
-BOOLEAN
-FindIOIRQ(ULONG *IOBase,ULONG *IRQ)
+BOOLEAN FindIOIRQ(ULONG *IOBase, ULONG *IRQ)
 {
     ULONG e,i,j,PciData,BaseAddr,Interrupt;
 	for(e=0;e<256;e++)
@@ -82,14 +79,12 @@ FindIOIRQ(ULONG *IOBase,ULONG *IRQ)
     return FALSE;
 }
 
-
-int
-ComputeInterrupt(
-	int	IrqNumber
-)
+int ComputeInterrupt(int IrqNumber)
 {
-	if(IrqNumber <=8) return IrqNumber+8;
-	else		  return IrqNumber+0x68;
+	if(IrqNumber <=8) 
+		return IrqNumber+8;
+	else		  
+		return IrqNumber+0x68;
 }
 /////////////////////////////////////////////////////////////////////////
 //Our Interrupt Service Routine (ISR)
@@ -101,41 +96,44 @@ void interrupt NewFunction(void)
     curISR = inport(IOBase + ISR);
     if( (curISR & R39_INTERRUPT_MASK) != 0)
     {
-	do
-	{
-	    if(curISR & ISR_PUN)
-	    {
-//     	        ProcessLingChange();	//should write this code someday
-		outport(IOBase + ISR , ISR_PUN);
-	    }
-	    if(curISR & ISR_TOK)
-	    {
-		TxInterruptHandler();
-		outport(IOBase + ISR, ISR_TOK);
-	    }
-	    if(curISR & ISR_TER)
-	    {
-		outportb(IOBase + TCR , TCR_CLRABT);
-		outport(IOBase + ISR , ISR_TER);
-	    }
-	    if( curISR & (ISR_ROK|ISR_RER|ISR_RXOVW|ISR_FIFOOVW) )
-	    {
-		if(curISR & ISR_ROK)
+		do
 		{
-		    RxInterruptHandler();
-		}
-		outport(IOBase + ISR, ISR_ROK | ISR_RER |ISR_RXOVW | ISR_FIFOOVW);
-	    }
-	    curISR = inport(IOBase + ISR);
-	}while( (curISR & R39_INTERRUPT_MASK) != 0);
-//	_asm int 3;
-asm    mov     al,020h
-asm    out     0a0h,al         //;issue EOI to 2nd 8259
-asm    out     20h,al          //;Issue EOI to 1nd 8259
+			if(curISR & ISR_PUN)
+			{
+				// ProcessLingChange();	//should write this code someday
+				outport(IOBase + ISR , ISR_PUN);
+			}
+			if(curISR & ISR_TOK)
+			{
+				TxInterruptHandler();
+				outport(IOBase + ISR, ISR_TOK);
+			}
+			if(curISR & ISR_TER)
+			{
+				outportb(IOBase + TCR , TCR_CLRABT);
+				outport(IOBase + ISR , ISR_TER);
+			}
+			if( curISR & (ISR_ROK|ISR_RER|ISR_RXOVW|ISR_FIFOOVW) )
+			{
+				if(curISR & ISR_ROK)
+				{
+					RxInterruptHandler();
+				}
+				outport(IOBase + ISR, ISR_ROK | ISR_RER |ISR_RXOVW | ISR_FIFOOVW);
+			}
+			curISR = inport(IOBase + ISR);
+		} while( (curISR & R39_INTERRUPT_MASK) != 0);
+	
+		//	_asm int 3;
+		asm    mov     al,020h
+		asm    out     0a0h,al         //;issue EOI to 2nd 8259
+		asm    out     20h,al          //;Issue EOI to 1nd 8259
+	
     }
     else
-    {//not our interrupt, should call original interrupt service routine.
-     // OldFunction();
+    {
+		// not our interrupt, should call original interrupt service routine.
+		// OldFunction();
     }
     enable();	// == _asm sti
 }
@@ -143,8 +141,7 @@ asm    out     20h,al          //;Issue EOI to 1nd 8259
 //////////////////////////////////////////////////////////////////////////
 //Initialization part
 //////////////////////////////////////////////////////////////////////////
-void
-InitHardware()
+void InitHardware()
 {
 	outportb(IOBase + CR, CR_RST);              //reset
 	outportb(IOBase + CR, CR_RE + CR_TE);       //enable Tx/Rx
@@ -154,8 +151,7 @@ InitHardware()
 	outport(IOBase + IMR, R39_INTERRUPT_MASK);//enable interrupt
 }
 
-void
-InitSoftware()
+void InitSoftware()
 {
 	ULONG	Offset,Segment,Delta,i;
 	unsigned char *tmpBuffer;
@@ -203,55 +199,47 @@ InitSoftware()
 //////////////////////////////////////////////////////////////////////////
 //Transmit part
 //////////////////////////////////////////////////////////////////////////
-unsigned char
-NextDesc(
-	unsigned char CurrentDescriptor
-    )
+unsigned char NextDesc(unsigned char CurrentDescriptor)
 {
-//    (CurrentDescriptor == TX_SW_BUFFER_NUM-1) ? 0 : (1 + CurrentDescriptor);
+	// (CurrentDescriptor == TX_SW_BUFFER_NUM-1) ? 0 : (1 + CurrentDescriptor);
     if(CurrentDescriptor == TX_SW_BUFFER_NUM-1)
     {
-	return  0;
+		return  0;
     }
     else
     {
-	return ( 1 + CurrentDescriptor);
+		return (1 + CurrentDescriptor);
     }
 }
 
-unsigned char
-CheckTSDStatus(
-    unsigned char            Desc
-    )
+unsigned char CheckTSDStatus(unsigned char Desc)
 {
-    ULONG       Offset = Desc << 2;
-    ULONG       tmpTSD;
+    ULONG Offset = Desc << 2;
+    ULONG tmpTSD;
 
     tmpTSD=inpdw(IOBase + TSD0 + Offset);
     switch ( tmpTSD & (TSD_OWN | TSD_TOK) )
     {
-	case (TSD_OWN | TSD_TOK):      	return 	TSDSTATUS_BOTH;
-	case (TSD_TOK) 		:       return  TSDSTATUS_TOK;
-	case (TSD_OWN) 		:       return  TSDSTATUS_OWN;
-	case 0 			:	return  TSDSTATUS_0;
+		case (TSD_OWN | TSD_TOK): 
+			return TSDSTATUS_BOTH;
+		case (TSD_TOK):       
+			return TSDSTATUS_TOK;
+		case (TSD_OWN):       
+			return TSDSTATUS_OWN;
+		case 0:	
+			return TSDSTATUS_0;
     }
     return 0;
 }
 
-
-
-void
-IssueCMD(unsigned char descriptor)
+void IssueCMD(unsigned char descriptor)
 {
 	unsigned long offset = descriptor << 2;
 	outpdw(IOBase + TSAD0 + offset, TxDesc[TxHwSetupPtr].PhysicalAddress);
 	outpdw(IOBase + TSD0 + offset , TxDesc[TxHwSetupPtr].PacketLength);
 }
 
-int
-SendPacket(
-	PPACKET pPacket
-)
+int SendPacket(PPACKET pPacket)
 {
     disable();
     if(TxHwFreeDesc > 0 )
@@ -272,74 +260,55 @@ SendPacket(
     }
 }
 
-void
-TxInterruptHandler()
+void TxInterruptHandler()
 {
-    while( (CheckTSDStatus(TxHwFinishPtr) == TSDSTATUS_BOTH	) &&
-	   (TxHwFreeDesc < 4 				)   )
+    while( (CheckTSDStatus(TxHwFinishPtr) == TSDSTATUS_BOTH	) && (TxHwFreeDesc < 4))
     {
-	//can Release this buffer now
+		//can Release this buffer now
 
-	TxHwFinishPtr = NextDesc(TxHwFinishPtr);
-	TxHwFreeDesc++;
+		TxHwFinishPtr = NextDesc(TxHwFinishPtr);
+		TxHwFreeDesc++;
     }
 }
 ////////////////////////////////////////////////////////////////////////
 // Start of Rx Path
 ////////////////////////////////////////////////////////////////////////
-void
-ReadPacket(
-	PPACKET	RxPacket
-)
+void ReadPacket(PPACKET	RxPacket)
 {
     pLeadingReadPacket = RxPacket;
 }
 
-void
-CopyPacket(
-    unsigned char 	*pIncomePacket,
-    unsigned int        PktLength
-)
+void CopyPacket(unsigned char *pIncomePacket, unsigned int PktLength)
 {
-    if( (pLeadingReadPacket != NULL)           &&
-	(pLeadingReadPacket->PacketLength == 0)  )
+    if( (pLeadingReadPacket != NULL) && (pLeadingReadPacket->PacketLength == 0) )
     {
-	memcpy(pLeadingReadPacket->Buffers.Buffer , pIncomePacket , PktLength);
-	pLeadingReadPacket->PacketLength = PktLength;
+		memcpy(pLeadingReadPacket->Buffers.Buffer , pIncomePacket , PktLength);
+		pLeadingReadPacket->PacketLength = PktLength;
     }
-
 }
 
-BOOLEAN
-PacketOK(
-	PPACKETHEADER pPktHdr
-)
+BOOLEAN PacketOK(PPACKETHEADER pPktHdr)
 {
-    BOOLEAN BadPacket = pPktHdr->RUNT ||
-			pPktHdr->LONG ||
-			pPktHdr->CRC  ||
-			pPktHdr->FAE;
-    if( ( !BadPacket )   &&
-	( pPktHdr->ROK )   )
+    BOOLEAN BadPacket = pPktHdr->RUNT || pPktHdr->LONG || pPktHdr->CRC || pPktHdr->FAE;
+    
+	if ((!BadPacket) && (pPktHdr->ROK))
     {
-	if ( (pPktHdr->PacketLength > RX_MAX_PACKET_LENGTH ) ||
-	     (pPktHdr->PacketLength < RX_MIN_PACKET_LENGTH )    )
-	{
-	    return(FALSE);
-	}
-	PacketReceivedGood++;
-	ByteReceived += pPktHdr->PacketLength;
-	return TRUE ;
+		if ((pPktHdr->PacketLength > RX_MAX_PACKET_LENGTH ) || (pPktHdr->PacketLength < RX_MIN_PACKET_LENGTH ))
+		{
+			return(FALSE);
+		}
+		
+		PacketReceivedGood++;
+		ByteReceived += pPktHdr->PacketLength;
+		return TRUE;
     }
     else
     {
-	return FALSE;
+		return FALSE;
     }
 }
 
-BOOLEAN
-RxInterruptHandler(
-    )
+BOOLEAN RxInterruptHandler()
 {
     unsigned char  TmpCMD;
     unsigned int   PktLength;
@@ -348,44 +317,47 @@ RxInterruptHandler(
 
     while (TRUE)
     {
-	TmpCMD = inportb(IOBase + CR);
-	if (TmpCMD & CR_BUFE)
-	{
-	    break;
-	}
-
-	do
-	{
-	    RxReadPtr	  = RxBuffer + RxReadPtrOffset;
-	    pPacketHeader = (PPACKETHEADER)  RxReadPtr;
-	    pIncomePacket = RxReadPtr + 4;
-	    PktLength	  = pPacketHeader->PacketLength;	//this length include CRC
-	    if ( PacketOK( pPacketHeader ) )
-	    {
-		if ( (RxReadPtrOffset + PktLength) > RX_BUFFER_SIZE )
-		{      //wrap around to end of RxBuffer
-//_asm int 3;
-		    memcpy( RxBuffer + RX_BUFFER_SIZE ,	RxBuffer,
-				(RxReadPtrOffset + PktLength - RX_BUFFER_SIZE)  );
+		TmpCMD = inportb(IOBase + CR);
+		if (TmpCMD & CR_BUFE)
+		{
+			break;
 		}
-		//copy the packet out here
-		CopyPacket(pIncomePacket,PktLength - 4);//don't copy 4 bytes CRC
 
-		//update Read Pointer
-		RxReadPtrOffset = (RxReadPtrOffset + PktLength + 4 + 3) & RX_READ_POINTER_MASK;
-			//4:for header length(PktLength include 4 bytes CRC)
-			//3:for dword alignment
-		outport( IOBase + CAPR, RxReadPtrOffset - 0x10);	//-4:avoid overflow
-	    }
-	    else
-	    {
-//		ResetRx();
-		break;
-	    }
-	    TmpCMD = inportb(IOBase + CR);
-	} while (!(TmpCMD & CR_BUFE));
+		do
+		{
+			RxReadPtr	  = RxBuffer + RxReadPtrOffset;
+			pPacketHeader = (PPACKETHEADER)  RxReadPtr;
+			pIncomePacket = RxReadPtr + 4;
+			PktLength	  = pPacketHeader->PacketLength;	//this length include CRC
+			if (PacketOK( pPacketHeader))
+			{
+				if ((RxReadPtrOffset + PktLength) > RX_BUFFER_SIZE)
+				{      
+					//wrap around to end of RxBuffer
+					//_asm int 3;
+					memcpy( RxBuffer + RX_BUFFER_SIZE ,	RxBuffer, (RxReadPtrOffset + PktLength - RX_BUFFER_SIZE));
+				}
+				//copy the packet out here
+				CopyPacket(pIncomePacket,PktLength - 4);//don't copy 4 bytes CRC
+
+				//update Read Pointer
+				RxReadPtrOffset = (RxReadPtrOffset + PktLength + 4 + 3) & RX_READ_POINTER_MASK;
+					//4:for header length(PktLength include 4 bytes CRC)
+					//3:for dword alignment
+				outport( IOBase + CAPR, RxReadPtrOffset - 0x10);	//-4:avoid overflow
+			}
+			else
+			{
+				// ResetRx();
+				break;
+			}
+			
+			TmpCMD = inportb(IOBase + CR);
+			
+		} while (!(TmpCMD & CR_BUFE));
    }
-    return (TRUE);              //Done
+   
+	return (TRUE);              //Done
 }
 
 void EnableBusMastering()
@@ -404,8 +376,7 @@ void EnableBusMastering()
 /////////////////////////////////////////////////////////////////////////
 //Load / Unload
 /////////////////////////////////////////////////////////////////////////
-BOOLEAN
-LoadDriver()
+BOOLEAN LoadDriver()
 {
 	int	INTR;
 	FindIOIRQ(&IOBase, &Irq);
@@ -423,8 +394,7 @@ LoadDriver()
 	return TRUE;
 }
 
-BOOLEAN
-UnloadDriver()
+BOOLEAN UnloadDriver()
 {
 	disable();
 	setvect(INTR,OldFunction);
@@ -438,9 +408,7 @@ UnloadDriver()
 ///////////////////////////////////////////////////////////////////////////
 //	Start of Test Program (only for demo)
 ///////////////////////////////////////////////////////////////////////////
-PPACKET
-BuildPacket(
-)
+PPACKET BuildPacket()
 {
 	int i;
 	PPACKET tmpPacket = (PPACKET) malloc(sizeof(PACKET));
@@ -460,9 +428,7 @@ BuildPacket(
 	return	tmpPacket;
 }
 
-PPACKET
-PreparePacket(
-)
+PPACKET PreparePacket()
 {
 	PPACKET tmpPacket = (PPACKET) malloc(sizeof(PACKET));
 	tmpPacket->BufferCount  = 1;
@@ -473,35 +439,33 @@ PreparePacket(
 	return	tmpPacket;
 }
 
-void
-ShowPacket(
-    PPACKET pPacket
-)
+void ShowPacket(PPACKET pPacket)
 {
     unsigned char *PktBuf   = pPacket->Buffers.Buffer;
     unsigned int  i,PktLength = pPacket->PacketLength;
+	
+	if (pPacket->PacketLength == 0) return;
+	
     clrscr();
-    ShowStatistics();
+    //ShowStatistics();
     printf("Packet Length = %d\n",PktLength);
     for(i=0;i<PktLength;i++)
     {
-	printf("%02X ",PktBuf[i]);
-	if( (i&0xf) == 0xf )
-	{
-	    printf("  %4X\n", (i&0xfffffff0) );
-	}
-	if( (i&0xff) == 0xff )
-	{
-	    getchar();
-	    clrscr();
-	}
+		printf("%02X ",PktBuf[i]);
+		if( (i&0xf) == 0xf )
+		{
+			printf("  %4X\n", (i&0xfffffff0) );
+		}
+		
+		if( (i&0xff) == 0xff )
+		{
+			getch();
+			clrscr();
+		}
     }
-
 }
 
-BOOLEAN
-Send(
-)
+BOOLEAN Send()
 {
 	PPACKET	pTestPacket;
 	int	i;
@@ -520,24 +484,28 @@ Send(
 	return TRUE;
 }
 
-void
-Receive()
+void Receive()
 {
 	PPACKET	pTestPacket;
 	int	i;
 
-//Read Test
+	//Read Test
 	pTestPacket = PreparePacket();
 	ReadPacket(pTestPacket);
+	
     do
     {
-/*	while(pTestPacket->PacketLength == 0)
-	{
-	}
-//	ShowPacket(pTestPacket);*/
-	ShowStatistics();
+	/*	while(pTestPacket->PacketLength == 0)
+		{
+		}
+	*/	
+	
+	NewFunction();
+	ShowPacket(pTestPacket);
 	pTestPacket->PacketLength = 0;
-    }while(!kbhit());
+	delay(1000);
+	
+    } while(!kbhit());
 }
 
 void breakpoint(BOOLEAN success)
@@ -551,8 +519,8 @@ main()
 	clrscr();
     directvideo = 1;
 	LoadDriver();
-	Send();
-	//Receive();
+	//Send();
+	Receive();
 	UnloadDriver();
 	return 0;
 }
