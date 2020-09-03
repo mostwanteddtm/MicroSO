@@ -84,7 +84,7 @@ DATA SEGMENT PUBLIC 'DATA' USE16
     
     IOBase          DW 00h
 
-    ALIGN           4
+    ALIGN           16
     FRAME      	    DB  40h DUP(0FFh)
 					DB	60h DUP(00h)
 
