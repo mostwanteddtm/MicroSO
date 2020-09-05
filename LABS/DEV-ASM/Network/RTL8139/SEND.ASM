@@ -78,8 +78,6 @@ DATA SEGMENT PUBLIC 'DATA' USE16
 	ETHDEVICE		DD 	813910ECh						; NETWORK CARD REALTEK 8139
 	DEVICEID		DD 	?
 
-    physaddr        DD  0
-
     BASE            DB 10h
     
     IOBase          DW 00h
@@ -87,6 +85,9 @@ DATA SEGMENT PUBLIC 'DATA' USE16
     ALIGN           16
     FRAME      	    DB  40h DUP(0FFh)
 					DB	60h DUP(00h)
+					
+	ALIGN			16
+	RXBUFFER		DB	1024 DUP(0)
 
 DATA ENDS
 
@@ -303,14 +304,6 @@ CODE SEGMENT PUBLIC 'CODE' USE16
     
     RESET PROC 
 
-        XOR     EAX, EAX
-        XOR     ESI, ESI
-        MOV     AX, DATA
-        SHL     EAX, 4
-        MOV     SI, OFFSET FRAME
-        ADD     EAX, ESI
-        MOV     DWORD PTR physaddr, EAX
-
         MOV     DX, IOBase
         ADD     DX, CR
         MOV     AL, CR_RST
@@ -330,10 +323,16 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         ADD     DX, RRCR
         MOV     EAX, RCR_RBLEN0 OR RCR_MXDMA2 OR RCR_MXDMA1 OR RCR_AB OR RCR_AM OR RCR_APM 
         OUT     DX, EAX
+		
+		XOR     EAX, EAX
+        XOR     ESI, ESI
+        MOV     AX, DATA
+        SHL     EAX, 4
+        MOV     SI, OFFSET RXBUFFER
+        ADD     EAX, ESI
 
         MOV     DX, IOBase
         ADD     DX, RBSTART
-        MOV     EAX, physaddr
         OUT     DX, EAX
 
         MOV     DX, IOBase
@@ -350,10 +349,16 @@ CODE SEGMENT PUBLIC 'CODE' USE16
     ISSUECMD PROC
           
         CLI
+		
+		XOR     EAX, EAX
+        XOR     ESI, ESI
+        MOV     AX, DATA
+        SHL     EAX, 4
+        MOV     SI, OFFSET FRAME
+        ADD     EAX, ESI
 
         MOV     DX, IOBase
         ADD     DX, TSAD0
-        MOV     EAX, physaddr
         OUT     DX, EAX
 
         MOV     DX, IOBase
