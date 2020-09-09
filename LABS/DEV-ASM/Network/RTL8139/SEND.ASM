@@ -78,7 +78,7 @@ DATA SEGMENT PUBLIC 'DATA' USE16
 	ETHDEVICE		DD 	813910ECh						; NETWORK CARD REALTEK 8139
 	DEVICEID		DD 	?
 
-    BASE            DB 10h
+    TXCURRDESC		DB 00h
     
     IOBase          DW 00h
 
@@ -155,15 +155,14 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 		
 		LOOP	NEXTREG
 		
-	@@: XOR     EDX, EDX	
-        MOV		DX, WORD PTR IOBase
-		MOV     SI, OFFSET FRAME						; SI = BUFFER TO PRINT DATA		
+		CALL    ENABLEBUSMASTERING						; ENABLE PCI BUS MASTERING FOR DEVICE
+        CALL    RESET									; RESET ETHERNET CARD 
+		
+	@@: MOV     SI, OFFSET FRAME						; SI = BUFFER TO PRINT DATA		
 		MOV		CX, 0FFh								; TOTAL DATA TO PRINT
 		
+		CALL    ISSUECMD								; SEND ETHERNET PACKET
 		CALL	DEBUGRMODE								; PRINT DATA
-        CALL    ENABLEBUSMASTERING
-        CALL    RESET 
-        CALL    ISSUECMD
 
 		XOR		AX, AX									; GET KEY PRESS
 		INT		16h
@@ -352,19 +351,32 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 		
 		XOR     EAX, EAX
         XOR     ESI, ESI
-        MOV     AX, DATA
-        SHL     EAX, 4
-        MOV     SI, OFFSET FRAME
-        ADD     EAX, ESI
-
+        MOV     AX, DATA								; GET DS SEGMENT
+        SHL     EAX, 4									; TRANSFORM IN LINEAR ADDRESS
+        MOV     SI, OFFSET FRAME						; GET OFFSET OF FRAME (PACKET)
+        ADD     EAX, ESI								; PHYSICAL ADDRESS
+		
+		CMP		BYTE PTR TXCURRDESC, 3					; TRANSMIT START ADDRESS (0, 1, 2 AND 3)
+		JLE		@f										; IF CURRENT DESCRIPTOR == 4
+		MOV		BYTE PTR TXCURRDESC, 0					; DESCRIPTOR = 0
+	@@:	
+		XOR		EBX, EBX
+		MOV		BL, BYTE PTR TXCURRDESC
+		SHL		BL, 2									; (0 << 2 = 0h, 1 << 2 = 4h, 2 << 2 = 8h, 3 << 2 = 0Ch)
+	
         MOV     DX, IOBase
-        ADD     DX, TSAD0
+        ADD     DX, TSAD0								; TSAD0 20h, TSAD1 24h, TSAD2 28h, TSAD3 2Ch
+		ADD		DX, BX
         OUT     DX, EAX
 
         MOV     DX, IOBase
-        ADD     DX, TSD0
+        ADD     DX, TSD0								; TSD0 10h, TSD1 14h, TSD2 18h, TSD3 1Ch
+		ADD		DX, BX									; TRANSMIT STATUS DESCRIPTOR (0, 1, 2 AND 3)
         MOV     EAX, 40h                                ; PACKET LENGHT
         OUT     DX, EAX
+		
+		INC		BYTE PTR TXCURRDESC
+		
         STI 
          
         RET
