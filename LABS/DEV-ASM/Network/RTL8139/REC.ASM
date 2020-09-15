@@ -34,6 +34,12 @@ CR              EQU 37h
 TCR             EQU 40h
 RRCR            EQU 44h									; RCR REGSTER
 IMR             EQU 3Ch 
+ISR				EQU 3Eh
+
+ISR_ROK			EQU 1
+ISR_RER			EQU 2
+ISR_RXOVW		EQU 10h
+ISR_FIFOOVW		EQU 40h
 
 ; 5.1 	Transmit Configuration Register 				(Offset 0040-0043h,R/W) 
 TCR_MXDMA1      EQU 200h
@@ -60,7 +66,7 @@ CR_RE           EQU 08h
 CR_RST          EQU 10h                               
 
 STACK SEGMENT STACK 'STACK'
-    DB      100h  DUP(0) 
+    DB      1024h  DUP(0) 
     TOPS    LABEL BYTE
 STACK ENDS
 
@@ -72,22 +78,21 @@ DATA SEGMENT PUBLIC 'DATA' USE16
 	TOTALBUS		DB 	255
 	
 	BUSNUMBER		DD	0
-
-    CONTENTLOADED	DD	3Fh DUP(?)
 	
 	ETHDEVICE		DD 	813910ECh						; NETWORK CARD REALTEK 8139
 	DEVICEID		DD 	?
 
-    BASE            DB 10h
-    
     IOBase          DW 00h
+	
+	STARTPACKOFF	DW 0
+	LENPACK			DW 0
+	QTDEPACK		DD 0
 
     ALIGN           16
-    FRAME      	    DB  40h DUP(0FFh)
-					DB	60h DUP(00h)
+    PACKETBUFFER    DB  0FFh DUP(0)
 					
 	ALIGN			16
-	RXBUFFER		DB	1024 DUP(0)
+	RXBUFFER		DB	4096 DUP(0)
 
 DATA ENDS
 
@@ -123,65 +128,53 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 
         CALL    GETIOBASE                               ; GET I/O ADDRESS									
 			
-		MOV		EAX, PCICONFIG							; PCICONFIG = BUS, DEVICE, FUNCTION
-		MOV		DX, CONFIG_ADDRESS						; GET CONFIG REGISTER 0CF8h
-		OUT		DX, EAX									; SELECT FIRST REGISTER IN PCICONFIG
-			
-		MOV		ECX, 3Fh	
-		MOV     SI, OFFSET CONTENTLOADED	
-			
-	NEXTREG:	
-			
-		PUSH	EAX	
-			
-        MOV     DX, CONFIG_DATA							; PCI DATA REGISTER 0CFCh
-        IN      EAX, DX									; GET DATA FROM PCI REGISTER
-	
-		CMP		ECX, 3Fh								; (3Fh X 4h) + 4h = FFh (TOTAL PCI REGISTERS) 
-		JNE		EBXOK	
-		MOV		EBX, EAX	
-			
-	EBXOK:	
-	
-        MOV     [SI], EAX								; MOV PCI DATA TO BUFFER 
-			
-		POP		EAX	
-			
-		ADD		EAX, 4									; FOR EVERY INTERACTION 4 BYTES DATA
-		ADD		SI, 4	
-			
-		MOV		DX, CONFIG_ADDRESS						; PCI CONFIG REGISTER 0CF8h 
-		OUT		DX, EAX									; SELECT PCICONFIG TO GET DATA
-		
-		LOOP	NEXTREG
+		CALL    ENABLEBUSMASTERING
+        CALL    RESET 
 
-	@@: XOR     EDX, EDX	
-        MOV		DX, WORD PTR IOBase
-		MOV     SI, OFFSET RXBUFFER						; SI = BUFFER TO PRINT DATA	
-		ADD		SI, 4									; FIRST 4 BYTES ??? SEARCH ABOUT
+		MOV     SI, OFFSET PACKETBUFFER					; SI = BUFFER TO PRINT DATA	
 		MOV		CX, 0FFh								; TOTAL DATA TO PRINT
 		
 		CALL	DEBUGRMODE								; PRINT DATA
-		CALL    ENABLEBUSMASTERING
-        CALL    RESET 
-        ;CALL    ISSUECMD
 
-		; set 1 million microseconds interval (1 second)
+	@@:	; set 1 million microseconds interval (1 second)
 		MOV     CX, 0Fh
 		MOV     DX, 4240h
 		MOV     AH, 86h
 		INT     15h
 		
-		;XOR		AX, AX									; GET KEY PRESS
-		;INT		16h
+		XOR     EDX, EDX	
+		XOR		EAX, EAX
+        MOV		DX, WORD PTR IOBase
+		ADD		DX, ISR
+		IN		AX, DX
 		
-		;CMP		AH, 01h									; KEY PRESSED ESC
-		;JE		EOF
-		;CMP		AH, 1Ch									; KEY PRESSED ENTER
-		;JE		EOF
-		;
-		;MOV		KEYPRESSED, AH
+		CMP		AX, 0
+		JE		@b
 		
+		XOR		EDX, EDX
+		XOR		EAX, EAX
+		MOV		DX, WORD PTR IOBase
+		ADD		DX, ISR
+		MOV		AX, ISR_ROK OR ISR_RER OR ISR_RXOVW OR ISR_FIFOOVW
+		OUT		DX, AX
+		
+		CALL	CLEARPACKETBUFFER
+		CALL	GETLENPACKET
+		
+		; CLEAR PACKETBUFFER
+		; GET LEN PACKET [LENPACK] = (RXBUFFER + STARTPACKOFF + 2)
+		; COPY PACKET TO BUFFER [PACKETBUFFER] = (START: RXBUFFER + STARTPACKOFF + 4 { LENGHT: LENPACK - 4})	
+		; SET START OFFSET OF NEXT PACKET = [STARTPACKOFF] = (RXBUFFER + LENPACK + 4)
+
+		MOV		SI, OFFSET RXBUFFER						; FOR DEBUG
+		;MOV     SI, OFFSET PACKETBUFFER						; SI = BUFFER TO PRINT DATA	
+		MOV		CX, 0FFh									; TOTAL DATA TO PRINT
+		
+		INC		QTDEPACK
+		MOV		DWORD PTR EBX, QTDEPACK
+
+		CALL	DEBUGRMODE									; PRINT DATA
+
 		JMP		@b
 		
     EOF:  
@@ -189,8 +182,43 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         INT     21h    
     
     MAIN ENDP
+	
+	;==================================================================================
+	
+	CLEARPACKETBUFFER PROC
+	
+		MOV		AX, DATA
+		MOV		ES, AX
+		MOV		ECX, 3Fh
+		XOR		EAX, EAX
+		MOV		DI, OFFSET PACKETBUFFER
+	
+	@@:	STOSD
+		LOOP	@b
+		
+		RET
+	
+	CLEARPACKETBUFFER ENDP
 
     ;==================================================================================
+	
+	GETLENPACKET PROC
+	
+		MOV		AX, DATA
+		MOV		DS, AX
+		XOR		EAX, EAX
+		MOV		SI, OFFSET RXBUFFER
+		ADD		SI, STARTPACKOFF
+		ADD		SI, 2
+		
+		LODSW
+		MOV		WORD PTR LENPACK, AX
+		
+		RET
+	
+	GETLENPACKET ENDP
+	
+	;==================================================================================
 
     GETIOBASE PROC
 
@@ -351,33 +379,6 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         RET
         
     RESET ENDP  
-
-    ;==================================================================================
-    
-    ISSUECMD PROC
-          
-        CLI
-		
-		XOR     EAX, EAX
-        XOR     ESI, ESI
-        MOV     AX, DATA
-        SHL     EAX, 4
-        MOV     SI, OFFSET FRAME
-        ADD     EAX, ESI
-
-        MOV     DX, IOBase
-        ADD     DX, TSAD0
-        OUT     DX, EAX
-
-        MOV     DX, IOBase
-        ADD     DX, TSD0
-        MOV     EAX, 40h                                ; PACKET LENGHT
-        OUT     DX, EAX
-        STI 
-         
-        RET
-        
-    ISSUECMD ENDP
 
     ;==================================================================================
 	
