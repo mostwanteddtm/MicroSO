@@ -1,23 +1,6 @@
 .386 
 .MODEL SMALL
 
-EXTERN DEBUGRMODE:PROC
-;======================================================================================|
-;	PUBLIC METHOD FOR DEBUG ON REAL MODE                                               |
-;                                                                                      |
-;	DEBUGRMODE:                                                                        |
-;	IN:                                                                                |
-;		CX = SIZE OF BUFFER TO BE COPIED                                               |
-;		DS:SI = ORIGIN OF THE CONTENT TO BE COPIED TO THE BUFFER                       |
-;		AX, BX, CX, DX, SI, DI, BP, SP, DS, ES, SS = VALUE DEFINED ON MAIN PROGRAM     |
-;                                                                                      |
-;	OUT: BUFFER = COPIED FROM CONTENT LOADED IN MEMORY                                 |
-;		 SHOW REGISTERS VALUES (AX, BX, CX, DX, SI, DI, BP, SP, CS, DS, ES, SS)        |
-;======================================================================================| 
-
-EXTERN          KEYPRESSED:BYTE
-EXTERN          BUFFER:WORD
-
 ; PCI REGISTERS
 CONFIG_ADDRESS  EQU 0CF8h
 CONFIG_DATA     EQU 0CFCh 
@@ -63,7 +46,33 @@ RCR_RBLEN0      EQU 800h
 ; 5.10  Command Register 
 CR_TE           EQU 04h
 CR_RE           EQU 08h
-CR_RST          EQU 10h                               
+CR_RST          EQU 10h  
+
+HEADERCOLOR 	EQU 0Fh
+VIDEOCOLOR		EQU 07h
+OPTIONSCOLOR	EQU 0Eh 
+
+SPACE			EQU 20h
+;========================================|
+;                                        |
+;	0      0000      black               |
+;	1      0001      blue                |
+;	2      0010      green               |
+;	3      0011      cyan                |
+;	4      0100      red                 |
+;	5      0101      magenta             |
+;	6      0110      brown               |
+;	7      0111      light gray          |
+;	8      1000      dark gray           |
+;	9      1001      light blue          |
+;	A      1010      light green         |
+;	B      1011      light cyan          |
+;	C      1100      light red           |
+;	D      1101      light magenta       |
+;	E      1110      yellow              |
+;	F      1111      white               |
+;                                        |
+;========================================|                             
 
 STACK SEGMENT STACK 'STACK'
     DB      1024h  DUP(0) 
@@ -71,6 +80,17 @@ STACK SEGMENT STACK 'STACK'
 STACK ENDS
 
 DATA SEGMENT PUBLIC 'DATA' USE16
+
+	HEADER      	DB 	'   00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F', 0
+	
+	TAB         	DB	'0123456789ABCDEF'
+	
+	ROW				DW 	0
+	
+	NEWLINE			DW  0
+	
+	PACKETSTR		DB	'PACKET: ', 0
+	OFFSETSTR		DB	'OFFSET: ', 0
     
     PCICONFIG 		DD 	80000000h
 
@@ -84,12 +104,9 @@ DATA SEGMENT PUBLIC 'DATA' USE16
 
     IOBase          DW 00h
 	
-	STARTPACKOFF	DW 0
-	LENPACKET		DW 0
+	STARTPACKOFF	DD 0
+	LENPACKET		DD 0
 	QTDEPACK		DD 0
-
-    ALIGN           16
-    PACKETBUFFER    DB  0FFh DUP(0)
 					
 	ALIGN			16
 	RXBUFFER		DB	4096 DUP(0)
@@ -109,13 +126,7 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 
         CALL    CLS
 	
-	@@: MOV		DH, 17h									; ROW 23d
-		MOV		DL, 0									; COL 0
-		XOR		BX, BX	
-		MOV		AH, 02h									; SET CURSOR POSITION
-		INT		10h	
-
-		MOV     EAX, PCICONFIG							; CHECK PCI ENABLE BIT 80000000h
+	@@: MOV     EAX, PCICONFIG							; CHECK PCI ENABLE BIT 80000000h
         MOV     DX, CONFIG_ADDRESS						; PCI CONFIG REGISTER 0CF8h
         OUT     DX, EAX									; SELECT PCICONFIG TO GET DATA
 			
@@ -130,18 +141,15 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 			
 		CALL    ENABLEBUSMASTERING
         CALL    RESET 
-
-		MOV     SI, OFFSET PACKETBUFFER					; SI = BUFFER TO PRINT DATA	
-		MOV		CX, 0FFh								; TOTAL DATA TO PRINT
 		
-		CALL	DEBUGRMODE								; PRINT DATA
+		CALL	SHOWPACKET
 
 	@@:	; set 1 million microseconds interval (1 second)
-		MOV     CX, 0Fh
-		MOV     DX, 4240h
-		MOV     AH, 86h
-		INT     15h
-		
+		;MOV     CX, 0Fh
+		;MOV     DX, 4240h
+		;MOV     AH, 86h
+		;INT     15h
+	
 		XOR     EDX, EDX	
 		XOR		EAX, EAX
         MOV		DX, WORD PTR IOBase
@@ -158,24 +166,17 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 		MOV		AX, ISR_ROK OR ISR_RER OR ISR_RXOVW OR ISR_FIFOOVW
 		OUT		DX, AX
 		
-		CALL	CLEARPACKETBUFFER
+		CALL	CLS
+
+		INC		QTDEPACK
+		
 		CALL	GETLENPACKET
-		CALL	COPYPACKET
+		CALL	SHOWPACKET
+		
 		CALL	SETNEXTPACKOFFSET
 		
-		; CLEAR PACKETBUFFER
-		; GET LEN PACKET [LENPACK] = (RXBUFFER + STARTPACKOFF + 2)
-		; COPY PACKET TO BUFFER [PACKETBUFFER] = (START: RXBUFFER + STARTPACKOFF + 4 { LENGHT: LENPACK - 8})	
+		; GET LEN PACKET [LENPACK] = (RXBUFFER + STARTPACKOFF + 2)	
 		; SET START OFFSET OF NEXT PACKET = [STARTPACKOFF] = (RXBUFFER + LENPACK + 4)
-
-		;MOV		SI, OFFSET RXBUFFER						; FOR DEBUG
-		MOV     SI, OFFSET PACKETBUFFER						; SI = BUFFER TO PRINT DATA	
-		MOV		CX, 0FFh									; TOTAL DATA TO PRINT
-		
-		INC		QTDEPACK
-		MOV		DWORD PTR EBX, QTDEPACK
-
-		CALL	DEBUGRMODE									; PRINT DATA
 
 		JMP		@b
 		
@@ -187,30 +188,14 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 	
 	;==================================================================================
 	
-	CLEARPACKETBUFFER PROC
-	
-		MOV		AX, DATA
-		MOV		ES, AX
-		MOV		ECX, 3Fh
-		XOR		EAX, EAX
-		MOV		DI, OFFSET PACKETBUFFER
-	
-	@@:	STOSD
-		LOOP	@b
-		
-		RET
-	
-	CLEARPACKETBUFFER ENDP
-
-    ;==================================================================================
-	
 	GETLENPACKET PROC
 	
+		XOR		ESI, ESI
 		MOV		AX, DATA
 		MOV		DS, AX
 		XOR		EAX, EAX
 		MOV		SI, OFFSET RXBUFFER
-		ADD		SI, STARTPACKOFF
+		ADD		ESI, STARTPACKOFF
 		ADD		SI, 2
 		
 		LODSW
@@ -222,33 +207,15 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 	
 	;==================================================================================
 	
-	COPYPACKET PROC
-	
-		MOV		AX, DATA
-		MOV		DS, AX
-		MOV		ES, AX
-		MOV		SI, OFFSET RXBUFFER
-		ADD		SI, STARTPACKOFF
-		ADD		SI, 4
-		MOV		DI, OFFSET PACKETBUFFER
-		MOVZX	ECX, WORD PTR LENPACKET
-		SUB		ECX, 8
-		
-		REP		MOVSB
-		
-		RET
-
-	COPYPACKET ENDP
-	
-	;==================================================================================
-	
 	SETNEXTPACKOFFSET PROC
 	
+		XOR		ESI, ESI
 		MOV		AX, DATA
 		MOV		DS, AX
 		MOV		SI, OFFSET LENPACKET
 		LODSW
-		MOV		WORD PTR STARTPACKOFF, AX
+		ADD		WORD PTR STARTPACKOFF, AX
+		ADD		WORD PTR STARTPACKOFF, 4
 		
 		RET
 		
@@ -278,11 +245,11 @@ CODE SEGMENT PUBLIC 'CODE' USE16
     CLS PROC
 
         PUSH    ES
-        XOR     AX, 0B800h
+        MOV     AX, 0B800h
         MOV     ES, AX 
         XOR     DI, DI
 
-        MOV     CX, 0F00h
+        MOV     CX, 80 * 24								; 80 COL * 24 ROW
         MOV     AX, 720h
 
     @@: MOV     ES:[DI], AX
@@ -415,8 +382,208 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         RET
         
     RESET ENDP  
+	
+	;======================================================================================
+	;	SHOW PACKET
+	;======================================================================================
+	
+	SHOWPACKET PROC
+	
+		PUSH	ES
+		MOV		AX, DATA
+		MOV		DS, AX
+		MOV		AX, 0B800h
+		MOV		ES, AX
+		
+		MOV		DI, 6
+		MOV		SI, OFFSET HEADER
+		CALL	PRINTSTR 
+		
+		MOV		ROW, WORD PTR 0
+		
+		CALL    PRINTBUFFER
+		
+		ADD		DI, 0A0h
+		
+		MOV		SI, OFFSET PACKETSTR
+		CALL	PRINTSTR 
+		
+		MOV		SI, OFFSET QTDEPACK
+		CALL	PRINTVALUE
+		
+		ADD		DI, 7Eh
+		
+		MOV		SI, OFFSET OFFSETSTR
+		CALL	PRINTSTR
+		
+		MOV		SI, OFFSET STARTPACKOFF
+		CALL	PRINTVALUE
+		
+		POP		ES
+		RET
+	
+	SHOWPACKET ENDP
+	
+	;======================================================================================
+	;	PRINT HEADER OF REAL MODE DEBUG
+	;======================================================================================
+    
+    PRINTSTR PROC
+            
+    @@: LODSB
+        CMP     AL, 0
+        JE      @f
+        CMP     AL, '$'
+        JE      @f
+        MOV     AH, HEADERCOLOR
+        STOSW
+        JMP     @b
+        
+    @@: RET
+    
+    PRINTSTR ENDP 
+	
+	;======================================================================================
+	;	PRINT MEMORY BUFFER
+	;====================================================================================== 
+    
+    PRINTBUFFER PROC  
 
-    ;==================================================================================
+		MOV		SI, OFFSET RXBUFFER
+		ADD		ESI, STARTPACKOFF
+		ADD		SI, 4
+		
+		MOV     DI, 140h 
+		
+    @@: MOV		AX, WORD PTR LENPACKET
+		CMP		AX, 200h
+		JGE		HALTSYS
+		CMP     ROW, AX                                   	; ROW - 00h~0Ah
+        JGE     @f
+		
+        MOV     CX, 10h                                     ; COL - 00h~0Fh 
+        CALL    HEADERBUFFER
+    
+	CROW:
+	
+        LODSB
+        MOV     DL, AL
+        RCR     AL, 4
+		AND		AL, 0Fh
+        XLATB
+        MOV     AH, VIDEOCOLOR
+        STOSW
+        
+        MOV     AL, DL
+        AND     AL, 0Fh
+        XLATB   
+        STOSW
+        
+        MOV     AL, SPACE
+        STOSW
+		
+		LOOP	CROW
+		
+		ADD		DI, 34h										; LINE FEED
+		ADD		ROW, 10h
+
+        JMP     @b    
+
+    @@: ADD		DI, NEWLINE									; NEW LINE
+		RET
+
+	HALTSYS:
+		CALL	CLS
+		MOV		SI, OFFSET LENPACKET
+		XOR		DI, DI
+		CALL	PRINTVALUE
+		
+		MOV		AX, 4C00h
+		INT		21h
+        
+    PRINTBUFFER ENDP
+	
+	;======================================================================================
+	;	PRINT HEADER OF BUFFER 0000: ~ 00F0:
+	;======================================================================================
+    
+    HEADERBUFFER PROC
+	
+		PUSH	DX
+        
+		MOV		BX, OFFSET TAB
+		
+        MOV     AH, HEADERCOLOR
+
+        MOV     DX, ROW
+		
+		MOV		AL, DH
+        RCR     AL, 4
+		AND		AL, 0Fh
+        XLATB
+        MOV     AH, HEADERCOLOR
+        STOSW
+        MOV     AL, DH
+        AND     AL, 0Fh
+        XLATB   
+        STOSW
+		
+		MOV		AL, DL
+        RCR     AL, 4
+		AND		AL, 0Fh
+        XLATB
+        MOV     AH, HEADERCOLOR
+        STOSW
+        MOV     AL, DL
+        AND     AL, 0Fh
+        XLATB   
+        STOSW
+        
+        MOV     AL, ':'
+        STOSW
+        
+        MOV     AL, SPACE 
+        STOSW
+		
+		POP		DX
+        
+        RET
+        
+    HEADERBUFFER ENDP
+	
+	;======================================================================================
+	;	QTDE PACKECT RECEIVE
+	;======================================================================================
+	
+	PRINTVALUE PROC
+	
+		MOV		CX, 4								
+		ADD		SI, CX
+		DEC		SI
+		
+	@@: LODSB
+        MOV     DL, AL
+        RCR     AL, 4
+		AND		AL, 0Fh
+        XLATB
+        MOV     AH, VIDEOCOLOR
+        STOSW
+        
+        MOV     AL, DL
+        AND     AL, 0Fh
+        XLATB   
+        STOSW
+		
+		SUB		SI, 2
+		
+		LOOP	@b
+		
+		MOV		AL, 'h'
+		STOSW
+
+		RET
+	
+	PRINTVALUE ENDP
 	
 CODE ENDS
 
