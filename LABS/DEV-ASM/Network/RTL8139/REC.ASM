@@ -91,6 +91,7 @@ DATA SEGMENT PUBLIC 'DATA' USE16
 	
 	PACKETSTR		DB	'PACKET: ', 0
 	OFFSETSTR		DB	'OFFSET: ', 0
+	LENGTHSTR		DB	'LENGTH: ', 0
     
     PCICONFIG 		DD 	80000000h
 
@@ -104,12 +105,14 @@ DATA SEGMENT PUBLIC 'DATA' USE16
 
     IOBase          DW 00h
 	
-	STARTPACKOFF	DD 0
-	LENPACKET		DD 0
-	QTDEPACK		DD 0
+	PACKETOFFSET	DW 0
+					
+	LENPACK			DW 0
+					
+	QTDEPACK		DW 0
 					
 	ALIGN			16
-	RXBUFFER		DB	4096 DUP(0)
+	RXBUFFER		DB	8192 DUP(0)
 
 DATA ENDS
 
@@ -140,17 +143,12 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         CALL    GETIOBASE                               ; GET I/O ADDRESS									
 			
 		CALL    ENABLEBUSMASTERING
-        CALL    RESET 
+        CALL    RESETNIC 
 		
-		CALL	SHOWPACKET
+		CALL	GETPACKETOFFSET							; GET PACKET OFFSET ON RXBUFFER
+		CALL	SHOWPACKET								; DUMP PACKET
 
-	@@:	; set 1 million microseconds interval (1 second)
-		;MOV     CX, 0Fh
-		;MOV     DX, 4240h
-		;MOV     AH, 86h
-		;INT     15h
-	
-		XOR     EDX, EDX	
+	@@:	XOR     EDX, EDX	
 		XOR		EAX, EAX
         MOV		DX, WORD PTR IOBase
 		ADD		DX, ISR
@@ -166,18 +164,21 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 		MOV		AX, ISR_ROK OR ISR_RER OR ISR_RXOVW OR ISR_FIFOOVW
 		OUT		DX, AX
 		
-		CALL	CLS
+		XOR		EAX, EAX
+		MOV		DX, WORD PTR IOBase
+		ADD		DX, 3Ah									; REGISTER CBR -> (DW) 003Ah-003Bh (R/W) CURRENT ADDRESS OF PACKET 
+		IN		AX, DX									; THE INITIAL VALUE IS 0000h. IT REFLECTS TOTAL 
+														; RECEIVED BYTE-COUNT IN THE RX BUFFER
+														
+		SUB		AX, PACKETOFFSET						; CALC LENGTH OF PACKET
+		MOV		WORD PTR LENPACK, AX
 
-		INC		QTDEPACK
+		INC		QTDEPACK								; COUNT PACKET RECEIVED
+		CALL	CLS										; GET PACKET OFFSET ON RXBUFFER
+		CALL	GETPACKETOFFSET
+		CALL	SHOWPACKET								; DUMP PACKET
 		
-		CALL	GETLENPACKET
-		CALL	SHOWPACKET
-		
-		CALL	SETNEXTPACKOFFSET
-		
-		; GET LEN PACKET [LENPACK] = (RXBUFFER + STARTPACKOFF + 2)	
-		; SET START OFFSET OF NEXT PACKET = [STARTPACKOFF] = (RXBUFFER + LENPACK + 4)
-
+	
 		JMP		@b
 		
     EOF:  
@@ -188,38 +189,34 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 	
 	;==================================================================================
 	
-	GETLENPACKET PROC
+	GETPACKETOFFSET PROC
 	
-		XOR		ESI, ESI
 		MOV		AX, DATA
 		MOV		DS, AX
+	
 		XOR		EAX, EAX
-		MOV		SI, OFFSET RXBUFFER
-		ADD		ESI, STARTPACKOFF
-		ADD		SI, 2
+		MOV		DX, WORD PTR IOBase
+		ADD		DX, 3Ah									; REGISTER CBR -> (DW) 003Ah-003Bh (R/W) CURRENT ADDRESS OF PACKET 
+		IN		AX, DX									; THE INITIAL VALUE IS 0000h. IT REFLECTS TOTAL 
+														; RECEIVED BYTE-COUNT IN THE RX BUFFER
+														
+														
+		CMP		AX, WORD PTR LENGTHOF RXBUFFER			; BUFFER IS FULL ?
+		JGE		RESETALL								; RESET NIC AND VARS
 		
-		LODSW
-		MOV		WORD PTR LENPACKET, AX
-		
-		RET
-	
-	GETLENPACKET ENDP
-	
-	;==================================================================================
-	
-	SETNEXTPACKOFFSET PROC
-	
-		XOR		ESI, ESI
-		MOV		AX, DATA
-		MOV		DS, AX
-		MOV		SI, OFFSET LENPACKET
-		LODSW
-		ADD		WORD PTR STARTPACKOFF, AX
-		ADD		WORD PTR STARTPACKOFF, 4
+		MOV		WORD PTR PACKETOFFSET, AX
 		
 		RET
 		
-	SETNEXTPACKOFFSET ENDP
+	RESETALL:
+	
+		CALL	RESETNIC
+		MOV		WORD PTR PACKETOFFSET, 0
+		MOV		WORD PTR LENPACK, 0
+		
+		RET
+		
+	GETPACKETOFFSET ENDP
 	
 	;==================================================================================
 
@@ -249,7 +246,7 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         MOV     ES, AX 
         XOR     DI, DI
 
-        MOV     CX, 80 * 24								; 80 COL * 24 ROW
+        MOV     CX, 80 * 25								; 80 COL * 25 ROW
         MOV     AX, 720h
 
     @@: MOV     ES:[DI], AX
@@ -341,7 +338,7 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 
     ;==================================================================================
     
-    RESET PROC 
+    RESETNIC PROC 
 
         MOV     DX, IOBase
         ADD     DX, CR
@@ -381,7 +378,7 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         
         RET
         
-    RESET ENDP  
+    RESETNIC ENDP  
 	
 	;======================================================================================
 	;	SHOW PACKET
@@ -407,16 +404,24 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 		
 		MOV		SI, OFFSET PACKETSTR
 		CALL	PRINTSTR 
-		
+
 		MOV		SI, OFFSET QTDEPACK
 		CALL	PRINTVALUE
 		
-		ADD		DI, 7Eh
+		ADD		DI, 86h
 		
 		MOV		SI, OFFSET OFFSETSTR
 		CALL	PRINTSTR
 		
-		MOV		SI, OFFSET STARTPACKOFF
+		MOV		SI, OFFSET PACKETOFFSET
+		CALL	PRINTVALUE
+		
+		ADD		DI, 86h
+		
+		MOV		SI, OFFSET LENGTHSTR
+		CALL	PRINTSTR
+		
+		MOV		SI, OFFSET LENPACK
 		CALL	PRINTVALUE
 		
 		POP		ES
@@ -447,21 +452,36 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 	;	PRINT MEMORY BUFFER
 	;====================================================================================== 
     
-    PRINTBUFFER PROC  
+    PRINTBUFFER PROC
 
-		MOV		SI, OFFSET RXBUFFER
-		ADD		ESI, STARTPACKOFF
-		ADD		SI, 4
-		
+		XOR		EAX, EAX
+		MOV		DX, WORD PTR IOBase
+		ADD		DX, 3Ah									; REGISTER CBR -> (DW) 003Ah-003Bh (R/W) CURRENT ADDRESS OF PACKET 
+		IN		AX, DX									; THE INITIAL VALUE IS 0000h. IT REFLECTS TOTAL 
+														; RECEIVED BYTE-COUNT IN THE RX BUFFER
+														
+		SUB		AX, WORD PTR LENPACK					; LENGTH OF PACKET = (CURRENT OFFSET PACKET - LAST OFFSET PACKET)
+
+		MOV		SI, OFFSET RXBUFFER						; START OFFSET OF BUFFER
+		ADD		SI, AX									; + LAST OFFSET PACKET
+		ADD		SI, 4									; IGNORE CRC
+
 		MOV     DI, 140h 
+		MOV		WORD PTR ROW, 0
 		
-    @@: MOV		AX, WORD PTR LENPACKET
-		CMP		AX, 200h
-		JGE		HALTSYS
-		CMP     ROW, AX                                   	; ROW - 00h~0Ah
+    @@: MOV		AX, WORD PTR LENPACK					
+		CMP		AX, 0									; LENGTH OF PACKET = 0?
+		JE		ZEROLEN									; DUMP 8 ROWS
+		
+		MOV		AX, WORD PTR ROW						; DUMP ROWS OF PACKET
+		CMP		AX, WORD PTR LENPACK
+		JG		@f
+		
+	ZEROLEN:
+		CMP     ROW, 80h                                ; ROW - 00h~08h
         JGE     @f
 		
-        MOV     CX, 10h                                     ; COL - 00h~0Fh 
+        MOV     CX, 10h                                 ; COL - 00h~0Fh 
         CALL    HEADERBUFFER
     
 	CROW:
@@ -491,15 +511,6 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 
     @@: ADD		DI, NEWLINE									; NEW LINE
 		RET
-
-	HALTSYS:
-		CALL	CLS
-		MOV		SI, OFFSET LENPACKET
-		XOR		DI, DI
-		CALL	PRINTVALUE
-		
-		MOV		AX, 4C00h
-		INT		21h
         
     PRINTBUFFER ENDP
 	
@@ -557,7 +568,7 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 	
 	PRINTVALUE PROC
 	
-		MOV		CX, 4								
+		MOV		CX, 2								
 		ADD		SI, CX
 		DEC		SI
 		
