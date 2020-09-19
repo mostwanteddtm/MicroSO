@@ -88,11 +88,7 @@ DATA SEGMENT PUBLIC 'DATA' USE16
 	ROW				DW 	0
 	
 	NEWLINE			DW  0
-	
-	PACKETSTR		DB	'PACKET: ', 0
-	OFFSETSTR		DB	'OFFSET: ', 0
-	LENGTHSTR		DB	'LENGTH: ', 0
-    
+
     PCICONFIG 		DD 	80000000h
 
 	TOTALDEVICES	DB	20h
@@ -104,12 +100,20 @@ DATA SEGMENT PUBLIC 'DATA' USE16
 	DEVICEID		DD 	?
 
     IOBase          DW 00h
+
+	PACKETLENGTH	DW 0
+	LENGTHSTR		DB 'PACKET LENGTH: ', 0
 	
-	PACKETOFFSET	DW 0
-					
-	LENPACK			DW 0
-					
-	QTDEPACK		DW 0
+	PACKETOFFSET	DW 0h
+	OFFSETSTR		DB 'NEXT OFFSET  : ', 0
+	
+	DUMPBUFFER		DB 1								; DUMP BUFFER 1 - TRUE | 0 - FALSE
+	CURRENTADDR		DW 0
+	
+	DEBUGCOUNT		DB 30h
+	
+	ALIGN			16
+	PACKETBUFFER	DB	1024 DUP(0)
 					
 	ALIGN			16
 	RXBUFFER		DB	8192 DUP(0)
@@ -138,19 +142,21 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         JNE     EOF										; IF NO GOTO END
 			
 		CALL	FINDDEVICE								; FIND ALL PCI DEVICES
-		JC		@f	
+		JC		EOF										; DEVICE NOT FOUND
 
         CALL    GETIOBASE                               ; GET I/O ADDRESS									
 			
 		CALL    ENABLEBUSMASTERING
         CALL    RESETNIC 
 		
-		CALL	GETPACKETOFFSET							; GET PACKET OFFSET ON RXBUFFER
+		MOV		WORD PTR PACKETLENGTH, 0
+		CALL	GETPACKETLENGTH
 		CALL	SHOWPACKET								; DUMP PACKET
-
-	@@:	XOR     EDX, EDX	
+		
+	@@:	
+		XOR     EDX, EDX	
 		XOR		EAX, EAX
-        MOV		DX, WORD PTR IOBase
+		MOV		DX, WORD PTR IOBase
 		ADD		DX, ISR
 		IN		AX, DX
 		
@@ -164,21 +170,26 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 		MOV		AX, ISR_ROK OR ISR_RER OR ISR_RXOVW OR ISR_FIFOOVW
 		OUT		DX, AX
 		
-		XOR		EAX, EAX
-		MOV		DX, WORD PTR IOBase
-		ADD		DX, 3Ah									; REGISTER CBR -> (DW) 003Ah-003Bh (R/W) CURRENT ADDRESS OF PACKET 
-		IN		AX, DX									; THE INITIAL VALUE IS 0000h. IT REFLECTS TOTAL 
-														; RECEIVED BYTE-COUNT IN THE RX BUFFER
-														
-		SUB		AX, PACKETOFFSET						; CALC LENGTH OF PACKET
-		MOV		WORD PTR LENPACK, AX
-
-		INC		QTDEPACK								; COUNT PACKET RECEIVED
-		CALL	CLS										; GET PACKET OFFSET ON RXBUFFER
-		CALL	GETPACKETOFFSET
-		CALL	SHOWPACKET								; DUMP PACKET
+		CALL	CLS
+		CALL	GETPACKETLENGTH
 		
-	
+		;CALL	CLEARPACKETBUFFER
+		;CALL	COPYPACKETTOBUFFER
+		
+		CALL	SHOWPACKET								; DUMP PACKET
+		CALL	SETNEXTPACKETOFFSET
+		
+		CALL	PRINTFOOTER
+		
+		; set 1 million microseconds interval (1 second)
+		;MOV     CX, 0Fh
+		;MOV     DX, 4240h
+		;MOV     AH, 86h
+		;INT     15H
+		
+		;XOR		AX, AX
+		;INT		16h
+		
 		JMP		@b
 		
     EOF:  
@@ -189,34 +200,73 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 	
 	;==================================================================================
 	
-	GETPACKETOFFSET PROC
+	GETPACKETLENGTH	PROC
+	
+		XOR		EAX, EAX
+		MOV		SI, OFFSET RXBUFFER
+		ADD		SI, WORD PTR PACKETOFFSET
+		ADD		SI, 2
+		
+		MOV		AX, DS:[SI]
+		MOV		WORD PTR PACKETLENGTH, AX
+	
+		RET
+	
+	GETPACKETLENGTH ENDP
+
+	;==================================================================================
+	
+	SETNEXTPACKETOFFSET PROC
+	
+		MOV		AX, WORD PTR PACKETLENGTH
+		ADD		AX, 4									; CRC 4 BYTES
+		ADD		WORD PTR PACKETOFFSET, AX
+		
+		RET
+	
+	SETNEXTPACKETOFFSET ENDP
+	
+	;==================================================================================
+	
+	COPYPACKETTOBUFFER PROC
 	
 		MOV		AX, DATA
 		MOV		DS, AX
+		MOV		ES, AX
 	
-		XOR		EAX, EAX
-		MOV		DX, WORD PTR IOBase
-		ADD		DX, 3Ah									; REGISTER CBR -> (DW) 003Ah-003Bh (R/W) CURRENT ADDRESS OF PACKET 
-		IN		AX, DX									; THE INITIAL VALUE IS 0000h. IT REFLECTS TOTAL 
-														; RECEIVED BYTE-COUNT IN THE RX BUFFER
-														
-														
-		CMP		AX, WORD PTR LENGTHOF RXBUFFER			; BUFFER IS FULL ?
-		JGE		RESETALL								; RESET NIC AND VARS
+		XOR		ECX, ECX
+		MOV		SI, OFFSET RXBUFFER						; START OFFSET OF BUFFER
+		ADD		SI, WORD PTR PACKETOFFSET
+		ADD		SI, 4
 		
-		MOV		WORD PTR PACKETOFFSET, AX
+		MOV		CX, WORD PTR PACKETLENGTH
+		SUB		CX, 4									; IGNORE CRC
+		;ADD		CX, 10h									; DEBUG CRC AND START NEXT PACK
+		MOV		DI, OFFSET PACKETBUFFER
+		
+		REP		MOVSB
 		
 		RET
-		
-	RESETALL:
 	
-		CALL	RESETNIC
-		MOV		WORD PTR PACKETOFFSET, 0
-		MOV		WORD PTR LENPACK, 0
+	COPYPACKETTOBUFFER ENDP
+	
+	;==================================================================================
+	
+	CLEARPACKETBUFFER PROC
+	
+		MOV		AX, DATA
+		MOV		DS, AX
+		MOV		ES, AX
+		
+		MOV		DI, OFFSET PACKETBUFFER
+		XOR		AX, AX
+		MOV		CX, LENGTHOF PACKETBUFFER
+		
+		REP		STOSB
 		
 		RET
-		
-	GETPACKETOFFSET ENDP
+	
+	CLEARPACKETBUFFER ENDP
 	
 	;==================================================================================
 
@@ -246,7 +296,7 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         MOV     ES, AX 
         XOR     DI, DI
 
-        MOV     CX, 80 * 25								; 80 COL * 25 ROW
+        MOV     CX, 160 * 25								; 160 COL * 25 ROW
         MOV     AX, 720h
 
     @@: MOV     ES:[DI], AX
@@ -391,6 +441,7 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 		MOV		DS, AX
 		MOV		AX, 0B800h
 		MOV		ES, AX
+		MOV		BX, OFFSET TAB
 		
 		MOV		DI, 6
 		MOV		SI, OFFSET HEADER
@@ -399,16 +450,33 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 		MOV		ROW, WORD PTR 0
 		
 		CALL    PRINTBUFFER
+
+		POP		ES
+		RET
+	
+	SHOWPACKET ENDP
+	
+	;======================================================================================
+	;	PRINT FOOTER
+	;======================================================================================
+	
+	PRINTFOOTER PROC
+	
+		MOV		AX, DATA
+		MOV		DS, AX
+		MOV		AX, 0B800h
+		MOV		ES, AX
+		MOV		BX, OFFSET TAB
 		
-		ADD		DI, 0A0h
+		MOV		DI, 160 * 23
 		
-		MOV		SI, OFFSET PACKETSTR
+		MOV		SI, OFFSET LENGTHSTR
 		CALL	PRINTSTR 
 
-		MOV		SI, OFFSET QTDEPACK
+		MOV		SI, OFFSET PACKETLENGTH
 		CALL	PRINTVALUE
 		
-		ADD		DI, 86h
+		ADD		DI, 78h
 		
 		MOV		SI, OFFSET OFFSETSTR
 		CALL	PRINTSTR
@@ -416,18 +484,9 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 		MOV		SI, OFFSET PACKETOFFSET
 		CALL	PRINTVALUE
 		
-		ADD		DI, 86h
-		
-		MOV		SI, OFFSET LENGTHSTR
-		CALL	PRINTSTR
-		
-		MOV		SI, OFFSET LENPACK
-		CALL	PRINTVALUE
-		
-		POP		ES
 		RET
-	
-	SHOWPACKET ENDP
+		
+	PRINTFOOTER ENDP
 	
 	;======================================================================================
 	;	PRINT HEADER OF REAL MODE DEBUG
@@ -454,33 +513,34 @@ CODE SEGMENT PUBLIC 'CODE' USE16
     
     PRINTBUFFER PROC
 
-		XOR		EAX, EAX
-		MOV		DX, WORD PTR IOBase
-		ADD		DX, 3Ah									; REGISTER CBR -> (DW) 003Ah-003Bh (R/W) CURRENT ADDRESS OF PACKET 
-		IN		AX, DX									; THE INITIAL VALUE IS 0000h. IT REFLECTS TOTAL 
-														; RECEIVED BYTE-COUNT IN THE RX BUFFER
-														
-		SUB		AX, WORD PTR LENPACK					; LENGTH OF PACKET = (CURRENT OFFSET PACKET - LAST OFFSET PACKET)
-
-		MOV		SI, OFFSET RXBUFFER						; START OFFSET OF BUFFER
-		ADD		SI, AX									; + LAST OFFSET PACKET
-		ADD		SI, 4									; IGNORE CRC
-
+		MOV		SI, OFFSET RXBUFFER						; DEBUG
+		ADD		SI, WORD PTR PACKETOFFSET
+		AND		SI, 0FFF0h								; USE WITH DUMPBUFFER - 0) ROW PACKETOFFSET~N (DEBUG)
+		
+		;MOV		SI, OFFSET PACKETBUFFER
+		
 		MOV     DI, 140h 
 		MOV		WORD PTR ROW, 0
 		
-    @@: MOV		AX, WORD PTR LENPACK					
+	@@: 
+		MOV		AX, WORD PTR PACKETLENGTH					
 		CMP		AX, 0									; LENGTH OF PACKET = 0?
 		JE		ZEROLEN									; DUMP 8 ROWS
 		
 		MOV		AX, WORD PTR ROW						; DUMP ROWS OF PACKET
-		CMP		AX, WORD PTR LENPACK
+		MOV		BX, WORD PTR PACKETLENGTH
+		CMP		BX, 200h
+		JG		ZEROLEN
+		CMP		AX, BX
 		JG		@f
+		JMP		CPACK
 		
 	ZEROLEN:
-		CMP     ROW, 80h                                ; ROW - 00h~08h
+		CMP     ROW, 60h                                ; ROW - 00h~06h
         JGE     @f
-		
+	
+	CPACK:
+	
         MOV     CX, 10h                                 ; COL - 00h~0Fh 
         CALL    HEADERBUFFER
     
@@ -504,15 +564,41 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 		
 		LOOP	CROW
 		
-		ADD		DI, 34h										; LINE FEED
+		CALL	PRINTCHARS
+		
+		ADD		DI, 10h									; LINE FEED
 		ADD		ROW, 10h
 
         JMP     @b    
 
-    @@: ADD		DI, NEWLINE									; NEW LINE
+    @@: ADD		DI, NEWLINE								; NEW LINE
+		MOV		BYTE PTR DUMPBUFFER, 1					; 1) ROW = 0~N     0) ROW PACKETOFFSET~N (DEBUG)
 		RET
         
     PRINTBUFFER ENDP
+	
+	;======================================================================================
+	;	PRINT CHARS OF BUFFER
+	;======================================================================================
+	
+	PRINTCHARS PROC  
+
+	    SUB     SI, 10h
+	    ADD     DI, 4h 
+	    MOV     CX, 10h
+	    
+	@@: LODSB 
+	    CMP     AL, 20h
+	    JGE     ISCHAR
+	    MOV     AL, '.'
+    ISCHAR:
+	    MOV     AH, VIDEOCOLOR
+        STOSW 
+        LOOP    @b
+
+        RET
+	    
+	PRINTCHARS ENDP
 	
 	;======================================================================================
 	;	PRINT HEADER OF BUFFER 0000: ~ 00F0:
@@ -526,8 +612,17 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 		
         MOV     AH, HEADERCOLOR
 
-        MOV     DX, ROW
+		CMP		BYTE PTR DUMPBUFFER, 1
+		JNE		@f
+		MOV		DX, ROW
+		JMP		PRINTROW
 		
+	@@: MOV		DX, WORD PTR PACKETOFFSET
+		AND		DX, 0FFF0h
+		ADD		DX, ROW
+		
+	PRINTROW:
+	
 		MOV		AL, DH
         RCR     AL, 4
 		AND		AL, 0Fh
@@ -555,7 +650,7 @@ CODE SEGMENT PUBLIC 'CODE' USE16
         
         MOV     AL, SPACE 
         STOSW
-		
+
 		POP		DX
         
         RET
