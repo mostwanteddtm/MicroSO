@@ -1,10 +1,10 @@
 
  Start  Stop   Length Name                   Class
  00000H 00000H 00000H _TEXT                  CODE
- 00000H 0033DH 0033EH CODE                   CODE
- 00340H 00340H 00000H _DATA                  DATA
- 00340H 027DFH 024A0H DATA                   DATA
- 027E0H 03803H 01024H STACK                  STACK
+ 00000H 00347H 00348H CODE                   CODE
+ 00348H 00348H 00000H _DATA                  DATA
+ 00350H 027EFH 024A0H DATA                   DATA
+ 027F0H 03813H 01024H STACK                  STACK
 
  Origin   Group
  0034:0   DGROUP
