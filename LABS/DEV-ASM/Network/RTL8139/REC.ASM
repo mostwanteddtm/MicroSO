@@ -156,13 +156,18 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 		CALL	GETPACKETLENGTH
 		CALL	SHOWPACKET								; DUMP PACKET
 		
+		CALL	PRINTFOOTER
+		
 		MOV 	DH, 23									; SET ROW POSITION
 		MOV 	DL, 21									; SET COL POSITION
 		MOV 	BH, 0									; SET PAGE NUMBER
 		MOV 	AH, 2									; SET CURSOR POSITION
 		INT 	10h
 		
-	@@:	
+	@@:	MOV		AH, 01h
+		INT		16h
+		JNZ		EOF
+	
 		XOR     EDX, EDX	
 		XOR		EAX, EAX
 		MOV		DX, WORD PTR IOBase
@@ -203,7 +208,13 @@ CODE SEGMENT PUBLIC 'CODE' USE16
 		
 		JMP		CHECKIFLASTPACKET
 		
-    EOF:  
+    EOF:
+		CALL	CLS
+		MOV 	DH, 0									; SET ROW POSITION
+		MOV 	DL, 0									; SET COL POSITION
+		MOV 	BH, 0									; SET PAGE NUMBER
+		MOV 	AH, 2									; SET CURSOR POSITION
+		INT 	10h
         MOV     AX, 4C00h
         INT     21h    
     
