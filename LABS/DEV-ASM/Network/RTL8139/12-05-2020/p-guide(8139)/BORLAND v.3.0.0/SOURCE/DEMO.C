@@ -17,6 +17,7 @@ void InitSoftware();
 void IssueCMD();
 void TxInterruptHandler();
 void breakpoint(BOOLEAN success);
+void EnableInterruptOnPIC();
 BOOLEAN RxInterruptHandler();
 
 //Transmit variables
@@ -44,6 +45,8 @@ ULONG	IOBase,Irq;
 unsigned char *Buffer;
 ULONG	PhysicalAddrBuffer;
 
+int useInterrupt = TRUE;
+int	hasInterrupt = FALSE;
 
 void ShowStatistics()
 {
@@ -123,18 +126,21 @@ void interrupt NewFunction(void)
 			}
 			curISR = inport(IOBase + ISR);
 		} while( (curISR & R39_INTERRUPT_MASK) != 0);
-	
-		//	_asm int 3;
-		asm    mov     al,020h
-		asm    out     0a0h,al         //;issue EOI to 2nd 8259
-		asm    out     20h,al          //;Issue EOI to 1nd 8259
-	
+
     }
     else
     {
 		// not our interrupt, should call original interrupt service routine.
 		// OldFunction();
     }
+	
+	//	_asm int 3;
+	asm    mov     al,020h
+	asm    out     0a0h,al         //;issue EOI to 2nd 8259
+	asm    out     20h,al          //;Issue EOI to 1nd 8259
+		
+	hasInterrupt = TRUE;
+		
     enable();	// == _asm sti
 }
 
@@ -373,6 +379,15 @@ void EnableBusMastering()
 	outport(0xcfc, cmr);
 }
 
+void EnableInterruptOnPIC()
+{
+	// RTL8139 IRQ 11
+	// PIC SLAVE PORT 0xA1 (IRQ15 <- IRQ8) --- (1) Disable (0) Enable --- 11110111
+	asm		in		al, 0xA1
+	asm		and		al, 0xF7 // 11110111b
+	asm		out		0xA1, al
+}
+
 /////////////////////////////////////////////////////////////////////////
 //Load / Unload
 /////////////////////////////////////////////////////////////////////////
@@ -386,6 +401,7 @@ BOOLEAN LoadDriver()
 //hook interrupt vector
 	disable();
 	setvect(INTR,NewFunction);
+	if (useInterrupt) EnableInterruptOnPIC();
 	enable();
 //initialize chip
 	InitSoftware();
@@ -503,9 +519,11 @@ void Receive()
 	NewFunction();
 	ShowPacket(pTestPacket);
 	pTestPacket->PacketLength = 0;
-	delay(1000);
+	delay(200);
 	
     } while(!kbhit());
+	
+	printf("\nPackets received by function!!");
 }
 
 void breakpoint(BOOLEAN success)
@@ -516,11 +534,39 @@ void breakpoint(BOOLEAN success)
 
 main()
 {
-	clrscr();
-    directvideo = 1;
-	LoadDriver();
-	//Send();
-	Receive();
+	PPACKET	pTestPacket;
+	
+	if (useInterrupt)
+	{
+		clrscr();
+		directvideo = 1;
+		LoadDriver();
+		
+		pTestPacket = PreparePacket();
+		ReadPacket(pTestPacket);
+		
+		do
+		{
+			if (hasInterrupt)
+			{	
+				ShowPacket(pTestPacket);
+				pTestPacket->PacketLength = 0;
+				hasInterrupt = FALSE;
+			}
+			
+		} while(!kbhit());
+		
+		printf("\nPackets received by interrupt!!");
+	}
+	else
+	{
+		clrscr();
+		directvideo = 1;
+		LoadDriver();
+		//Send();
+		Receive();	
+	}
+	
 	UnloadDriver();
 	return 0;
 }
