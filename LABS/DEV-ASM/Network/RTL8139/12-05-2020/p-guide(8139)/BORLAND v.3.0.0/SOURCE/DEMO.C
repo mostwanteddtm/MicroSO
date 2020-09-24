@@ -458,26 +458,51 @@ PPACKET PreparePacket()
 void ShowPacket(PPACKET pPacket)
 {
     unsigned char *PktBuf   = pPacket->Buffers.Buffer;
-    unsigned int  i,PktLength = pPacket->PacketLength;
+    unsigned int  i,PktLength = pPacket->PacketLength, rest = -1;
+	int e = 0, cont = 0;
 	
 	if (pPacket->PacketLength == 0) return;
 	
     clrscr();
-    //ShowStatistics();
-    printf("Packet Length = %d\n",PktLength);
+	
+	printf("Packet Length = %d\n",PktLength);
+
     for(i=0;i<PktLength;i++)
     {
-		printf("%02X ",PktBuf[i]);
+        printf("%02X ",PktBuf[i]);
+		
 		if( (i&0xf) == 0xf )
 		{
-			printf("  %4X\n", (i&0xfffffff0) );
+			printf("  ");
+			
+            for(e=0xf;e>-1;e--)
+                PktBuf[i-e] < 0x20 ? putchar('.') : putchar(PktBuf[i-e]);
+
+			printf("%4X\n", (i&0xfffffff0) );
+
+            if (i + 0xf >= PktLength) cont = 1;
 		}
+
+        if (cont == 1) rest++;	
 		
 		if( (i&0xff) == 0xff )
 		{
 			getch();
 			clrscr();
-		}
+		}	
+    }
+
+	printf("  ");
+	
+    i = i - rest;
+
+    for(e=rest; e <= 0xf; e++)
+        printf("   ");
+
+    for(e=0; e<rest;e++)
+    {
+        PktBuf[i] < 0x20 ? putchar('.') : putchar(PktBuf[i]);
+        i++;
     }
 }
 
