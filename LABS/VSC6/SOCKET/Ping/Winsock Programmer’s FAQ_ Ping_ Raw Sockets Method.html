@@ -1,0 +1,788 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/DTD/strict.dtd">
+<!-- saved from url=(0052)https://tangentsoft.net/wskfaq/examples/rawping.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+	<link rel="shortcut icon" href="https://tangentsoft.net/bitmaps/favicon.png">
+	<link rel="icon" href="https://tangentsoft.net/bitmaps/favicon.png" type="image/png">
+	<link href="./Winsock Programmer’s FAQ_ Ping_ Raw Sockets Method_files/faq.css" rel="Stylesheet" type="text/css">
+
+	<title>Winsock Programmer’s FAQ: Ping: Raw Sockets Method</title>
+
+	<style type="text/css">
+		#next-link {
+			width: 38px;
+			height: 32px;
+			text-decoration: none;
+			display: block;
+			background-image: url(../bitmaps/navbar-icons.png);
+			background-position: -38px 0;
+		}
+		#prev-link {
+			width: 38px;
+			height: 32px;
+			text-decoration: none;
+			display: block;
+			background-image: url(../bitmaps/navbar-icons.png);
+			background-position: 0 0;
+		}
+		#stop-link {
+			width: 38px;
+			height: 32px;
+			text-decoration: none;
+			display: block;
+			background-image: url(../bitmaps/navbar-icons.png);
+			background-position: -76px 0;
+		}
+		.navbar {
+			border: 8px solid #d0d0a0;
+			border-spacing: 0;
+			border-radius: 10px;
+			-moz-border-radius: 10px;
+			-webkit-border-radius: 10px;
+			height: 140px;
+			margin: auto;   /* center on page */
+			margin-top: 10px;
+			text-align: center;
+			width: 95%;
+		}
+		.navbar td {
+			background-color: #006000;
+			border: 10px solid #e0e0c0;
+			color: #ffffee;
+			font-size: 182%;
+			font-family:
+				"verdana",
+				"luxi sans",
+				"helvetica narrow",
+				"arial condensed",
+				"arial",
+				"univers",
+				sans-serif;
+			font-weight: bold;
+			text-align: center;
+		}
+		.navbarcap {
+			background-color: #e0e0c0 !important;
+			cursor: pointer;
+			padding-left: 10px;
+			width: 50px;
+		}
+	</style>
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+	
+
+
+
+
+	
+
+	<!--  **** Navigation Bar ****  -->
+	<table class="navbar">
+		<tbody><tr>
+			<td class="navbarcap" onclick="location.href=&#39;../examples/dllping.html&#39;">
+				<a id="prev-link" href="https://tangentsoft.net/wskfaq/examples/dllping.html"></a>
+			</td>
+
+			<td>
+				Winsock Programmer’s FAQ<br>
+
+				
+
+				
+				
+				
+					Examples: Ping: Raw Sockets Method
+				
+			</td>
+
+			<td class="navbarcap" onclick="location.href=&#39;../examples/fdpass.html&#39;">
+				<a id="next-link" href="https://tangentsoft.net/wskfaq/examples/fdpass.html"></a>
+			</td>
+		</tr>
+	</tbody></table>
+
+	<!--  **** Body Container ****  -->
+	<div id="body" style="padding-left: 30px">
+
+
+<p>This pinger uses "raw sockets", so it requires Winsock 2. It’s
+about 3 times longer (288 non-comment lines versus 98) than the
+<a href="https://tangentsoft.net/wskfaq/examples/dllping.html">ICMP method</a>, but it will continue to
+work, while the ICMP method might fail to work on future versions of
+Windows. This program is also much more flexible than the ICMP.DLL
+pinger.</p>
+
+<p>To use this program on Windows NT derivatives, you must be logged
+in as an Administrator.</p>
+
+<p>This program is split into two major parts: a driver part and a
+"pinger" part. The driver mainly just declares <code>main()</code>, which
+calls the functions in the pinger part in the proper sequence. The
+pinger part is mostly reusable as-is, although you will probably
+want to do things like exchanging the output statements for encoded
+return values. There is also a separate module for the IP checksum
+calculation function because it is not specifically tied to pinging;
+this same algorithm is used in other parts of TCP/IP.</p>
+
+<p>This program allows you to change the ICMP packet’s TTL
+(time to live) value. From this, you can do several other interesting
+things, like developing a <a href="https://tangentsoft.net/wskfaq/examples/rawping.html#fn-traceroute">traceroute</a>
+utility, and finding the <a href="https://tangentsoft.net/wskfaq/examples/rawping.html#fn-nexthop">next hop</a> (such
+as a router) on your network. Notice that we don’t use the
+"<code>ttl</code>" field in <code>struct IPHeader</code>, because we can
+only <i>receive</i> the full IP header, not send it. Instead, we use
+the <code>setsockopt()</code> with the <code>IP_TTL</code> flag to set the
+TTL option in the IP header.</p>
+
+<p>You might want to add timeout functionality to this program,
+so that it doesn’t wait forever for a ping reply. Two ways to
+handle this are to 1) spin the ping off into a separate thread and
+handle the timeout from the main thread; or 2) drop in a call to
+<code>select()</code> before the <code>recvfrom()</code> call, passing something
+reasonable for the <i>timeout</i> argument.</p>
+
+<p>This program is based on a program in the Win32 SDK, though hardly
+any of the original code remains. Also, this version is a bit smarter,
+compiles under both Microsoft and Borland C++, and should be much
+easier to understand and reuse.</p>
+
+
+
+
+
+
+	
+
+
+<hr class="noshade">
+
+<h4 class="lmargin"><a href="https://tangentsoft.net/wskfaq/examples/src/rawping_driver.cpp">rawping_driver.cpp</a></h4>
+
+<pre><font color="#444444">/***********************************************************************
+ rawping_driver.cpp - A driver program to test the rawping.cpp module.
+
+ Building under Microsoft C++ 5.0: 
+ 
+    cl -GX rawping.cpp rawping_driver.cpp ip_checksum.cpp ws2_32.lib
+
+ Building under Borland C++ 5.0: 
+ 
+    bcc32 rawping.cpp rawping_driver.cpp ip_checksum.cpp ws2_32.lib
+  
+ ----------------------------------------------------------------------
+ Change log:
+    9/21/1998 - Added TTL support.
+ 
+    2/14/1998 - Polished the program up and separated out the 
+        rawping.cpp and ip_checksum.cpp modules.  Also got it to work
+        under Borland C++.
+
+    2/12/1998 - Fixed a problem with the checksum calculation.  Program
+        works now.
+
+    2/6/1998 - Created using Microsoft's "raw ping" sample in the Win32
+        SDK as a model.  Not much remains of the original code.
+***********************************************************************/</font>
+
+<font color="0000ff"><strong>#include <font color="#008000">&lt;winsock2.h&gt;</font></strong></font>
+<font color="0000ff"><strong>#include <font color="#008000">&lt;iostream.h&gt;</font></strong></font>
+
+<font color="0000ff"><strong>#include <font color="#008000">"rawping.h"</font></strong></font>
+
+<font color="0000ff"><strong>#define DEFAULT_PACKET_SIZE 32</strong></font>
+<font color="0000ff"><strong>#define DEFAULT_TTL 30</strong></font>
+<font color="0000ff"><strong>#define MAX_PING_DATA_SIZE 1024</strong></font>
+<font color="0000ff"><strong>#define MAX_PING_PACKET_SIZE (MAX_PING_DATA_SIZE + sizeof(IPHeader))</strong></font>
+
+<strong>int</strong> <font color="#2040a0">allocate_buffers</font><font color="4444FF">(</font><font color="#2040a0">ICMPHeader</font><font color="4444FF">*</font><font color="4444FF">&amp;</font> <font color="#2040a0">send_buf</font>, <font color="#2040a0">IPHeader</font><font color="4444FF">*</font><font color="4444FF">&amp;</font> <font color="#2040a0">recv_buf</font>,
+        <strong>int</strong> <font color="#2040a0">packet_size</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+
+<font color="#444444">///////////////////////////////////////////////////////////////////////</font>
+<font color="#444444">// Program entry point</font>
+
+<strong>int</strong> <font color="#2040a0">main</font><font color="4444FF">(</font><strong>int</strong> <font color="#2040a0">argc</font>, <strong>char</strong><font color="4444FF">*</font> <font color="#2040a0">argv</font><font color="4444FF">[</font><font color="4444FF">]</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#444444">// Init some variables at top, so they aren't skipped by the</font>
+    <font color="#444444">// cleanup routines.</font>
+    <strong>int</strong> <font color="#2040a0">seq_no</font> <font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">;</font>
+    <font color="#2040a0">ICMPHeader</font><font color="4444FF">*</font> <font color="#2040a0">send_buf</font> <font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">;</font>
+    <font color="#2040a0">IPHeader</font><font color="4444FF">*</font> <font color="#2040a0">recv_buf</font> <font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">;</font>
+
+    <font color="#444444">// Did user pass enough parameters?</font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">argc</font> <font color="4444FF">&lt;</font> <font color="#FF0000">2</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"usage: "</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">argv</font><font color="4444FF">[</font><font color="#FF0000">0</font><font color="4444FF">]</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">" &lt;host&gt; [data_size] [ttl]"</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font>
+                <font color="#2040a0">endl</font><font color="4444FF">;</font>
+        <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"<font color="#77dd77">\t</font>data_size can be up to "</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">MAX_PING_DATA_SIZE</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font>
+                <font color="#008000">" bytes.  Default is "</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">DEFAULT_PACKET_SIZE</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"."</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> 
+                <font color="#2040a0">endl</font><font color="4444FF">;</font> 
+        <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"<font color="#77dd77">\t</font>ttl should be 255 or lower.  Default is "</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font>
+                <font color="#2040a0">DEFAULT_TTL</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"."</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">endl</font><font color="4444FF">;</font>
+        <strong>return</strong> <font color="#FF0000">1</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+
+    <font color="#444444">// Figure out how big to make the ping packet</font>
+    <strong>int</strong> <font color="#2040a0">packet_size</font> <font color="4444FF">=</font> <font color="#2040a0">DEFAULT_PACKET_SIZE</font><font color="4444FF">;</font>
+    <strong>int</strong> <font color="#2040a0">ttl</font> <font color="4444FF">=</font> <font color="#2040a0">DEFAULT_TTL</font><font color="4444FF">;</font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">argc</font> <font color="4444FF">&gt;</font> <font color="#FF0000">2</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <strong>int</strong> <font color="#2040a0">temp</font> <font color="4444FF">=</font> <font color="#2040a0">atoi</font><font color="4444FF">(</font><font color="#2040a0">argv</font><font color="4444FF">[</font><font color="#FF0000">2</font><font color="4444FF">]</font><font color="4444FF">)</font><font color="4444FF">;</font>
+        <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">temp</font> <font color="4444FF">!</font><font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+            <font color="#2040a0">packet_size</font> <font color="4444FF">=</font> <font color="#2040a0">temp</font><font color="4444FF">;</font>
+        <font color="4444FF"><strong>}</strong></font>
+        <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">argc</font> <font color="4444FF">&gt;</font> <font color="#FF0000">3</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+            <font color="#2040a0">temp</font> <font color="4444FF">=</font> <font color="#2040a0">atoi</font><font color="4444FF">(</font><font color="#2040a0">argv</font><font color="4444FF">[</font><font color="#FF0000">3</font><font color="4444FF">]</font><font color="4444FF">)</font><font color="4444FF">;</font>
+            <strong>if</strong> <font color="4444FF">(</font><font color="4444FF">(</font><font color="#2040a0">temp</font> <font color="4444FF">&gt;</font><font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">)</font> <font color="4444FF">&amp;</font><font color="4444FF">&amp;</font> <font color="4444FF">(</font><font color="#2040a0">temp</font> <font color="4444FF">&lt;</font><font color="4444FF">=</font> <font color="#FF0000">255</font><font color="4444FF">)</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+                <font color="#2040a0">ttl</font> <font color="4444FF">=</font> <font color="#2040a0">temp</font><font color="4444FF">;</font>
+            <font color="4444FF"><strong>}</strong></font>
+        <font color="4444FF"><strong>}</strong></font>
+    <font color="4444FF"><strong>}</strong></font>
+    <font color="#2040a0">packet_size</font> <font color="4444FF">=</font> <font color="#2040a0">max</font><font color="4444FF">(</font><strong>sizeof</strong><font color="4444FF">(</font><font color="#2040a0">ICMPHeader</font><font color="4444FF">)</font>, 
+            <font color="#2040a0">min</font><font color="4444FF">(</font><font color="#2040a0">MAX_PING_DATA_SIZE</font>, <font color="4444FF">(</font><strong>unsigned</strong> <strong>int</strong><font color="4444FF">)</font><font color="#2040a0">packet_size</font><font color="4444FF">)</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+    <font color="#444444">// Start Winsock up</font>
+    <font color="#2040a0">WSAData</font> <font color="#2040a0">wsaData</font><font color="4444FF">;</font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">WSAStartup</font><font color="4444FF">(</font><font color="#2040a0">MAKEWORD</font><font color="4444FF">(</font><font color="#FF0000">2</font>, <font color="#FF0000">1</font><font color="4444FF">)</font>, <font color="4444FF">&amp;</font><font color="#2040a0">wsaData</font><font color="4444FF">)</font> <font color="4444FF">!</font><font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"Failed to find Winsock 2.1 or better."</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">endl</font><font color="4444FF">;</font>
+        <strong>return</strong> <font color="#FF0000">1</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+
+    <font color="#444444">// Set up for pinging</font>
+    <font color="#2040a0">SOCKET</font> <font color="#2040a0">sd</font><font color="4444FF">;</font>
+    <font color="#2040a0">sockaddr_in</font> <font color="#2040a0">dest</font>, <font color="#2040a0">source</font><font color="4444FF">;</font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">setup_for_ping</font><font color="4444FF">(</font><font color="#2040a0">argv</font><font color="4444FF">[</font><font color="#FF0000">1</font><font color="4444FF">]</font>, <font color="#2040a0">ttl</font>, <font color="#2040a0">sd</font>, <font color="#2040a0">dest</font><font color="4444FF">)</font> <font color="4444FF">&lt;</font> <font color="#FF0000">0</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <strong>goto</strong> <font color="#2040a0">cleanup</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">allocate_buffers</font><font color="4444FF">(</font><font color="#2040a0">send_buf</font>, <font color="#2040a0">recv_buf</font>, <font color="#2040a0">packet_size</font><font color="4444FF">)</font> <font color="4444FF">&lt;</font> <font color="#FF0000">0</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <strong>goto</strong> <font color="#2040a0">cleanup</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+    <font color="#2040a0">init_ping_packet</font><font color="4444FF">(</font><font color="#2040a0">send_buf</font>, <font color="#2040a0">packet_size</font>, <font color="#2040a0">seq_no</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+    <font color="#444444">// Send the ping and receive the reply</font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">send_ping</font><font color="4444FF">(</font><font color="#2040a0">sd</font>, <font color="#2040a0">dest</font>, <font color="#2040a0">send_buf</font>, <font color="#2040a0">packet_size</font><font color="4444FF">)</font> <font color="4444FF">&gt;</font><font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <strong>while</strong> <font color="4444FF">(</font><font color="#FF0000">1</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+            <font color="#444444">// Receive replies until we either get a successful read,</font>
+            <font color="#444444">// or a fatal error occurs.</font>
+            <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">recv_ping</font><font color="4444FF">(</font><font color="#2040a0">sd</font>, <font color="#2040a0">source</font>, <font color="#2040a0">recv_buf</font>, <font color="#2040a0">MAX_PING_PACKET_SIZE</font><font color="4444FF">)</font> <font color="4444FF">&lt;</font>
+                    <font color="#FF0000">0</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+                <font color="#444444">// Pull the sequence number out of the ICMP header.  If </font>
+                <font color="#444444">// it's bad, we just complain, but otherwise we take </font>
+                <font color="#444444">// off, because the read failed for some reason.</font>
+                <strong>unsigned</strong> <strong>short</strong> <font color="#2040a0">header_len</font> <font color="4444FF">=</font> <font color="#2040a0">recv_buf</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">h_len</font> <font color="4444FF">*</font> <font color="#FF0000">4</font><font color="4444FF">;</font>
+                <font color="#2040a0">ICMPHeader</font><font color="4444FF">*</font> <font color="#2040a0">icmphdr</font> <font color="4444FF">=</font> <font color="4444FF">(</font><font color="#2040a0">ICMPHeader</font><font color="4444FF">*</font><font color="4444FF">)</font>
+                        <font color="4444FF">(</font><font color="4444FF">(</font><strong>char</strong><font color="4444FF">*</font><font color="4444FF">)</font><font color="#2040a0">recv_buf</font> <font color="4444FF">+</font> <font color="#2040a0">header_len</font><font color="4444FF">)</font><font color="4444FF">;</font>
+                <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">icmphdr</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">seq</font> <font color="4444FF">!</font><font color="4444FF">=</font> <font color="#2040a0">seq_no</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+                    <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"bad sequence number!"</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">endl</font><font color="4444FF">;</font>
+                    <strong>continue</strong><font color="4444FF">;</font>
+                <font color="4444FF"><strong>}</strong></font>
+                <strong>else</strong> <font color="4444FF"><strong>{</strong></font>
+                    <strong>break</strong><font color="4444FF">;</font>
+                <font color="4444FF"><strong>}</strong></font>
+            <font color="4444FF"><strong>}</strong></font>
+            <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">decode_reply</font><font color="4444FF">(</font><font color="#2040a0">recv_buf</font>, <font color="#2040a0">packet_size</font>, <font color="4444FF">&amp;</font><font color="#2040a0">source</font><font color="4444FF">)</font> <font color="4444FF">!</font><font color="4444FF">=</font> <font color="4444FF">-</font><font color="#FF0000">2</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+                <font color="#444444">// Success or fatal error (as opposed to a minor error) </font>
+                <font color="#444444">// so take off.</font>
+                <strong>break</strong><font color="4444FF">;</font>
+            <font color="4444FF"><strong>}</strong></font>
+        <font color="4444FF"><strong>}</strong></font>
+    <font color="4444FF"><strong>}</strong></font>
+
+<font color="#2040a0">cleanup</font><font color="4444FF">:</font>
+    <strong>delete</strong><font color="4444FF">[</font><font color="4444FF">]</font><font color="#2040a0">send_buf</font><font color="4444FF">;</font>
+    <strong>delete</strong><font color="4444FF">[</font><font color="4444FF">]</font><font color="#2040a0">recv_buf</font><font color="4444FF">;</font>
+    <font color="#2040a0">WSACleanup</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <strong>return</strong> <font color="#FF0000">0</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+
+<font color="#444444">/////////////////////////// allocate_buffers ///////////////////////////</font>
+<font color="#444444">// Allocates send and receive buffers.  Returns &lt; 0 for failure.</font>
+
+<strong>int</strong> <font color="#2040a0">allocate_buffers</font><font color="4444FF">(</font><font color="#2040a0">ICMPHeader</font><font color="4444FF">*</font><font color="4444FF">&amp;</font> <font color="#2040a0">send_buf</font>, <font color="#2040a0">IPHeader</font><font color="4444FF">*</font><font color="4444FF">&amp;</font> <font color="#2040a0">recv_buf</font>,
+        <strong>int</strong> <font color="#2040a0">packet_size</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#444444">// First the send buffer</font>
+    <font color="#2040a0">send_buf</font> <font color="4444FF">=</font> <font color="4444FF">(</font><font color="#2040a0">ICMPHeader</font><font color="4444FF">*</font><font color="4444FF">)</font><strong>new</strong> <strong>char</strong><font color="4444FF">[</font><font color="#2040a0">packet_size</font><font color="4444FF">]</font><font color="4444FF">;</font>  
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">send_buf</font> <font color="4444FF">=</font><font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"Failed to allocate output buffer."</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">endl</font><font color="4444FF">;</font>
+        <strong>return</strong> <font color="4444FF">-</font><font color="#FF0000">1</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+
+    <font color="#444444">// And then the receive buffer</font>
+    <font color="#2040a0">recv_buf</font> <font color="4444FF">=</font> <font color="4444FF">(</font><font color="#2040a0">IPHeader</font><font color="4444FF">*</font><font color="4444FF">)</font><strong>new</strong> <strong>char</strong><font color="4444FF">[</font><font color="#2040a0">MAX_PING_PACKET_SIZE</font><font color="4444FF">]</font><font color="4444FF">;</font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">recv_buf</font> <font color="4444FF">=</font><font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"Failed to allocate output buffer."</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">endl</font><font color="4444FF">;</font>
+        <strong>return</strong> <font color="4444FF">-</font><font color="#FF0000">1</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+    
+    <strong>return</strong> <font color="#FF0000">0</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+</pre>
+
+
+	
+
+
+<hr class="noshade">
+
+<h4 class="lmargin"><a href="https://tangentsoft.net/wskfaq/examples/src/rawping.cpp">rawping.cpp</a></h4>
+
+<pre><font color="#444444">/***********************************************************************
+ rawping.cpp - Contains all of the functions essential to sending "ping"
+    packets using Winsock 2 raw sockets.  Depends on ip_checksum.cpp for 
+    calculating IP-style checksums on blocks of data, however.
+***********************************************************************/</font>
+
+<font color="0000ff"><strong>#include <font color="#008000">&lt;winsock2.h&gt;</font></strong></font>
+<font color="0000ff"><strong>#include <font color="#008000">&lt;ws2tcpip.h&gt;</font></strong></font>
+<font color="0000ff"><strong>#include <font color="#008000">&lt;iostream.h&gt;</font></strong></font>
+
+<font color="0000ff"><strong>#include <font color="#008000">"rawping.h"</font></strong></font>
+<font color="0000ff"><strong>#include <font color="#008000">"ip_checksum.h"</font></strong></font>
+
+
+<font color="#444444">//////////////////////////// setup_for_ping ////////////////////////////</font>
+<font color="#444444">// Creates the Winsock structures necessary for sending and recieving</font>
+<font color="#444444">// ping packets.  host can be either a dotted-quad IP address, or a</font>
+<font color="#444444">// host name.  ttl is the time to live (a.k.a. number of hops) for the</font>
+<font color="#444444">// packet.  The other two parameters are outputs from the function.</font>
+<font color="#444444">// Returns &lt; 0 for failure.</font>
+
+<strong>int</strong> <font color="#2040a0">setup_for_ping</font><font color="4444FF">(</font><strong>char</strong><font color="4444FF">*</font> <font color="#2040a0">host</font>, <strong>int</strong> <font color="#2040a0">ttl</font>, <font color="#2040a0">SOCKET</font><font color="4444FF">&amp;</font> <font color="#2040a0">sd</font>, <font color="#2040a0">sockaddr_in</font><font color="4444FF">&amp;</font> <font color="#2040a0">dest</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#444444">// Create the socket</font>
+    <font color="#2040a0">sd</font> <font color="4444FF">=</font> <font color="#2040a0">WSASocket</font><font color="4444FF">(</font><font color="#2040a0">AF_INET</font>, <font color="#2040a0">SOCK_RAW</font>, <font color="#2040a0">IPPROTO_ICMP</font>, <font color="#FF0000">0</font>, <font color="#FF0000">0</font>, <font color="#FF0000">0</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">sd</font> <font color="4444FF">=</font><font color="4444FF">=</font> <font color="#2040a0">INVALID_SOCKET</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"Failed to create raw socket: "</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">WSAGetLastError</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font>
+                <font color="#2040a0">endl</font><font color="4444FF">;</font>
+        <strong>return</strong> <font color="4444FF">-</font><font color="#FF0000">1</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">setsockopt</font><font color="4444FF">(</font><font color="#2040a0">sd</font>, <font color="#2040a0">IPPROTO_IP</font>, <font color="#2040a0">IP_TTL</font>, <font color="4444FF">(</font><strong>const</strong> <strong>char</strong><font color="4444FF">*</font><font color="4444FF">)</font><font color="4444FF">&amp;</font><font color="#2040a0">ttl</font>, 
+            <strong>sizeof</strong><font color="4444FF">(</font><font color="#2040a0">ttl</font><font color="4444FF">)</font><font color="4444FF">)</font> <font color="4444FF">=</font><font color="4444FF">=</font> <font color="#2040a0">SOCKET_ERROR</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"TTL setsockopt failed: "</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">WSAGetLastError</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">endl</font><font color="4444FF">;</font>
+        <strong>return</strong> <font color="4444FF">-</font><font color="#FF0000">1</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+
+    <font color="#444444">// Initialize the destination host info block</font>
+    <font color="#2040a0">memset</font><font color="4444FF">(</font><font color="4444FF">&amp;</font><font color="#2040a0">dest</font>, <font color="#FF0000">0</font>, <strong>sizeof</strong><font color="4444FF">(</font><font color="#2040a0">dest</font><font color="4444FF">)</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+    <font color="#444444">// Turn first passed parameter into an IP address to ping</font>
+    <strong>unsigned</strong> <strong>int</strong> <font color="#2040a0">addr</font> <font color="4444FF">=</font> <font color="#2040a0">inet_addr</font><font color="4444FF">(</font><font color="#2040a0">host</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">addr</font> <font color="4444FF">!</font><font color="4444FF">=</font> <font color="#2040a0">INADDR_NONE</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#444444">// It was a dotted quad number, so save result</font>
+        <font color="#2040a0">dest</font>.<font color="#2040a0">sin_addr</font>.<font color="#2040a0">s_addr</font> <font color="4444FF">=</font> <font color="#2040a0">addr</font><font color="4444FF">;</font>
+        <font color="#2040a0">dest</font>.<font color="#2040a0">sin_family</font> <font color="4444FF">=</font> <font color="#2040a0">AF_INET</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+    <strong>else</strong> <font color="4444FF"><strong>{</strong></font>
+        <font color="#444444">// Not in dotted quad form, so try and look it up</font>
+        <font color="#2040a0">hostent</font><font color="4444FF">*</font> <font color="#2040a0">hp</font> <font color="4444FF">=</font> <font color="#2040a0">gethostbyname</font><font color="4444FF">(</font><font color="#2040a0">host</font><font color="4444FF">)</font><font color="4444FF">;</font>
+        <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">hp</font> <font color="4444FF">!</font><font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+            <font color="#444444">// Found an address for that host, so save it</font>
+            <font color="#2040a0">memcpy</font><font color="4444FF">(</font><font color="4444FF">&amp;</font><font color="4444FF">(</font><font color="#2040a0">dest</font>.<font color="#2040a0">sin_addr</font><font color="4444FF">)</font>, <font color="#2040a0">hp</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">h_addr</font>, <font color="#2040a0">hp</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">h_length</font><font color="4444FF">)</font><font color="4444FF">;</font>
+            <font color="#2040a0">dest</font>.<font color="#2040a0">sin_family</font> <font color="4444FF">=</font> <font color="#2040a0">hp</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">h_addrtype</font><font color="4444FF">;</font>
+        <font color="4444FF"><strong>}</strong></font>
+        <strong>else</strong> <font color="4444FF"><strong>{</strong></font>
+            <font color="#444444">// Not a recognized hostname either!</font>
+            <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"Failed to resolve "</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">host</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">endl</font><font color="4444FF">;</font>
+            <strong>return</strong> <font color="4444FF">-</font><font color="#FF0000">1</font><font color="4444FF">;</font>
+        <font color="4444FF"><strong>}</strong></font>
+    <font color="4444FF"><strong>}</strong></font>
+
+    <strong>return</strong> <font color="#FF0000">0</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+
+
+<font color="#444444">/////////////////////////// init_ping_packet ///////////////////////////</font>
+<font color="#444444">// Fill in the fields and data area of an ICMP packet, making it </font>
+<font color="#444444">// packet_size bytes by padding it with a byte pattern, and giving it</font>
+<font color="#444444">// the given sequence number.  That completes the packet, so we also</font>
+<font color="#444444">// calculate the checksum for the packet and place it in the appropriate</font>
+<font color="#444444">// field.</font>
+
+<strong>void</strong> <font color="#2040a0">init_ping_packet</font><font color="4444FF">(</font><font color="#2040a0">ICMPHeader</font><font color="4444FF">*</font> <font color="#2040a0">icmp_hdr</font>, <strong>int</strong> <font color="#2040a0">packet_size</font>, <strong>int</strong> <font color="#2040a0">seq_no</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#444444">// Set up the packet's fields</font>
+    <font color="#2040a0">icmp_hdr</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">type</font> <font color="4444FF">=</font> <font color="#2040a0">ICMP_ECHO_REQUEST</font><font color="4444FF">;</font>
+    <font color="#2040a0">icmp_hdr</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">code</font> <font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">;</font>
+    <font color="#2040a0">icmp_hdr</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">checksum</font> <font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">;</font>
+    <font color="#2040a0">icmp_hdr</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">id</font> <font color="4444FF">=</font> <font color="4444FF">(</font><font color="#2040a0">USHORT</font><font color="4444FF">)</font><font color="#2040a0">GetCurrentProcessId</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">icmp_hdr</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">seq</font> <font color="4444FF">=</font> <font color="#2040a0">seq_no</font><font color="4444FF">;</font>
+    <font color="#2040a0">icmp_hdr</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">timestamp</font> <font color="4444FF">=</font> <font color="#2040a0">GetTickCount</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+    <font color="#444444">// "You're dead meat now, packet!"</font>
+    <strong>const</strong> <strong>unsigned</strong> <strong>long</strong> <strong>int</strong> <font color="#2040a0">deadmeat</font> <font color="4444FF">=</font> <font color="#FF0000">0xDEADBEEF</font><font color="4444FF">;</font>
+    <strong>char</strong><font color="4444FF">*</font> <font color="#2040a0">datapart</font> <font color="4444FF">=</font> <font color="4444FF">(</font><strong>char</strong><font color="4444FF">*</font><font color="4444FF">)</font><font color="#2040a0">icmp_hdr</font> <font color="4444FF">+</font> <strong>sizeof</strong><font color="4444FF">(</font><font color="#2040a0">ICMPHeader</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <strong>int</strong> <font color="#2040a0">bytes_left</font> <font color="4444FF">=</font> <font color="#2040a0">packet_size</font> <font color="4444FF">-</font> <strong>sizeof</strong><font color="4444FF">(</font><font color="#2040a0">ICMPHeader</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <strong>while</strong> <font color="4444FF">(</font><font color="#2040a0">bytes_left</font> <font color="4444FF">&gt;</font> <font color="#FF0000">0</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#2040a0">memcpy</font><font color="4444FF">(</font><font color="#2040a0">datapart</font>, <font color="4444FF">&amp;</font><font color="#2040a0">deadmeat</font>, <font color="#2040a0">min</font><font color="4444FF">(</font><strong>int</strong><font color="4444FF">(</font><strong>sizeof</strong><font color="4444FF">(</font><font color="#2040a0">deadmeat</font><font color="4444FF">)</font><font color="4444FF">)</font>, 
+                <font color="#2040a0">bytes_left</font><font color="4444FF">)</font><font color="4444FF">)</font><font color="4444FF">;</font>
+        <font color="#2040a0">bytes_left</font> <font color="4444FF">-</font><font color="4444FF">=</font> <strong>sizeof</strong><font color="4444FF">(</font><font color="#2040a0">deadmeat</font><font color="4444FF">)</font><font color="4444FF">;</font>
+        <font color="#2040a0">datapart</font> <font color="4444FF">+</font><font color="4444FF">=</font> <strong>sizeof</strong><font color="4444FF">(</font><font color="#2040a0">deadmeat</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+
+    <font color="#444444">// Calculate a checksum on the result</font>
+    <font color="#2040a0">icmp_hdr</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">checksum</font> <font color="4444FF">=</font> <font color="#2040a0">ip_checksum</font><font color="4444FF">(</font><font color="4444FF">(</font><font color="#2040a0">USHORT</font><font color="4444FF">*</font><font color="4444FF">)</font><font color="#2040a0">icmp_hdr</font>, <font color="#2040a0">packet_size</font><font color="4444FF">)</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+
+<font color="#444444">/////////////////////////////// send_ping //////////////////////////////</font>
+<font color="#444444">// Send an ICMP echo ("ping") packet to host dest by way of sd with</font>
+<font color="#444444">// packet_size bytes.  packet_size is the total size of the ping packet</font>
+<font color="#444444">// to send, including the ICMP header and the payload area; it is not</font>
+<font color="#444444">// checked for sanity, so make sure that it's at least </font>
+<font color="#444444">// sizeof(ICMPHeader) bytes, and that send_buf points to at least</font>
+<font color="#444444">// packet_size bytes.  Returns &lt; 0 for failure.</font>
+
+<strong>int</strong> <font color="#2040a0">send_ping</font><font color="4444FF">(</font><font color="#2040a0">SOCKET</font> <font color="#2040a0">sd</font>, <strong>const</strong> <font color="#2040a0">sockaddr_in</font><font color="4444FF">&amp;</font> <font color="#2040a0">dest</font>, <font color="#2040a0">ICMPHeader</font><font color="4444FF">*</font> <font color="#2040a0">send_buf</font>,
+        <strong>int</strong> <font color="#2040a0">packet_size</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#444444">// Send the ping packet in send_buf as-is</font>
+    <font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"Sending "</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">packet_size</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">" bytes to "</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> 
+            <font color="#2040a0">inet_ntoa</font><font color="4444FF">(</font><font color="#2040a0">dest</font>.<font color="#2040a0">sin_addr</font><font color="4444FF">)</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"..."</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">flush</font><font color="4444FF">;</font>
+    <strong>int</strong> <font color="#2040a0">bwrote</font> <font color="4444FF">=</font> <font color="#2040a0">sendto</font><font color="4444FF">(</font><font color="#2040a0">sd</font>, <font color="4444FF">(</font><strong>char</strong><font color="4444FF">*</font><font color="4444FF">)</font><font color="#2040a0">send_buf</font>, <font color="#2040a0">packet_size</font>, <font color="#FF0000">0</font>, 
+            <font color="4444FF">(</font><font color="#2040a0">sockaddr</font><font color="4444FF">*</font><font color="4444FF">)</font><font color="4444FF">&amp;</font><font color="#2040a0">dest</font>, <strong>sizeof</strong><font color="4444FF">(</font><font color="#2040a0">dest</font><font color="4444FF">)</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">bwrote</font> <font color="4444FF">=</font><font color="4444FF">=</font> <font color="#2040a0">SOCKET_ERROR</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"send failed: "</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">WSAGetLastError</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">endl</font><font color="4444FF">;</font>
+        <strong>return</strong> <font color="4444FF">-</font><font color="#FF0000">1</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+    <strong>else</strong> <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">bwrote</font> <font color="4444FF">&lt;</font> <font color="#2040a0">packet_size</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"sent "</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">bwrote</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">" bytes..."</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">flush</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+
+    <strong>return</strong> <font color="#FF0000">0</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+
+<font color="#444444">/////////////////////////////// recv_ping //////////////////////////////</font>
+<font color="#444444">// Receive a ping reply on sd into recv_buf, and stores address info</font>
+<font color="#444444">// for sender in source.  On failure, returns &lt; 0, 0 otherwise.  </font>
+<font color="#444444">// </font>
+<font color="#444444">// Note that recv_buf must be larger than send_buf (passed to send_ping)</font>
+<font color="#444444">// because the incoming packet has the IP header attached.  It can also </font>
+<font color="#444444">// have IP options set, so it is not sufficient to make it </font>
+<font color="#444444">// sizeof(send_buf) + sizeof(IPHeader).  We suggest just making it</font>
+<font color="#444444">// fairly large and not worrying about wasting space.</font>
+
+<strong>int</strong> <font color="#2040a0">recv_ping</font><font color="4444FF">(</font><font color="#2040a0">SOCKET</font> <font color="#2040a0">sd</font>, <font color="#2040a0">sockaddr_in</font><font color="4444FF">&amp;</font> <font color="#2040a0">source</font>, <font color="#2040a0">IPHeader</font><font color="4444FF">*</font> <font color="#2040a0">recv_buf</font>, 
+        <strong>int</strong> <font color="#2040a0">packet_size</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#444444">// Wait for the ping reply</font>
+    <strong>int</strong> <font color="#2040a0">fromlen</font> <font color="4444FF">=</font> <strong>sizeof</strong><font color="4444FF">(</font><font color="#2040a0">source</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <strong>int</strong> <font color="#2040a0">bread</font> <font color="4444FF">=</font> <font color="#2040a0">recvfrom</font><font color="4444FF">(</font><font color="#2040a0">sd</font>, <font color="4444FF">(</font><strong>char</strong><font color="4444FF">*</font><font color="4444FF">)</font><font color="#2040a0">recv_buf</font>, 
+            <font color="#2040a0">packet_size</font> <font color="4444FF">+</font> <strong>sizeof</strong><font color="4444FF">(</font><font color="#2040a0">IPHeader</font><font color="4444FF">)</font>, <font color="#FF0000">0</font>,
+            <font color="4444FF">(</font><font color="#2040a0">sockaddr</font><font color="4444FF">*</font><font color="4444FF">)</font><font color="4444FF">&amp;</font><font color="#2040a0">source</font>, <font color="4444FF">&amp;</font><font color="#2040a0">fromlen</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">bread</font> <font color="4444FF">=</font><font color="4444FF">=</font> <font color="#2040a0">SOCKET_ERROR</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"read failed: "</font><font color="4444FF">;</font>
+        <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">WSAGetLastError</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF">=</font><font color="4444FF">=</font> <font color="#2040a0">WSAEMSGSIZE</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+            <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"buffer too small"</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">endl</font><font color="4444FF">;</font>
+        <font color="4444FF"><strong>}</strong></font>
+        <strong>else</strong> <font color="4444FF"><strong>{</strong></font>
+            <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"error #"</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">WSAGetLastError</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">endl</font><font color="4444FF">;</font>
+        <font color="4444FF"><strong>}</strong></font>
+        <strong>return</strong> <font color="4444FF">-</font><font color="#FF0000">1</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+
+    <strong>return</strong> <font color="#FF0000">0</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+
+<font color="#444444">///////////////////////////// decode_reply /////////////////////////////</font>
+<font color="#444444">// Decode and output details about an ICMP reply packet.  Returns -1</font>
+<font color="#444444">// on failure, -2 on "try again" and 0 on success.</font>
+
+<strong>int</strong> <font color="#2040a0">decode_reply</font><font color="4444FF">(</font><font color="#2040a0">IPHeader</font><font color="4444FF">*</font> <font color="#2040a0">reply</font>, <strong>int</strong> <font color="#2040a0">bytes</font>, <font color="#2040a0">sockaddr_in</font><font color="4444FF">*</font> <font color="#2040a0">from</font><font color="4444FF">)</font> 
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#444444">// Skip ahead to the ICMP header within the IP packet</font>
+    <strong>unsigned</strong> <strong>short</strong> <font color="#2040a0">header_len</font> <font color="4444FF">=</font> <font color="#2040a0">reply</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">h_len</font> <font color="4444FF">*</font> <font color="#FF0000">4</font><font color="4444FF">;</font>
+    <font color="#2040a0">ICMPHeader</font><font color="4444FF">*</font> <font color="#2040a0">icmphdr</font> <font color="4444FF">=</font> <font color="4444FF">(</font><font color="#2040a0">ICMPHeader</font><font color="4444FF">*</font><font color="4444FF">)</font><font color="4444FF">(</font><font color="4444FF">(</font><strong>char</strong><font color="4444FF">*</font><font color="4444FF">)</font><font color="#2040a0">reply</font> <font color="4444FF">+</font> <font color="#2040a0">header_len</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+    <font color="#444444">// Make sure the reply is sane</font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">bytes</font> <font color="4444FF">&lt;</font> <font color="#2040a0">header_len</font> <font color="4444FF">+</font> <font color="#2040a0">ICMP_MIN</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"too few bytes from "</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">inet_ntoa</font><font color="4444FF">(</font><font color="#2040a0">from</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">sin_addr</font><font color="4444FF">)</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> 
+                <font color="#2040a0">endl</font><font color="4444FF">;</font>
+        <strong>return</strong> <font color="4444FF">-</font><font color="#FF0000">1</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+    <strong>else</strong> <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">icmphdr</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">type</font> <font color="4444FF">!</font><font color="4444FF">=</font> <font color="#2040a0">ICMP_ECHO_REPLY</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">icmphdr</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">type</font> <font color="4444FF">!</font><font color="4444FF">=</font> <font color="#2040a0">ICMP_TTL_EXPIRE</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+            <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">icmphdr</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">type</font> <font color="4444FF">=</font><font color="4444FF">=</font> <font color="#2040a0">ICMP_DEST_UNREACH</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+                <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"Destination unreachable"</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">endl</font><font color="4444FF">;</font>
+            <font color="4444FF"><strong>}</strong></font>
+            <strong>else</strong> <font color="4444FF"><strong>{</strong></font>
+                <font color="#2040a0">cerr</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"Unknown ICMP packet type "</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <strong>int</strong><font color="4444FF">(</font><font color="#2040a0">icmphdr</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">type</font><font color="4444FF">)</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font>
+                        <font color="#008000">" received"</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">endl</font><font color="4444FF">;</font>
+            <font color="4444FF"><strong>}</strong></font>
+            <strong>return</strong> <font color="4444FF">-</font><font color="#FF0000">1</font><font color="4444FF">;</font>
+        <font color="4444FF"><strong>}</strong></font>
+        <font color="#444444">// If "TTL expired", fall through.  Next test will fail if we</font>
+        <font color="#444444">// try it, so we need a way past it.</font>
+    <font color="4444FF"><strong>}</strong></font>
+    <strong>else</strong> <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">icmphdr</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">id</font> <font color="4444FF">!</font><font color="4444FF">=</font> <font color="4444FF">(</font><font color="#2040a0">USHORT</font><font color="4444FF">)</font><font color="#2040a0">GetCurrentProcessId</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#444444">// Must be a reply for another pinger running locally, so just</font>
+        <font color="#444444">// ignore it.</font>
+        <strong>return</strong> <font color="4444FF">-</font><font color="#FF0000">2</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+
+    <font color="#444444">// Figure out how far the packet travelled</font>
+    <strong>int</strong> <font color="#2040a0">nHops</font> <font color="4444FF">=</font> <strong>int</strong><font color="4444FF">(</font><font color="#FF0000">256</font> <font color="4444FF">-</font> <font color="#2040a0">reply</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">ttl</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">nHops</font> <font color="4444FF">=</font><font color="4444FF">=</font> <font color="#FF0000">192</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font> 
+        <font color="#444444">// TTL came back 64, so ping was probably to a host on the</font>
+        <font color="#444444">// LAN -- call it a single hop.</font>
+        <font color="#2040a0">nHops</font> <font color="4444FF">=</font> <font color="#FF0000">1</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+    <strong>else</strong> <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">nHops</font> <font color="4444FF">=</font><font color="4444FF">=</font> <font color="#FF0000">128</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#444444">// Probably localhost</font>
+        <font color="#2040a0">nHops</font> <font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+
+    <font color="#444444">// Okay, we ran the gamut, so the packet must be legal -- dump it</font>
+    <font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">endl</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">bytes</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">" bytes from "</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> 
+            <font color="#2040a0">inet_ntoa</font><font color="4444FF">(</font><font color="#2040a0">from</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">sin_addr</font><font color="4444FF">)</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">", icmp_seq "</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> 
+            <font color="#2040a0">icmphdr</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">seq</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">", "</font><font color="4444FF">;</font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">icmphdr</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">type</font> <font color="4444FF">=</font><font color="4444FF">=</font> <font color="#2040a0">ICMP_TTL_EXPIRE</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">"TTL expired."</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">endl</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+    <strong>else</strong> <font color="4444FF"><strong>{</strong></font>
+        <font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">nHops</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">" hop"</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="4444FF">(</font><font color="#2040a0">nHops</font> <font color="4444FF">=</font><font color="4444FF">=</font> <font color="#FF0000">1</font> ? <font color="#008000">""</font> <font color="4444FF">:</font> <font color="#008000">"s"</font><font color="4444FF">)</font><font color="4444FF">;</font>
+        <font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">", time: "</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="4444FF">(</font><font color="#2040a0">GetTickCount</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF">-</font> <font color="#2040a0">icmphdr</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">timestamp</font><font color="4444FF">)</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font>
+                <font color="#008000">" ms."</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">endl</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+
+    <strong>return</strong> <font color="#FF0000">0</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+</pre>
+
+
+	
+
+
+<hr class="noshade">
+
+<h4 class="lmargin"><a href="https://tangentsoft.net/wskfaq/examples/src/rawping.h">rawping.h</a></h4>
+
+<pre><font color="#444444">/***********************************************************************
+ rawping.h - Declares the types, constants and prototypes required to
+    use the rawping.cpp module.
+***********************************************************************/</font>
+
+<font color="0000ff"><strong>#define WIN32_LEAN_AND_MEAN</strong></font>
+<font color="0000ff"><strong>#include <font color="#008000">&lt;winsock2.h&gt;</font></strong></font>
+
+<font color="#444444">// ICMP packet types</font>
+<font color="0000ff"><strong>#define ICMP_ECHO_REPLY 0</strong></font>
+<font color="0000ff"><strong>#define ICMP_DEST_UNREACH 3</strong></font>
+<font color="0000ff"><strong>#define ICMP_TTL_EXPIRE 11</strong></font>
+<font color="0000ff"><strong>#define ICMP_ECHO_REQUEST 8</strong></font>
+
+<font color="#444444">// Minimum ICMP packet size, in bytes</font>
+<font color="0000ff"><strong>#define ICMP_MIN 8</strong></font>
+
+<font color="0000ff"><strong>#ifdef _MSC_VER</strong></font>
+<font color="#444444">// The following two structures need to be packed tightly, but unlike</font>
+<font color="#444444">// Borland C++, Microsoft C++ does not do this by default.</font>
+<font color="0000ff"><strong>#pragma pack(1)</strong></font>
+<font color="0000ff"><strong>#endif</strong></font>
+
+<font color="#444444">// The IP header</font>
+<strong>struct</strong> <font color="#2040a0">IPHeader</font> <font color="4444FF"><strong>{</strong></font>
+    <font color="#2040a0">BYTE</font> <font color="#2040a0">h_len</font><font color="4444FF">:</font><font color="#FF0000">4</font><font color="4444FF">;</font>           <font color="#444444">// Length of the header in dwords</font>
+    <font color="#2040a0">BYTE</font> <font color="#2040a0">version</font><font color="4444FF">:</font><font color="#FF0000">4</font><font color="4444FF">;</font>         <font color="#444444">// Version of IP</font>
+    <font color="#2040a0">BYTE</font> <font color="#2040a0">tos</font><font color="4444FF">;</font>               <font color="#444444">// Type of service</font>
+    <font color="#2040a0">USHORT</font> <font color="#2040a0">total_len</font><font color="4444FF">;</font>       <font color="#444444">// Length of the packet in dwords</font>
+    <font color="#2040a0">USHORT</font> <font color="#2040a0">ident</font><font color="4444FF">;</font>           <font color="#444444">// unique identifier</font>
+    <font color="#2040a0">USHORT</font> <font color="#2040a0">flags</font><font color="4444FF">;</font>           <font color="#444444">// Flags</font>
+    <font color="#2040a0">BYTE</font> <font color="#2040a0">ttl</font><font color="4444FF">;</font>               <font color="#444444">// Time to live</font>
+    <font color="#2040a0">BYTE</font> <font color="#2040a0">proto</font><font color="4444FF">;</font>             <font color="#444444">// Protocol number (TCP, UDP etc)</font>
+    <font color="#2040a0">USHORT</font> <font color="#2040a0">checksum</font><font color="4444FF">;</font>        <font color="#444444">// IP checksum</font>
+    <font color="#2040a0">ULONG</font> <font color="#2040a0">source_ip</font><font color="4444FF">;</font>
+    <font color="#2040a0">ULONG</font> <font color="#2040a0">dest_ip</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font><font color="4444FF">;</font>
+
+<font color="#444444">// ICMP header</font>
+<strong>struct</strong> <font color="#2040a0">ICMPHeader</font> <font color="4444FF"><strong>{</strong></font>
+    <font color="#2040a0">BYTE</font> <font color="#2040a0">type</font><font color="4444FF">;</font>          <font color="#444444">// ICMP packet type</font>
+    <font color="#2040a0">BYTE</font> <font color="#2040a0">code</font><font color="4444FF">;</font>          <font color="#444444">// Type sub code</font>
+    <font color="#2040a0">USHORT</font> <font color="#2040a0">checksum</font><font color="4444FF">;</font>
+    <font color="#2040a0">USHORT</font> <font color="#2040a0">id</font><font color="4444FF">;</font>
+    <font color="#2040a0">USHORT</font> <font color="#2040a0">seq</font><font color="4444FF">;</font>
+    <font color="#2040a0">ULONG</font> <font color="#2040a0">timestamp</font><font color="4444FF">;</font>    <font color="#444444">// not part of ICMP, but we need it</font>
+<font color="4444FF"><strong>}</strong></font><font color="4444FF">;</font>
+
+<font color="0000ff"><strong>#ifdef _MSC_VER</strong></font>
+<font color="0000ff"><strong>#pragma pack()</strong></font>
+<font color="0000ff"><strong>#endif</strong></font>
+
+<strong>extern</strong> <strong>int</strong> <font color="#2040a0">setup_for_ping</font><font color="4444FF">(</font><strong>char</strong><font color="4444FF">*</font> <font color="#2040a0">host</font>, <strong>int</strong> <font color="#2040a0">ttl</font>, <font color="#2040a0">SOCKET</font><font color="4444FF">&amp;</font> <font color="#2040a0">sd</font>, 
+        <font color="#2040a0">sockaddr_in</font><font color="4444FF">&amp;</font> <font color="#2040a0">dest</font><font color="4444FF">)</font><font color="4444FF">;</font>
+<strong>extern</strong> <strong>int</strong> <font color="#2040a0">send_ping</font><font color="4444FF">(</font><font color="#2040a0">SOCKET</font> <font color="#2040a0">sd</font>, <strong>const</strong> <font color="#2040a0">sockaddr_in</font><font color="4444FF">&amp;</font> <font color="#2040a0">dest</font>, 
+        <font color="#2040a0">ICMPHeader</font><font color="4444FF">*</font> <font color="#2040a0">send_buf</font>, <strong>int</strong> <font color="#2040a0">packet_size</font><font color="4444FF">)</font><font color="4444FF">;</font>
+<strong>extern</strong> <strong>int</strong> <font color="#2040a0">recv_ping</font><font color="4444FF">(</font><font color="#2040a0">SOCKET</font> <font color="#2040a0">sd</font>, <font color="#2040a0">sockaddr_in</font><font color="4444FF">&amp;</font> <font color="#2040a0">source</font>, <font color="#2040a0">IPHeader</font><font color="4444FF">*</font> <font color="#2040a0">recv_buf</font>,
+        <strong>int</strong> <font color="#2040a0">packet_size</font><font color="4444FF">)</font><font color="4444FF">;</font>
+<strong>extern</strong> <strong>int</strong> <font color="#2040a0">decode_reply</font><font color="4444FF">(</font><font color="#2040a0">IPHeader</font><font color="4444FF">*</font> <font color="#2040a0">reply</font>, <strong>int</strong> <font color="#2040a0">bytes</font>, <font color="#2040a0">sockaddr_in</font><font color="4444FF">*</font> <font color="#2040a0">from</font><font color="4444FF">)</font><font color="4444FF">;</font>
+<strong>extern</strong> <strong>void</strong> <font color="#2040a0">init_ping_packet</font><font color="4444FF">(</font><font color="#2040a0">ICMPHeader</font><font color="4444FF">*</font> <font color="#2040a0">icmp_hdr</font>, <strong>int</strong> <font color="#2040a0">packet_size</font>, 
+        <strong>int</strong> <font color="#2040a0">seq_no</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+</pre>
+
+
+	
+
+
+<hr class="noshade">
+
+<h4 class="lmargin"><a href="https://tangentsoft.net/wskfaq/examples/src/ip_checksum.cpp">ip_checksum.cpp</a></h4>
+
+<pre><font color="#444444">/***********************************************************************
+ ip_checksum.cpp - Calculates IP-style checksums on a block of data.
+***********************************************************************/</font>
+
+<font color="0000ff"><strong>#define WIN32_LEAN_AND_MEAN</strong></font>
+<font color="0000ff"><strong>#include <font color="#008000">&lt;windows.h&gt;</font></strong></font>
+
+<font color="#2040a0">USHORT</font> <font color="#2040a0">ip_checksum</font><font color="4444FF">(</font><font color="#2040a0">USHORT</font><font color="4444FF">*</font> <font color="#2040a0">buffer</font>, <strong>int</strong> <font color="#2040a0">size</font><font color="4444FF">)</font> 
+<font color="4444FF"><strong>{</strong></font>
+    <strong>unsigned</strong> <strong>long</strong> <font color="#2040a0">cksum</font> <font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">;</font>
+    
+    <font color="#444444">// Sum all the words together, adding the final byte if size is odd</font>
+    <strong>while</strong> <font color="4444FF">(</font><font color="#2040a0">size</font> <font color="4444FF">&gt;</font> <font color="#FF0000">1</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#2040a0">cksum</font> <font color="4444FF">+</font><font color="4444FF">=</font> <font color="4444FF">*</font><font color="#2040a0">buffer</font><font color="4444FF">+</font><font color="4444FF">+</font><font color="4444FF">;</font>
+        <font color="#2040a0">size</font> <font color="4444FF">-</font><font color="4444FF">=</font> <strong>sizeof</strong><font color="4444FF">(</font><font color="#2040a0">USHORT</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">size</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+        <font color="#2040a0">cksum</font> <font color="4444FF">+</font><font color="4444FF">=</font> <font color="4444FF">*</font><font color="4444FF">(</font><font color="#2040a0">UCHAR</font><font color="4444FF">*</font><font color="4444FF">)</font><font color="#2040a0">buffer</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+
+    <font color="#444444">// Do a little shuffling</font>
+    <font color="#2040a0">cksum</font> <font color="4444FF">=</font> <font color="4444FF">(</font><font color="#2040a0">cksum</font> <font color="4444FF">&gt;</font><font color="4444FF">&gt;</font> <font color="#FF0000">16</font><font color="4444FF">)</font> <font color="4444FF">+</font> <font color="4444FF">(</font><font color="#2040a0">cksum</font> <font color="4444FF">&amp;</font> <font color="#FF0000">0xffff</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">cksum</font> <font color="4444FF">+</font><font color="4444FF">=</font> <font color="4444FF">(</font><font color="#2040a0">cksum</font> <font color="4444FF">&gt;</font><font color="4444FF">&gt;</font> <font color="#FF0000">16</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    
+    <font color="#444444">// Return the bitwise complement of the resulting mishmash</font>
+    <strong>return</strong> <font color="4444FF">(</font><font color="#2040a0">USHORT</font><font color="4444FF">)</font><font color="4444FF">(</font>~<font color="#2040a0">cksum</font><font color="4444FF">)</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+</pre>
+
+
+	
+
+
+<hr class="noshade">
+
+<h4 class="lmargin"><a href="https://tangentsoft.net/wskfaq/examples/src/ip_checksum.h">ip_checksum.h</a></h4>
+
+<pre><strong>extern</strong> <font color="#2040a0">USHORT</font> <font color="#2040a0">ip_checksum</font><font color="4444FF">(</font><font color="#2040a0">USHORT</font><font color="4444FF">*</font> <font color="#2040a0">buffer</font>, <strong>int</strong> <font color="#2040a0">size</font><font color="4444FF">)</font><font color="4444FF">;</font>
+</pre>
+
+<hr class="noshade">
+
+<h4>Footnotes</h4>
+
+<a name="fn-traceroute">
+<p>1. The traceroute utility ("tracert.exe") works by setting the
+TTL field to 1, sending a ping, waiting for the reply, setting
+TTL to 2...and so on. By looking at the addresses returned in
+the ICMP_TTL_EXPIRE replies, you can "trace" a route through
+the Internet. Eventually, you’ll get an ICMP_ECHO reply,
+which lets you know when you’ve completed the route to the
+host. (Incidentally, many Unix traceroute utilities use UDP instead
+of ICMP, which if nothing else doesn’t require that you use
+raw sockets.)</p>
+
+</a><a name="fn-nexthop">
+<p>2. Finding the next hop on the network can be useful, because
+it allows you to discover a gateway to another network, such as the
+Internet. To do this, set the TTL field to 1, send the ping and see
+who responds with ICMP_TTL_EXPIRE. This isn’t reliable, but it
+can be useful in some situations.</p>
+
+<!--  ---- Vertical padding to ensure that link targets can always be
+           placed at the top of the browser window. ----  -->
+
+<img src="./Winsock Programmer’s FAQ_ Ping_ Raw Sockets Method_files/dot-clear.gif" alt="" width="1" height="200">
+
+<p align="center"><font size="-1">This space intentionally left
+blank. <tt><b>:)</b></tt></font></p>
+
+<img src="./Winsock Programmer’s FAQ_ Ping_ Raw Sockets Method_files/dot-clear.gif" alt="" width="1" height="100">
+
+
+
+
+
+		</a></div><a name="fn-nexthop"> <!-- end body div -->
+
+<hr class="noshade">
+
+
+<!--  Navigation footer  -->
+<table class="fullwidth" cellpadding="5" cellspacing="0" summary="footer nav"> 
+	<tbody><tr>
+		<td align="left" class="halfwidth">
+		
+			
+			
+			
+			<span class="large">
+				<a href="https://tangentsoft.net/wskfaq/examples/dllping.html">&lt;&lt;&nbsp;Ping: ICMP.DLL Method</a><br>
+			</span>
+		
+		</td>
+
+		<td align="right" class="halfwidth">
+		
+			
+			
+			
+			<span class="large">
+				<a href="https://tangentsoft.net/wskfaq/examples/fdpass.html">Passing Sockets Between Processes&nbsp;&gt;&gt;</a>
+			</span>
+		
+		</td>
+	</tr>
+</tbody></table>
+
+
+
+
+
+
+	<!--  Document Footer -->
+
+	<table class="fullwidth" cellpadding="5" cellspacing="0" summary="footer info"> 
+		<tbody><tr>
+			
+				<td align="left" class="thirdwidth">
+					
+					<span class="annotation">Updated Sun Jan 18 2015 04:24 MST</span>
+				</td>
+				<td align="center" class="thirdwidth">
+				
+			
+
+			
+				&nbsp;
+			
+			</td>
+
+			<td align="right" class="thirdwidth">
+				<a href="https://tangentsoft.net/">Go to my home page</a>
+			</td>
+		</tr>	
+	</tbody></table>
+
+
+
+
+</a></body></html>
