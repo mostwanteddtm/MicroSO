@@ -1,13 +1,16 @@
-GLOBAL  _putch
+.MODEL SMALL
+.286
 
-%define param_1 bp+4
-%define param_2 bp+6
-%define param_3 bp+8
-%define param_4 bp+10
-%define param_5 bp+12
-%define param_6 bp+14
+PUBLIC  _putch
 
-SEGMENT _TEXT PUBLIC CLASS=CODE USE16
+param_1 equ bp+4
+param_2 equ bp+6
+param_3 equ bp+8
+param_4 equ bp+10
+param_5 equ bp+12
+param_6 equ bp+14
+
+_TEXT SEGMENT PUBLIC 'CODE' USE16
 
 _putch:
     push  bp
@@ -21,3 +24,6 @@ _putch:
 
     pop   bp
     ret
+	
+_TEXT ENDS
+END

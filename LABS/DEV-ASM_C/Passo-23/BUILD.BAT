@@ -1,11 +1,9 @@
-del *.lib
-cwsdpmi
-nasm c0s.asm -f obj
-nasm CONIOA.ASM -f obj
-lib conio.lib +conio.obj +CONIOA.obj, conio.lib
-rem TCC -ms -c -w- conio.c
-rem TCC -ms -c -w- main.c
-CL /G2 /Gs /c /Zl conio.c
-CL /G2 /Gs /c /Zl main.c /link conio/NOD
-rem TLINK /c main c0s, main.exe,,
-LINK /NOD main c0s CONIO! conio, main.exe,,,,
+SET PATH=C:\MASM615\BIN;C:\MSVC\BIN;
+SET INCLUDE=C:\MSVC\INCLUDE;
+DEL *.LIB
+ML /c C0S.ASM
+ML /c CONIOA.ASM
+LIB CONIO.LIB +CONIO.OBJ +CONIOA.OBJ, CONIO.LIB
+CL /G2 /Gs /c /Zl CONIO.C
+CL /G2 /Gs /c /Zl MAIN.C /link CONIO/NOD
+LINK /NOD MAIN C0S CONIOA CONIO, MAIN.EXE,,,,
