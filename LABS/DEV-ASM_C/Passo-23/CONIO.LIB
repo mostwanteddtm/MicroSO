@@ -1,0 +1,8 @@
+_printf...........conio             _putch............CONIOA
+
+
+conio             Offset: 00000010H  Code and data size: 3eH
+  _printf         
+
+CONIOA            Offset: 00000140H  Code and data size: 11H
+  _putch          
