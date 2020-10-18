@@ -6,54 +6,53 @@ Stack Allocation = 5120 bytes
  01942H 01942H 00000H C_ETEXT                ENDCODE
  01950H 01950H 00000H EMULATOR_DATA          FAR_DATA
  01950H 01991H 00042H NULL                   BEGDATA
- 01992H 02C53H 012C2H _DATA                  DATA
- 02C54H 02C55H 00002H XIQC                   DATA
- 02C56H 02C61H 0000CH DBDATA                 DATA
- 02C62H 02C6FH 0000EH CDATA                  DATA
- 02C70H 02C70H 00000H XIFB                   DATA
- 02C70H 02C70H 00000H XIF                    DATA
- 02C70H 02C70H 00000H XIFE                   DATA
- 02C70H 02C70H 00000H XIB                    DATA
- 02C70H 02C70H 00000H XI                     DATA
- 02C70H 02C70H 00000H XIE                    DATA
- 02C70H 02C70H 00000H XPB                    DATA
- 02C70H 02C71H 00002H XP                     DATA
- 02C72H 02C72H 00000H XPE                    DATA
- 02C72H 02C72H 00000H XCB                    DATA
- 02C72H 02C72H 00000H XC                     DATA
- 02C72H 02C72H 00000H XCE                    DATA
- 02C72H 02C72H 00000H XCFB                   DATA
- 02C72H 02C72H 00000H XCFCRT                 DATA
- 02C72H 02C72H 00000H XCF                    DATA
- 02C72H 02C72H 00000H XCFE                   DATA
- 02C72H 02C72H 00000H XIFCB                  DATA
- 02C72H 02C72H 00000H XIFU                   DATA
- 02C72H 02C72H 00000H XIFL                   DATA
- 02C72H 02C72H 00000H XIFM                   DATA
- 02C72H 02C72H 00000H XIFCE                  DATA
- 02C72H 02C72H 00000H CONST                  CONST
- 02C72H 02C79H 00008H HDR                    MSG
- 02C7AH 02D4FH 000D6H MSG                    MSG
- 02D50H 02D51H 00002H PAD                    MSG
- 02D52H 02D52H 00001H EPAD                   MSG
- 02D54H 02D85H 00032H _BSS                   BSS
- 02D86H 02D86H 00000H XOB                    BSS
- 02D86H 02D86H 00000H XO                     BSS
- 02D86H 02D86H 00000H XOE                    BSS
- 02D86H 02D86H 00000H XOFB                   BSS
- 02D86H 02D86H 00000H XOF                    BSS
- 02D86H 02D86H 00000H XOFE                   BSS
- 02D90H 02D93H 00004H c_common               BSS
- 02DA0H 0419FH 01400H STACK                  STACK
+ 01992H 02445H 00AB4H _DATA                  DATA
+ 02446H 02447H 00002H XIQC                   DATA
+ 02448H 02453H 0000CH DBDATA                 DATA
+ 02454H 02461H 0000EH CDATA                  DATA
+ 02462H 02462H 00000H XIFB                   DATA
+ 02462H 02462H 00000H XIF                    DATA
+ 02462H 02462H 00000H XIFE                   DATA
+ 02462H 02462H 00000H XIB                    DATA
+ 02462H 02462H 00000H XI                     DATA
+ 02462H 02462H 00000H XIE                    DATA
+ 02462H 02462H 00000H XPB                    DATA
+ 02462H 02463H 00002H XP                     DATA
+ 02464H 02464H 00000H XPE                    DATA
+ 02464H 02464H 00000H XCB                    DATA
+ 02464H 02464H 00000H XC                     DATA
+ 02464H 02464H 00000H XCE                    DATA
+ 02464H 02464H 00000H XCFB                   DATA
+ 02464H 02464H 00000H XCFCRT                 DATA
+ 02464H 02464H 00000H XCF                    DATA
+ 02464H 02464H 00000H XCFE                   DATA
+ 02464H 02464H 00000H XIFCB                  DATA
+ 02464H 02464H 00000H XIFU                   DATA
+ 02464H 02464H 00000H XIFL                   DATA
+ 02464H 02464H 00000H XIFM                   DATA
+ 02464H 02464H 00000H XIFCE                  DATA
+ 02464H 02464H 00000H CONST                  CONST
+ 02464H 0246BH 00008H HDR                    MSG
+ 0246CH 02541H 000D6H MSG                    MSG
+ 02542H 02543H 00002H PAD                    MSG
+ 02544H 02544H 00001H EPAD                   MSG
+ 02546H 02577H 00032H _BSS                   BSS
+ 02578H 02578H 00000H XOB                    BSS
+ 02578H 02578H 00000H XO                     BSS
+ 02578H 02578H 00000H XOE                    BSS
+ 02578H 02578H 00000H XOFB                   BSS
+ 02578H 02578H 00000H XOF                    BSS
+ 02578H 02578H 00000H XOFE                   BSS
+ 02580H 0397FH 01400H STACK                  STACK
 
  Origin   Group
  0195:0   DGROUP
 
   Address         Publics by Name
 
- 0195:1404       _edata
- 0195:1450       _end
- 0195:10E4       _errno
+ 0195:0BF6       _edata
+ 0195:0C30       _end
+ 0195:08D6       _errno
  0000:01DE       _exit
  0000:05EC       _fclose
  0000:08EC       _fflush
@@ -63,7 +62,6 @@ Stack Allocation = 5120 bytes
  0000:14B0       _main
  0000:11CA       _memcpy
  0000:1908       _msdelay
- 0195:1440       _nichdr
  0000:18F0       _outnic
  0000:06A2       _printf
  0195:0042       _promisc
@@ -71,67 +69,66 @@ Stack Allocation = 5120 bytes
  0000:17BC       _put_etherne
  0000:14A2       _remove
  0000:159C       _resetnic
- 0195:0044       _rxpkts
- 0195:1122       _STKHQQ
+ 0195:0914       _STKHQQ
  0000:10A4       _strcat
  0000:10E4       _strcpy
- 0195:0852       _txpkts
- 0195:1120       __aaltstkovr
- 0195:10C8       __acfinfo
+ 0195:0044       _txpkts
+ 0195:0912       __aaltstkovr
+ 0195:08BA       __acfinfo
  0000:9876  Abs  __acrtmsg
  0000:9876  Abs  __acrtused
  0000:D6D6  Abs  __aDBdoswp
- 0195:111E       __adbgmsg
- 0195:10AA       __aexit_rtn
- 0195:10D6       __aintdiv
- 0195:12EC       __amblksiz
+ 0195:0910       __adbgmsg
+ 0195:089C       __aexit_rtn
+ 0195:08C8       __aintdiv
+ 0195:0ADE       __amblksiz
  0000:00E1       __amsg_exit
  0000:02CE       __aNchkstk
  0195:0042       __anullsize
- 0195:10C2       __aseghi
- 0195:10C4       __aseglo
- 0195:10AC       __asizds
- 0195:1300       __asizeC
- 0195:1301       __asizeD
+ 0195:08B4       __aseghi
+ 0195:08B6       __aseglo
+ 0195:089E       __asizds
+ 0195:0AF2       __asizeC
+ 0195:0AF3       __asizeD
  0000:0010       __astart
- 0195:10A8       __atopsp
+ 0195:089A       __atopsp
  0000:01ED       __cexit
- 0195:12EE       __cfltcvt_tab
- 0195:113E       __cflush
- 0195:1115       __child
+ 0195:0AE0       __cfltcvt_tab
+ 0195:0930       __cflush
+ 0195:0907       __child
  0000:02CE       __chkstk
  0000:010C       __cinit
  0000:00D2       __cintDIV
  0000:0F04       __close
  0000:11F6       __cltoasub
  0000:1156       __commit
- 0195:10F1       __cpumode
+ 0195:08E3       __cpumode
  0000:026C       __ctermsub
  0000:1202       __cxtoa
  0000:01F7       __c_exit
  0000:010A       __dataseg
- 0195:10F2       __doserrno
+ 0195:08E4       __doserrno
  0000:0594       __dosret0
  0000:05A9       __dosretax
  0000:059C       __dosreturn
  0000:1256       __dos_commit
- 0195:1404       __edata
+ 0195:0BF6       __edata
  0194:0000       __EmDataSeg
- 0195:1450       __end
+ 0195:0C30       __end
  0000:06DE       __endstdio
- 0195:110E       __environ
+ 0195:0900       __environ
  0000:01E5       __exit
- 0195:111D       __exitflag
- 0195:10DA       __fac
+ 0195:090F       __exitflag
+ 0195:08CC       __fac
  0000:05EA       __farstub
  0000:1132       __fcloseall
- 0195:10C6       __fDosExt
+ 0195:08B8       __fDosExt
  0000:02A8       __FF_MSGBANNER
  0000:1083       __findlast
  0000:06F0       __flsbuf
  0000:093A       __flush
  0000:09B0       __flushall
- 0195:1314       __fpinit
+ 0195:0B06       __fpinit
  0000:02C8       __fptrap
  0000:07D0       __freebuf
  0000:08AD       __ftbuf
@@ -140,55 +137,55 @@ Stack Allocation = 5120 bytes
  0000:1032       __incseg
  0000:11AE       __inp
  0000:1264       __inpw
- 0195:1118       __intno
- 0195:1140       __iob
- 0195:11E0       __iob2
+ 0195:090A       __intno
+ 0195:0932       __iob
+ 0195:09D2       __iob2
  0000:1116       __itoa
- 0195:1280       __lastiob
+ 0195:0A72       __lastiob
  0000:0F24       __lseek
- 0195:12EA       __lseekchk
+ 0195:0ADC       __lseekchk
  0000:05B6       __maperror
  0000:0570       __myalloc
- 0195:10F4       __nfile
+ 0195:08E6       __nfile
  0000:13CA       __nfree
- 0195:10AE       __nheap_desc
+ 0195:08A0       __nheap_desc
  0000:13EB       __nmalloc
  0000:0510       __NMSG_TEXT
  0000:053B       __NMSG_WRITE
  0000:02E6       __nullcheck
- 0195:10F2       __oserr
- 0195:10F6       __osfile
- 0195:10ED       __osmajor
- 0195:10EC       __osminor
- 0195:10F0       __osmode
- 0195:10EC       __osver
- 0195:10EE       __osversion
+ 0195:08E4       __oserr
+ 0195:08E8       __osfile
+ 0195:08DF       __osmajor
+ 0195:08DE       __osminor
+ 0195:08E2       __osmode
+ 0195:08DE       __osver
+ 0195:08E0       __osversion
  0000:11BC       __outp
  0000:0A2E       __output
  0000:126E       __outpw
- 0195:1117       __ovlflag
- 0195:1119       __ovlvec
- 0195:1110       __pgmptr
- 0195:1302       __pnhNearHeap
- 0195:10EA       __psp
- 0195:10E8       __pspadr
+ 0195:0909       __ovlflag
+ 0195:090B       __ovlvec
+ 0195:0902       __pgmptr
+ 0195:0AF4       __pnhNearHeap
+ 0195:08DC       __psp
+ 0195:08DA       __pspadr
  0000:1426       __searchseg
  0000:0308       __setargv
  0000:0492       __setenvp
- 0195:12FE       __sigintoff
- 0195:12FC       __sigintseg
+ 0195:0AF0       __sigintoff
+ 0195:0AEE       __sigintseg
  0000:13B8       __stackavail
  0000:083C       __stbuf
- 0195:10E6       __umaskval
+ 0195:08D8       __umaskval
  0000:14A2       __unlink
  0000:127A       __write
- 0195:130C       ___aDBexit
- 0195:130A       ___aDBrterr
- 0195:1308       ___aDBswpchk
- 0195:1306       ___aDBswpflg
- 0195:110A       ___argc
- 0195:110C       ___argv
- 0195:1304       ___qczrinit
+ 0195:0AFE       ___aDBexit
+ 0195:0AFC       ___aDBrterr
+ 0195:0AFA       ___aDBswpchk
+ 0195:0AF8       ___aDBswpflg
+ 0195:08FC       ___argc
+ 0195:08FE       ___argv
+ 0195:0AF6       ___qczrinit
 
   Address         Publics by Value
 
@@ -252,8 +249,8 @@ Stack Allocation = 5120 bytes
  0000:13CA       __nfree
  0000:13EB       __nmalloc
  0000:1426       __searchseg
- 0000:14A2       __unlink
  0000:14A2       _remove
+ 0000:14A2       __unlink
  0000:14B0       _main
  0000:151E       _init_etherne
  0000:159C       _resetnic
@@ -264,69 +261,67 @@ Stack Allocation = 5120 bytes
  0000:18F0       _outnic
  0000:1908       _msdelay
  0194:0000       __EmDataSeg
- 0195:0042       __anullsize
  0195:0042       _promisc
- 0195:0044       _rxpkts
- 0195:0852       _txpkts
- 0195:10A8       __atopsp
- 0195:10AA       __aexit_rtn
- 0195:10AC       __asizds
- 0195:10AE       __nheap_desc
- 0195:10C2       __aseghi
- 0195:10C4       __aseglo
- 0195:10C6       __fDosExt
- 0195:10C8       __acfinfo
- 0195:10D6       __aintdiv
- 0195:10DA       __fac
- 0195:10E4       _errno
- 0195:10E6       __umaskval
- 0195:10E8       __pspadr
- 0195:10EA       __psp
- 0195:10EC       __osver
- 0195:10EC       __osminor
- 0195:10ED       __osmajor
- 0195:10EE       __osversion
- 0195:10F0       __osmode
- 0195:10F1       __cpumode
- 0195:10F2       __oserr
- 0195:10F2       __doserrno
- 0195:10F4       __nfile
- 0195:10F6       __osfile
- 0195:110A       ___argc
- 0195:110C       ___argv
- 0195:110E       __environ
- 0195:1110       __pgmptr
- 0195:1115       __child
- 0195:1117       __ovlflag
- 0195:1118       __intno
- 0195:1119       __ovlvec
- 0195:111D       __exitflag
- 0195:111E       __adbgmsg
- 0195:1120       __aaltstkovr
- 0195:1122       _STKHQQ
- 0195:113E       __cflush
- 0195:1140       __iob
- 0195:11E0       __iob2
- 0195:1280       __lastiob
- 0195:12EA       __lseekchk
- 0195:12EC       __amblksiz
- 0195:12EE       __cfltcvt_tab
- 0195:12FC       __sigintseg
- 0195:12FE       __sigintoff
- 0195:1300       __asizeC
- 0195:1301       __asizeD
- 0195:1302       __pnhNearHeap
- 0195:1304       ___qczrinit
- 0195:1306       ___aDBswpflg
- 0195:1308       ___aDBswpchk
- 0195:130A       ___aDBrterr
- 0195:130C       ___aDBexit
- 0195:1314       __fpinit
- 0195:1404       __edata
- 0195:1404       _edata
- 0195:1440       _nichdr
- 0195:1450       __end
- 0195:1450       _end
+ 0195:0042       __anullsize
+ 0195:0044       _txpkts
+ 0195:089A       __atopsp
+ 0195:089C       __aexit_rtn
+ 0195:089E       __asizds
+ 0195:08A0       __nheap_desc
+ 0195:08B4       __aseghi
+ 0195:08B6       __aseglo
+ 0195:08B8       __fDosExt
+ 0195:08BA       __acfinfo
+ 0195:08C8       __aintdiv
+ 0195:08CC       __fac
+ 0195:08D6       _errno
+ 0195:08D8       __umaskval
+ 0195:08DA       __pspadr
+ 0195:08DC       __psp
+ 0195:08DE       __osver
+ 0195:08DE       __osminor
+ 0195:08DF       __osmajor
+ 0195:08E0       __osversion
+ 0195:08E2       __osmode
+ 0195:08E3       __cpumode
+ 0195:08E4       __doserrno
+ 0195:08E4       __oserr
+ 0195:08E6       __nfile
+ 0195:08E8       __osfile
+ 0195:08FC       ___argc
+ 0195:08FE       ___argv
+ 0195:0900       __environ
+ 0195:0902       __pgmptr
+ 0195:0907       __child
+ 0195:0909       __ovlflag
+ 0195:090A       __intno
+ 0195:090B       __ovlvec
+ 0195:090F       __exitflag
+ 0195:0910       __adbgmsg
+ 0195:0912       __aaltstkovr
+ 0195:0914       _STKHQQ
+ 0195:0930       __cflush
+ 0195:0932       __iob
+ 0195:09D2       __iob2
+ 0195:0A72       __lastiob
+ 0195:0ADC       __lseekchk
+ 0195:0ADE       __amblksiz
+ 0195:0AE0       __cfltcvt_tab
+ 0195:0AEE       __sigintseg
+ 0195:0AF0       __sigintoff
+ 0195:0AF2       __asizeC
+ 0195:0AF3       __asizeD
+ 0195:0AF4       __pnhNearHeap
+ 0195:0AF6       ___qczrinit
+ 0195:0AF8       ___aDBswpflg
+ 0195:0AFA       ___aDBswpchk
+ 0195:0AFC       ___aDBrterr
+ 0195:0AFE       ___aDBexit
+ 0195:0B06       __fpinit
+ 0195:0BF6       _edata
+ 0195:0BF6       __edata
+ 0195:0C30       __end
+ 0195:0C30       _end
  0000:9876  Abs  __acrtmsg
  0000:9876  Abs  __acrtused
  0000:D6D6  Abs  __aDBdoswp
