@@ -6,6 +6,7 @@ void main(int argc, char *argv[])
 	unsigned int i = 0;
 	unsigned long baseaddr = 0;
 	char *base = (char *)malloc(lenbase);
+    char ch, exit = 0;
 
 	FILE *file = fopen("baseaddr.cfg", "r");
 	fgets(base, (lenbase + 1), file);
@@ -21,7 +22,24 @@ void main(int argc, char *argv[])
 		txpkts.data[i] = 0xff;
 	}
 
-    put_etherne(0, txpkts.data, 0x64);
+	while(1)
+	{
+		if(kbhit())
+		{
+			ch = getch();
+			switch(ch)
+			{
+                case 13:
+					put_etherne(0, txpkts.data, 0x64);
+                    break;
+				case 27: 
+					exit = 1;
+                    break;
+			}
+		}
+
+		if(exit) break;
+	}
 }
 
 /* Initialise card given driver type and base addr.
