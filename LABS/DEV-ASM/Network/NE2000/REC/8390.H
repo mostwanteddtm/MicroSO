@@ -1,3 +1,5 @@
+#define lenbase 0x4
+
 #define inp(a)      _inp(a)
 #define outp(a, b)  _outp(a, b)
 #define inpw(a)     _inpw(a)
@@ -130,3 +132,4 @@ WORD buff_in(CBUFF *bp, BYTE *data, WORD len);
 int init_etherne(WORD dtype, WORD baseaddr);
 void msdelay(WORD millisec);
 WORD buff_dlen(CBUFF *bp);
+void gotoxy (int x, int y);

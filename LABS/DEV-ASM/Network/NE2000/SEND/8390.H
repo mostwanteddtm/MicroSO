@@ -1,3 +1,5 @@
+#define lenbase 0x4
+
 #define inp(a)      _inp(a)
 #define outp(a, b)  _outp(a, b)
 #define inpw(a)     _inpw(a)

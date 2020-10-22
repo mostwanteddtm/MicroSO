@@ -4,7 +4,16 @@
 void main(int argc, char *argv[])
 {
 	unsigned int i = 0;
-    printf("Init NE 2000 is %s\n", init_etherne(0, 0x300) ? "ok!" : "with error :(");
+	unsigned long baseaddr = 0;
+	char *base = (char *)malloc(lenbase);
+
+	FILE *file = fopen("baseaddr.cfg", "r");
+	fgets(base, (lenbase + 1), file);
+
+	baseaddr = strtol(base, NULL, 16);
+	fclose(file);
+	
+    printf("Init NE 2000 is %s\n", init_etherne(0, baseaddr) ? "ok!" : "with error :(");
 
 	txpkts.in = 0x64;
 	for(i = 0; i <= txpkts.in; i++)

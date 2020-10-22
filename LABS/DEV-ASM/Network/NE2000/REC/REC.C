@@ -1,19 +1,38 @@
 #include <stdio.h>
 #include <conio.h>
+#include <dos.h>
 #include "8390.h"
+
+#define lenbase 0x4
 
 void main(int argc, char *argv[])
 {
 	unsigned int i = 0;
-    WORD baseaddr = 0x78A0;
+    unsigned long baseaddr = 0;
+	char *base = (char *)malloc(lenbase);
+
+	FILE *file = fopen("baseaddr.cfg", "r");
+	fgets(base, (lenbase + 1), file);
+
+	baseaddr = strtol(base, NULL, 16);
+	fclose(file);
 
     printf("Init NE 2000 is %s\n", init_etherne(0, baseaddr) ? "ok!" : "with error :(");
 
 	while(!kbhit())
 	{
-		//put_etherne(0, txpkts.data, 0x64);
+		gotoxy(0, 0);
 		poll_etherne(0);
 	}
+}
+
+void gotoxy (int x, int y)
+{ union REGS regs;
+  regs.h.ah = 2; /* cursor position */
+  regs.h.dh = y;
+  regs.h.dl = x;
+  regs.h.bh = 0; /* vi­deo page #0 */
+  int86(0x10, &regs, &regs);
 }
 
 /* Initialise card given driver type and base addr.
@@ -57,12 +76,12 @@ void poll_etherne(WORD dtype)
         while ((len=get_etherne(cp->dtype, ebuff))>0)
         {                                   /* Store frames in buff */
             receive_upcall(cp->dtype, ebuff, len);
+            system("CLS");
 			for(i = 0; i < len; i++)
 			{
 				if (i % 16 == 0) printf("\n");
 				ebuff[i] <= 0xf ? printf("0%X ", ebuff[i]) : printf("%X ", ebuff[i]);
-			}
-					
+			}			
         }
     }
 }
