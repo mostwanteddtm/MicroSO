@@ -99,7 +99,7 @@
 #define TXSTART     0x40
 #define DATAPORT    0x10
 
-unsigned long baseaddr = 0;
+unsigned int baseaddr = 0;
 
 void ne2k_init();
 unsigned int put_ne2k(unsigned char *pkt, unsigned int len);

@@ -72,12 +72,6 @@ void ne2k_init()
     _outp(baseaddr + DP_CURR, 0x47);              /* Set current Rx page -- startPage + 1*/
     _outp(baseaddr + NE_CMD,  0x20);              /* DMA abort, page 0 */
 
-    /*
-    _inp(baseaddr + DP_CNTR0);                    reset counters by reading 
-    _inp(baseaddr + DP_CNTR1);
-    _inp(baseaddr + DP_CNTR2);
-    */
-    
     _outp(baseaddr + NE_RCR, 0x14);               /* Allow broadcasts, maybe all pkts */
     _outp(baseaddr + NE_TCR, 0x00);               /* Normal Tx operation */
     _outp(baseaddr + NE_ISR, 0xFF);               /* Clear interrupt flags */
