@@ -117,19 +117,13 @@ typedef struct {                /* NIC hardware packet header */
 NICHDR nichdr;
 
 /* Private prototypes */
-void poll_etherne(WORD dtype);
+void poll_etherne();
+WORD get_etherne(unsigned char *pkt);
 void outnic(int reg, int b);
-WORD get_etherne(WORD dtype, unsigned char *pkt);
-WORD receive_upcall(WORD dtype, unsigned char *buff, WORD len);
 BYTE innic(int reg);
-void resetnic(CONFIGNE *cp, char cold);
+int resetnic();
 void getnic(WORD addr, BYTE data[], WORD len);
 BYTE nicwrap(int page);
 WORD minw(WORD a, WORD b);
 WORD maxw(WORD a, WORD b);
-WORD buff_freelen(CBUFF *bp);
-WORD buff_in(CBUFF *bp, BYTE *data, WORD len);
-int init_etherne(WORD dtype, WORD baseaddr);
-void msdelay(WORD millisec);
-WORD buff_dlen(CBUFF *bp);
 void gotoxy (int x, int y);
