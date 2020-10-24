@@ -12,7 +12,7 @@ void main(int argc, char *argv[])
     unsigned int baseaddr = 0;
 	char *base = (char *)malloc(lenbase);
 
-	FILE *file = fopen("baseaddr.cfg", "r");
+	FILE *file = fopen("base.cfg", "r");
 	fgets(base, (lenbase + 1), file);
 
 	baseaddr = strtol(base, NULL, 16);
@@ -154,7 +154,7 @@ int resetnic()
         for (i=0; i<MACLEN; i++)        /* Convert addr words to bytes */
             cp->myeth[i] = temp[WORDMODE ? i+i : i];
     }
-    
+
     outnic(CMDR, 0x61);                 /* Stop, DMA abort, page 1 */
 
     for (i=0; i<6; i++)                 /* Set Phys addr */
