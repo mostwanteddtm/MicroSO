@@ -103,4 +103,4 @@ unsigned int baseaddr = 0;
 
 void ne2k_init();
 unsigned int put_ne2k(unsigned char *pkt, unsigned int len);
-void put(unsigned int addr, unsigned char data[], unsigned int len);
+void put(unsigned char data[], unsigned int len);

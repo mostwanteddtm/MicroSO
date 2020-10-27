@@ -1,136 +1,136 @@
 Stack Allocation = 5120 bytes
 
  Start  Stop   Length Name                   Class
- 00000H 01E91H 01E92H _TEXT                  CODE
- 01EA0H 01EA1H 00002H EMULATOR_TEXT          CODE
- 01EA2H 01EA2H 00000H C_ETEXT                ENDCODE
- 01EB0H 01EB0H 00000H EMULATOR_DATA          FAR_DATA
- 01EB0H 01EF1H 00042H NULL                   BEGDATA
- 01EF2H 02179H 00288H _DATA                  DATA
- 0217AH 0217BH 00002H XIQC                   DATA
- 0217CH 02187H 0000CH DBDATA                 DATA
- 02188H 02195H 0000EH CDATA                  DATA
- 02196H 02196H 00000H XIFB                   DATA
- 02196H 02196H 00000H XIF                    DATA
- 02196H 02196H 00000H XIFE                   DATA
- 02196H 02196H 00000H XIB                    DATA
- 02196H 02196H 00000H XI                     DATA
- 02196H 02196H 00000H XIE                    DATA
- 02196H 02196H 00000H XPB                    DATA
- 02196H 02197H 00002H XP                     DATA
- 02198H 02198H 00000H XPE                    DATA
- 02198H 02198H 00000H XCB                    DATA
- 02198H 02198H 00000H XC                     DATA
- 02198H 02198H 00000H XCE                    DATA
- 02198H 02198H 00000H XCFB                   DATA
- 02198H 02198H 00000H XCFCRT                 DATA
- 02198H 02198H 00000H XCF                    DATA
- 02198H 02198H 00000H XCFE                   DATA
- 02198H 02198H 00000H XIFCB                  DATA
- 02198H 02198H 00000H XIFU                   DATA
- 02198H 02198H 00000H XIFL                   DATA
- 02198H 02198H 00000H XIFM                   DATA
- 02198H 02198H 00000H XIFCE                  DATA
- 02198H 02198H 00000H CONST                  CONST
- 02198H 0219FH 00008H HDR                    MSG
- 021A0H 02275H 000D6H MSG                    MSG
- 02276H 02277H 00002H PAD                    MSG
- 02278H 02278H 00001H EPAD                   MSG
- 0227AH 0227AH 00000H _BSS                   BSS
- 0227AH 0227AH 00000H XOB                    BSS
- 0227AH 0227AH 00000H XO                     BSS
- 0227AH 0227AH 00000H XOE                    BSS
- 0227AH 0227AH 00000H XOFB                   BSS
- 0227AH 0227AH 00000H XOF                    BSS
- 0227AH 0227AH 00000H XOFE                   BSS
- 02280H 0367FH 01400H STACK                  STACK
+ 00000H 01E8BH 01E8CH _TEXT                  CODE
+ 01E90H 01E91H 00002H EMULATOR_TEXT          CODE
+ 01E92H 01E92H 00000H C_ETEXT                ENDCODE
+ 01EA0H 01EA0H 00000H EMULATOR_DATA          FAR_DATA
+ 01EA0H 01EE1H 00042H NULL                   BEGDATA
+ 01EE2H 02163H 00282H _DATA                  DATA
+ 02164H 02165H 00002H XIQC                   DATA
+ 02166H 02171H 0000CH DBDATA                 DATA
+ 02172H 0217FH 0000EH CDATA                  DATA
+ 02180H 02180H 00000H XIFB                   DATA
+ 02180H 02180H 00000H XIF                    DATA
+ 02180H 02180H 00000H XIFE                   DATA
+ 02180H 02180H 00000H XIB                    DATA
+ 02180H 02180H 00000H XI                     DATA
+ 02180H 02180H 00000H XIE                    DATA
+ 02180H 02180H 00000H XPB                    DATA
+ 02180H 02181H 00002H XP                     DATA
+ 02182H 02182H 00000H XPE                    DATA
+ 02182H 02182H 00000H XCB                    DATA
+ 02182H 02182H 00000H XC                     DATA
+ 02182H 02182H 00000H XCE                    DATA
+ 02182H 02182H 00000H XCFB                   DATA
+ 02182H 02182H 00000H XCFCRT                 DATA
+ 02182H 02182H 00000H XCF                    DATA
+ 02182H 02182H 00000H XCFE                   DATA
+ 02182H 02182H 00000H XIFCB                  DATA
+ 02182H 02182H 00000H XIFU                   DATA
+ 02182H 02182H 00000H XIFL                   DATA
+ 02182H 02182H 00000H XIFM                   DATA
+ 02182H 02182H 00000H XIFCE                  DATA
+ 02182H 02182H 00000H CONST                  CONST
+ 02182H 02189H 00008H HDR                    MSG
+ 0218AH 0225FH 000D6H MSG                    MSG
+ 02260H 02261H 00002H PAD                    MSG
+ 02262H 02262H 00001H EPAD                   MSG
+ 02264H 02264H 00000H _BSS                   BSS
+ 02264H 02264H 00000H XOB                    BSS
+ 02264H 02264H 00000H XO                     BSS
+ 02264H 02264H 00000H XOE                    BSS
+ 02264H 02264H 00000H XOFB                   BSS
+ 02264H 02264H 00000H XOF                    BSS
+ 02264H 02264H 00000H XOFE                   BSS
+ 02270H 0366FH 01400H STACK                  STACK
 
  Origin   Group
- 01EB:0   DGROUP
+ 01EA:0   DGROUP
 
   Address         Publics by Name
 
- 01EB:0042       _baseaddr
- 01EB:03CA       _edata
- 01EB:03D0       _end
- 01EB:00A4       _errno
+ 01EA:0042       _baseaddr
+ 01EA:03C4       _edata
+ 01EA:03D0       _end
+ 01EA:009E       _errno
  0000:01DE       _exit
  0000:05EC       _fclose
  0000:0AE6       _fflush
  0000:1628       _fgets
  0000:06CA       _fopen
  0000:1B38       _main
- 0000:1BDE       _ne2k_init
+ 0000:1BEA       _ne2k_init
  0000:06DE       _printf
- 0000:1DD2       _put
- 0000:1D7E       _put_ne2k
+ 0000:1DD4       _put
+ 0000:1D82       _put_ne2k
  0000:1ADC       _remove
- 01EB:00E2       _STKHQQ
+ 01EA:00DC       _STKHQQ
  0000:1576       _strcat
  0000:15B6       _strcpy
  0000:177A       _strtol
  0000:176E       _strtoul
- 01EB:00E0       __aaltstkovr
- 01EB:0088       __acfinfo
+ 01EA:00DA       __aaltstkovr
+ 01EA:0082       __acfinfo
  0000:9876  Abs  __acrtmsg
  0000:9876  Abs  __acrtused
  0000:D6D6  Abs  __aDBdoswp
- 01EB:00DE       __adbgmsg
- 01EB:006A       __aexit_rtn
- 01EB:0096       __aintdiv
- 01EB:02B0       __amblksiz
+ 01EA:00D8       __adbgmsg
+ 01EA:0064       __aexit_rtn
+ 01EA:0090       __aintdiv
+ 01EA:02AA       __amblksiz
  0000:00E1       __amsg_exit
  0000:02CE       __aNchkstk
- 01EB:0042       __anullsize
- 01EB:0082       __aseghi
- 01EB:0084       __aseglo
- 01EB:006C       __asizds
- 01EB:02C4       __asizeC
- 01EB:02C5       __asizeD
+ 01EA:0042       __anullsize
+ 01EA:007C       __aseghi
+ 01EA:007E       __aseglo
+ 01EA:0066       __asizds
+ 01EA:02BE       __asizeC
+ 01EA:02BF       __asizeD
  0000:0010       __astart
- 01EB:0068       __atopsp
+ 01EA:0062       __atopsp
  0000:01ED       __cexit
- 01EB:02B2       __cfltcvt_tab
- 01EB:00FE       __cflush
- 01EB:02C8       __chbuf
- 01EB:00D5       __child
+ 01EA:02AC       __cfltcvt_tab
+ 01EA:00F8       __cflush
+ 01EA:02C2       __chbuf
+ 01EA:00CF       __child
  0000:02CE       __chkstk
  0000:010C       __cinit
  0000:00D2       __cintDIV
  0000:1130       __close
  0000:170E       __cltoasub
  0000:169A       __commit
- 01EB:02AC       __commode
- 01EB:00B1       __cpumode
+ 01EA:02A6       __commode
+ 01EA:00AB       __cpumode
  0000:026C       __ctermsub
  0000:137D       __cXENIXtoDOSmode
  0000:171A       __cxtoa
  0000:01F7       __c_exit
  0000:010A       __dataseg
- 01EB:00B2       __doserrno
+ 01EA:00AC       __doserrno
  0000:0594       __dosret0
  0000:05A9       __dosretax
  0000:059C       __dosreturn
  0000:189A       __dos_commit
- 01EB:03CA       __edata
- 01EA:0000       __EmDataSeg
- 01EB:03D0       __end
+ 01EA:03C4       __edata
+ 01E9:0000       __EmDataSeg
+ 01EA:03D0       __end
  0000:071A       __endstdio
- 01EB:00CE       __environ
+ 01EA:00C8       __environ
  0000:01E5       __exit
- 01EB:00DD       __exitflag
- 01EB:009A       __fac
+ 01EA:00D7       __exitflag
+ 01EA:0094       __fac
  0000:05EA       __farstub
  0000:1604       __fcloseall
- 01EB:0086       __fDosExt
+ 01EA:0080       __fDosExt
  0000:02A8       __FF_MSGBANNER
  0000:072C       __filbuf
  0000:1555       __findlast
  0000:07C0       __flsbuf
  0000:0B34       __flush
  0000:0BAA       __flushall
- 01EB:02AA       __fmode
- 01EB:02DA       __fpinit
+ 01EA:02A4       __fmode
+ 01EA:02D4       __fpinit
  0000:02C8       __fptrap
  0000:08A0       __freebuf
  0000:06A2       __fsopen
@@ -142,61 +142,61 @@ Stack Allocation = 5120 bytes
  0000:1478       __growseg
  0000:1504       __incseg
  0000:16F2       __inp
- 01EB:00D8       __intno
- 01EB:0100       __iob
- 01EB:01A0       __iob2
- 01EB:02AA       __iomode
+ 01EA:00D2       __intno
+ 01EA:00FA       __iob
+ 01EA:019A       __iob2
+ 01EA:02A4       __iomode
  0000:15E8       __itoa
  0000:1AEA       __kbhit
- 01EB:0240       __lastiob
+ 01EA:023A       __lastiob
  0000:1150       __lseek
- 01EB:02AE       __lseekchk
+ 01EA:02A8       __lseekchk
  0000:05B6       __maperror
  0000:0570       __myalloc
- 01EB:00B4       __nfile
+ 01EA:00AE       __nfile
  0000:1A04       __nfree
- 01EB:006E       __nheap_desc
+ 01EA:0068       __nheap_desc
  0000:1A25       __nmalloc
  0000:0510       __NMSG_TEXT
  0000:053B       __NMSG_WRITE
  0000:02E6       __nullcheck
  0000:11EC       __open
  0000:090C       __openfile
- 01EB:00B2       __oserr
- 01EB:00B6       __osfile
- 01EB:00AD       __osmajor
- 01EB:00AC       __osminor
- 01EB:00B0       __osmode
- 01EB:00AC       __osver
- 01EB:00AE       __osversion
+ 01EA:00AC       __oserr
+ 01EA:00B0       __osfile
+ 01EA:00A7       __osmajor
+ 01EA:00A6       __osminor
+ 01EA:00AA       __osmode
+ 01EA:00A6       __osver
+ 01EA:00A8       __osversion
  0000:1700       __outp
  0000:0C28       __output
  0000:18A8       __outpw
- 01EB:00D7       __ovlflag
- 01EB:00D9       __ovlvec
- 01EB:00D0       __pgmptr
- 01EB:02C6       __pnhNearHeap
- 01EB:00AA       __psp
- 01EB:00A8       __pspadr
+ 01EA:00D1       __ovlflag
+ 01EA:00D3       __ovlvec
+ 01EA:00CA       __pgmptr
+ 01EA:02C0       __pnhNearHeap
+ 01EA:00A4       __psp
+ 01EA:00A2       __pspadr
  0000:138E       __read
  0000:1A60       __searchseg
  0000:0308       __setargv
  0000:0492       __setenvp
- 01EB:02C2       __sigintoff
- 01EB:02C0       __sigintseg
+ 01EA:02BC       __sigintoff
+ 01EA:02BA       __sigintseg
  0000:11D2       __sopen
  0000:19F2       __stackavail
  0000:0A36       __stbuf
- 01EB:00A6       __umaskval
+ 01EA:00A0       __umaskval
  0000:1ADC       __unlink
  0000:18B4       __write
- 01EB:02D2       ___aDBexit
- 01EB:02D0       ___aDBrterr
- 01EB:02CE       ___aDBswpchk
- 01EB:02CC       ___aDBswpflg
- 01EB:00CA       ___argc
- 01EB:00CC       ___argv
- 01EB:02CA       ___qczrinit
+ 01EA:02CC       ___aDBexit
+ 01EA:02CA       ___aDBrterr
+ 01EA:02C8       ___aDBswpchk
+ 01EA:02C6       ___aDBswpflg
+ 01EA:00C4       ___argc
+ 01EA:00C6       ___argv
+ 01EA:02C4       ___qczrinit
 
   Address         Publics by Value
 
@@ -276,74 +276,74 @@ Stack Allocation = 5120 bytes
  0000:1B0C       __getche
  0000:1B10       __getch
  0000:1B38       _main
- 0000:1BDE       _ne2k_init
- 0000:1D7E       _put_ne2k
- 0000:1DD2       _put
- 01EA:0000       __EmDataSeg
- 01EB:0042       __anullsize
- 01EB:0042       _baseaddr
- 01EB:0068       __atopsp
- 01EB:006A       __aexit_rtn
- 01EB:006C       __asizds
- 01EB:006E       __nheap_desc
- 01EB:0082       __aseghi
- 01EB:0084       __aseglo
- 01EB:0086       __fDosExt
- 01EB:0088       __acfinfo
- 01EB:0096       __aintdiv
- 01EB:009A       __fac
- 01EB:00A4       _errno
- 01EB:00A6       __umaskval
- 01EB:00A8       __pspadr
- 01EB:00AA       __psp
- 01EB:00AC       __osver
- 01EB:00AC       __osminor
- 01EB:00AD       __osmajor
- 01EB:00AE       __osversion
- 01EB:00B0       __osmode
- 01EB:00B1       __cpumode
- 01EB:00B2       __oserr
- 01EB:00B2       __doserrno
- 01EB:00B4       __nfile
- 01EB:00B6       __osfile
- 01EB:00CA       ___argc
- 01EB:00CC       ___argv
- 01EB:00CE       __environ
- 01EB:00D0       __pgmptr
- 01EB:00D5       __child
- 01EB:00D7       __ovlflag
- 01EB:00D8       __intno
- 01EB:00D9       __ovlvec
- 01EB:00DD       __exitflag
- 01EB:00DE       __adbgmsg
- 01EB:00E0       __aaltstkovr
- 01EB:00E2       _STKHQQ
- 01EB:00FE       __cflush
- 01EB:0100       __iob
- 01EB:01A0       __iob2
- 01EB:0240       __lastiob
- 01EB:02AA       __fmode
- 01EB:02AA       __iomode
- 01EB:02AC       __commode
- 01EB:02AE       __lseekchk
- 01EB:02B0       __amblksiz
- 01EB:02B2       __cfltcvt_tab
- 01EB:02C0       __sigintseg
- 01EB:02C2       __sigintoff
- 01EB:02C4       __asizeC
- 01EB:02C5       __asizeD
- 01EB:02C6       __pnhNearHeap
- 01EB:02C8       __chbuf
- 01EB:02CA       ___qczrinit
- 01EB:02CC       ___aDBswpflg
- 01EB:02CE       ___aDBswpchk
- 01EB:02D0       ___aDBrterr
- 01EB:02D2       ___aDBexit
- 01EB:02DA       __fpinit
- 01EB:03CA       __edata
- 01EB:03CA       _edata
- 01EB:03D0       __end
- 01EB:03D0       _end
+ 0000:1BEA       _ne2k_init
+ 0000:1D82       _put_ne2k
+ 0000:1DD4       _put
+ 01E9:0000       __EmDataSeg
+ 01EA:0042       __anullsize
+ 01EA:0042       _baseaddr
+ 01EA:0062       __atopsp
+ 01EA:0064       __aexit_rtn
+ 01EA:0066       __asizds
+ 01EA:0068       __nheap_desc
+ 01EA:007C       __aseghi
+ 01EA:007E       __aseglo
+ 01EA:0080       __fDosExt
+ 01EA:0082       __acfinfo
+ 01EA:0090       __aintdiv
+ 01EA:0094       __fac
+ 01EA:009E       _errno
+ 01EA:00A0       __umaskval
+ 01EA:00A2       __pspadr
+ 01EA:00A4       __psp
+ 01EA:00A6       __osver
+ 01EA:00A6       __osminor
+ 01EA:00A7       __osmajor
+ 01EA:00A8       __osversion
+ 01EA:00AA       __osmode
+ 01EA:00AB       __cpumode
+ 01EA:00AC       __oserr
+ 01EA:00AC       __doserrno
+ 01EA:00AE       __nfile
+ 01EA:00B0       __osfile
+ 01EA:00C4       ___argc
+ 01EA:00C6       ___argv
+ 01EA:00C8       __environ
+ 01EA:00CA       __pgmptr
+ 01EA:00CF       __child
+ 01EA:00D1       __ovlflag
+ 01EA:00D2       __intno
+ 01EA:00D3       __ovlvec
+ 01EA:00D7       __exitflag
+ 01EA:00D8       __adbgmsg
+ 01EA:00DA       __aaltstkovr
+ 01EA:00DC       _STKHQQ
+ 01EA:00F8       __cflush
+ 01EA:00FA       __iob
+ 01EA:019A       __iob2
+ 01EA:023A       __lastiob
+ 01EA:02A4       __fmode
+ 01EA:02A4       __iomode
+ 01EA:02A6       __commode
+ 01EA:02A8       __lseekchk
+ 01EA:02AA       __amblksiz
+ 01EA:02AC       __cfltcvt_tab
+ 01EA:02BA       __sigintseg
+ 01EA:02BC       __sigintoff
+ 01EA:02BE       __asizeC
+ 01EA:02BF       __asizeD
+ 01EA:02C0       __pnhNearHeap
+ 01EA:02C2       __chbuf
+ 01EA:02C4       ___qczrinit
+ 01EA:02C6       ___aDBswpflg
+ 01EA:02C8       ___aDBswpchk
+ 01EA:02CA       ___aDBrterr
+ 01EA:02CC       ___aDBexit
+ 01EA:02D4       __fpinit
+ 01EA:03C4       __edata
+ 01EA:03C4       _edata
+ 01EA:03D0       __end
+ 01EA:03D0       _end
  0000:9876  Abs  __acrtused
  0000:9876  Abs  __acrtmsg
  0000:D6D6  Abs  __aDBdoswp

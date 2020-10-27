@@ -11,11 +11,13 @@ void main(int argc, char *argv[])
     unsigned char *packet = (unsigned char *)malloc(lenpacket);
     char ch, exit = 0;
 
-	FILE *file = fopen("baseaddr.cfg", "r");
+	FILE *file = fopen("base.cfg", "r");
 	fgets(base, (lenbase + 1), file);
 
 	baseaddr = strtol(base, NULL, 16);
 	fclose(file);
+
+    printf("Base Address 0x%X\n", baseaddr);
 
     ne2k_init();
 
@@ -77,8 +79,6 @@ void ne2k_init()
     _outp(baseaddr + NE_ISR, 0xFF);               /* Clear interrupt flags */
 
     _outp(baseaddr + NE_CMD, 0x22);               /* Start NIC */
-
-    printf("Init NE 2000 is ok\n");
 }
 
 unsigned int put_ne2k(unsigned char *pkt, unsigned int len)
@@ -86,25 +86,25 @@ unsigned int put_ne2k(unsigned char *pkt, unsigned int len)
     _outp(baseaddr + NE_ISR, 0x0a);                       /* Clear interrupt flags */
     _outp(baseaddr + NE_TBCR0, len & 0xff);               /* Set Tx length regs */
     _outp(baseaddr + NE_TBCR1, len >> 8);
-    put(TXSTART<<8, pkt, len);
+    put(pkt, len);
     _outp(baseaddr + NE_CMD, 0x24);                       /* Transmit the packet */
     return(len);
 }
 
 /* Put a packet into a given address in the NIC's RAM */
-void put(unsigned int addr, unsigned char data[], unsigned int len)
+void put(unsigned char data[], unsigned int len)
 {
     register int count;
     register unsigned int *dataw, dataport;
 
     len += len & 1;                             /* Round length up to an even value */
-    count = WORDMODE ? len>>1 : len;            /* Halve byte count if word O/P */
+    count = WORDMODE ? len >> 1 : len;            /* Halve byte count if word O/P */
     dataport = baseaddr + DATAPORT;               /* Address of NIC data port */
     _outp(baseaddr + NE_ISR, 0x40);               /* Clear remote DMA interrupt flag */
-    _outp(baseaddr + NE_RBCR0, len&0xff);         /* Byte count */
-    _outp(baseaddr + NE_RBCR1, len>>8);
-    _outp(baseaddr + EN0_RSARLO, addr&0xff);      /* Data addr */
-    _outp(baseaddr + EN0_RSARHI, addr>>8);
+    _outp(baseaddr + NE_RBCR0, len & 0xff);         /* Byte count */
+    _outp(baseaddr + NE_RBCR1, len >> 8);
+    _outp(baseaddr + EN0_RSARLO, 0x00);      /* Data addr */
+    _outp(baseaddr + EN0_RSARHI, 0x40);
     _outp(baseaddr + NE_CMD, 0x12);               /* Start, DMA remote write */
 #if WORDMODE                                    /* Word transfer? */
     dataw = (unsigned int *)data;
@@ -115,6 +115,6 @@ void put(unsigned int addr, unsigned char data[], unsigned int len)
         outp(dataport, *data++);
 #endif
     count = 10000;                      /* Done: must ensure DMA complete */
-    while(count && (_inp(baseaddr + NE_ISR)&0x40)==0)
+    while(count && (_inp(baseaddr + NE_ISR) & 0x40) == 0)
         count--;
 }
