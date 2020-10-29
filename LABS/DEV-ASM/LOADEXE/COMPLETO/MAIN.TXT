@@ -1,0 +1,5 @@
+############################ MAIN.EXE ####################################
+
+O onte está na pasta C:\MicroSO\trunk\LABS\MASM 80286\MODELO\EX02\MAIN.EXE
+Utilizei esse modelo, pois é um Executável combinado C++ e Assembly!!
+Para testar é só colocar o arquivo FLOPPY_0 na Pasta C:\EMU8086
