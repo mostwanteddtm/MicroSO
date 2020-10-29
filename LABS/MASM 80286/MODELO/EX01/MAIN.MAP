@@ -1,0 +1,33 @@
+Stack Allocation = 5120 bytes
+
+ Start  Stop   Length Name                   Class
+ 00000H 00000H 00000H _TEXT                  CODE
+ 00000H 0000BH 0000CH PRINTCSEG              CODE
+ 00010H 00021H 00012H MAINCSEG               CODE
+ 00030H 0004FH 00020H INITCSEG               CODE
+ 00050H 00050H 00000H _DATA                  DATA
+ 00050H 0008FH 00040H INITDSEG               DATA
+ 00090H 00090H 00000H MAINDSEG               DATA
+ 00090H 0009FH 00010H PRINTDSEG              DATA
+ 000A0H 0149FH 01400H STACK                  STACK
+
+ Origin   Group
+ 0005:0   DGROUP
+
+  Address         Publics by Name
+
+ 0001:0000       MAIN
+ 0005:001B       MAINMSG
+ 0000:0000       PRINTSTR
+ 0003:0017       RETURN
+ 0003:0000       START
+
+  Address         Publics by Value
+
+ 0000:0000       PRINTSTR
+ 0001:0000       MAIN
+ 0003:0000       START
+ 0003:0017       RETURN
+ 0005:001B       MAINMSG
+
+Program entry point at 0003:0000

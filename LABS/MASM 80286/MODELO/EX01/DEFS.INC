@@ -1,0 +1,2 @@
+CR	EQU 0Dh
+LF	EQU 0Ah
