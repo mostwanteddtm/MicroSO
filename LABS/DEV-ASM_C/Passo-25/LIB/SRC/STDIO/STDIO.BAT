@@ -5,11 +5,11 @@ SET CMODEL=
 SET LMODEL=
 SET LIBDIR=..\..\
 
-IF "%PE%"=="" (
-    SET PE=__EXE__
+IF "%x86%"=="" (
+    SET x86=__EXE__
 )
 
-IF "%PE%"=="__COM__" (
+IF "%x86%"=="__COM__" (
     SET CMODEL=/AT
     SET LMODEL=/TINY
 )
@@ -17,7 +17,7 @@ IF "%PE%"=="__COM__" (
 IF EXIST "CRT0.INC" DEL CRT0.INC
 COPY %STARTUP%\CRT0.INC
 
-ML /c %CMODEL% /D %PE%=1 STDIO.ASM
+ML /c %CMODEL% /D %x86%=1 STDIO.ASM
 
 LIB %LIBDIR%KERNEL16 +STDIO.OBJ,,
 
