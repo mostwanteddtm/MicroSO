@@ -13,7 +13,7 @@ _TEXT SEGMENT
         JMP     @f
 
         MESSAGE     DB 'It is a MS-DOS .com file extension!', CR, LF, 0
-        VALUE       DW 1234h
+        VALUE       DW 5678h
         LENVALUE    EQU $-VALUE
     
     @@: MOV 	AX, CS
