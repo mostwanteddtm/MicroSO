@@ -53,10 +53,12 @@ DCRVAL      EQU 48h
 ENDIF
 STARHACK    EQU 00h             ;/* Set non-zero to enable Starlan length hack */
 
-EXTERN MACADDR: PTR
+EXTERN BUFFER: BYTE
+EXTERN PACKET: BYTE
 EXTERN BASEADDR: WORD
+EXTERN MACADDR: BYTE
 EXTERN DATALEN:WORD
-EXTERN TAB:PTR
+EXTERN TAB:BYTE
 
 PUBLIC RESETNIC
 PUBLIC PRINTMEM
@@ -72,78 +74,147 @@ _TEXT SEGMENT PUBLIC 'CODE'
     ;                                                                                                             ;
     ; RESET NE 2000 CARD                                                                                          ;
     ;   IN:     BASE PORT ADDRES - DEFAULT 0x300                                                                  ;
+    ;           CX -> DATA LENGHT (FOR GET AN SET MAC ADDRESS)                                                    ;
     ;   OUT:    NONE                                                                                              ;
     ;                                                                                                             ;
     ;**************************************************************************************************************
 
     RESETNIC PROC 
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR           
         ADD     DX, CMDR
-        MOV     AL, 21h
+        MOV     AL, 21h                         ; /* Stop, DMA abort, page 0 */
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR
         ADD     DX, DCR
         MOV     AL, DCRVAL
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR           
         ADD     DX, RBCR0
-        MOV     AL, 00h
+        MOV     AL, 00h                         ; /* Clear remote byte count */
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR
         ADD     DX, RBCR1
         MOV     AL, 00h
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR           
         ADD     DX, RRCR
-        MOV     AL, 20h
+        MOV     AL, 20h                         ; /* Rx monitor mode */
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR           
         ADD     DX, TCR
-        MOV     AL, 02h
+        MOV     AL, 02h                         ; /* Tx internal loopback */ 
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR           
         ADD     DX, TPSR
-        MOV     AL, TXSTART
+        MOV     AL, TXSTART                     ; /* Set Tx start page */
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR           
         ADD     DX, PSTART
-        MOV     AL, RXSTART
+        MOV     AL, RXSTART                     ; /* Set Rx start, stop, boundary */
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR
         ADD     DX, PSTOP
         MOV     AL, RXSTOP
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR
         ADD     DX, BNRY
         MOV     AL, RXSTOP-1
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR           
         ADD     DX, ISR
-        MOV     AL, 0FFh
+        MOV     AL, 0FFh                        ; /* Clear interrupt flags */
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR           
         ADD     DX, IMR
-        MOV     AL, 00h
+        MOV     AL, 00h                         ; /* Mask all interrupts */
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR           
         ADD     DX, CMDR
-        MOV     AL, 22h
+        MOV     AL, 22h                         ; /* Start NIC, DMA abort */
         OUT     DX, AL
 
-        CALL    GETNIC
+        CALL    GETNIC                          ; /* Get 12-byte addr */
+
+        MOV     CX, WORD PTR DATALEN
+        SHR     CX, 1                           ; /* Convert addr words to bytes */
+        MOV     SI, OFFSET _DATA:BUFFER
+        MOV     DI, OFFSET _DATA:MACADDR        
+
+    @@: MOVSB                                   ; /* Save Mac Address */
+        INC     SI
+        LOOP    @b
+
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, CMDR
+        MOV     AL, 61h                         ; /* Stop, DMA abort, page 1 */
+        OUT     DX, AL
+
+        XOR     BX, BX
+        MOV     DI, OFFSET _DATA:MACADDR
+        MOV     CX, WORD PTR DATALEN
+        SHR     CX, 1
+
+    @@: LODSB    
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, PAR0
+        ADD     DX, BX
+        OUT     DX, AL                          ; /* Set Phys addr */
+        INC     BX
+        LOOP    @b
+
+        XOR     BX, BX
+        MOV     CX, 8
+
+    @@: MOV     AL, 0FFh    
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, MAR0
+        ADD     DX, BX
+        OUT     DX, AL                          ; /* Multicast accept-all */
+        INC     BX
+        LOOP    @b
+
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, CURR
+        MOV     AL, RXSTART+1                   ; /* Set current Rx page */
+        OUT     DX, AL
+
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, CMDR
+        MOV     AL, 20h                         ; /* DMA abort, page 0 */
+        OUT     DX, AL
+
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, RRCR
+        MOV     AL, 14h                         ; /* Allow broadcasts, maybe all pkts */
+        OUT     DX, AL
+
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, TCR
+        MOV     AL, 00h                         ; /* Normal Tx operation */
+        OUT     DX, AL
+
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, ISR
+        MOV     AL, 0FFh                        ; /* Clear interrupt flags */
+        OUT     DX, AL
+
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, CMDR
+        MOV     AL, 22h                         ; /* Start NIC */
+        OUT     DX, AL
 
         RET 
 
@@ -152,55 +223,55 @@ _TEXT SEGMENT PUBLIC 'CODE'
     ;*************************************************************************************************************;
     ;                                                                                                             ;
     ; GET DATA ON NE 2000 CARD                                                                                    ;
-    ;   IN:     DATA LENGHT                                                                                       ;
-    ;   OUT:    WORDS RECEIVED ON DATAPOR                                                                         ;
+    ;   IN:     CX -> DATA LENGHT                                                                                 ;
+    ;   OUT:    WORDS RECEIVED ON DATAPORT                                                                        ;
     ;                                                                                                             ;
     ;**************************************************************************************************************
 
     GETNIC PROC
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR
         ADD     DX, ISR
-        MOV     AL, 40h
+        MOV     AL, 40h                         ; /* Clear remote DMA interrupt flag */
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR
         ADD     DX, RBCR0
         MOV     AX, WORD PTR DATALEN
-        AND     AL, 0FFh
+        AND     AL, 0FFh                        ; /* Byte count */
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR
         ADD     DX, RBCR1
         MOV     AX, WORD PTR DATALEN
         SHR     AX, 8
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR
         ADD     DX, RSAR0
         MOV     AX, 0
-        AND     AL, 0FFh
+        AND     AL, 0FFh                        ; /* Data addr */
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR
         ADD     DX, RSAR1
         MOV     AX, 0
         SHR     AL, 8
         OUT     DX, AL
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR
         ADD     DX, CMDR
-        MOV     AL, 0Ah
+        MOV     AL, 0Ah                         ; /* Start, DMA remote read */
         OUT     DX, AL
 
         MOV     CX, WORD PTR DATALEN
         SHR     CL, 1
 
-        MOV     DX, BASEADDR
+        MOV     DX, WORD PTR BASEADDR
         ADD     DX, DATAPORT
-        MOV     SI, OFFSET _DATA:MACADDR
+        MOV     SI, OFFSET _DATA:BUFFER
 
-    @@: IN      AX, DX
+    @@: IN      AX, DX                          ; /* Get words */
         MOV     DS:[SI], AX
         ADD     SI, 2
         LOOP    @b
@@ -208,6 +279,94 @@ _TEXT SEGMENT PUBLIC 'CODE'
         RET
 
     GETNIC ENDP
+
+    ;*************************************************************************************************************;
+    ;                                                                                                             ;
+    ; SET DATA ON NE 2000 CARD                                                                                    ;
+    ;   IN:     CX -> DATA LENGHT                                                                                 ;
+    ;           SI -> PACKET OFFSET                                                                               ;
+    ;   OUT:    WORDS TRANSMIT ON DATAPORT                                                                        ;
+    ;                                                                                                             ;
+    ;**************************************************************************************************************
+
+    PUTNIC PROC
+
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, ISR
+        MOV     AL, 0Ah                         ; /* Clear interrupt flags */
+        OUT     DX, AL 
+
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, TBCR0
+        MOV     AX, WORD PTR DATALEN
+        AND     AL, 0FFh                        ; /* Set Tx length regs */
+        OUT     DX, AL 
+         
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, TBCR1
+        MOV     AX, WORD PTR DATALEN
+        SHR     AL, 08h
+        OUT     DX, AL 
+
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, ISR
+        MOV     AL, 40h                         ; /* Clear remote DMA interrupt flag */
+        OUT     DX, AL
+
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, RBCR0
+        MOV     AX, WORD PTR DATALEN
+        AND     AL, 0FFh                        ; /* Byte count */
+        OUT     DX, AL 
+         
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, RBCR1
+        MOV     AX, WORD PTR DATALEN
+        SHR     AL, 08h
+        OUT     DX, AL 
+
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, RSAR0
+        MOV     AL, 00h                         ; /* Data addr */
+        OUT     DX, AL
+
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, RSAR1
+        MOV     AL, 40h
+        OUT     DX, AL
+
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, CMDR
+        MOV     AL, 12h                         ; /* Start, DMA remote write */
+        OUT     DX, AL
+
+        MOV     SI, OFFSET _DATA:PACKET
+        MOV     CX, WORD PTR DATALEN
+        SHR     CX, 01h
+
+    @@: LODSW
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, DATAPORT
+        OUT     DX, AX                          ; /* Copy words to buffer card */
+        LOOP    @b
+
+        MOV     CX, 10000
+    @@: MOV     DX, WORD PTR BASEADDR
+        ADD     DX, ISR
+        IN      AL, DX
+        AND     AL, 40h
+        CMP     AL, 0                           ; /* Done: must ensure DMA complete */
+        JE      @f 
+        LOOP    @b
+
+    @@: MOV     DX, WORD PTR BASEADDR
+        ADD     DX, CMDR
+        MOV     AL, 24h                         ; /* Transmit the packet */
+        OUT     DX, AL
+
+        RET
+
+    PUTNIC ENDP
 
     ;*************************************************************************************************************;
     ;                                                                                                             ;
@@ -284,8 +443,11 @@ _TEXT SEGMENT PUBLIC 'CODE'
         AND     AL, 0Fh
         XLATB
         INT     10h
-        MOV     AL, 20h
+        CMP     CX, 1
+        JE      ENDPMEM
+        MOV     AL, ':'
         INT     10h
+    ENDPMEM:
         LOOP    @b
 
         RET
