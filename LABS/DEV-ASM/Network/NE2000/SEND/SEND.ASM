@@ -6,6 +6,7 @@ PUBLIC MACADDR
 PUBLIC BUFFER
 PUBLIC DATALEN
 PUBLIC PACKET
+PUBLIC NEXTPACKET
 PUBLIC TAB
 
 EXTERN RESETNIC:PROC
@@ -38,6 +39,8 @@ _DATA SEGMENT PUBLIC 'DATA'
     PACKET          DB 64h DUP(0FFh)
     LENPACKET       EQU $-PACKET
 
+    NEXTPACKET      DB 00h
+
     ALIGN 2
     BUFFER          DB 0Ch DUP(0)
 
@@ -65,11 +68,19 @@ _TEXT SEGMENT PUBLIC 'CODE'
         MOV     CX, 06h
         CALL    PRINTMEM
 
-        MOV     SI, OFFSET _DATA:PACKET
+    @@: MOV     SI, OFFSET _DATA:PACKET
         MOV     WORD PTR DATALEN, LENPACKET
         CALL    PUTNIC
 
-        MOV     AX, 4C00h
+        MOV     AH, 00h
+        INT     16h
+
+        CMP     AL, 1Bh
+        JE      @f
+
+        JMP     @b
+
+    @@: MOV     AX, 4C00h
         INT     21h
 
     MAIN ENDP

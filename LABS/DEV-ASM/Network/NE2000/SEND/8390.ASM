@@ -55,6 +55,7 @@ STARHACK    EQU 00h             ;/* Set non-zero to enable Starlan length hack *
 
 EXTERN BUFFER: BYTE
 EXTERN PACKET: BYTE
+EXTERN NEXTPACKET:BYTE
 EXTERN BASEADDR: WORD
 EXTERN MACADDR: BYTE
 EXTERN DATALEN:WORD
@@ -190,6 +191,8 @@ _TEXT SEGMENT PUBLIC 'CODE'
         ADD     DX, CURR
         MOV     AL, RXSTART+1                   ; /* Set current Rx page */
         OUT     DX, AL
+
+        MOV     BYTE PTR NEXTPACKET, RXSTART+1
 
         MOV     DX, WORD PTR BASEADDR
         ADD     DX, CMDR
