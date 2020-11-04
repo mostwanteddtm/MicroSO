@@ -56,6 +56,7 @@ STARHACK    EQU 00h             ;/* Set non-zero to enable Starlan length hack *
 EXTERN BUFFER: BYTE
 EXTERN PACKET: BYTE
 EXTERN NEXTPACKET:BYTE
+EXTERN CURRADDR:BYTE
 EXTERN BASEADDR: WORD
 EXTERN MACADDR: BYTE
 EXTERN DATALEN:WORD
@@ -147,6 +148,7 @@ _TEXT SEGMENT PUBLIC 'CODE'
         MOV     AL, 22h                         ; /* Start NIC, DMA abort */
         OUT     DX, AL
 
+        MOV     BYTE PTR CURRADDR, 00h
         CALL    GETNIC                          ; /* Get 12-byte addr */
 
         MOV     CX, WORD PTR DATALEN
@@ -252,13 +254,13 @@ _TEXT SEGMENT PUBLIC 'CODE'
 
         MOV     DX, WORD PTR BASEADDR
         ADD     DX, RSAR0
-        MOV     AX, 0
+        MOV     AL, BYTE PTR CURRADDR
         AND     AL, 0FFh                        ; /* Data addr */
         OUT     DX, AL
 
         MOV     DX, WORD PTR BASEADDR
         ADD     DX, RSAR1
-        MOV     AX, 0
+        MOV     AL, BYTE PTR CURRADDR
         SHR     AL, 8
         OUT     DX, AL
 
