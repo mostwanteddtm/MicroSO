@@ -55,17 +55,18 @@ STARHACK    EQU 00h             ;/* Set non-zero to enable Starlan length hack *
 
 EXTERN BUFFER: BYTE
 EXTERN PACKET: BYTE
-EXTERN NEXTPACKET:BYTE
-EXTERN CURRADDR:BYTE
+EXTERN NEXTPACKET:WORD
+EXTERN CURRADDR:WORD
 EXTERN BASEADDR: WORD
 EXTERN MACADDR: BYTE
 EXTERN DATALEN:WORD
 EXTERN TAB:BYTE
 
 PUBLIC RESETNIC
-PUBLIC PRINTMEM
+PUBLIC PRINTMAC
 PUBLIC PRINTSTR
 PUBLIC PRINTHEX
+PUBLIC PRINTMEM
 PUBLIC GETETHERNE
 
 _DATA SEGMENT PUBLIC 'DATA'
@@ -150,7 +151,7 @@ _TEXT SEGMENT PUBLIC 'CODE'
         MOV     AL, 22h                         ; /* Start NIC, DMA abort */
         OUT     DX, AL
 
-        MOV     BYTE PTR CURRADDR, 00h
+        MOV     WORD PTR CURRADDR, 00h
         CALL    GETNIC                          ; /* Get 12-byte addr */
 
         MOV     CX, WORD PTR DATALEN
@@ -196,7 +197,7 @@ _TEXT SEGMENT PUBLIC 'CODE'
         MOV     AL, RXSTART+1                   ; /* Set current Rx page */
         OUT     DX, AL
 
-        MOV     BYTE PTR NEXTPACKET, RXSTART+1
+        MOV     WORD PTR NEXTPACKET, RXSTART+1
 
         MOV     DX, WORD PTR BASEADDR
         ADD     DX, CMDR
@@ -256,14 +257,14 @@ _TEXT SEGMENT PUBLIC 'CODE'
 
         MOV     DX, WORD PTR BASEADDR
         ADD     DX, RSAR0
-        MOV     AL, BYTE PTR CURRADDR
+        MOV     AX, WORD PTR NEXTPACKET
         AND     AL, 0FFh                        ; /* Data addr */
         OUT     DX, AL
 
         MOV     DX, WORD PTR BASEADDR
         ADD     DX, RSAR1
-        MOV     AL, BYTE PTR CURRADDR
-        SHR     AL, 8
+        MOV     AX, WORD PTR NEXTPACKET
+        SHR     AX, 8
         OUT     DX, AL
 
         MOV     DX, WORD PTR BASEADDR
@@ -299,18 +300,52 @@ _TEXT SEGMENT PUBLIC 'CODE'
         MOV     AL, 60h                         ; /* DMA abort, page 1 */
         OUT     DX, AL
 
+        XOR     AX, AX
         MOV     DX, WORD PTR BASEADDR
         ADD     DX, CURR
         IN      AL, DX
 
-        MOV     BYTE PTR NEXTPACKET, AL
+        MOV     WORD PTR CURRADDR, AX
 
         MOV     DX, WORD PTR BASEADDR
         ADD     DX, CMDR
         MOV     AL, 20h
         OUT     DX, AL
 
-        RET
+        MOV     AX, WORD PTR CURRADDR
+        CMP     AX, WORD PTR NEXTPACKET
+        JE      @f
+
+        MOV     WORD PTR DATALEN, 4
+        SHL     WORD PTR NEXTPACKET, 8
+
+        CALL    GETNIC
+
+        MOV     SI, OFFSET _DATA:BUFFER
+        ADD     SI, 2
+        LODSW
+        MOV     WORD PTR DATALEN, AX
+
+        CALL    GETNIC
+
+        MOV     AH, 03h
+        MOV     BH, 00h
+        INT     10h
+
+        MOV     AH, 02h
+        MOV     DL, 00h
+        MOV     BH, 0
+        INT     10h
+
+        MOV     SI, OFFSET _DATA:BUFFER
+        ADD     SI, 4
+        MOV     CX, WORD PTR DATALEN
+        SUB     CX, 4
+        CALL    PRINTMEM
+
+        JMP     $
+
+    @@: RET
 
     GETETHERNE ENDP
 
@@ -369,13 +404,13 @@ _TEXT SEGMENT PUBLIC 'CODE'
 
     ;*************************************************************************************************************;
     ;                                                                                                             ;
-    ; PRINT MEMORY                                                                                                ;
+    ; PRINT MAC ADDRESS                                                                                           ;
     ;   IN:     SI -> BUFFER OFFSET                                                                               ;
     ;           CX -> NUMBER OF BYTES PRINT                                                                       ;
     ;   OUT:    DISPLAY MEMORY BYTES ON SCREEN                                                                    ;
     ;                                                                                                             ;
     ;**************************************************************************************************************                     
-    PRINTMEM PROC
+    PRINTMAC PROC
 
         MOV     BX, OFFSET _DATA:TAB
 
@@ -390,14 +425,60 @@ _TEXT SEGMENT PUBLIC 'CODE'
         XLATB
         INT     10h
         CMP     CX, 1
-        JE      ENDPMEM
+        JE      ENDPMAC
         MOV     AL, ':'
         INT     10h
-    ENDPMEM:
+    ENDPMAC:
         LOOP    @b
 
         MOV     AL, 0Dh
         INT     10h
+        MOV     AL, 0Ah
+        INT     10h
+
+        RET
+      
+    PRINTMAC ENDP
+
+    ;*************************************************************************************************************;
+    ;                                                                                                             ;
+    ; PRINT MEMORY                                                                                                ;
+    ;   IN:     SI -> BUFFER OFFSET                                                                               ;
+    ;           CX -> NUMBER OF BYTES PRINT                                                                       ;
+    ;   OUT:    DISPLAY MEMORY BYTES ON SCREEN                                                                    ;
+    ;                                                                                                             ;
+    ;**************************************************************************************************************                     
+    PRINTMEM PROC
+
+        XOR     DI, DI
+        MOV     BX, OFFSET _DATA:TAB
+
+    @@: CMP     DI, 10h
+        JNE     CPMEM
+        CALL    @f
+        XOR     DI, DI
+    CPMEM:
+        INC     DI
+        MOV     AH, 0Eh 
+        LODSB
+        MOV     DL, AL
+        SHR     AL, 4
+        XLATB
+        INT     10h
+        MOV     AL, DL
+        AND     AL, 0Fh
+        XLATB
+        INT     10h
+        MOV     AL, 20h
+        INT     10h
+        LOOP    @b
+
+        RET
+
+    @@: MOV     AH, 0Eh
+        MOV     AL, 0Dh
+        INT     10h
+
         MOV     AL, 0Ah
         INT     10h
 
