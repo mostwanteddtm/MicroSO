@@ -29,6 +29,7 @@ void main(int argc, char *argv[])
 
 	while(!kbhit())
         poll_etherne();
+}
 
 /* Poll network interface to keep it alive; send & receive frames */
 void poll_etherne()
