@@ -342,9 +342,7 @@ _TEXT SEGMENT PUBLIC 'CODE'
         LODSB
         MOV     WORD PTR CURRENTPACKET, AX
 
-        MOV     DX, WORD PTR BASEADDR
-        ADD     DX, BNRY
-        OUT     DX, AL
+        CALL    NICWRAP
 
         MOV     AH, 02h
         MOV     DL, 00h
@@ -361,6 +359,39 @@ _TEXT SEGMENT PUBLIC 'CODE'
     @@: RET
 
     GETETHERNE ENDP
+
+    ;*************************************************************************************************************;
+    ;                                                                                                             ;
+    ; NICWRAP                                                                                                     ;
+    ;   IN:     NONE                                                                                              ;
+    ;   OUT:    NONE                                                                                              ;
+    ;                                                                                                             ;
+    ;**************************************************************************************************************
+
+    NICWRAP PROC
+
+        MOV     AX, WORD PTR CURRENTPACKET
+        DEC     AX
+
+        CMP     AX, RXSTOP
+        JGE     PMORE
+        CMP     AX, RXSTART
+        JL      PMIN
+        JMP     ENDPAGE
+        PMORE:
+        ADD     AX, RXSTART - RXSTOP
+        JMP     ENDPAGE
+        PMIN:
+        ADD     AX, RXSTOP - RXSTART
+        ENDPAGE:
+
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, BNRY
+        OUT     DX, AL
+
+        RET
+
+    NICWRAP ENDP
 
     ;*************************************************************************************************************;
     ;                                                                                                             ;
