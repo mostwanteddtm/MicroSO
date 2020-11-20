@@ -28,11 +28,7 @@ void main(int argc, char *argv[])
     system("CLS");
 
 	while(!kbhit())
-	{
-		gotoxy(0, 0);
-		poll_etherne();
-	}
-}
+        poll_etherne();
 
 /* Poll network interface to keep it alive; send & receive frames */
 void poll_etherne()
@@ -49,6 +45,8 @@ void poll_etherne()
         while ((len = get_etherne(ebuff)) > 0)
         {                                   /* Store frames in buff */
             system("CLS");
+            gotoxy(0, 0);
+            printf("0x%X", cp->next_pkt);
 			for(i = 0; i < len; i++)
 			{
 				if (i % 16 == 0) printf("\n");
