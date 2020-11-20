@@ -1,6 +1,23 @@
 .286
 .MODEL SMALL
 
+EXTERN PACKET: BYTE
+EXTERN PACKETHEADER:DWORD
+EXTERN CURRENTPACKET:WORD
+EXTERN CURPOS:BYTE
+EXTERN CURRADDR:WORD
+EXTERN BASEADDR: WORD
+EXTERN MACADDR: BYTE
+EXTERN DATALEN:WORD
+EXTERN TAB:BYTE
+
+PUBLIC RESETNIC
+PUBLIC PRINTMAC
+PUBLIC PRINTSTR
+PUBLIC PRINTHEX
+PUBLIC PRINTMEM
+PUBLIC GETETHERNE
+
 MACLEN  EQU 6                   ;/* Ethernet (MAC) address length */
 CRCLEN  EQU 4                   ;/* Ethernet hardware CRC length */
 MAXNETS EQU 4                   ;/* Max net interfaces, must be power of 2 */
@@ -52,22 +69,6 @@ RXSTOP      EQU 5fh             ;/* Ditto for byte mode */
 DCRVAL      EQU 48h
 ENDIF
 STARHACK    EQU 00h             ;/* Set non-zero to enable Starlan length hack */
-
-EXTERN BUFFER: BYTE
-EXTERN PACKET: BYTE
-EXTERN NEXTPACKET:WORD
-EXTERN CURRADDR:WORD
-EXTERN BASEADDR: WORD
-EXTERN MACADDR: BYTE
-EXTERN DATALEN:WORD
-EXTERN TAB:BYTE
-
-PUBLIC RESETNIC
-PUBLIC PRINTMAC
-PUBLIC PRINTSTR
-PUBLIC PRINTHEX
-PUBLIC PRINTMEM
-PUBLIC GETETHERNE
 
 _DATA SEGMENT PUBLIC 'DATA'
 _DATA ENDS
@@ -156,7 +157,7 @@ _TEXT SEGMENT PUBLIC 'CODE'
 
         MOV     CX, WORD PTR DATALEN
         SHR     CX, 1                           ; /* Convert addr words to bytes */
-        MOV     SI, OFFSET _DATA:BUFFER
+        MOV     SI, OFFSET _DATA:PACKET
         MOV     DI, OFFSET _DATA:MACADDR        
 
     @@: MOVSB                                   ; /* Save Mac Address */
@@ -197,7 +198,7 @@ _TEXT SEGMENT PUBLIC 'CODE'
         MOV     AL, RXSTART+1                   ; /* Set current Rx page */
         OUT     DX, AL
 
-        MOV     WORD PTR NEXTPACKET, RXSTART+1
+        MOV     WORD PTR CURRENTPACKET, RXSTART+1
 
         MOV     DX, WORD PTR BASEADDR
         ADD     DX, CMDR
@@ -257,13 +258,13 @@ _TEXT SEGMENT PUBLIC 'CODE'
 
         MOV     DX, WORD PTR BASEADDR
         ADD     DX, RSAR0
-        MOV     AX, WORD PTR NEXTPACKET
+        MOV     AX, WORD PTR CURRENTPACKET
         AND     AL, 0FFh                        ; /* Data addr */
         OUT     DX, AL
 
         MOV     DX, WORD PTR BASEADDR
         ADD     DX, RSAR1
-        MOV     AX, WORD PTR NEXTPACKET
+        MOV     AX, WORD PTR CURRENTPACKET
         SHR     AX, 8
         OUT     DX, AL
 
@@ -277,7 +278,7 @@ _TEXT SEGMENT PUBLIC 'CODE'
 
         MOV     DX, WORD PTR BASEADDR
         ADD     DX, DATAPORT
-        MOV     SI, OFFSET _DATA:BUFFER
+        MOV     SI, OFFSET _DATA:PACKET
 
     @@: IN      AX, DX                          ; /* Get words */
         MOV     DS:[SI], AX
@@ -312,42 +313,86 @@ _TEXT SEGMENT PUBLIC 'CODE'
         MOV     AL, 20h
         OUT     DX, AL
 
-        MOV     AX, WORD PTR CURRADDR
-        CMP     AX, WORD PTR NEXTPACKET
-        JE      @f
+        MOV     AX, WORD PTR CURRADDR           ; /* Contains number of next packet
+        CMP     AX, WORD PTR CURRENTPACKET      ; /* Contains number of current packet
+        JE      @f                              ; /* Compares if a new package has arrived 
+
+        CALL    CLEANPREVIOUSPACKET             ; /* Celan Screen a previous packet
 
         MOV     WORD PTR DATALEN, 4
-        SHL     WORD PTR NEXTPACKET, 8
+        SHL     WORD PTR CURRENTPACKET, 8
 
-        CALL    GETNIC
+        CALL    GETNIC                          ; /* Get Packet Header
 
-        MOV     SI, OFFSET _DATA:BUFFER
+        MOV     SI, OFFSET _DATA:PACKET
+        MOV     DI, OFFSET _DATA:PACKETHEADER
+        MOV     CX, 2
+        REP     MOVSW                           ; /* Move Header to Packet Header Buffer                         
+
+        MOV     SI, OFFSET _DATA:PACKETHEADER   ; /* Packet Header: 1 - Byte Status, 2 - Byte Next Packet, 3 - Word Len
         ADD     SI, 2
         LODSW
         MOV     WORD PTR DATALEN, AX
 
-        CALL    GETNIC
+        CALL    GETNIC                          ; /* Get Packet 
 
-        MOV     AH, 03h
-        MOV     BH, 00h
-        INT     10h
+        XOR     AX, AX
+        MOV     SI, OFFSET _DATA:PACKETHEADER
+        INC     SI
+        LODSB
+        MOV     WORD PTR CURRENTPACKET, AX
+
+        MOV     DX, WORD PTR BASEADDR
+        ADD     DX, BNRY
+        OUT     DX, AL
 
         MOV     AH, 02h
         MOV     DL, 00h
+        MOV     DH, BYTE PTR CURPOS
         MOV     BH, 0
         INT     10h
 
-        MOV     SI, OFFSET _DATA:BUFFER
+        MOV     SI, OFFSET _DATA:PACKET
         ADD     SI, 4
         MOV     CX, WORD PTR DATALEN
         SUB     CX, 4
         CALL    PRINTMEM
 
-        JMP     $
-
     @@: RET
 
     GETETHERNE ENDP
+
+    ;*************************************************************************************************************;
+    ;                                                                                                             ;
+    ; CLEAN PREVIOUS PACKET ON SCRENN                                                                             ;
+    ;   IN:     NONE                                                                                              ;
+    ;   OUT:    NONE                                                                                              ;
+    ;                                                                                                             ;
+    ;**************************************************************************************************************
+
+    CLEANPREVIOUSPACKET PROC
+
+        MOV     AH, 02h
+        MOV     DL, 00h
+        MOV     DH, BYTE PTR CURPOS
+        MOV     BH, 0
+        INT     10h
+
+        XOR     AX, AX
+        MOV     AL, 24
+        SUB     AL, BYTE PTR CURPOS
+        MOV     BX, 80
+        MUL     BX
+        MOV     CX, AX
+
+        MOV     AH, 0Eh
+        MOV     AL, 20h
+    @@: INT     10h
+        LOOP    @b
+
+        RET 
+
+    CLEANPREVIOUSPACKET ENDP
 
     ;*************************************************************************************************************;
     ;                                                                                                             ;

@@ -3,12 +3,12 @@
 
 PUBLIC BASEADDR
 PUBLIC MACADDR
-PUBLIC BUFFER
 PUBLIC DATALEN
 PUBLIC PACKET
 PUBLIC PACKETHEADER
-PUBLIC NEXTPACKET
+PUBLIC CURRENTPACKET
 PUBLIC CURRADDR
+PUBLIC CURPOS
 PUBLIC TAB
 
 EXTERN RESETNIC:PROC
@@ -39,17 +39,14 @@ _DATA SEGMENT PUBLIC 'DATA'
     DATALEN         DW 00h
     MACADDR         DB 06h DUP(0)
 
-    ALIGN 2
-    PACKET          DB 200h DUP(00h)
-    
     PACKETHEADER    DD 0
-    NEXTPACKET      DW 0
+    CURRENTPACKET   DW 0
     CURRADDR        DW 0
 
-    HALT            DB 0
+    CURPOS          DB 0
 
     ALIGN 2
-    BUFFER          DB 200h DUP(0)
+    PACKET          DB 200h DUP(00h)
 
 _DATA ENDS
 
@@ -75,6 +72,13 @@ _TEXT SEGMENT PUBLIC 'CODE'
         MOV     CX, 06h
         CALL    PRINTMAC
 
+        MOV     AH, 03h
+        MOV     BH, 00h
+        INT     10h
+
+        INC     DH
+        MOV     BYTE PTR CURPOS, DH
+
     @@: ;MOV     AH, 86h
         ;MOV     CX, 0Fh
         ;MOV     DX, 4240h
@@ -82,16 +86,14 @@ _TEXT SEGMENT PUBLIC 'CODE'
 
         CALL    GETETHERNE
 
-        MOV     AH, 03h
-        MOV     BH, 00h
-        INT     10h
-
         MOV     AH, 02h
         MOV     DL, 00h
+        MOV     DH, BYTE PTR CURPOS
+        DEC     DH
         MOV     BH, 0
         INT     10h
 
-        MOV     SI, OFFSET _DATA:NEXTPACKET
+        MOV     SI, OFFSET _DATA:CURRENTPACKET
         MOV     CX, 2
         CALL    PRINTHEX
 
