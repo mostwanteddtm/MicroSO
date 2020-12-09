@@ -1,112 +1,63 @@
 .286
-.MODEL SMALL 
+.MODEL TINY 
+.STACK 100
 
 INCLUDE 8390.INC
-
-STACK SEGMENT STACK 'STACK'
-	DW 100h DUP (0)
-STACK ENDS
 
 segmoffs	struc			; defines offs as 0, segm as 2
 	offs		dw	?
 	segm		dw	?
  segmoffs	ends
 
- _DATA SEGMENT PUBLIC 'DATA' USE16
-
-	endcfg				db	048h					; Set burst mode, 8 deep FIFO
-		
-	BOARD_DATA_SIZE 	equ	32
-	board_data			db 	BOARD_DATA_SIZE dup(0)
-	
-	MAX_ADDR_LEN		equ	16						;maximum number of bytes in our address.
-	rom_address			db	MAX_ADDR_LEN dup(?)		;our address in ROM.
-	
-	EADDR_LEN			equ	6						;Ethernet address length.
-	port_no 			= 0
-	SM_RSTART_PG		equ	046h					; Starting page of RX ring
-	
-	SM_RSTOP_PG			equ	080h					; Last page +1 of RX ring
-	sm_rstop_ptr		db	SM_RSTOP_PG
-	
-	mcast_list_bits 	db 0,0,0,0,0,0,0,0 			;Bit mask from last set_multicast_list
-	
-	next_packet			db	0
-	save_curr			db	0
-	
-	their_recv_isr		segmoffs <,>
-	their_timer			dd	0
-	original_mask		db 	0
-	int_no				db 	3
-	int_num				dw	0						;Interrupt # to hook for post-EOI
-
-	TAB             	DB '0123456789ABCDEF'
-
-    CBUFFER         	DB 00h  
-    BASEADDR        	DW 300h
-
-    DATALEN         	DW 00h
-    MACADDR         	DB 06h DUP(0)
-
-    PACKETHEADER    	DD 0
-    CURRENTPACKET   	DW 47h						;RXSTART+1
-    CURRADDR        	DW 0
-
-    CURPOS          	DB 0
-
-    ALIGN 2
-    PACKET          	DB 200h DUP(00h)
-
-	TESTE				DD 12345678h
-
- _DATA ENDS
-
 _TEXT SEGMENT PUBLIC 'CODE' USE16
-	ASSUME CS:_TEXT, DS:_DATA, ES:_DATA
-
+	ASSUME DS:_TEXT, ES:_TEXT
+	
+	ORG 100h
+	
 	MAIN PROC
 	
-		MOV		AX, _DATA
+		MOV		AX, CS
 		MOV		DS, AX
 		MOV		ES, AX
-
-		MOV     AH, 03h
-        MOV     BH, 00h
-        INT     10h
-
-        INC     DH
-        MOV     BYTE PTR CURPOS, DH
-
-		;MOV     SI, OFFSET _DATA:CURRENTPACKET
-        ;MOV     CX, 2
-        ;CALL    PRINTHEX
-
-		CLI
+		
 		CALL	etopen
-		STI
 		
 		MOV		AX, 4C00h
 		INT		21h
-
+		
+		endcfg				db	048h					; Set burst mode, 8 deep FIFO
+		
+		BOARD_DATA_SIZE 	equ	32
+		board_data			db 	BOARD_DATA_SIZE dup(0)
+		
+		MAX_ADDR_LEN		equ	16						;maximum number of bytes in our address.
+		rom_address			db	MAX_ADDR_LEN dup(?)		;our address in ROM.
+		
+		EADDR_LEN			equ	6						;Ethernet address length.
+		port_no 			= 0
+		SM_RSTART_PG		equ	046h					; Starting page of RX ring
+		
+		SM_RSTOP_PG			equ	080h					; Last page +1 of RX ring
+		sm_rstop_ptr		db	SM_RSTOP_PG
+		
+		mcast_list_bits 	db 0,0,0,0,0,0,0,0 			;Bit mask from last set_multicast_list
+		
+		next_packet			db	0
+		save_curr			db	0
+		
+		their_recv_isr		segmoffs <,>
+		their_timer			dd	0
+		original_mask		db 	0
+		int_no				db 	3
+		int_num				dw	0						;Interrupt # to hook for post-EOI
+		
 	MAIN ENDP
 	
 	recv_isr PROC FAR
 	
-		PUSHA
-
 		;in		al, 21h
 		;and		al, 0f7h
 		;out		21h, al
-
-		MOV		AX, _DATA
-		MOV		DS, AX
-		MOV		ES, AX
-
-		;MOV     SI, OFFSET _DATA:CURRENTPACKET
-        ;MOV     CX, 2
-        ;CALL    PRINTHEX
-
-		;CALL	GETETHERNE
 	
 		mov		ah, 0eh
 		mov		al, 31h
@@ -171,8 +122,6 @@ _TEXT SEGMENT PUBLIC 'CODE' USE16
 		out 	0a0h, al  			; notify secondary pic
 		out 	20h, al  			; notify primary pic
 		
-		POPA
-
 		iret
 	
 	recv_isr ENDP
@@ -277,7 +226,7 @@ _TEXT SEGMENT PUBLIC 'CODE' USE16
 
 		;call	init_card		;init the card as needed.
 
-		;assume	ds:_TEXT
+		assume	ds:_TEXT
 
 		or	endcfg,ENDCFG_WTS			; endcfg = 49h
 
@@ -460,7 +409,7 @@ _TEXT SEGMENT PUBLIC 'CODE' USE16
 
 		;call	set_address	; Now set the address in the 8390 chip
 
-		;assume	ds:_TEXT
+		assume	ds:_TEXT
 	;enter with my_address,si -> Ethernet address, CX = length of address.
 	;exit with nc if okay, or cy, dh=error if any errors.
 
@@ -503,9 +452,9 @@ _TEXT SEGMENT PUBLIC 'CODE' USE16
 
 		;call	set_hw_multi  ; Put the right stuff into 8390's multicast masks
 
-		push    _DATA
+		push    cs
 		pop     ds
-		;assume	ds:_TEXT
+		assume	ds:_TEXT
 
 		;loadport
 		;setport	EN_CCMD		; Chip command register
@@ -611,7 +560,7 @@ _TEXT SEGMENT PUBLIC 'CODE' USE16
 		;mov	al, ENRXCR_BCST
 		mov		al, 04h					; ENRXCR_BCST
 
-		;setport	EN0_RXCR
+		setport	EN0_RXCR
 		mov		dx, 300h				; io_addr
 		add		dx, 0ch					; EN0_RXCR
 		;pause_
@@ -634,13 +583,8 @@ _TEXT SEGMENT PUBLIC 'CODE' USE16
 		mov	their_recv_isr.segm,es
 
 		mov	ah,25h			;now set our recv interrupt.
-		mov dx, _TEXT
-		mov ds, dx
 		mov	dx,offset recv_isr
 		int	21h
-
-		mov dx, _DATA
-		mov ds, dx
 
 		cmp	byte ptr timer_isr,0cfh	;is there just an iret at their handler?
 		je	set_isr_no_timer_1	;yes, don't bother hooking the timer.
@@ -651,20 +595,15 @@ _TEXT SEGMENT PUBLIC 'CODE' USE16
 		mov	their_timer.segm,es
 
 		mov	ah,25h			;now set our recv interrupt.
-		mov dx, _TEXT
-		mov ds, dx
 		mov	dx,offset timer_isr
 		int	21h
-
-		mov dx, _DATA
-		mov ds, dx
 
 	set_isr_no_timer_1:
 		mov	al,int_no		; Now enable interrupts
 		
 		;call	unmaskint
 		;exit with cl = 0 if the interrupt had been enabled.
-		;assume	ds:_TEXT
+		assume	ds:_TEXT
 		mov	dx,21h			;assume the master 8259.
 		mov	cl,al
 		cmp	cl,8			;using the slave 8259 on an AT?
@@ -725,312 +664,6 @@ _TEXT SEGMENT PUBLIC 'CODE' USE16
 		ret				; Back to common code
 	
 	etopen ENDP
-
-	;*************************************************************************************************************;
-    ;                                                                                                             ;
-    ; GET DATA ON NE 2000 CARD                                                                                    ;
-    ;   IN:     CX -> DATA LENGHT                                                                                 ;
-    ;   OUT:    WORDS RECEIVED ON DATAPORT                                                                        ;
-    ;                                                                                                             ;
-    ;**************************************************************************************************************
-
-    GETNIC PROC
-
-        MOV     DX, WORD PTR BASEADDR
-        ADD     DX, 07h							; /* ISR
-        MOV     AL, 40h                         ; /* Clear remote DMA interrupt flag */
-        OUT     DX, AL
-
-        MOV     DX, WORD PTR BASEADDR
-        ADD     DX, 0Ah							; /* RBCR0
-        MOV     AX, WORD PTR DATALEN
-        AND     AL, 0FFh                        ; /* Byte count */
-        OUT     DX, AL
-
-        MOV     DX, WORD PTR BASEADDR
-        ADD     DX, 0Bh							; /* RBCR1
-        MOV     AX, WORD PTR DATALEN
-        SHR     AX, 8
-        OUT     DX, AL
-
-        MOV     DX, WORD PTR BASEADDR
-        ADD     DX, 08h							; /* RSAR0
-        MOV     AX, WORD PTR CURRENTPACKET
-        AND     AL, 0FFh                        ; /* Data addr */
-        OUT     DX, AL
-
-        MOV     DX, WORD PTR BASEADDR
-        ADD     DX, 09h							; /* RSAR1
-        MOV     AX, WORD PTR CURRENTPACKET
-        SHR     AX, 8
-        OUT     DX, AL
-
-        MOV     DX, WORD PTR BASEADDR
-        ADD     DX, 00h							; /* CMDR
-        MOV     AL, 0Ah                         ; /* Start, DMA remote read */
-        OUT     DX, AL
-
-        MOV     CX, WORD PTR DATALEN
-        SHR     CL, 1
-
-        MOV     DX, WORD PTR BASEADDR
-        ADD     DX, 10h							; /* DATAPORT
-        MOV     SI, OFFSET _DATA:PACKET
-
-    @@: IN      AX, DX                          ; /* Get words */
-        MOV     DS:[SI], AX
-        ADD     SI, 2
-        LOOP    @b
-
-        RET
-
-    GETNIC ENDP
-
-	;*************************************************************************************************************;
-    ;                                                                                                             ;
-    ; GET DATA ON NE 2000 CARD -> CALLED BY ISR                                                                   ;
-    ;   IN:     NONE			                                                                                  ;
-    ;   OUT:    NONE					                                                                          ;
-    ;                                                                                                             ;
-    ;**************************************************************************************************************
-
-    GETETHERNE PROC
-
-        MOV     DX, WORD PTR BASEADDR
-        ADD     DX, 07h							; /* ISR
-        MOV     AL, 01h
-        OUT     DX, AL                          ; /* Clear interrupt flag */
-
-        MOV     DX, WORD PTR BASEADDR
-        ADD     DX, 00h							; /* CMDR
-        MOV     AL, 60h                         ; /* DMA abort, page 1 */
-        OUT     DX, AL
-
-        XOR     AX, AX
-        MOV     DX, WORD PTR BASEADDR
-        ADD     DX, 07h							; /* CURR
-        IN      AL, DX
-
-        MOV     WORD PTR CURRADDR, AX
-
-        MOV     DX, WORD PTR BASEADDR
-        ADD     DX, 00h							; /* CMDR
-        MOV     AL, 20h
-        OUT     DX, AL
-
-        ;MOV     AX, WORD PTR CURRADDR           ; /* Contains number of next packet
-        ;CMP     AX, WORD PTR CURRENTPACKET      ; /* Contains number of current packet
-        ;JE      @f                              ; /* Compares if a new package has arrived 
-
-        CALL    CLEANPREVIOUSPACKET             ; /* Celan Screen a previous packet
-
-        MOV     WORD PTR DATALEN, 4
-        SHL     WORD PTR CURRENTPACKET, 8
-
-        CALL    GETNIC                          ; /* Get Packet Header
-
-        MOV     SI, OFFSET _DATA:PACKET
-        MOV     DI, OFFSET _DATA:PACKETHEADER
-        MOV     CX, 2
-        REP     MOVSW                           ; /* Move Header to Packet Header Buffer                         
-
-        MOV     SI, OFFSET _DATA:PACKETHEADER   ; /* Packet Header: 1 - Byte Status, 2 - Byte Next Packet, 3 - Word Len
-        ADD     SI, 2
-        LODSW
-        MOV     WORD PTR DATALEN, AX
-
-        CALL    GETNIC                          ; /* Get Packet 
-
-        XOR     AX, AX
-        MOV     SI, OFFSET _DATA:PACKETHEADER
-        INC     SI
-        LODSB
-        MOV     WORD PTR CURRENTPACKET, AX
-
-        CALL    NICWRAP
-
-        MOV     AH, 02h
-        MOV     DL, 00h
-        MOV     DH, BYTE PTR CURPOS
-        MOV     BH, 0
-        INT     10h
-
-        MOV     SI, OFFSET _DATA:PACKET
-        ADD     SI, 4
-        MOV     CX, WORD PTR DATALEN
-        SUB     CX, 4
-        CALL    PRINTMEM
-
-    @@: RET
-
-    GETETHERNE ENDP
-
-    ;*************************************************************************************************************;
-    ;                                                                                                             ;
-    ; NICWRAP                                                                                                     ;
-    ;   IN:     NONE                                                                                              ;
-    ;   OUT:    NONE                                                                                              ;
-    ;                                                                                                             ;
-    ;**************************************************************************************************************
-
-    NICWRAP PROC
-
-        MOV     AX, WORD PTR CURRENTPACKET
-        DEC     AX
-
-        CMP     AX, 7Eh							; /* RXSTOP
-        JGE     PMORE
-        CMP     AX, 46h							; /* RXSTART
-        JL      PMIN
-        JMP     ENDPAGE
-        PMORE:
-        ADD     AX, 46h - 7Eh					; /* RXSTART - RXSTOP
-        JMP     ENDPAGE
-        PMIN:
-        ADD     AX, 7Eh - 46h					; /* RXSTOP - RXSTART
-        ENDPAGE:
-
-        MOV     DX, WORD PTR BASEADDR
-        ADD     DX, 03h							; /* BNRY
-        OUT     DX, AL
-
-        RET
-
-    NICWRAP ENDP
-
-    ;*************************************************************************************************************;
-    ;                                                                                                             ;
-    ; CLEAN PREVIOUS PACKET ON SCRENN                                                                             ;
-    ;   IN:     NONE                                                                                              ;
-    ;   OUT:    NONE                                                                                              ;
-    ;                                                                                                             ;
-    ;**************************************************************************************************************
-
-    CLEANPREVIOUSPACKET PROC
-
-        MOV     AH, 02h
-        MOV     DL, 00h
-        MOV     DH, BYTE PTR CURPOS
-        MOV     BH, 0
-        INT     10h
-
-        XOR     AX, AX
-        MOV     AL, 24
-        SUB     AL, BYTE PTR CURPOS
-        MOV     BX, 80
-        MUL     BX
-        MOV     CX, AX
-
-        MOV     AH, 0Eh
-        MOV     AL, 20h
-    @@: INT     10h
-        LOOP    @b
-
-        RET 
-
-    CLEANPREVIOUSPACKET ENDP
-
-	;*************************************************************************************************************;
-    ;                                                                                                             ;
-    ; PRINT HEXADECIMAL                                                                                           ;
-    ;   IN:     SI -> BUFFER OFFSET                                                                               ;
-    ;           CX -> NUMBER OF BYTES PRINT                                                                       ;
-    ;   OUT:    DISPLAY HEXADECIMAL VALUE O SCREEN                                                                ;
-    ;                                                                                                             ;
-    ;**************************************************************************************************************                     
-    PRINTHEX PROC
-
-		PUSH	DS
-		MOV		AX, _DATA
-		MOV		DS, AX
-
-		MOV     AH, 02h
-        MOV     DL, 00h
-        MOV     DH, BYTE PTR CURPOS
-		DEC		DH
-        MOV     BH, 0
-        INT     10h
-
-        MOV     DX, CX
-        DEC     DX
-        MOV     BX, OFFSET _DATA:TAB
-        ADD     SI, DX
-
-    @@: MOV     AH, 0Eh 
-        LODSB
-        MOV     DL, AL
-        SHR     AL, 4
-        XLATB
-        INT     10h
-        MOV     AL, DL
-        AND     AL, 0Fh
-        XLATB
-        INT     10h
-        SUB     SI, 2
-        LOOP    @b
-
-		POP		DS
-
-        RET
-      
-    PRINTHEX ENDP
-
-	;*************************************************************************************************************;
-    ;                                                                                                             ;
-    ; PRINT MEMORY                                                                                                ;
-    ;   IN:     SI -> BUFFER OFFSET                                                                               ;
-    ;           CX -> NUMBER OF BYTES PRINT                                                                       ;
-    ;   OUT:    DISPLAY MEMORY BYTES ON SCREEN                                                                    ;
-    ;                                                                                                             ;
-    ;**************************************************************************************************************                     
-    PRINTMEM PROC
-
-		PUSH	DS
-		MOV		AX, _DATA
-		MOV		DS, AX
-
-        XOR     DI, DI
-        MOV     BX, OFFSET _DATA:TAB
-
-		CMP		CX, 80h
-		JLE		@f
-		MOV		CX, 80h
-
-    @@: CMP     DI, 10h
-        JNE     CPMEM
-        CALL    @f
-        XOR     DI, DI
-    CPMEM:
-        INC     DI
-        MOV     AH, 0Eh 
-        LODSB
-        MOV     DL, AL
-        SHR     AL, 4
-        XLATB
-        INT     10h
-        MOV     AL, DL
-        AND     AL, 0Fh
-        XLATB
-        INT     10h
-        MOV     AL, 20h
-        INT     10h
-        LOOP    @b
-
-		POP		DS
-
-        RET
-
-	; LOCAL 	CRLF
-    @@: MOV     AH, 0Eh
-        MOV     AL, 0Dh
-        INT     10h
-
-        MOV     AL, 0Ah
-        INT     10h
-
-        RET
-      
-    PRINTMEM ENDP
 	
 _TEXT ENDS
 
