@@ -1,0 +1,54 @@
+8390.ASM
+
+;0760 - reset_board:
+
+; reset_8390
+assume ds:nothing
+mov	dx, io_addr
+add dx, NE_RESET
+in al, dx
+; end reset_8390
+
+;long pause
+push cx
+push ax
+mov  cx,1600	; 1.6ms = 1600*1.0us
+test sys_features,SYS_MCA
+je   lp_not_mc_1
+shl  cx,1	; twice as many loops for Microchannel
+lp_not_mc_1:
+in al,61h
+loop lp_not_mc_1
+pop  ax
+pop  cx
+;end long pause
+
+out	dx,al		; should set command 21, 80
+
+mov dx, io_addr
+add dx, EN_CCMD
+
+;pause macro
+push	ax
+in	al, 61h
+pop	ax
+;end pause
+
+mov al,	ENC_STOP+ENC_NODMA
+out dx,	al		; Stop the DS8390
+
+;long pause
+push cx
+push ax
+mov  cx,1600	; 1.6ms = 1600*1.0us
+test sys_features,SYS_MCA
+je   lp_not_mc_2
+shl  cx,1	; twice as many loops for Microchannel
+lp_not_mc_2:
+in al,61h
+loop lp_not_mc_2
+pop  ax
+pop  cx
+;end long pause
+
+1583 - etopen:
