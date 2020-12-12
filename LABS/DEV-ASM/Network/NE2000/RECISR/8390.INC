@@ -118,3 +118,4 @@ EN_RBUF_SIZE_LO	equ	2	; Length of this frame
 EN_RBUF_SIZE_HI	equ	3	; Length of this frame
 EN_RBUF_NHDR	equ	4	; Length of above header area
 
+SM_RSTART_PG	equ	046h	; Starting page of RX ring
