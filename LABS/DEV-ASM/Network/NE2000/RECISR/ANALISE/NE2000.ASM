@@ -4,7 +4,7 @@
 
 INCLUDE 8390.INC
 
-segmoffs	struc			; defines offs as 0, segm as 2
+segmoffs	struc										; defines offs as 0, segm as 2
 	offs		dw	?
 	segm		dw	?
  segmoffs	ends
@@ -20,7 +20,15 @@ _TEXT SEGMENT PUBLIC 'CODE' USE16
 		MOV		DS, AX
 		MOV		ES, AX
 		
+		CLI
+
 		CALL	etopen
+
+		IN		AL, 21h
+		AND		AL, 0f7h								; UNMASK IQR 3 ON PIC 
+		OUT		21h, AL
+
+		STI
 		
 		MOV		AX, 4C00h
 		INT		21h

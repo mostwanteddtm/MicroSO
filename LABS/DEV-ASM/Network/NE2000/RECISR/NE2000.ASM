@@ -7,7 +7,7 @@ STACK SEGMENT STACK 'STACK'
 	DW 100h DUP (0)
 STACK ENDS
 
-segmoffs	struc			; defines offs as 0, segm as 2
+segmoffs	struc									; defines offs as 0, segm as 2
 	offs		dw	?
 	segm		dw	?
  segmoffs	ends
@@ -19,17 +19,17 @@ segmoffs	struc			; defines offs as 0, segm as 2
 	BOARD_DATA_SIZE 	equ	32
 	board_data			db 	BOARD_DATA_SIZE dup(0)
 	
-	MAX_ADDR_LEN		equ	16						;maximum number of bytes in our address.
-	rom_address			db	MAX_ADDR_LEN dup(?)		;our address in ROM.
+	MAX_ADDR_LEN		equ	16						; maximum number of bytes in our address.
+	rom_address			db	MAX_ADDR_LEN dup(?)		; our address in ROM.
 	
-	EADDR_LEN			equ	6						;Ethernet address length.
+	EADDR_LEN			equ	6						; Ethernet address length.
 	port_no 			= 0
 	SM_RSTART_PG		equ	046h					; Starting page of RX ring
 	
 	SM_RSTOP_PG			equ	080h					; Last page +1 of RX ring
 	sm_rstop_ptr		db	SM_RSTOP_PG
 	
-	mcast_list_bits 	db 0,0,0,0,0,0,0,0 			;Bit mask from last set_multicast_list
+	mcast_list_bits 	db 0,0,0,0,0,0,0,0 			; Bit mask from last set_multicast_list
 	
 	next_packet			db	0
 	save_curr			db	0
@@ -38,7 +38,7 @@ segmoffs	struc			; defines offs as 0, segm as 2
 	their_timer			dd	0
 	original_mask		db 	0
 	int_no				db 	3
-	int_num				dw	0						;Interrupt # to hook for post-EOI
+	int_num				dw	0						; Interrupt # to hook for post-EOI
 
 	TAB             	DB '0123456789ABCDEF'
 
@@ -49,7 +49,7 @@ segmoffs	struc			; defines offs as 0, segm as 2
     MACADDR         	DB 06h DUP(0)
 
     PACKETHEADER    	DD 0
-    CURRENTPACKET   	DW 47h						;RXSTART+1
+    CURRENTPACKET   	DW 47h						; RXSTART+1
     CURRADDR        	DW 0
 
     CURPOS          	DB 0
@@ -82,9 +82,15 @@ _TEXT SEGMENT PUBLIC 'CODE' USE16
         ;CALL    PRINTHEX
 
 		CLI
+
 		CALL	etopen
+
+		IN		AL, 21h
+		AND		AL, 0f7h							; UNMASK IQR 3 ON PIC 
+		OUT		21h, AL
+
 		STI
-		
+
 		MOV		AX, 4C00h
 		INT		21h
 

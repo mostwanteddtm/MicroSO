@@ -1,8 +1,8 @@
 Stack Allocation = 5120 bytes
 
  Start  Stop   Length Name                   Class
- 00000H 00403H 00404H _TEXT                  CODE
- 00404H 00673H 00270H _DATA                  DATA
+ 00000H 00409H 0040AH _TEXT                  CODE
+ 0040AH 00679H 00270H _DATA                  DATA
  00680H 01A7FH 01400H STACK                  STACK
 
  Origin   Group
