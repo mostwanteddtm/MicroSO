@@ -41,11 +41,67 @@ start:
 	dw	128 dup(?)		;128 words of stack.
 our_stack	label	byte
 
+	public printmem
+	;*************************************************************************************************************;
+    ;                                                                                                             ;
+    ; print memory                                                                                                ;
+    ;   in:     si -> buffer offset                                                                               ;
+    ;           cx -> number of bytes print                                                                       ;
+    ;   out:    display memory bytes on screen                                                                    ;
+    ;                                                                                                             ;
+    ;**************************************************************************************************************                     
+    printmem proc
+	
+		call	newline
+
+        xor     di, di
+        mov     bx, offset tab
+
+    @@: cmp     di, 10h
+        jne     cpmem
+        call    newline
+        xor     di, di
+    cpmem:
+        inc     di
+        mov     ah, 0eh 
+        lodsb
+        mov     dl, al
+		push    cx
+		mov		cx, 4
+        shr     al, cl
+		pop		cx
+        xlatb
+        int     10h
+        mov     al, dl
+        and     al, 0fh
+        xlatb
+        int     10h
+        mov     al, 20h
+        int     10h
+        loop    @b
+		
+		call	newline
+
+        ret
+
+    newline: 
+		mov     ah, 0eh
+        mov     al, 0dh
+        int     10h
+
+        mov     al, 0ah
+        int     10h
+
+        ret
+		
+	tab             	db '0123456789abcdef'
+      
+    printmem endp
 
 	extrn	int_no: byte
 
 	public	entry_point, sys_features, flagbyte, is_186, is_286, is_386, original_mask
-entry_point	db	?,?,?,?		; interrupt to communicate.
+entry_point	db	68h,?,?,?		; interrupt to communicate.
 sys_features	db	0		; 2h = MC   40h = 2nd 8259
 is_186		db	0		;=0 if 808[68], =1 if 80[123]86.
 is_286		db	0		;=0 if 80[1]8[68], =1 if 80[234]86.
@@ -1045,9 +1101,9 @@ in_recv_isr	db 	0	; flag to trap re-entrancy
 public recv_isr
 recv_isr:
 
-	mov	ah, 0eh
-	mov	al, 31h
-	int 10h
+	;mov	ah, 0eh
+	;mov	al, 31h
+	;int 10h
 
 	cmp	in_recv_isr, 0
 	jne	recv_iret
@@ -1067,7 +1123,7 @@ recv_isr:
 ; itself.
 	push	ax
 	push	dx
-	call	xmit
+	;call	xmit
 
 ; Now switch stacks, push remaining registers, and do remaining interrupt work.
 	push	ds

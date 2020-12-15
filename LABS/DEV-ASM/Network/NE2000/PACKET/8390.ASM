@@ -101,7 +101,7 @@ rcv_modes	dw	7		;number of receive modes in our table.
 ;
 ;	a temp buffer for the received header
 ;
-RCV_HDR_SIZE	equ	26		; 2 ids @6 + protocol @2+8, + header @4
+RCV_HDR_SIZE	equ	40h		; 2 ids @6 + protocol @2+8, + header @4
 rcv_hdr		db	RCV_HDR_SIZE dup(0)
 
 ;
@@ -702,6 +702,8 @@ rcv_mode_5:     ; Mode 3 plus ALL multicast packets
 	mov al,	ENRXCR_BCST+ENRXCR_MULTI ; Ours, bcst, and filtered multicasts
 	mov     mcast_all_flag,1
 	jmp short rcv_mode_set
+	
+public rcv_mode_6
 rcv_mode_6:     ; Receive all packets (Promiscuous physical plus all multi)
 	mov al,	ENRXCR_BCST+ENRXCR_MULTI+ENRXCR_PROMP
 	mov     mcast_all_flag,1
@@ -709,9 +711,11 @@ rcv_mode_set:
 	push    ax			; Hold mode until masks are right
 	call    set_hw_multi		; Set the multicast mask bits in chip
 	pop     ax
-	loadport
-	setport	EN0_RXCR		; Set receiver to selected mode
-	pause_
+	;loadport
+	;setport	EN0_RXCR		; Set receiver to selected mode
+	;pause_
+	mov dx, 30Ch
+	port_no = 30Ch
 	out dx,	al
 	mov     rxcr_bits,al		; Save a copy of what we set it to
 	ret
@@ -722,17 +726,27 @@ set_hw_multi:
 	push    cs
 	pop     ds
 	assume	ds:code
-	loadport
-	setport	EN_CCMD		; Chip command register
-	pause_
+
+	;loadport
+	;setport	EN_CCMD		; Chip command register
+	mov		dx, 300h				; io_addr
+	add		dx, 00h					; EN_CCMD
+	;pause_
+
 	mov cx,	8		; Eight bytes of multicast filter
 	mov si, offset mcast_list_bits  ; Where bits are, if not all ones
 	cli			; Protect from irq changing page bits
-	mov al,	ENC_NODMA+ENC_PAGE1+ENC_STOP
+	;mov al,	ENC_NODMA+ENC_PAGE1+ENC_STOP
+	mov	al, 20h+40h+01h				; ENC_NODMA+ENC_PAGE1+ENC_STOP
 	out dx,	al		; Switch to page one for writing eaddr
-	setport	EN1_MULT	; Where it goes in 8390
-	pause_
-	mov al, mcast_all_flag  ; Want all ones or just selected bits?
+
+	;setport	EN1_MULT	; Where it goes in 8390
+	mov		dx, 300h				; io_addr
+	add		dx, 08h					; EN1_MULT
+	;pause_
+
+	;mov al, mcast_all_flag  ; Want all ones or just selected bits?
+	mov		al, 00h
 	or al,  al
 	je      set_mcast_2     ; Just selected ones
 	mov al,	0ffh		; Ones for filter
@@ -748,10 +762,14 @@ set_mcast_2:
 	inc	dl		; Step to next I/O register
 	loop	set_mcast_2 	; ..
 set_mcast_x:
-	loadport
-	setport	EN_CCMD		; Chip command register
-	pause_
-	mov al,	ENC_NODMA+ENC_PAGE0+ENC_START
+	;loadport
+	;setport	EN_CCMD		; Chip command register
+	mov		dx, 300h				; io_addr
+	add		dx, 00h					; EN_CCMD
+
+	;pause_
+	;mov al,	ENC_NODMA+ENC_PAGE0+ENC_START
+	mov		al, 20h+00h+02h			; ENC_NODMA+ENC_PAGE0+ENC_START
 	out dx,	al		; Restore to page zero
 	ret
 
@@ -816,62 +834,127 @@ reset_interface:
 	extrn	count_out_err: near
 
 	public	recv
+
 recv:
-
-	;loadport		; Point at Chip's Command Reg
-	;setport	EN0_ISR		; Point at Interrupt status register
-	;pause_
-	;mov al,	ENISR_RX+ENISR_RX_ERR
-	;out dx,	al		; Clear those requests
-
-	mov		dx, 307h
-	mov		al, 01h+04h
-	out 	dx, al
-	port_no = 307h
-
- 	;setport	EN_CCMD		; ..
-	;pause_
-	;cli
-	;mov al,	ENC_NODMA+ENC_PAGE1+ENC_START
-	;out dx,	al		; Switch to page 1 registers
-
-	mov		dx, 300h
-	mov		al, 20h+40h+02h
-	out		dx, al
-
-	;setport	EN1_CURPAG	;Get current page of rcv ring
-	;pause_
-	;in al,	dx		; ..
-
-	mov		dx, 307h
-	in		al, dx
-
-;	mov ah,	al		; Hold current page in AH
-	mov save_curr,al	; Hold last read current page register in 
-				; memory instead - gft - 910611
-
+		mov		ax, cs
+		mov		ds, ax
+		mov		es, ax
 	
- 	;setport	EN_CCMD		; Back to page zero registers
-	;pause_
-	;mov al,	ENC_NODMA+ENC_PAGE0+ENC_START
-	;out dx,	al		; Switch back to page 0 registers
-
-	mov		dx, 300h
-	mov		al, 20h+00h+02h
-	out		dx, al
+		;in		al, 21h
+		;and		al, 0f7h
+		;out		21h, al
 	
-	;loadport
-	;setport	EN0_IMR		; Tell card it can cause these interrupts
-	;pause_
-	;mov al,	ENISR_ALL
-	;out dx,	al
+		;mov		ah, 0eh
+		;mov		al, 31h
+		;int		10h
 
-	mov		dx, 30fh
-	mov		al, 3fh
-	out		dx, al
-	port_no = 30fh
-	ret
+		;loadport		; Point at card's I/O port base
+		;setport EN0_IMR		; point at interrupt masks
+		;pause_			; switch off, this way we can
+		mov dx, 30fh
+		mov	al,0		; leave the chip running.
+		out	dx,al		; no interrupts please.
+		;setport	EN0_ISR		; Point at interrupt status register
+		mov dx, 307h
+		;pause_
+		in al,	dx		; Get pending interrupts
+		and al,	ENISR_ALL	; Any?
+		jnz	isr_test_overrun_1
+		jmp @f
 
+	isr_test_overrun_1:
+		;loadport		; Point at Chip's Command Reg
+		;setport	EN0_ISR		; Point at Interrupt status register
+		;pause_
+		;mov al,	ENISR_RX+ENISR_RX_ERR
+		;out dx,	al		; Clear those requests
+
+		mov		dx, 307h
+		mov		al, 01h+04h
+		out 	dx, al
+
+		;setport	EN_CCMD		; ..
+		;pause_
+		;cli
+		;mov al,	ENC_NODMA+ENC_PAGE1+ENC_START
+		;out dx,	al		; Switch to page 1 registers
+
+		mov		dx, 300h
+		mov		al, 20h+40h+02h
+		out		dx, al
+
+		;setport	EN1_CURPAG	;Get current page of rcv ring
+		;pause_
+		;in al,	dx		; ..
+
+		mov		dx, 307h
+		in		al, dx
+
+	;	mov ah,	al		; Hold current page in AH
+		mov save_curr,al	; Hold last read current page register in 
+					; memory instead - gft - 910611
+
+		
+		;setport	EN_CCMD		; Back to page zero registers
+		;pause_
+		;mov al,	ENC_NODMA+ENC_PAGE0+ENC_START
+		;out dx,	al		; Switch back to page 0 registers
+
+		mov		dx, 300h
+		mov		al, 20h+00h+02h
+		out		dx, al
+
+	recv_frame_1:
+		mov al, next_packet	; Get saved pointer to next packet in ring
+	;
+	; change the next instruction to compare against the saved copy of the current
+	; page register and only read from the ring what was received up until the 
+	; last read from the current page register - gft - 910611
+	;
+	;	cmp al,	ah		; Read all the frames?
+		cmp al,	save_curr	; Read all the frames?
+		jne	recv_more_frames; hacked jump code for addition of mkle
+					; macro below - gft -910521
+	;	jmp	recv_frame_break	; Finished them all
+
+	recv_more_frames_1:
+
+		mov	ah,al		; make a byte address. E.G. page
+		mov	al,0		; 46h becomes 4600h into buffer
+		mov	bl,ah
+		mov	cx,RCV_HDR_SIZE
+		mov	di,offset rcv_hdr
+		;movseg	es,ds
+		push ds
+		pop	es
+		call block_input
+		
+		mov	cx, RCV_HDR_SIZE
+		mov si, offset rcv_hdr
+		call printmem
+
+		;loadport
+		;setport	EN0_IMR		; Tell card it can cause these interrupts
+		;pause_
+		;mov al,	ENISR_ALL
+		;out dx,	al
+
+		mov		dx, 30fh
+		mov		al, 3fh
+		out		dx, al
+		
+		;in		al, 21h
+		;or		al, 0ffh
+		;out		21h, al
+		
+		mov 	al, 20h				; informa o fim da instrucao de interrupcao
+		out 	0a0h, al  			; notify secondary pic
+		out 	20h, al  			; notify primary pic
+
+	@@:	
+		ret
+		
+recv_old:
 
 ;called from the recv isr.  All registers have been saved, and ds=cs.
 ;Actually, not just receive, but all interrupts come here.
@@ -1060,7 +1143,7 @@ rcv_ovr_rx_one:
 
 	mov	defer_upcall, 1	; Defer upcalls until later. (may be cleared
 				;  by rcv_frm)
- 	call	rcv_frm		; Yes, go accept it
+	call	rcv_frm		; Yes, go accept it
 	jmp	rcv_ovr_ok
 
 rcv_ovr_ng:
@@ -1289,6 +1372,13 @@ recv_more_frames:
 	mov	di,offset rcv_hdr
 	movseg	es,ds
 	call	block_input
+	
+	mov cx, RCV_HDR_SIZE
+	mov si, offset rcv_hdr
+	
+	EXTERN PRINTMEM:PROC
+	call PRINTMEM
+	
 	mov al,	rcv_hdr+EN_RBUF_STAT	; Get the buffer status byte
 	test al,ENRSR_RXOK	; Good frame?
 	jz	recv_err_no_rcv
@@ -1541,7 +1631,7 @@ interrupt_done:
 	mov al,	ENISR_ALL
 	out dx,	al
 	ret
-
+	
 ; Do the work of copying out a receive frame.
 ; Called with bl/ the page number of the frame header in shared memory
 
@@ -1956,56 +2046,7 @@ set_8390_2:
 	popf
 	clc
 
-	;call	set_hw_multi  ; Put the right stuff into 8390's multicast masks
-
-	push    cs
-	pop     ds
-	assume	ds:code
-
-	;loadport
-	;setport	EN_CCMD		; Chip command register
-	mov		dx, 300h				; io_addr
-	add		dx, 00h					; EN_CCMD
-	;pause_
-
-	mov cx,	8		; Eight bytes of multicast filter
-	mov si, offset mcast_list_bits  ; Where bits are, if not all ones
-	cli			; Protect from irq changing page bits
-	;mov al,	ENC_NODMA+ENC_PAGE1+ENC_STOP
-	mov	al, 20h+40h+01h				; ENC_NODMA+ENC_PAGE1+ENC_STOP
-	out dx,	al		; Switch to page one for writing eaddr
-
-	;setport	EN1_MULT	; Where it goes in 8390
-	mov		dx, 300h				; io_addr
-	add		dx, 08h					; EN1_MULT
-	;pause_
-
-	;mov al, mcast_all_flag  ; Want all ones or just selected bits?
-	mov		al, 00h
-	or al,  al
-	je      set_mcast_2_1     ; Just selected ones
-	mov al,	0ffh		; Ones for filter
-set_mcast_all_1:
-	out dx,	al		; Write a mask byte
-	inc	dl		; Step to next one
-	loop	set_mcast_all_1	; ..
-	jmp short set_mcast_x_1
-
-set_mcast_2_1:
-	lodsb                   ; Get a byte of mask bits
-	out dx,	al		; Write a mask byte
-	inc	dl		; Step to next I/O register
-	loop	set_mcast_2_1 	; ..
-set_mcast_x_1:
-	;loadport
-	;setport	EN_CCMD		; Chip command register
-	mov		dx, 300h				; io_addr
-	add		dx, 00h					; EN_CCMD
-
-	;pause_
-	;mov al,	ENC_NODMA+ENC_PAGE0+ENC_START
-	mov		al, 20h+00h+02h			; ENC_NODMA+ENC_PAGE0+ENC_START
-	out dx,	al		; Restore to page zero
+	call	set_hw_multi  ; Put the right stuff into 8390's multicast masks
 
 ;Step 12. Program EN_CCMD for page 1.
 
@@ -2111,51 +2152,8 @@ set_recv_isr_1_1:
 set_isr_no_timer_1:
 	mov	al,int_no		; Now enable interrupts
 	
-	;call	unmaskint
-	;exit with cl = 0 if the interrupt had been enabled.
-	assume	ds:code
-	mov	dx,21h			;assume the master 8259.
-	mov	cl,al
-	cmp	cl,8			;using the slave 8259 on an AT?
-	jb	unmask_not_irq2_1		;no
-	in	al,dx			;get master mask
-	push	ax
-	in	al,61h			;wait lots of time.
-	in	al,61h
-	in	al,61h
-	pop	ax
-	and	al,not (1 shl 2)	; and clear slave cascade bit in mask
-	out	dx,al			;set new master mask (enable slave int)
-;
-; 500ns Stall required here, per INTEL documentation for eisa machines
-; - gft - 910617
-;
-	push	ax
-	in	al,61h	; 1.5 - 3 uS should be plenty
-	in	al,61h
-	in	al,61h
-	pop	ax
-	mov	dx,0a1h			;go enable int on slave 8259
-	sub	cl,8
-unmask_not_irq2_1:
-
-	in	al,dx			;enable interrupts on the correct 8259.
-	mov	ah,1			;clear the bit.
-	shl	ah,cl
-	mov	cl,al			;remember the original mask.
-	and	cl,ah
-	not	ah
-	and	al,ah
-;
-; 500ns Stall required here, per INTEL documentation for eisa machines
-; - gft - 910617
-;
-	push	ax
-	in	al,61h	; 1.5 - 3 uS should be plenty
-	in	al,61h
-	in	al,61h
-	pop	ax
-	out	dx,al
+	extern  unmaskint:proc
+	call	unmaskint
 
 	mov	original_mask,al
 set_isr_no_irq_1:
@@ -2170,6 +2168,20 @@ set_int_num:
 	xor	ah, ah			; Clear high byte
 	mov	int_num, ax		; Set parameter_list int num.
 
+	mov al,	ENRXCR_BCST+ENRXCR_MULTI+ENRXCR_PROMP
+	mov     mcast_all_flag,1
+	push    ax			; Hold mode until masks are right
+	call    set_hw_multi		; Set the multicast mask bits in chip
+	pop     ax
+	;loadport
+	;setport	EN0_RXCR		; Set receiver to selected mode
+	;pause_
+	mov dx, 30Ch
+	port_no = 30Ch
+	out dx,	al
+	mov     rxcr_bits,al		; Save a copy of what we set it to
+	
+	
 	clc				; Say no error
 	ret				; Back to common code
 

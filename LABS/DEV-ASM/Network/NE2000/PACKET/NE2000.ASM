@@ -86,7 +86,7 @@ terminate_board	macro
 	endm
 
 	public	int_no, io_addr
-int_no		db	2,0,0,0		;must be four bytes long for get_number.
+int_no		db	3,0,0,0		;must be four bytes long for get_number.
 io_addr		dw	0300h,0		; I/O address for card (jumpers)
 
 	public	driver_class, driver_type, driver_name, driver_function, parameter_list
@@ -115,33 +115,47 @@ int_num	dw	0	;Interrupt # to hook for post-EOI
 	public	block_input
 block_input:
 	push	ax		; save buffer address
-	loadport
-	setport EN_CCMD
-	pause_
+	;loadport
+	;setport EN_CCMD
+	;pause_
+	mov dx, 300h
+	port_no = 300h
 	mov	al,ENC_NODMA+ENC_PAGE0+ENC_START
 	out	dx,al
-	setport	EN0_RCNTLO	; remote byte count 0
-	pause_
+	;setport	EN0_RCNTLO	; remote byte count 0
+	;pause_
+	mov dx, 30ah
+	port_no = 30ah
 	mov	al,cl
 	out	dx,al
-	setport	EN0_RCNTHI
-	pause_
+	;setport	EN0_RCNTHI
+	;pause_
+	mov dx, 30bh
+	port_no = 30bh
 	mov	al,ch
 	out	dx,al
 	pop	ax		; get our page back
-	setport	EN0_RSARLO
-	pause_
+	;setport	EN0_RSARLO
+	;pause_
+	mov dx, 308h
+	port_no = 308h
 	out	dx,al		; set as hi address
-	setport	EN0_RSARHI
-	pause_
+	;setport	EN0_RSARHI
+	;pause_
+	mov dx, 309h
+	port_no = 309h
 	mov	al,ah
 	out	dx,al
-	setport EN_CCMD
-	pause_
+	;setport EN_CCMD
+	;pause_
+	mov dx, 300h
+	port_no = 300h
 	mov	al,ENC_RREAD+ENC_START	; read and start
 	out	dx,al
-	setport	NE_DATAPORT
-	pause_
+	;setport	NE_DATAPORT
+	;pause_
+	mov dx, 310h
+	port_no = 310h
 	cmp	is_186,0
 	jnz	read_186
 read_loop:
