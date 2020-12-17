@@ -27,6 +27,9 @@ public	count_out_err
 
 public recv_isr
 
+public	maskint
+public	unmaskint
+
 extrn	int_no: byte
 
 ;external code supplied by device-dependent module:
@@ -47,7 +50,7 @@ start:
 	mov 	ax, 4c00h
 	int 	21h
 
-;************************* DATA AREA **********************************
+;***************************************** DATA AREA **********************************************************
 
 					dw 128 dup(?)				;128 words of stack.
 	our_stack		label byte
@@ -84,7 +87,7 @@ start:
 	
 	in_recv_isr	db 	0	; flag to trap re-entrancy
 	
-;********************** END DATA AREA ***********************************
+;************************************* END DATA AREA **********************************************************
 
 ;######### NÃO REMOVER #############
 	
@@ -108,6 +111,8 @@ count_out_err:
 ; not happen. To protect the driver from the adverse effects of this I am
 ; adding a simple re-entrancy trap here.  - gft - 910617
 ;
+
+;*************************************************************************************************************
 
 recv_isr:
 
@@ -225,41 +230,8 @@ recv_isr_3:
 recv_iret:
 	iret
 
-recv_exiting_flag	db	0	;nonzero if recv_exiting will be run.
-recv_exiting_addr	dd	?
-
-	public	schedule_exiting
-schedule_exiting:
-ret
-;call this routine to schedule a subroutine that gets run after the
-;recv_isr.  This is done by stuffing routine's address in place
-;of the recv_isr iret's address.  This routine should push the flags when it
-;is entered, and should jump to recv_exiting_exit to leave.
-;enter with ax = address of routine to run.
-;	cmp	recv_exiting_flag,0	;is it already scheduled?
-;	jne	schedule_exiting_1	;yes, don't do it again!
-;	inc	recv_exiting_flag	;set the flag.
-;	les	di,savespss		;make es:di -> their stack.
-;	xchg	ax,es:[di].recv_isr_ip	;stuff our routine's address in,
-;	mov	recv_exiting_addr.offs,ax	;and save the original address.
-;	mov	ax,cs
-;	xchg	ax,es:[di].recv_isr_cs
-;	mov	recv_exiting_addr.segm,ax
-;schedule_exiting_1:
-;	ret
-
-	public	recv_exiting_exit
-recv_exiting_exit:
-ret
-;recv_exiting jumps here to exit, after pushing the flags.
-;	cli				;protect the following semaphore.
-;	mov	recv_exiting_flag,0
-;	push	recv_exiting_addr.segm
-;	push	recv_exiting_addr.offs
-;	iret
-
-
-	public	maskint
+;*************************************************************************************************************
+	
 maskint:
 	or	al,al			;are they using a hardware interrupt?
 	je	maskint_1		;no, don't mask off the timer!
@@ -290,8 +262,8 @@ mask_not_irq2:
 maskint_1:
 	ret
 
+;*************************************************************************************************************
 
-	public	unmaskint
 unmaskint:
 ;exit with cl = 0 if the interrupt had been enabled.
 	assume	ds:code
@@ -339,6 +311,8 @@ unmask_not_irq2:
 	out	dx,al
 
 	ret
+
+	;*************************************************************************************************************
 
 	public printmem
 	;*************************************************************************************************************;
@@ -396,26 +370,6 @@ unmask_not_irq2:
 	tab             	db '0123456789abcdef'
       
     printmem endp
-
-;	public	recv_locate
-;recv_locate:
-;ret
-;
-;	public	recv_find, recv_found
-;recv_find:
-;ret
-;
-;recv_found:
-;	ret
-;
-;
-;	public	recv_copy
-;recv_copy:
-;ret
-;
-;	public	send_dequeue
-;send_dequeue:
-;ret
 
 code	ends
 
