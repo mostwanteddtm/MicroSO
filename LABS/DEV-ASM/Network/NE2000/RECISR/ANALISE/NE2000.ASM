@@ -44,9 +44,6 @@ public	board_data
 public	xmit
 public	recv
 
-extrn	sys_features: byte
-extrn	is_186: byte						;=0 if 808[68], =1 if 80[123]86.
-
 extrn	rom_address: byte					;-> the assigned Ethernet address of the card.
 
 extrn	my_address: byte					;-> current address
@@ -145,22 +142,10 @@ block_input:
 	;pause_
 	mov dx, 310h
 	port_no = 310h
-	cmp	is_186,0
-	jnz	read_186
-read_loop:
-	in	al,dx		; get a byte
-	stosb			; save it
-	loop	read_loop
-	ret
-read_186:
 	shr	cx,1		; word count
 	.286
 	rep	insw
 	.8086
-	jnc	read_186_1		;is there an extra byte?
-	in	ax,dx			;yes, read the next word and store a
-	stosb				;  byte.
-read_186_1:
 	ret
 
 	
@@ -408,19 +393,6 @@ interrupt_done:
 	ret
 	
 ;####################################################################################################################################################
-
-	
-; Do the work of copying out a receive frame.
-; Called with bl/ the page number of the frame header in shared memory
-
-	public	rcv_frm
-rcv_frm:
-ret
-
-	public	timer_isr
-timer_isr:
-;if the first instruction is an iret, then the timer is not hooked
-	iret
 
 ;any code after this will not be kept after initialization. Buffers
 ;used by the program, if any, are allocated from the memory between
@@ -823,19 +795,17 @@ set_8390_2:
 
 	;call	set_recv_isr	; Put ourselves in interrupt chain
 	extern	their_recv_isr:dword
-	extern	their_timer:dword
-	extern 	original_mask:byte
 	extern	recv_isr:proc
 
 	mov	ah,35h			;get the old interrupt into es:bx
 	mov	al,int_no		; board's interrupt vector
 	or	al,al
-	je	set_isr_no_irq_1
+	je	set_isr_no_irq
 	add	al,8
 	cmp	al,8+8			;is it a slave 8259 interrupt?
-	jb	set_recv_isr_1_1		;no.
+	jb	set_recv_isr_1		;no.
 	add	al,70h - 8 - 8		;map it to the real interrupt.
-set_recv_isr_1_1:
+set_recv_isr_1:
 	int	21h
 	mov	their_recv_isr.offs,bx	;remember the old seg:off.
 	mov	their_recv_isr.segm,es
@@ -844,26 +814,12 @@ set_recv_isr_1_1:
 	mov	dx,offset recv_isr
 	int	21h
 
-	cmp	byte ptr timer_isr,0cfh	;is there just an iret at their handler?
-	je	set_isr_no_timer_1	;yes, don't bother hooking the timer.
-
-	mov	ax,3508h		;get the old interrupt into es:bx
-	int	21h
-	mov	their_timer.offs,bx	;remember the old seg:off.
-	mov	their_timer.segm,es
-
-	mov	ah,25h			;now set our recv interrupt.
-	mov	dx,offset timer_isr
-	int	21h
-
-set_isr_no_timer_1:
 	mov	al,int_no		; Now enable interrupts
 	
 	extern  unmaskint:proc
 	call	unmaskint
 
-	mov	original_mask,al
-set_isr_no_irq_1:
+set_isr_no_irq:
 
 
 	mov	al, int_no		; Get board's interrupt vector
