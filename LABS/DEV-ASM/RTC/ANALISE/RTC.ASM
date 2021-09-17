@@ -7,21 +7,22 @@ ORG 100h
 START: 
 
     CALL 		UPD_IN_PR ;CHECK FOR UPDATE IN PROCESS
-	JNC 		RTC_2A ;GO AROUND IF OK
-	JMP 		ERROR ;IF ERROR
-	RTC_2A: 	CLI ;INTERRUPTS OFF DURING READ
-	MOV 		DL,-2 ;-2 goes to 0 for PORT_INC_2
-	CALL 		PORT_INC_2 ;SET ADDRESS OF SECONDS
-	IN 			AL,CMOS_PORT+1 ;Get BCD value returned
-	MOV 		DH, AL ;SAVE IN DH
+	;JNC 		RTC_2A ;GO AROUND IF OK
+	;JMP 		ERROR ;IF ERROR
+	;RTC_2A: 	CLI ;INTERRUPTS OFF DURING READ
+	;MOV 		DL,-2 ;-2 goes to 0 for PORT_INC_2
+	;CALL 		PORT_INC_2 ;SET ADDRESS OF SECONDS
+	;IN 			AL,CMOS_PORT+1 ;Get BCD value returned
+	;MOV 		DH, AL ;SAVE IN DH   
+	MOV         DL, 0
 	CALL 		PORT_INC_2 ;SET ADDRESS OF MINUTES
 	IN 			AL,CMOS_PORT+1 ;Get BCD value returned
 	MOV 		CL,AL ;SAVE IN CL
-	CALL 		PORT_INC_2 ;SET ADDRESS OF HOURS
-	IN 			AL,CMOS_PORT+1 ;Get BCD value returned
-	MOV 		CH,AL ;SAVE
-	MOV 		DL,0 ;SET DL TO ZERO
-	STI
+	;CALL 		PORT_INC_2 ;SET ADDRESS OF HOURS
+	;IN 			AL,CMOS_PORT+1 ;Get BCD value returned
+	;MOV 		CH,AL ;SAVE
+	;MOV 		DL,0 ;SET DL TO ZERO
+	;STI
 	CALL 		DisplayTime
 	
 	
@@ -59,28 +60,28 @@ PORT_INC_2:
 	; CL = Minutes in BCD
 	; DH = Seconds in BCD
 	DisplayTime:
-	PUSH 		BX
-	PUSH 		DX
-	PUSH 		CX
-	PUSH 		CX
-	LEA 		BX,Time_Msg
-	CALL 		PRINT_STRING
-	POP 		CX
-	MOV 		AL,CH
-	CALL 		PRINT_REG ;Hours. Convert BCD to ASCII
-	MOV 		CL,':'
-	CALL 		CO
-	POP 		CX
+	;PUSH 		BX
+	;PUSH 		DX
+	;PUSH 		CX
+	;PUSH 		CX
+	;LEA 		BX,Time_Msg
+	;CALL 		PRINT_STRING
+	;POP 		CX
+	;MOV 		AL,CH
+	;CALL 		PRINT_REG ;Hours. Convert BCD to ASCII
+	;MOV 		CL,':'
+	;CALL 		CO
+	;POP 		CX
 	MOV 		AL,CL
 	CALL 		PRINT_REG ;Minutes. Convert BCD to ASCII
-	MOV 		CL,':'
-	CALL 		CO
-	POP 		DX
-	MOV 		AL,DH
-	CALL 		PRINT_REG ;Seconds. Convert BCD to ASCII
-	LEA 		BX,Time1_Msg
-	CALL 		PRINT_STRING
-	POP 		BX
+	;MOV 		CL,':'
+	;CALL 		CO
+	;POP 		DX
+	;MOV 		AL,DH
+	;CALL 		PRINT_REG ;Seconds. Convert BCD to ASCII
+	;LEA 		BX,Time1_Msg
+	;CALL 		PRINT_STRING
+	;POP 		BX
 	RET
 	
 PRINT_STRING: ;Use CS over-ride so it will splice into 8086 BIOS easily
