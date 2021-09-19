@@ -1,0 +1,303 @@
+
+ Start  Stop   Length Name                   Class
+ 00000H 00000H 00000H MAIN_TEXT              CODE
+ 00000H 00000H 00000H FUNCTION_TEXT          CODE
+ 00000H 01482H 01483H _TEXT                  CODE
+ 01490H 01491H 00002H EMULATOR_TEXT          CODE
+ 014A0H 014D3H 00034H COMDAT_SEG1            CODE
+ 014D4H 014D4H 00000H C_ETEXT                ENDCODE
+ 014E0H 014E0H 00000H EMULATOR_DATA          FAR_DATA
+ 014E0H 01521H 00042H NULL                   BEGDATA
+ 01522H 01799H 00278H _DATA                  DATA
+ 0179AH 0179BH 00002H XIQC                   DATA
+ 0179CH 017A7H 0000CH DBDATA                 DATA
+ 017A8H 017B5H 0000EH CDATA                  DATA
+ 017B6H 017B6H 00000H XIFB                   DATA
+ 017B6H 017B6H 00000H XIF                    DATA
+ 017B6H 017B6H 00000H XIFE                   DATA
+ 017B6H 017B6H 00000H XIB                    DATA
+ 017B6H 017B6H 00000H XI                     DATA
+ 017B6H 017B6H 00000H XIE                    DATA
+ 017B6H 017B6H 00000H XPB                    DATA
+ 017B6H 017B9H 00004H XP                     DATA
+ 017BAH 017BAH 00000H XPE                    DATA
+ 017BAH 017BAH 00000H XCB                    DATA
+ 017BAH 017BAH 00000H XC                     DATA
+ 017BAH 017BAH 00000H XCE                    DATA
+ 017BAH 017BAH 00000H XCFB                   DATA
+ 017BAH 017BAH 00000H XCFCRT                 DATA
+ 017BAH 017BAH 00000H XCF                    DATA
+ 017BAH 017BAH 00000H XCFE                   DATA
+ 017BAH 017BAH 00000H XIFCB                  DATA
+ 017BAH 017BAH 00000H XIFU                   DATA
+ 017BAH 017BAH 00000H XIFL                   DATA
+ 017BAH 017BAH 00000H XIFM                   DATA
+ 017BAH 017BAH 00000H XIFCE                  DATA
+ 017BAH 017BAH 00000H CONST                  CONST
+ 017BAH 017C1H 00008H HDR                    MSG
+ 017C2H 01897H 000D6H MSG                    MSG
+ 01898H 01899H 00002H PAD                    MSG
+ 0189AH 0189AH 00001H EPAD                   MSG
+ 0189CH 0189CH 00000H _BSS                   BSS
+ 0189CH 0189CH 00000H XOB                    BSS
+ 0189CH 0189CH 00000H XO                     BSS
+ 0189CH 0189CH 00000H XOE                    BSS
+ 0189CH 0189CH 00000H XOFB                   BSS
+ 0189CH 0189CH 00000H XOF                    BSS
+ 0189CH 0189CH 00000H XOFE                   BSS
+ 018A0H 0209FH 00800H STACK                  STACK
+
+ Origin   Group
+ 014E:0   DGROUP
+
+  Address         Publics by Name
+
+ 014E:03BC       _edata
+ 014E:03C0       _end
+ 014E:0084       _errno
+ 0000:01E3       _exit
+ 0000:05F2       _fclose
+ 0000:090C       _fflush
+ 014A:0000       _main
+ 014A:0018       _print
+ 0000:06B2       _printf
+ 0000:1476       _remove
+ 014E:00C6       _STKHQQ
+ 0000:10CE       _strcat
+ 0000:110E       _strcpy
+ 014E:00C2       __aaltstkovr
+ 014E:0068       __acfinfo
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 0000:D6D6  Abs  __aDBdoswp
+ 014E:00BE       __adbgmsg
+ 014E:004A       __aexit_rtn
+ 0000:02BE       __aFchkstk
+ 014E:0076       __aintdiv
+ 014E:0292       __amblksiz
+ 0000:00EC       __amsg_exit
+ 014E:0042       __anullsize
+ 014E:0062       __aseghi
+ 014E:0064       __aseglo
+ 014E:004C       __asizds
+ 014E:02B4       __asizeC
+ 014E:02B5       __asizeD
+ 0000:0010       __astart
+ 014E:0048       __atopsp
+ 0000:01F2       __cexit
+ 014E:0294       __cfltcvt_tab
+ 014E:00E4       __cflush
+ 014E:00B5       __child
+ 0000:02BE       __chkstk
+ 0000:011A       __cinit
+ 0000:00DD       __cintDIV
+ 0000:0F2E       __close
+ 0000:11DC       __cltoasub
+ 0000:1182       __commit
+ 014E:0091       __cpumode
+ 0000:026A       __ctermsub
+ 0000:11E8       __cxtoa
+ 0000:01FC       __c_exit
+ 0000:0118       __dataseg
+ 014E:0092       __doserrno
+ 0000:059A       __dosret0
+ 0000:05AF       __dosretax
+ 0000:05A2       __dosreturn
+ 0000:123C       __dos_commit
+ 014E:03BC       __edata
+ 0149:0000       __EmDataSeg
+ 014E:03C0       __end
+ 0000:06F0       __endstdio
+ 014E:00AE       __environ
+ 0000:01EA       __exit
+ 014E:00BD       __exitflag
+ 014E:007A       __fac
+ 0000:05F0       __farstub
+ 0000:115C       __fcloseall
+ 014E:0066       __fDosExt
+ 0000:0296       __FF_MSGBANNER
+ 0000:10AD       __findlast
+ 0000:0706       __flsbuf
+ 0000:095C       __flush
+ 0000:09D4       __flushall
+ 014E:02CA       __fpinit
+ 0000:02B8       __fptrap
+ 0000:07EA       __freebuf
+ 0000:08CD       __ftbuf
+ 0000:0816       __getbuf
+ 0000:0FD0       __growseg
+ 0000:105C       __incseg
+ 014E:00B8       __intno
+ 014E:00E6       __iob
+ 014E:0186       __iob2
+ 0000:1140       __itoa
+ 014E:0226       __lastiob
+ 0000:0F4E       __lseek
+ 014E:0290       __lseekchk
+ 0000:05BC       __maperror
+ 0000:0574       __myalloc
+ 014E:0094       __nfile
+ 0000:139E       __nfree
+ 014E:004E       __nheap_desc
+ 0000:13BF       __nmalloc
+ 0000:0512       __NMSG_TEXT
+ 0000:053D       __NMSG_WRITE
+ 0000:02E2       __nullcheck
+ 014E:0092       __oserr
+ 014E:0096       __osfile
+ 014E:008D       __osmajor
+ 014E:008C       __osminor
+ 014E:0090       __osmode
+ 014E:008C       __osver
+ 014E:008E       __osversion
+ 0000:0A56       __output
+ 014E:00B7       __ovlflag
+ 014E:00B9       __ovlvec
+ 014E:00B0       __pgmptr
+ 014E:02B6       __pnhNearHeap
+ 014E:008A       __psp
+ 014E:0088       __pspadr
+ 0000:13FA       __searchseg
+ 0000:0306       __setargv
+ 0000:0494       __setenvp
+ 014E:02B2       __sigintoff
+ 014E:02B0       __sigintseg
+ 0000:138A       __stackavail
+ 0000:085A       __stbuf
+ 014E:0086       __umaskval
+ 0000:1476       __unlink
+ 0000:124A       __write
+ 014E:02C2       ___aDBexit
+ 014E:02C0       ___aDBrterr
+ 014E:02BE       ___aDBswpchk
+ 014E:02BC       ___aDBswpflg
+ 014E:00AA       ___argc
+ 014E:00AC       ___argv
+ 014E:02BA       ___qczrinit
+
+  Address         Publics by Value
+
+ 0000:0010       __astart
+ 0000:00DD       __cintDIV
+ 0000:00EC       __amsg_exit
+ 0000:0118       __dataseg
+ 0000:011A       __cinit
+ 0000:01E3       _exit
+ 0000:01EA       __exit
+ 0000:01F2       __cexit
+ 0000:01FC       __c_exit
+ 0000:026A       __ctermsub
+ 0000:0296       __FF_MSGBANNER
+ 0000:02B8       __fptrap
+ 0000:02BE       __aFchkstk
+ 0000:02BE       __chkstk
+ 0000:02E2       __nullcheck
+ 0000:0306       __setargv
+ 0000:0494       __setenvp
+ 0000:0512       __NMSG_TEXT
+ 0000:053D       __NMSG_WRITE
+ 0000:0574       __myalloc
+ 0000:059A       __dosret0
+ 0000:05A2       __dosreturn
+ 0000:05AF       __dosretax
+ 0000:05BC       __maperror
+ 0000:05F0       __farstub
+ 0000:05F2       _fclose
+ 0000:06B2       _printf
+ 0000:06F0       __endstdio
+ 0000:0706       __flsbuf
+ 0000:07EA       __freebuf
+ 0000:0816       __getbuf
+ 0000:085A       __stbuf
+ 0000:08CD       __ftbuf
+ 0000:090C       _fflush
+ 0000:095C       __flush
+ 0000:09D4       __flushall
+ 0000:0A56       __output
+ 0000:0F2E       __close
+ 0000:0F4E       __lseek
+ 0000:0FD0       __growseg
+ 0000:105C       __incseg
+ 0000:10AD       __findlast
+ 0000:10CE       _strcat
+ 0000:110E       _strcpy
+ 0000:1140       __itoa
+ 0000:115C       __fcloseall
+ 0000:1182       __commit
+ 0000:11DC       __cltoasub
+ 0000:11E8       __cxtoa
+ 0000:123C       __dos_commit
+ 0000:124A       __write
+ 0000:138A       __stackavail
+ 0000:139E       __nfree
+ 0000:13BF       __nmalloc
+ 0000:13FA       __searchseg
+ 0000:1476       _remove
+ 0000:1476       __unlink
+ 0149:0000       __EmDataSeg
+ 014A:0000       _main
+ 014A:0018       _print
+ 014E:0042       __anullsize
+ 014E:0048       __atopsp
+ 014E:004A       __aexit_rtn
+ 014E:004C       __asizds
+ 014E:004E       __nheap_desc
+ 014E:0062       __aseghi
+ 014E:0064       __aseglo
+ 014E:0066       __fDosExt
+ 014E:0068       __acfinfo
+ 014E:0076       __aintdiv
+ 014E:007A       __fac
+ 014E:0084       _errno
+ 014E:0086       __umaskval
+ 014E:0088       __pspadr
+ 014E:008A       __psp
+ 014E:008C       __osver
+ 014E:008C       __osminor
+ 014E:008D       __osmajor
+ 014E:008E       __osversion
+ 014E:0090       __osmode
+ 014E:0091       __cpumode
+ 014E:0092       __oserr
+ 014E:0092       __doserrno
+ 014E:0094       __nfile
+ 014E:0096       __osfile
+ 014E:00AA       ___argc
+ 014E:00AC       ___argv
+ 014E:00AE       __environ
+ 014E:00B0       __pgmptr
+ 014E:00B5       __child
+ 014E:00B7       __ovlflag
+ 014E:00B8       __intno
+ 014E:00B9       __ovlvec
+ 014E:00BD       __exitflag
+ 014E:00BE       __adbgmsg
+ 014E:00C2       __aaltstkovr
+ 014E:00C6       _STKHQQ
+ 014E:00E4       __cflush
+ 014E:00E6       __iob
+ 014E:0186       __iob2
+ 014E:0226       __lastiob
+ 014E:0290       __lseekchk
+ 014E:0292       __amblksiz
+ 014E:0294       __cfltcvt_tab
+ 014E:02B0       __sigintseg
+ 014E:02B2       __sigintoff
+ 014E:02B4       __asizeC
+ 014E:02B5       __asizeD
+ 014E:02B6       __pnhNearHeap
+ 014E:02BA       ___qczrinit
+ 014E:02BC       ___aDBswpflg
+ 014E:02BE       ___aDBswpchk
+ 014E:02C0       ___aDBrterr
+ 014E:02C2       ___aDBexit
+ 014E:02CA       __fpinit
+ 014E:03BC       __edata
+ 014E:03BC       _edata
+ 014E:03C0       __end
+ 014E:03C0       _end
+ 0000:9876  Abs  __acrtused
+ 0000:9876  Abs  __acrtmsg
+ 0000:D6D6  Abs  __aDBdoswp
+
+Program entry point at 0000:0010
