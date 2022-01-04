@@ -9,7 +9,7 @@ SM_TSTART_PG	EQU	040h	; First page of TX buffer
 SM_RSTART_PG	EQU	046h	; Starting page of RX ring
 SM_RSTOP_PG		EQU	080h	; Last page +1 of RX ring
 
-CODE	SEGMENT PUBLIC 'CODE' USE16
+CODE	SEGMENT WORD PUBLIC
 	ASSUME	CS:CODE, DS:NOTHING
 
 	ORG	100h
@@ -38,7 +38,7 @@ CODE	SEGMENT PUBLIC 'CODE' USE16
 												
 												; a temp buffer for the received header
 
-		RCV_HDR_SIZE	EQU	40h					; 2 ids @6 + protocol @2+8, + header @4
+		RCV_HDR_SIZE	EQU	100h					; 2 ids @6 + protocol @2+8, + header @4
 		RCV_HDR			DB RCV_HDR_SIZE dup(0)
 		
 		BOARD_DATA_SIZE EQU	32					; The board data
@@ -238,16 +238,17 @@ CODE	SEGMENT PUBLIC 'CODE' USE16
 		MOV		AH, AL							; make a byte address. E.G. page
 		MOV		AL, 0							; 46h becomes 4600h into buffer
 		MOV		BL, AH
-		MOV		CX, RCV_HDR_SIZE
-		MOV		DI, OFFSET RCV_HDR
-		
+
 		PUSH 	DS								; movseg	es,ds
 		POP 	ES
+
+		MOV		CX, RCV_HDR_SIZE
+		MOV		DI, OFFSET RCV_HDR
 		CALL	BLOCK_INPUT
-		
-		MOV 	CX, RCV_HDR_SIZE
-		MOV 	SI, OFFSET RCV_HDR
-		
+
+		MOV		SI, OFFSET RCV_HDR
+		MOV		CX, DS:[SI+2]
+
 		CALL 	PRINTMEM
 		
 		MOV 	AL,	RCV_HDR+EN_RBUF_STAT		; Get the buffer status byte
@@ -689,6 +690,11 @@ unmask_not_irq2:
     ;                                                                                                             ;
     ;**************************************************************************************************************                     
     printmem proc
+
+		CMP		CX, 0FFh
+		JLE		@f
+		MOV		CX, 100
+	@@:
 	
 		call	newline
 
